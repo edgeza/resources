@@ -1023,13 +1023,6 @@ WeaponList = {
         ammotype = 'AMMO_MG',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
     },
-    [`weapon_glock21`] = {
-        name = 'weapon_glock21',
-        label = 'GLOCK 21',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
     [`weapon_glock41`] = {
         name = 'weapon_glock41',
         label = 'GLOCK 41',
@@ -1061,13 +1054,6 @@ WeaponList = {
     [`weapon_mgglock`] = {
         name = 'weapon_mgglock',
         label = 'MG GLOCK',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_midasglock`] = {
-        name = 'weapon_midasglock',
-        label = 'MIDAS GLOCK',
         weapontype = 'Pistol',
         ammotype = 'AMMO_MG',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
@@ -1821,13 +1807,6 @@ WeaponList = {
         ammotype = 'AMMO_MG',
         damagereason = 'Ended / Rifled / Shot down / Floored'
     },
-    [`weapon_scarh`] = {
-        name = 'weapon_scarh',
-        label = 'SCAR-H',
-        weapontype = 'Assault Rifle',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Ended / Rifled / Shot down / Floored'
-    },
     [`weapon_tar21`] = {
         name = 'weapon_tar21',
         label = 'TAR-21',
@@ -1842,13 +1821,6 @@ WeaponList = {
         ammotype = 'AMMO_MG',
         damagereason = 'Ended / Rifled / Shot down / Floored'
     },
-    [`weapon_m4`] = {
-        name = 'weapon_m4',
-        label = 'M4A1 Carbine',
-        weapontype = 'Assault Rifle',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Ended / Rifled / Shot down / Floored'
-    },
     [`weapon_mk47fm`] = {
         name = 'weapon_mk47fm',
         label = 'MK47 Mutant',
@@ -1856,46 +1828,12 @@ WeaponList = {
         ammotype = 'AMMO_MG',
         damagereason = 'Ended / Rifled / Shot down / Floored'
     },
-    [`weapon_m6ic`] = {
-        name = 'weapon_m6ic',
-        label = 'LWRC M6IC',
-        weapontype = 'Assault Rifle',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Ended / Rifled / Shot down / Floored'
-    },
-    [`weapon_scarsc`] = {
-        name = 'weapon_scarsc',
-        label = 'Scar SC',
-        weapontype = 'Assault Rifle',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Ended / Rifled / Shot down / Floored'
-    },
-    [`weapon_groza`] = {
-        name = 'weapon_groza',
-        label = 'OTs-14 Groza',
-        weapontype = 'Assault Rifle',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Ended / Rifled / Shot down / Floored'
-    },
+    
 
     -- Pistols
     [`weapon_de`] = {
         name = 'weapon_de',
         label = 'Desert Eagle',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_deagle`] = {
-        name = 'weapon_deagle',
-        label = 'Desert Eagle',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_browning`] = {
-        name = 'weapon_browning',
-        label = 'Browning',
         weapontype = 'Pistol',
         ammotype = 'AMMO_MG',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
@@ -1907,51 +1845,9 @@ WeaponList = {
         ammotype = 'AMMO_MG',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
     },
-    [`weapon_fnfnx45`] = {
-        name = 'weapon_fnfnx45',
-        label = 'FN FNX-45',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
     [`weapon_fnx45`] = {
         name = 'weapon_fnx45',
         label = 'FN FNX-45',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_glock17`] = {
-        name = 'weapon_glock17',
-        label = 'Glock 17',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_glock18c`] = {
-        name = 'weapon_glock18c',
-        label = 'Glock 18C',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_glock20`] = {
-        name = 'weapon_glock20',
-        label = 'Glock 20',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_glock22`] = {
-        name = 'weapon_glock22',
-        label = 'Glock 22',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_glock19gen4`] = {
-        name = 'weapon_glock19gen4',
-        label = 'Glock 19 Gen 4',
         weapontype = 'Pistol',
         ammotype = 'AMMO_MG',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
@@ -1966,13 +1862,6 @@ WeaponList = {
     [`weapon_m45a1`] = {
         name = 'weapon_m45a1',
         label = 'M45A1',
-        weapontype = 'Pistol',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
-    },
-    [`weapon_m1911`] = {
-        name = 'weapon_m1911',
-        label = 'M1911',
         weapontype = 'Pistol',
         ammotype = 'AMMO_MG',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
@@ -2014,13 +1903,6 @@ WeaponList = {
         ammotype = 'AMMO_SMG',
         damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
     },
-    [`weapon_pmxfm`] = {
-        name = 'weapon_pmxfm',
-        label = 'Beretta PMX',
-        weapontype = 'Submachine Gun',
-        ammotype = 'AMMO_MG',
-        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
-    },
     [`weapon_mac10`] = {
         name = 'weapon_mac10',
         label = 'MAC-10',
@@ -2028,6 +1910,128 @@ WeaponList = {
         ammotype = 'AMMO_MG',
         damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
     },
+    
+    -- PD Weapons
+    [`weapon_pmxfm`] = {
+        name = 'weapon_pmxfm',
+        label = 'Beretta PMX',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_glock18c`] = {
+        name = 'weapon_glock18c',
+        label = 'Glock 18C',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock19gen4`] = {
+        name = 'weapon_glock19gen4',
+        label = 'Glock 19 Gen 4',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock21`] = {
+        name = 'weapon_glock21',
+        label = 'GLOCK 21',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_deagle`] = {
+        name = 'weapon_deagle',
+        label = 'Desert Eagle',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock22`] = {
+        name = 'weapon_glock22',
+        label = 'Glock 22',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock17`] = {
+        name = 'weapon_glock17',
+        label = 'Glock 17',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_fnfnx45`] = {
+        name = 'weapon_fnfnx45',
+        label = 'FN FNX-45',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_m1911`] = {
+        name = 'weapon_m1911',
+        label = 'M1911',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_midasglock`] = {
+        name = 'weapon_midasglock',
+        label = 'MIDAS GLOCK',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_m6ic`] = {
+        name = 'weapon_m6ic',
+        label = 'LWRC M6IC',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_scarsc`] = {
+        name = 'weapon_scarsc',
+        label = 'Scar SC',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_groza`] = {
+        name = 'weapon_groza',
+        label = 'OTs-14 Groza',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_scarh`] = {
+        name = 'weapon_scarh',
+        label = 'SCAR-H',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_browning`] = {
+        name = 'weapon_browning',
+        label = 'Browning',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock20`] = {
+        name = 'weapon_glock20',
+        label = 'Glock 20',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_m4`] = {
+        name = 'weapon_m4',
+        label = 'M4A1 Carbine',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    
 
     -- Shotguns
     [`weapon_aa12`] = {

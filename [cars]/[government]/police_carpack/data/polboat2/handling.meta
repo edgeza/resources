@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHandlingDataMgr>
+  <HandlingData>
+  <Item type="CHandlingData">
+      <handlingName>polboat2</handlingName>
+      <fMass value="2000.0" />
+      <fInitialDragCoeff value="1.0" />
+      <fPercentSubmerged value="50.0" />
+      <vecCentreOfMassOffset x="0.0" y="-0.9" z="-0.5" />
+      <vecInertiaMultiplier x="1.0" y="1.0" z="1.0" />
+      <fDriveBiasFront value="0.0" />
+      <nInitialDriveGears value="1" />
+      <fInitialDriveForce value="16.0" />
+      <fDriveInertia value="1.5" />
+      <fClutchChangeRateScaleUpShift value="1.3" />
+      <fClutchChangeRateScaleDownShift value="1.3" />
+      <fInitialDriveMaxFlatVel value="125.0" />
+      <fBrakeForce value="0.4" />
+      <fBrakeBiasFront value="0.6" />
+      <fHandBrakeForce value="0.7" />
+      <fSteeringLock value="35.0" />
+      <fTractionCurveMax value="0.0" />
+      <fTractionCurveMin value="0.0" />
+      <fTractionCurveLateral value="6.0" />
+      <fTractionSpringDeltaMax value="0.1" />
+      <fLowSpeedTractionLossMult value="0.0" />
+      <fCamberStiffnesss value="0.0" />
+      <fTractionBiasFront value="0.95" />
+      <fTractionLossMult value="1.0" />
+      <fSuspensionForce value="1.0" />
+      <fSuspensionCompDamp value="3.0" />
+      <fSuspensionReboundDamp value="0.0" />
+      <fSuspensionUpperLimit value="0.1" />
+      <fSuspensionLowerLimit value="0.1" />
+      <fSuspensionRaise value="0.0" />
+      <fSuspensionBiasFront value="0.0" />
+      <fAntiRollBarForce value="0.0" />
+      <fAntiRollBarBiasFront value="0.0" />
+      <fRollCentreHeightFront value="0.0" />
+      <fRollCentreHeightRear value="0.0" />
+      <fCollisionDamageMult value="0.5" />
+      <fWeaponDamageMult value="1.0" />
+      <fDeformationDamageMult value="0.8" />
+      <fEngineDamageMult value="1.5" />
+      <fPetrolTankVolume value="10.0" />
+      <fOilVolume value="3.0" />
+      <fSeatOffsetDistX value="0.0" />
+      <fSeatOffsetDistY value="0.0" />
+      <fSeatOffsetDistZ value="0.0" />
+      <nMonetaryValue value="40000" />
+      <strModelFlags>8000000</strModelFlags>
+      <strHandlingFlags>0</strHandlingFlags>
+      <strDamageFlags>20</strDamageFlags>
+      <AIHandling>AVERAGE</AIHandling>
+      <SubHandlingData>
+        <Item type="CBoatHandlingData">
+          <fBoxFrontMult value="0.8" />
+          <fBoxRearMult value="0.8" />
+          <fBoxSideMult value="1.0" />
+          <fSampleTop value="0.2" />
+          <fSampleBottom value="0.3" />
+          <fAquaplaneForce value="3.6" />
+          <fAquaplanePushWaterMult value="0.6" />
+          <fAquaplanePushWaterCap value="3.5" />
+          <fAquaplanePushWaterApply value="0.002" />
+          <fRudderForce value="0.9" />
+          <fRudderOffsetSubmerge value="0.0" />
+          <fRudderOffsetForce value="0.0" />
+          <fRudderOffsetForceZMult value="0.8" />
+          <fWaveAudioMult value="4.0" />
+          <vecMoveResistance x="8.5" y="400.0" z="100.0" />
+          <vecTurnResistance x="2.64" y="1.4" z="0.07" />
+          <fLook_L_R_CamHeight value="4.0" />
+          <fDragCoefficient value="1.6" />
+          <fKeelSphereSize value="0.0" />
+          <fPropRadius value="0.1" />
+          <fLowLodAngOffset value="0.046234" />
+          <fLowLodDraughtOffset value="0.119548" />
+          <fImpellerOffset value="0.4" />
+          <fImpellerForceMult value="0.2" />
+          <fDinghySphereBuoyConst value="10.0" />
+          <fProwRaiseMult value="0.5" />
+        </Item>
+        <Item type="CVehicleWeaponHandlingData">
+          <uWeaponHash>
+            <Item>VEHICLE_WEAPON_RADAR</Item>
+            <Item />
+            <Item />
+          </uWeaponHash>
+          <WeaponSeats content="int_array">
+            0 
+            0 
+            0 
+          </WeaponSeats>
+          <fTurretSpeed content="float_array">
+            1.0	
+            0.0	
+          </fTurretSpeed>
+          <fTurretPitchMin content="float_array">
+            0.0	
+            0.0	
+          </fTurretPitchMin>
+          <fTurretPitchMax content="float_array">
+            0.0	
+            0.0	
+          </fTurretPitchMax>
+          <fTurretCamPitchMin content="float_array">
+            0.0	
+            0.0	
+          </fTurretCamPitchMin>
+          <fTurretCamPitchMax content="float_array">
+            0.0	
+            0.0	
+          </fTurretCamPitchMax>
+          <fBulletVelocityForGravity content="float_array">
+            0.0	
+            0.0	
+          </fBulletVelocityForGravity>
+          <fTurretPitchForwardMin content="float_array">
+            0.0	
+            0.0	
+          </fTurretPitchForwardMin>
+          <fUvAnimationMult value="0.0" />
+          <fMiscGadgetVar value="0.0" />
+          <fWheelImpactOffset value="0.0" />
+        </Item>
+        <Item type="NULL" />
+      </SubHandlingData>
+    </Item>
+  </HandlingData>
+</CHandlingDataMgr>

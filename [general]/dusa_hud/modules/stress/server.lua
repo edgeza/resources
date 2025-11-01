@@ -27,13 +27,13 @@ if config.EnableStress then
             return
         end
         local data = db.query("hud_settings", {"stress"}, "citizenid", citizenid)
-        if not data or not next(data) then
+        if not data or not next(data) or not data[1] then
             local playlist, settings = {}, {}            
             db.insert("hud_settings", {'citizenid', 'stress', 'playlist', 'settings'}, {citizenid, 0, json.encode(playlist), json.encode(settings)})
             stress_data[citizenid] = 0
             TriggerClientEvent('hud:client:UpdateStress', src, stress_data[citizenid])
         else
-            stress_data[citizenid] = data[1].stress
+            stress_data[citizenid] = data[1].stress or 0
             TriggerClientEvent('hud:client:UpdateStress', src, stress_data[citizenid])
         end
     end)

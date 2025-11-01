@@ -183,7 +183,7 @@ Config.DrawableArmor                 = 100 -- [EDIT] Armor points granted when w
 -- ESX Docs: https://docs.quasar-store.com/ Inventory > Functions > Clothing
 -- QB Docs:  https://docs.quasar-store.com/
 --──────────────────────────────────────────────────────────────────────────────
-Config.Clothing                      = true -- [EDIT] Enables clothing options in inventory (adds clothing button).
+Config.Clothing                      = false -- [EDIT] Enables clothing options in inventory (adds clothing button).
 
 ---@type ClotheSlot[]
 Config.ClothingSlots                 = { -- [EDIT] Define which slots are used for clothing pieces.

@@ -1,0 +1,352 @@
+@import 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,300&family=Montserrat:wght@200&family=Outfit:wght@300&family=Varela+Round&display=swap';
+
+body {
+ font-family: 'Barlow Condensed', sans-serif;
+ overflow: hidden;
+}
+
+.stopwatch-container {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 300px;
+  top: 10%;
+  left: 45%;
+  overflow: none;
+}
+
+
+
+#stopwatchtime {
+  margin-left: 1rem;
+}	
+
+.stopwatch {
+  font-size: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  filter: drop-shadow(0px 2px 0.2px #292929);
+}
+
+#stopwatchtime {
+  order: 1;
+  margin-left: 20px;
+}
+
+.stopwatch h1 {
+  margin-bottom: 50px;
+  margin-left: 10px;
+  color: #fff;
+  filter: drop-shadow(0px 0.1px 0.01px #292929);
+  order: 2;
+  font-size: 2rem;
+}
+
+
+/* leaderboard */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Sora:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Sora:wght@100;600&display=swap');
+
+
+.container {
+    background: none;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.leaderboard {
+    height: 600px;
+    width: 500px;
+    border-radius: 25px;
+    margin: auto;
+    top: 200px;
+    position: relative;
+    background: rgb(37, 37, 37);
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.headertext {
+    text-align: left;
+    color: white;
+    top: 5px;
+    margin-left: 20px;
+    position: relative;
+    font-size: 30px;
+    font-family: 'Barlow Condensed', sans-serif;;
+}
+
+.traplocation {
+    text-align: left;
+    color: white;
+    top: -5px;
+    font-size: 18px;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.playersranked {
+    position: relative;
+    left: 295px;
+    top: 18px;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.playeramount {
+    font-weight: 700;
+    font-family: 'Barlow Condensed', sans-serif;
+    animation: rainbow 10s linear infinite;
+}
+
+.listcontainer {
+    height: 460px;
+    width: 440px;
+    margin: auto;
+    position: relative;
+    top: -5px;
+}
+
+li {
+    list-style: none;
+    background: linear-gradient(to right, white 90%, rgb(22, 22, 22) 10%);
+    left: -40px;
+    width: 440px;
+    position: relative;
+    margin-top: 3px;
+    height: 30px;
+    transition: 0.2s all ease-in-out;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+
+li .speed {
+    left: 403px;
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+}
+
+.userspeed {
+  font-family: 'Barlow Condensed', sans-serif;
+  position: absolute;
+  left: 280px;
+  width: 50px;
+  font-weight: 800;
+}
+
+.yourrank {
+  color: white;
+  position: absolute;
+  top: 30px;
+  font-size: 18px;
+  left: 296px;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+li:hover {
+    transform: scale(0.95);
+background: linear-gradient(to right, rgb(255, 207, 117) 90%, rgb(255, 149, 0) 90%);
+
+}
+
+
+
+ul {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    height: 440px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f1f1f1;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b8b8b8;
+}
+
+.rank {
+    font-weight: 800;
+    left: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    position: relative;
+}
+
+.userinfo {
+    position: absolute;
+    left: 60px;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+@keyframes rainbow {
+  0% { color: red; }
+  14% { color: orange; }
+  28% { color: yellow; }
+  42% { color: green; }
+  57% { color: blue; }
+  71% { color: indigo; }
+  85% { color: violet; }
+  100% { color: red; }
+}
+
+
+/* time slip */
+
+@font-face {
+  font-family: receipt;
+  src: url("./fonts/fakereceipt.otf");
+}
+
+.timeslip {
+
+  height: 500px;
+  width: 300px;
+  top: 300px;
+  animation: fadeInRight;
+  background-color: white;
+  animation-duration: 0.5s;
+  right: 20px;
+  display: none;
+  position: absolute;
+  font-family: receipt;
+}
+
+.timeslip h1 {
+  font-size: 15px;
+  top: 50px;
+  left: 10px;
+  position: relative;
+}
+
+.timeslip h2 {
+  font-size: 13px;
+  top: 70px;
+  left: 10px;
+  position: relative;
+}
+
+.times {
+padding: 0;
+position: relative;
+list-style: none;
+top: 80px;
+left: 0px;
+width: 180px;
+height: 350px;
+font-size: 10px;
+}
+
+.times li {
+  margin-bottom: 2px;
+  left: 10px;
+  position: relative;
+}
+
+.greeting {
+  text-align: center;
+  position: relative;
+  width: 80%;
+  top: 20px;
+  margin: auto;
+}
+
+.greeting2 {
+  text-align: center;
+  position: relative;
+  width: 80%;
+  top: -10px;
+  margin: auto;
+}
+
+@keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.fadeOutRight {
+  animation: fadeOutRight 0.5s forwards;
+}
+
+
+/* speed board */
+
+@font-face {
+  font-family: lcd;
+  src: url("./fonts/open24.ttf");
+}
+
+
+#firsttime, #secondtime{
+color: red;
+text-align: center;
+font-size: 200px;
+font-family: lcd;
+font-weight: 200;
+}
+
+#board-times {
+  display: flex;
+  color: red;
+  margin-top: -100px;
+  font-family: lcd;
+  gap: 320px;
+}
+
+#firstmph, #secondmph {
+  margin-top: -90px;
+  font-size: 140px;
+  font-family: lcd;
+  width: 600px;
+  color: red;
+  text-align: center;
+}
+
+.firstbox, .secondbox {
+  display: block;
+  opacity: 0;
+}
+
+.hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  background-color: #000;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #fff;
+
+}

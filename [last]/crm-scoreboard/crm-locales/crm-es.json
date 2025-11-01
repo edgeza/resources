@@ -1,0 +1,14 @@
+{
+    "crm_total": "Total de jugadores",
+    "crm_online": "EN LÍNEA",
+    "crm_jobs": "Los trabajos cuentan",
+    "crm_heists": "Robos disponibles",
+    "crm_players": "Jugadores en línea",
+    "crm_id": "IDENTIFICACIÓN",
+    "crm_name": "Nombre",
+    "crm_role": "Role",
+    "crm_ping": "Silbido",
+    "crm_active": "activo",
+    "crm_inactive": "inactivo",
+    "crm_busy": "ocupado <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

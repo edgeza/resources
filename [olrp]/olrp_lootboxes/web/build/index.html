@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loot Cases</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .case-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .case-container.active {
+            display: flex;
+            animation: containerFadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes containerFadeIn {
+            from { 
+                opacity: 0;
+                backdrop-filter: blur(0px);
+            }
+            to { 
+                opacity: 1;
+                backdrop-filter: blur(10px);
+            }
+        }
+
+        .case-content {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            max-width: 900px;
+            width: 95%;
+            border: 2px solid #3498db;
+            animation: contentSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            position: relative;
+        }
+
+        .case-content.winning {
+            animation: screenShake 0.5s ease-in-out;
+        }
+
+        @keyframes screenShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px) rotate(-1deg); }
+            20%, 40%, 60%, 80% { transform: translateX(10px) rotate(1deg); }
+        }
+
+        @keyframes contentSlideIn {
+            from { 
+                transform: scale(0.7) translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Glowing border animation */
+        .case-content::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            background: linear-gradient(45deg, #808080, #808080);
+            background-size: 400% 400%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Rarity-based border animations */
+        .case-content.rarity-common::before {
+            background: linear-gradient(45deg, #808080, #808080);
+            opacity: 0.2;
+        }
+
+        .case-content.rarity-uncommon::before {
+            background: linear-gradient(45deg, #00ff00, #00ff00);
+            opacity: 0.3;
+            animation: borderGlow 3s ease infinite;
+        }
+
+        .case-content.rarity-rare::before {
+            background: linear-gradient(45deg, #0080ff, #0080ff);
+            opacity: 0.4;
+            animation: borderGlow 2s ease infinite;
+        }
+
+        .case-content.rarity-epic::before {
+            background: linear-gradient(45deg, #8000ff, #8000ff);
+            opacity: 0.5;
+            animation: borderGlow 1.5s ease infinite;
+        }
+
+        .case-content.rarity-legendary::before {
+            background: linear-gradient(45deg, #ff8000, #ffd700, #ff8000);
+            opacity: 0.7;
+            animation: borderGlowRainbow 2s ease infinite;
+            box-shadow: 0 0 20px rgba(255, 128, 0, 0.5);
+        }
+
+        .case-content.rarity-diamond::before {
+            background: linear-gradient(45deg, #00ffff, #ffffff, #00ffff, #e0f7fa);
+            opacity: 0.9;
+            animation: borderGlowRainbow 1.5s ease infinite;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { background-position: 0% 50%; filter: brightness(1); }
+            50% { background-position: 100% 50%; filter: brightness(1.5); }
+        }
+
+        @keyframes borderGlowRainbow {
+            0%, 100% { background-position: 0% 50%; filter: hue-rotate(0deg) brightness(1); }
+            33% { background-position: 100% 50%; filter: hue-rotate(120deg) brightness(1.3); }
+            66% { background-position: 50% 100%; filter: hue-rotate(240deg) brightness(1.3); }
+        }
+
+        .case-header {
+            margin-bottom: 20px;
+        }
+
+        .case-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #808080;
+            transition: all 0.5s ease;
+        }
+
+        .case-title.rarity-common {
+            color: #808080;
+            animation: none;
+        }
+
+        .case-title.rarity-uncommon {
+            color: #00ff00;
+            animation: titlePulse 3s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .case-title.rarity-rare {
+            color: #0080ff;
+            animation: titlePulse 2.5s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(0, 128, 255, 0.6);
+        }
+
+        .case-title.rarity-epic {
+            color: #8000ff;
+            animation: titlePulse 2s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(128, 0, 255, 0.7);
+        }
+
+        .case-title.rarity-legendary {
+            color: #ff8000;
+            animation: titlePulseLegendary 1.5s ease-in-out infinite;
+            text-shadow: 0 0 25px rgba(255, 128, 0, 0.8);
+        }
+
+        .case-title.rarity-diamond {
+            color: #00ffff;
+            animation: titlePulseDiamond 1s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 1), 0 0 60px rgba(255, 255, 255, 0.8);
+            filter: drop-shadow(0 0 10px #00ffff);
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { 
+                transform: scale(1);
+            }
+            50% { 
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes titlePulseLegendary {
+            0%, 100% { 
+                transform: scale(1) rotateZ(0deg);
+                text-shadow: 0 0 25px rgba(255, 128, 0, 0.8);
+            }
+            25% { 
+                transform: scale(1.08) rotateZ(-0.5deg);
+                text-shadow: 0 0 35px rgba(255, 128, 0, 1);
+            }
+            75% { 
+                transform: scale(1.08) rotateZ(0.5deg);
+                text-shadow: 0 0 35px rgba(255, 128, 0, 1);
+            }
+        }
+
+        @keyframes titlePulseDiamond {
+            0%, 100% { 
+                transform: scale(1) rotateZ(0deg);
+                filter: hue-rotate(0deg) brightness(1);
+            }
+            25% { 
+                transform: scale(1.1) rotateZ(-1deg);
+                filter: hue-rotate(90deg) brightness(1.3);
+            }
+            75% { 
+                transform: scale(1.1) rotateZ(1deg);
+                filter: hue-rotate(270deg) brightness(1.3);
+            }
+        }
+
+        .case-image {
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            display: block;
+            border: 3px solid #808080;
+            transition: all 0.5s ease;
+        }
+
+        .case-image.rarity-common {
+            border-color: #808080;
+            animation: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .case-image.rarity-uncommon {
+            border-color: #00ff00;
+            animation: imageFloat 3s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+        }
+
+        .case-image.rarity-rare {
+            border-color: #0080ff;
+            animation: imageFloat 2.5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 128, 255, 0.5);
+        }
+
+        .case-image.rarity-epic {
+            border-color: #8000ff;
+            animation: imageFloat 2s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(128, 0, 255, 0.6);
+        }
+
+        .case-image.rarity-legendary {
+            border-color: #ff8000;
+            animation: imageFloatLegendary 1.5s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 128, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+
+        .case-image.rarity-diamond {
+            border-color: #00ffff;
+            animation: imageFloatDiamond 1s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 1), 0 0 80px rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes imageFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% { 
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+
+        @keyframes imageFloatLegendary {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+            33% { 
+                transform: translateY(-15px) rotate(-3deg) scale(1.05);
+            }
+            66% { 
+                transform: translateY(-10px) rotate(3deg) scale(1.05);
+            }
+        }
+
+        @keyframes imageFloatDiamond {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                filter: brightness(1) hue-rotate(0deg);
+            }
+            25% { 
+                transform: translateY(-20px) rotate(-5deg) scale(1.08);
+                filter: brightness(1.2) hue-rotate(90deg);
+            }
+            50% { 
+                transform: translateY(-15px) rotate(5deg) scale(1.08);
+                filter: brightness(1.3) hue-rotate(180deg);
+            }
+            75% { 
+                transform: translateY(-18px) rotate(-3deg) scale(1.08);
+                filter: brightness(1.2) hue-rotate(270deg);
+            }
+        }
+
+        /* CSGO Style Item Carousel */
+        .item-carousel-container {
+            position: relative;
+            height: 180px;
+            margin: 30px 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.9) 100%);
+        }
+
+        .item-carousel-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #ffd700, transparent);
+            z-index: 10;
+            box-shadow: 0 0 20px #ffd700, 0 0 40px rgba(255, 215, 0, 0.5);
+            animation: indicatorPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes indicatorPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px #ffd700, 0 0 40px rgba(255, 215, 0, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 30px #ffd700, 0 0 60px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .item-carousel-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.2), transparent);
+            z-index: 9;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.5; }
+        }
+
+        .item-track {
+            display: flex;
+            height: 100%;
+            will-change: transform;
+        }
+
+        .item-track.spinning {
+            transition: none;
+        }
+
+        .item-slot {
+            min-width: 140px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            margin: 0 3px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            padding: 10px;
+        }
+
+        .item-slot.common { 
+            border-color: #808080; 
+            background: rgba(128, 128, 128, 0.1);
+            box-shadow: 0 0 5px rgba(128, 128, 128, 0.3);
+        }
+        .item-slot.uncommon { 
+            border-color: #00ff00; 
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+            animation: uncommonGlow 2s ease-in-out infinite;
+        }
+        .item-slot.rare { 
+            border-color: #0080ff; 
+            background: rgba(0, 128, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 128, 255, 0.5);
+            animation: rareGlow 2s ease-in-out infinite;
+        }
+        .item-slot.epic { 
+            border-color: #8000ff; 
+            background: rgba(128, 0, 255, 0.1);
+            box-shadow: 0 0 12px rgba(128, 0, 255, 0.6);
+            animation: epicGlow 2s ease-in-out infinite;
+        }
+        .item-slot.legendary { 
+            border-color: #ff8000; 
+            background: rgba(255, 128, 0, 0.1);
+            box-shadow: 0 0 15px rgba(255, 128, 0, 0.7);
+            animation: legendaryGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes uncommonGlow {
+            0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 0, 0.4); }
+            50% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); }
+        }
+        @keyframes rareGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 128, 255, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(0, 128, 255, 0.8); }
+        }
+        @keyframes epicGlow {
+            0%, 100% { box-shadow: 0 0 12px rgba(128, 0, 255, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(128, 0, 255, 0.9); }
+        }
+        @keyframes legendaryGlow {
+            0%, 100% { 
+                box-shadow: 0 0 15px rgba(255, 128, 0, 0.7), 0 0 5px rgba(255, 255, 0, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 128, 0, 1), 0 0 15px rgba(255, 255, 0, 0.8);
+            }
+        }
+
+        .item-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+        }
+
+        .item-name {
+            font-size: 0.85em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .item-rarity {
+            font-size: 0.75em;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        .rarity-common { color: #808080; }
+        .rarity-uncommon { color: #00ff00; }
+        .rarity-rare { color: #0080ff; }
+        .rarity-epic { color: #8000ff; }
+        .rarity-legendary { color: #ff8000; }
+
+        .reward-display {
+            display: none;
+            margin: 30px 0;
+        }
+
+        .reward-display.show {
+            display: block;
+            animation: rewardReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes rewardReveal {
+            0% { 
+                opacity: 0;
+                transform: scale(0.2) translateY(100px) rotate(-20deg);
+                filter: blur(10px);
+            }
+            40% {
+                opacity: 0.8;
+                transform: scale(1.15) translateY(-20px) rotate(5deg);
+                filter: blur(2px);
+            }
+            60% {
+                transform: scale(0.95) translateY(5px) rotate(-2deg);
+            }
+            100% { 
+                opacity: 1;
+                transform: scale(1) translateY(0) rotate(0deg);
+                filter: blur(0);
+            }
+        }
+
+        .reward-item {
+            background: linear-gradient(145deg, #27ae60, #2ecc71);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: rewardPulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reward-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
+            animation: rewardShine 3s ease-in-out infinite;
+        }
+
+        @keyframes rewardShine {
+            0% { transform: rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes rewardPulse {
+            0%, 100% { 
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 204, 113, 0.3);
+            }
+            50% { 
+                box-shadow: 0 15px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(46, 204, 113, 0.6);
+            }
+        }
+
+        .reward-name {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            animation: rewardTextShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes rewardTextShimmer {
+            0%, 100% { text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); }
+            50% { text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.6); }
+        }
+
+        .reward-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+            animation: rewardImageSpin 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes rewardImageSpin {
+            0% { transform: scale(0) rotate(-180deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .btn {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 3px 15px rgba(52, 152, 219, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-success {
+            background: linear-gradient(145deg, #27ae60, #2ecc71);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .opening-text {
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #3498db;
+            animation: textPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Particle effects */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 6px #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div id="caseContainer" class="case-container">
+        <div class="case-content">
+            <div class="case-header">
+                <h1 id="caseTitle" class="case-title">Opening Case...</h1>
+                <img id="caseImage" class="case-image" src="" alt="Case Image" onerror="this.style.display='none'">
+            </div>
+            
+            <div id="openingText" class="opening-text">Preparing to open...</div>
+            
+            <!-- CSGO Style Item Carousel -->
+            <div id="itemCarousel" class="item-carousel-container" style="display: none;">
+                <div id="itemTrack" class="item-track">
+                    <!-- Items will be dynamically added here -->
+                </div>
+            </div>
+            
+            <div id="rewardDisplay" class="reward-display">
+                <div class="reward-item">
+                    <img id="rewardImage" class="reward-image" src="" alt="Reward" onerror="this.src='https://via.placeholder.com/120?text=Reward'">
+                    <div id="rewardName" class="reward-name"></div>
+                    <div id="rewardAmount"></div>
+                </div>
+            </div>
+            
+            <div id="buttons" style="display: none;">
+                <button id="claimBtn" class="btn btn-success">Claim Reward</button>
+                <button id="closeBtn" class="btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio for spin sound -->
+    <audio id="spinSound" preload="auto">
+        <source src="spinning-wheel.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let isOpening = false;
+        let currentItems = [];
+        let targetItem = null;
+        const inventoryPath = 'nui://qs-inventory/html/images/';
+        let activeTimers = []; // Track all active timers for cleanup
+
+        window.addEventListener('message', function(event) {
+            const data = event.data;
+            
+            switch(data.type) {
+                case 'Open_caseOpener':
+                    openCase(data.caseData, data.items, data.reward);
+                    break;
+                case 'Close_caseOpener':
+                    closeCase();
+                    break;
+            }
+        });
+
+        function openCase(caseData, items, reward) {
+            if (isOpening) {
+                console.log('Case opening already in progress, ignoring new request');
+                return;
+            }
+            
+            isOpening = true; // Set flag first to prevent concurrent openings
+            
+            // Clean up any existing case state first (but keep isOpening = true)
+            const wasOpening = isOpening;
+            activeTimers.forEach(timer => clearTimeout(timer));
+            activeTimers = [];
+            
+            const spinSound = document.getElementById('spinSound');
+            if (spinSound) {
+                spinSound.pause();
+                spinSound.currentTime = 0;
+            }
+            
+            const itemTrack = document.getElementById('itemTrack');
+            if (itemTrack) {
+                itemTrack.innerHTML = '';
+            }
+            
+            // Small delay to ensure cleanup completes
+            setTimeout(() => {
+                isOpening = wasOpening; // Restore flag
+                currentItems = items;
+                targetItem = reward;
+                
+                initializeCase(caseData);
+            }, 150);
+        }
+        
+        function initializeCase(caseData) {
+            
+            const container = document.getElementById('caseContainer');
+            const caseContent = document.querySelector('.case-content');
+            const caseTitle = document.getElementById('caseTitle');
+            const caseImage = document.getElementById('caseImage');
+            const openingText = document.getElementById('openingText');
+            const itemCarousel = document.getElementById('itemCarousel');
+            
+            // Detect case rarity from title
+            const titleLower = caseData.title.toLowerCase();
+            let rarityClass = 'rarity-common';
+            
+            if (titleLower.includes('diamond')) {
+                rarityClass = 'rarity-diamond';
+            } else if (titleLower.includes('legendary')) {
+                rarityClass = 'rarity-legendary';
+            } else if (titleLower.includes('epic')) {
+                rarityClass = 'rarity-epic';
+            } else if (titleLower.includes('rare')) {
+                rarityClass = 'rarity-rare';
+            } else if (titleLower.includes('uncommon')) {
+                rarityClass = 'rarity-uncommon';
+            }
+            
+            // Remove all rarity classes and add the correct one
+            caseContent.classList.remove('rarity-common', 'rarity-uncommon', 'rarity-rare', 'rarity-epic', 'rarity-legendary', 'rarity-diamond');
+            caseContent.classList.add(rarityClass);
+            
+            caseTitle.textContent = caseData.title;
+            caseTitle.className = 'case-title ' + rarityClass;
+            
+            caseImage.src = caseData.image;
+            caseImage.className = 'case-image ' + rarityClass;
+            caseImage.style.display = 'block';
+            
+            container.classList.add('active');
+            
+            const timer1 = setTimeout(() => {
+                openingText.textContent = 'Opening case...';
+                itemCarousel.style.display = 'block';
+                startItemCarousel();
+            }, 1000);
+            activeTimers.push(timer1);
+        }
+
+        function startItemCarousel() {
+            const itemTrack = document.getElementById('itemTrack');
+            if (!itemTrack) return;
+            
+            itemTrack.innerHTML = '';
+            
+            // Calculate positions
+            const itemWidth = 146; // 140px + 6px margin
+            const containerWidth = itemTrack.parentElement.offsetWidth || 900;
+            const centerOffset = containerWidth / 2;
+            
+            // Generate a large array of random items
+            const allItems = [];
+            for (let i = 0; i < 200; i++) {
+                const randomItem = currentItems[Math.floor(Math.random() * currentItems.length)];
+                allItems.push(randomItem);
+            }
+            
+            // Insert target item at a specific position to ensure it lands centered
+            const targetItemIndex = 100; // Position to insert target item
+            allItems[targetItemIndex] = targetItem;
+            
+            // Calculate exact pixel position to center target item
+            const targetPixelPosition = targetItemIndex * itemWidth;
+            
+            allItems.forEach((item, index) => {
+                const itemSlot = document.createElement('div');
+                itemSlot.className = `item-slot ${item.rarity.toLowerCase()}`;
+                itemSlot.dataset.index = index;
+                
+                const imgSrc = inventoryPath + item.image;
+                
+                itemSlot.innerHTML = `
+                    <img class="item-image" src="${imgSrc}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/70?text=Item'">
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-rarity rarity-${item.rarity.toLowerCase()}">${item.rarity}</div>
+                `;
+                
+                itemTrack.appendChild(itemSlot);
+            });
+            
+            // Play spin sound and start animation
+            const spinSound = document.getElementById('spinSound');
+            if (!spinSound) return;
+            
+            spinSound.volume = 0.5;
+            
+            // Ensure audio is loaded
+            if (spinSound.readyState === 0) {
+                spinSound.load();
+            }
+            
+            // Win sound plays at 9 seconds, so animation should stop at 9 seconds
+            const winSoundTime = 9000; // 9 seconds
+            
+            // Wait for audio to be ready and then start
+            const tryStart = () => {
+                if (!isOpening) return; // Stop if case was closed
+                
+                if (spinSound.readyState >= 2) {
+                    // Reset audio to start and play
+                    spinSound.currentTime = 0;
+                    const playPromise = spinSound.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            // Audio started successfully
+                        }).catch(error => {
+                            console.log('Audio play failed:', error);
+                        });
+                    }
+                    
+                    startGradualSlowdown(itemTrack, targetItemIndex, targetPixelPosition, winSoundTime);
+                } else {
+                    const timer = setTimeout(tryStart, 100);
+                    activeTimers.push(timer);
+                }
+            };
+            
+            tryStart();
+            
+            // Show reward when win sound time is reached
+            const timer2 = setTimeout(() => {
+                if (isOpening && targetItem) {
+                    showReward(targetItem);
+                }
+            }, winSoundTime);
+            activeTimers.push(timer2);
+        }
+
+        function startGradualSlowdown(itemTrack, targetItemIndex, targetPixelPosition, duration) {
+            const itemWidth = 146;
+            const containerWidth = itemTrack.parentElement.offsetWidth || 900;
+            const centerOffset = containerWidth / 2;
+            
+            // Calculate the exact final position to center the target item
+            const finalPosition = targetPixelPosition - centerOffset + 70; // Offset to center the item
+            
+            const startTime = Date.now();
+            
+            itemTrack.classList.add('spinning');
+            
+            const animate = () => {
+                const elapsed = Date.now() - startTime;
+                
+                if (elapsed >= duration) {
+                    // Stop exactly at the target position
+                    itemTrack.style.transform = `translateX(-${finalPosition}px)`;
+                    return;
+                }
+                
+                // CSGO-style ease-out deceleration (fast start, slow end)
+                const t = elapsed / duration;
+                
+                // Easing function: ease-out-cubic for realistic deceleration (starts fast, slows down)
+                const easeOutCubic = 1 - Math.pow(1 - t, 3);
+                
+                const currentPosition = easeOutCubic * finalPosition;
+                
+                itemTrack.style.transform = `translateX(-${currentPosition}px)`;
+                
+                requestAnimationFrame(animate);
+            };
+            
+            animate();
+        }
+
+        function showReward(reward) {
+            const rewardDisplay = document.getElementById('rewardDisplay');
+            const rewardName = document.getElementById('rewardName');
+            const rewardAmount = document.getElementById('rewardAmount');
+            const rewardImage = document.getElementById('rewardImage');
+            const buttons = document.getElementById('buttons');
+            const openingText = document.getElementById('openingText');
+            const itemCarousel = document.getElementById('itemCarousel');
+            
+            openingText.style.display = 'none';
+            
+            // Add particle burst effect
+            createParticleBurst();
+            
+            setTimeout(() => {
+                itemCarousel.style.display = 'none';
+                
+                const imgSrc = inventoryPath + reward.image;
+                rewardImage.src = imgSrc;
+                rewardName.textContent = reward.name;
+                rewardAmount.textContent = `Amount: ${reward.amount}`;
+                
+                // Remove any existing animation classes first
+                rewardDisplay.classList.remove('show');
+                
+                // Force a reflow to ensure the removal is processed
+                void rewardDisplay.offsetWidth;
+                
+                // Now set display to block and add the animation class
+                rewardDisplay.style.display = 'block';
+                
+                // Use requestAnimationFrame to ensure the animation triggers
+                requestAnimationFrame(() => {
+                    rewardDisplay.classList.add('show');
+                });
+                
+                buttons.style.display = 'block';
+                
+                // Add screen shake for epic+ items
+                const caseContent = document.querySelector('.case-content');
+                if (reward.rarity === 'Legendary' || reward.rarity === 'Epic') {
+                    caseContent.classList.add('winning');
+                    setTimeout(() => caseContent.classList.remove('winning'), 500);
+                }
+            }, 500);
+        }
+
+        function createParticleBurst() {
+            const caseContent = document.querySelector('.case-content');
+            const rarity = caseContent.classList.contains('rarity-diamond') ? 'diamond' :
+                          caseContent.classList.contains('rarity-legendary') ? 'legendary' :
+                          caseContent.classList.contains('rarity-epic') ? 'epic' :
+                          caseContent.classList.contains('rarity-rare') ? 'rare' :
+                          caseContent.classList.contains('rarity-uncommon') ? 'uncommon' : 'common';
+            
+            // Scale particle count based on rarity
+            const particleCount = rarity === 'diamond' ? 100 :
+                                 rarity === 'legendary' ? 75 :
+                                 rarity === 'epic' ? 50 :
+                                 rarity === 'rare' ? 30 :
+                                 rarity === 'uncommon' ? 20 : 10;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Vary colors based on rarity
+                if (rarity === 'diamond') {
+                    particle.style.background = `radial-gradient(circle, ${Math.random() > 0.5 ? '#00ffff' : '#ffffff'}, transparent)`;
+                    particle.style.boxShadow = '0 0 8px #00ffff';
+                    particle.style.width = '8px';
+                    particle.style.height = '8px';
+                } else if (rarity === 'legendary') {
+                    particle.style.background = `radial-gradient(circle, ${Math.random() > 0.5 ? '#ff8000' : '#ffd700'}, transparent)`;
+                    particle.style.boxShadow = '0 0 6px #ff8000';
+                }
+                
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const delay = Math.random() * 0.5;
+                const duration = (rarity === 'diamond' ? 2 : rarity === 'legendary' ? 1.5 : 1) + Math.random();
+                
+                particle.style.left = x + '%';
+                particle.style.top = y + '%';
+                particle.style.animation = `particleFloat ${duration}s ease-out ${delay}s forwards`;
+                particle.style.animationDelay = delay + 's';
+                
+                caseContent.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), (duration + delay) * 1000);
+            }
+        }
+
+        // Add particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) translateX(0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) translateX(${Math.random() * 100 - 50}px) scale(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function closeCase() {
+            // Clear all active timers
+            activeTimers.forEach(timer => clearTimeout(timer));
+            activeTimers = [];
+            
+            isOpening = false;
+            
+            const container = document.getElementById('caseContainer');
+            if (container) {
+                container.classList.remove('active');
+            }
+            
+            const spinSound = document.getElementById('spinSound');
+            if (spinSound) {
+                spinSound.pause();
+                spinSound.currentTime = 0;
+            }
+            
+            const rewardDisplay = document.getElementById('rewardDisplay');
+            const buttons = document.getElementById('buttons');
+            
+            if (rewardDisplay) {
+                // Remove the show class to reset animation
+                rewardDisplay.classList.remove('show');
+            }
+            
+            // Also reset case content winning class if it exists
+            const caseContent = document.querySelector('.case-content');
+            if (caseContent) {
+                caseContent.classList.remove('winning');
+            }
+            
+            // Clear the item track
+            const itemTrack = document.getElementById('itemTrack');
+            if (itemTrack) {
+                itemTrack.innerHTML = '';
+            }
+            
+            const timer = setTimeout(() => {
+                if (rewardDisplay) rewardDisplay.style.display = 'none';
+                if (buttons) buttons.style.display = 'none';
+                const itemCarousel = document.getElementById('itemCarousel');
+                if (itemCarousel) itemCarousel.style.display = 'none';
+                const openingText = document.getElementById('openingText');
+                if (openingText) {
+                    openingText.style.display = 'block';
+                    openingText.textContent = 'Preparing to open...';
+                }
+                const caseImage = document.getElementById('caseImage');
+                if (caseImage) caseImage.style.display = 'block';
+            }, 500);
+            activeTimers.push(timer);
+            
+            // Reset variables
+            currentItems = [];
+            targetItem = null;
+        }
+
+        document.getElementById('claimBtn').addEventListener('click', function() {
+            fetch(`https://${GetParentResourceName()}/closeCaseOpener`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            });
+        });
+
+        document.getElementById('closeBtn').addEventListener('click', function() {
+            fetch(`https://${GetParentResourceName()}/forceClose`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            });
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && isOpening) {
+                fetch(`https://${GetParentResourceName()}/forceClose`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+            }
+        });
+    </script>
+</body>
+</html>

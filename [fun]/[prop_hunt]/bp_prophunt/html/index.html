@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Orbitron&family=Roboto&family=Press+Start+2P&family=Russo+One&display=swap" rel="stylesheet">
+    <script src="howler.min.js" type="text/javascript"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="smoke-screen" style="display: none;">
+        <div id="smoke-effect">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/049/665/488/small_2x/abstract-smoke-cloud-with-transparent-background-a-dreamy-and-ethereal-image-png.png" alt="">
+        </div>
+    </div>
+    
+    <div class="prophunt_spectateall" style="display: none;">
+
+        <div class="prophunt_spectate_spectatetext">
+            SPECTATING
+        </div>
+
+        <div class="prophunt_spectate_arrows">
+            <div class="prophunt_spectate_arrows_1" onclick="changespec('next')">
+                <svg width="40px" height="40px" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z" fill="white" /></svg>
+            </div>
+
+            <div class="prophunt_spectate_arrows_2" onclick="changespec('prev')">
+                <svg width="40px" height="40px" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z" fill="white" /></svg>
+   
+                
+            </div>
+        </div>
+
+        <div class="prophunt_spectate">
+
+       
+            <div class="prophunt_spectate_avatar">
+                <img id="playeravatarspectate" src="https://cdn.pixabay.com/photo/2023/10/03/10/49/anonymous-8291223_1280.png" alt="">
+            </div>
+    
+    
+            <div class="prophunt_spectate_texts">
+                <div class="prophunt_spectate_texts_1">
+                    Paul Malon
+                </div>
+                <div class="prophunt_spectate_texts_2">
+                    You're watching this player right now.
+                </div>
+            </div>
+    
+    
+            <div class="prophunt_spectate_team">
+                <img src="hider.png" alt="" id="spectemaid">
+            </div>
+    
+        </div>
+
+    </div>
+    
+
+    <div class="prophunt_blackscreen" style="display: none;">
+
+    </div>
+
+
+    <div class="prophunt_timermain2" style="display: none;">
+        <div class="prophunt_timermain_avatar">
+            <img src="https://cdn.pixabay.com/photo/2023/10/03/10/49/anonymous-8291223_1280.png" alt="">
+        </div>
+
+        <div class="prophunt_timermain_texts">
+            <div class="prophunt_timermain_texts_1">
+                Paul Malon
+            </div>
+            <div class="prophunt_timermain_texts_2">
+                Hiders! Saklanacak bir yer bulun.
+            </div>
+        </div>
+
+        <div class="prophunt_timermain_team">
+            <img src="hider.png" alt="" id="temaiconid">
+        </div>
+   </div>
+
+  <div class="prophunt_timermain" style="display: none;">
+      <div id="prophunt_timermain-container">
+            <div id="prophunt_timermain-role">
+                COME ON HURRY UP ! HIDE !!
+            </div>
+            <div id="prophunt_timermain-countdown">
+                00:00
+            </div>
+        </div>
+  </div>
+  
+
+  <div class="prophunt_overlay" style="display: none;">
+
+    <div id="kill-ui">
+        <!-- <div class="kill-entry">
+            <span class="killer">Paul Malon</span>
+            <span>killed</span> 
+            <span class="victim">Adanalı Nevzat</span>
+        </div> -->
+    </div>
+
+    <div id="crosshair"></div>
+
+
+    <div class="prophunt_overlay_top" style="zoom: 0.9;">
+
+        <div class="prophunt_overlay_top_1">
+            <div class="prophunt_overlay_top_1_list" id="killerlist">
+                <div class="prophunt_overlay_top_1_item">
+                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/EP1004-BLES01807_00-AVGRANDTHE000002/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720" alt="">
+                </div>
+                <div class="prophunt_overlay_top_1_item">
+                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/EP1004-BLES01807_00-AVGRANDTHE000002/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720" alt="">
+                </div>
+                <div class="prophunt_overlay_top_1_item">
+                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/EP1004-BLES01807_00-AVGRANDTHE000002/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="prophunt_overlay_top_2">
+            <div class="prophunt_overlay_top_2_team">
+                <div class="prophunt_overlay_top_2_team_1" id="killerteam">
+                    A
+                </div>
+
+                <div class="prophunt_overlay_top_2_team_topla">
+                    <div class="prophunt_overlay_top_2_team_2" id="killerteam_skor">
+                        0
+                    </div>
+
+                    <div class="prophunt_overlay_top_2_team_3">
+                        -
+                    </div>
+
+                    <div class="prophunt_overlay_top_2_team_4" id="hiderteam_skor">
+                        0
+                    </div>
+                </div>
+
+                <div class="prophunt_overlay_top_2_team_5" id="hiderteam">
+                    B
+                </div>
+            </div>
+
+
+
+            <div class="prophunt_overlay_top_2_1">
+                <div class="prophunt_overlay_top_2_1_text"> 
+                    Killers
+                </div>
+
+                <div class="prophunt_overlay_top_2_1_image">
+                    <img src="knife.png" alt="">
+                </div>
+            </div>
+
+            <div class="prophunt_overlay_top_2_2">
+                <div class="prophunt_overlay_top_2_2_text2">
+                    TIME
+                </div>
+
+                <div class="prophunt_overlay_top_2_2_text" id="globaltimer">
+                    10:00
+                </div>
+                
+
+                
+            </div>
+
+            <div class="prophunt_overlay_top_2_3">
+                <div class="prophunt_overlay_top_2_3_text"> 
+                    Hiders
+                </div>
+
+                <div class="prophunt_overlay_top_2_3_image">
+                    <img src="hider.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="prophunt_overlay_top_3" style="zoom: 0.9;">
+            <div class="prophunt_overlay_top_3_list" id="hiderlist">
+                <div class="prophunt_overlay_top_3_item">
+                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/EP1004-BLES01807_00-AVGRANDTHE000002/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720" alt="">
+                </div>
+                <div class="prophunt_overlay_top_3_item">
+                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/EP1004-BLES01807_00-AVGRANDTHE000002/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720" alt="">
+                </div>
+                <div class="prophunt_overlay_top_3_item">
+                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/EP1004-BLES01807_00-AVGRANDTHE000002/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720" alt="">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="prophunt_bars" style="zoom: 0.9;">
+        <div class="avatar-container">
+            <div class="avatar">
+                <img id="ingameavatarid" src="https://store.playstation.com/store/api/chihiro/00_09_000/container/IT/it/99/EP2402-CUSA05624_00-AV00000000000218/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720" alt="Avatar">
+            </div>
+            <div class="separator">
+                <svg width="110" height="110" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,90 A90,90 0 0,1 190,90" 
+                          fill="none" 
+                          stroke="white" 
+                          stroke-width="7" 
+                          class="semi-circle" />
+                </svg>
+            </div>
+        </div>
+
+        
+        <div class="helathall">
+
+            <div class="health-icon">
+                <img src="heart.svg" alt="Health Icon">
+            </div>
+
+
+            <div class="health-bar">
+                <div class="health-segment active"></div>
+                <div class="health-segment active"></div>
+                <div class="health-segment active"></div>
+                <div class="health-segment"></div>
+                <div class="health-segment"></div>
+                <div class="health-segment"></div>
+                <div class="health-segment"></div>
+                <div class="health-segment"></div>
+                <div class="health-segment"></div>
+                <div class="health-segment"></div>
+    
+            </div>
+        </div>
+
+
+        <div class="staminaall">
+
+            <div class="stamina-icon">
+                <img src="run.svg" alt="stamina Icon">
+            </div>
+
+
+            <div class="stamina-bar">
+                <div class="stamina-segment"></div>
+    
+            </div>
+        </div>
+
+
+
+        
+        
+    </div>
+
+    <!-- ---------------------------------------------------------------- Keylist ---------------------------------------------------------- -->
+
+
+    <!-- -------------------- HIDERS KEY ---------------------------------------------------------------- -->
+    <div class="prophunt-keymain" id="hiderskey" style="display:none;">
+        <div class="prophunt-key-list">
+            <div class="prophunt-key-info">
+                <div class="prophunt-key">
+                    <img src="leftclick.svg" alt="Left Click">
+                </div>
+                <div class="prophunt-description">TRANSFORM</div>
+            </div>
+            <div class="prophunt-key-info">
+                <div class="prophunt-key">
+                    <img src="rightclick.svg" alt="Right Click">
+                </div>
+                <div class="prophunt-description">TURN PED</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key" id="destkey2">
+                    X
+                </div>
+                <div class="prophunt-description">SKILL 2</div>
+            </div>
+
+            <div class="prophunt-key-info" >
+                <div class="prophunt-key" id="destkey3">
+                    Z
+                </div>
+                <div class="prophunt-description">SKILL 3</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key" id="destkey1">
+                    P
+                </div>
+                <div class="prophunt-description">SKILL 1</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key">
+                    DEL
+                </div>
+                <div class="prophunt-description">LOCK/UNLOCK</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key">
+                    Q
+                </div>
+                <div class="prophunt-description">lEFT ROTATE</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key">
+                    E
+                </div>
+                <div class="prophunt-description">RIGHT ROTATE</div>
+            </div>
+
+          
+        </div>
+    </div>
+
+
+    <div class="prophunt-keymain" id="killerskey" style="bottom: 45%; display:none;">
+        <div class="prophunt-key-list">
+            <div class="prophunt-key-info">
+                <div class="prophunt-key">
+                    <img src="leftclick.svg" alt="Left Click">
+                </div>
+                <div class="prophunt-description">SHOOT</div>
+            </div>
+            <div class="prophunt-key-info">
+                <div class="prophunt-key">
+                    <img src="rightclick.svg" alt="Right Click">
+                </div>
+                <div class="prophunt-description">AIM</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key" id="destkeykiller2">
+                    X
+                </div>
+                <div class="prophunt-description">SKILL 2</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key" id="destkeykiller3">
+                    Z
+                </div>
+                <div class="prophunt-description">SKILL 3</div>
+            </div>
+
+            <div class="prophunt-key-info">
+                <div class="prophunt-key" id="destkeykiller1">
+                    P
+                </div>
+                <div class="prophunt-description">SKILL 1</div>
+            </div>
+
+           
+        </div>
+    </div>
+
+
+    <div class="prophunt_skillbars" style="zoom: 0.9;">
+        <div class="weapon-skills-container">
+            <div class="weapon-info" id="weaponpart">
+                <img src="https://www.vespura.com/fivem/weapons/images/WEAPON_ADVANCEDRIFLE.png" alt="Weapon Icon" class="weapon-icon">
+                <div class="ammo-info">
+                    <span class="current-ammo">30</span>
+                    <span class="total-ammo">/ 90</span>
+                </div>
+            </div>
+            <div class="skills" id="hiderskill" style="display: none;">
+                <div class="skill" data-active="true" id="skillstate1">
+                    <img src="hider_z.png" alt="Skill 1" id="skill-1">
+                    <span class="skill-label" id="skillstate1_text">Z</span>
+                </div>
+                <div class="skill" data-active="true" id="skillstate2">
+                    <img src="hider_p.png" alt="Skill 1" id="skill-2">
+                    <span class="skill-label" id="skillstate2_text">P</span>
+                </div>
+                <div class="skill" data-active="true" id="skillstate3">
+                    <img src="hider_x.png" alt="Skill 1" id="skill-3">
+                    <span class="skill-label" id="skillstate3_text">X</span>
+                </div>
+            </div>
+
+            <div class="skills" id="killerskill" style="display: none;">
+                <div class="skill" id="skill-8" data-active="true" id="skillstate4">
+                    <!-- <img src="https://png.pngtree.com/png-vector/20231215/ourmid/pngtree-flame-icon-collection-png-image_11354643.png" alt="Skill 1"> -->
+                    <!-- <span class="skill-label"></span> -->
+                </div>
+                <div class="skill"  data-active="true" id="skillstate5">
+                    <img src="killer_p.svg" alt="Skill 1" id="skill-4">
+                    <span class="skill-label" id="skillstate5_text">P</span>
+                </div>
+                <div class="skill" data-active="true" id="skillstate6">
+                    <img src="killer_x.svg" alt="Skill 1" id="skill-5">
+                    <span class="skill-label" id="skillstate6_text">X</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+  </div>
+
+</body>
+<script src="jquery.min.js"></script>
+<script src="bridge.js"></script>
+<script src="index.js"></script>
+</html>

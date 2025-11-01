@@ -1,0 +1,7 @@
+1.4.02
+
+- Fixes Music Volume option when using QB-Input
+- Fixes Play/Pause option not working
+- Small Refactor and optimization of code
+
+https://github.com/jimathy/jim-djbooth/releases/latest

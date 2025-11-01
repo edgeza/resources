@@ -1,0 +1,10 @@
+Thank you for purchasing from DimboScripts!
+
+To install this resource:
+    - Drag and Drop `dimbo-passhack` into your resources folder
+    - Add `ensure dimbo-passhack` to your server.cfg
+    - Read `readme.md` for more information
+
+If you run into any issues or need any help, feel free to join the Discord: https://discord.gg/XvMgwChFbk
+
+Thank you! <3

@@ -1,0 +1,9 @@
+-- Old QB Core Items
+["magnifying_glass"]				 = {["name"] = "magnifying_glass", 					["label"] = "Magnifying Glass", 			["weight"] = 100, 	["type"] = "item", 		["image"] = "magnifying_glass.png", 			["unique"] = true, 		["useable"] = true, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Check for fingerprints on vehicle"},
+["thermal_camera"]				 = {["name"] = "thermal_camera", 					["label"] = "Thermal Camera", 			["weight"] = 100, 	["type"] = "item", 		["image"] = "thermal_camera.png", 			["unique"] = true, 		["useable"] = true, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Analyze scene"},
+["evidence_tablet"]				 = {["name"] = "evidence_tablet", 					["label"] = "Evidence Tablet", 			["weight"] = 100, 	["type"] = "item", 		["image"] = "evidence_tablet.png", 			["unique"] = true, 		["useable"] = true, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Manage all evidence reports, analyze"},
+
+-- New QB Core Items
+magnifying_glass                  = { name = 'magnifying_glass', label = 'Magnifying Glass', weight = 100, type = 'item', image = 'magnifying_glass.png', unique = false, useable = true, shouldClose = true, description = 'Check for fingerprints on vehicle' },
+thermal_camera                  = { name = 'thermal_camera', label = 'Thermal Camera', weight = 100, type = 'item', image = 'thermal_camera.png', unique = false, useable = true, shouldClose = true, description = 'Analyze scene' },
+evidence_tablet                  = { name = 'evidence_tablet', label = 'Evidence Tablet', weight = 100, type = 'item', image = 'evidence_tablet.png', unique = false, useable = true, shouldClose = true, description = 'Manage all evidence reports, analyze' },

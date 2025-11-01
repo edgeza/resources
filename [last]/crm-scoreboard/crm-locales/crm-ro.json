@@ -1,0 +1,14 @@
+{
+    "crm_total": "total de jucători",
+    "crm_online": "ONLINE",
+    "crm_jobs": "Numărul de locuri de muncă",
+    "crm_heists": "Furturi disponibile",
+    "crm_players": "Jucători online",
+    "crm_id": "ID",
+    "crm_name": "Nume",
+    "crm_role": "Rol",
+    "crm_ping": "Ping",
+    "crm_active": "activ",
+    "crm_inactive": "inactiv",
+    "crm_busy": "ocupat <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

@@ -1,0 +1,98 @@
+["wheel_lock"] = {
+    label = "Wheel Locker",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "wheel_lock.png",
+    }
+},
+
+["wrench"] = {
+    label = "Wrench",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "wrench.png",
+    }
+},
+
+["gps"] = {
+    label = "Gps",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "gps.png",
+    }
+},
+
+["vehicle_gps"] = {
+    label = "Vehicle GPS",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "vehicle_gps.png",
+    }
+},
+
+["remove_gps"] = {
+    label = "GPS Detacher",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "remove_gps.png",
+    }
+},
+
+["radio"] = {
+    label = "Radio",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "radio.png",
+    }
+},
+
+["handcuffs"] = {
+    label = "Handcuffs",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "handcuffs.png",
+    }
+},
+
+["cuff_keys"] = {
+    label = "Handcuff Keys",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "cuff_keys.png",
+    }
+},
+
+["moneybag"] = {
+    label = "Money Bag",
+    weight = 100,
+    stack = false,
+    close = true,
+    description = "",
+    client = {
+        image = "moneybag.png",
+    }
+},

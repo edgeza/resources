@@ -1,0 +1,14 @@
+{
+    "crm_total": "Spieler insgesamt",
+    "crm_online": "ONLINE",
+    "crm_jobs": "Anzahl der Aufträge",
+    "crm_heists": "Verfügbare Raubüberfälle",
+    "crm_players": "Online-Spieler",
+    "crm_id": "AUSWEIS",
+    "crm_name": "Name",
+    "crm_role": "Rolle",
+    "crm_ping": "Klingeln",
+    "crm_active": "aktiv",
+    "crm_inactive": "inaktiv",
+    "crm_busy": "beschäftigt <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

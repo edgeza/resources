@@ -1,0 +1,14 @@
+{
+    "crm_total": "total players",
+    "crm_online": "ONLINE",
+    "crm_jobs": "Jobs Count",
+    "crm_heists": "Available Heists",
+    "crm_players": "Online Players",
+    "crm_id": "ID",
+    "crm_name": "Name",
+    "crm_role": "Role",
+    "crm_ping": "Ping",
+    "crm_active": "active",
+    "crm_inactive": "inactive",
+    "crm_busy": "busy <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

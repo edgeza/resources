@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="./vue.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="responsive.css" />
+        <title></title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    </head>
+    <style></style>
+
+    <body>
+        <div id="app" v-if="show"> 
+            <div class="container" >
+                <div class="menu-wrapper">
+                    <div class="craf-top-header">
+                        <div class="craft-top-header2">
+                            <div class="craft-top-header-player">
+                                <div class="craft-top-header-player-image">
+                                    <img  v-bind:src="playerDiscordImg" />
+                                </div>
+                                <div class="craft-top-header-player-bilgi">
+                                    <h2 class="playername">{{playername}}</h2>
+                                    <h2>Lv {{playerLevel}} - Xp {{playerxp}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="craft-top-header2">
+                            <div class="craft-top-image-wrapper">
+                                <div class="craft-top-header-top-image">
+                                    <img src="./images/rplogo.png" alt="" />
+                                </div>
+                                <h2 class="craftext">{{languages['craft']}}</h2>
+                            </div>
+                        </div>
+                        <div class="craft-top-header2">
+                            <div class="craft-top-header-close-wrapper">
+                                <div class="craft-top-header-text">
+                                    <h2>{{languages['exitfrom']}}</h2>
+                                    <h2>{{languages['craftmenu']}}</h2>
+                                </div>
+                                <div class="craft-top-header-close-image">
+                                    <img @click="closepage" src="./images/close.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="craft-middle-left">
+                        <h2>Craft Categories</h2>
+                        <div class="craft-middle-left-buttons-wrapper">
+                            <div
+                                class="craft-middle-left-buttons"
+                                v-for="data in categories" v-if="data.enabled"
+                                :style="
+                                    selectbutton == data.name
+                                        ? {
+                                              'background-image': 'url(images/' + data.activebuttonpng + '.png)',
+                                              border: '1px solid ' + data.shadow + '',
+                                              filter: 'drop-shadow(0px 0px 5px ' + data.shadow + ')',
+                                              transition: '0.5s all'
+                                          }
+                                        : { 'background-image': 'url(images/' + data.name + '.png)' }
+                                "
+                                @click="newButton(data.name,data.backgroundimage)"
+                            >
+                                {{ data.label }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="craft-middle-middle">
+                        <h2 class="weapon-text-middle">{{categoryText}}</h2>
+                        <div class="craft-middle-page animate__animated animate__fadeInDown" v-if="!itemShow">
+                            <div class="craft-middle-box animate__animated animate__fadeIn"
+                                v-if="mainPage != 'main' && data.category == mainPage "
+                                v-for="(data,index) in craftItems"
+                                @click="setItem(data.itemname, data.label, data.requiredItems, data.time,data.level,playerLevel,data.rewardXp,data.category,data.weaponitem,data.weaponammo, data.itemamount)"
+                            >
+                                <div class="craft-middle-box-image">
+                                    <img v-bind:src="'./images/items/'+data.itemname+'.png'"/>
+                                </div>
+                                <div class="craft-middle-box-text">
+                                    <h2>{{data.label}}</h2>
+                                    <h3>Lv.{{data.level}}</h3>
+                                </div>
+                                <div class="itemblur" v-if="data.level > playerLevel">
+                                    <div class="requiredimg">
+                                        <img src="./images/Lock.png" alt="">
+                                    </div>
+                                    
+                                    <h2>Lv.{{data.level}} Required</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="craft-middle-page-click"  v-else :style="{'background-image' : 'url(./images/'+backgroundimage+'.png)'}">
+                            <div class="mainpagebutton" @click="itemShowFunc()">
+                                <img src="./images/backbutton.png" alt="">
+                            </div>
+                            <div class="itemimages">
+                                <div class="item-images">
+                                    <img v-bind:src="'./images/items/'+ lastCraftItemName +'.png'" alt="">
+                                </div>
+                            </div>
+                            <div class="itemtextandlevel">
+                                <h2>{{lastCraftItemLabel}}</h2>
+                                <h3>Lv.{{lastCraftItemLevel}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="craft-middle-right">
+                        <h2>{{languages['craftdetails']}}</h2>
+                        <div class="craft-middle-right-details">
+                            <div v-if="!craftDeatilText" class="noItemText">{{languages['noitem']}}</div>
+                            <div v-else class="craft-middle-right-click-item" v-for="data in selectCraftItem">
+                                <div class="craft-middle-right-click-item-top-header">
+                                    <div class="weapons-image">
+                                        <img v-bind:src="'./images/items/'+data.name+'.png'" alt="" />
+                                    </div>
+                                    <h2>{{ data.label }}</h2>
+                                </div>
+                                <div class="craft-middle-right-click-item-middle">
+                                    <div class="craft-middle-right-click-item-middle-in" v-for="req in requiredItems">
+                                        <div class="reqimg">
+                                            <img v-bind:src="'./images/items/'+req.inventoryname+'.png'" alt="" />
+                                        </div>
+                                        <div class="reqlabel">{{ req.label }}</div>
+                                        <div  class="reqCount" :style="(req.count > req.inventorycount) ? {'color': 'red'} : {'color' : 'green'}">{{ req.inventorycount }}/<span>{{ req.count }}</span></div>
+                                    </div>
+                                </div>
+                                <div class="craft-middle-right-click-item-bottom">
+                                    <div class="timeimg">
+                                        <img src="./images/weaponstimer.png" alt="" />
+                                    </div>
+                                    <h2>{{ data.reqTime }} Minute Crafting Time  </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="craft-middle-right-craft-button" v-if="enoughBehavior && craftDeatilText" @click="craftSelectItems"> 
+                            <div class="craft-button-edit">
+                                <img src="./images/craft-button-icon.png" alt="" />
+                                <h2>CRAFT</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="craft-bottom">
+                        <div class="test">
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper ">
+                                <div class="swiper-slide  swiper-border " v-bind:style="getImage(data.cat,data.completed)" v-if="getNewCraftData" v-for="data in getNewCraftData" @click="crafItemClick(data.seconds,data.uniqeid)">
+                                    <div class="swiper-general-border">
+                                        <div class="swiper-item-img">
+                                            <img v-bind:src="'./images/items/'+data.itemname+'.png'" alt="">
+                                        </div>
+                                        <div class="swiper-item-account">
+                                            <h2>{{data.itemlabel}}</h2>
+                                            <h2  v-if="data.seconds > 0"> <span>{{ data.displayTimeCraft }}</span> {{languages['minutesleft']}}</h2>
+                                            <h2 v-else>{{languages['readyclaim']}}</h2>
+                                            <div class="img-wrapper" v-if="data.seconds > 0">
+                                                <img v-bind:style="getTimerImage(data.cat)" :src="'./images/'+timerImg+'.png'" alt="">
+                                            </div>
+                                            
+                                            <img v-else src="./images/time-active.png" alt="">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="script.js"></script>
+    <script></script>
+</html>

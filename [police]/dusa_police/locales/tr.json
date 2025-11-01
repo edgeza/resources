@@ -1,0 +1,487 @@
+{
+    "currency": "$",
+
+    "boss": {
+        "no_auth": "Bu işlemi gerçekleştirme yetkiniz yok",
+        "not_enough_money": "Yeterli paranız yok",
+        "account_not_enough_money": "Şirket hesabında yeterli para yok",
+        "notified_employee": "Memuru bilgilendirdiniz",
+        "fired": "**%s** kişisini işten çıkardınız",
+        "been_fired": "İşten **çıkarıldınız**",
+        "too_far": "İşlem yapmak için oyuncu çok uzakta",
+        "recruited": "**%s** kişisini işe aldınız",
+        "been_recruited": "İşe **alındınız**!",
+        "updated_rank": "**%s** rütbesi güncellendi!",
+        "been_updated_rank": "Rütbeniz güncellendi",
+        "withdrawn": "Şirket hesabından **%s** çektiniz",
+        "deposited": "Şirket hesabına **%s** yatırdınız",
+        "open": "Patron Menüsünü Aç"
+    },
+
+    "service": {
+        "cant_leave_area": "Hizmetinizi tamamlamadan alanı terk edemezsiniz. Hala %s görev kaldı. Ceza olarak %s daha hizmet eklendi.",
+        "cant_leave_area_no_penalty": "Hizmetinizi tamamlamadan alanı terk edemezsiniz. Hala %s görev kaldı.",
+        "service_completed": "Hizmetinizi tamamladınız.",
+        "remaining_sweep": "%s daha süpürme işleminiz var.",
+        "sweeping_area": "Alan süpürülüyor...",
+        "not_in_community_service": "Bu kişi kamu hizmetinde değil.",
+        "released_service": "Oyuncuyu kamu hizmetinden serbest bıraktınız.",
+        "been_released_service": "Kamu hizmetinden serbest bırakıldınız.",
+        "already_in_service": "Bu kişi zaten kamu hizmetinde.",
+        "sent_to_service": "**%s** kişisini %s görevlik kamu hizmetine gönderdiniz.",
+        "amount_limit": "1-%s arasında olmalıdır.",
+        "no_auth": "Kamu hizmeti menüsünü açmaya yetkiniz yok",
+        "send_to_service": "Kamu Hizmetine Gönder",
+        "release_from_service": "Kamu Hizmetinden Çıkar",
+        "suspect_id": "Şüpheli ID",
+        "added_service": "Hizmetinize %s süpürme eklendi."
+    },
+
+    "jail": {
+        "no_auth": "Bu işlemi gerçekleştirme yetkiniz yok",
+        "send_to_jail": "Oyuncuyu Hapise Gönder",
+        "sent_to_jail": "Oyuncu başarıyla %s dakikalığına hapise gönderildi"
+    },
+
+    
+    "gps": {
+        "no_vehicle_nearby": "Yakında araç yok",
+        "placing_vehicle_gps": "GPS yerleştiriliyor...",
+        "removing_vehicle_gps": "GPS kaldırılıyor...",
+        "gps_removed": "GPS cihazı araçtan kaldırıldı",
+        "not_allowed_connect": "Bu kanala bağlanma izniniz yok",
+        "not_connected_gps": "GPS'e bağlı değilsiniz",
+        "callsign_updated": "Çağrı kodunuz **%s** olarak güncellendi",
+        "distance_updated": "Mesafe limiti **%s** olarak güncellendi",
+        "waypoint_set": "Araç koordinatları navigasyonunuza ayarlandı",
+        "no_auth": "GPS'i açıp kapatma yetkiniz yok",
+        "already_gps": "Zaten bir GPS'iniz var",
+        "not_in_gps": "GPS'te değilsiniz",
+        "disconnected": "GPS'ten bağlantınız kesildi",
+        "been_kicked": "GPS'ten atıldınız",
+        "already_has_gps": "Bu araçta zaten bir GPS var",
+        "dont_has_gps": "Bu araçta GPS yok",
+        "unknown": "Bilinmiyor",
+        "panic_button": "Panik Butonu",
+        "connected": "BAĞLANDI"
+    },
+
+    "interact": {
+        "no_cuff": "Kelepçeniz yok",
+        "none_nearby": "Yakında kimse yok",
+        "robbing": "Soyuluyor...",
+        "canceled": "İptal edildi..",
+        "vehicle_cuff": "Araçta kelepçeleyemezsiniz",
+        "cuffed": "Sıkı bir şekilde kelepçelendiniz",
+        "soft_cuffed": "Gevşek kelepçelendiniz, yürüyebilirsiniz",
+        "uncuffed": "Kelepçeleriniz çıkarıldı",
+        "escaped_cuff": "Kelepçelerden kurtuldunuz",
+        "not_cuff_dead": "Oyuncu kelepçeli veya ölü değil",
+        "searched": "Başarıyla arandınız",
+        "being_searched": "Aranıyorsunuz",
+        "no_cash": "Nakit para bulunamadı",
+        "cash_confiscated": "Nakit para el konuldu",
+        "cash_robbed": "**%s** $ paranız çalındı",
+        "stolen_money": "**%s** kişisini soydunuz",
+        "not_allowed_usebag": "Çanta kullanmanıza izin verilmiyor",
+        "no_rob": "Soymak için oyuncunun ellerini kaldırması gerekiyor",
+        "unlocking_door": "Kapı açılıyor...",
+        "door_unlocked": "Kapı başarıyla açıldı",
+        "no_vehicle_nearby": "Yakında araç yok",
+        "impounding_vehicle": "Araç çekiliyor...",
+        "impounded_vehicle": "Araç başarıyla çekildi"
+      },
+
+    "armory": {
+        "paid": "Satın aldığınız tüm eşyalar için %s $ ödediniz.",
+        "not_enough_money": "Yeterli paranız yok",
+        "open_armory": "Silah Deposunu Aç"
+    },
+
+    "fine": {
+        "cant_fine_leo": "Bir kolluk kuvveti mensubuna ceza kesemezsiniz",
+        "fine_limit": "Maksimum ceza limiti %s $",
+        "no_auth": "Ceza menüsünü açmaya yetkiniz yok",
+        "fine_player": "Oyuncuya Ceza Kes",
+        "fine_created": "%s $ tutarında ceza kesildi"
+    },
+
+    "badge": {
+        "saved": "Rozet kaydedildi"
+    },
+
+    "objects": {
+      "too_far": "Nesne yerleştirmek için çok uzakta",
+      "object_limit": "Nesne limitine ulaştınız, yeni nesneler yerleştirmek için mevcut nesnelerinizi kaldırın",
+      "remove_object": "Nesneyi Kaldır",
+      "no_auth": "Nesneyi kaldırmaya yetkiniz yok",
+      "no_object_nearby": "Yakında nesne yok",
+      "not_valid": "Bu nesne modeli geçerli değil, belki özel nesneleri başlatmadınız?",
+      "current_mode": "Geçerli Mod:",
+      "world": "Dünya",
+      "relative": "Göreceli",
+      "translate_mode": "Taşıma Modu",
+      "rotate_mode": "Döndürme Modu",
+      "change_mode": "Modu Değiştir",
+      "snap_ground": "Yere Yapıştır",
+      "finish_editing": "Düzenlemeyi Bitir",
+      "move": "Taşı",
+      "rotate": "Döndür",
+      "rotate_90": "90° Döndür",
+      "place": "Yerleştir",
+      "cancel": "İptal",
+      "edit": "Düzenle",
+      "edit_object": "%s Düzenle",
+      "delete": "Sil",
+      "add": "Yeni Nesne Ekle",
+      "remove_scene": "Sahneyi Kaldır",
+      "show_scene": "%s Sahnesini Göster Nesne(ler): %s",
+      "scene_creation": "Sahne Oluşturma",
+      "scene_name": "Sahne Adı",
+      "scene_created": "Sahne başarıyla oluşturuldu",
+      "no_scenes_created": "Oluşturulmuş sahne yok",
+      "menu_title": "Polis Nesne Menüsü",
+      "all_objects_removed": "Tüm nesneler kaldırıldı",
+      "scene_removed": "Sahne kaldırıldı"
+    },
+
+    "radar": {
+        "radar_limit": "Radar yerleştirme limitine ulaştınız",
+        "create_radar": "Radar Oluştur",
+        "radar_name": "Radar Adı",
+        "radar_name_desc": "Radar için bir isim girin",
+        "speed_limit": "Hız Limiti",
+        "speed_limit_desc": "Radar için hız limitini girin",
+        "radius": "Yarıçap",
+        "radius_desc": "Radar için yarıçapı girin",
+        "fine_amount": "Ceza Miktarı",
+        "show_blip": "İşareti Göster",
+        "show_blip_desc": "Haritada işareti göster veya gösterme",
+        "flash_effect": "Flaş Efekti",
+        "flash_effect_desc": "Fotoğraf flaş efektini etkinleştir veya devre dışı bırak",
+        "radar_options": "Radar Seçenekleri",
+        "remove_radar": "Radarı Kaldır",
+        "set_waypoint": "Yol Noktası Ayarla",
+        "remove_object": "Radarı Kaldır",
+        "speed_limit_info": "Hız Limiti: %s %s",
+        "fine_amount_info": "Ceza Miktarı",
+        "radius_info": "Yarıçap",
+        "radar_management": "Radar Yönetimi",
+        "speeding": "Hız Aşımı",
+        "fine_reason": "Hız limitini aşmak",
+        "speeding_fine": "%s %s hız limitini %s radar bölgesinde aştınız. %s %s ceza uygulandı",
+        "waypoint_set": "%s radarına yol noktası ayarlandı"
+      },
+
+    "radio": {
+        "left_channel": "Kanaldan ayrıldınız",
+        "volume_set_to": "Ses seviyesi %s olarak ayarlandı",
+        "joined_channel": "%s kanalına katıldınız",
+        "channel_unavailable": "Kanal kullanılamıyor",
+        "left_channel_forced": "Kanal bağlantısı koptu"
+    },
+
+    "garage": {
+        "not_owned": "Bu araç size ait değil",
+        "no_space": "Çıkarma noktasında yer yok",
+        "no_auth": "Araç çıkarmaya yetkiniz yok",
+        "not_enough_money": "Araç satın almak için yeterli paranız yok",
+        "purchased": "Araç satın aldınız!",
+        "vehicle_parked": "Araç başarıyla park edildi",
+        "vehicle_occupied": "Araçta başka yolcular var!",
+        "spawn_in_progress": "Zaten bir çıkarma işlemi devam ediyor",
+        "in_vehicle": "Bir araçtasınız, önce araçtan çıkın",
+        "veh_not_found": "Araç bulunamadı",
+        "preview_not_found": "Önizleme aracı bulunamadı"
+    },
+
+    "k9": {
+      "select_someone": "Saldırmak için birini seçin, iptal için [X]",
+      "now_attack": "Saldır!",
+      "attack_canceled": "Saldırı iptal edildi",
+      "determine_location": "Konum belirle",
+      "too_far": "Hedef konum çok uzakta",
+      "gone": "K9 gitti",
+      "wounded": "K9 yaralandı, veterinerler onunla ilgilenecek",
+      "attacking": "K9 saldırıyor!",
+      "searching": "K9 oyuncuyu arayacak",
+      "not_a_player": "Hedef aranmaya uygun değil",
+      "found_something": "K9 yasadışı bir şey buldu!",
+      "couldnt_find": "K9 yasadışı bir şey bulamadı"
+    },
+
+    "cloakroom": {
+      "open": "Soyunma Odasını Aç"
+    },
+
+    "not_leo": "Kolluk kuvveti mensubu değilsiniz",
+    "duty_required": "Bu işlemi gerçekleştirmek için görevde olmalısınız",
+    "not_enough_grade": "Bu işlemi gerçekleştirmek için yeterli rütbeniz yok",
+    "no_nearby_player": "Yakında oyuncu bulunamadı!",
+    "not_injured": "Hedef yaralı değil",
+    "no_nearby_vehicle": "Yakında araç bulunamadı!",
+    "lock_removed": "Araç tekerleklerinden kilit çıkarıldı!",
+    "already_wheel_locked": "Bu tekerlek zaten kilitli!",
+    "no_lock_attached": "Aracın tekerleğine takılı kilit yok!",
+    "locking_wheel": "Aracın tekerleği kilitleniyor...",
+    "unlocking_wheel": "Aracın tekerleği kilidi açılıyor...",
+    "vehicle_moving": "Araç hareket halinde! Kilidi takmak için aracı durdurun.",
+
+    "slow_down": "Bu işlemi çok hızlı yapıyorsunuz. Lütfen bir süre bekleyin.",
+
+    "kmh": "km/sa",
+    "mph": "mil/sa",
+    "hour": "Saat",
+    "minute": "Dakika",
+
+    "ui": {
+        "panicButton": "! -PANİK BUTONU AKTİF- !",
+        "gpsListTitle": "AKTİF GPS KULLANICI LİSTESİ",
+        "transactionName": "İşlem Adı",
+        "transactionDetails": "İşlem Detayları",
+        "deposit": "Yatır",
+        "withdrawal": "Çek",
+        "depositAmount": "Yatırılacak Miktar",
+        "withdrawalAmount": "Çekilecek Miktar",
+        "employeeList": {
+          "title": "Çalışan Listesi",
+          "salary": "MAAŞ",
+          "rank": "Rütbe",
+          "removeJob": "İşten Çıkar",
+          "sendNotification": "Bildirim Gönder",
+          "norank": "Rütbe Yok",
+          "whatyouwant": "Hangi işlemi uygulamak istiyorsunuz:",
+          "agree": "Onayla",
+          "dontagree": "Reddet"
+        },
+        "mainComponent": {
+          "title": "Patron Menüsü",
+          "description": "Bu panel ile her şeyi yönetin.",
+          "jobTime": "Şu anda görevdesiniz",
+          "finishJob": "Vardiyayı Bitir",
+          "startJob": "Vardiyaya Başla",
+          "finishJobExtra": "*Görev durumunu değiştir",
+          "titleSecondary": "Çalışan Listesi",
+          "titleThird": "İşe Alım Menüsü",
+          "titleFourth": "Şirket Parası",
+          "employeeInfo": "Çalışan Bilgisi",
+          "user": "Kullanıcı",
+          "contentDesc": "Aşağıda listelenmiştir"
+        },
+        "penaltyDuration": {
+          "selectPenaltyDuration": "Ceza Süresini Seçin",
+          "days": "Gün",
+          "hours": "Saat",
+          "seconds": "Dakika",
+          "dayShort": "G",
+          "hourShort": "S",
+          "secondShort": "D"
+        },
+        "recruitMenu": {
+          "recruitsListed": "İşe Alınacaklar Listesi",
+          "hireUser": "Kullanıcıyı İşe Al"
+        },
+        "armoryShop": {
+          "armorShop": "SİLAH DEPOSU",
+          "armorShopDescription": "Açıklama burada.",
+          "searchPlaceholder": "Ara...",
+          "add": "Ekle",
+          "added": "Eklendi",
+          "noProductsAvailable": "Bu koleksiyon için ürün bulunmuyor.",
+          "shoppingCart": "ALIŞVERİŞ SEPETİ",
+          "shoppingCartDescription": "Açıklama burada.",
+          "noProductsAdded": "Henüz ürün eklenmedi.",
+          "totalPrice": "Toplam Fiyat",
+          "items": "ÜRÜNLER",
+          "payByCard": "Kart ile Öde",
+          "payByCash": "Nakit ile Öde"
+        },
+        "badgeManage": {
+          "badgeManagement": "ROZET YÖNETİMİ",
+          "badgeManagementDescription": "Açıklama burada.",
+          "setBadgeCode": "ROZET KODU AYARLA",
+          "imageBadge": "ROZET RESMİ",
+          "saveChanges": "DEĞİŞİKLİKLERİ KAYDET"
+        },
+        "chat": {
+          "placeholder": "Yanıtla..."
+        },
+        "clothesArea": {
+          "clothesRoom": "KIYAFET ODASI",
+          "clothesRoomDescription": "Açıklama burada.",
+          "select": "SEÇ"
+        },
+        "crimeStatus": {
+          "crimeName": "SUÇ ADI",
+          "prison": "HAPİS -",
+          "reason": "SEBEP"
+        },
+        "dusaGarage": {
+          "garageTitle": "GARAJ",
+          "garageDescription": "Açıklama burada.",
+          "extractVehicle": "ARAÇ ÇIKAR",
+          "modelLabel": "Model:"
+        },
+        "dusaVehicleDetail": {
+          "loading": "Yükleniyor...",
+          "modelLabel": "Model:",
+          "extractFromGarage": "SATIN AL",
+          "cancel": "İPTAL"
+        },
+        "dusaVehicleShop": {
+          "garageTitle": "ARAÇ MAĞAZASI",
+          "garageDescription": "Açıklama burada.",
+          "buy": "SATIN AL",
+          "modelLabel": "Model:"
+        },
+        "emsGarage": {
+          "garageTitle": "GARAJ",
+          "garageDescription": "Açıklama burada.",
+          "extractVehicle": "ARAÇ ÇIKAR",
+          "modelLabel": "Model:"
+        },
+        "lockArea": {
+          "lockAreaTitle": "ALAN KİLİTLEME",
+          "lockAreaDescription": "Açıklama burada.",
+          "labelText": "ETİKET METNİ",
+          "minutesLabel": "DAKİKA",
+          "rangeLabel": "MENZIL",
+          "selectBlipLabel": "İŞARET SEÇ",
+          "lockAreaButton": "ALAN KİLİTLE"
+        },
+        "members": {
+          "membersTitle": "ÜYELER",
+          "kick": "At",
+          "giveOwner": "Sahiplik Ver",
+          "message": "Mesaj",
+          "hasBeenKicked": "atıldı!",
+          "isNowOwner": "artık sahip!"
+        },
+        "paper": {
+          "nameLabel": "Ad",
+          "surnameLabel": "Soyad",
+          "durationStayedLabel": "Kalış Süresi",
+          "durationEnteredLabel": "Giriş Zamanı",
+          "signatureLabel": "İmza"
+        },
+        "sendUser": {
+          "sendUserTitle": "KULLANICI GÖNDER",
+          "sendUserDescription": "Kullanıcıya uygulanacak işlemi seçin.",
+          "userIdLabel": "KULLANICI ID",
+          "selectUserLabel": "CEZALANDIRILACAK KULLANICI SEÇ",
+          "listPlayers": "OYUNCULARI LİSTELE",
+          "noUserSelected": "Lütfen bir oyuncu seçin.",
+          "selectPenaltyTypeLabel": "CEZA SEBEBİ",
+          "listPenaltyTypes": "CEZA TİPLERİNİ LİSTELE",
+          "enterPenaltyAmountLabel": "CEZA MİKTARI $",
+          "applyPenaltyButton": "CEZAYI UYGULA",
+          "penaltyTypes": ["Tip 1", "Tip 2", "Tip 3"],
+          "sendToJail": "HAPİSE GÖNDER",
+          "sendToPublicService": "KAMU HİZMETİNE GÖNDER",
+          "giveFine": "PARA CEZASI VER",
+          "usernameLabel": "KULLANICI ADI",
+          "playerLabel": "Oyuncu",
+          "remove": "Kaldır",
+          "penaltyPlaceholder": "Sebep",
+          "durationPlaceholder": "Dakika"
+        },
+        "telsiz1": {
+          "homeTab": "Ana Sayfa",
+          "channelsTab": "Kanallar",
+          "chatsTab": "Sohbetler",
+          "settingsTab": "Ayarlar",
+          "locationLabel": "Konum",
+          "timeLabel": "Zaman",
+          "youSure": "Bu frekansı kaydetmek istediğinizden emin misiniz?"
+        },
+        "telsiz1Channel": {
+          "channelsTitle": "KANALLAR",
+          "saveLabel": "KAYDET +",
+          "savedTab": "Kaydedilmiş",
+          "recentsTab": "Son Kullanılanlar",
+          "commonTab": "Genel",
+          "connectLabel": "Bağlan",
+          "membersLabel": "Üyeler",
+          "backLabel": "Geri"
+        },
+        "telsiz1Chat": {
+          "blockListLabel": "Engelli Listesi",
+          "chatsTitle": "Sohbetler",
+          "closeLabel": "Kapat",
+          "searchUsersPlaceholder": "Kullanıcıları Ara...",
+          "messageLabel": "Mesaj",
+          "hasBeenKicked": "atıldı!",
+          "isNowOwner": "artık sahip!"
+        },
+        "telsiz1Home": {
+          "connectLabel": "Bağlan",
+          "disconnectLabel": "Bağlantıyı Kes"
+        },
+        "telsiz1Settings": {
+          "settingsTitle": "AYARLAR",
+          "brightnessLabel": "PARLAKLIK",
+          "zoomLabel": "YAKINLAŞTIRMA",
+          "positionUILabel": "ARAYÜZ KONUMU",
+          "mouseControlLabel": "FARE KONTROLÜ"
+        },
+        "radioMembers": {
+          "title": "TELSİZ ÜYELERİ"
+        },
+        "gps": {
+          "settingsTitle": "AYARLAR",
+          "homeLabel": "Ana Sayfa",
+          "channelsLabel": "Kanallar",
+          "vehicleGPSLabel": "Araç GPS'i",
+          "panicButtonLabel": "Panik"
+        },
+        "gpsChannel": {
+          "panicButtonNotActivated": "! -PANİK BUTONU AKTİF- !",
+          "defaultChannelsTitle": "Varsayılan Kanallar",
+          "fromThisMenuBrowseWithGPS": "Bu menüden GPS ile gezinin",
+          "copiedToClipboard": "Panoya kopyalandı"
+        },
+        "gpsHome": {
+          "panicButtonActivated": "! -PANİK BUTONU AKTİF- !",
+          "channelConnectTitle": "Kanal Bağlantısı",
+          "fromThisMenuBrowseWithGPS": "Bu menüden GPS ile gezinin",
+          "channelCodeLabel": "Kanal Kodu",
+          "connectLabel": "Bağlan",
+          "historyConnectsLabel": "Bağlantı Geçmişi",
+          "copiedToClipboard": "Panoya kopyalandı"
+        },
+        "gpsSettings": {
+          "panicButtonNotActivated": "! -PANİK BUTONU AKTİF- !",
+          "settingsMenuTitle": "Ayarlar Menüsü",
+          "fromThisMenuBrowseWithGPS": "Bu menüden GPS ile gezinin",
+          "gpsColorLabel": "GPS RENGİ (GPS Rengini Ayarla)",
+          "gpsDistanceLabel": "GPS MESAFESİ (Mesafeyi Ayarla)",
+          "gpsCodeLabel": "GPS Kodu (GPS Kodunu Ayarla)",
+          "activeGPSUserListLabel": "AKTİF GPS KULLANICI LİSTESİ",
+          "searchActiveGPSUsersPlaceholder": "Aktif GPS kullanıcılarını ara"
+        },
+        "vehicleGpsList": {
+          "panicButtonNotActivated": "! -PANİK BUTONU AKTİF- !",
+          "vehicleGPSListTitle": "Araç GPS Listesi",
+          "fromThisMenuBrowseWithGPS": "Bu menüden GPS ile gezinin",
+          "vehicleCodeCopied": "Araç kodu panoya kopyalandı"
+        },
+        "notify": {
+          "success": "Başarılı",
+          "error": "Hata",
+          "info": "Bilgi",
+          "copiedToClipboard": "Panoya kopyalandı",
+          "panicAlertSent": "Panik uyarısı başarıyla gönderildi!",
+          "connectedGps": "GPS'e bağlandınız.",
+          "disconnectedGps": "GPS bağlantısını kestiniz.",
+          "removedHistory": "Kayıtlı kanal kaldırıldı.",
+          "colorChanged": "GPS rengi değiştirildi.",
+          "callsignChanged": "Çağrı kodu başarıyla değiştirildi.",
+          "connectedRadio": "Frekansa bağlandınız.",
+          "cantConnectRadio": "Bu frekansa bağlanamazsınız!",
+          "channelRemoved": "Kanal başarıyla kaldırıldı.",
+          "savedChannel": "Kanal başarıyla kaydedildi.",
+          "connectedFrequency": "Frekansa bağlandınız: ",
+          "disconnectedFrequency": "Frekanstan bağlantınız kesildi: "
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "crm_total": "total de jogadores",
+    "crm_online": "ON-LINE",
+    "crm_jobs": "Contagem de empregos",
+    "crm_heists": "Assaltos disponíveis",
+    "crm_players": "Jogadores Online",
+    "crm_id": "EU IA",
+    "crm_name": "Nome",
+    "crm_role": "Papel",
+    "crm_ping": "Ping",
+    "crm_active": "ativo",
+    "crm_inactive": "inativo",
+    "crm_busy": "ocupado <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

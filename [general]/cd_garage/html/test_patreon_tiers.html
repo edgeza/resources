@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Patreon Tier Display Test - Garage Simulation</title>
+    <link rel="stylesheet" href="css/bootstrap-4.5.2.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <style>
+        .test-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-vehicle {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #f8f9fa;
+            position: relative;
+        }
+        .test-controls {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .garage-simulation {
+            background: #f1f3f4;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .garage-header {
+            background: #343a40;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .console-output {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-online { background-color: #28a745; }
+        .status-offline { background-color: #dc3545; }
+        .status-warning { background-color: #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Patreon Tier Display System Test - Garage Simulation</h1>
+        
+        <div class="test-controls">
+            <h3>Test Controls</h3>
+            <button class="btn btn-primary" onclick="testAddTierIndicators()">Test Add Tier Indicators</button>
+            <button class="btn btn-warning" onclick="testClearTierIndicators()">Test Clear Tier Indicators</button>
+            <button class="btn btn-info" onclick="testProcessGarageList()">Test Process Garage List</button>
+            <button class="btn btn-secondary" onclick="showDebugInfo()">Show Debug Info</button>
+            <button class="btn btn-success" onclick="simulateGarageOpen()">Simulate Garage Open</button>
+            <button class="btn btn-danger" onclick="simulateGarageClose()">Simulate Garage Close</button>
+        </div>
+
+        <div class="test-controls">
+            <h3>System Status</h3>
+            <p><span class="status-indicator" id="tier-system-status"></span><strong>Tier System:</strong> <span id="tier-system-text">Unknown</span></p>
+            <p><span class="status-indicator" id="patreon-data-status"></span><strong>Patreon Data:</strong> <span id="patreon-data-text">Unknown</span></p>
+            <p><span class="status-indicator" id="garage-container-status"></span><strong>Garage Container:</strong> <span id="garage-container-text">Unknown</span></p>
+            <p><strong>Processed Vehicles:</strong> <span id="processed-count">0</span></p>
+            <p><strong>Current Tiers Data:</strong> <span id="tiers-data">None</span></p>
+        </div>
+
+        <div class="garage-simulation">
+            <div class="garage-header">
+                <h3>🚗 Garage Simulation (smallGarageContainer)</h3>
+                <p>This simulates the actual garage UI structure used in cd_garage</p>
+            </div>
+            
+            <div id="smallGarageContainer" class="list-group shadow">
+                <div class="test-vehicle list-group-item" data-id="1" data-vehicle="sc_dominatorwb">
+                    <span class="badge badge-light">sc_dominatorwb</span>
+                    <strong>Dominator Widebody</strong> - Test Vehicle 1
+                </div>
+                <div class="test-vehicle list-group-item" data-id="2" data-vehicle="vacca2">
+                    <span class="badge badge-light">vacca2</span>
+                    <strong>Pegassi Vacca Widebody</strong> - Test Vehicle 2
+                </div>
+                <div class="test-vehicle list-group-item" data-id="3" data-vehicle="clubta">
+                    <span class="badge badge-light">clubta</span>
+                    <strong>Clubta</strong> - Test Vehicle 3
+                </div>
+                <div class="test-vehicle list-group-item" data-id="4" data-vehicle="regular_car">
+                    <span class="badge badge-light">regular_car</span>
+                    <strong>Regular Car</strong> - Test Vehicle 4 (Not Patreon)
+                </div>
+                <div class="test-vehicle list-group-item" data-id="5" data-vehicle="turismorr">
+                    <span class="badge badge-light">turismorr</span>
+                    <strong>Grotti Turismo RR</strong> - Test Vehicle 5
+                </div>
+            </div>
+        </div>
+
+        <div class="test-controls">
+            <h3>Console Output & Debug</h3>
+            <div id="console-output" class="console-output">
+                <div>Console output will appear here...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/patreon_tier_display.js"></script>
+    <script>
+        // Override console.log to capture output
+        const originalLog = console.log;
+        const consoleOutput = document.getElementById('console-output');
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleOutput.appendChild(div);
+            consoleOutput.scrollTop = consoleOutput.scrollTop + 1000;
+        };
+
+        // Test functions
+        function testAddTierIndicators() {
+            console.log('Testing addTierIndicators...');
+            
+            // Simulate the message from Lua client
+            const testPatreonTiers = {
+                ENABLE: true,
+                DEBUG: false,
+                tiers: {
+                    1: {
+                        cars: ['sc_dominatorwb', 'vacca2', 'clubta'],
+                        boats: [],
+                        air: []
+                    },
+                    2: {
+                        cars: ['turismorr'],
+                        boats: [],
+                        air: []
+                    }
+                }
+            };
+            
+            window.postMessage({
+                action: 'cd_garage:addTierIndicators',
+                patreonTiers: testPatreonTiers
+            }, '*');
+        }
+
+        function testClearTierIndicators() {
+            console.log('Testing clearTierIndicators...');
+            window.postMessage({
+                action: 'cd_garage:clearTierIndicators'
+            }, '*');
+        }
+
+        function testProcessGarageList() {
+            console.log('Testing processGarageListForTiers...');
+            if (window.PatreonTierDisplay) {
+                window.PatreonTierDisplay.processGarageListForTiers();
+            } else {
+                console.log('PatreonTierDisplay not available');
+            }
+        }
+
+        function simulateGarageOpen() {
+            console.log('Simulating garage open event...');
+            // Simulate the events that would be triggered when opening a garage
+            window.postMessage({
+                action: 'cd_garage:EnterGarage_Outside',
+                garage_data: { id: 'test_garage', name: 'Test Garage' }
+            }, '*');
+            
+            // Also trigger the addTierIndicators
+            setTimeout(() => {
+                testAddTierIndicators();
+            }, 100);
+        }
+
+        function simulateGarageClose() {
+            console.log('Simulating garage close event...');
+            window.postMessage({
+                action: 'cd_garage:Exit'
+            }, '*');
+        }
+
+        function showDebugInfo() {
+            console.log('Showing debug info...');
+            if (window.PatreonTierDisplay) {
+                console.log('PatreonTierDisplay object:', window.PatreonTierDisplay);
+                console.log('Patreon tiers data:', window.patreonTiers);
+                console.log('Processed vehicles count:', window.processedVehicles ? window.processedVehicles.size : 'N/A');
+                
+                // Check garage container
+                const garageContainer = document.getElementById('smallGarageContainer');
+                console.log('Garage container found:', !!garageContainer);
+                if (garageContainer) {
+                    console.log('Garage container children:', garageContainer.children.length);
+                    console.log('Garage container HTML length:', garageContainer.innerHTML.length);
+                }
+            } else {
+                console.log('PatreonTierDisplay not available');
+            }
+        }
+
+        // Update status indicators
+        function updateStatusIndicators() {
+            // Tier System Status
+            const tierSystemStatus = document.getElementById('tier-system-status');
+            const tierSystemText = document.getElementById('tier-system-text');
+            if (window.PatreonTierDisplay) {
+                tierSystemStatus.className = 'status-indicator status-online';
+                tierSystemText.textContent = 'Online';
+            } else {
+                tierSystemStatus.className = 'status-indicator status-offline';
+                tierSystemText.textContent = 'Offline';
+            }
+
+            // Patreon Data Status
+            const patreonDataStatus = document.getElementById('patreon-data-status');
+            const patreonDataText = document.getElementById('patreon-data-text');
+            if (window.patreonTiers && window.patreonTiers.ENABLE) {
+                patreonDataStatus.className = 'status-indicator status-online';
+                patreonDataText.textContent = 'Loaded';
+            } else {
+                patreonDataStatus.className = 'status-indicator status-warning';
+                patreonDataText.textContent = 'Not Loaded';
+            }
+
+            // Garage Container Status
+            const garageContainerStatus = document.getElementById('garage-container-status');
+            const garageContainerText = document.getElementById('garage-container-text');
+            const garageContainer = document.getElementById('smallGarageContainer');
+            if (garageContainer) {
+                garageContainerStatus.className = 'status-indicator status-online';
+                garageContainerText.textContent = 'Found';
+            } else {
+                garageContainerStatus.className = 'status-indicator status-offline';
+                garageContainerText.textContent = 'Not Found';
+            }
+
+            // Update other status info
+            document.getElementById('processed-count').textContent = 
+                window.processedVehicles ? window.processedVehicles.size : '0';
+            document.getElementById('tiers-data').textContent = 
+                window.patreonTiers ? `${Object.keys(window.patreonTiers.tiers || {}).length} tiers` : 'None';
+        }
+
+        // Update status periodically
+        setInterval(updateStatusIndicators, 1000);
+
+        // Initial status update
+        setTimeout(updateStatusIndicators, 500);
+
+        console.log('Test page loaded - Garage Simulation Mode');
+        console.log('This test simulates the actual garage environment used in cd_garage');
+        console.log('Use the controls to test different scenarios');
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+["empty_evidence_bag"] = {
+    label = "Empty Evidence Bag",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "empty_evidence_bag.png",
+    }
+},
+
+["filled_evidence_bag"] = {
+    label = "Filled Evidence Bag",
+    weight = 100,
+    stack = false,
+    close = true,
+    description = "",
+    client = {
+        image = "filled_evidence_bag.png",
+    }
+},
+
+["magnifying_glass"] = {
+    label = "Magnifying Glass",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "magnifying_glass.png",
+    }
+},
+
+["thermal_camera"] = {
+    label = "Thermal Camera",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "thermal_camera.png",
+    }
+},
+
+["evidence_tablet"] = {
+    label = "Evidence Tablet",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "evidence_tablet.png",
+    }
+},

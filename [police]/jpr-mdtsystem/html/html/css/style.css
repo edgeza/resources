@@ -1,0 +1,8080 @@
+@font-face {
+    font-family: ProBold;
+    src: url(./fonts/SF-Pro-Display-Bold.otf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --mainBG: #300406;
+    --secondBG: rgba(48, 4, 6, 0.8);
+    --thirdBG: #4a0a0c;
+    --textColor: white;
+    --textColorSecondary: white;
+}
+
+/* Force background colors with higher specificity */
+.mdt-content-home-recentReports,
+.mdt-content-home-quickfine-zone,
+.mdt-content-home-chat,
+.mdt-content-home-dispatch,
+.mdt-content-home-recentReports-textArea,
+.mdt-content-home-recentReports-reportArea,
+.mdt-content-home-quickfine-list,
+.mdt-content-home-chat-list,
+.mdt-content-home-dispatch-list,
+.mdt-content-home-active-units,
+.mdt-content-home-active-units-list,
+.mdt-content-home-active-units-units {
+    background-color: #300406 !important;
+}
+
+/* Force all content panels to use dark background */
+.mdt-content-home > div,
+.mdt-content-home > div > div {
+    background-color: #300406 !important;
+}
+
+/* Override any potential Bootstrap or external CSS */
+.jpr-mdtsystem * {
+    background-color: inherit !important;
+}
+
+.jpr-mdtsystem .mdt-content-home * {
+    background-color: #300406 !important;
+}
+
+
+/* Exception for specific elements that should remain colored */
+.jpr-mdtsystem .bg-primary,
+.jpr-mdtsystem .btn-primary,
+.jpr-mdtsystem [class*="primary"] {
+    color: white !important;
+}
+
+.mdt-content-search-bar-pequena {
+    position: absolute;
+    top: 14.5%;
+    left: 2%;
+    height: 8.5%;
+    width: 96%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+    line-height: 0.5vh;
+    padding-top: 0.2vh !important;
+    padding-left: 0.5vh;
+}
+
+.mdt-content-search-bar-pequena::placeholder {
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+}
+
+.mdt-content-search-bar-pequena:focus {
+    outline: none;
+}
+
+.mdt-content-search-bar-grande {
+    position: absolute;
+    top: 7%;
+    left: 2%;
+    height: 4.5%;
+    width: 96%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+    line-height: 0.5vh;
+    padding-top: 0.2vh;
+    padding-left: 0.5vh;
+}
+
+.mdt-content-search-bar-grande::placeholder {
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+}
+
+.mdt-content-search-bar-grande:focus {
+    outline: none;
+}
+
+.mdt-content-titles-pequeno {
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    top: 0%;
+    left: 0%;
+}
+
+.mdt-content-titles-pequeno > h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 1.2vh;
+    margin-left: 1vh;
+    font-family: ProBold;
+    font-size: 2.5vh;
+}
+
+body {
+	background-color: transparent !important;
+	background-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+.jpr-mdtsystem {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    top: 100%; /*0*/
+    left: 0;
+    background-color: transparent;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(48, 4, 6, 0.726);
+    backdrop-filter: blur(15px);
+    z-index: 3;
+	border-radius: 0.55vh;
+    transition: all 0.5s ease-in-out;
+}
+
+.loader > i {
+    position: absolute;
+    top: 42%;
+    left: 48%;
+    font-size: 7vh;
+    color: white;
+}
+
+.loader > h1 {
+    position: relative;
+    top: 49%;
+    text-align: center;
+    font-size: 2.5vh;
+    color: white;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-zone {
+    position: absolute;
+    width: 70%;
+    height: 90%;
+    left: 15%;
+    top: 5%;
+    z-index: 150;
+    border-radius: 2vh;
+    background-color: var(--thirdBG);
+    overflow: hidden;
+    border: 20px solid rgb(26, 26, 26);
+}
+
+.mdt-frame {
+    position: absolute;
+    width: 140vh;
+    bottom: -25%;
+    right: 11%;
+    margin: 5vh;
+    z-index: 150;
+    pointer-events: none;
+}
+
+.mdt-top-zone {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 18%;
+    border-bottom: 1px solid gray;
+    background-color: var(--mainBG)
+}
+
+.mdt-top-zone-logo {
+    position: absolute;
+    left: 0%;
+    top: 6%;
+    width: 16%;
+    height: 100%;
+}
+
+.mdt-top-zone-logo > img {
+    position: absolute;
+    top: 0%;
+    left: 16%;
+    width: 65%;
+}
+
+.mdt-top-zone-title {
+    position: absolute;
+    left: 14%;
+    top: 0%;
+    width: 65%;
+    height: 100%;
+}
+
+.mdt-top-zone-title > h1 {
+    position: absolute;
+    top: 27.5%;
+    left: 3%;
+    font-size: 3.5vh;
+    font-family: ProBold;
+    max-width: 90%;
+
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-top-zone-title > h2 {
+    position: absolute;
+    top: 52%;
+    left: 3%;
+    font-size: 2.15vh;
+    font-family: 'Montserrat', sans-serif;
+
+    max-width: 90%;
+
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-top-zone-profile {
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    width: 28vh;
+    height: 100%;
+    background-color: #4a0a0c;
+    border-top-left-radius: 1.5vh;
+    border-bottom-left-radius: 1.5vh;
+    border-left: 1px solid grey;
+}
+
+.mdt-top-zone-profile-logo {
+    position: absolute;
+    right: 8%;
+    top: 9%;
+    width: 13vh;
+    height: 13vh;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    transition: 0.5s ease;
+}
+
+.mdt-top-zone-profile-logo:hover {
+    transform: scale(1.05);
+    filter: brightness(80%);
+}
+
+.mdt-top-zone-profile-logo > img {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mdt-top-zone-profile-infos {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 43%;
+    height: 82%;
+}
+
+.mdt-left-zone {
+    position: absolute;
+    left: 0;
+    top: 18%;
+    width: 18%;
+    height: 83%;
+    background-color: var(--mainBG);
+    border-right: 1px solid grey;
+}
+
+.mdt-left-zone > .nav > .nav-link {
+    position: relative;
+    height: 4vh;
+    transition: 0.5s ease !important;
+    cursor: pointer;
+    margin-left: 1vh;
+    border-radius: 0.5vh;
+    width: 89%;
+}
+
+.mdt-left-zone > .nav > .nav-link:hover {
+    transform: scale(1.05);
+    background-color: var(--secondBG);
+}
+
+.mdt-left-zone > .nav > .nav-link > p {
+    line-height: 2.7vh;
+    font-size: 1.4vh;
+    color: rgb(240, 240, 240);
+}
+
+.mdt-left-zone > .nav > .nav-link.active {
+    transform: scale(1.05);
+    background-color: var(--secondBG);
+}
+
+.mdt-left-zone > .nav > .nav-link > p > span {
+    position: absolute;
+    margin-top: 0.2vh;
+    padding-left: 1vh;
+    color: rgb(240, 240, 240);
+    /*font-family: 'Montserrat', sans-serif;*/
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+/*  */
+
+.mdt-top-zone-profile-infos > .nav {
+    position: absolute;
+    left: -5%;
+    top: -4.5%;  
+}
+
+.mdt-top-zone-profile-infos > .nav > .nav-link {
+    position: relative;
+    height: 3vh;
+    right: 0;
+    transition: 0.5s ease !important;
+    cursor: pointer;
+    margin-left: 1vh;
+    border-radius: 0.5vh;
+    width: 89%;
+    color: rgb(240, 240, 240) !important;
+}
+
+.mdt-top-zone-profile-infos > .nav {
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240) !important;
+}
+
+.mdt-top-zone-profile-infos > .nav > .nav-link > p {
+    line-height: 2.7vh;
+    font-size: 1.4vh;
+    color: rgb(240, 240, 240);
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-top-zone-profile-infos > .nav > .nav-link > p > span {
+    position: absolute;
+    margin-top: 0.3vh;
+    padding-left: 0.5vh;
+    color: rgb(240, 240, 240);
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-home {
+    position: absolute;
+    top: 18%;
+    left: 18%;
+    width: 82%;
+    height: 82%;
+    background-color: var(--secondBG);
+    transition: all 0.5s ease-in-out;
+}
+
+.mdt-content-home-active-units {
+    position: absolute;
+    width: 32%;
+    height: 97%;
+    top: 1.5%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+.mdt-content-home-active-units-title {
+    position: absolute;
+    width: 100%;
+    height: 8%;
+    top: 1%;
+    left: 0;
+    border-radius: 1vh;
+}
+
+.mdt-content-home-active-units-title > h1 {
+    position: relative;
+    margin-top: 1vh;
+    text-align: center;
+    font-family: ProBold;
+    font-size: 3vh;
+}
+
+.searchClassHome {
+    position: absolute;
+    height: 6%;
+    width: 100%;
+    right: 0%;
+    top: 0%;
+    border: none;
+    border-radius: 1vh;
+    border-bottom: 1px solid gray;
+    background-color: var(--mainBG);
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+    line-height: 0.5vh;
+    padding-top: 0.2vh !important;
+    padding-left: 0.5vh;
+}
+
+.searchClassHome::placeholder {
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+}
+
+.searchClassHome:focus {
+    outline: none;
+}
+
+input {
+    font-family: 'Poppins', sans-serif !important;
+    padding-top: 2vh;
+    font-size: 1.5vh;
+}
+
+button {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.mdt-content-home-active-units-search > h1 {
+    position: absolute;
+    margin-left: 4vh;
+    margin-top: 0.7vh;
+    font-size: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(240, 240, 240);
+}
+
+.mdt-content-home-active-units-list {
+    position: absolute;
+    bottom: 1%;
+    right: 2%;
+    height: 89.5%;
+    width: 96%;
+    border-radius: 1vh;
+    border: 1px solid gray;
+    background-color: #4a0a0c;
+}
+
+.mdt-content-home-active-units-units {
+    position: absolute;
+    top: 7%;
+    right: 1%;
+    height: 92%;
+    width: 97.5%;
+}
+
+.mdt-content-home-active-units-person {
+    position: relative;
+    display: inline-block;
+    height: 18%;
+    width: 46%;
+    top: 1%;
+    left: 1.5%;
+    margin-right: 3%;
+    margin-bottom: 1%;
+    border-radius: 1vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-home-active-units-person:hover {
+    transform: scale(1.03);
+}
+
+.mdt-content-home-active-units-person-photo {
+    position: absolute;
+    height: 5vh;
+    width: 5vh;
+    top: 5%;
+    right: 5%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 0.1vh solid gray;
+}
+
+.mdt-content-home-active-units-person-photo > img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-home-active-units-person-photo > img:hover {
+    filter: brightness(50%);
+    cursor: pointer;
+}
+
+.mdt-content-home-active-units-person-name {
+    position: absolute;
+    height: 25%;
+    width: auto;
+    top: 44%;
+    left: 3.5%;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-home-active-units-person-name > h1 {
+    font-size: 1.6vh;
+    color: rgb(240, 240, 240);
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-home-active-units-person-rank {
+    position: absolute;
+    height: 25%;
+    width: auto;
+    bottom: 10%;
+    left: 3.5%;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-home-active-units-person-rank > h1 {
+    font-size: 1.5vh;
+    color: rgb(240, 240, 240);
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-home-active-units-person > i {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    font-size: 1.6vh;
+    transition: 0.5s ease;
+    border: 1px solid rgb(32, 32, 32);
+    padding-top: 0.7vh;
+    border-radius: 50%;
+    padding-bottom: 0.5vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+}
+
+.mdt-content-home-active-units-person > i:hover {
+    cursor: pointer;
+    transform: rotate(15deg);
+}
+
+.mdt-content-home-active-units-tag {
+    position: absolute;
+    height: 25%;
+    width: auto;
+    top: 5%;
+    left: 2.5%;
+    border-radius: 1.5vh;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+
+.mdt-content-home-active-units-tag > h1 {
+    text-align: center;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    line-height: 2.45vh;
+    font-size: 1.5vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+}
+
+.mdt-content-home-recentReports {
+    position: absolute;
+    width: 32%;
+    height: 47%;
+    top: 1.5%;
+    border-radius: 0.5vh;
+    left: 1%;
+    background-color: var(--mainBG);
+    border: 1px solid grey;
+}
+
+.mdt-content-home-recentReports-textArea {
+    position: absolute;
+    top: 18%;
+    width: 55%;
+    height: 60%;
+}
+
+.mdt-content-home-recentReports-textArea > h3 {
+    position: relative;
+    left: 5%;
+    top: 7%;
+    font-size: 1.5vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-home-recentReports-textArea > h3 > span {
+    font-size: 1.3vh;
+    color: white;
+    
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-home-recentReports-reportArea::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-home-recentReports-reportArea > h3 {
+    position: relative;
+    left: 3%;
+    top: 1.5%;
+    font-size: 1.5vh;
+    font-family: ProBold;
+    max-width: 95%;
+}
+
+.mdt-content-home-recentReports-reportArea > h2 {
+    position: relative;
+    font-size: 1.3vh;
+    left: 3%;
+    color: white;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    top: 0;
+    max-width: 90%;
+}
+
+.mdt-content-home-recentReports-reportArea {
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    height: 33%;
+    overflow-y: scroll;
+}
+
+.mdt-content-home-recentReports > h1 {
+    position: absolute;
+    top: 2.5%;
+    left: 3%;
+    font-size: 2.5vh;
+    font-family: ProBold;
+}
+
+.mdt-content-home-recentReports > h2 {
+    position: absolute;
+    top: 11.5%;
+    left: 3%;
+    font-size: 1.5vh;
+    color: white;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-home-recentReports-reported-person-image {
+    position: absolute;
+    width: 40%;
+    height: 35%;
+    right: 3%;
+    top: 13%;
+    border-radius: 0.5vh;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.mdt-content-home-recentReports-reported-person-image > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-home-recentReports-reported-person-image > img:hover {
+    cursor: pointer;
+    filter: brightness(50%);
+
+}
+
+.mdt-content-home-quickfine-zone {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1.5%;
+    left: 1%;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    border: 1px solid gray;
+}
+
+.mdt-content-home-quickfine-zone-title {
+    position: absolute;
+    height: 13%;
+    width: 100%;
+    top: 1%;
+    left: 0;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-home-quickfine-zone-title> h1 {
+    position: relative;
+    margin-top: 0.6vh;
+    text-align: left;
+    left: 3%;
+    font-family: ProBold;
+    font-size: 2.5vh;
+}
+
+.mdt-content-home-quickfine-list {
+    position: absolute;
+    width: 98%;
+    height: 85.5%;
+    bottom: 2%;
+    left: 1%;
+    border-radius: 0.5vh;
+    
+    overflow: hidden;
+    overflow: scroll;
+    
+}
+
+.mdt-content-home-quickfine-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-home-quickfine {
+    position: relative;
+    height: 12%;
+    width: 95.5%;
+    top: 0%;
+    left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1.3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    transition: 0.5s ease;
+    background-color: var(--secondBG);
+    cursor: pointer;
+}
+
+.mdt-content-home-quickfine:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-home-quickfine > h1 {
+    position: absolute;
+    left: 2%;
+    top: 33%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    line-height: 1.35vh;
+    max-width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-home-quickfine > h1 > span {
+    position: relative;
+    top: 28%;
+    left: 1%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-home-chat {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1.5%;
+    left: 34%;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    border: 1px solid gray;
+}
+
+.mdt-content-home-chat-title {
+    position: absolute;
+    height: 13%;
+    width: 100%;
+    top: 1%;
+    left: 0;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-home-chat-title > h1 {
+    position: relative;
+    margin-top: 0.6vh;
+    text-align: left;
+    left: 3%;
+    font-family: ProBold;
+    font-size: 2.5vh;
+}
+
+.mdt-content-home-chat-list {
+    position: absolute;
+    width: 98%;
+    height: 85.5%;
+    bottom: 2%;
+    left: 1%;
+    border-radius: 0.5vh;
+    
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.mdt-content-home-chat-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-home-chat-person {
+    position: relative;
+    min-height: 5.5vh;
+    width: 95.5%;
+    top: 0%;
+    left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1.3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+    transition: 0.5s ease;
+}
+
+.focusBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(48, 4, 6, 0.503);
+    border-radius: 0.8vh;
+}
+
+.mdt-content-home-chat-person:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-home-chat-person > img {
+    position: absolute;
+    width: 4vh;
+    height: 4.2vh;
+    top: 0.6vh;
+    left: 2%;
+    border-radius: 1vh;
+    object-fit: cover;
+}
+
+.mdt-content-home-chat-person-sms {
+    position: relative;
+    width: 81%;
+    height: 79%;
+    left: 5vh;
+    top: 0.9vh;
+    padding-bottom: 0.5vh;
+}
+
+.mdt-content-home-chat-person-sms > h1 {
+    position: relative;
+    text-align: left;
+    left: 1%;
+    top: 0;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-home-chat-person-sms > h2 {
+    position: relative;
+    text-align: left;
+    left: 1%;
+    top: -0.6vh;
+    font-size: 1.2vh;
+    color: white;
+    max-width: 95%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    word-break: break-all;
+}
+
+.mdt-content-home-chat-person-tag {
+    position: absolute;
+    height: 1.9vh;
+    width: 4.5vh;
+    top: 0.5vh;
+    right: 1%;
+    border-radius: 1.5vh;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+.mdt-content-home-chat-person-tag > h1 {
+    position: relative;
+    text-align: center;
+    line-height: 1.8vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+}
+
+.mdt-content-home-dispatch {
+    position: absolute;
+    width: 32%;
+    height: 47%;
+    top: 1.5%;
+    left: 34%;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    border: 1px solid gray;
+}
+
+.mdt-content-home-dispatch-title {
+    position: absolute;
+    height: 13%;
+    width: 100%;
+    top: 1%;
+    left: 0;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-home-dispatch-title > h1 {
+    position: relative;
+    margin-top: 0.6vh;
+    text-align: left;
+    left: 3%;
+    font-family: ProBold;
+    font-size: 2.5vh;
+}
+
+.mdt-content-home-dispatch-list {
+    position: absolute;
+    width: 98%;
+    height: 72.5%;
+    bottom: 14%;
+    left: 1%;
+    border-radius: 0.5vh;
+    
+    overflow: hidden;
+    overflow: scroll;
+    
+}
+
+.mdt-content-home-dispatch-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-home-dispatch-item {
+    position: relative;
+    height: 43%;
+    width: 95.5%;
+    top: 0%;
+    left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1.3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-home-dispatch-item:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-home-dispatch-item > h1 {
+    position: relative;
+    left: 2%;
+    top: 6%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+    max-width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-home-dispatch-item > h2 {
+    position: relative;
+    top: 0;
+    left: 2%;
+    color: white;
+    font-size: 1.2vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-home-dispatch-item > i {
+    position: absolute;
+    right: 2%;
+    top: 8%;
+    font-size: 1.4vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-home-dispatch-item > i:hover {
+    transform: scale(1.1);
+    filter: brightness(80%);
+}
+
+.mdt-content-home-dispatch-item-currentUnits {
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    bottom: -0.5%;
+}
+
+.mdt-content-home-dispatch-item-currentUnits > h1 {
+    position: absolute;
+    text-align: left;
+    font-size: 1.2vh;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    width: 100%;
+    left: 2%;
+    height: 100%;
+}
+
+.mdt-content-home-dispatch-item-currentUnits-unit {
+    position: relative;
+    display: inline-block;
+    width: 2.8vh;
+    height: 2.8vh;
+    top: 14%;
+    left: 2%;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1%;
+    transition: 0.5s ease;
+}
+
+.mdt-content-home-dispatch-item-currentUnits-unit > img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mdt-content-home-dispatch-item-currentUnits-unit:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-citizens {
+    position: absolute;
+    top: 100%;
+    left: 18%;
+    width: 82%;
+    height: 82%;
+    transition: all 0.5s ease-in-out;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-citizens-warrants-warrant-botao {
+    position: relative;
+    left: 79.5%;
+    width: 18%;
+    height: 3vh;
+    border-radius: 1.3vh;
+    margin-top: 1vh;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-warrants-warrant-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-citizens-warrants-warrant-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-citizens-fines-fine-botao {
+    position: relative;
+    left: 56.5%;
+    width: 38%;
+    height: 3vh;
+    border-radius: 1.3vh;
+    margin-top: 4vh;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-fines-fine-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-citizens-fines-fine-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-citizens-pasts-past-botao {
+    position: relative;
+    left: 78%;
+    width: 20%;
+    height: 3vh;
+    border-radius: 1.3vh;
+    margin-top: 1vh;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-pasts-past-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-citizens-pasts-past-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-vehicles-insfos-cars-informations {
+    position: absolute;
+    width: 48%;
+    height: 40%;
+    bottom: 5.5%;
+    left: 2vh;
+}
+
+.mdt-content-vehicles-insfos-cars-informations > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+    text-align: center;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-insfos-cars-informations > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+
+
+.mdt-content-citizens-insfos-informations {
+    position: absolute;
+    width: 21%;
+    height: 96%;
+    top: 0;
+    left: 0vh;
+}
+
+.mdt-content-citizens-insfos-informations > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-insfos-informations > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-citizens-insfos-informations-2 {
+    position: absolute;
+    width: 17%;
+    height: 50%;
+    top: 13.3vh;
+    left: 22%;
+}
+
+.mdt-content-citizens-insfos-informations-2 > h1 {
+    position: relative;
+    left: 5%;
+    top: 3%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-insfos-informations-2 > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+.mdt-content-citizens-insfos-cars > h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 0.75vh;
+    margin-left: 0.9vh;
+    font-family: ProBold;
+    font-size: 2.3vh;
+}
+
+.mdt-content-citizens-insfos-houses > h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 0.75vh;
+    margin-left: 0.9vh;
+    font-family: ProBold;
+    font-size: 2.3vh;
+}
+
+.mdt-content-citizens-insfos-cars-list {
+    position: absolute;
+    width: 100%;
+    font-size: 0;
+    height: 85%;
+    top: 14%;
+    overflow: scroll;
+}
+
+.mdt-content-citizens-insfos-cars-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-citizens-insfos-cars-list-car {
+    position: relative;
+    display: inline-block;
+    width: 91%;
+    height: 20%;
+    top: 2%;
+    margin-left: 0.9vh;
+    margin-bottom: 3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-insfos-cars-list-car:hover {
+    transform: scale(1.05);
+}
+
+.mdt-content-citizens-insfos-houses-list-house:hover {
+    transform: scale(1.05);
+}
+
+.mdt-content-citizens-insfos-cars-list-car > h1 {
+    position: relative;
+    text-align: left;
+    top: 15%;
+    margin-left: 0.9vh;
+    margin-bottom: 0;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-insfos-cars-list-car > h1 > span {
+    font-family: ProBold;
+    font-size: 1.2vh;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-citizens-insfos-list-botao {
+    position: absolute;
+    right: 5%;
+    width: 5vh;
+    height: 3vh;
+    top: 16%;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-citizens-insfos-list-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-citizens-insfos-list-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-citizens-insfos-houses-list {
+    position: absolute;
+    width: 100%;
+    font-size: 0;
+    height: 85%;
+    top: 14%;
+    overflow: scroll;
+}
+
+.mdt-content-citizens-insfos-houses-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-citizens-insfos-houses-list-house {
+    position: relative;
+    display: inline-block;
+    width: 91%;
+    height: 20%;
+    top: 2%;
+    margin-left: 0.9vh;
+    margin-bottom: 3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-insfos-houses-list-house > h1 {
+    position: relative;
+    text-align: left;
+    top: 15%;
+    margin-left: 0.9vh;
+    margin-bottom: 0;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-insfos-houses-list-house > h1 > span {
+    font-family: ProBold;
+    font-size: 1.2vh;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-citizens-insfos-photo:hover {
+    transform: scale(1.05);
+    filter: brightness(80%);
+}
+
+.mdt-content-home-recentReports-botao {
+    position: absolute;
+    right: 3%;
+    width: 13.6vh;
+    height: 3vh;
+    bottom: 2%;
+    border-radius: 0.6vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-home-recentReports-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-home-recentReports-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-home-dispatch-botao {
+    position: absolute;
+    right: 3%;
+    width: 9.5vh;
+    height: 3vh;
+    bottom: 2.5%;
+    border-radius: 0.6vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-home-dispatch-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-home-dispatch-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-citizens-list {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    left: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    overflow: hidden;
+}
+
+.mdt-content-citizens-list-person-list {
+    position: absolute;
+    top: 25%;
+    left: 1%;
+    width: 98%;
+    height: 73%;
+    border-bottom-left-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    overflow: scroll
+}
+
+.mdt-content-citizens-list-person-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-citizens-list-person {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    margin-bottom: 0.6vh;
+    width: 98%;
+    height: 25%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-list-person:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-citizens-list-person > img {
+    position: absolute;
+    top: 7%;
+    left: 1%;
+    width: 5.4vh;
+    height: 5.4vh;
+    border-radius: 0.5vh;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-list-person > img:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-citizens-list-person-name {
+    position: absolute;
+    top: 5%;
+    left: 6vh;
+    width: 40%;
+    height: 52%;
+}
+
+.mdt-content-citizens-list-person-name > h1 {
+    position: absolute;
+    left: 5%;
+    top: 3%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-citizens-list-person-name > span {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 37%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-list-person-birth {
+    position: absolute;
+    bottom: 6%;
+    left: 6vh;
+    width: 40%;
+    height: 44%;
+} 
+
+.mdt-content-citizens-list-person-birth > h1 {
+    position: relative;
+    left: 5%;
+    top: 0;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-citizens-list-person-birth > span {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-list-person-tag {
+    position: absolute;
+    bottom: 6%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-citizens-list-person-tag > h1 {
+    position: relative;
+    left: 5%;
+    top: 0;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-citizens-list-person-tag > span {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-list-person-sex {
+    position: absolute;
+    top: 5%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-citizens-list-person-sex > h1 {
+    position: relative;
+    left: 5%;
+    top: 3%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-citizens-list-person-sex > span {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-citizens-infos {
+    position: absolute;
+    width: 65%;
+    height: 48.5%;
+    top: 1%;
+    right: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-citizens-insfos-box {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 98%;
+    height: 84%;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-citizens-insfos-photo {
+    position: absolute;
+    height: 40%;
+    width: 17%;
+    left: 22%;
+    top: 0.5%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-insfos-photo > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vh;
+    
+    object-fit: cover;
+}
+
+.mdt-content-citizens-insfos-cars {
+    position: absolute;
+    width: 29%;
+    height: 96%;
+    right: 30%;
+    top: 0.5%;
+    border-top-left-radius: 0.5vh;
+    border-bottom-left-radius: 0.5vh;
+    border: 1px solid gray;
+    border-right: none;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-citizens-insfos-houses {
+    position: absolute;
+    width: 29%;
+    height: 96%;
+    right: 1%;
+    top: 0.5%;
+    border-top-right-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    background-color: var(--secondBG);
+    border: 1px solid gray;
+    border-left: none;
+}
+
+.mdt-content-citizens-warrants {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1%;
+    left: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    overflow: hidden;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-citizens-warrants-list {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 98%;
+    height: 84%;
+    border-radius: 0.5vh;
+    overflow: scroll
+}
+
+.mdt-content-citizens-warrants-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-citizens-warrants-warrant {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    margin-bottom: 0.5vh;
+    width: 98%;
+    min-height: 1.5vh;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    transition: 0.5s ease;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-citizens-warrants-warrant:hover {
+    transform: scale(0.98);
+}
+
+.mdt-content-citizens-warrants-warrant > h1 {
+    position: relative;
+    left: 1.5%;
+    top: 0.75vh;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-citizens-warrants-warrant > h2 {
+    position: relative;
+    left: 1.5%;
+    margin-top: 3.5%;
+    font-size: 1.3vh;
+    max-width: 95%;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-citizens-fines {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1%;
+    left: 34%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-citizens-fines-list {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 98%;
+    height: 84%;
+    border-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-citizens-fines-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-citizens-fines-fine {
+    position: relative;
+    left: 1.9%;
+    top: 1%;
+    display: inline-block;
+    margin-bottom: 0.8vh;
+    width: 46%;
+    margin-right: 0.8vh;
+    min-height: 1.5vh;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-citizens-fines-fine:hover {
+    transform: scale(0.98);
+}
+
+.mdt-content-citizens-fines-fine > h1 {
+    position: absolute;
+    top: 1vh;
+    text-align: left;
+    word-break: break-all;
+    max-width: 95%;
+    left: 3%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-citizens-fines-fine > h2 {
+    position: absolute;
+    bottom: 0.6vh;
+    font-size: 1.3vh;
+    text-align: left;
+    color: white;
+    word-wrap:normal;
+    max-width: 95%;
+    left: 3%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-citizens-past {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1%;
+    right: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-citizens-past-list {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 98%;
+    height: 84%;
+    border-radius: 0.5vh;
+    overflow: scroll
+}
+
+.mdt-content-citizens-past-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-citizens-past-pasts {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    margin-bottom: 0.5vh;
+    width: 98%;
+    min-height: 1.5vh;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    transition: 0.5s ease;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-citizens-past-pasts:hover {
+    transform: scale(0.98);
+}
+
+.mdt-content-citizens-past-pasts > h1 {
+    position: relative;
+    left: 1.5%;
+    top: 0.6vh;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-citizens-past-pasts > h2 {
+    position: relative;
+    left: 1.5%;
+    margin-top: 3.5%;
+    max-width: 95%;
+    font-size: 1.3vh;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-vehicles {
+    position: absolute;
+    top: 100%;
+    left: 18%;
+    transition: all 0.5s ease-in-out;
+    width: 82%;
+    height: 82%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-vehicles-list {
+    position: absolute;
+    width: 32%;
+    height: 98%;
+    top: 1%;
+    left: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    overflow: hidden;
+}
+
+.mdt-content-vehicles-list-list {
+    position: absolute;
+    width: 100%;
+    height: 86%;
+    bottom: 1%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-vehicles-list-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-vehicles-list-list-vehicle {
+    position: relative;
+    width: 96%;
+    height: 14%;
+    top: 0%;
+    left: 2%;
+    background-color: var(--mainBG);
+    margin-top: 0.4vh;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    border: 1px solid gray;
+    transition: 0.5s ease;
+}
+
+.mdt-content-vehicles-list-list-vehicle:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-vehicles-list-list-vehicle > img {
+    position: absolute;
+    width: 23%;
+    height: 92%;
+    top: 4%;
+    left: 1%;
+    object-fit: cover;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-vehicles-list-list-vehicle > img:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-vehicles-list-list-vehicle-box {
+    position: absolute;
+    width: 74%;
+    height: 92%;
+    top: 4%;
+    right: 1%;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > h1 {
+    position: absolute;
+    left: 2%;
+    top: 4.5%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > h2 {
+    position: absolute;
+    left: 2%;
+    bottom: 16%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > h3 {
+    position: absolute;
+    left: 50%;
+    top: 4%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > h4 {
+    position: absolute;
+    left: 50%;
+    bottom: 16%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > m {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    top: 23%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > o {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    top: 23%;
+    left: 50%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > j {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-list-list-vehicle-box > c {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-titles-search-list {
+    position: absolute;
+    width: 100%;
+    height: 7.5%;
+    top: 0%;
+    left: 0%;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-vehicles-titles-search-list > h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 1.2vh;
+    margin-left: 1vh;
+    font-family: ProBold;
+    font-size: 2.5vh;
+}
+
+.mdt-content-vehicles-infos {
+    position: absolute;
+    width: 65%;
+    height: 48.5%;
+    top: 1%;
+    right: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-vehicles-insfos-box {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 98%;
+    height: 84%;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-vehicles-insfos-photo {
+    position: absolute;
+    height: 40%;
+    width: 17%;
+    left: 22%;
+    top: 0.5%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+
+    transition: 0.5s ease;
+}
+
+.mdt-content-vehicles-insfos-photo > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vh;
+    
+    object-fit: cover;
+}
+
+.mdt-content-vehicles-insfos-cars {
+    position: absolute;
+    width: 57%;
+    height: 96%;
+    right: 1%;
+    top: 0.5%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-vehicles-insfos-informations {
+    position: absolute;
+    width: 21%;
+    height: 96%;
+    top: 0;
+    left: 0vh;
+}
+
+.mdt-content-vehicles-insfos-informations > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-insfos-informations > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-vehicles-insfos-informations-2 {
+    position: absolute;
+    width: 17%;
+    height: 50%;
+    top: 13.3vh;
+    left: 22%;
+}
+
+.mdt-content-vehicles-insfos-informations-2 > h1 {
+    position: relative;
+    left: 5%;
+    top: 3%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-insfos-informations-2 > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-insfos-cars > h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 0.75vh;
+    margin-left: 0.9vh;
+    font-family: ProBold;
+    font-size: 2.3vh;
+}
+
+.mdt-content-vehicles-insfos-list-botao {
+    position: absolute;
+    right: 5%;
+    width: 5vh;
+    height: 3vh;
+    top: 16%;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-vehicles-insfos-list-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-vehicles-insfos-list-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-vehicles-insfos-photo:hover {
+    transform: scale(1.05);
+    filter: brightness(80%);
+}
+
+.mdt-content-vehicles-insfos-cars-vehImage {
+    position: absolute;
+    right: 25%;
+    width: 45%;
+    height: 38%;
+    top: 15%;
+    border-radius: 0.9vh;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+.mdt-content-vehicles-insfos-cars-vehImage > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-radius: 0.9vh;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mdt-content-vehicles-insfos-cars-vehImage:hover {
+    filter: brightness(80%);
+    transform: scale(1.1);
+}
+
+.mdt-content-vehicles-insfos-informations {
+    position: absolute;
+    width: 21%;
+    height: 96%;
+    top: 0;
+    left: 0vh;
+}
+
+.mdt-content-vehicles-insfos-informations > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-insfos-informations > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-vehicles-insfos-cars-informations-2 {
+    position: absolute;
+    width: 43%;
+    height: 40%;
+    bottom: 5.5%;
+    right: 3vh;
+}
+
+.mdt-content-vehicles-insfos-cars-informations-2 > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+    text-align: center;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-insfos-cars-informations-2 > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-vehicles-reports {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1%;
+    left: 34%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-vehicles-reports-box {
+    position: absolute;
+    height: 84%;
+    width: 96%;
+    right: 2%;
+    bottom: 1.5%;
+    border-radius: 0.5vh;
+    overflow-y: scroll;
+}
+
+.mdt-content-vehicles-reports-box::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-vehicles-allVehs {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1%;
+    right: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-vehicles-allVehs-box {
+    position: absolute;
+    height: 84%;
+    width: 96%;
+    right: 2%;
+    bottom: 1.5%;
+    border-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-vehicles-allVehs-box::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-vehicles-allVehs-box-infos {
+    position: relative;
+    height: 12%;
+    width: 95.5%;
+    top: 0%;
+    left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1.3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-vehicles-allVehs-box-infos:hover {
+    transform: scale(1.05);
+}
+
+.mdt-content-vehicles-allVehs-box-infos > h1 {
+    position: absolute;
+    left: 2%;
+    top: 33%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    line-height: 1.35vh;
+    max-width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-vehicles-allVehs-box-infos > h1 > span {
+    position: relative;
+    top: 28%;
+    left: 1%;
+    font-size: 1.3vh;
+    color: rgb(99, 99, 99);
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-vehicles-insfos-cars-botao {
+    position: relative;
+    left: 73%;
+    width: 25%;
+    height: 3vh;
+    border-radius: 1.3vh;
+    margin-top: 1vh;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-vehicles-insfos-cars-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-vehicles-insfos-cars-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-houses-insfos-cars-informations {
+    position: absolute;
+    width: 48%;
+    height: 40%;
+    bottom: -5%;
+    left: 2vh;
+}
+
+.mdt-content-houses-insfos-cars-informations > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+    text-align: center;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-insfos-cars-informations > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-houses {
+    position: absolute;
+    top: 100%;
+    left: 18%;
+    width: 82%;
+    transition: all 0.5s ease-in-out;
+    height: 82%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-houses-list {
+    position: absolute;
+    width: 32%;
+    height: 98%;
+    top: 1%;
+    left: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    overflow: hidden;
+}
+
+.mdt-content-houses-list-list {
+    position: absolute;
+    width: 100%;
+    height: 86%;
+    bottom: 1%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-houses-list-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-houses-list-list-vehicle {
+    position: relative;
+    width: 96%;
+    height: 14%;
+    top: 0%;
+    left: 2%;
+    background-color: var(--mainBG);
+    margin-top: 0.4vh;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    border: 1px solid gray;
+    transition: 0.5s ease;
+}
+
+.mdt-content-houses-list-list-vehicle:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-houses-list-list-vehicle > img {
+    position: absolute;
+    width: 23%;
+    height: 92%;
+    top: 4%;
+    left: 1%;
+    object-fit: cover;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-houses-list-list-vehicle > img:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-houses-list-list-vehicle-box {
+    position: absolute;
+    width: 74%;
+    height: 92%;
+    top: 4%;
+    right: 1%;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-houses-list-list-vehicle-box > h1 {
+    position: absolute;
+    left: 2%;
+    top: 4.5%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-houses-list-list-vehicle-box > h2 {
+    position: absolute;
+    left: 2%;
+    bottom: 16%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+}
+
+.mdt-content-houses-list-list-vehicle-box > h3 {
+    position: absolute;
+    left: 10.5vh;
+    top: 4%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+}
+
+.mdt-content-houses-list-list-vehicle-box > h4 {
+    position: absolute;
+    left: 50%;
+    bottom: 16%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+}
+
+.mdt-content-houses-list-list-vehicle-box > m {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    top: 23%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-list-list-vehicle-box > o {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    top: 23%;
+    left: 10.5vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 39%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-list-list-vehicle-box > j {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 95%;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-list-list-vehicle-box > c {
+    font-size: 1.3vh;
+    color: white;
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-titles-search-list {
+    position: absolute;
+    width: 100%;
+    height: 7.5%;
+    top: 0%;
+    left: 0%;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-houses-titles-search-list > h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 1.2vh;
+    margin-left: 1vh;
+    font-family: ProBold;
+    font-size: 2.5vh;
+}
+
+.mdt-content-houses-infos {
+    position: absolute;
+    width: 65%;
+    height: 48.5%;
+    top: 1%;
+    right: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-houses-insfos-box {
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    width: 98%;
+    height: 84%;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-houses-insfos-photo {
+    position: absolute;
+    height: 40%;
+    width: 17%;
+    left: 22%;
+    top: 0.5%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+
+    transition: 0.5s ease;
+}
+
+.mdt-content-houses-insfos-photo > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vh;
+    
+    object-fit: cover;
+}
+
+.mdt-content-houses-insfos-cars {
+    position: absolute;
+    width: 57%;
+    height: 96%;
+    right: 1%;
+    top: 0.5%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-houses-insfos-informations {
+    position: absolute;
+    width: 21%;
+    height: 96%;
+    top: 0;
+    left: 0vh;
+}
+
+.mdt-content-houses-insfos-informations > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-insfos-informations > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-houses-insfos-informations-2 {
+    position: absolute;
+    width: 17%;
+    height: 50%;
+    top: 13.3vh;
+    left: 22%;
+}
+
+.mdt-content-houses-insfos-informations-2 > h1 {
+    position: relative;
+    left: 5%;
+    top: 3%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-insfos-informations-2 > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-insfos-cars > h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 0.75vh;
+    margin-left: 0.9vh;
+    font-family: ProBold;
+    font-size: 2.3vh;
+}
+
+.mdt-content-houses-insfos-list-botao {
+    position: absolute;
+    right: 5%;
+    width: 5vh;
+    height: 3vh;
+    top: 16%;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-houses-insfos-list-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-houses-insfos-list-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-houses-insfos-photo:hover {
+    transform: scale(1.05);
+    filter: brightness(80%);
+}
+
+.mdt-content-houses-insfos-cars-houseImage {
+    position: absolute;
+    right: 25%;
+    width: 45%;
+    height: 38%;
+    top: 18%;
+    border-radius: 0.9vh;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+.mdt-content-houses-insfos-cars-houseImage > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.9vh;
+}
+
+.mdt-content-houses-insfos-cars-houseImage:hover {
+    filter: brightness(80%);
+    transform: scale(1.1);
+}
+
+.mdt-content-houses-insfos-informations {
+    position: absolute;
+    width: 21%;
+    height: 96%;
+    top: 0;
+    left: 0vh;
+}
+
+.mdt-content-houses-insfos-informations > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-insfos-informations > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-houses-insfos-cars-informations-2 {
+    position: absolute;
+    width: 43%;
+    height: 40%;
+    bottom: -5%;
+    right: 3vh;
+}
+
+.mdt-content-houses-insfos-cars-informations-2 > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+    text-align: center;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-insfos-cars-informations-2 > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3vh;
+}
+
+.mdt-content-houses-reports {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1%;
+    left: 34%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-houses-reports-box {
+    position: absolute;
+    height: 84%;
+    width: 96%;
+    right: 2%;
+    bottom: 1.5%;
+    border-radius: 0.5vh;
+    overflow-y: scroll;
+}
+
+.mdt-content-houses-reports-box::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-houses-allVehs {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    bottom: 1%;
+    right: 1%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-houses-allVehs-box {
+    position: absolute;
+    height: 84%;
+    width: 96%;
+    right: 2%;
+    bottom: 1.5%;
+    border-radius: 0.5vh;
+    overflow-y: scroll;
+}
+
+.mdt-content-houses-allVehs-box::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-houses-allVehs-box-infos {
+    position: relative;
+    height: 12%;
+    width: 95.5%;
+    top: 0%;
+    left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1.3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-houses-allVehs-box-infos > h1 {
+    position: absolute;
+    left: 2%;
+    top: 33%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    line-height: 1.35vh;
+    max-width: 95%;
+    margin-right: 1%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-houses-allVehs-box-infos > h1 > span {
+    position: relative;
+    top: 28%;
+    font-size: 1.3vh;
+    color: rgb(99, 99, 99);
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-houses-insfos-cars-botao {
+    position: absolute;
+    right: 2%;
+    width: 10vh;
+    height: 3vh;
+    border-radius: 1.3vh;
+    margin-top: 1vh;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-houses-insfos-cars-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-houses-insfos-cars-botao-gps:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-houses-insfos-cars-botao-gps {
+    position: absolute;
+    right: 2%;
+    width: 15%;
+    height: 3vh;
+    border-radius: 1.3vh;
+    margin-top: 4.8vh;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-houses-insfos-cars-botao-gps > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-houses-insfos-cars-botao-gps:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-reports {
+    position: absolute;
+    width: 82%;
+    height: 82%;
+    transition: all 0.5s ease-in-out;
+    top: 100%;
+    left: 18%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-search-list {
+    position: absolute;
+    height: 97%;
+    width: 32%;
+    top: 1.5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-infos {
+    position: absolute;
+    height: 97%;
+    width: 65%;
+    top: 1.5%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-infos-person-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+
+.mdt-content-reports-infos-vehicle-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    left: 34%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-infos-house-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-reports-box {
+    position: absolute;
+    width: 48.5%;
+    height: 48.5%;
+    bottom: 1%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-reports-list {
+    position: absolute;
+    width: 94%;
+    height: 72%;
+    top: 15%;
+    left: 3%;
+    border-radius: 0.5vh;
+}
+
+
+.mdt-content-reports-evidence-box {
+    position: absolute;
+    width: 48.5%;
+    height: 48.5%;
+    bottom: 1%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-evidence-box-camera {
+    position: absolute;
+    width: 25%;
+    height: 11%;
+    top: 2%;
+    right: 2%;
+    background-color: #300406;
+}
+
+.mdt-content-reports-evidence-list {
+    position: absolute;
+    width: 94%;
+    height:72%;
+    top: 15%;
+    left: 2.5%;
+    border-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-reports-evidence-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-evidence-photo {
+    position: relative;
+    display: inline-block;
+    width: 23%;
+    height: 28%;
+    top: 1%;
+    left: 1%;
+    margin-bottom: 1%;
+    margin-right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-evidence-photo > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vh;
+    object-fit: cover;
+}
+
+.mdt-content-reports-evidence-photo:hover .delete-evidence {
+    opacity: 0.5;
+    transform: scale(1.02);
+    display:block  
+}
+
+.delete-evidence {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    background-color: rgba(211, 51, 51, 0.653);
+}
+
+.delete-evidence > i {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: white;
+    top: 43%;
+    font-size: 1.4vh;
+}
+
+.mdt-content-reports-infos-img {
+    position: absolute;
+    right: 4%;
+    width: 45%;
+    height: 27%;
+    top: 18%;
+    border-radius: 0.8vh;
+    border: 1px solid green;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-infos-img:hover {
+    transform: scale(0.95);
+    filter: brightness(80%);
+}
+
+.mdt-content-reports-infos-content {
+    position: absolute;
+    left: 3%;
+    width: 46%;
+    top: 17%;
+    height: 80%;
+}
+
+.mdt-content-reports-infos-content > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.2vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-infos-content > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.2vh;
+}
+
+.mdt-content-reports-infos-img > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.mdt-content-reports-botao {
+    position: absolute;
+    right: 2%;
+    width: 10vh;
+    height: 3vh;
+    border-radius: 1.3vh;
+    bottom: -0.5%;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-reports-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mdt-content-reports-list-list {
+    position: absolute;
+    top: 12.5%;
+    left: 1%;
+    width: 98%;
+    height: 86%;
+    border-bottom-left-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-reports-list-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-list {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    margin-bottom: 0.6vh;
+    width: 98%;
+    height: 15%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    cursor: pointer;
+    transition: 0.5s ease;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-list:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-reports-list > img {
+    position: absolute;
+    top: 5%;
+    left: 1%;
+    width: 5.4vh;
+    height: 5.4vh;
+    border-radius: 0.5vh;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-list > img:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-reports-list-name {
+    position: absolute;
+    top: 5%;
+    left: 6vh;
+    width: 40%;
+    height: 52%;
+}
+
+.mdt-content-reports-list-name > h1 {
+    position: absolute;
+    left: 5%;
+    top: 3%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-list-name > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 37%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-list-date {
+    position: absolute;
+    bottom: 6%;
+    left: 6vh;
+    width: 40%;
+    height: 44%;
+} 
+
+.mdt-content-reports-list-date > h1 {
+    position: relative;
+    left: 5%;
+    top: 0;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-list-date > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-list-evidenceNumber {
+    position: absolute;
+    bottom: 6%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-reports-list-evidenceNumber > h1 {
+    position: relative;
+    left: 5%;
+    top: 0;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-list-evidenceNumber > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-list-createdBy {
+    position: absolute;
+    top: 5%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-reports-list-createdBy > h1 {
+    position: relative;
+    left: 5%;
+    top: 3%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-list-createdBy > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-reports-list > h1 {
+    position: relative;
+    text-align: left;
+    margin-top: 0.5vh;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-reports-reports-list > h1 > span {
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+}
+
+.mdt-content-reports-reports-list > h2 > span {
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+}
+
+.mdt-content-reports-report-desc {
+    position: relative;
+    width: 94%;
+    height: auto;
+    max-height: 61%;
+    width: auto;
+    top: 0;
+    left: 0;
+    border-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-reports-report-desc::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-reports-list > .mdt-content-reports-report-desc > h2 {
+    position: relative;
+    text-align: left;
+    margin-top: 0;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+}
+
+
+.geral-item-currentUnits::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+.geral-item-currentUnits {
+    position: relative;
+    width: 100%;
+    height: 28%;
+    top: 0;
+    overflow-y: scroll;
+}
+
+.geral-item-currentUnits-unit {
+    position: relative;
+    display: inline-block;
+    width: 3vh;
+    height: 3vh;
+    top: 0;
+    left: 1%;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1%;
+    transition: 0.5s ease;
+}
+
+.geral-item-currentUnits-unit > img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.geral-item-currentUnits-unit:hover {
+    filter: brightness(50%);
+}
+
+
+
+
+
+.mdt-content-reports-create {
+    position: absolute;
+    height: 97%;
+    width: 65%;
+    top: 1.5%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    transition: 1s ease;
+    right: -100%;
+    z-index: 2;
+}
+
+.mdt-content-reports-create-person-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+
+.mdt-content-reports-create-vehicle-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    left: 34%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-create-house-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-create-img {
+    position: absolute;
+    right: 4%;
+    width: 45%;
+    height: 30%;
+    top: 18%;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-create-img:hover {
+    transform: scale(0.95);
+    filter: brightness(80%);
+}
+
+.mdt-content-reports-create-content {
+    position: absolute;
+    left: 3%;
+    width: 46%;
+    top: 17%;
+    height: 80%;
+}
+
+.mdt-content-reports-create-content > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.2vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-create-content > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.2vh;
+}
+
+.mdt-content-reports-create-img > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mdt-content-central {
+    position: absolute;
+    height: 82%;
+    width: 82%;
+    top: 100%;
+    transition: all 0.5s ease-in-out;
+    left: 18%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-central-police-search {
+    position: absolute;
+    height: 97%;
+    width: 32%;
+    top: 1.5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-central-medic-search {
+    position: absolute;
+    height: 97%;
+    width: 32%;
+    top: 1.5%;
+    left: 34%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-central-list {
+    position: absolute;
+    width: 100%;
+    height: 88%;
+    top: 12%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.mdt-content-central-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-central-person {
+    position: relative;
+    width: 96%;
+    height: 15%;
+    top: 1%;
+    left: 2%;
+    margin-bottom: 0.5vh;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.mdt-content-central-person > img {
+    position: absolute;
+    width: 23%;
+    height: 90%;
+    top: 5%;
+    left: 1.5%;
+    border-radius: 0.5vh;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-central-person:hover {
+    transform: scale(1.01);
+}
+
+.mdt-content-central-person > img:hover {
+    filter: brightness(80%);
+}
+
+.mdt-content-central-person-info {
+    position: absolute;
+    width: 74%;
+    height: 90%;
+    top: 5%;
+    right: 1%;
+}
+
+.mdt-content-central-person-info > h1 {
+    position: absolute;
+    top: 3%;
+    left: 5%;
+    font-size: 1.5vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-person-info > h2 {
+    position: absolute;
+    top: 3%;
+    left: 55%;
+    font-size: 1.5vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-person-info > h3 {
+    position: absolute;
+    top: 53%;
+    left: 5%;
+    font-size: 1.5vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-person-info > h4 {
+    position: absolute;
+    top: 53%;
+    left: 55%;
+    font-size: 1.5vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-person-info > a {
+    position: absolute;
+    width: 46%;
+    height: 25%;
+    top: 25%;
+    left: 5%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-central-person-info > b {
+    position: absolute;
+    width: 46%;
+    height: 25%;
+    top: 25%;
+    left: 55%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-weight: 600;
+}
+
+.mdt-content-central-person-info > c {
+    position: absolute;
+    width: 46%;
+    height: 25%;
+    top: 73%;
+    left: 5%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-central-person-info > d {
+    position: absolute;
+    width: 46%;
+    height: 25%;
+    top: 73%;
+    left: 55%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-central-infos-zone {
+    position: absolute;
+    height: 97%;
+    width: 32%;
+    top: 1.5%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-central-infos-zone-top {
+    position: absolute;
+    width: 96%;
+    height: 45.5%;
+    top: 7%;
+    right: 2%;
+    border-radius: 0.5vh;
+    overflow: hidden;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-central-infos-zone-top-infos {
+    position: absolute;
+    height: 60%;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+}
+
+.mdt-content-central-infos-zone-top-infos > img {
+    position: absolute;
+    height: 70%;
+    width: 35%;
+    top: 0%;
+    right: 2%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-central-infos-zone-top-infos > img:hover {
+    filter: brightness(80%);
+    transform: scale(0.97);
+}
+
+.mdt-content-central-infos-zone-top-infos > h1 {
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    top: 2%;
+    left: 2.25%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-central-infos-zone-top-infos > h2 {
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    top: 2%;
+    left: 36.25%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-central-infos-zone-top-infos > h3 {
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    top: 34%;
+    left: 2.25%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-central-infos-zone-top-infos > h4 {
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    top: 34%;
+    left: 36.25%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-central-infos-zone-top-infos > a {
+    position: absolute;
+    height: 25%;
+    width: 32%;
+    top: 14%;
+    left: 2.25%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    color: rgb(84, 84, 84) !important;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-central-infos-zone-top-infos > input {
+    position: absolute;
+    height: 12%;
+    width: 25%;
+    top: 13%;
+    padding-top: 0.4vh !important;
+    left: 36.25%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.3vh;
+    color: rgb(84, 84, 84);
+
+    font-weight: 600;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    transition: 0.5s ease;
+}
+
+.mdt-content-central-infos-zone-top-infos > input:focus {
+    outline: none;
+    border-bottom: 3px solid gray;
+}
+
+.mdt-content-central-infos-zone-top-infos > c {
+    position: absolute;
+    height: 25%;
+    width: 32%;
+    top: 45%;
+    left: 2.25%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.3vh;
+    white-space: nowrap;
+    overflow: hidden;
+    color: rgb(84, 84, 84);
+    text-overflow: ellipsis;
+}
+
+.mdt-content-central-infos-zone-top-infos > d {
+    position: absolute;
+    height: 25%;
+    width: 25%;
+    top: 45%;
+    color: rgb(84, 84, 84);
+    left: 36.25%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.3vh;
+
+    max-width: 26%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+.mdt-content-central-infos-zone-top-description {
+    position: absolute;
+    height: 51%;
+    width: 96%;
+    bottom: 3%;
+    left: 2%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    overflow-y: scroll;
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    color: rgb(84, 84, 84);
+    padding-left: 0.3vh;
+    padding-right: 0.3vh;
+    transition: 0.5s ease;
+    outline: none;
+}
+
+.mdt-content-central-infos-zone-top-description:focus {
+    border: 2px solid gray;
+}
+
+.mdt-content-central-infos-zone-top-description::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-central-infos-zone-top-infos > desc {
+    position: absolute;
+    height: 25%;
+    width: 35%;
+    bottom: 13.5%;
+    left: 2.25%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-central-infos-zone-top-description > h1 {
+    position: absolute;
+    height: 99%;
+    width: 96%;
+    top: 3%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    color: rgb(84, 84, 84);
+    overflow-y: scroll;
+}
+
+.mdt-content-central-infos-zone-top-description > h1::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-central-infos-zone-bot {
+    position: absolute;
+    width: 96%;
+    height: 45.5%;
+    bottom: 1%;
+    right: 2%;
+    border-radius: 0.5vh;
+    overflow: hidden;
+    background-color: var(--secondBG);
+    border: 1px solid gray;
+}
+
+.mdt-content-central-infos-zone-title {
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    top: 0%;
+    left: 0%;
+}
+
+.mdt-content-central-infos-zone-title > h1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 25%;
+    left: 2%;
+    font-size: 2vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-infos-zone-box {
+    position: absolute;
+    width: 100%;
+    height: 86%;
+    bottom: 0%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.mdt-content-central-infos-zone-box::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-central-infos-zone-mission {
+    position: relative;
+    width: 96%;
+    height: 28%;
+    top: 1%;
+    left: 2%;
+    margin-bottom: 0.5vh;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-central-infos-zone-mission:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-central-infos-zone-mission > img {
+    position: absolute;
+    width: 20%;
+    top: 5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-central-infos-zone-mission > img:hover {
+    filter: brightness(80%);
+    transform: scale(1.02);
+}
+
+.mdt-content-central-infos-zone-mission-info {
+    position: absolute;
+    width: 82%;
+    height: 90%;
+    top: 5%;
+    right: 0%;
+}
+
+.mdt-content-central-infos-zone-mission-info > h1 {
+    position: absolute;
+    top: 0%;
+    left: 8%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-infos-zone-mission-info > h2 {
+    position: absolute;
+    top: 0%;
+    left: 58%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-infos-zone-mission-info > h3 {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-infos-zone-mission-info > h4 {
+    position: absolute;
+    top: 50%;
+    left: 58%;
+    font-size: 1.3vh;
+    font-family: ProBold;
+}
+
+.mdt-content-central-infos-zone-mission-info > a {
+    position: absolute;
+    width: 46%;
+    height: 29%;
+    top: 23%;
+    left: 8%;
+    font-size: 1.2vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-central-infos-zone-mission-info > b {
+    position: absolute;
+    width: 46%;
+    height: 25%;
+    top: 23%;
+    left: 58%;
+    font-size: 1.2vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-central-infos-zone-mission-info > c {
+    position: absolute;
+    width: 46%;
+    height: 25%;
+    top: 73%;
+    left: 8%;
+    font-size: 1.2vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-central-infos-zone-mission-info > d {
+    position: absolute;
+    width: 46%;
+    height: 25%;
+    top: 73%;
+    left: 58%;
+    font-size: 1.2vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+
+
+
+
+
+.mdt-content-home-central-botao {
+    position: absolute;
+    right: 2%;
+    width: 5vh;
+    height: 2.5vh;
+    bottom: 2%;
+    border-radius: 1.6vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-home-central-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 2.65vh;
+    font-size: 1.1vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-home-central-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+
+.mdt-content-new-report-list-geral-list {
+    position: absolute;
+    top: 24%;
+    left: 1%;
+    width: 98%;
+    height: 75%;
+    border-bottom-left-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-new-report-list-geral-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-new-report-list-person {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    margin-bottom: 0.6vh;
+    width: 98%;
+    height: 28.2%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    cursor: pointer;
+    transition: 0.5s ease;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-new-report-list-person:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-new-report-list-person > img {
+    position: absolute;
+    top: 6%;
+    left: 1.5%;
+    width: 5.4vh;
+    height: 5.4vh;
+    border-radius: 0.5vh;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-new-report-list-person > img:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-new-report-list-box-left {
+    position: absolute;
+    top: 5%;
+    left: 6vh;
+    width: 40%;
+    height: 52%;
+}
+
+.mdt-content-new-report-list-box-left > h1 {
+    position: absolute;
+    left: 5%;
+    top: 3%;
+    font-size: 1.2vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-new-report-list-box-left > h2 {
+    font-size: 1vh;
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-new-report-list-box-left-bottom {
+    position: absolute;
+    bottom: 6%;
+    left: 6vh;
+    width: 40%;
+    height: 44%;
+} 
+
+.mdt-content-new-report-list-box-left-bottom > h1 {
+    position: relative;
+    left: 5%;
+    top: 0;
+    font-size: 1.2vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-new-report-list-box-left-bottom > h2 {
+    font-size: 1vh;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+
+    max-width: 98%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-new-report-list-right-bottom {
+    position: absolute;
+    bottom: 6%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-new-report-list-right-bottom > h1 {
+    position: relative;
+    left: 25%;
+    top: 0;
+    font-size: 1.2vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-new-report-list-right-bottom > h2 {
+    font-size: 1vh;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 75%;
+}
+
+.mdt-content-new-report-list-right-top {
+    position: absolute;
+    top: 5%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-new-report-list-right-top > h1 {
+    position: relative;
+    left: 25%;
+    top: 3%;
+    font-size: 1.2vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-new-report-list-right-top > h2 {
+    font-size: 1vh;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.mdt-content-reports-reports-list > input {
+    position: relative;
+    width: 100%;
+    height: 11%;
+    border-radius: 0.5vh;
+    outline: none;
+    padding-left: 0.3vh;
+    padding-top: 0.2vh !important;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-reports-list > textarea {
+    position: relative;
+    width: 100%;
+    height: 41%;
+    border-radius: 0.5vh;
+    outline: none;
+    font-size: 1.2vh;
+    padding-left: 0.3vh;
+    padding-top: 0.2vh !important;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+    resize: none;
+}
+
+.mdt-content-fines {
+    position: absolute;
+    height: 82%;
+    width: 82%;
+    top: 100%;
+    left: 18%;
+    background-color: var(--secondBG);
+    transition: all 0.5s ease-in-out;
+}
+
+.mdt-content-fines-box {
+    position: absolute;
+    height: 97%;
+    width: 35%;
+    top: 1.5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-fines-fine-list {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    width: 98%;
+    height: 86.8%;
+    border-radius: 0.5vh;
+    overflow: scroll
+}
+
+.mdt-content-fines-fine-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+.mdt-content-fines-fine {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    margin-bottom: 0.5vh;
+    width: 98%;
+    min-height: 1.5vh;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    transition: 0.5s ease;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-fines-fine:hover {
+    transform: scale(0.98);
+}
+
+.mdt-content-fines-fine > h1 {
+    position: relative;
+    left: 1.5%;
+    top: 0.6vh;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+    width: 100%;
+}
+
+.mdt-content-fines-fine > h1 > i {
+    position: absolute;
+    right: 1.5vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-fines-fine > h1 > i:hover {
+    transform: scale(1.1);
+}
+
+.mdt-content-fines-fine > h2 {
+    position: relative;
+    left: 1.5%;
+    top: 0;
+    font-size: 1.3vh;
+    color: white;
+    max-width: 68%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+
+.mdt-content-fines-fine-botao {
+    position: absolute;
+    right: 0;
+    width: 9vh;
+    height: 3vh;
+    border-radius: 1.3vh;
+    margin-top: 1vh;
+    margin-right: 0.5vh;
+    margin-bottom: 0.5vh;
+    bottom: 0;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-fines-fine-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-fines-fine-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+.mdt-content-create-fines-box {
+    position: absolute;
+    top: 1.5%;
+    right: 1%;
+    width: 62%;
+    height: 96.5%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-create-fines-box > h1 {
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.6vh;
+    left: 2%;
+    top: 10%;
+}
+
+
+
+
+.mdt-content-search-bar-grande-custom {
+    position: relative;
+    top: 10%;
+    left: 2%;
+    height: 4.5%;
+    width: 96%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+    line-height: 0.5vh;
+    padding-top: 0.2vh;
+    margin-bottom: 3%;
+    padding-left: 0.5vh;
+}
+
+.mdt-content-search-bar-grande-custom::placeholder {
+    color: rgb(240, 240, 240);
+    font-size: 1.3vh;
+}
+
+.mdt-content-search-bar-grande-custom:focus {
+    outline: none;
+}
+
+.mdt-content-create-fines-box > h2 {
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.3vh;
+    left: 2%;
+    top: 7%;
+    color: white;
+    max-width: 95%;
+}
+
+.selectedTag {
+    filter: brightness(80%) !important;
+}
+
+.orange {
+    color: orange !important;
+}
+
+.notification {
+    position: absolute;
+    right: 1.5%;
+    top: 1.5%;
+    max-width: 25%;
+    height: auto;
+    border: 1px solid gray;
+    border-radius: 0.6vh;
+    background-color: rgb(218, 63, 63);
+    z-index: 1055;
+    transition: 0.5s ease;
+}
+
+.notification > h1 {
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.35vh;
+    color: white;
+    padding-left: 0.7vh;
+    margin-top: 1vh;
+    padding-right: 0.7vh;
+    padding-bottom: 0.2vh;
+}
+
+.mdt-content-reports-list > i {
+    position: absolute;
+    right: 1.2%;
+    bottom: 3.5%;
+}
+
+.createNewReportHouse {
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.createNewReportHouse:hover {
+    transform: scale(0.95);
+    filter: brightness(75%);
+}
+
+:root {
+    --mainBG: rgb(243, 242, 242);
+    --secondBG: rgba(197, 196, 196, 0.794);
+    --thirdBG: rgb(230, 228, 228);
+}
+
+.mdt-content-cameras {
+    position: absolute;
+    height: 82%;
+    width: 82%;
+    top: 100%;
+    transition: all 0.5s ease-in-out;
+    left: 18%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-cameras-box {
+    position: absolute;
+    height: 97%;
+    width: 98%;
+    top: 1.5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-cameras-title {
+    position: absolute;
+    height: 9%;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+}
+
+.mdt-content-cameras-title > h1 {
+    position: absolute;
+    top: 5%;
+    left: 1%;
+    font-family: ProBold;
+    font-size: 3.5vh;
+    color: rgb(240, 240, 240);
+}
+
+.mdt-content-cameras-list {
+    position: absolute;
+    height: 91.5%;
+    width: 98%;
+    top: 7%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-cameras-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-cameras-list-camera {
+    position: relative;
+    height: 21%;
+    width: 14.5%;
+    top: 0.6%;
+    left: 0.7vh;
+    margin-right: 1.2%;
+    margin-top: 0.9%;
+    display: inline-block;
+    background-color: var(--mainBG);
+    transition: 0.5s ease;
+    border-radius: 0.8vh;
+    cursor: pointer;
+}
+
+.mdt-content-cameras-list-camera:hover {
+    transform: scale(1.04);
+}
+
+.mdt-content-cameras-list-camera > img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border: 1px solid gray;
+    border-radius: 0.8vh;
+}
+
+.mdt-content-cameras-list-camera > h1 {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.6vh;
+    top: 44%;
+    font-family: ProBold;
+}
+
+
+
+
+
+.mdt-content-dispatch {
+ position: absolute;
+ height: 82%;
+ width: 82%;
+ top: 100%;
+ left: 18%;
+ transition: all 0.5s ease-in-out;
+ background-color: var(--secondBG);
+}
+
+
+.mdt-content-logs {
+    position: absolute;
+    height: 82%;
+    width: 82%;
+    top: 100%;
+    transition: all 0.5s ease-in-out;
+    left: 18%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-logs-box {
+    position: absolute;
+    height: 97%;
+    width: 98%;
+    top: 1.5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-logs-box > h1 {
+    position: absolute;
+    top: 0.65%;
+    left: 1.5%;
+    font-size: 2.5vh;
+    font-family: ProBold;
+    color: rgb(240, 240, 240);
+}
+
+.mdt-content-logs-list {
+    position: absolute;
+    height: 87%;
+    width: 100%;
+    bottom: 0;
+    left: 0%;
+    overflow-y: scroll;
+}
+
+.mdt-content-logs-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-logs-search-bar {
+    position: relative;
+    top: 0%;
+    left: 0.5%;
+    height: 4%;
+    width: 99%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+    color: var(--textColor);
+    font-size: 1.3vh;
+    line-height: 0.5vh;
+    padding-top: 0.2vh;
+    margin-bottom: 3%;
+    padding-left: 0.5vh;    
+}
+
+.mdt-content-logs-search-bar::placeholder {
+color: var(--textColorSecondary);
+font-size: 1.3vh;
+}
+
+.mdt-content-logs-search-bar:focus {
+outline: none;
+}
+
+.mdt-content-logs-list-log {
+    position: relative;
+    width: 98%;
+    height: 15%;
+    left: 1%;
+    margin-bottom: 1%;
+    overflow: hidden;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-logs-list-log:hover {
+    transform: scale(1.01);
+}
+
+
+
+.mdt-content-logs-list-log > h1 {
+    position: relative;
+    text-align: left;
+    line-height: 2.1vh;
+    left: 0.5%;
+    top: 5%;
+    font-family: ProBold;
+    font-size: 1.6vh;
+}
+
+.mdt-content-logs-list-log > h2 {
+    position: relative;
+    text-align: left;
+    left: 0.5%;
+    top: 1%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.25vh;
+    color: white;
+}
+
+.mdt-content-logs-list-log > h3 {
+    position: relative;
+    text-align: left;
+    left: 0.5%;
+    top: 18%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.25vh;
+    color: white;
+}
+
+
+.mdt-content-logs-list-log > i {
+    position: absolute;
+    right: -1.5%;
+    top: -5%;
+    font-size: 4.5vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+.mdt-content-logs-list-log-botao {
+    position: absolute;
+    right: 0.5%;
+    width: 9.5vh;
+    height: 3vh;
+    bottom: 6.3%;
+    border-radius: 0.6vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-logs-list-log-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-logs-list-log-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mdt-content-reports-infos-list {
+    position: absolute;
+    height: 87%;
+    width: 100%;
+    bottom: 1%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.mdt-content-reports-infos-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-infos-list-box {
+    position: relative;
+    height: 43%;
+    width: 94%;
+    top: 1%;
+    left: 3%;
+    margin-bottom: 3%;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+    border-radius: 0.4vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-infos-list-box:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-reports-infos-list-box > img {
+    position: absolute;
+    height: 55%;
+    width: 35%;
+    top: 2.5%;
+    right: 1.75%;
+    object-fit: cover;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-infos-list-box > img:hover {
+    filter: brightness(60%);
+}
+
+.mdt-content-reports-infos-list-box > h1 {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-infos-list-box > h2 {
+    position: absolute;
+    top: 26%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-infos-list-box > h3 {
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-infos-list-box > h4 {
+    position: absolute;
+    top: 74%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-infos-list-box > ha {
+    position: absolute;
+    top: 13%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 55%;
+    color: white;
+}
+
+.mdt-content-reports-infos-list-box > hb {
+    position: absolute;
+    top: 37%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 55%;
+    color: white;
+}
+
+.mdt-content-reports-infos-list-box > hc {
+    position: absolute;
+    top: 61%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 68%;
+    color: white;
+}
+
+.mdt-content-reports-infos-list-box > hd {
+    position: absolute;
+    top: 85%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 68%;
+    width: 100%;
+    color: white;
+}
+
+
+
+
+
+
+
+
+.modal-body > .total-units {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    max-height: 25vh;
+    overflow-y: scroll;
+}
+
+.modal-body > .total-units::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-body > .total-units > .unit {
+    position: relative;
+    display: inline-block;
+    width: 9vh;
+    background-color: var(--secondBG);
+    height: 35%;
+    top: 1%;
+    left: 1%;
+    margin-right: 1%;
+    border-radius: 0.6vh;
+    border: 1px solid gray;
+    margin-bottom: 0.8%;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.modal-body > .total-units > .unit:hover {
+    transform: scale(1.05);
+    filter: brightness(70%);
+}
+
+.modal-body > .total-units > .unit > img {
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    top: 5%;
+    left: 5%;
+    border: 1px solid gray;
+    object-fit: cover;
+    border-radius: 0.6vh;
+}
+
+.modal-body > .total-units > .unit > h1 {
+    position: absolute;
+    top: 63%;
+    font-family: ProBold;
+    font-size: 1.25vh;
+    left: 5%;
+    max-width: 90%;
+    max-height: 31%;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.modal-body > .total-units > .unit > h1::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-body > .total-units > .unit > .unit-TAG {
+    position: absolute;
+    height: 2vh;
+    width: 2vh;
+    top: 5%;
+    right: 5%;
+    border-radius: 50%;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+.modal-body > .total-units > .unit > .selectedTag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(37, 134, 37, 0.314);
+    backdrop-filter: blur(3px);
+}
+
+.modal-body > .total-units > .unit > .selectedTag  > h1 {
+    position: relative;
+    text-align: center;
+    top: 40.5%;
+    font-family: ProBold;
+    font-size: 1.35vh;
+    color: white;
+    filter: drop-shadow(2px 2px 5px #1b1b1b);
+}
+
+
+
+
+.mdt-content-new-report-list-person > .selectedTag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(37, 134, 37, 0.314);
+    backdrop-filter: blur(3px);
+}
+
+.mdt-content-new-report-list-person > .selectedTag  > h1 {
+    position: relative;
+    text-align: center;
+    top: 39.5%;
+    font-family: ProBold;
+    font-size: 1.35vh;
+    color: white;
+    filter: drop-shadow(2px 2px 5px #1b1b1b);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-body > .total-cameras {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    max-height: 25vh;
+    overflow-y: scroll;
+}
+
+.modal-body > .total-cameras::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-body > .total-cameras > .cameras {
+    position: relative;
+    display: inline-block;
+    width: 9vh;
+    background-color: var(--secondBG);
+    height: 35%;
+    top: 1%;
+    left: 1%;
+    margin-right: 1%;
+    border-radius: 0.6vh;
+    border: 1px solid gray;
+    margin-bottom: 0.8%;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.modal-body > .total-cameras > .cameras:hover {
+    transform: scale(1.05);
+    filter: brightness(70%);
+}
+
+.modal-body > .total-cameras > .cameras > img {
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    top: 5%;
+    left: 5%;
+    border: 1px solid gray;
+    object-fit: cover;
+    border-radius: 0.6vh;
+}
+
+.modal-body > .total-cameras > .cameras > h1 {
+    position: absolute;
+    top: 63%;
+    font-family: ProBold;
+    font-size: 1.25vh;
+    left: 5%;
+    max-width: 90%;
+    max-height: 31%;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.modal-body > .total-cameras > .cameras > h1::-webkit-scrollbar {
+    display: none;
+}
+
+
+.mdt-content-dispatch-calls {
+    position: absolute;
+    height: 97%;
+    width: 32.5%;
+    top: 1.5%;
+    left: 1%;
+    background-color: var(--mainBG);
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-dispatch-infos {
+    position: absolute;
+    height: 97%;
+    width: 64.5%;
+    top: 1.5%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-dispatch-infos > h1 {
+    position: absolute;
+    top: 1%;
+    left: 1.75%;
+    font-family: ProBold;
+    font-size: 2.5vh;
+    color: rgb(240, 240, 240);
+}
+
+
+
+.mdt-content-dispatch-infos-units-unit {
+    position: relative;
+    display: inline-block;
+    width: 4vh;
+    height: 4vh;
+    top: 3%;
+    left: 0.25%;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+.mdt-content-dispatch-infos-units-unit > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mdt-content-dispatch-infos-units-unit:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-dispatch-infos-desc {
+    position: absolute;
+    height: 33%;
+    width: 48.5%;
+    bottom: 1%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    resize: none;
+}
+
+.mdt-content-dispatch-infos-desc:focus {
+    outline: none;
+}
+
+
+
+.mdt-content-dispatch-calls-title {
+    position: absolute;
+    width: 90%;
+    top: 1%;
+    left: 2%;
+}
+
+.mdt-content-dispatch-calls-title > h1 {
+    position: absolute;
+    top: 11%;
+    left: 1.5%;
+    font-size: 2.5vh;
+    font-family: ProBold;
+    color: rgb(240, 240, 240);
+}
+
+.mdt-content-dispatch-calls-list {
+    position: absolute;
+    height: 94%;
+    width: 100%;
+    top: 6%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.mdt-content-dispatch-calls-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+.mdt-content-dispatch-calls-call > i {
+    position: absolute;
+    right: 0.8vh;
+    top: 0.8vh;
+    font-size: 1.3vh;
+}
+
+.mdt-content-dispatch-infos-units-list {
+    position: relative;
+    height: 7%;
+    width: 98%;
+    top: 0.5vh;
+    padding-bottom: 0.7vh;
+    left: 1%;
+    border-radius: 0.5vh;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.mdt-content-dispatch-infos-units-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-dispatch-infos-units-unit {
+    position: relative;
+    display: inline-block;
+    width: 4vh;
+    height: 4vh;
+    top: 3%;
+    left: 0.25%;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: 0.5s ease;
+    margin-right: 1%;
+}
+
+.mdt-content-dispatch-infos-units-unit > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mdt-content-dispatch-infos-units-unit:hover {
+    filter: brightness(50%);
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+.mdt-content-dispatch-calls-call-extended {
+    position: absolute;
+    min-height: 1vh;
+    width: 50%;
+    height: 60%;
+    top: 0;
+    left: 0;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-dispatch-calls-call-extended > h1 {
+    position: relative;
+    height: 3.5%;
+    width: 96%;
+    max-width: 100%;
+    top: 4%;
+    left: 2%;
+    font-size: 1.5vh;
+    line-height: 0.8vh;
+    margin-bottom: 2%;
+    font-family: ProBold;
+}
+
+.mdt-content-dispatch-calls-call-extended > h2 {
+    position: relative;
+    width: 96%;
+    top: 2%;
+    margin-bottom: 5%;
+    left: 0.75%;
+    max-width: 96%;
+    margin-left: 1.5%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-dispatch-calls-call-extended > i {
+    position: absolute;
+    right: 0.8vh;
+    top: 0.8vh;
+    font-size: 1.3vh;
+}
+
+.mdt-content-dispatch-calls-call-extended > .mdt-content-dispatch-infos-units-list {
+    position: relative;
+    min-height: 15%;
+    max-height: 15%;
+    width: 98%;
+    top: 4%;
+    padding-bottom: 0.7vh;
+    left: 2%;
+    border-radius: 0.5vh;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.mdt-content-dispatch-infos-box > h3 {
+    position: absolute;
+    bottom: 46%;
+    left: 1.5%;
+    font-family: ProBold;
+    font-size: 1.6vh;
+}
+
+.mdt-content-dispatch-calls-call-extended > .mdt-content-dispatch-infos-units-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+
+.mdt-content-dispatch-infos-caller {
+    position: absolute;
+    height: 45%;
+    width: 48.5%;
+    top: 1.2%;
+    right: 1.2%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+
+.mdt-content-dispatch-infos-caller > h1 {
+    position: absolute;
+    top: 2%;
+    left: 1.8%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-dispatch-infos-caller > h2 {
+    position: absolute;
+    top: 16%;
+    left: 1.8%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-dispatch-infos-caller > h3 {
+    position: absolute;
+    top: 30%;
+    left: 1.8%;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-dispatch-infos-caller > ha {
+    position: absolute;
+    top: 8%;
+    left: 1.8%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.3vh;
+}
+
+.mdt-content-dispatch-infos-caller > hb {
+    position: absolute;
+    top: 22%;
+    left: 1.8%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.3vh;
+}
+
+.mdt-content-dispatch-infos-caller > hc {
+    position: absolute;
+    top: 36%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.3vh;
+}
+
+.mdt-content-dispatch-infos-caller > h5 {
+    position: absolute;
+    bottom: 43.5%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.6vh;
+}
+
+.mdt-content-dispatch-infos-caller-desc {
+    position: absolute;
+    height: 42%;
+    width: 96%;
+    bottom: 2.5%;
+    left: 2%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.15vh;
+    padding-right: 0.5vh;
+    padding-left: 0.5vh;
+    padding-top: 0.2vh;
+}
+
+.mdt-content-dispatch-infos-caller-desc:focus {
+    outline: none;
+}
+
+.mdt-content-dispatch-infos-caller > img {
+    position: absolute;
+    height: 45%;
+    width: 40%;
+    top: 2%;
+    right: 2%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-dispatch-infos-caller > img:hover {
+    transform: scale(1.02);
+    filter: brightness(60%);
+}
+
+.mdt-content-dispatch-calls-call {
+    position: relative;
+    min-height: 1vh;
+    width: 95%;
+    top: 0.5%;
+    left: 2.5%;
+    margin-bottom: 2%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+    transition: 0.5s ease;
+    cursor: pointer !important;
+}
+
+.mdt-content-dispatch-calls-call:hover {
+    transform: scale(0.98);
+}
+
+.mdt-content-dispatch-calls-call > h1 {
+    position: relative;
+    height: 20%;
+    width: 96%;
+    max-width: 100%;
+    margin-top: 3.5%;
+    left: 2%;
+    font-size: 1.5vh;
+    line-height: 0.8vh;
+    font-family: ProBold;
+}
+
+.mdt-content-dispatch-calls-call > h2 {
+    position: relative;
+    width: 96%;
+    top: 2%;
+    left: 0.75%;
+    max-width: 96%;
+    margin-left: 1.5%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.mdt-content-dispatch-infos-box {
+    position: absolute;
+    height: 94%;
+    width: 98%;
+    top: 6.5%;
+    left: 1%;
+    border-radius: 0.5vh;
+   
+}
+
+.mdt-content-dispatch-infos-box > img {
+    position: absolute;
+    height: 20%;
+    width: 20%;
+    top: 1%;
+    right: 1%;
+    object-fit: cover;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+}
+
+.mdt-content-dispatch-infos-box > h1 {
+    position: absolute;
+    bottom: 45%;
+    left: 1%;
+    font-family: ProBold;
+    font-size: 1.6vh;
+}
+
+.mdt-content-dispatch-infos-box > h2 {
+    position: absolute;
+    bottom: 33%;
+    left: 1%;
+    font-family: ProBold;
+    font-size: 1.6vh;
+}
+
+.mdt-content-dispatch-infos-extra {
+    position: absolute;
+    bottom: 2.5%;
+    width: 98%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    left: 1%;
+    height: 49.5%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-dispatch-infos-extra > h3 {
+    position: absolute;
+    top: 1.9%;
+    left: 1.2%;
+    font-family: ProBold;
+    font-size: 2.5vh;
+    color: rgb(240, 240, 240);
+}
+
+.mdt-content-dispatch-infos-extra > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-dispatch-infos-extra > #showMobilizedData > h1 {
+    position: relative;
+    height: 3.5%;
+    width: 96%;
+    max-width: 100%;
+    top: 6.5vh;
+    left: 1.5%;
+    font-size: 1.5vh;
+    line-height: 0.8vh;
+    margin-bottom: 2%;
+    font-family: ProBold;
+}
+
+.mdt-content-dispatch-infos-extra > #showMobilizedData > h2 {
+    position: relative;
+    width: 96%;
+    top: 6vh;
+    margin-bottom: 1%;
+    left: 0;
+    max-width: 46%;
+    margin-left: 1.5%;
+    font-size: 1.3vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-dispatch-infos-extra-botao {
+    position: absolute;
+    right: 3.5vh;
+    width: 13.6vh;
+    height: 3vh;
+    bottom: 4%;
+    border-radius: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.mdt-content-dispatch-infos-extra-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-dispatch-infos-extra-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-dispatch-infos-extra > #showMobilizedData > img {
+    position: absolute;
+    right: 3.5vh;
+    top: 3.5vh;
+    border-radius: 0.6vh;
+    border: 1px solid gray;
+    width: 45%;
+    height: 70%;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-dispatch-infos-extra > #showMobilizedData > img:hover {
+    transform: scale(1.01);
+    filter: brightness(70%);
+}
+
+.mdt-content-dispatch-infos > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 49%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-chat {
+    position: absolute;
+    height: 82%;
+    width: 82%;
+    top: 100%;
+    left: 18%;
+    background-color: var(--secondBG);
+    transition: all 0.5s ease-in-out;
+}
+
+.mdt-content-chat-box {
+    position: absolute;
+    height: 97%;
+    width: 98%;
+    top: 1.5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-chat-messages-list {
+    position: absolute;
+    bottom: 1%;
+    background-color: var(--secondBG);
+    left: 0.75%;
+    width: 98.5%;
+    height: 91%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    overflow: scroll
+}
+
+.mdt-content-chat-messages-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+.mdt-content-chat-messages-list > .mdt-content-chat-messages-list-left {
+    position: absolute;
+    background-color: var(--mainBG);
+    left: 0;
+    width: 25%;
+    height: 100%;
+    top: 0;
+    font-size: 0;
+    overflow-y: scroll;
+    border-right: 1px solid gray;
+}
+
+.mdt-content-chat-messages-list > .mdt-content-chat-messages-list-left::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-chat-left-player {
+    position: relative;
+    display: inline-block;
+    width: 96%;
+    left: 2%;
+    top: 1%;
+    height: 13%;
+    margin-bottom: 2%;
+    border: 1px solid gray;
+    border-radius: 0.8vh;
+    background-color: var(--secondBG);
+    transition: 0.5s ease;
+}
+
+.mdt-content-chat-left-player:hover {
+    transform: scale(0.98);
+}
+
+.mdt-content-chat-left-player-image {
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    border-radius: 0.5vh;
+    width: 30%;
+    height: 90%;
+    overflow: hidden;
+    border: 1px solid gray;
+
+    transition: 0.5s ease;
+}
+
+.mdt-content-chat-left-player-image:hover {
+    filter: brightness(80%);
+}
+
+.mdt-content-chat-left-player-image > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-chat-left-player > h1 {
+    position: absolute;
+    text-align: left;
+    left: 35%;
+    top: 41%;
+    font-family: ProBold;
+    max-width: 63%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.7vh;
+}
+
+.mdt-content-chat-left-player-tag {
+    position: absolute;
+    left: 35%;
+    top: 9.5%;
+    border-radius: 1.6vh;
+    border: 1px solid gray;
+    width: 7vh;
+    height: 2.2vh;
+}
+
+.mdt-content-chat-left-player-tag > h1 {
+    position: relative;
+    text-align: center;
+    line-height: 2.1vh;
+    color: white;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-chat-left-player > h2 {
+    position: absolute;
+    text-align: center;
+    left: 35%;
+    top: 69%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.25vh;
+    color: white;
+}
+
+.mdt-content-chat-messages-top {
+    position: absolute;
+    right: 0.75%;
+    width: 73.5%;
+    height: 14%;
+    top: 1.3%;
+    overflow-y: scroll;
+    border-radius: 0.8vh;
+    background-color: var(--mainBG);
+    border: 1px solid gray;
+}
+
+.mdt-content-chat-messages-top::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-chat-messages-top > .mdt-content-titles-pequeno > h2 {
+    position: absolute;
+    text-align: left;
+    margin-top: 6%;
+    left: 1.5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.25vh;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+.mdt-content-chat-chat-messages {
+    position: absolute;
+    right: 0.75%;
+    top: 17%;
+    width: 73.5%;
+    height: 75%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    overflow: scroll;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-chat-chat-messages::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-chat-chat-person {
+    position: relative;
+    min-height: 5.5vh;
+    width: 55%;
+    top: 0%;
+    left: 1.5%;
+    margin-top: 1%;
+    margin-bottom: 1.3%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-chat-chat-person > img {
+    position: absolute;
+    width: 4vh;
+    height: 4.2vh;
+    top: 0.6vh;
+    left: 0.8%;
+    border-radius: 1vh;
+    object-fit: cover;
+}
+
+.mdt-content-chat-chat-person-sms {
+    position: relative;
+    width: 81%;
+    height: 79%;
+    left: 5vh;
+    top: 0.9vh;
+    padding-bottom: 0.5vh;
+}
+
+.mdt-content-chat-chat-person-sms > h1 {
+    position: relative;
+    text-align: left;
+    left: 1%;
+    top: 0;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-chat-chat-person-sms > h2 {
+    position: relative;
+    text-align: left;
+    left: 1%;
+    top: -0.6vh;
+    font-size: 1.2vh;
+    color: white;
+    max-width: 95%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    word-break: break-all;
+}
+
+.mdt-content-chat-chat-person-tag {
+    position: absolute;
+    height: 1.9vh;
+    width: 4.5vh;
+    top: 0.5vh;
+    right: 1%;
+    border-radius: 1.5vh;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+.mdt-content-chat-chat-person-tag > h1 {
+    position: relative;
+    text-align: center;
+    line-height: 1.8vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+}
+
+
+.mdt-content-chat-chat-person-mine {
+    position: relative;
+    height: auto;
+    top: 3%;
+    float: right;
+    text-align: left;
+    font-size: 1.08vh;
+    border-radius: 1vh;
+    border: 1px solid gray;
+    font-family: ProLight;
+    padding-left: 0%;
+    word-wrap: break-word;
+    background-color: rgba(58, 144, 58, 0.228);
+    min-width: 25%;
+    max-width: 55%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 3%;
+    line-height: 1.5vh;
+    right: 1.5%;
+    margin-top: 1.5%;
+    filter: drop-shadow(0 0 0.35rem rgba(54, 54, 54, 0.152));
+}
+
+.mdt-content-chat-chat-person-mine > img {
+    position: absolute;
+    width: 4vh;
+    height: 4.2vh;
+    top: 2.9vh;
+    right: 1.5%;
+    border-radius: 1vh;
+    object-fit: cover;
+}
+
+.mdt-content-chat-chat-person-mine-sms {
+    position: relative;
+    width: 81%;
+    height: 79%;
+    left: 2%;
+    top: 0.9vh;
+    padding-bottom: 0.5vh;
+}
+
+.mdt-content-chat-chat-person-mine-sms > h1 {
+    position: relative;
+    text-align: left;
+    left: 1%;
+    top: 0;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-chat-chat-person-mine-sms > h2 {
+    position: relative;
+    text-align: left;
+    left: 1%;
+    top: -0.6vh;
+    font-size: 1.2vh;
+    color: rgb(76, 76, 76);
+    max-width: 95%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    word-break: break-all;
+}
+
+.mdt-content-chat-chat-person-mine-tag {
+    position: absolute;
+    height: 1.9vh;
+    width: 4.5vh;
+    top: 0.5vh;
+    right: 1%;
+    border-radius: 1.5vh;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+.mdt-content-chat-chat-person-mine-tag > h1 {
+    position: relative;
+    text-align: center;
+    line-height: 1.8vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+}
+
+
+.chat-message {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    top: 0;
+}
+
+
+.mdt-content-chat-new-message {
+    position: absolute;
+    right: 0.8%;
+    width: 73.3%;
+    height: 5.9%;
+    bottom: 1%;
+    border-radius: 0.6vh;
+    border: 1px solid gray;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-chat-new-message > input {
+    position: absolute;
+    background-color: var(--secondBG);
+    width: 85%;
+    height: 100%;
+    border-radius: 0.6vh;
+    border: none;
+    padding-top: 0.15vh !important;
+    padding-left: 1%;
+    color: var(--textColor) !important;
+    border-right: 1px solid gray;
+    transition: 0.5s ease;
+}
+
+.mdt-content-chat-new-message > input::placeholder {
+    color: var(--textColorSecondary);
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+
+.mdt-content-chat-new-message > input:focus {
+    outline: none;
+    filter: brightness(80%);
+}
+
+
+.mdt-content-chat-botao {
+    position: absolute;
+    right: 6%;
+    width: 10%;
+    height: 100%;
+    bottom: 0;
+    cursor: pointer;
+    border: 1px solid gray;
+    transition: 0.5s ease;
+    border-radius: 0.6vh;
+}
+
+.mdt-content-chat-botao {
+    transform: scale(1.0) !important;
+}
+
+.mdt-content-chat-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.45vh;
+    font-size: 1.3vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-chat-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+.mdt-content-chat-new-message > i {
+    position: absolute;
+    right: 1.7%;
+    font-size: 2vh;
+    top: 22.5%;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.mdt-content-chat-new-message > i:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+.mdt-content-home-active-units > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-home-recentReports > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-home-quickfine-zone > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-home-chat > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-home-dispatch > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-citizens-list > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-citizens-infos > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-citizens-warrants > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-citizens-fines > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-citizens-past > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-vehicles-list > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-vehicles-infos > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-vehicles-reports > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-vehicles-allVehs > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-houses-list > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-houses-infos > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-houses-reports > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-houses-allVehs > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-search-list > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-infos-person-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-infos-vehicle-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-infos-house-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-reports-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-evidence-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-create-person-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-create-vehicle-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-create-house-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-central-police-search > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-central-medic-search > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-central-infos-zone-top > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 47%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-central-infos-zone-bot > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 47%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-fines-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 47%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-chat-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 5%;
+    top: 47%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-chat-chat-messages > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-logs-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-infos > warningTagExtra {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 47%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+
+
+
+.mdt-content-chat-chat-person-mine-photo {
+    position: relative;
+    height: 25vh;
+    top: 3%;
+    float: right;
+    text-align: left;
+    font-size: 1.08vh;
+    border-radius: 1vh;
+    border: 1px solid gray;
+    font-family: ProLight;
+    padding-left: 0%;
+    word-wrap: break-word;
+    background-color: rgba(58, 144, 58, 0.228);
+    width: 45%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    line-height: 1.5vh;
+    right: 1.5%;
+    margin-top: 1.5%;
+    filter: drop-shadow(0 0 0.35rem rgba(54, 54, 54, 0.152));
+    margin-bottom: 0.2vh;
+}
+
+.mdt-content-chat-chat-person-mine-photo > h1 {
+    position: relative;
+    text-align: left;
+    left: 0.6vh;
+    top: 0.2vh;
+    padding-bottom: 0.4vh;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-chat-chat-person-mine-sms-photo > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-chat-chat-person-mine-sms-photo > img:hover {
+    filter: brightness(70%);
+}
+
+.mdt-content-chat-chat-person-mine-photo > img {
+    position: absolute;
+    width: 4vh;
+    height: 4.2vh;
+    top: 3vh;
+    right: 1.5%;
+    border-radius: 1vh;
+    object-fit: cover;
+}
+
+.mdt-content-chat-chat-person-mine-sms-photo {
+    position: relative;
+    width: 85%;
+    height: 89.5%;
+    left: 2%;
+    top: 0;
+    overflow: hidden;
+    border-radius: 0.5vh;
+    padding-bottom: 0.5vh;
+}
+
+.mdt-content-chat-chat-person-mine-photo-tag {
+    position: absolute;
+    height: 1.9vh;
+    width: 4.5vh;
+    top: 0.5vh;
+    right: 1%;
+    border-radius: 1.5vh;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+.mdt-content-chat-chat-person-mine-photo-tag > h1 {
+    position: relative;
+    text-align: center;
+    line-height: 1.8vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+}
+
+
+
+
+.mdt-content-chat-chat-person-photo {
+    position: relative;
+    min-height: 5.5vh;
+    width: 48%;
+    top: 0%;
+    left: 1.5%;
+    margin-top: 1%;
+    margin-bottom: 1.3%;
+    padding-bottom: 2%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-chat-chat-person-photo > img {
+    position: absolute;
+    width: 4vh;
+    height: 4.2vh;
+    top: 0.6vh;
+    left: 0.8%;
+    border-radius: 1vh;
+    object-fit: cover;
+}
+
+.mdt-content-chat-chat-person-sms-photo > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-chat-chat-person-sms-photo > img:hover {
+    filter: brightness(70%);
+}
+
+.mdt-content-chat-chat-person-sms-photo {
+    position: relative;
+    width: 83.5%;
+    height: 19vh;
+    left: 5vh;
+    top: 0.9vh;
+    padding-bottom: 0.5vh;
+    border-radius: 0.5vh;
+    overflow: hidden;
+}
+
+.mdt-content-chat-chat-person-tag {
+    position: absolute;
+    height: 1.9vh;
+    width: 4.5vh;
+    top: 0.5vh;
+    right: 1%;
+    border-radius: 1.5vh;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+.mdt-content-chat-chat-person-tag > h1 {
+    position: relative;
+    text-align: center;
+    line-height: 1.8vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+}
+
+.mdt-content-chat-chat-person-photo > h1 {
+    position: relative;
+    text-align: left;
+    left: 5vh;
+    top: 0.8vh;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-home-chat-person-sms-image {
+    position: relative;
+    width: 81%;
+    height: 16vh;
+    left: 5vh;
+    top: 0.9vh;
+    padding-bottom: 0.5vh;
+    overflow: hidden;
+    border-radius: 0.6vh;
+}
+
+.mdt-content-home-chat-person-sms-image > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    transition: 0.5s ease;
+}
+
+.mdt-content-home-chat-person-sms-image > img:hover {
+    filter: brightness(70%);
+}
+
+.mdt-content-home-chat-person > h1 {
+    position: relative;
+    text-align: left;
+    left: 16%;
+    top: 0.85vh;
+    font-family: ProBold;
+    font-size: 1.3vh;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.alerts-dispatch {
+    position: absolute;
+    right: 1vh;
+    top: 2vh;
+    width: 25%;
+    height: 28%;
+    overflow-y: scroll;
+    display: none;
+    cursor: default !important;
+}
+
+.alerts-dispatch::-webkit-scrollbar {
+    display: none;
+}
+
+.alerts-individual {
+    position: relative;
+    width: 98%;
+    left: 1%;
+    top: 1%;
+    min-height: 45%;
+    border: 2px solid gray;
+    border-radius: 1vh;
+    margin-bottom: 1%;
+    background-color: var(--mainBG);
+}
+
+.alerts-individual > img {
+    position: absolute;
+    width: 20%;
+    top: 5%;
+    left: 1%;
+}
+
+.alerts-individual > h1 {
+    position: relative;
+    text-align: left;
+    left: 24%;
+    top: 1.8vh;
+    font-family: ProBold;
+    max-width: 63%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.7vh;
+}
+
+#personalCallsign {
+    max-width: 8vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#personalGradeName {
+    max-width: 8vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-home-active-units-person-rank > h1 {
+    max-width: 8.5vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#personalUserName {
+    max-width: 8vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.alerts-individual > h2 {
+    position: relative;
+    text-align: left;
+    left: 24%;
+    top: 1.8vh;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.25vh;
+    color: white;
+    max-width: 75%;
+    padding-bottom: 2vh;
+}
+.alerts-individual > i {
+    position: absolute;
+    right: 0.8vh;
+    top: 0.8vh;
+    font-size: 1.3vh;
+}
+
+
+#citizenIdentifier {
+    max-width: 75% !important;
+}
+
+
+.mdt-content-reports-ems {
+    position: absolute;
+    width: 82%;
+    height: 82%;
+    transition: all 0.5s ease-in-out;
+    top: 100%;
+    left: 18%;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-ems-search-list {
+    position: absolute;
+    height: 97%;
+    width: 32%;
+    top: 1.5%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-ems-infos {
+    position: absolute;
+    height: 97%;
+    width: 65%;
+    top: 1.5%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-ems-infos-person-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+
+.mdt-content-reports-ems-infos-vehicle-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    left: 34%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-ems-infos-house-box {
+    position: absolute;
+    width: 32%;
+    height: 48.5%;
+    top: 1%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-ems-reports-ems-box {
+    position: absolute;
+    width: 48.5%;
+    height: 48.5%;
+    bottom: 1%;
+    left: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-ems-reports-ems-list {
+    position: absolute;
+    width: 94%;
+    height: 72%;
+    top: 15%;
+    left: 3%;
+    border-radius: 0.5vh;
+}
+
+
+.mdt-content-reports-ems-evidence-box {
+    position: absolute;
+    width: 48.5%;
+    height: 48.5%;
+    bottom: 1%;
+    right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    background-color: var(--secondBG);
+}
+
+.mdt-content-reports-ems-evidence-box-camera {
+    position: absolute;
+    width: 25%;
+    height: 11%;
+    top: 2%;
+    right: 2%;
+    background-color: #300406;
+}
+
+.mdt-content-reports-ems-evidence-list {
+    position: absolute;
+    width: 94%;
+    height:72%;
+    top: 15%;
+    left: 2.5%;
+    border-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-reports-ems-evidence-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-ems-evidence-photo {
+    position: relative;
+    display: inline-block;
+    width: 23%;
+    height: 28%;
+    top: 1%;
+    left: 1%;
+    margin-bottom: 1%;
+    margin-right: 1%;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-ems-evidence-photo > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vh;
+    object-fit: cover;
+}
+
+.mdt-content-reports-ems-evidence-photo:hover .delete-evidence {
+    opacity: 0.5;
+    transform: scale(1.02);
+    display:block  
+}
+
+.mdt-content-reports-ems-infos-img {
+    position: absolute;
+    right: 4%;
+    width: 45%;
+    height: 27%;
+    top: 18%;
+    border-radius: 0.8vh;
+    border: 1px solid green;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-ems-infos-img:hover {
+    transform: scale(0.95);
+    filter: brightness(80%);
+}
+
+.mdt-content-reports-ems-infos-content {
+    position: absolute;
+    left: 3%;
+    width: 46%;
+    top: 17%;
+    height: 80%;
+}
+
+.mdt-content-reports-ems-infos-content > h1 {
+    position: relative;
+    left: 5%;
+    top: 1vh;
+    font-size: 1.3vh;
+    font-family: ProBold;
+    line-height: 1.2vh;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-ems-infos-content > h2 {
+    font-size: 1.1vh;
+    color: white;
+    position: relative;
+    top: 0.5vh;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.2vh;
+}
+
+.mdt-content-reports-ems-infos-img > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.mdt-content-reports-ems-botao {
+    position: absolute;
+    right: 2%;
+    width: 10vh;
+    height: 3vh;
+    border-radius: 1.3vh;
+    bottom: -0.5%;
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-ems-botao > span {
+    position: absolute;
+    text-align: center;
+    line-height: 3.1vh;
+    font-size: 1.2vh;
+    color: rgb(240, 240, 240);
+    font-family: ProBold;
+    width: 100%;
+    height: 100%;
+}
+
+.mdt-content-reports-ems-botao:hover {
+    filter: brightness(80%);
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mdt-content-reports-ems-list-list {
+    position: absolute;
+    top: 12.5%;
+    left: 1%;
+    width: 98%;
+    height: 86%;
+    border-bottom-left-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-reports-ems-list-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-ems-list {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    margin-bottom: 0.6vh;
+    width: 98%;
+    height: 15%;
+    border-radius: 0.5vh;
+    border: 1px solid gray;
+    cursor: pointer;
+    transition: 0.5s ease;
+    background-color: var(--mainBG);
+}
+
+.mdt-content-reports-ems-list:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-reports-ems-list > img {
+    position: absolute;
+    top: 5%;
+    left: 1%;
+    width: 5.4vh;
+    height: 5.4vh;
+    border-radius: 0.5vh;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-ems-list > img:hover {
+    filter: brightness(50%);
+}
+
+.mdt-content-reports-ems-list-name {
+    position: absolute;
+    top: 5%;
+    left: 6vh;
+    width: 40%;
+    height: 52%;
+}
+
+.mdt-content-reports-ems-list-name > h1 {
+    position: absolute;
+    left: 5%;
+    top: 3%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-ems-list-name > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 37%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-ems-list-date {
+    position: absolute;
+    bottom: 6%;
+    left: 6vh;
+    width: 40%;
+    height: 44%;
+} 
+
+.mdt-content-reports-ems-list-date > h1 {
+    position: relative;
+    left: 5%;
+    top: 0;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-ems-list-date > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-ems-list-evidenceNumber {
+    position: absolute;
+    bottom: 6%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-reports-ems-list-evidenceNumber > h1 {
+    position: relative;
+    left: 5%;
+    top: 0;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-ems-list-evidenceNumber > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-ems-list-createdBy {
+    position: absolute;
+    top: 5%;
+    right: 0vh;
+    width: 40%;
+    height: 44%;
+}
+
+.mdt-content-reports-ems-list-createdBy > h1 {
+    position: relative;
+    left: 5%;
+    top: 3%;
+    font-size: 1.4vh;
+    font-family: ProBold;
+    line-height: 1.35vh;
+}
+
+.mdt-content-reports-ems-list-createdBy > h2 {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 43%;
+    left: 5%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mdt-content-reports-ems-reports-ems-list > h1 {
+    position: relative;
+    text-align: left;
+    margin-top: 0.5vh;
+    font-family: ProBold;
+    font-size: 1.5vh;
+}
+
+.mdt-content-reports-ems-reports-ems-list > h1 > span {
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+}
+
+.mdt-content-reports-ems-reports-ems-list > h2 > span {
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+}
+
+.mdt-content-reports-ems-report-desc {
+    position: relative;
+    width: 94%;
+    height: auto;
+    max-height: 61%;
+    width: auto;
+    top: 0;
+    left: 0;
+    border-radius: 0.5vh;
+    overflow: scroll;
+}
+
+.mdt-content-reports-ems-report-desc::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-ems-reports-ems-list > .mdt-content-reports-ems-report-desc > h2 {
+    position: relative;
+    text-align: left;
+    margin-top: 0;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+}
+
+
+.mdt-content-reports-ems-infos-list {
+    position: absolute;
+    height: 87%;
+    width: 100%;
+    bottom: 1%;
+    left: 0%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.mdt-content-reports-ems-infos-list::-webkit-scrollbar {
+    display: none;
+}
+
+.mdt-content-reports-ems-infos-list-box {
+    position: relative;
+    height: 43%;
+    width: 94%;
+    top: 1%;
+    left: 3%;
+    margin-bottom: 3%;
+    border: 1px solid gray;
+    background-color: var(--secondBG);
+    border-radius: 0.4vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-ems-infos-list-box:hover {
+    transform: scale(1.02);
+}
+
+.mdt-content-reports-ems-infos-list-box > img {
+    position: absolute;
+    height: 60%;
+    width: 35%;
+    top: 2.5%;
+    right: 1.75%;
+    object-fit: cover;
+    border: 1px solid gray;
+    border-radius: 0.5vh;
+    transition: 0.5s ease;
+}
+
+.mdt-content-reports-ems-infos-list-box > img:hover {
+    filter: brightness(60%);
+}
+
+.mdt-content-reports-ems-infos-list-box > h1 {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-ems-infos-list-box > h2 {
+    position: absolute;
+    top: 26%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-ems-infos-list-box > h3 {
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-ems-infos-list-box > h4 {
+    position: absolute;
+    top: 74%;
+    left: 2%;
+    font-family: ProBold;
+    font-size: 1.3vh;
+}
+
+.mdt-content-reports-ems-infos-list-box > ha {
+    position: absolute;
+    top: 13%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 55%;
+    color: white;
+}
+
+.mdt-content-reports-ems-infos-list-box > hb {
+    position: absolute;
+    top: 37%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 55%;
+    color: white;
+}
+
+.mdt-content-reports-ems-infos-list-box > hc {
+    position: absolute;
+    top: 61%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 68%;
+    color: white;
+}
+
+.mdt-content-reports-ems-infos-list-box > hd {
+    position: absolute;
+    top: 85%;
+    left: 2%;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.2vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 68%;
+    width: 100%;
+    color: white;
+}
+
+
+.mdt-content-reports-ems-search-list > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-infos-person-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-infos-vehicle-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-infos-house-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-reports-ems-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-evidence-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-create-person-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-create-vehicle-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-create-injury-box > warningTag {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+font-weight: 500;
+    font-size: 1.7vh;
+    z-index: 2;
+}
+
+.mdt-content-reports-ems-list > i {
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+}
+
+.modal-body > .total-fines {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    max-height: 25vh;
+    overflow-y: scroll;
+}
+
+.modal-body > .total-fines::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-body > .total-fines > .fine {
+    position: relative;
+    display: inline-block;
+    width: 9vh;
+    background-color: var(--secondBG);
+    height: 25%;
+    top: 2%;
+    left: 1%;
+    margin-right: 1%;
+    border-radius: 0.6vh;
+    border: 1px solid gray;
+    margin-bottom: 0.8%;
+    transition: 0.5s ease;
+    cursor: pointer;
+    overflow-y: scroll;
+}
+
+.modal-body > .total-fines > .fine::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-body > .total-fines > .fine:hover {
+    transform: scale(1.05);
+    filter: brightness(70%);
+}
+
+.modal-body > .total-fines > .fine > img {
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    top: 5%;
+    left: 5%;
+    border: 1px solid gray;
+    object-fit: cover;
+    border-radius: 0.6vh;
+}
+
+.modal-body > .total-fines > .fine > h1 {
+    position: absolute;
+    top: 5%;
+    font-family: ProBold;
+    font-size: 1.15vh;
+    left: 5%;
+    max-width: 94%;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.modal-body > .total-fines > .fine > h1::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-body > .total-fines > .fine > .unit-TAG {
+    position: absolute;
+    height: 2vh;
+    width: 2vh;
+    top: 5%;
+    right: 5%;
+    border-radius: 50%;
+    border: 1px solid gray;
+    background-color: #300406;
+}
+
+.modal-body > .total-fines > .fine > .selectedTag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(37, 134, 37, 0.314);
+    backdrop-filter: blur(3px);
+}
+
+.modal-body > .total-fines > .fine > .selectedTag  > h1 {
+    position: relative;
+    text-align: center;
+    top: 40.5%;
+    font-family: ProBold;
+    font-size: 1.35vh;
+    color: white;
+    filter: drop-shadow(2px 2px 5px #1b1b1b);
+}

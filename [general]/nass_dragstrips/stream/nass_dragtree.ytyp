@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CMapTypes>
+  <extensions/>
+  <archetypes>
+  <Item type="CBaseArchetypeDef">
+  <lodDist value="140.00000000"/>
+  <flags value="537001984"/>
+  <specialAttribute value="0"/>
+  <bbMin x="-10.23982000" y="-0.69671170" z="-0.05486500"/>
+  <bbMax x="0.44809160" y="0.29700000" z="9.46538200"/>
+  <bsCentre x="-4.89586400" y="-0.19985590" z="4.70525900"/>
+  <bsRadius value="7.17380700"/>
+  <hdTextureDist value="10.00000000"/>
+  <name>nass_dragtree</name>
+  <textureDictionary>nass_dragtree</textureDictionary>
+  <clipDictionary/>
+  <drawableDictionary/>
+  <physicsDictionary>nass_dragtree</physicsDictionary>
+  <assetType>ASSET_TYPE_DRAWABLE</assetType>
+  <assetName>nass_dragtree</assetName>
+  <extensions/>
+  <extensions>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="-8.52150400" y="0.02050400" z="1.23965400"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>amb_water_roof_drips</fxName>
+      <fxType value="0"/>
+      <boneTag value="48665"/>
+      <scale value="1.00000000"/>
+      <probability value="100"/>
+      <flags value="32"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="0.10760500" y="0.00000000" z="0.00000000"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>amb_water_roof_drips</fxName>
+      <fxType value="0"/>
+      <boneTag value="29567"/>
+      <scale value="0.40000000"/>
+      <probability value="100"/>
+      <flags value="32"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="-6.66115200" y="0.02050400" z="1.23965400"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>amb_water_roof_drips</fxName>
+      <fxType value="0"/>
+      <boneTag value="48665"/>
+      <scale value="1.00000000"/>
+      <probability value="100"/>
+      <flags value="32"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="-1.73165500" y="0.02050400" z="0.38134720"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>amb_water_roof_drips</fxName>
+      <fxType value="0"/>
+      <boneTag value="48665"/>
+      <scale value="1.00000000"/>
+      <probability value="100"/>
+      <flags value="32"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="-3.74322100" y="0.02050400" z="0.84471130"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>amb_water_roof_drips</fxName>
+      <fxType value="0"/>
+      <boneTag value="48665"/>
+      <scale value="1.00000000"/>
+      <probability value="100"/>
+      <flags value="32"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="0.00000381" y="0.00000000" z="0.00000000"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>brk_lamppost_base</fxName>
+      <fxType value="3"/>
+      <boneTag value="53661"/>
+      <scale value="1.00000000"/>
+      <probability value="100"/>
+      <flags value="32"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="0.00000381" y="0.00000000" z="0.00000000"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>brk_sparking_wires</fxName>
+      <fxType value="3"/>
+      <boneTag value="-1"/>
+      <scale value="2.00000000"/>
+      <probability value="100"/>
+      <flags value="0"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefParticleEffect">
+      <name>nass_dragtree</name>
+      <offsetPosition x="0.00000381" y="0.00000000" z="0.00000000"/>
+      <offsetRotation x="0.00000000" y="0.00000000" z="0.00000000" w="1.00000000"/>
+      <fxName>dst_glass_bulb</fxName>
+      <fxType value="4"/>
+      <boneTag value="29567"/>
+      <scale value="1.00000000"/>
+      <probability value="100"/>
+      <flags value="0"/>
+      <color value="0xFFFFFFFF"/>
+    </Item>
+    <Item type="CExtensionDefAudioCollisionSettings">
+      <name>nass_dragtree</name>
+      <offsetPosition x="0.00000000" y="0.00000000" z="0.00000000"/>
+      <settings>MOD_nass_dragtree</settings>
+    </Item>
+  </extensions>
+</Item>
+   </archetypes>
+  <name>0x0AD225D7</name>
+  <dependencies/>
+  <compositeEntityTypes/>
+</CMapTypes>

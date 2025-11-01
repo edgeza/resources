@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLRP Guidebook - Modern Interface</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="fullScreenImg" class="full-screen-img" onclick="closeFullScreenImg()">
+            <img src="" alt="Full Screen Image">
+        </div>
+
+        <div class="close-button" id="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <img src="imgs/Onelife_transparent.png" alt="OneLife Logo" class="logo-image">
+                    </div>
+                    <h2 class="sidebar-title" id="sidebar-header"></h2>
+                </div>
+                <div class="settings-icon" onclick="openSettings()">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <div class="search-input-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="">
+                </div>
+            </div>
+
+            <div class="sidebar-content">
+                <!-- Categories will be dynamically loaded here -->
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <h1 id="default-title"></h1>
+            </div>
+            <div class="content-body">
+                <div id="content-area"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="settings-header"></h2>
+                <button class="close" onclick="closeSettings()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="settings-description"></p>
+
+                <div class="settings-item">
+                    <div class="settings-label">
+                        <i class="fas fa-text-height"></i>
+                        <span id="text-size-label"></span>
+                    </div>
+                    <div class="settings-controls">
+                        <button class="control-btn" onclick="changeTextSize('decrease')">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button class="control-btn" onclick="changeTextSize('increase')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="settings-item">
+                    <div class="settings-label">
+                        <i class="fas fa-search"></i>
+                        <span id="search-bar-label"></span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="search-toggle" onchange="toggleSearchBar()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="settings-item">
+                    <div class="settings-label">
+                        <i class="fas fa-font"></i>
+                        <span id="select-font-label"></span>
+                    </div>
+                    <select id="font-selector" onchange="changeFont(this.value)"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="externalLinkModal" class="modal">
+        <div class="modal-content external-modal">
+            <div class="modal-header">
+                <h2>External Link</h2>
+                <button class="close" onclick="closeExternalLinkModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="externalLinkIframe" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

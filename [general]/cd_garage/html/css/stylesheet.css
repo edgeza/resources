@@ -1,0 +1,483 @@
+html, body{
+    background-color:transparent!important;
+    width:100%;
+    height:100%;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Dark/Red Theme Variables */
+:root {
+    --dark-bg: #0a0a0a;
+    --dark-secondary: #1a1a1a;
+    --dark-tertiary: #2a2a2a;
+    --dark-accent: #3a3a3a;
+    --red-primary: #dc3545;
+    --red-secondary: #c82333;
+    --red-dark: #bd2130;
+    --red-light: #ff6b7a;
+    --red-glow: rgba(220, 53, 69, 0.3);
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border-color: #dc3545;
+    --shadow-color: rgba(220, 53, 69, 0.2);
+}
+
+#largeGarage {
+    width: 50%;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translateX(-50%);
+}
+
+#largeGarage > .jumbotron {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 100%) !important;
+    border: 2px solid var(--red-primary) !important;
+    box-shadow: 0 8px 25px var(--shadow-color) !important;
+}
+
+#manuf_image{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);   
+    height:100%;                                         
+}
+
+#manuf_image > img {
+    height:100%;
+}
+
+#impoundSelection{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    max-width:25%; 
+    max-height:70%;
+    overflow-y: auto;
+    display:none;
+}
+
+#smallGarage{
+    position:absolute;
+    top:50.5%;
+    left:50.5%;
+    -webkit-transform: translateX(-50%) translateY(calc(-50% - .1px));
+    transform: translateX(-50%) translateY(calc(-50% - .1px));
+    max-width:25%;
+    max-height:80%;
+    overflow-y: hidden;
+    display:none;
+}
+
+#smallGarage a, #smallGarage .btn, #smallGarage .badge, #smallGarage .list-group-item.active{
+    --primary: var(--red-primary);
+}
+
+/* Force Bootstrap primary variants to red in the garage UI */
+#smallGarage .btn-primary,
+#smallGarage .badge-primary,
+#smallGarage .bg-primary,
+#smallGarage .text-primary,
+#smallGarage .alert-primary,
+#smallGarage .btn-outline-primary{
+    color: var(--text-primary) !important;
+    background-color: var(--red-primary) !important;
+    border-color: var(--red-primary) !important;
+}
+
+#smallGarage .btn-outline-primary{
+    color: var(--red-primary) !important;
+    background-color: transparent !important;
+}
+
+#keyMenu{
+    position:absolute;
+    top:50.5%;
+    left:50.5%;
+    -webkit-transform: translateX(-50%) translateY(calc(-50% - .1px));
+    transform: translateX(-50%) translateY(calc(-50% - .1px));
+    max-width:25%;
+    max-height:80%;
+    overflow-y: hidden;
+    display:none;
+}
+
+#impoundGarage{
+    position:absolute;
+    top:50.5%;
+    left:50.5%;
+    -webkit-transform: translateX(-50%) translateY(calc(-50% - .1px));
+    transform: translateX(-50%) translateY(calc(-50% - .1px));
+    max-width:25%;
+    max-height:80%;
+    overflow-y: hidden;
+    display:none;
+}
+
+/* Dark/Red scrollbar styling */
+.scrollbar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	border-radius: 2px;
+	background-color: var(--dark-secondary);
+}
+
+.scrollbar::-webkit-scrollbar
+{
+	width: 12px;
+    background-color: var(--dark-secondary);
+    border-radius: 2px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb
+{
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.5);
+	background-color: var(--red-primary);
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--red-secondary);
+}
+
+.messageContainer{
+    display:none;
+}
+
+.modalLoading{
+    display:none;
+}
+
+.card-header{
+    background-color: var(--dark-secondary) !important;
+    border-bottom: 1px solid var(--red-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+#impoundSelectionContainer{
+    display:none;
+}
+
+.flashdanger {
+    background: linear-gradient(45deg, var(--dark-secondary), 70%, var(--red-primary));
+    background-size: 200% 200%;
+    border: 0;
+    animation: flashdanger 1s ease infinite;
+    color: var(--text-primary) !important;
+}
+
+@keyframes flashdanger {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+#header{
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 100%) !important;
+    border: 2px solid var(--red-primary) !important;
+    box-shadow: 0 8px 25px var(--shadow-color) !important;
+}
+
+#bigAlert{
+    display:none;
+}
+
+#garageAlert, #keyAlert{
+    display:none;
+    background-color: var(--dark-secondary);
+    border: 2px solid var(--red-primary);
+    border-radius: .25rem;
+    color: var(--text-primary);
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+#carModel,#carName, .impoundItem, .smallGarageItem{
+    text-transform: capitalize;
+    color: var(--text-primary) !important;
+} 
+
+.smallGarageItem{
+    display: flex;
+    align-items: center;
+    background-color: var(--dark-secondary) !important;
+    border: 1px solid var(--dark-accent) !important;
+    border-radius: .25rem;
+    margin-bottom: .5rem;
+    padding: .75rem;
+    transition: all 0.3s ease;
+}
+
+.smallGarageItem:hover {
+    background-color: var(--dark-tertiary) !important;
+    border-color: var(--red-primary) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+#carModel{
+    flex-grow: 0.1;
+}
+
+#impoundCivNotification{
+    display:none;
+}
+
+#input-plate-wrapper{
+    width:100%;
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#input-plate-body{
+    display:none;
+    padding:1rem;
+    background-color: var(--dark-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--red-primary);
+    border-radius: .3rem;
+    min-width: 500px;
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+#transfer-to-garage{
+    display:none;
+}
+
+#create-impound-wrapper{
+    width:100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9000;
+    background-color: rgba(0,0,0,.7);
+    color: var(--text-primary);
+    display:none;
+}
+
+#create-impound{
+    width:33.33%;
+    max-height:90%;
+    border-radius: .3rem;
+    background-color: var(--dark-secondary);
+    border: 2px solid var(--red-primary);
+    display:none;
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+#create-impound-header{
+    background-color: var(--dark-bg);
+    border-bottom: 1px solid var(--red-primary);
+    color: var(--text-primary);
+}
+
+#create-impound-body{
+    background-color: var(--dark-tertiary);
+    color: var(--text-primary);
+}
+
+#writeLimit-text{
+    position: absolute;
+    bottom: 2rem;
+    right:.5rem;
+    color: var(--text-primary);
+}
+
+#ci-impound-description{
+    resize: none;
+    background-color: var(--dark-accent);
+    color: var(--text-primary);
+    border: 1px solid var(--red-primary);
+}
+
+#action-bar-wrapper{
+    position:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#action-bar{
+    display:none;
+}
+
+.bar {
+    width: 500px;
+    height: 32px;
+    border: 0.5rem solid var(--dark-bg);
+    position: relative;
+    background-color: var(--dark-secondary);
+    border-radius: 0.3rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.bar-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-variant: small-caps;
+    color: var(--text-primary);
+    text-shadow: 1px 1px 1px #000;
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index:100;
+}
+
+.bar-target {
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    background-color: var(--red-primary);
+    left: 30%;
+    z-index:98;
+}
+
+.bar-block {
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    transition: 0.1s linear;
+    background-color: var(--red-light);
+    z-index:99;
+}
+
+.shake{
+    animation: shake 0.7s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(0deg); }
+}
+
+.vehicleLocation{
+    align-self: end;
+    text-align: right;
+    flex-grow: 4;
+    color: var(--text-primary);
+}
+
+/* Progress bars styling */
+.progress {
+    background-color: var(--dark-accent) !important;
+    border: 1px solid var(--red-primary);
+    border-radius: .25rem;
+    height: 1.5rem;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--red-primary), var(--red-secondary)) !important;
+    border-radius: .25rem;
+    transition: width 0.6s ease;
+}
+
+/* Badge styling */
+.badge {
+    border: 1px solid var(--red-primary);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.badge-warning {
+    background-color: var(--red-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.badge-success {
+    background-color: var(--red-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+.badge-secondary {
+    background-color: var(--dark-accent) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--red-primary);
+}
+
+.badge-info {
+    background-color: var(--red-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Text styling */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-light {
+    color: var(--text-primary) !important;
+}
+
+/* Button styling */
+.btn {
+    border-radius: .375rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.btn-danger {
+    background-color: var(--red-primary) !important;
+    border-color: var(--red-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.btn-danger:hover {
+    background-color: var(--red-secondary) !important;
+    border-color: var(--red-secondary) !important;
+}
+
+/* Alert styling */
+.alert-danger {
+    background-color: var(--dark-secondary) !important;
+    border-color: var(--red-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Jumbotron styling */
+.jumbotron {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 100%) !important;
+    border: 2px solid var(--red-primary) !important;
+    box-shadow: 0 8px 25px var(--shadow-color) !important;
+}
+
+/* Hover effects for interactive elements */
+.btn:hover, .badge:hover, .smallGarageItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all 0.3s ease;
+}

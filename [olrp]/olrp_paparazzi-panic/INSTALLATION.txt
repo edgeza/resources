@@ -1,0 +1,192 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║              🎬 PAPARAZZI PANIC - QBOX COMPATIBLE                ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+✅ INSTALLATION COMPLETE!
+
+The script has been successfully created in:
+📁 resources/[Fun]/olrp_paparazzi-panic/
+
+📦 OPTIMIZED FOR QBOX (qbx-core) FRAMEWORK
+
+═══════════════════════════════════════════════════════════════════
+
+📋 FOLDER STRUCTURE:
+└── olrp_paparazzi-panic/
+    ├── client/
+    │   ├── main.lua          (Celebrity & interaction logic - QBox)
+    │   └── paparazzi.lua     (Paparazzi NPC spawning & AI)
+    ├── server/
+    │   ├── main.lua          (Event management & rewards - QBox)
+    │   └── ransom.lua        (Kidnapping & ransom system - QBox)
+    ├── config.lua            (All configuration + Framework settings)
+    ├── fxmanifest.lua        (Resource manifest)
+    ├── README.md             (Full documentation)
+    └── INSTALLATION.txt      (This file)
+
+═══════════════════════════════════════════════════════════════════
+
+🚀 NEXT STEPS:
+
+1. ✅ ALREADY DONE: Script is in [Fun] folder
+   
+2. ✅ ALREADY DONE: Server.cfg includes "ensure [fun]"
+   
+3. 🔧 CONFIGURE (Required):
+   - Open: resources/[Fun]/olrp_paparazzi-panic/config.lua
+   - Set Config.Framework = 'qbox' (or 'qb-core' or 'esx')
+   - Set Config.CoreName = 'qbx-core' (or your core resource name)
+   - Edit settings to match your server economy
+   - Adjust spawn locations if needed
+   
+4. ♻️ RESTART SERVER:
+   - In server console, type: restart olrp_paparazzi-panic
+   - Or restart the entire server
+
+═══════════════════════════════════════════════════════════════════
+
+🎮 TESTING THE SCRIPT:
+
+Method 1: MANUAL START (Admin Only)
+   In-game command: /startcelebrity
+   
+Method 2: AUTO START
+   - Wait for auto-event (configured interval)
+   - Requires minimum players set in config
+   
+Method 3: CONSOLE START
+   Server console: startcelebrity
+
+═══════════════════════════════════════════════════════════════════
+
+⚙️ QUICK CONFIGURATION TIPS:
+
+EVENT DURATION:
+   Config.EventDuration = 600000 (10 minutes)
+   
+EVENT COOLDOWN:
+   Config.EventCooldown = 1800000 (30 minutes)
+   
+MINIMUM PLAYERS:
+   Config.MinPlayers = 5
+   
+AUTO START:
+   Config.AutoStart = true
+   
+FRAMEWORK:
+   Config.Framework = 'qbox' (or 'qb-core' or 'esx')
+   Config.CoreName = 'qbx-core' (your core resource name)
+
+REWARDS:
+   Config.PhotoReward = 100 ($100 per photo)
+   Config.KidnapSuccessReward = 75000 ($75k for kidnap)
+   Config.RescueReward = 15000 ($15k for police rescue)
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 COMMANDS AVAILABLE:
+
+ADMIN COMMANDS:
+   /startcelebrity  - Manually start celebrity event
+   /endcelebrity    - Manually end current event
+
+POLICE COMMANDS:
+   /rescuecelebrity - Rescue kidnapped celebrity (near celeb)
+   /crowdcontrol    - Claim crowd control bonus
+
+PLAYER INTERACTIONS:
+   [E] - Take photo of celebrity (earn money)
+   [H] - Hold to kidnap celebrity (criminals)
+
+═══════════════════════════════════════════════════════════════════
+
+🎬 WHAT HAPPENS DURING AN EVENT:
+
+1. Random celebrity NPC spawns in city
+2. Blip appears on map for all players
+3. Up to 15 paparazzi NPCs spawn and chase celebrity
+4. Players can take photos for money
+5. Criminals can kidnap celebrity for ransom
+6. Police must control crowds and rescue celebrities
+7. Event lasts 10 minutes (configurable)
+
+═══════════════════════════════════════════════════════════════════
+
+✨ FEATURES:
+
+✅ Random celebrity spawns
+✅ AI paparazzi that chase celebrity
+✅ Photo rewards for players
+✅ Kidnapping system with ransom
+✅ Police rescue mechanics
+✅ Real-time blip tracking
+✅ Crowd control rewards
+✅ Fully configurable
+✅ QBox (qbx-core) compatible
+✅ QB-Core compatible
+✅ ESX compatible
+✅ Auto-start with cooldown system
+
+═══════════════════════════════════════════════════════════════════
+
+🔧 TROUBLESHOOTING:
+
+ISSUE: Event won't start automatically
+FIX: 
+   - Check Config.AutoStart = true
+   - Verify minimum players online
+   - Check cooldown hasn't expired
+
+ISSUE: Paparazzi not spawning
+FIX:
+   - Check Config.MaxPaparazzi value
+   - Verify NPC models are valid
+   - Check console for errors
+
+ISSUE: Kidnapping not working
+FIX:
+   - Ensure Config.KidnapEnabled = true
+   - Check Config.KidnapDistance setting
+   - Verify progressbar is working (QBox/QBCore)
+   - Make sure player is holding H key (not just pressing)
+
+ISSUE: Framework errors
+FIX:
+   - Verify Config.Framework matches your server ('qbox' for QBox)
+   - Check Config.CoreName matches resource name ('qbx-core')
+   - Ensure core exports are available
+   - Check console for specific errors
+
+═══════════════════════════════════════════════════════════════════
+
+📚 NEED MORE HELP?
+
+Check the README.md file for:
+   - Complete feature list
+   - Configuration examples
+   - Developer API documentation
+   - Customization tips
+   - Balance recommendations
+
+═══════════════════════════════════════════════════════════════════
+
+🎉 ENJOY THE CHAOS!
+
+Your city is about to get a lot more interesting with random
+celebrity sightings, paparazzi chases, and kidnapping scenarios!
+
+Perfect for creating spontaneous RP situations and keeping your
+players engaged with dynamic public events.
+
+═══════════════════════════════════════════════════════════════════
+
+Created for OneLifeRP Development
+Version 1.0.0 - QBox Compatible Edition
+
+📦 Supported Frameworks:
+   - QBox (qbx-core) ✅ Fully Supported
+   - QBCore (qb-core) ✅ Fully Supported
+   - ESX (es_extended) ⚠️ Configured (may need adjustments)
+
+═══════════════════════════════════════════════════════════════════
+

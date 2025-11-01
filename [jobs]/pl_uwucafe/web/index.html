@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop UI</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="ui" style="display: none;">
+    <div class="main">
+        <div class="sidebar">
+            <img src="assets/logo.png" alt="Logo" class="sidebar-logo">
+            
+            <div class="spacer"></div>
+        
+            <button class="sidebar-exit-button" onclick="exit()">
+                <img src="assets/exit.png" alt="Exit" class="sidebar-exit-icon">
+            </button>
+        </div>
+        
+        <div class="content">
+            <div class="header">
+                <h1>UwU Cat Cafe</h1>
+            
+            </div>
+            <div class="categories" id="category-menu">
+                <a class="category-item" data-category="Burgers">Burgers</a>
+                <a class="category-item" data-category="Drinks">Drinks</a>
+                <a class="category-item" data-category="Sides">Sides</a>
+                <a class="category-item" data-category="Desserts">Desserts</a>
+            </div>
+              
+              <div class="divider"></div>
+              
+            <div class="product-list-container" id="product-list">
+                <!-- Dynamic content goes here -->
+            </div>
+              
+        </div>
+        <div class="cart">
+            <div class="cart-content">
+                <div class="cart-display">
+                    <a class="cart-item">Item</a>
+                    <div class="cart-meta">
+                        <a>Qty</a>
+                        <a>Price</a>
+                    </div>
+                </div>
+                <div class="cart-divider"></div>
+                <div id="cart-products" class="cart-products">
+                   
+                </div>
+                <div class="total-price">
+                    <a>Total:</a>
+                    <a>$0.00</a>
+                </div>
+                <div class="pay-button-cash">
+                    <a>Pay with Cash</a>
+                </div>
+                <div class="pay-button-bank">
+                    <a>Pay with Bank</a>
+                </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

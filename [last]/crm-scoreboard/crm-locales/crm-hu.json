@@ -1,0 +1,14 @@
+{
+    "crm_total": "összesen játékos",
+    "crm_online": "ONLINE",
+    "crm_jobs": "Állások száma",
+    "crm_heists": "Elérhető rablás",
+    "crm_players": "Online játékosok",
+    "crm_id": "ID",
+    "crm_name": "Név",
+    "crm_role": "Szerep",
+    "crm_ping": "Ping",
+    "crm_active": "aktív",
+    "crm_inactive": "inaktív",
+    "crm_busy": "foglalt <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

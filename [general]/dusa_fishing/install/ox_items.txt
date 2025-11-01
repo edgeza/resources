@@ -1,0 +1,180 @@
+["bass"] = {
+    label = "Bass",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "bass.png",
+    }
+},
+["carp"] = {
+    label = "Carp",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "carp.png",
+    }
+},
+["crab"] = {
+    label = "Crab",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "crab.png",
+    }
+},
+["lobster"] = {
+    label = "Lobster",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "lobster.png",
+    }
+},
+["mullet"] = {
+    label = "Mullet",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "mullet.png",
+    }
+},
+["perch"] = {
+    label = "Perch",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "perch.png",
+    }
+},
+["trout"] = {
+    label = "Trout",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "trout.png",
+    }
+},
+["tuna"] = {
+    label = "Tuna",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "tuna.png",
+    }
+},
+["turtle"] = {
+    label = "Turtle",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "turtle.png",
+    }
+},
+["octopus"] = {
+    label = "Octopus",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "octopus.png",
+    }
+},
+["rod_1"] = {
+    label = "Rod Lv.1",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "rod_1.png",
+    }
+},
+["rod_2"] = {
+    label = "Rod Lv.2",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "rod_2.png",
+    }
+},
+["rod_3"] = {
+    label = "Rod Lv.3",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "rod_3.png",
+    }
+},
+["rod_4"] = {
+    label = "Rod Lv.4",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "rod_4.png",
+    }
+},
+["worm"] = {
+    label = "Worm",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "worm.png",
+    }
+},
+["shrimp_lure"] = {
+    label = "Shrimp Lure",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "shrimp_lure.png",
+    }
+},
+["illegalbait"] = {
+    label = "Illegal Bait",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "illegalbait.png",
+    }
+},
+["tackle_box"] = {
+    label = "Tackle Box",
+    weight = 100,
+    stack = true,
+    close = true,
+    description = "",
+    client = {
+        image = "tackle_box.png",
+    }
+},

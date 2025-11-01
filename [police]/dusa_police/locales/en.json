@@ -1,0 +1,490 @@
+{
+    "currency": "$",
+
+    "boss": {
+        "no_auth": "You are not authorized to perform this action",
+        "not_enough_money": "You do not have enough money",
+        "account_not_enough_money": "Company account does not have enough money",
+        "notified_employee": "You have notified the officer",
+        "fired": "You have fired **%s**",
+        "been_fired": "You have been **fired**",
+        "too_far": "Player is too far to perform action on him",
+        "recruited": "You have recruited **%s**",
+        "been_recruited": "You have been **recruited**!",
+        "updated_rank": "**%s** rank is updated!",
+        "been_updated_rank": "Your rank has been updated",
+        "withdrawn": "You have withdrawn **%s** from company account",
+        "deposited": "You have deposited **%s** to company account",
+        "open":"Open Boss Menu"
+    },
+
+    "service": {
+        "cant_leave_area": "You cant leave the area before finishing your service. Still have %s tasks left. Added %s more service as penalty.",
+        "cant_leave_area_no_penalty": "You cant leave the area before finishing your service. Still have %s tasks left.",
+        "service_completed": "You have completed your service.",
+        "remaining_sweep": "You have %s more sweep to do.",
+        "sweeping_area": "Sweeping area...",
+        "not_in_community_service": "This person is not in community service.",
+        "released_service": "You released player from community service..",
+        "been_released_service": "You have been released from community service.",
+        "already_in_service": "This person is already in community service.",
+        "sent_to_service": "You have sent **%s** to community service for %s tasks.",
+        "amount_limit": "Must be between 1-%s.",
+        "no_auth": "You are not authorized to open public service menu",
+        "send_to_service": "Send to Community Service",
+        "release_from_service": "Release from Community Service",
+        "suspect_id": "Suspect ID",
+        "added_service": "%s more sweep added to your service."
+    },
+
+    "jail": {
+        "no_auth": "You are not authorized to perform this action",
+        "send_to_jail": "Send player to Jail",
+        "sent_to_jail": "Player successfully sent to jail for %s minutes"
+    },
+
+    
+    "gps": {
+        "no_vehicle_nearby": "No vehicle nearby",
+        "placing_vehicle_gps": "Placing GPS...",
+        "removing_vehicle_gps": "Removing GPS...",
+        "gps_removed": "GPS device removed from vehicle",
+        "not_allowed_connect": "You are not allowed to connect to this channel",
+        "not_connected_gps": "You are not connected to GPS",
+        "callsign_updated": "Your callsign has been updated to **%s**",
+        "distance_updated": "Distance limit has been updated to **%s**",
+        "waypoint_set": "Vehicle coordinates set to your navigation",
+        "no_auth": "You are not authorized to toggle GPS.",
+        "already_gps": "You already have a GPS.",
+        "not_in_gps": "You are not in GPS.",
+        "disconnected": "You have disconnected from GPS.",
+        "been_kicked": "You have been kicked from GPS.",
+        "already_has_gps": "This vehicle already has a GPS.",
+        "dont_has_gps": "This vehicle does not have a GPS.",
+        "unknown": "Unknown",
+        "panic_button": "Panic Button",
+        "connected": "CONNECTED",
+        "vehicle": "Vehicle - %s"
+    },
+
+    "interact": {
+        "no_cuff": "You dont have cuffs",
+        "no_cuff_keys": "You dont have cuff keys",
+        "none_nearby": "No one nearby",
+        "robbing": "Robbing...",
+        "canceled": "Canceled..",
+        "vehicle_cuff": "You cant cuff in vehicle",
+        "cuffed": "You have been hard cuffed",
+        "soft_cuffed": "You have been soft cuffed, you can walk",
+        "uncuffed": "You have been uncuffed",
+        "escaped_cuff": "You have escaped from cuffs",
+        "not_cuff_dead": "Player is not cuffed or dead",
+        "player_not_cuffed": "Player is not cuffed",
+        "searched": "You have successfully searched",
+        "being_searched": "You are being searched",
+        "no_cash": "No cash found",
+        "cash_confiscated": "Cash confiscated",
+        "cash_robbed": "You have been robbed **%s** $",
+        "stolen_money": "You have robbed **%s**",
+        "not_allowed_usebag": "You are not allowed to use bag",
+        "no_rob": "Player has to raise hands to rob",
+        "unlocking_door": "Unlocking door...",
+        "door_unlocked": "Door unlocked successfully",
+        "no_vehicle_nearby":"There are no any vehicle nearby",
+        "impounding_vehicle": "Impounding vehicle...",
+        "impounded_vehicle": "Vehicle impounded successfully"
+      },
+
+    "armory": {
+        "paid": "You paid %s $ for all items you bought.",
+        "not_enough_money": "You do not have enough money",
+        "open_armory": "Open Armory"
+    },
+
+    "fine": {
+        "cant_fine_leo": "You can't fine a Law Enforcement Officer",
+        "fine_limit": "Maximum fine limit is $%s",
+        "no_auth":"You are not authorized to open fine menu",
+        "fine_player": "Fine Player",
+        "fine_created": "Fine with %s $ has been created"
+    },
+
+    "badge": {
+        "saved": "Badge saved"
+    },
+
+    "objects": {
+        "too_far": "Object is too far to place",
+        "object_limit": "You have reached the object limit, remove your existing objects to place new ones",
+        "remove_object": "Remove Object",
+        "no_auth": "You are not authorized to remove object",
+        "no_object_nearby": "No object nearby",
+        "not_valid": "This object model is not valid, maybe you didnt start custom objects?",
+        "current_mode": "Current Mode:",
+        "world": "World",
+        "relative": "Relative",
+        "translate_mode": "Translate Mode",
+        "rotate_mode": "Rotate Mode",
+        "change_mode": "Change Mode",
+        "snap_ground": "Snap to Ground",
+        "finish_editing": "Finish Editing",
+        "move": "Move",
+        "rotate": "Rotate",
+        "rotate_90": "Rotate 90°",
+        "place": "Place",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "edit_object": "Edit %s",
+        "delete": "Delete",
+        "add": "Add New Object",
+        "remove_scene": "Remove Scene",
+        "show_scene": "Show Scene %s Object(s): %s",
+        "scene_creation": "Scene Creation",
+        "scene_name": "Scene Name",
+        "scene_created": "Scene successfully created",
+        "no_scenes_created": "No scenes created",
+        "menu_title": "Police Object Menu",
+        "all_objects_removed": "All objects removed",
+        "scene_removed": "Scene removed"
+    },
+
+    "radar": {
+        "radar_limit": "You have reached the radar placement limit",
+        "create_radar": "Create Radar",
+        "radar_name": "Radar Name",
+        "radar_name_desc": "Enter a name for the radar",
+        "speed_limit": "Speed Limit",
+        "speed_limit_desc": "Enter the speed limit for the radar",
+        "radius": "Radius",
+        "radius_desc": "Enter the radius for the radar",
+        "fine_amount": "Fine Amount",
+        "show_blip": "Show Blip",
+        "show_blip_desc": "Show blip on the map or not",
+        "flash_effect": "Photo Flash Effect",
+        "flash_effect_desc": "Enable photo flash effect or not",
+        "radar_options": "Radar Options",
+        "remove_radar": "Remove Radar",
+        "set_waypoint": "Set Waypoint",
+        "remove_object": "Remove Radar",
+        "speed_limit_info": "Speed Limit: %s %s",
+        "fine_amount_info": "Fine Amount",
+        "radius_info": "Radius",
+        "radar_management": "Radar Management",
+        "speeding": "Speeding",
+        "fine_reason": "Exceeding speed limit",
+        "speeding_fine": "Exceeded %s %s speed limit at %s radar zone. %s %s fine applied",
+        "waypoint_set": "Waypoint set to radar %s"
+      },
+
+    "radio": {
+        "left_channel": "You have left the channel",
+        "volume_set_to": "Volume set to %s",
+        "joined_channel": "You have joined the channel %s",
+        "channel_unavailable": "Channel is not available",
+        "left_channel_forced": "Frequency connection is disrupted"
+    },
+
+    "garage": {
+        "not_owned": "You do not own this vehicle",
+        "no_space": "No space available on the spawn point",
+        "no_auth": "You are not authorized to spawn vehicle",
+        "not_enough_money":"You do not have enough money to buy vehicle",
+        "purchased": "You have purchased vehicle!",
+        "vehicle_parked": "Vehicle parked successfully",
+        "vehicle_occupied": "There are other passengers at vehicle!",
+        "spawn_in_progress": "Already a spawn in progress",
+        "in_vehicle": "You are in a vehicle, first get out of the vehicle",
+        "veh_not_found": "Vehicle not found",
+        "preview_not_found": "No preview vehicle found"
+    },
+
+    "k9": {
+      "select_someone": "Select someone to attack, [X] to cancel",
+      "now_attack": "Attack!",
+      "attack_canceled": "Attack canceled",
+      "determine_location": "Determine location",
+      "too_far": "Target location is too far",
+      "gone": "K9 has gone",
+      "wounded": "K9 has been wounded, vets gonna take care of him",
+      "attacking": "K9 is attacking!",
+      "searching": "K9 gonna search player",
+      "not_a_player": "Target is not available to search",
+      "found_something": "K9 found something illegal!",
+      "couldnt_find": "K9 couldnt find anything illegal"
+    },
+
+    "cloakroom": {
+      "open": "Open Cloakroom"
+    },
+
+    "not_leo": "You are not a Law Enforcement Officer",
+    "duty_required": "You must be on duty to perform this action",
+    "not_enough_grade": "You do not have enough grade to perform this action",
+    "no_nearby_player": "No player found nearby!",
+    "not_injured": "Target is not injured",
+    "no_nearby_vehicle": "No vehicle found nearby!",
+    "lock_removed": "Lock removed from vehicle's wheel!",
+    "already_wheel_locked": "This wheel is already locked!",
+    "no_lock_attached": "No lock attached to the vehicle's wheel!",
+    "locking_wheel": "Locking vehicle's wheel...",
+    "unlocking_wheel": "Unlocking vehicle's wheel...",
+    "vehicle_moving": "Vehicle is moving! Stop the vehicle to attach the lock.",
+
+    "slow_down": "You are performing this action too quickly. Please wait a moment.",
+
+    "kmh": "km/h",
+    "mph": "mph",
+    "hour": "Hour",
+    "minute": "Minute(s)",
+
+    "ui": {
+        "panicButton": "! -PANIC BUTTON ACTIVATED- !",
+        "gpsListTitle": "ACTIVE GPS USER LIST",
+        "transactionName": "Operation Name",
+        "transactionDetails": "Operation Details",
+        "deposit": "Deposit",
+        "withdrawal": "Withdraw",
+        "depositAmount": "Deposit Amount",
+        "withdrawalAmount": "Withdrawal Amount",
+        "employeeList": {
+          "title": "Employee Listed",
+          "salary": "SALARY",
+          "rank": "Rank",
+          "removeJob": "Remove Job",
+          "sendNotification": "Send Notification",
+          "norank": "No Rank",
+          "whatyouwant": "What action do you want to apply to",
+          "agree": "Agree",
+          "dontagree": "Disagree"
+        },
+        "mainComponent": {
+          "title": "Boss Menu",
+          "description": "Manage everything with this panel.",
+          "jobTime": "You are currently on duty",
+          "finishJob": "End Shift",
+          "startJob": "Start Shift",
+          "finishJobExtra": "*Toggle your duty",
+          "titleSecondary": "Employee List",
+          "titleThird": "Recruit Menu",
+          "titleFourth": "Company Money",
+          "employeeInfo": "Employee Info",
+          "user": "User",
+          "contentDesc": "Listed below"
+        },
+        "penaltyDuration": {
+          "selectPenaltyDuration": "Select Penalty Duration",
+          "days": "Days",
+          "hours": "Hours",
+          "seconds": "Minutes",
+          "dayShort": "D",
+          "hourShort": "H",
+          "secondShort": "M"
+        },
+        "recruitMenu": {
+          "recruitsListed": "Recruit(s) Listed",
+          "hireUser": "Hire User"
+        },
+        "armoryShop": {
+          "armorShop": "ARMORY SHOP",
+          "armorShopDescription": "Here is a description.",
+          "searchPlaceholder": "Search...",
+          "add": "Add",
+          "added": "Added",
+          "noProductsAvailable": "No products available for this collection.",
+          "shoppingCart": "SHOPPING CART",
+          "shoppingCartDescription": "Here is a description.",
+          "noProductsAdded": "No products added yet.",
+          "totalPrice": "Total Price",
+          "items": "ITEMS",
+          "payByCard": "Pay by Card",
+          "payByCash": "Pay by Cash"
+        },
+        "badgeManage": {
+          "badgeManagement": "BADGE MANAGEMENT",
+          "badgeManagementDescription": "Here is a description.",
+          "setBadgeCode": "SET BADGE CODE",
+          "imageBadge": "IMAGE BADGE",
+          "saveChanges": "SAVE CHANGES"
+        },
+        "chat": {
+          "placeholder": "Reply..."
+        },
+        "clothesArea": {
+          "clothesRoom": "CLOTHES ROOM",
+          "clothesRoomDescription": "Here is a description.",
+          "select": "SELECT"
+        },
+        "crimeStatus": {
+          "crimeName": "CRIME NAME",
+          "prison": "PRISON -",
+          "reason": "REASON"
+        },
+        "dusaGarage": {
+          "garageTitle": "GARAGE",
+          "garageDescription": "Here is a description.",
+          "extractVehicle": "EXTRACT VEHICLE",
+          "modelLabel": "Model:"
+        },
+        "dusaVehicleDetail": {
+          "loading": "Loading...",
+          "modelLabel": "Model:",
+          "extractFromGarage": "PURCHASE",
+          "cancel": "CANCEL"
+        },
+        "dusaVehicleShop": {
+          "garageTitle": "VEHICLE SHOP",
+          "garageDescription": "Here is a description.",
+          "buy": "BUY",
+          "modelLabel": "Model:"
+        },
+        "emsGarage": {
+          "garageTitle": "GARAGE",
+          "garageDescription": "Here is a description.",
+          "extractVehicle": "EXTRACT VEHICLE",
+          "modelLabel": "Model:"
+        },
+        "lockArea": {
+          "lockAreaTitle": "LOCK AREA",
+          "lockAreaDescription": "Here is a description.",
+          "labelText": "LABEL TEXT",
+          "minutesLabel": "MINUTES",
+          "rangeLabel": "RANGE",
+          "selectBlipLabel": "SELECT BLIP",
+          "lockAreaButton": "LOCK AREA"
+        },
+        "members": {
+          "membersTitle": "MEMBERS",
+          "kick": "Kick",
+          "giveOwner": "Give Owner",
+          "message": "Message",
+          "hasBeenKicked": "has been kicked!",
+          "isNowOwner": "is now the owner!"
+        },
+        "paper": {
+          "nameLabel": "Firstname",
+          "surnameLabel": "Lastname",
+          "durationStayedLabel": "Stayed Duration",
+          "durationEnteredLabel": "Clocked In Time",
+          "signatureLabel": "Signature"
+        },
+        "sendUser": {
+          "sendUserTitle": "SEND USER",
+          "sendUserDescription": "Select the action to perform on the user.",
+          "userIdLabel": "USER ID",
+          "selectUserLabel": "SELECT USER TO PENALIZE",
+          "listPlayers": "LIST PLAYERS",
+          "noUserSelected": "Please select a player.",
+          "selectPenaltyTypeLabel": "PENALTY REASON",
+          "listPenaltyTypes": "LIST PENALTY TYPES",
+          "enterPenaltyAmountLabel": "PENALTY AMOUNT $",
+          "applyPenaltyButton": "APPLY PENALTY",
+          "penaltyTypes": ["Type 1", "Type 2", "Type 3"],
+          "sendToJail": "SEND TO JAIL",
+          "sendToPublicService": "SEND TO PUBLIC SERVICE",
+          "giveFine": "GIVE FINE",
+          "usernameLabel": "USERNAME",
+          "playerLabel": "Player",
+          "remove": "Remove",
+          "penaltyPlaceholder": "Reason",
+          "durationPlaceholder": "Minutes"
+        },
+        "telsiz1": {
+          "homeTab": "Home",
+          "channelsTab": "Channels",
+          "chatsTab": "Chats",
+          "settingsTab": "Settings",
+          "locationLabel": "Location",
+          "timeLabel": "Time",
+          "youSure": "Are you sure to save this frequency?"
+        },
+        "telsiz1Channel": {
+          "channelsTitle": "CHANNELS",
+          "saveLabel": "SAVE +",
+          "savedTab": "Saved",
+          "recentsTab": "Recents",
+          "commonTab": "Common",
+          "connectLabel": "Connect",
+          "membersLabel": "Members",
+          "backLabel": "Back"
+        },
+        "telsiz1Chat": {
+          "blockListLabel": "Block List",
+          "chatsTitle": "Chats",
+          "closeLabel": "Close",
+          "searchUsersPlaceholder": "Search Users...",
+          "messageLabel": "Message",
+          "hasBeenKicked": "has been kicked!",
+          "isNowOwner": "is now the owner!"
+        },
+        "telsiz1Home": {
+          "connectLabel": "Connect",
+          "disconnectLabel": "Disconnect"
+        },
+        "telsiz1Settings": {
+          "settingsTitle": "SETTINGS",
+          "brightnessLabel": "BRIGHTNESS",
+          "zoomLabel": "ZOOM",
+          "positionUILabel": "POSITION UI",
+          "mouseControlLabel": "MOUSE CONTROL"
+        },
+        "radioMembers": {
+          "title": "RADIO MEMBERS"
+        },
+        "gps": {
+          "settingsTitle": "SETTINGS",
+          "homeLabel": "Home",
+          "channelsLabel": "Channels",
+          "vehicleGPSLabel": "Vehicle GPS",
+          "panicButtonLabel": "Panic"
+        },
+        "gpsChannel": {
+          "panicButtonNotActivated": "! -PANIC BUTTON ACTIVATED- !",
+          "defaultChannelsTitle": "Default Channels",
+          "fromThisMenuBrowseWithGPS": "From this menu, browse with GPS",
+          "copiedToClipboard": "Copied to clipboard"
+        },
+        "gpsHome": {
+          "panicButtonActivated": "! -PANIC BUTTON ACTIVATED- !",
+          "channelConnectTitle": "Channel Connect",
+          "fromThisMenuBrowseWithGPS": "From this menu, browse with GPS",
+          "channelCodeLabel": "Channel Code",
+          "connectLabel": "Connect",
+          "historyConnectsLabel": "History Connects",
+          "copiedToClipboard": "Copied to clipboard"
+        },
+        "gpsSettings": {
+          "panicButtonNotActivated": "! -PANIC BUTTON ACTIVATED- !",
+          "settingsMenuTitle": "Settings Menu",
+          "fromThisMenuBrowseWithGPS": "From this menu, browse with GPS",
+          "gpsColorLabel": "GPS COLOR (Set GPS Color)",
+          "gpsDistanceLabel": "GPS DISTANCE (Set Distance)",
+          "gpsCodeLabel": "GPS Code (Set GPS Code)",
+          "activeGPSUserListLabel": "ACTIVE GPS USER LIST",
+          "searchActiveGPSUsersPlaceholder": "Search active GPS users"
+        },
+        "vehicleGpsList": {
+          "panicButtonNotActivated": "! -PANIC BUTTON ACTIVATED- !",
+          "vehicleGPSListTitle": "Vehicle GPS List",
+          "fromThisMenuBrowseWithGPS": "From this menu, browse with GPS",
+          "vehicleCodeCopied": "Vehicle code copied to clipboard"
+        },
+        "notify": {
+          "success": "Success",
+          "error": "Error",
+          "info": "Info",
+          "copiedToClipboard": "Copied to clipboard",
+          "panicAlertSent": "Panic alert sent successfully!",
+          "connectedGps": "You have connected to GPS.",
+          "disconnectedGps": "You have disconnected from GPS.",
+          "removedHistory": "Stored channel removed.",
+          "colorChanged": "GPS color changed.",
+          "callsignChanged": "Callsign changed successfully.",
+          "connectedRadio": "You have connected to frequency.",
+          "cantConnectRadio": "You can not connect to this frequency!",
+          "channelRemoved": "Channel removed successfully.",
+          "savedChannel": "Channel saved successfully.",
+          "connectedFrequency": "You have connected to frequency: ",
+          "disconnectedFrequency": "You have disconnected from frequency: "
+        }
+    }
+}

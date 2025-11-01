@@ -1,0 +1,14 @@
+{
+    "crm_total": "مجموع اللاعبين",
+    "crm_online": "متصل",
+    "crm_jobs": "عدد الوظائف",
+    "crm_heists": "عمليات السطو المتاحة",
+    "crm_players": "اللاعبون على الإنترنت",
+    "crm_id": "بطاقة تعريف",
+    "crm_name": "اسم",
+    "crm_role": "دور",
+    "crm_ping": "بينغ",
+    "crm_active": "نشيط",
+    "crm_inactive": "غير نشط",
+    "crm_busy": "مشغول <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

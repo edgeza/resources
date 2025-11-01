@@ -1,0 +1,45 @@
+SDC = {}
+
+---------------------------------------------------------------------------------
+-------------------------------Important Configs---------------------------------
+---------------------------------------------------------------------------------
+SDC.Framework = "qb-core" --Either "qb-core" or "esx"
+
+SDC.DetectorCooldown = 2 --In Seconds (Wouldn't Touch This)
+SDC.MaxSoundDistance = 20 --How close you have to be hear the sound
+SDC.DetectorSoundFile = "detectorbeep" --Soundfile name
+
+SDC.JobWhitelist = { --All jobs you want whitelisted from being checked
+    --EX: ["job_name"] = "Job_Label",
+    ["police"] = "Police",
+}
+---------------------------------------------------------------------------------
+-------------------------------Prop Configs--------------------------------------
+---------------------------------------------------------------------------------
+SDC.DetectorProps = { --Props that are identified as metal detectors
+    --ex: "prop_name"
+    "ch_prop_ch_metal_detector_01a",
+}
+SDC.SpawnDetectors = { --A Model Spawner to place down detectors that arn't native to the map
+    --ex: {Coords = vec4(0.0, 0.0, 0.0, 0.0), Model = "prop_name"},
+    {Coords = vector4(-557.49, -199.09, 38.23, 121.01), Model = "ch_prop_ch_metal_detector_01a"},
+    {Coords = vector4(-563.12, -202.33, 43.37, 120.79), Model = "ch_prop_ch_metal_detector_01a"},
+}
+SDC.SpawnDetectorDist = 50 --How close/far you need to be for the prop to spawn/delete
+
+---------------------------------------------------------------------------------
+-------------------------------Coord Configs--------------------------------------
+---------------------------------------------------------------------------------
+SDC.CheckCoords = { --All coords that act like a detector (This is for maps with pre-placed detectors)
+    --EX: vec4(0.0, 0.0, 0.0, 0.0)
+}
+
+---------------------------------------------------------------------------------
+-------------------------------Item Configs--------------------------------------
+---------------------------------------------------------------------------------
+SDC.RemoveAllOfBlastedItem = false --This is if you want the resource to remove all the blacklisted items when they walk through!
+
+SDC.BlacklistedItems = { --Blacklisted items that will make the detector go off
+    --ex: "item_name"
+    "weapon_wrench",
+}

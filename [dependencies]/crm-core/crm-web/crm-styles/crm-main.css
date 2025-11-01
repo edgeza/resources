@@ -1,0 +1,28 @@
+/* ************************ crm-default ************************ */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,600,700');
+
+/* ************************ crm-atoms ************************ */
+
+:root {
+    --crm-dark: 39, 39, 39;
+    --crm-second: 52, 52, 52;
+    --crm-third: 30, 30, 30;
+    --crm-primary: 255, 176, 96; 
+    --crm-white: 255, 255, 255;
+    --crm-danger: 218, 55, 60;
+    --crm-success: 41, 207, 103;
+    --crm-warning: 251, 209, 40;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+    font-size: 1.48vh;
+    color: rgba(var(--crm-white), 1.0);
+    -webkit-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
+    box-sizing: border-box;
+}

@@ -1,0 +1,14 @@
+{
+    "crm_total": "totaal aantal spelers",
+    "crm_online": "ONLINE",
+    "crm_jobs": "Aantal banen",
+    "crm_heists": "Beschikbare overvallen",
+    "crm_players": "Online spelers",
+    "crm_id": "identiteitsbewijs",
+    "crm_name": "Naam",
+    "crm_role": "Rol",
+    "crm_ping": "Ping",
+    "crm_active": "actief",
+    "crm_inactive": "inactief",
+    "crm_busy": "bezet <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

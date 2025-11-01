@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP's Questionare System</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="main.js" type="text/javascript" defer></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <style type="text/css">
+        .ui-title {
+            font-size: 28px;
+            text-align: center;
+            top: -336px;
+            left: -209px;
+        }
+
+        .no-border {
+            border: none;
+            outline: none; 
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        .w-[680px] {
+          pointer-events: none;
+        }
+
+        .hidden {
+          display: none;  /* This will hide the element */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="grid h-screen place-items-center">
+      <div id="UI" class="hidden w-[960px] h-[654px] relative">
+        <div id="Main Container" class="w-[960px] h-[654px] left-0 top-0 absolute bg-[#00353a] rounded-[10px] border border-[#00fffb]"></div>
+        <div id="Questions" class="hidden w-[890px] h-[595px] left-[35px] top-[30px] absolute">
+          <div id="StartExamContainer" class="w-[890px] h-[595px] left-0 top-0 absolute bg-[#04595d] rounded-[10px]"></div>
+          <div id="Question" class="w-[666px] h-[87px] left-[112px] top-[126px] absolute text-white font-bold text-1xl"></div>
+          <div id="QuestionNumber" class="w-[323px] h-[42px] left-[112px] top-[79px] absolute text-white font-bold text-3xl"></div>
+          <button id="A1" class="w-[381px] h-[133px] left-[54px] top-[261px] absolute bg-[#006d72] hover:bg-[#00e2e0] text-white font-bold text-sm rounded-[10px]"></button>
+          <button id="A2" class="w-[381px] h-[133px] left-[456px] top-[261px] absolute bg-[#006d72] hover:bg-[#00e2e0] text-white font-bold text-sm rounded-[10px]"></button>
+          <button id="A3" class="w-[381px] h-[133px] left-[54px] top-[416px] absolute bg-[#006d72] hover:bg-[#00e2e0] text-white font-bold text-sm rounded-[10px]"></button>
+          <button id="A4" class="w-[381px] h-[133px] left-[456px] top-[416px] absolute bg-[#006d72] hover:bg-[#00e2e0] text-white font-bold text-sm rounded-[10px]"></button>
+        </div>
+        <div id="StartExam" class="w-[890px] h-[595px] left-[35px] top-[30px] absolute">
+          <div id="StartExamContainer" class="w-[890px] h-[595px] left-0 top-0 absolute bg-[#04595d] rounded-[10px]"></div>
+          <div id="StartExamTitle" class="w-[543px] h-[60px] left-[174px] top-[252px] absolute text-center text-white font-bold text-3xl"></div>
+          <div id="StartExamDescription" class="w-[543px] h-[92px] left-[174px] top-[344px] absolute text-center text-white font-bold text-1xl"></div>
+          <div id="StartExamLogo" class="w-[222px] h-[166px] left-[334px] top-[54px] absolute"></div>
+          <button id="StartExamButtonStart" class="w-[171px] h-[51px] left-[470px] top-[461px] absolute bg-[#006d72] hover:bg-[#00e2e0] text-white font-bold text-sm rounded-[10px] border border-[#3afbff]">Next</button>
+          <button id="StartExamButtonCancel" class="w-[171px] h-[51px] left-[249px] top-[461px] absolute bg-[#006d72] hover:bg-[#00e2e0] text-white font-bold text-sm rounded-[10px] border border-[#3afbff]">Cancel</button>
+        </div>
+        <div id="FinishExam" class="hidden w-[890px] h-[595px] left-[35px] top-[30px] absolute">
+          <div id="FinishExamContainer" class="w-[890px] h-[595px] left-0 top-0 absolute bg-[#04595d] rounded-[10px]"></div>
+          <div id="FinishExamCorrectAnswers" class="w-[543px] h-[60px] left-[174px] top-[288px] absolute text-center text-white font-bold text-3xl"></div>
+          <div id="FinishExamPassOrFail" class="w-[543px] h-[60px] left-[174px] top-[370px] absolute text-center text-white font-bold text-3xl"></div>
+          <div id="FinishExamLogo" class="w-[222px] h-[166px] left-[324px] top-[95px] absolute"></div>
+          <button id="FinishExamButton" class="w-[171px] h-[51px] left-[350px] top-[479px] absolute bg-[#006d72] hover:bg-[#00e2e0] text-white font-bold text-sm rounded-[10px] border border-[#3afbff]">Finish Exam</button>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

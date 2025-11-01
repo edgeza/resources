@@ -1,0 +1,12 @@
+[dimbo-passhack Changelogs]
+
+[v1.1.0]
+    • Password now gets replaced with the correct amount of *'s (Ex: a 3 digit password will be replaced with *** while a 6 digit password will be replaced with ****** and so on)
+    • Completely rewrote the timer
+        • Fixes issues with the timer not resetting if starting another hack too fast.
+        • Fixes issues with timer not stopping even when your pass or fail the hack
+        • Added a `ProgressSpeed` variable in `ui/ui.js` that allows you to speed up or slow down the progress bar.
+    
+
+[v1.0.0]
+    • Initial Release

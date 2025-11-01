@@ -1,0 +1,218 @@
+/*----------------------------*/
+/*---- BOII | DEVELOPMENT ----*/
+/*----------------------------*/
+
+* {
+    margin: 0
+}
+
+#main-container {
+    height: 100%;
+    padding-top: 6%;
+}
+
+.hidden { 
+    display: none 
+}
+
+.book {
+    transition: opacity 0.4s 0.2s;
+}
+
+coverheader {
+    position: relative;
+    top: 24%;
+    left: 3%;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgba(0,0,0,0.75);
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+    font-family: 'Aboreto', cursive;
+}
+
+header {
+    margin-top: 20%;
+    text-align: center;
+    font-size: 2.6rem;
+    color: rgba(0,0,0,0.9);
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+    font-family: 'Aboreto', cursive;
+}
+
+subheader {
+    text-align: center;
+    font-size: 2.0rem;
+    color: rgba(0,0,0,0.9);
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+    font-family: 'Aboreto', cursive;
+}
+
+
+text {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgba(0,0,0,0.9);
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+    font-family: 'Zilla Slab', serif;
+}
+
+.page {
+    width: 30vw;
+    height: 44vw;
+    background-color: #111111;
+    float: left;
+    margin-bottom: 0.5em;
+    background: left top no-repeat;
+    background-size: cover;
+    padding: 2%;
+    text-align: center;
+}
+
+.page:nth-child(even) {
+    clear: both;
+}
+
+.book {
+    perspective: 250vw;
+}
+
+.book .pages {
+    width: 60vw;
+    height: 44vw;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    border-radius: 4px;
+}
+
+.book .page {
+    float: none;
+    clear: none;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 30vw;
+    height: 40vw;
+    transform-origin: 0 0;
+    transition: transform 1.4s;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: rgba(0,0,0,0.3) 1px 1px 1px 1px;
+}
+
+.book .page:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.7s;
+    z-index: 2;
+}
+
+.book .page:nth-child(odd) {
+    pointer-events: all;
+    transform: rotateY(0deg);
+    right: 0;
+    border-radius: 0 4px 4px 0;
+    background-image: url('/html/images/guide/page.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+.book .page:nth-child(odd):hover {
+    transform: rotateY(-15deg);
+}
+
+.book .page:nth-child(odd):hover:before {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.book .page:nth-child(odd):before {
+    background: rgba(0, 0, 0, 0);
+}
+
+.book .page:nth-child(even) {
+    pointer-events: none;
+    transform: rotateY(180deg);
+    transform-origin: 100% 0;
+    left: 0;
+    border-radius: 4px 0 0 4px;
+    border-color: black;
+    background-image: url('/html/images/guide/page.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+.book .page:nth-child(even):before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.book .page.grabbing {
+    transition: none;
+}
+
+.book .page.flipped:nth-child(odd) {
+    pointer-events: none;
+    transform: rotateY(-180deg);
+}
+
+.book .page.flipped:nth-child(odd):before {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.book .page.flipped:nth-child(even) {
+    pointer-events: all;
+    transform: rotateY(0deg);
+}
+
+.book .page.flipped:nth-child(even):hover {
+    transform: rotateY(15deg);
+}
+
+.book .page.flipped:nth-child(even):hover:before {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.book .page.flipped:nth-child(even):before {
+    background: rgba(0, 0, 0, 0);
+}
+
+*, * :before, *:after {
+    box-sizing: border-box;
+}
+
+html, body {
+    background: none !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0;
+    line-height: 1.5em;
+}
+
+.page:nth-child(odd){
+    background-position: right top;
+}
+
+#frontcover {
+    background-image: url('/html/images/guide/guidefront.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+#rearcover {
+    background-image: url('/html/images/guide/guiderear.jpg');
+    background-size: cover;
+    background-position: center center;
+}

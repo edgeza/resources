@@ -1,0 +1,831 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&display=swap');
+@font-face {
+  src: url('./fonts/Gilroy-ExtraBold.otf') format("OpenType");
+  font-family: "gilroy";
+}
+@font-face {
+  src: url('./fonts/Futura_SC_T_OT_Book_Regular.otf') format("OpenType");
+  font-family: "futura";
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  user-select: none;
+  overflow:hidden;
+
+}
+#app {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+ 
+}
+.menu-wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+}
+
+.craf-top-header{
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.craft-top-image-wrapper{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.craft-top-header2{
+  width: 30%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.craft-top-header-player-image{
+  width: 4rem;
+  height: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3rem;
+}
+.craft-top-header-player-bilgi{
+  width: 13rem;
+  height: 4rem;
+
+  display: flex;
+  margin-left:1rem;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  align-content:center;
+}
+.craft-top-header-player-bilgi h2{
+  width: 100%;
+ font-family: "gilroy";
+  display: flex;
+  font-size:1rem;
+    align-items: center;
+  justify-content: flex-start;
+    align-content:center;
+}
+.craft-top-header-player-bilgi h2:nth-child(2){
+color: rgba(255, 255, 255, 0.46);
+}
+
+.craft-top-header-player-image img{
+  width: 100%;
+  height: 100%;
+  border-radius:3rem;
+  border:2px solid #5A9CFF;
+}
+.craft-top-header-player{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+.craftext{
+  color:white;
+  width: 100%;
+  height: 2rem;
+  
+  text-align: center;
+   font-family: "futura";
+  letter-spacing:0.6rem;
+  
+}
+.craft-top-header-top-image{
+  width: 8rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.craft-top-header-top-image img{
+  width: 100%;
+  height: 100%;
+}
+.craft-top-header-close-wrapper{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.craft-top-header-text{
+  width: 8rem;
+  height: 2.5rem;
+ 
+  display: flex;
+  flex-wrap: wrap;
+  margin-right:0.5rem;
+  align-content: flex-start;
+
+  
+}
+.craft-top-header-text h2{
+  font-size: 1rem;
+  padding: 0;
+  width: 100%;
+  height: 50%;
+  text-align: end;
+  margin: 0;
+  color:White;
+
+}
+
+.craft-middle-left{
+  width: 27rem;
+  height: 38rem;
+
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.craft-middle-left h2{
+  width: 67%;
+  color:White;
+
+    font-family: "gilroy";
+   font-size:1.2rem;
+  letter-spacing: 0.12em;
+}
+
+.craft-middle-left-buttons-wrapper{
+  width: 75%;
+
+  height: 35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content:flex-start;
+  overflow:auto;
+
+}
+.craft-middle-left-buttons-wrapper::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.craft-middle-left-buttons-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.craft-middle-left-buttons-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #5196FF;
+ 
+}
+
+.craft-middle-left-buttons{
+  width: 90%;
+  height: 10rem;
+  margin-top:1rem;
+  color:White;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius:1rem;
+  background-size:100% 100%;
+   font-family: "gilroy";
+  letter-spacing:0.2rem;
+
+  
+}
+.playername{
+  color:white;
+  letter-spacing:0.1rem;
+}
+
+
+.craft-middle-middle{
+  width: 59rem;
+  height: 38rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap:wrap;
+}
+.weapon-text-middle{
+  color:white;
+  width:90%;
+ font-size:1.2rem;
+  letter-spacing: 0.12em;
+  margin-top:-4rem;
+}
+
+.craft-middle-right{
+  width: 30rem;
+  height: 38rem;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+}
+.craft-middle-right h2 {
+  color:White;
+  font-family: "gilroy";
+  font-size:1rem;
+  width:80%;
+  letter-spacing:0.2rem
+}
+
+.craft-middle-right-details{
+  width: 80%;
+  height: 27rem;
+  margin-top:1rem;
+  background-image: url('./images/details-bg.png');
+  box-shadow: 0px 24px 35px rgba(0, 0, 0, 0.25);
+
+
+}
+.craft-middle-right-craft-button{
+  width: 80%;
+  height: 5rem;
+
+  margin-top:1rem;
+  background-color: #001B44;
+  border-radius:0.5rem;
+  display:flex;
+  align-items:center;
+    justify-content:center;
+   overflow: hidden;
+  position:relative;
+  transition: all 0.5s;
+  
+}
+.craft-button-edit{
+  width:80%;
+  height:100%;
+
+  margin-left:-24rem;
+  display:flex;
+  align-items:center;
+    justfiy-content:center;
+
+}
+.craft-button-edit h2{
+  width:55%;
+  
+  text-align:center;
+  font-size:1.3rem;
+  color:gray;
+
+ 
+
+ 
+}
+.craft-button-edit h2:hover{
+   color:White;
+}
+.craft-middle-right-craft-button:hover{
+  cursor:pointer;
+  background-color: green;
+
+  
+}
+
+.craft-middle-right-craft-button:before{
+  content: '';
+  background-color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+   position:relative;
+  transform: translateX(-100%) rotate(45deg);
+
+	transition: all 0.5s;
+}
+
+.craft-middle-right-craft-button:hover:before{
+transform: translateX(200%) rotate(45deg);
+}
+
+
+.craft-bottom{
+  width: 100%;
+  height: 19rem;
+ 
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border:1px solid transparent;
+  
+}
+.swiper{
+  width: 95%;
+  height: 70%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  display:flex !important ;
+  align-items:center !important;
+    justify-content:center !important;
+
+}
+
+.swiper-border{
+  margin-top:2rem;
+    width: 274px !important;
+  height: 176px !important;
+ 
+
+  
+  background-size: 100% 100%;
+  display:flex;
+  align-items:center;
+    justify-content:center;
+  flex-wrap:wrap;
+  margin-left:1rem;
+  color:white;
+}
+.swiper-item-img{
+  width:80%;
+  height:80%;
+
+    display:flex;
+  align-items:center;
+    justify-content:center;
+}
+.swiper-item-img img{
+  max-width:100%;
+  max-height:100%;
+  
+}
+.swiper-item-account{
+  width:100%;
+  height:3rem;
+
+      display:flex;
+  align-items:center;
+    justify-content:flex-start;
+}
+.swiper-item-account h2:nth-child(1){
+  width:12rem;
+ 
+
+ 
+  font-size:1.1rem;
+  color:White;
+  white-space: nowrap; 
+   overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.img-wrapper{
+  width:3rem;
+  height:rem;
+  
+}
+.img-wrapper img{
+  width:100%;
+  height:100%;
+}
+.swiper-item-account h2:nth-child(2){
+
+
+  display:Flex;
+  align-items:center;
+  justify-content:start;
+  font-size:0.9rem;
+  color:White;
+  margin-left:1rem;
+
+  text-indent:0.2rem;
+        display:flex;
+  align-items:center;
+  justify-content:center;
+  width:18rem;
+ 
+}
+
+.swiper-general-border{
+  width:90%;
+  height:80%;
+  display:flex;
+  align-items:center;
+    justify-content:center;
+  flex-wrap:wrap;
+}
+.test{
+  position: absolute;
+  width: 100%;
+
+}
+
+.craft-middle-page{
+  width: 90%;
+  height: 87%;
+  margin-top:-6rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+    background-image:url('images/weapon-bg.png');
+  background-size: 100% 100%;
+  overflow:auto;
+  overflow-x:hidden;
+
+}
+.craft-middle-page::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.craft-middle-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.craft-middle-page::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #5196FF;
+  box-shadow: 0px 0px 21px #5196FF;
+}
+
+.craft-middle-page-click{
+  width: 90%;
+  height: 87%;
+  margin-top:-6rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: end;
+  flex-wrap: wrap;
+    background-image:url('images/weaponclikc.png');
+  background-size: 100% 100%;
+  align-content:flex-start;
+
+}
+.itemtextandlevel{
+  width:100%;
+ 
+  height:5.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.itemtextandlevel h2{
+  width:80%;
+
+  color:gray;
+  text-align:start;
+  font-size:2.5rem;
+  letter-spacing: 0.12em;
+  margin-left:1rem;
+  font-family: "gilroy";
+}
+.itemtextandlevel h3{
+  width:15%;
+   color:gray;
+  text-align:end;
+  font-size:2.5rem;
+  letter-spacing: 0.12em;
+  margin-right:1rem;
+  font-family: "gilroy";
+}
+.mainpagebutton{
+    width:3.3rem;
+  height:3.3rem;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(84, 152, 255, 0.15);
+border-radius: 8px;
+  margin-right:2rem;
+  cursor:pointer;
+  margin-top:1rem;
+}
+.mainpagebutton img{
+  width:100%;
+  height:100%;
+}
+
+.itemimages{
+  width:100%;
+  height:22.5rem;
+
+    display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.item-images{
+  width:80%;
+  height:90%;
+
+      display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.item-images img{
+  max-width:80%;
+  max-height:80%;
+  
+}
+
+
+.craft-middle-box{
+  width: 14rem;
+  height: 9rem;
+
+  margin-top:4.5rem;
+  margin-left: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap:wrap ;
+  background-image: url('./images/craft-bg-2.png');
+
+  border-radius:0.5rem;
+  background-size:100% 100%;
+  background-repeat: no-repeat;
+
+ 
+}
+.itemblur{
+  width:100%;
+  height:100%;
+
+  position:relative;
+  margin-top:-8rem;
+  background: rgba(0, 0, 0, 0.09);
+backdrop-filter: blur(3px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+      flex-wrap:wrap;
+  align-content:center;
+  z-index:2;
+  background-image: url('./images/blur-active.png');
+    background-size:100% 100%;
+  background-repeat: no-repeat;
+  border-radius:0.5rem;
+}
+.requiredimg{
+  width:5rem;
+  height:5rem;
+
+  display:Flex;
+  align-items:center;
+   justify-content:center;
+  
+}
+.requiredimg img{
+  width:80%;
+  height:80%;
+}
+.itemblur h2{
+  width:100%;
+  color:white;
+  font-family: "gilroy";
+  font-size:1.3rem;
+  text-align:center;
+  
+}
+.craft-middle-box-image{
+  width: 100%;
+  height: 75%;
+  margin-top:-1rem;
+
+  transform: rotate(15deg) scale(1.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.craft-middle-box-image img{
+  max-width: 100%;
+  max-height: 100%;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.craft-middle-box-text{
+  width: 95%;
+
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.craft-middle-box-text h2{
+  color:White;
+  width:80%;
+     font-family: "gilroy";
+  font-size:1rem;
+   letter-spacing:0.1rem;
+  white-space: nowrap; 
+    overflow: hidden;
+   text-overflow: ellipsis;
+}
+.craft-middle-box-text h3{
+  color:White;
+  font-size:1rem;
+     font-family: "gilroy";
+  letter-spacing:0.1rem;
+}
+.noItemText{
+  width: 100%;
+  height: 100%;
+
+  color:gray;
+  display:flex;
+  align-items:center;
+    justify-content:center;
+  letter-spacing: 0.12em;
+    font-family: "gilroy";
+}
+
+.craft-middle-right-click-item{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+}
+
+.craft-middle-right-click-item-top-header{
+   width:90%;
+  height:5.3125rem;
+  margin-top:1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  background: rgba(84, 152, 255, 0.15);
+   border-radius:0.5rem;
+}
+
+.weapons-image {
+  width:9rem;
+  height:80%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  object-fit:cover;
+}
+.weapons-image img{
+  max-width: 100%;
+  max-height:80%;
+}
+
+.craft-middle-right-click-item-top-header h2{
+  width:12rem;
+
+  text-align:end;
+}
+.craft-middle-right-click-item-middle{
+  margin-top:1rem;
+  width:90%;
+
+  height:11.375rem;
+  background: rgba(84, 152, 255, 0.15);
+  border-radius:0.5rem;
+  overflow:auto;
+ 
+}
+.craft-middle-right-click-item-middle::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.craft-middle-right-click-item-middle::-webkit-scrollbar {
+  width: 8px;
+}
+
+.craft-middle-right-click-item-middle::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #5196FF;
+  box-shadow: 0px 0px 21px #5196FF;
+}
+
+.craft-middle-right-click-item-middle-in{
+  margin-top:0.5rem;
+  width:100%;
+  height:3rem;
+ 
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+
+  
+}
+.reqimg{
+  width:20%;
+  height:90%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+}
+.reqimg img{
+      width:90%;
+  height:90%;
+  object-fit:cover;
+}
+.reqlabel{
+    width:50%;
+ font-family: "gilroy";
+  color:White;
+  
+}
+.reqCount{
+    width:20%;
+font-family: "gilroy";
+  color:green;
+  text-align:center;
+}
+.reqCount span {
+  color:green !important;
+}
+.craft-middle-right-click-item-bottom{
+  width:90%;
+  height:5rem;
+
+  margin-top:1rem;
+  display:flex;
+  align-items:center;
+ justify-content:center;
+  background: linear-gradient(270deg, rgba(84, 152, 255, 0.15) 0.66%, rgba(84, 152, 255, 0) 110.1%);
+}
+.timeimg{
+  width:5rem;
+  height:90%;
+
+   display:flex;
+  align-items:center;
+ justify-content:flex-start;
+  
+}
+.timeimg img{
+  width:85%;
+  height:90%;
+
+
+}
+
+.craft-middle-right-click-item-bottom h2{
+  width:17rem;
+  height:90%;
+     display:flex;
+  align-items:center;
+ justify-content:flex-start;
+
+}

@@ -1,0 +1,486 @@
+{
+  "currency": "€",
+
+  "boss": {
+      "no_auth": "Sie sind nicht autorisiert, diese Aktion auszuführen",
+      "not_enough_money": "Sie haben nicht genug Geld",
+      "account_not_enough_money": "Das Unternehmenskonto hat nicht genug Geld",
+      "notified_employee": "Sie haben den Beamten benachrichtigt",
+      "fired": "Sie haben **%s** entlassen",
+      "been_fired": "Sie wurden **entlassen**",
+      "too_far": "Der Spieler ist zu weit entfernt, um eine Aktion durchzuführen",
+      "recruited": "Sie haben **%s** rekrutiert",
+      "been_recruited": "Sie wurden **rekrutiert**!",
+      "updated_rank": "Der Rang von **%s** wurde aktualisiert!",
+      "been_updated_rank": "Ihr Rang wurde aktualisiert",
+      "withdrawn": "Sie haben **%s** vom Unternehmenskonto abgehoben",
+      "deposited": "Sie haben **%s** auf das Unternehmenskonto eingezahlt",
+      "open": "Boss-Menü öffnen"
+  },
+
+  "service": {
+      "cant_leave_area": "Sie können das Gebiet nicht verlassen, bevor Sie Ihren Dienst beendet haben. Es sind noch %s Aufgaben zu erledigen. %s weitere Dienste wurden als Strafe hinzugefügt.",
+      "cant_leave_area_no_penalty": "Sie können das Gebiet nicht verlassen, bevor Sie Ihren Dienst beendet haben. Es sind noch %s Aufgaben zu erledigen.",
+      "service_completed": "Sie haben Ihren Dienst abgeschlossen.",
+      "remaining_sweep": "Sie haben noch %s Kehrungen zu erledigen.",
+      "sweeping_area": "Bereich wird gekehrt...",
+      "not_in_community_service": "Diese Person ist nicht im Gemeindedienst.",
+      "released_service": "Sie haben den Spieler aus dem Gemeindedienst entlassen.",
+      "been_released_service": "Sie wurden aus dem Gemeindedienst entlassen.",
+      "already_in_service": "Diese Person ist bereits im Gemeindedienst.",
+      "sent_to_service": "Sie haben **%s** für %s Aufgaben zum Gemeindedienst geschickt.",
+      "amount_limit": "Muss zwischen 1 und %s liegen.",
+      "no_auth": "Sie sind nicht autorisiert, das öffentliche Dienstmenü zu öffnen",
+      "send_to_service": "Zum Gemeindedienst schicken",
+      "release_from_service": "Vom Gemeindedienst entlassen",
+      "suspect_id": "Verdächtigen-ID",
+      "added_service": "%s weitere Kehrungen zu Ihrem Dienst hinzugefügt."
+  },
+
+  "jail": {
+      "no_auth": "Sie sind nicht autorisiert, diese Aktion auszuführen",
+      "send_to_jail": "Spieler ins Gefängnis schicken",
+      "sent_to_jail": "Spieler erfolgreich für %s Minuten ins Gefängnis geschickt"
+  },
+
+  "gps": {
+      "no_vehicle_nearby": "Kein Fahrzeug in der Nähe",
+      "placing_vehicle_gps": "GPS wird platziert...",
+      "removing_vehicle_gps": "GPS wird entfernt...",
+      "gps_removed": "GPS-Gerät vom Fahrzeug entfernt",
+      "not_allowed_connect": "Sie sind nicht berechtigt, sich mit diesem Kanal zu verbinden",
+      "not_connected_gps": "Sie sind nicht mit GPS verbunden",
+      "callsign_updated": "Ihr Rufzeichen wurde auf **%s** aktualisiert",
+      "distance_updated": "Die Entfernungsbegrenzung wurde auf **%s** aktualisiert",
+      "waypoint_set": "Fahrzeugkoordinaten auf Ihrer Navigation festgelegt",
+      "no_auth": "Sie sind nicht autorisiert, GPS umzuschalten.",
+      "already_gps": "Sie haben bereits ein GPS.",
+      "not_in_gps": "Sie sind nicht im GPS.",
+      "disconnected": "Sie haben sich vom GPS abgemeldet.",
+      "been_kicked": "Sie wurden vom GPS ausgeschlossen.",
+      "already_has_gps": "Dieses Fahrzeug hat bereits ein GPS.",
+      "dont_has_gps": "Dieses Fahrzeug hat kein GPS.",
+      "unknown": "Unbekannt",
+      "panic_button": "Paniktaste",
+      "connected": "VERBUNDEN"
+  },
+
+  "interact": {
+      "no_cuff": "Sie haben keine Handschellen",
+      "none_nearby": "Niemand in der Nähe",
+      "robbing": "Raubüberfall...",
+      "canceled": "Abgebrochen...",
+      "vehicle_cuff": "Sie können im Fahrzeug keine Handschellen anlegen",
+      "cuffed": "Sie wurden fest angekettet",
+      "soft_cuffed": "Sie wurden weich angekettet, Sie können gehen",
+      "uncuffed": "Sie wurden entkettet",
+      "escaped_cuff": "Sie sind aus den Handschellen entkommen",
+      "not_cuff_dead": "Der Spieler ist weder gefesselt noch tot",
+      "searched": "Sie haben erfolgreich durchsucht",
+      "being_searched": "Sie werden durchsucht",
+      "no_cash": "Kein Bargeld gefunden",
+      "cash_confiscated": "Bargeld konfisziert",
+      "cash_robbed": "Sie wurden um **%s** $ bestohlen",
+      "stolen_money": "Sie haben **%s** bestohlen",
+      "not_allowed_usebag": "Sie dürfen die Tasche nicht benutzen",
+      "no_rob": "Der Spieler muss die Hände heben, um ihn zu berauben",
+      "unlocking_door": "Tür wird geöffnet...",
+      "door_unlocked": "Tür erfolgreich geöffnet",
+      "no_vehicle_nearby": "Kein Fahrzeug in der Nähe",
+      "impounding_vehicle": "Fahrzeug wird abgeschleppt...",
+      "impounded_vehicle": "Fahrzeug erfolgreich abgeschleppt"
+  },
+
+  "armory": {
+      "paid": "Sie haben %s $ für alle gekauften Artikel bezahlt.",
+      "not_enough_money": "Sie haben nicht genug Geld",
+      "open_armory": "Waffenlager öffnen"
+  },
+
+  "fine": {
+      "cant_fine_leo": "Sie können einen Strafverstoß nicht bei einem Gesetzeshüter verhängen",
+      "fine_limit": "Das maximale Bußgeldlimit beträgt $%s",
+      "no_auth": "Sie sind nicht autorisiert, das Bußgeldmenü zu öffnen",
+      "fine_player": "Spieler verurteilen",
+      "fine_created": "Bußgeld von %s $ wurde erstellt"
+  },
+
+  "badge": {
+      "saved": "Abzeichen gespeichert"
+  },
+
+  "objects": {
+        "too_far": "Objekt ist zu weit entfernt, um es zu platzieren",
+        "object_limit": "Sie haben das Objektlimit erreicht. Entfernen Sie Ihre vorhandenen Objekte, um neue zu platzieren",
+        "remove_object": "Objekt entfernen",
+        "no_auth": "Sie sind nicht berechtigt, das Objekt zu entfernen",
+        "no_object_nearby": "Kein Objekt in der Nähe",
+        "not_valid": "Dieses Objektmodell ist ungültig. Haben Sie benutzerdefinierte Objekte gestartet?",
+        "current_mode": "Aktueller Modus:",
+        "world": "Welt",
+        "relative": "Relativ",
+        "translate_mode": "Verschiebe-Modus",
+        "rotate_mode": "Dreh-Modus",
+        "change_mode": "Modus wechseln",
+        "snap_ground": "Am Boden ausrichten",
+        "finish_editing": "Bearbeitung beenden",
+        "move": "Bewegen",
+        "rotate": "Drehen",
+        "rotate_90": "Um 90° drehen",
+        "place": "Platzieren",
+        "cancel": "Abbrechen",
+        "edit": "Bearbeiten",
+        "edit_object": "%s bearbeiten",
+        "delete": "Löschen",
+        "add": "Neues Objekt hinzufügen",
+        "remove_scene": "Szene entfernen",
+        "show_scene": "Szene %s anzeigen Objekt(e): %s",
+        "scene_creation": "Szenenerstellung",
+        "scene_name": "Szenenname",
+        "scene_created": "Szene erfolgreich erstellt",
+        "no_scenes_created": "Keine Szenen erstellt",
+        "menu_title": "Polizei-Objektmenü",
+        "all_objects_removed": "Alle Objekte entfernt",
+        "scene_removed": "Szene entfernt"
+    },
+
+  "radar": {
+      "radar_limit": "Sie haben das Radarplatzierungs-Limit erreicht",
+      "create_radar": "Radar erstellen",
+      "radar_name": "Radarname",
+      "radar_name_desc": "Geben Sie einen Namen für das Radar ein",
+      "speed_limit": "Geschwindigkeitsbegrenzung",
+      "speed_limit_desc": "Geben Sie die Geschwindigkeitsbegrenzung für das Radar ein",
+      "radius": "Radius",
+      "radius_desc": "Geben Sie den Radius für das Radar ein",
+      "fine_amount": "Bußgeldbetrag",
+      "show_blip": "Blip anzeigen",
+      "show_blip_desc": "Blip auf der Karte anzeigen oder nicht",
+      "flash_effect": "Foto-Blitz-Effekt",
+      "flash_effect_desc": "Foto-Blitz-Effekt aktivieren oder nicht",
+      "radar_options": "Radaroptionen",
+      "remove_radar": "Radar entfernen",
+      "set_waypoint": "Waypoint festlegen",
+      "remove_object": "Radar entfernen",
+      "speed_limit_info": "Geschwindigkeitsbegrenzung: %s %s",
+      "fine_amount_info": "Bußgeldbetrag",
+      "radius_info": "Radius",
+      "radar_management": "Radarverwaltung",
+      "speeding": "Geschwindigkeitsüberschreitung",
+      "fine_reason": "Überschreitung der Geschwindigkeitsbegrenzung",
+      "speeding_fine": "Geschwindigkeitsbegrenzung von %s %s überschritten in %s Radarzone. Bußgeld von %s %s wurde angewendet",
+      "waypoint_set": "Waypoint auf Radar %s festgelegt"
+  },
+
+"radio": {
+        "left_channel": "Sie haben den Kanal verlassen",
+        "volume_set_to": "Lautstärke auf %s eingestellt",
+        "joined_channel": "Sie haben den Kanal %s betreten",
+        "channel_unavailable": "Kanal ist nicht verfügbar",
+        "left_channel_forced": "Frequenzverbindung ist unterbrochen"
+  },
+
+  "garage": {
+      "not_owned": "Dieses Fahrzeug gehört Ihnen nicht",
+      "no_space": "Kein Platz am Spawnpunkt verfügbar",
+      "no_auth": "Sie sind nicht berechtigt, ein Fahrzeug zu spawnen",
+      "not_enough_money": "Sie haben nicht genug Geld, um das Fahrzeug zu kaufen",
+      "purchased": "Sie haben das Fahrzeug gekauft!",
+      "vehicle_parked": "Fahrzeug erfolgreich geparkt",
+      "vehicle_occupied": "Es befinden sich andere Passagiere im Fahrzeug!",
+      "spawn_in_progress": "Es läuft bereits ein Spawn-Vorgang",
+      "in_vehicle": "Sie sind in einem Fahrzeug, steigen Sie zuerst aus",
+      "veh_not_found": "Fahrzeug nicht gefunden",
+      "preview_not_found": "Kein Vorschau-Fahrzeug gefunden"
+  },
+
+  "k9": {
+      "select_someone": "Wählen Sie jemanden zum Angreifen aus, [X] zum Abbrechen",
+      "now_attack": "Angriff!",
+      "attack_canceled": "Angriff abgebrochen",
+      "determine_location": "Standort bestimmen",
+      "too_far": "Der Zielort ist zu weit entfernt",
+      "gone": "K9 ist weg",
+      "wounded": "K9 wurde verletzt, Tierärzte kümmern sich um ihn",
+      "attacking": "K9 greift an!",
+      "searching": "K9 wird den Spieler durchsuchen",
+      "not_a_player": "Das Ziel ist nicht verfügbar, um durchsucht zu werden",
+      "found_something": "K9 hat etwas Illegales gefunden!",
+      "couldnt_find": "K9 konnte nichts Illegales finden"
+  },
+
+  "cloakroom": {
+      "open": "Umkleideraum öffnen"
+  },
+
+  "not_leo": "Sie sind kein Polizeibeamter",
+  "duty_required": "Sie müssen im Dienst sein, um diese Aktion auszuführen",
+  "not_enough_grade": "Sie haben nicht den erforderlichen Rang, um diese Aktion auszuführen",
+  "no_nearby_player": "Kein Spieler in der Nähe gefunden!",
+  "not_injured": "Das Ziel ist nicht verletzt",
+  "no_nearby_vehicle": "Kein Fahrzeug in der Nähe gefunden!",
+  "lock_removed": "Radschloss vom Fahrzeug entfernt!",
+  "already_wheel_locked": "Dieses Rad ist bereits verriegelt!",
+  "no_lock_attached": "Kein Schloss am Rad des Fahrzeugs angebracht!",
+  "locking_wheel": "Fahrzeugrad wird verriegelt...",
+  "unlocking_wheel": "Fahrzeugrad wird entriegelt...",
+  "vehicle_moving": "Fahrzeug bewegt sich! Stoppen Sie das Fahrzeug, um das Schloss anzubringen.",
+
+  "slow_down": "Sie führen diese Aktion zu schnell aus. Bitte warten Sie einen Moment.",
+
+  "kmh": "km/h",
+  "mph": "mph",
+  "hour": "Stunde",
+  "minute": "Minute(n)",
+
+  "ui": {
+    "panicButton": "! -PANIKKNOPF AKTIVIERT- !",
+    "gpsListTitle": "AKTIVE GPS-NUTZERLISTE",
+    "transactionName": "Operationsname",
+    "transactionDetails": "Operationsdetails",
+    "deposit": "Einzahlung",
+    "withdrawal": "Abhebung",
+    "depositAmount": "Einzahlungsbetrag",
+    "withdrawalAmount": "Abhebungsbetrag",
+    "employeeList": {
+        "title": "Mitarbeiter aufgelistet",
+        "salary": "GEHALT",
+        "rank": "Rang",
+        "removeJob": "Job entfernen",
+        "sendNotification": "Benachrichtigung senden",
+        "norank": "Kein Rang",
+        "whatyouwant": "Welche Aktion möchten Sie anwenden auf",
+        "agree": "Zustimmen",
+        "dontagree": "Ablehnen"
+    },
+    "mainComponent": {
+        "title": "Chef-Menü",
+        "description": "Verwalten Sie alles mit diesem Panel.",
+        "jobTime": "Sie sind derzeit im Dienst",
+        "finishJob": "Schicht beenden",
+        "startJob": "Schicht starten",
+        "finishJobExtra": "*Dienststatus umschalten",
+        "titleSecondary": "Mitarbeiterliste",
+        "titleThird": "Rekrutierungsmenü",
+        "titleFourth": "Firmenvermögen",
+        "employeeInfo": "Mitarbeiterinfo",
+        "user": "Benutzer",
+        "contentDesc": "Nachfolgend aufgelistet"
+    },
+    "penaltyDuration": {
+        "selectPenaltyDuration": "Wählen Sie die Strafdauer",
+        "days": "Tage",
+        "hours": "Stunden",
+        "seconds": "Minuten",
+        "dayShort": "T",
+        "hourShort": "S",
+        "secondShort": "M"
+    },
+    "recruitMenu": {
+        "recruitsListed": "Rekrut(e) aufgelistet",
+        "hireUser": "Benutzer einstellen"
+    },
+    "armoryShop": {
+        "armorShop": "WAFFENKAMMER-SHOP",
+        "armorShopDescription": "Hier ist eine Beschreibung.",
+        "searchPlaceholder": "Suchen...",
+        "add": "Hinzufügen",
+        "added": "Hinzugefügt",
+        "noProductsAvailable": "Keine Produkte für diese Kollektion verfügbar.",
+        "shoppingCart": "EINKAUFSWAGEN",
+        "shoppingCartDescription": "Hier ist eine Beschreibung.",
+        "noProductsAdded": "Noch keine Produkte hinzugefügt.",
+        "totalPrice": "Gesamtpreis",
+        "items": "ARTIKEL",
+        "payByCard": "Mit Karte bezahlen",
+        "payByCash": "Bar bezahlen"
+    },
+    "badgeManage": {
+        "badgeManagement": "ABZEICHENVERWALTUNG",
+        "badgeManagementDescription": "Hier ist eine Beschreibung.",
+        "setBadgeCode": "ABZEICHEN-CODE FESTLEGEN",
+        "imageBadge": "BILD-ABZEICHEN",
+        "saveChanges": "ÄNDERUNGEN SPEICHERN"
+    },
+    "chat": {
+        "placeholder": "Antworten..."
+    },
+    "clothesArea": {
+        "clothesRoom": "UMKLEIDERAUM",
+        "clothesRoomDescription": "Hier ist eine Beschreibung.",
+        "select": "AUSWÄHLEN"
+    },
+    "crimeStatus": {
+        "crimeName": "STRAFTATNAME",
+        "prison": "GEFÄNGNIS -",
+        "reason": "GRUND"
+    },
+    "dusaGarage": {
+        "garageTitle": "GARAGE",
+        "garageDescription": "Hier ist eine Beschreibung.",
+        "extractVehicle": "FAHRZEUG AUSWÄHLEN",
+        "modelLabel": "Modell:"
+    },
+    "dusaVehicleDetail": {
+        "loading": "Wird geladen...",
+        "modelLabel": "Modell:",
+        "extractFromGarage": "KAUFEN",
+        "cancel": "ABBRECHEN"
+    },
+    "dusaVehicleShop": {
+        "garageTitle": "FAHRZEUGSHOP",
+        "garageDescription": "Hier ist eine Beschreibung.",
+        "buy": "KAUFEN",
+        "modelLabel": "Modell:"
+    },
+    "emsGarage": {
+        "garageTitle": "GARAGE",
+        "garageDescription": "Hier ist eine Beschreibung.",
+        "extractVehicle": "FAHRZEUG AUSWÄHLEN",
+        "modelLabel": "Modell:"
+    },
+    "lockArea": {
+        "lockAreaTitle": "SPERRBEREICH",
+        "lockAreaDescription": "Hier ist eine Beschreibung.",
+        "labelText": "TEXT KENNZEICHNEN",
+        "minutesLabel": "MINUTEN",
+        "rangeLabel": "BEREICH",
+        "selectBlipLabel": "BLIP AUSWÄHLEN",
+        "lockAreaButton": "BEREICH SPERREN"
+    },
+    "members": {
+        "membersTitle": "MITGLIEDER",
+        "kick": "Rauswerfen",
+        "giveOwner": "Eigentümer übertragen",
+        "message": "Nachricht",
+        "hasBeenKicked": "wurde rausgeworfen!",
+        "isNowOwner": "ist jetzt der Eigentümer!"
+    },
+    "paper": {
+        "nameLabel": "Vorname",
+        "surnameLabel": "Nachname",
+        "durationStayedLabel": "Verbleibensdauer",
+        "durationEnteredLabel": "Eingestempelte Zeit",
+        "signatureLabel": "Unterschrift"
+    },
+    "sendUser": {
+        "sendUserTitle": "BENUTZER SENDEN",
+        "sendUserDescription": "Wählen Sie die Aktion, die für den Benutzer ausgeführt werden soll.",
+        "userIdLabel": "BENUTZER-ID",
+        "selectUserLabel": "BENUTZER ZUR BESTRAFUNG WÄHLEN",
+        "listPlayers": "SPIELER LISTEN",
+        "noUserSelected": "Bitte wählen Sie einen Spieler aus.",
+        "selectPenaltyTypeLabel": "STRAFGRUND",
+        "listPenaltyTypes": "STRAFARTEN LISTEN",
+        "enterPenaltyAmountLabel": "STRAFHÖHE $",
+        "applyPenaltyButton": "STRAFE VERHÄNGEN",
+        "penaltyTypes": ["Art 1", "Art 2", "Art 3"],
+        "sendToJail": "INS GEFÄNGNIS SCHICKEN",
+        "sendToPublicService": "ZUM GEMEINWESEN SCHICKEN",
+        "giveFine": "BUSSGELD VERHÄNGEN",
+        "usernameLabel": "BENUTZERNAME",
+        "playerLabel": "Spieler",
+        "remove": "Entfernen",
+        "penaltyPlaceholder": "Grund",
+        "durationPlaceholder": "Minuten"
+    },
+    "telsiz1": {
+        "homeTab": "Startseite",
+        "channelsTab": "Kanäle",
+        "chatsTab": "Chats",
+        "settingsTab": "Einstellungen",
+        "locationLabel": "Standort",
+        "timeLabel": "Zeit",
+        "youSure": "Möchten Sie diese Frequenz wirklich speichern?"
+    },
+    "telsiz1Channel": {
+        "channelsTitle": "KANÄLE",
+        "saveLabel": "SPEICHERN +",
+        "savedTab": "Gespeichert",
+        "recentsTab": "Letzte",
+        "commonTab": "Gemeinsame",
+        "connectLabel": "Verbinden",
+        "membersLabel": "Mitglieder",
+        "backLabel": "Zurück"
+    },
+    "telsiz1Chat": {
+        "blockListLabel": "Blockierte Liste",
+        "chatsTitle": "Chats",
+        "closeLabel": "Schließen",
+        "searchUsersPlaceholder": "Benutzer suchen...",
+        "messageLabel": "Nachricht",
+        "hasBeenKicked": "wurde rausgeworfen!",
+        "isNowOwner": "ist jetzt der Eigentümer!"
+    },
+    "telsiz1Home": {
+        "connectLabel": "Verbinden",
+        "disconnectLabel": "Trennen"
+    },
+    "telsiz1Settings": {
+        "settingsTitle": "EINSTELLUNGEN",
+        "brightnessLabel": "HELLIGKEIT",
+        "zoomLabel": "ZOOM",
+        "positionUILabel": "UI-POSITION",
+        "mouseControlLabel": "MAUSSTEUERUNG"
+    },
+    "radioMembers": {
+        "title": "FUNKMITGLIEDER"
+    },
+    "gps": {
+        "settingsTitle": "EINSTELLUNGEN",
+        "homeLabel": "Startseite",
+        "channelsLabel": "Kanäle",
+        "vehicleGPSLabel": "Fahrzeug-GPS",
+        "panicButtonLabel": "Panik"
+    },
+    "gpsChannel": {
+        "panicButtonNotActivated": "! -PANIKKNOPF AKTIVIERT- !",
+        "defaultChannelsTitle": "Standardkanäle",
+        "fromThisMenuBrowseWithGPS": "Von diesem Menü aus mit GPS navigieren",
+        "copiedToClipboard": "In die Zwischenablage kopiert"
+    },
+    "gpsHome": {
+        "panicButtonActivated": "! -PANIKKNOPF AKTIVIERT- !",
+        "channelConnectTitle": "Kanal verbinden",
+        "fromThisMenuBrowseWithGPS": "Von diesem Menü aus mit GPS navigieren",
+        "channelCodeLabel": "Kanalcode",
+        "connectLabel": "Verbinden",
+        "historyConnectsLabel": "Verlauf Verbindungen",
+        "copiedToClipboard": "In die Zwischenablage kopiert"
+    },
+    "gpsSettings": {
+        "panicButtonNotActivated": "! -PANIKKNOPF AKTIVIERT- !",
+        "settingsMenuTitle": "Einstellungsmenü",
+        "fromThisMenuBrowseWithGPS": "Von diesem Menü aus mit GPS navigieren",
+        "gpsColorLabel": "GPS-FARBE (GPS-Farbe einstellen)",
+        "gpsDistanceLabel": "GPS-DISTANZ (Entfernung einstellen)",
+        "gpsCodeLabel": "GPS-Code (GPS-Code einstellen)",
+        "activeGPSUserListLabel": "AKTIVE GPS-NUTZERLISTE",
+        "searchActiveGPSUsersPlaceholder": "Aktive GPS-Nutzer suchen"
+    },
+    "vehicleGpsList": {
+        "panicButtonNotActivated": "! -PANIKKNOPF AKTIVIERT- !",
+        "vehicleGPSListTitle": "Fahrzeug-GPS-Liste",
+        "fromThisMenuBrowseWithGPS": "Von diesem Menü aus mit GPS navigieren",
+        "vehicleCodeCopied": "Fahrzeugcode in die Zwischenablage kopiert"
+    },
+    "notify": {
+        "success": "Erfolg",
+        "error": "Fehler",
+        "info": "Info",
+        "copiedToClipboard": "In die Zwischenablage kopiert",
+        "panicAlertSent": "Panikalarm erfolgreich gesendet!",
+        "connectedGps": "Sie sind mit GPS verbunden.",
+        "disconnectedGps": "Sie sind von GPS getrennt.",
+        "removedHistory": "Gespeicherter Kanal entfernt.",
+        "colorChanged": "GPS-Farbe geändert.",
+        "callsignChanged": "Rufzeichen erfolgreich geändert.",
+        "connectedRadio": "Sie sind mit der Frequenz verbunden.",
+        "cantConnectRadio": "Sie können sich nicht mit dieser Frequenz verbinden!",
+        "channelRemoved": "Kanal erfolgreich entfernt.",
+        "savedChannel": "Kanal erfolgreich gespeichert.",
+        "connectedFrequency": "Sie sind mit der Frequenz verbunden: ",
+        "disconnectedFrequency": "Sie sind von der Frequenz getrennt: "
+    }
+}
+}

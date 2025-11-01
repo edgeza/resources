@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: black;
+            display: none;
+        }
+        
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        
+        iframe,
+        video {
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+        
+        #video-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        #bilibiliPlayer {
+            position: absolute;
+            z-index: 97;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+
+<body>
+    <div id="video-container">
+        <!-- YouTube Player -->
+        <iframe id="ytplayer" style="position:absolute;z-index:98; display: none;" src="" frameborder="0" allowfullscreen></iframe>
+
+        <!-- Bilibili Player -->
+        <iframe id="bilibiliPlayer" style="display: none;" allowfullscreen="true" scrolling="no"></iframe>
+
+        <!-- Local Video Player -->
+        <video id="localPlayer" src="" style="position:absolute;z-index:99; visibility: hidden;" controls></video>
+    </div>
+
+    <script>
+        let player;
+        let bilibiliHeartbeat;
+
+        function showUI() {
+            document.body.style.display = "flex";
+        }
+
+        function hideUI() {
+            document.body.style.display = "none";
+            cleanupPlayers();
+        }
+
+        function cleanupPlayers() {
+            // Stop all players and clear intervals
+            if (player && player.stopVideo) player.stopVideo();
+            const bilibiliIframe = document.getElementById('bilibiliPlayer');
+            bilibiliIframe.src = '';
+            clearInterval(bilibiliHeartbeat);
+
+            const localPlayer = document.getElementById('localPlayer');
+            localPlayer.style.visibility = 'hidden'; // Hides the element, but it still occupies space
+
+            //localPlayer.pause();
+            //localPlayer.src = 'video/';
+        }
+
+        function playYouTubeVideo(videoUrl) {
+            const videoId = extractYouTubeId(videoUrl);
+            const iframe = document.getElementById('ytplayer');
+
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&enablejsapi=1`;
+            iframe.style.display = 'block';
+            showUI();
+
+            player = new YT.Player('ytplayer', {
+                events: {
+                    'onStateChange': onYouTubeStateChange
+                }
+            });
+        }
+
+        function onYouTubeStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                notifyVideoEnded();
+            }
+        }
+
+        function playBilibiliVideo(videoUrl) {
+            const videoId = extractBilibiliId(videoUrl);
+            const iframe = document.getElementById('bilibiliPlayer');
+
+            iframe.src = `https://player.bilibili.com/player.html?bvid=${videoId}&autoplay=1&controls=0&disablekb=1&modestbranding=1&rel=0`;
+            iframe.style.display = 'block';
+            showUI();
+
+            // Polling mechanism to check if the video has ended
+            bilibiliHeartbeat = setInterval(() => {
+                try {
+                    const iframeWindow = iframe.contentWindow;
+
+                    // Access the player's duration and current time
+                    if (iframeWindow && iframeWindow.player) {
+                        const player = iframeWindow.player;
+                        const currentTime = player.getCurrentTime();
+                        const duration = player.getDuration();
+
+                        // Check if the video has ended
+                        if (currentTime >= duration) {
+                            console.log('Bilibili video has ended!');
+                            notifyVideoEnded();
+                            clearInterval(bilibiliHeartbeat); // Stop polling
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error accessing Bilibili iframe:', error);
+                }
+            }, 1000); // Poll every second
+        }
+
+        function extractYouTubeId(url) {
+            const regExp = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&\?]{11}).*/;
+            const match = url.match(regExp);
+            return (match && match[1]) ? match[1] : null;
+        }
+
+        function extractBilibiliId(url) {
+            const matches = url.match(/(?:video\/|av)(\d+)|(?:video\/BV)([a-zA-Z0-9]{10})/);
+            return matches ? (matches[1] || matches[2]) : null;
+        }
+
+        function playLocalVideo(videoPath) {
+            if (videoPath) {
+                const localPlayer = document.getElementById('localPlayer');
+
+                // Make the player visible and set the video source
+                localPlayer.style.visibility = 'visible';
+                localPlayer.src = videoPath;
+
+                // Error handler for loading the video
+                localPlayer.onerror = (event) => {
+                    // Get the error from the event object and include it in the alert
+                    alert(`Error loading video: ${event.target.error.code} - ${event.target.error.message}`);
+                    hideUI();
+                };
+
+                // Try playing the video, handle playback error
+                localPlayer.play().then(() => {
+                    // If playback starts successfully, show UI
+                    showUI();
+                }).catch(error => {
+                    // Include the specific error message in the alert
+                    alert(`Playback error: ${error.message}`);
+                    hideUI();
+                });
+
+                // Notify when the video ends
+                localPlayer.onended = notifyVideoEnded;
+            }
+        }
+
+
+        function notifyVideoEnded() {
+            fetch(`https://${GetParentResourceName()}/videoEnded`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).finally(hideUI);
+        }
+
+        window.addEventListener('message', (event) => {
+            const data = event.data;
+            if (data.action === 'playVideo') {
+                cleanupPlayers();
+
+                switch (data.videoType) {
+                    case 'youtube':
+                        playYouTubeVideo(data.url);
+                        break;
+                    case 'bilibili':
+                        playBilibiliVideo(data.url);
+                        break;
+                    case 'local':
+                        playLocalVideo(data.url);
+                        break;
+                }
+            }
+        });
+
+        // YouTube API loading
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+
+        // Resize handling
+        let resizeObserver;
+        window.addEventListener('DOMContentLoaded', () => {
+            resizeObserver = new ResizeObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.contentRect.width === 0 || entry.contentRect.height === 0) {
+                        hideUI();
+                    }
+                });
+            });
+            resizeObserver.observe(document.getElementById('video-container'));
+        });
+    </script>
+</body>
+
+</html>

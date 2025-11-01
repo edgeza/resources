@@ -1,0 +1,14 @@
+{
+    "crm_total": "общо играчи",
+    "crm_online": "ОНЛАЙН",
+    "crm_jobs": "Работните места се броят",
+    "crm_heists": "Налични кражби",
+    "crm_players": "Онлайн играчи",
+    "crm_id": "ID",
+    "crm_name": "Име",
+    "crm_role": "Роля",
+    "crm_ping": "Пинг",
+    "crm_active": "активен",
+    "crm_inactive": "неактивен",
+    "crm_busy": "зает <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

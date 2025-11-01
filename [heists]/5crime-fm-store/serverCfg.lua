@@ -1,0 +1,1 @@
+Webhook = "" -- Add your webhook inside "" to use the logs and make sure to toggle them

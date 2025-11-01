@@ -1,0 +1,14 @@
+{
+    "crm_total": "nombre total de joueurs",
+    "crm_online": "EN LIGNE",
+    "crm_jobs": "Les emplois comptent",
+    "crm_heists": "Braquages ​​disponibles",
+    "crm_players": "Joueurs en ligne",
+    "crm_id": "IDENTIFIANT",
+    "crm_name": "Nom",
+    "crm_role": "Rôle",
+    "crm_ping": "Ping",
+    "crm_active": "actif",
+    "crm_inactive": "inactif",
+    "crm_busy": "occupé <i class='fa-regular fa-clock' style='color: rgba(var(--crm-warning), 1.0);'></i>"
+}

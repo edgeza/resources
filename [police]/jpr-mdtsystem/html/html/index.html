@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.2.9/purify.min.js" integrity="sha512-VOTFfd4vxPpuE98m9UQTN7j2N2/Blw44lZMhRTnZQqA2gOHq7Yvn5bdIDjjAZuFqqkDtppcjMW+dN3GYbhM94g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js" type="text/javascript"></script>
+    <title>JPR MDT System</title>
+
+    <audio src="./sounds/camera.mp3" id="camera-sound"></audio>
+    <audio id="clickSound" src="./sounds/click.mp3"></audio>
+    <audio id="messageSent" src="./sounds/message_sent.mp3"></audio>
+    <audio id="messageReceived" src="./sounds/message_receive.mp3"></audio>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- CSS File's -->
+    <link rel="stylesheet" href="./css/style.css" rel="preload">
+    <link rel="stylesheet" href="./css/styleGarcia.css">
+    <link rel="stylesheet" href="./css/styleJPR.css">
+
+    <!-- CDN's -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <!-- JQuery -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> <!-- Bootstrap -->
+    <script src="https://code.jquery.com/color/jquery.color-2.2.0.min.js" integrity="sha256-aSe2ZC5QeunlL/w/7PsVKmV+fa0eDbmybn/ptsKHR6I=" crossorigin="anonymous"></script> <!-- Color CDN -->
+    <script src="https://kit.fontawesome.com/e8dff26be7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+    
+    <script src="./js/main.js" rel="preload"></script>
+    <script src="./js/functions.js" rel="preload"></script>
+    <script src="./js/openFunctions.js" rel="preload"></script>
+    <script src="./js/translate.js" rel="preload"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> <!-- Bootstrap -->
+</head>
+    <body>
+        <div class="jpr-mdtsystem">
+            <!--<img src="./img/ipad.png" alt="frame" class="mdt-frame">-->
+
+            <div class="mdt-zone">
+                <div class="loader"><br><i class="fa-solid fa-circle-notch fa-spin"></i><br><h1>Loading...</h1></div>
+
+                <div class="mdt-top-zone">
+                    <div class="mdt-top-zone-logo">
+                        <img src="./img/logo.png" alt="img">
+                    </div>
+                    <div class="mdt-top-zone-title">
+                        <h1>OneLife PD</h1>
+                        <h2>OneLife Police</h2>
+                    </div>
+                    <div class="mdt-top-zone-profile">
+                        <div class="mdt-top-zone-profile-logo">
+                            <img src="./img/people/userDefault.png" alt="img" data-bs-toggle="modal" data-bs-target="#assetProfilesModal">
+                        </div>
+                        <div class="mdt-top-zone-profile-infos">
+                            <nav class="nav flex-column">
+                                <br>
+                                <a class="nav-link" href="#">
+                                    <p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                        </svg>
+                                        <span id="personalUserName">Home</span>
+                                    </p>
+                                </a>
+                                <a class="nav-link" href="#">
+                                    <p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                                        </svg>
+                                        <span id="personalGradeName">Chief</span> 
+                                    </p>
+                                </a>
+                                <a class="nav-link" href="#">
+                                    <p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+                                            <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+                                            <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+                                        </svg>
+                                        <span id="personalCallsign">LSPD</span> 
+                                    </p>
+                                </a>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-left-zone">
+                    <nav class="nav flex-column">
+                        <br>
+                        <a class="nav-link active" data-menu="home">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                                </svg>
+                                <span>Home</span>
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="citizens">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                                </svg>
+                                <span>Citizens</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="vehicles">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-ev-front" viewBox="0 0 16 16">
+                                    <path d="M9.354 4.243a.19.19 0 0 0-.085-.218.186.186 0 0 0-.23.034L6.051 7.246a.188.188 0 0 0 .136.316h1.241l-.673 2.195a.19.19 0 0 0 .085.218c.075.043.17.03.23-.034l2.88-3.187a.188.188 0 0 0-.137-.316H8.572z"/>
+                                    <path d="M4.819 2A2.5 2.5 0 0 0 2.52 3.515l-.792 1.848a.8.8 0 0 1-.38.404c-.5.25-.855.715-.965 1.262L.05 8.708a2.5 2.5 0 0 0-.049.49v.413c0 .814.39 1.543 1 1.997V13.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1.338c1.292.048 2.745.088 4 .088s2.708-.04 4-.088V13.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1.892c.61-.454 1-1.183 1-1.997v-.413q0-.248-.049-.49l-.335-1.68a1.8 1.8 0 0 0-.964-1.261.8.8 0 0 1-.381-.404l-.792-1.848A2.5 2.5 0 0 0 11.181 2H4.82ZM3.44 3.91A1.5 1.5 0 0 1 4.82 3h6.362a1.5 1.5 0 0 1 1.379.91l.792 1.847a1.8 1.8 0 0 0 .853.904c.222.112.381.32.43.564l.336 1.679q.03.146.029.294v.413a1.48 1.48 0 0 1-1.408 1.484c-1.555.07-3.786.155-5.592.155s-4.037-.084-5.592-.155A1.48 1.48 0 0 1 1 9.611v-.413q0-.148.03-.294l.335-1.68a.8.8 0 0 1 .43-.563c.383-.19.685-.511.853-.904z"/>
+                                </svg>
+                                <span>Vehicles</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="houses">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-houses" viewBox="0 0 16 16">
+                                    <path d="M5.793 1a1 1 0 0 1 1.414 0l.647.646a.5.5 0 1 1-.708.708L6.5 1.707 2 6.207V12.5a.5.5 0 0 0 .5.5.5.5 0 0 1 0 1A1.5 1.5 0 0 1 1 12.5V7.207l-.146.147a.5.5 0 0 1-.708-.708zm3 1a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708zm.707.707L5 7.207V13.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V7.207z"/>
+                                </svg>
+                                <span>Houses</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="reports">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                                </svg>
+                                <span>Reports</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="reports-ems" id="emsReports">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-zip" viewBox="0 0 16 16">
+                                    <path d="M5 7.5a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v.938l.4 1.599a1 1 0 0 1-.416 1.074l-.93.62a1 1 0 0 1-1.11 0l-.929-.62a1 1 0 0 1-.415-1.074L5 8.438zm2 0H6v.938a1 1 0 0 1-.03.243l-.4 1.598.93.62.929-.62-.4-1.598A1 1 0 0 1 7 8.438z"/>
+                                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1h-2v1h-1v1h1v1h-1v1h1v1H6V5H5V4h1V3H5V2h1V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                                </svg>
+                                <span>EMS Archives</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="central">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
+                                    <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z"/>
+                                </svg>
+                                <span>Central</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="dispatch">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                </svg>
+                                <span>Dispatch</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="fines">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
+                                    <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27m.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0z"/>
+                                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
+                                </svg>
+                                <span>Fines</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="chat">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+                                    <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                                    <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9 9 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.4 10.4 0 0 1-.524 2.318l-.003.011a11 11 0 0 1-.244.637c-.079.186.074.394.273.362a22 22 0 0 0 .693-.125m.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6-3.004 6-7 6a8 8 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a11 11 0 0 0 .398-2"/>
+                                </svg>
+                                <span>Chat</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="logs">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
+                                    <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
+                                    <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
+                                    <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
+                                </svg>
+                                <span>Logs</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="cameras">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-camera-video" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z"/>
+                                </svg>
+                                <span>Cameras</span> 
+                            </p>
+                        </a>
+                    </nav>
+
+                    <nav class="nav flex-column" style="position: absolute; bottom: 4%; width: 100%;">
+                        <a class="nav-link" data-menu="backup">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                                </svg>
+                                <span class="text-danger">BACKUP</span> 
+                            </p>
+                        </a>
+                        <a class="nav-link" data-menu="logout">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                                </svg>
+                                <span>Logout</span> 
+                            </p>
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="mdt-content-home">
+                    <div class="mdt-content-home-active-units">
+                        <div class="mdt-content-home-active-units-title">
+                            <h1>Active Units:</h1>
+                        </div>
+                        <warningTag>No Active Units</warningTag>
+                        <div class="mdt-content-home-active-units-list">
+                            <input type="text" placeholder="Unit name" class="searchClassHome" oninput="SearchActiveUnits()">
+
+                            <div class="mdt-content-home-active-units-units" id="mdt-content-home-active-units-units">
+                                <!-- auto -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdt-content-home-recentReports">
+                        <warningTag>No Reports Yet</warningTag>
+                        <h1>Latest Report:</h1>
+                        <h2>Informations:</h2>
+
+                        <div id="showLatestReport">
+                            <div class="mdt-content-home-recentReports-reported-person-image">
+                                <img src="./img/people/userDefault.png" alt="reported-Person">                            
+                            </div>
+
+                            <div class="mdt-content-home-recentReports-textArea">
+                                <h3>Name: <span id="latestReportName"><!-- auto --></span></h3>
+                                <h3>Age: <span id="latestReportAge"><!-- auto --></span></h3>
+                                <h3>Gender: <span id="latestReportGender"><!-- auto --></span></h3>
+                                <h3>Job: <span id="latestReportJob"><!-- auto --></span></h3>
+                            </div>
+                            
+                            <div class="mdt-content-home-recentReports-reportArea">
+                                <h3>Report description:</h3>
+    
+                                <h2 id="latestReportDesc">
+                                    <!-- auto -->
+                                </h2>
+                            </div>
+    
+                            <div class="mdt-content-home-recentReports-botao bg-primary" id="latestReportButton" style="cursor: pointer !important;">
+                                <span>More info</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdt-content-home-quickfine-zone">
+                        <div class="mdt-content-home-quickfine-zone-title">
+                            <h1>Quick Fines:</h1>
+                        </div>
+                        <warningTag>No Recent Fines</warningTag>
+                        <div class="mdt-content-home-quickfine-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+                    <div class="mdt-content-home-chat">
+                        <div class="mdt-content-home-chat-title">
+                            <h1>Recent Text:</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-home-chat-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-home-dispatch">
+                        <div class="mdt-content-home-dispatch-title">
+                            <h1>Latest calls:</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-home-dispatch-list">
+                            <!-- auto -->
+                        </div>
+
+                <div class="mdt-content-home-dispatch-botao bg-primary">
+                    <span>Dispatch</span>
+                </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-citizens">
+                    <div class="mdt-content-citizens-list">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Citizens List</h1>
+                        </div>
+                        <warningTag>No recent profiles edited</warningTag>
+                        <input type="text" placeholder="Search for any name" id="inputSearchCitizens" class="mdt-content-search-bar-pequena">
+
+                        <div class="mdt-content-citizens-list-person-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-citizens-infos">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Citizens Info</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+
+                        <div id="selectPersonDiv">
+                            <div class="mdt-content-citizens-insfos-box">
+                                <div class="mdt-content-citizens-insfos-photo">
+                                    <img src="./img/people/userDefault.png" alt="img" data-bs-toggle="modal" data-bs-target="#assetProfilesModal">
+                                </div>
+    
+                                <div class="mdt-content-citizens-insfos-informations">
+                                    <h1>NIF:</h1>
+                                    <h2 id="citizenIdentifier">CTG3381J</h2>
+    
+                                    <h1>Name:</h1>
+                                    <h2 id="citizenName">Asdrubal Fonseca</h2>
+    
+                                    <h1>Age:</h1>
+                                    <h2 id="citizenAge">25</h2>
+    
+                                    <h1>Gender:</h1>
+                                    <h2 id="citizenGender">M</h2>
+    
+                                    <h1>Phone number:</h1>
+                                    <h2 id="citizenPhone">96958432</h2>
+    
+                                    <h1>Nationality:</h1>
+                                    <h2 id="citizenNation">Indiana</h2>
+    
+                                    <h1>Job:</h1>
+                                    <h2 id="citizenJob">Inem nos tempos livres</h2>
+                                </div>
+    
+                                <div class="mdt-content-citizens-insfos-informations-2">
+                                    <h1>Active Report:</h1>
+                                    <h2 class="text-danger" style="font-weight: bold;" id="isCitizenActiveReport">YES <i class="fa-solid fa-handcuffs"></i></h2>
+    
+                                    <h1>Pending Payments:</h1>
+                                    <h2 class="text-success" style="font-weight: bold;" id="isCitizenPendingPayment">NO</h2>
+    
+                                    <h1>Vehicle Report:</h1>
+                                    <h2 class="text-danger" style="font-weight: bold;" id="isCitizenVehicleReported">YES <i class="fa-solid fa-handcuffs"></i></h2>
+                                </div>
+    
+                                <div class="mdt-content-citizens-insfos-cars">
+                                    <h1>Vehicles:</h1>
+    
+                                    <div class="mdt-content-citizens-insfos-cars-list">
+                                        <!-- auto -->
+                                    </div>
+                                </div>
+    
+                                <div class="mdt-content-citizens-insfos-houses" style="border-left: 1px solid gray;">
+                                    <h1>Houses:</h1>
+    
+                                    <div class="mdt-content-citizens-insfos-houses-list">
+                                        <!-- auto -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-citizens-warrants">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Included Reports</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-citizens-warrants-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-citizens-fines">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Fine History</h1>
+                        </div>
+
+                        <i class="fa-solid fa-circle-plus text-success addNewBill" data-bs-toggle="modal" id="openFinesMenu" data-bs-target="#assetFinesProfileModal" style="position: absolute; right: 2.5%; top: 5%; font-size: 1.6vh; display: none;"></i>
+                        
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-citizens-fines-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-citizens-past">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Citizen Licenses</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-citizens-past-list">
+                           <!-- auto -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-vehicles">
+                    <div class="mdt-content-vehicles-list">
+                        <div class="mdt-content-vehicles-titles-search-list">
+                            <h1>Search List</h1>
+                        </div>
+                        <warningTag>No recent vehicles edited</warningTag>
+                        <input type="text" placeholder="Search for any plate" id="searchVehicles" class="mdt-content-search-bar-grande">
+
+                        <div class="mdt-content-vehicles-list-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-vehicles-infos">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Citizen and Vehicle Information</h1>
+                        </div>
+                        <warningTag>No Vehicle Selected</warningTag>
+                        <div class="mdt-content-vehicles-insfos-box">
+                            <div id="selectedVehicleDiv" style="display: none;">
+                                <div class="mdt-content-vehicles-insfos-photo">
+                                    <img src="./img/people/userDefault.png" alt="img" data-bs-toggle="modal" data-bs-target="#assetProfilesModal">
+                                </div>
+    
+                                <div class="mdt-content-vehicles-insfos-informations">
+                                    <h1>NIF:</h1>
+                                    <h2 id="vehicleOwner">CTG3381J</h2>
+    
+                                    <h1>Name:</h1>
+                                    <h2 id="vehicleOwnerName">Asdrubal Fonseca</h2>
+    
+                                    <h1>Age:</h1>
+                                    <h2 id="vehicleOwnerAge">25</h2>
+    
+                                    <h1>Gender:</h1>
+                                    <h2 id="vehicleOwnerGender">M</h2>
+    
+                                    <h1>Phone number:</h1>
+                                    <h2 id="vehicleOwnerPhone">96958432</h2>
+    
+                                    <h1>Nacionalidade:</h1>
+                                    <h2 id="vehicleOwnerCountry">Indiana</h2>
+    
+                                    <h1>Job:</h1>
+                                    <h2 id="vehicleOwnerJob">Inem nos tempos livres</h2>
+                                </div>
+    
+                                <div class="mdt-content-vehicles-insfos-informations-2">
+                                    <h1>Active Warrant:</h1>
+                                    <h2 class="text-danger" style="font-weight: bold;" id="isCitizenVehActiveReport">YES <i class="fa-solid fa-handcuffs"></i></h2>
+    
+                                    <h1>Pending Payments:</h1>
+                                    <h2 class="text-success" style="font-weight: bold;" id="isCitizenVehPendingPayments">NO</h2>
+    
+                                    <h1>Warrant Vehicle:</h1>
+                                    <h2 class="text-danger" style="font-weight: bold;" id="isCitizenVehReported">YES <i class="fa-solid fa-handcuffs"></i></h2>
+                                </div>
+    
+                                <div class="mdt-content-vehicles-insfos-cars">
+                                    <h1>Vehicle:</h1>
+    
+                                    <div class="mdt-content-vehicles-insfos-cars-botao createNewReportVehicle bg-primary">
+                                        <span>Create Report</span>
+                                    </div>
+    
+                                    <div class="mdt-content-vehicles-insfos-cars-vehImage">
+                                        <img src="./img/vehicles/defaultVehicle.png" alt="vehicle" data-bs-toggle="modal" data-bs-target="#assetProfilesModal">
+                                    </div>
+    
+                                    <div class="mdt-content-vehicles-insfos-cars-informations">
+                                        <h1>Plate:</h1>
+                                        <h2 id="selectedVehiclePlate">CTG3381J</h2>
+        
+                                        <h1>Model:</h1>
+                                        <h2 id="selectedVehicleModelName">Asdrubal Fonseca</h2>
+        
+                                        <h1>Color:</h1>
+                                        <h2 id="selectedVehicleColor">Afonso Estevão</h2>
+                                    </div>
+    
+                                    <div class="mdt-content-vehicles-insfos-cars-informations-2">
+                                        <h1>Impounded:</h1>
+                                        <h2 class="text-danger" style="font-weight: bold;" id="isVehicleImpounded">YES <i class="fa-solid fa-handcuffs"></i></h2>
+                                    
+                                        <h1>Active Warrant:</h1>
+                                        <h2 class="text-danger" style="font-weight: bold;" id="isVehicleReported">YES <i class="fa-solid fa-handcuffs"></i></h2>
+                                    
+                                        <h1>Pending Payments:</h1>
+                                        <h2 class="text-success" style="font-weight: bold;" id="isVehiclePendingPayments">NO</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-vehicles-reports">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Reports List:</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-vehicles-reports-box">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-vehicles-allVehs">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Owner Vehicles:</h1>
+                        </div>
+                        <warningTag>No Vehicle Selected</warningTag>
+                        <div class="mdt-content-vehicles-allVehs-box">
+                            <!-- auto -->
+                        </div>
+                    </div>
+                </div>   
+                
+                <div class="mdt-content-houses">
+                    <div class="mdt-content-houses-list">
+                        <div class="mdt-content-houses-titles-search-list">
+                            <h1>Search List</h1>
+                        </div>
+                        <warningTag>No recent houses edited</warningTag>
+                        <input type="text" placeholder="Search any house" class="mdt-content-search-bar-grande" id="searchHouses">
+
+                        <div class="mdt-content-houses-list-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-houses-infos">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Citizen and House Information</h1>
+                        </div>
+                        <warningTag>No House Selected</warningTag>
+                        <div class="mdt-content-houses-insfos-box">
+                            <div id="selectHouseDiv" style="display: none;">
+                                <div class="mdt-content-houses-insfos-photo">
+                                    <img src="./img/people/userDefault.png" alt="img" data-bs-toggle="modal" data-bs-target="#assetProfilesModal">
+                                </div>
+    
+                                <div class="mdt-content-houses-insfos-informations">
+                                    <h1>NIF:</h1>
+                                    <h2 id="houseOwner">CTG3381J</h2>
+    
+                                    <h1>Name:</h1>
+                                    <h2 id="houseOwnerName">Asdrubal Fonseca</h2>
+    
+                                    <h1>Age:</h1>
+                                    <h2 id="houseAge">25</h2>
+    
+                                    <h1>Gender:</h1>
+                                    <h2 id="houseGender">M</h2>
+    
+                                    <h1>Phone number:</h1>
+                                    <h2 id="housePhone">96958432</h2>
+    
+                                    <h1>Nacionalidade:</h1>
+                                    <h2 id="houseCountry">Indiana</h2>
+    
+                                    <h1>Job:</h1>
+                                    <h2 id="houseJob">Inem nos tempos livres</h2>
+                                </div>
+    
+                                <div class="mdt-content-houses-insfos-informations-2">
+                                    <h1>Active Warrant:</h1>
+                                    <h2 class="text-danger" style="font-weight: bold;" id="citizenWarrant">YES <i class="fa-solid fa-handcuffs"></i></h2>
+    
+                                    <h1>Pending Payments:</h1>
+                                    <h2 class="text-success" style="font-weight: bold;" id="citizenPendingPayments">NO</h2>
+    
+                                    <h1>Warrant Vehicle:</h1>
+                                    <h2 class="text-danger" style="font-weight: bold;" id="citizenWarrantVehicle">YES <i class="fa-solid fa-handcuffs"></i></h2>
+                                </div>
+    
+                                <div class="mdt-content-houses-insfos-cars">
+                                    <h1>House:</h1>
+    
+                                    <div class="mdt-content-houses-insfos-cars-botao createNewReportHouse bg-primary">
+                                        <span>Create Report</span>
+                                    </div>
+    
+                                    <div class="mdt-content-houses-insfos-cars-botao-gps bg-success">
+                                        <span>GPS</span>
+                                    </div>
+    
+                                    <div class="mdt-content-houses-insfos-cars-houseImage">
+                                        <img src="./img/houses/defaultHouse.png" alt="house" data-bs-toggle="modal" data-bs-target="#assetProfilesModal">
+                                    </div>
+    
+                                    <div class="mdt-content-houses-insfos-cars-informations">
+                                        <h1>House name:</h1>
+                                        <h2 id="houseName">Mansão 3</h2>
+        
+                                        <h1>Address:</h1>
+                                        <h2 id="houseAdress">Rua optimizada da silva</h2>
+                                    </div>
+    
+                                    <div class="mdt-content-houses-insfos-cars-informations-2">
+                                        <h1>Linked To:</h1>
+                                        <h2 id="houseOwnerExtended">Afonso Estevão</h2>
+                                        
+                                        <h1>Active Warrant:</h1>
+                                        <h2 class="text-danger" style="font-weight: bold;" id="isHouseWarranted">YES <i class="fa-solid fa-handcuffs"></i></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-houses-reports">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Reports List:</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-houses-reports-box">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-houses-allVehs">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Owner Houses:</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <div class="mdt-content-houses-allVehs-box">
+                            <!-- auto -->
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="mdt-content-reports-ems">
+                    <div class="mdt-content-reports-ems-search-list">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Search Archive</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <input type="text" placeholder="Search for archive name"class="mdt-content-search-bar-grande" style="width: 96%;">
+
+                        <div class="mdt-content-reports-ems-list-list" id="reportEMSListage">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-reports-ems-infos" style="display: block;">
+                        <div style="display: block;">
+                            <div class="mdt-content-reports-ems-infos-person-box" style="width: 50%;">
+                                <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                    <h1>Citizen Infos</h1>
+                                </div>
+                                <warningTag>No data available</warningTag>
+    
+                                <div class="mdt-content-reports-ems-infos-list">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+    
+                            <div class="mdt-content-reports-ems-infos-house-box" style="width: 46.5%;">
+                                <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                    <h1>Injuries Info</h1>
+                                </div>
+                                <warningTag>No data available</warningTag>
+
+                                <div class="mdt-content-reports-ems-infos-list">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+                            
+                            <div class="mdt-content-reports-ems-reports-ems-box">
+                                <div class="mdt-content-titles-pequeno">
+                                    <h1>Report Infos</h1>
+                                </div>
+                               
+                                <div class="mdt-content-reports-ems-reports-ems-list">
+                                    <h1>Name: 
+                                        <span id="reportEMSName">
+                                            No archive selected
+                                        </span>
+                                    </h1>
+                                    
+                                    <div class="mdt-content-reports-ems-report-desc">
+                                        <h2><b>Description:</b> 
+                                            <span id="reportEMSDesc">
+                                                No archive selected
+                                            </span>
+                                        </h2>
+                                    </div>
+    
+                                    <h1>Mobilized Units:</h1>
+                                
+                                    <div class="geral-item-currentUnits" id="reportEMSInfosUnits">
+                                        <!-- auto -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mdt-content-reports-ems-evidence-box">
+                                <div class="mdt-content-titles-pequeno">
+                                    <h1>Images List</h1>
+                                </div>
+                                <warningTag>No data available</warningTag>
+    
+                                <div class="mdt-content-reports-ems-evidence-list" id="evidencesEMSReportInfos">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-reports">
+                    <div class="mdt-content-reports-search-list">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Search Report</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <input type="text" placeholder="Search for report name" oninput="SearchReport()" id="reportNameSearch" class="mdt-content-search-bar-grande" style="width: 65%;">
+                        <div class="mdt-content-reports-botao bg-success" id="createNewReport" style="top: 7.15%; border-radius: 0.6vh; border: 1px solid gray; width: 29%;">
+                            <span style="line-height: 2.9vh;">Create new</span>
+                        </div>
+
+                        <div class="mdt-content-reports-list-list" id="reportListage">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-reports-infos" style="display: block;">
+                        <warningTagExtra>No data available</warningTagExtra>
+
+                        <div id="showReportInfos" style="display: none;">
+                            <div class="mdt-content-reports-infos-person-box">
+                                <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                    <h1>Citizen Info</h1>
+                                </div>
+                                <warningTag>No data available</warningTag>
+    
+                                <div class="mdt-content-reports-infos-list">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+    
+                            <div class="mdt-content-reports-infos-vehicle-box">
+                                <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                    <h1>Vehicle Info</h1>
+                                </div>
+                                <warningTag>No data available</warningTag>
+
+                                <div class="mdt-content-reports-infos-list">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+    
+                            <div class="mdt-content-reports-infos-house-box">
+                                <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                    <h1>House Info</h1>
+                                </div>
+                                <warningTag>No data available</warningTag>
+
+                                <div class="mdt-content-reports-infos-list">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+                            
+                            <div class="mdt-content-reports-reports-box">
+                                <div class="mdt-content-titles-pequeno">
+                                    <h1>Report Info</h1>
+                                </div>
+                               
+                                <div class="mdt-content-reports-reports-list">
+                                    <h1>Name: 
+                                        <span id="reportName">
+                                            <!-- auto -->
+                                        </span>
+                                    </h1>
+                                    
+                                    <div class="mdt-content-reports-report-desc">
+                                        <h2><b>Description:</b> 
+                                            <span id="reportDesc">
+                                                <!-- auto -->
+                                            </span>
+                                        </h2>
+                                    </div>
+    
+                                    <h1>Mobilized Units:</h1>
+                                
+                                    <div class="geral-item-currentUnits" id="reportInfosUnits">
+                                        <!-- auto -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mdt-content-reports-evidence-box">
+                                <div class="mdt-content-titles-pequeno">
+                                    <h1>Evidence List</h1>
+                                </div>
+                                <warningTag>No data available</warningTag>
+                                <div class="mdt-content-reports-botao" style="background-color: rgb(215, 143, 8);" id="editReport">
+                                    <span>Edit Report</span>
+                                </div>
+                                <div class="mdt-content-reports-botao bg-danger" id="disableReport" style="right: 37%;">
+                                    <span>Disable Report</span>
+                                </div>
+    
+                                <div class="mdt-content-reports-evidence-list" id="evidencesReportInfos">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-reports-create">
+                        <div class="mdt-content-reports-create-person-box">
+                            <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                <h1>Citizens</h1>
+                            </div>
+                            <warningTag>No data available</warningTag>
+                            <input id="inputSearchCitizensReport" type="text" placeholder="Write the name of civilian" class="mdt-content-search-bar-grande" style="height: 8%; top: 14%; left: 2%; width: 95.5%; background-color: var(--mainBG);">
+                        
+                        
+                            <div class="mdt-content-new-report-list-geral-list" id="personReportListing" style="height: 66%;">
+                                <!-- auto -->
+                            </div>
+
+                            <div class="mdt-content-reports-botao bg-primary" style="bottom: -0.7%; border-radius: 1vh; border: 1px solid gray; width: 30%; height: 8%;">
+                                <span style="line-height: 2.6vh; font-size: 1.1vh;">Selected</span>
+                            </div>
+                        </div>
+
+                        <div class="mdt-content-reports-create-vehicle-box">
+                            <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                <h1>Vehicles</h1>
+                            </div>
+                            <warningTag>No data available</warningTag>
+                            <input id="searchVehiclesReport" type="text" placeholder="Write plate of vehicle" class="mdt-content-search-bar-grande" style="height: 8%; top: 14%; left: 2%; width: 95.5%; background-color: var(--mainBG);">
+                        
+                        
+                            <div class="mdt-content-new-report-list-geral-list" id="vehicleReportListing" style="height: 66%;">
+                                <!-- auto -->
+                            </div>
+
+                            <div class="mdt-content-reports-botao bg-primary" style="bottom: -0.7%; border-radius: 1vh; border: 1px solid gray; width: 30%; height: 8%;">
+                                <span style="line-height: 2.6vh; font-size: 1.1vh;">Selected</span>
+                            </div>
+                        </div>
+
+                        <div class="mdt-content-reports-create-house-box">
+                            <div class="mdt-content-titles-pequeno" style="top: -1%; left: -1%;">
+                                <h1>Houses</h1>
+                            </div>
+                            <warningTag>No data available</warningTag>
+                            <input id="searchHousesReport" type="text" placeholder="Write name of house" class="mdt-content-search-bar-grande" style="height: 8%; top: 14%; left: 2%; width: 95.5%; background-color: var(--mainBG);">
+                        
+                        
+                            <div class="mdt-content-new-report-list-geral-list" id="houseReportListing" style="height: 66%;">
+                                <!-- auto -->
+                            </div>
+
+                            <div class="mdt-content-reports-botao bg-primary" style="bottom: -0.7%; border-radius: 1vh; border: 1px solid gray; width: 30%; height: 8%;">
+                                <span style="line-height: 2.6vh; font-size: 1.1vh;">Selected</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mdt-content-reports-reports-box">
+                            <div class="mdt-content-titles-pequeno">
+                                <h1>Report Info</h1>
+                            </div>
+                        
+                            <div class="mdt-content-reports-botao bg-success" id="createNewReportEnd" style="bottom: 0; border-radius: 1vh; border: 1px solid gray; width: 20%;">
+                                <span style="line-height: 2.9vh;">Create</span>
+                            </div>
+
+                            <div class="mdt-content-reports-reports-list">
+                                <h1>Name:</h1>
+                                <input type="text" id="reportNewName">
+                                <h1>Description:</h1>
+                                <textarea id="reportDescription"></textarea>
+                                <h1>Officers involved:
+                                    <div class="mdt-content-reports-botao bg-primary" style="top: 0%; border-radius: 1vh; border: 1px solid gray; width: 3vh;" data-bs-toggle="modal" data-bs-target="#unitsModal" id="addMoreUnits">
+                                        <span style="line-height: 2.9vh;"><i class="fa-solid fa-user-plus"></i></span>
+                                    </div>
+                                </h1>
+
+                                <div class="geral-item-currentUnits" style="height: 25%; max-width: 75%;" id="reportNewUnits">
+                                    <div class="geral-item-currentUnits-unit">
+                                        <img src="./img/people/noUnits.png" alt="unit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mdt-content-reports-evidence-box">
+                            <div class="mdt-content-titles-pequeno">
+                                <h1>Evidence List</h1>
+                            </div>
+                            <warningTag>No evidence added</warningTag>
+                            <div class="mdt-content-reports-botao bg-primary" data-bs-toggle="modal" data-bs-target="#assetModal">
+                                <span>Add more</span>
+                            </div>
+
+                            <div class="mdt-content-reports-evidence-list" id="newReportEvidenceList">
+                                <!-- auto -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-central">
+                    <div class="mdt-content-central-police-search">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Police List</h1>
+                        </div>
+                        <div class="mdt-content-search-bar-grande"></div>
+                        <input type="text" placeholder="Write name of college" oninput="FilterCentralPolice()" class="mdt-content-search-bar-grande" id="searchBarPolice">
+                        <warningTag>Nobody onduty</warningTag>
+                        <div class="mdt-content-central-list" id="centralPoliceList">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-central-medic-search">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Medic List</h1>
+                        </div>
+                        <div class="mdt-content-search-bar-grande"></div>
+                        <input type="text" placeholder="Write name of college" oninput="FilterCentralEMS()" class="mdt-content-search-bar-grande" id="serachBarMedic">
+                        <warningTag>Nobody onduty</warningTag>
+                        <div class="mdt-content-central-list" id="centralMedicList">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-central-infos-zone">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Info List</h1>
+                        </div>
+
+                        <div class="mdt-content-central-infos-zone-top">
+                            <warningTag>Select an college</warningTag>
+
+                            <div id="centralShowProfile" style="display: none;">
+                                <div class="mdt-content-central-infos-zone-title">
+                                    <h1>Professional Profile</h1>
+                                </div>
+
+                                <div class="mdt-content-central-infos-zone-box">
+                                    <div class="mdt-content-central-infos-zone-top-infos">
+                                        <img src="./img/people/userDefault.png" alt="img" data-bs-toggle="modal" data-bs-target="#assetProfilesModal">
+                                        <h1>Name:</h1> <h2>Tag: <i class="fa-solid fa-pencil editProfileClass" style="font-size: 1.3vh; cursor: pointer;"></i></h2> <h3>Rank:</h3> <h4>Phone:</h4>
+                                        <a>Andrew Tate</a> <input type="text" disabled></input> <c>Chief</c> <d>9675712512</d>
+    
+                                        <desc>Description: <i class="fa-solid fa-pencil editProfileClass" style="font-size: 1.2vh; cursor: pointer;"></i></desc>
+                                    </div>
+    
+                                    <textarea class="mdt-content-central-infos-zone-top-description" disabled>
+                                        <!-- auto -->
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mdt-content-central-infos-zone-bot">
+                            <warningTag>No data available</warningTag>
+
+                            <div id="centralShowProfileReports" style="display: none;">
+                                <div class="mdt-content-central-infos-zone-title">
+                                    <h1>Included Reports</h1>
+                                </div>
+                                
+                                <div class="mdt-content-central-infos-zone-box" id="unitIncludedReports">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-fines">
+                    <div class="mdt-content-fines-box">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Created fines</h1>
+                        </div>
+                        <warningTag>No Fines Created</warningTag>
+                        <input type="text" placeholder="Write the name of bill" id="searchFines" class="mdt-content-search-bar-grande" oninput="SearchFine()">
+                        <div class="mdt-content-fines-fine-list" id="allFines">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-create-fines-box">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Create new fine</h1>
+                        </div>
+                        <h2>When creating a new fine, your name and tag will be always linked to it, so be sure of what you are doing otherwise can be consequences for your side.</h2>
+
+                        <h1>Fine name:</h1>
+                        <input type="text" placeholder="" id="fineName" class="mdt-content-search-bar-grande-custom" style="position: relative;">
+
+                        <h1>Fine description:</h1>
+                        <input type="text" placeholder="" id="fineDesc" class="mdt-content-search-bar-grande-custom" style="position: relative;">
+
+                        <h1>Fine value:</h1>
+                        <input type="number" placeholder="" id="fineVal" class="mdt-content-search-bar-grande-custom" style="position: relative;">
+
+                        <h1>Created By:</h1>
+                        <input type="text" disabled value="Sérgio Calado" id="newFineMyName" class="mdt-content-search-bar-grande-custom" style="position: relative;">
+                    
+                        <div class="mdt-content-fines-fine-botao bg-success" id="createNewBill">
+                            <span>Submit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-chat">
+                    <div class="mdt-content-chat-box">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>Current Chat</h1>
+                        </div>
+
+                        <div class="mdt-content-chat-messages-list">
+                            <div class="mdt-content-chat-messages-list-left">
+                                <!-- auto -->
+                            </div>
+                            <div class="mdt-content-chat-messages-top">
+                                <div class="mdt-content-titles-pequeno" style="top: -5%;">
+                                    <h1>Message list:</h1>
+                                    <h2>Keep in mind,
+                                        <br>
+                                        All messages with more than 7 days will be wiped to prevent problems on MDT loads and spam preventions.
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="mdt-content-chat-chat-messages">
+                                <!-- auto -->
+                            </div>
+
+                            <div class="mdt-content-chat-new-message">
+                                <input type="text" id="newMessageInput" placeholder="Write your new message">
+
+                                <div class="mdt-content-chat-botao bg-primary">
+                                    <span>Send</span>
+                                </div>
+
+                                <i class="fa-solid fa-camera" data-bs-toggle="modal" data-bs-target="#assetMessageModal"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <div class="mdt-content-cameras">
+                    <div class="mdt-content-cameras-box">
+                        <div class="mdt-content-cameras-title">
+                            <h1>Cameras List</h1>
+                        </div>
+
+                        <div class="mdt-content-cameras-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-dispatch">
+                    <div class="mdt-content-dispatch-calls">
+                        <div class="mdt-content-dispatch-calls-title">
+                            <h1>Latest Calls</h1>
+                        </div>
+
+                        <div class="mdt-content-dispatch-calls-list">
+                            <!-- auto -->
+                        </div>
+                    </div>
+
+                    <div class="mdt-content-dispatch-infos">
+                        <h1>Dispatch Information</h1>
+
+                        <warningTag>No dispatch call selected</warningTag>
+
+                        <div class="mdt-content-dispatch-infos-box" style="display: none;">
+                            
+                            <div class="mdt-content-dispatch-infos-extra-botao bg-success" style="top: -5%; right: 1%; width: 8vh;" id="mobilizeMe">
+                                <span>Mobilize</span>
+                            </div>
+
+                            <div class="mdt-content-dispatch-calls-call-extended">
+                                <!-- auto -->
+                            </div>
+
+                            <div class="mdt-content-dispatch-infos-caller">
+                                <img src="https://img.gta5-mods.com/q95/images/jim-layhey-24-7-clerk-model-from-dojrp/c3dcb3-Screenshot%20(1).jpg" alt="img">
+                                <h1>Name:</h1> <h2>Age:</h2> <h3>Gender:</h3>
+                                <ha><!-- auto --></ha> <hb><!-- auto --></hb> <hc><!-- auto --></hc>
+
+                                <h5>Call description:</h5>
+                                <textarea class="mdt-content-dispatch-infos-caller-desc" disabled><!-- auto --></textarea>
+                            </div>
+
+                            <div class="mdt-content-dispatch-infos-extra">
+                                <h3>Mobilized info</h3>
+
+                                <warningTag>No unit selected</warningTag>
+
+                                <div id="showMobilizedData" style="display: none;">
+                                    <!-- auto -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdt-content-logs">
+                    <div class="mdt-content-logs-box">
+                        <div class="mdt-content-titles-pequeno">
+                            <h1>MDT Logs</h1>
+                        </div>
+                        <warningTag>No data available</warningTag>
+                        <input type="text" placeholder="Search by name" oninput="SearchLog()" id="logInputSearch" class="mdt-content-logs-search-bar" style="top: 7.2%; left: 1%; width: 98.2%;">
+
+                        <div class="mdt-content-logs-list" id="logsListage">
+                            <!-- auto -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notification" style="top: -100%;">
+                    <h1><!--auto --></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="alerts-dispatch">
+            <!-- auto -->
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="unitsModal" tabindex="-1" aria-labelledby="unitsModalLabel" aria-hidden="true" style="top: 28%;">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="unitsModalLabel" style="font-family: ProBold;">Add Units</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="total-units" id="total-units-listage">
+                    <!-- auto -->
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="assetModal" tabindex="-1" aria-labelledby="assetModalLabel" aria-hidden="true" style="top: 28%;">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="assetModalLabel" style="font-family: ProBold;">Upload asset</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Image URL" id="clearInputImage" aria-label="Image URL" aria-describedby="basic-addon2" style="transition: 0.5s ease;">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-success" id="submitURLImage" type="button" style="transition: 0.5s ease;">SUBMIT</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="takePhotoBTN">Take Photo</button>
+                    <button type="button" class="btn btn-success closeModal" data-bs-dismiss="modal">Done</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="assetMessageModal" tabindex="-1" aria-labelledby="assetMessageModalLabel" aria-hidden="true" style="top: 28%;">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="assetMessageModalLabel" style="font-family: ProBold;">Share asset</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Image URL" id="clearInputImageMessage" aria-label="Image URL" aria-describedby="basic-addon2" style="transition: 0.5s ease;">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-success" id="submitURLImageMessage" type="button" style="transition: 0.5s ease;">SUBMIT</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="takePhotoBTNMessage">Take Photo</button>
+                    <button type="button" class="btn btn-success closeModal" data-bs-dismiss="modal">Done</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="showCamerasModal" tabindex="-1" aria-labelledby="showCamerasModalLabel" aria-hidden="true" style="top: 28%;">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="showCamerasModalLabel" style="font-family: ProBold;">Camera list:</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="total-cameras">
+                        <!-- auto -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary closeModal" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="assetProfilesModal" tabindex="-1" aria-labelledby="assetProfilesModalLabel" aria-hidden="true" style="top: 28%;">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="assetProfilesModalLabel" style="font-family: ProBold;">Switch profile image</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Image URL" id="clearInputImageProfiles" aria-label="Image URL" aria-describedby="basic-addon2" style="transition: 0.5s ease;">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-success" id="submitURLImageProfile" type="button" style="transition: 0.5s ease;">SUBMIT</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="takePhotoBTNProfile">Take Photo</button>
+                    <button type="button" class="btn btn-success closeModal" data-bs-dismiss="modal">Done</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="assetFinesProfileModal" tabindex="-1" aria-labelledby="assetFinesProfileModal" aria-hidden="true" style="top: 28%;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="assetFinesProfileModal" style="font-family: ProBold;">Add Fines to Player</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="total-fines" id="total-fines-listage">
+                      <!-- auto -->
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary closeModal" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </body>
+</html>

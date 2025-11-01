@@ -58,7 +58,7 @@ Config.Peds = {
     {name = 'quarry_ped', coords = vector4(2944.44, 2742.84, 43.37, 10.35), model = 'csb_cletus', scenario = 'WORLD_HUMAN_CLIPBOARD', label = 'Speak to Quarry Worker', icon = 'fa-solid fa-gem', event = 'boii-mining:cl:QuarryMenu', distance = 2.0, useped = true},
     {name = 'mineshaft_ped', coords = vector4(-599.64, 2092.27, 131.4, 343.67), model = 'csb_cletus', scenario = 'WORLD_HUMAN_CLIPBOARD', label = 'Speak to Mineshaft Worker', icon = 'fa-solid fa-gem', event = 'boii-mining:cl:MineMenu', distance = 2.0, useped = true},
     {name = 'warehouse_ped', coords = vector4(1192.2, -1261.27, 35.18, 266.65), model = 's_m_y_dockwork_01', scenario = 'WORLD_HUMAN_CLIPBOARD', label = 'Speak to Warehouse Worker', icon = 'fa-solid fa-gem', event = 'boii-mining:cl:WarehouseMenu', distance = 2.0, useped = true},
-    {name = 'jeweller_ped', coords = vector4(vec4(-630.01, -240.61, 38.16, 123.89)), model = 's_f_y_shop_mid', scenario = 'WORLD_HUMAN_CLIPBOARD', label = 'Speak to Jeweller', icon = 'fa-solid fa-gem', event = 'boii-mining:cl:JewelleryMenu', distance = 2.0, useped = true},
+    {name = 'jeweller_ped', coords = vector4(-630.01, -240.61, 38.16, 123.89), model = 's_f_y_shop_mid', scenario = 'WORLD_HUMAN_CLIPBOARD', label = 'Speak to Jeweller', icon = 'fa-solid fa-gem', event = 'boii-mining:cl:JewelleryMenu', distance = 2.0, useped = true},
     {name = 'drillbit_ped', coords = vector4(1076.44, -1992.11, 30.88, 325.0), model = 's_m_m_highsec_01', scenario = 'WORLD_HUMAN_CLIPBOARD', label = 'Buy Drill Bits', icon = 'fa-solid fa-screwdriver-wrench', event = 'boii-mining:cl:DrillbitShop', distance = 2.0, useped = true}
 }
 

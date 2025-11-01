@@ -699,6 +699,7 @@
         let currentItems = [];
         let targetItem = null;
         const inventoryPath = 'nui://qs-inventory/html/images/';
+        const caseImagePath = 'nui://qs-inventory/html/images/'; // Case images also use inventory path
         let activeTimers = []; // Track all active timers for cleanup
 
         window.addEventListener('message', function(event) {
@@ -780,9 +781,22 @@
             caseTitle.textContent = caseData.title;
             caseTitle.className = 'case-title ' + rarityClass;
             
-            caseImage.src = caseData.image;
+            // Fix case image path - remove "images/" prefix if present and use inventory path
+            let caseImgSrc = caseData.image;
+            if (caseImgSrc.startsWith('images/')) {
+                caseImgSrc = caseImgSrc.replace('images/', '');
+            }
+            // Also remove any other path separators to get just filename
+            if (caseImgSrc.includes('/')) {
+                caseImgSrc = caseImgSrc.split('/').pop();
+            }
+            caseImage.src = caseImagePath + caseImgSrc;
             caseImage.className = 'case-image ' + rarityClass;
             caseImage.style.display = 'block';
+            caseImage.onerror = function() {
+                console.log('Failed to load case image: ' + this.src);
+                // Keep the image visible but log the error
+            };
             
             container.classList.add('active');
             
@@ -824,10 +838,16 @@
                 itemSlot.className = `item-slot ${item.rarity.toLowerCase()}`;
                 itemSlot.dataset.index = index;
                 
-                const imgSrc = inventoryPath + item.image;
+                // Ensure image path uses inventory directory
+                let imgSrc = item.image;
+                // Remove any existing path prefixes
+                if (imgSrc.includes('/')) {
+                    imgSrc = imgSrc.split('/').pop(); // Get just the filename
+                }
+                imgSrc = inventoryPath + imgSrc;
                 
                 itemSlot.innerHTML = `
-                    <img class="item-image" src="${imgSrc}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/70?text=Item'">
+                    <img class="item-image" src="${imgSrc}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/70?text=Item'; console.log('Failed to load image: ${imgSrc}')">
                     <div class="item-name">${item.name}</div>
                     <div class="item-rarity rarity-${item.rarity.toLowerCase()}">${item.rarity}</div>
                 `;
@@ -938,8 +958,18 @@
             setTimeout(() => {
                 itemCarousel.style.display = 'none';
                 
-                const imgSrc = inventoryPath + reward.image;
+                // Ensure reward image path uses inventory directory
+                let imgSrc = reward.image;
+                // Remove any existing path prefixes
+                if (imgSrc.includes('/')) {
+                    imgSrc = imgSrc.split('/').pop(); // Get just the filename
+                }
+                imgSrc = inventoryPath + imgSrc;
                 rewardImage.src = imgSrc;
+                rewardImage.onerror = function() {
+                    console.log('Failed to load reward image: ' + imgSrc);
+                    this.src = 'https://via.placeholder.com/120?text=Reward';
+                };
                 rewardName.textContent = reward.name;
                 rewardAmount.textContent = `Amount: ${reward.amount}`;
                 

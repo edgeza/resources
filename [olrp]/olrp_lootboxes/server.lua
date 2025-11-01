@@ -90,15 +90,13 @@ OpenServerCase = function(serverid, caseitems)
     
     TriggerClientEvent('olrp_lootcases:openCase', serverid, itemCopy, caseitems)
 
+    -- Log to server console only (no public chat notifications)
     if CFG.RarityChance[itemCopy.rarity] and CFG.RarityChance[itemCopy.rarity] < 10 then 
         if itemCopy.item == 'money' then
-            CFG.ChatNotify(("^3%s^7 won ^3$%s^7 from a ^3%s^7 case!"):format(GetPlayerName(serverid), GroupDigits(itemCopy.amount), itemCopy.rarity))
             LogCrateOpening(serverid, itemCopy.rarity, GroupDigits(itemCopy.amount), 'Money')
         elseif string.match(string.lower(itemCopy.item), 'weapon_') then
-            CFG.ChatNotify(("^3%s^7 won a ^3%s^7 from a ^3%s^7 case!"):format(GetPlayerName(serverid), GetWeaponLabel(itemCopy.item), itemCopy.rarity))
             LogCrateOpening(serverid, itemCopy.rarity, 1, GetWeaponLabel(itemCopy.item))
         else
-            CFG.ChatNotify(("^3%s^7 won x%s ^3%s^7 from a ^3%s^7 case!"):format(GetPlayerName(serverid), itemCopy.amount, GetItemLabel(itemCopy.item), itemCopy.rarity))
             LogCrateOpening(serverid, itemCopy.rarity, itemCopy.amount, GetItemLabel(itemCopy.item))
         end
     end

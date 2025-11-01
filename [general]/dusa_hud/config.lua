@@ -89,7 +89,7 @@ config.HideDefaultUI = {
     mp_cash = true,
     hud_components = true, 
     hud_weapons = true, 
-    ammo = true,
+    ammo = false,
 }
 
 ---------------------------SEATBELT----------------------------

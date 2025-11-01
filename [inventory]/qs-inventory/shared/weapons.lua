@@ -1,0 +1,2869 @@
+--[[
+    Weapon Configuration for ESX framework only.
+
+    Important: If you are using qb-core, this section should not be used.
+    Instead, utilize the weapon definitions in qb-core's shared configuration.
+
+    However, for ESX users, you can freely copy or modify items in this section as needed.
+]]
+
+WeaponList = {
+
+    -- // WEAPONS
+
+    -- Melee
+    [`weapon_unarmed`] = {
+        name = 'weapon_unarmed',
+        label = 'Fists',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_dagger`] = {
+        name = 'weapon_dagger',
+        label = 'Dagger',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_bat`] = {
+        name = 'weapon_bat',
+        label = 'Bat',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_bottle`] = {
+        name = 'weapon_bottle',
+        label = 'Broken Bottle',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_crowbar`] = {
+        name = 'weapon_crowbar',
+        label = 'Crowbar',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_flashlight`] = {
+        name = 'weapon_flashlight',
+        label = 'Flashlight',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_golfclub`] = {
+        name = 'weapon_golfclub',
+        label = 'Golfclub',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_hammer`] = {
+        name = 'weapon_hammer',
+        label = 'Hammer',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_hatchet`] = {
+        name = 'weapon_hatchet',
+        label = 'Hatchet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_knuckle`] = {
+        name = 'weapon_knuckle',
+        label = 'Knuckle',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_knife`] = {
+        name = 'weapon_knife',
+        label = 'Knife',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_machete`] = {
+        name = 'weapon_machete',
+        label = 'Machete',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_switchblade`] = {
+        name = 'weapon_switchblade',
+        label = 'Switchblade',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_nightstick`] = {
+        name = 'weapon_nightstick',
+        label = 'Nightstick',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_wrench`] = {
+        name = 'weapon_wrench',
+        label = 'Wrench',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_battleaxe`] = {
+        name = 'weapon_battleaxe',
+        label = 'Battle Axe',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_poolcue`] = {
+        name = 'weapon_poolcue',
+        label = 'Poolcue',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_briefcase`] = {
+        name = 'weapon_briefcase',
+        label = 'Briefcase',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_briefcase_02`] = {
+        name = 'weapon_briefcase_02',
+        label = 'Briefcase',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_garbagebag`] = {
+        name = 'weapon_garbagebag',
+        label = 'Garbage Bag',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_handcuffs`] = {
+        name = 'weapon_handcuffs',
+        label = 'Handcuffs',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_bread`] = {
+        name = 'weapon_bread',
+        label = 'Baquette',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_stone_hatchet`] = {
+        name = 'weapon_stone_hatchet',
+        label = 'Stone Hatchet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+
+    -- Handguns
+    [`weapon_pistol`] = {
+        name = 'weapon_pistol',
+        label = 'Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_pistol_mk2`] = {
+        name = 'weapon_pistol_mk2',
+        label = 'Pistol Mk2',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_combatpistol`] = {
+        name = 'weapon_combatpistol',
+        label = 'Combat Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_appistol`] = {
+        name = 'weapon_appistol',
+        label = 'AP Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_stungun`] = {
+        name = 'weapon_stungun',
+        label = 'Taser',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_STUNGUN',
+        damagereason = 'Died'
+    },
+    [`weapon_pistol50`] = {
+        name = 'weapon_pistol50',
+        label = 'Pistol .50 Cal',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_snspistol`] = {
+        name = 'weapon_snspistol',
+        label = 'SNS Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_snspistol_mk2`] = {
+        name = 'weapon_snspistol_mk2',
+        label = 'SNS Pistol MK2',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_heavypistol`] = {
+        name = 'weapon_heavypistol',
+        label = 'Heavy Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_vintagepistol`] = {
+        name = 'weapon_vintagepistol',
+        label = 'Vintage Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_flaregun`] = {
+        name = 'weapon_flaregun',
+        label = 'Flare Gun',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_FLARE',
+        damagereason = 'Died'
+    },
+    [`weapon_marksmanpistol`] = {
+        name = 'weapon_marksmanpistol',
+        label = 'Marksman Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_revolver`] = {
+        name = 'weapon_revolver',
+        label = 'Revolver',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_revolver_mk2`] = {
+        name = 'weapon_revolver_mk2',
+        label = 'Revolver MK2',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_doubleaction`] = {
+        name = 'weapon_doubleaction',
+        label = 'Double Action Revolver',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_raypistol`] = {
+        name = 'weapon_raypistol',
+        label = 'Ray Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_ceramicpistol`] = {
+        name = 'weapon_ceramicpistol',
+        label = 'Ceramic Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_navyrevolver`] = {
+        name = 'weapon_navyrevolver',
+        label = 'Navy Revolver',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_gadgetpistol`] = {
+        name = 'weapon_gadgetpistol',
+        label = 'Gadget Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_stungun_mp`] = {
+        name = 'weapon_stungun_mp',
+        label = 'Taser',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_STUNGUN',
+        damagereason = 'Died'
+    },
+
+    -- Submachine Guns
+    [`weapon_microsmg`] = {
+        name = 'weapon_microsmg',
+        label = 'Micro SMG',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_smg`] = {
+        name = 'weapon_smg',
+        label = 'SMG',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_smg_mk2`] = {
+        name = 'weapon_smg_mk2',
+        label = 'SMG MK2',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_assaultsmg`] = {
+        name = 'weapon_assaultsmg',
+        label = 'Assault SMG',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_combatpdw`] = {
+        name = 'weapon_combatpdw',
+        label = 'Combat PDW',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_machinepistol`] = {
+        name = 'weapon_machinepistol',
+        label = 'Tec-9',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_minismg`] = {
+        name = 'weapon_minismg',
+        label = 'Mini SMG',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_raycarbine`] = {
+        name = 'weapon_raycarbine',
+        label = 'Raycarbine',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+
+    -- Shotguns
+    [`weapon_pumpshotgun`] = {
+        name = 'weapon_pumpshotgun',
+        label = 'Pump Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_pumpshotgun_mk2`] = {
+        name = 'weapon_pumpshotgun_mk2',
+        label = 'Pump Shotgun MK2',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_sawnoffshotgun`] = {
+        name = 'weapon_sawnoffshotgun',
+        label = 'Sawn-off Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_assaultshotgun`] = {
+        name = 'weapon_assaultshotgun',
+        label = 'Assault Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_bullpupshotgun`] = {
+        name = 'weapon_bullpupshotgun',
+        label = 'Bullpup Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_musket`] = {
+        name = 'weapon_musket',
+        label = 'Musket',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_heavyshotgun`] = {
+        name = 'weapon_heavyshotgun',
+        label = 'Heavy Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_dbshotgun`] = {
+        name = 'weapon_dbshotgun',
+        label = 'Double-barrel Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_autoshotgun`] = {
+        name = 'weapon_autoshotgun',
+        label = 'Auto Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_combatshotgun`] = {
+        name = 'weapon_combatshotgun',
+        label = 'Combat Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+
+    -- Assault Rifles
+    [`weapon_assaultrifle`] = {
+        name = 'weapon_assaultrifle',
+        label = 'Assault Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_assaultrifle_mk2`] = {
+        name = 'weapon_assaultrifle_mk2',
+        label = 'Assault Rifle MK2',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_carbinerifle`] = {
+        name = 'weapon_carbinerifle',
+        label = 'Carbine Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = { 'AMMO_RIFLE', 'AMMO_POLICE_RIFLE' },
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_carbinerifle_mk2`] = {
+        name = 'weapon_carbinerifle_mk2',
+        label = 'Carbine Rifle MK2',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_advancedrifle`] = {
+        name = 'weapon_advancedrifle',
+        label = 'Advanced Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_specialcarbine`] = {
+        name = 'weapon_specialcarbine',
+        label = 'Special Carbine',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_specialcarbine_mk2`] = {
+        name = 'weapon_specialcarbine_mk2',
+        label = 'Specialcarbine MK2',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_bullpuprifle`] = {
+        name = 'weapon_bullpuprifle',
+        label = 'Bullpup Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_bullpuprifle_mk2`] = {
+        name = 'weapon_bullpuprifle_mk2',
+        label = 'Bull Puprifle MK2',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_compactrifle`] = {
+        name = 'weapon_compactrifle',
+        label = 'Compact Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_militaryrifle`] = {
+        name = 'weapon_militaryrifle',
+        label = 'Military Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_heavyrifle`] = {
+        name = 'weapon_heavyrifle',
+        label = 'Heavy Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_tacticalrifle`] = {
+        name = 'weapon_tacticalrifle',
+        label = 'Service Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+
+    -- Light Machine Guns
+    [`weapon_mg`] = {
+        name = 'weapon_mg',
+        label = 'Machinegun',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+    [`weapon_combatmg`] = {
+        name = 'weapon_combatmg',
+        label = 'Combat MG',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+    [`weapon_combatmg_mk2`] = {
+        name = 'weapon_combatmg_mk2',
+        label = 'Combat MG MK2',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+    [`weapon_gusenberg`] = {
+        name = 'weapon_gusenberg',
+        label = 'Thompson SMG',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+
+    -- Sniper Rifles
+    [`weapon_sniperrifle`] = {
+        name = 'weapon_sniperrifle',
+        label = 'Sniper Rifle',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_heavysniper`] = {
+        name = 'weapon_heavysniper',
+        label = 'Heavy Sniper',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_heavysniper_mk2`] = {
+        name = 'weapon_heavysniper_mk2',
+        label = 'Heavysniper MK2',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_marksmanrifle`] = {
+        name = 'weapon_marksmanrifle',
+        label = 'Marksman Rifle',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_dhr31`] = {
+        name = 'weapon_dhr31',
+        label = 'Hunting Rifle',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_marksmanrifle_mk2`] = {
+        name = 'weapon_marksmanrifle_mk2',
+        label = 'Marksman Rifle MK2',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_remotesniper`] = {
+        name = 'weapon_remotesniper',
+        label = 'Remote Sniper',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER_REMOTE',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_precisionrifle`] = {
+        name = 'weapon_precisionrifle',
+        label = 'Precision Rifle',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+
+    -- Heavy Weapons
+    [`weapon_rpg`] = {
+        name = 'weapon_rpg',
+        label = 'RPG',
+        weapontype = 'Heavy Weapons',
+        ammotype = 'AMMO_RPG',
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_grenadelauncher`] = {
+        name = 'weapon_grenadelauncher',
+        label = 'Grenade Launcher',
+        weapontype = 'Heavy Weapons',
+        ammotype = 'AMMO_GRENADELAUNCHER',
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_grenadelauncher_smoke`] = {
+        name = 'weapon_grenadelauncher_smoke',
+        label = 'Smoke Grenade Launcher',
+        weapontype = 'Heavy Weapons',
+        ammotype = 'AMMO_GRENADELAUNCHER',
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_minigun`] = {
+        name = 'weapon_minigun',
+        label = 'Minigun',
+        weapontype = 'Heavy Weapons',
+        ammotype = 'AMMO_MINIGUN',
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_firework`] = {
+        name = 'weapon_firework',
+        label = 'Firework Launcher',
+        weapontype = 'Heavy Weapons',
+        ammotype = nil,
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_railgun`] = {
+        name = 'weapon_railgun',
+        label = 'Railgun',
+        weapontype = 'Heavy Weapons',
+        ammotype = nil,
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_hominglauncher`] = {
+        name = 'weapon_hominglauncher',
+        label = 'Homing Launcher',
+        weapontype = 'Heavy Weapons',
+        ammotype = 'AMMO_STINGER',
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_compactlauncher`] = {
+        name = 'weapon_compactlauncher',
+        label = 'Compact Launcher',
+        weapontype = 'Heavy Weapons',
+        ammotype = nil,
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_rayminigun`] = {
+        name = 'weapon_rayminigun',
+        label = 'Ray Minigun',
+        weapontype = 'Heavy Weapons',
+        ammotype = 'AMMO_MINIGUN',
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_emplauncher`] = {
+        name = 'weapon_emplauncher',
+        label = 'EMP Launcher',
+        weapontype = 'Heavy Weapons',
+        ammotype = 'AMMO_EMPLAUNCHER',
+        damagereason = 'Died'
+    },
+
+    -- Throwables
+    [`weapon_grenade`] = {
+        name = 'weapon_grenade',
+        label = 'Grenade',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Bombed / Exploded / Detonated / Blew up'
+    },
+    [`weapon_bzgas`] = {
+        name = 'weapon_bzgas',
+        label = 'BZ Gas',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_molotov`] = {
+        name = 'weapon_molotov',
+        label = 'Molotov',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Torched / Flambeed / Barbecued'
+    },
+    [`weapon_stickybomb`] = {
+        name = 'weapon_stickybomb',
+        label = 'C4',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Bombed / Exploded / Detonated / Blew up'
+    },
+    [`weapon_proxmine`] = {
+        name = 'weapon_proxmine',
+        label = 'Proxmine Grenade',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Bombed / Exploded / Detonated / Blew up'
+    },
+    [`weapon_snowball`] = {
+        name = 'weapon_snowball',
+        label = 'Snowball',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_pipebomb`] = {
+        name = 'weapon_pipebomb',
+        label = 'Pipe Bomb',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Bombed / Exploded / Detonated / Blew up'
+    },
+    [`weapon_ball`] = {
+        name = 'weapon_ball',
+        label = 'Ball',
+        weapontype = 'Throwable',
+        ammotype = 'AMMO_BALL',
+        damagereason = 'Died'
+    },
+    [`weapon_smokegrenade`] = {
+        name = 'weapon_smokegrenade',
+        label = 'Smoke Grenade',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_flare`] = {
+        name = 'weapon_flare',
+        label = 'Flare pistol',
+        weapontype = 'Throwable',
+        ammotype = 'AMMO_FLARE',
+        damagereason = 'Died'
+    },
+
+    -- Miscellaneous
+    [`weapon_petrolcan`] = {
+        name = 'weapon_petrolcan',
+        label = 'Petrol Can',
+        weapontype = 'Miscellaneous',
+        ammotype = 'AMMO_PETROLCAN',
+        damagereason = 'Died'
+    },
+    [`gadget_parachute`] = {
+        name = 'gadget_parachute',
+        label = 'Parachute',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_fireextinguisher`] = {
+        name = 'weapon_fireextinguisher',
+        label = 'Fire Extinguisher',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_hazardcan`] = {
+        name = 'weapon_hazardcan',
+        label = 'Hazardcan',
+        weapontype = 'Miscellaneous',
+        ammotype = 'AMMO_PETROLCAN',
+        damagereason = 'Died'
+    },
+    [`weapon_fertilizercan`] = {
+        name = 'weapon_fertilizercan',
+        label = 'Fertilizer Can',
+        weapontype = 'Miscellaneous',
+        ammotype = 'AMMO_FERTILIZERCAN',
+        damagereason = 'Died'
+    },
+    [`weapon_barbed_wire`] = {
+        name = 'weapon_barbed_wire',
+        label = 'Barbed Wire',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Prodded'
+    },
+    [`weapon_drowning`] = {
+        name = 'weapon_drowning',
+        label = 'Drowning',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_drowning_in_vehicle`] = {
+        name = 'weapon_drowning_in_vehicle',
+        label = 'Drowning in a Vehicle',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_bleeding`] = {
+        name = 'weapon_bleeding',
+        label = 'Bleeding',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Bled out'
+    },
+    [`weapon_electric_fence`] = {
+        name = 'weapon_electric_fence',
+        label = 'Electric Fence',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Fried'
+    },
+    [`weapon_explosion`] = {
+        name = 'weapon_explosion',
+        label = 'Explosion',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Killed / Exploded / Obliterated / Destroyed / Erased / Annihilated'
+    },
+    [`weapon_fall`] = {
+        name = 'weapon_fall',
+        label = 'Fall',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Committed suicide'
+    },
+    [`weapon_exhaustion`] = {
+        name = 'weapon_exhaustion',
+        label = 'Exhaustion',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_hit_by_water_cannon`] = {
+        name = 'weapon_hit_by_water_cannon',
+        label = 'Water Cannon',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+    [`weapon_rammed_by_car`] = {
+        name = 'weapon_rammed_by_car',
+        label = 'Rammed - Vehicle',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Flattened / Ran over / Ran down'
+    },
+    [`weapon_run_over_by_car`] = {
+        name = 'weapon_run_over_by_car',
+        label = 'Run Over - Vehicle',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Flattened / Ran over / Ran down'
+    },
+    [`weapon_heli_crash`] = {
+        name = 'weapon_heli_crash',
+        label = 'Heli Crash',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Helicopter Crash'
+    },
+    [`weapon_fire`] = {
+        name = 'weapon_fire',
+        label = 'Fire',
+        weapontype = 'Miscellaneous',
+        ammotype = nil,
+        damagereason = 'Torched / Flambeed / Barbecued'
+    },
+    [`weapon_metaldetector`] = {
+        name = 'weapon_metaldetector',
+        label = 'Metal Dectector',
+        weapontype = 'Miscellaneous',
+        ammotype = 'nil',
+        damagereason = 'Died'
+    },
+
+    -- Animals
+    [`weapon_animal`] = {
+        name = 'weapon_animal',
+        label = 'Animal',
+        weapontype = 'Animals',
+        ammotype = nil,
+        damagereason = 'Mauled'
+    },
+    [`weapon_cougar`] = {
+        name = 'weapon_cougar',
+        label = 'Cougar',
+        weapontype = 'Animals',
+        ammotype = nil,
+        damagereason = 'Mauled'
+    },
+
+    -- Police
+    [`weapon_beanbag`] = {
+        name = 'weapon_beanbag',
+        label = 'Bean Bag Shotgun',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Hurt by a beanbag from a non-lethal shotgun'
+    },
+
+    -- Kyros Weapon Pack V5
+    [`weapon_bar15`] = {
+        name = 'weapon_bar15',
+        label = 'AR-15',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_blackarp`] = {
+        name = 'weapon_blackarp',
+        label = 'BLACK ARP',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_bscar`] = {
+        name = 'weapon_bscar',
+        label = 'BLACK SCAR',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_thompson`] = {
+        name = 'weapon_thompson',
+        label = 'BLACK THOMPSON',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_dmk18`] = {
+        name = 'weapon_dmk18',
+        label = 'DESERET MK18',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_lbtarp`] = {
+        name = 'weapon_lbtarp',
+        label = 'LB TAN ARP',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_ram7`] = {
+        name = 'weapon_ram7',
+        label = 'RAM-7',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_redarp`] = {
+        name = 'weapon_redarp',
+        label = 'RED DRAG ARP',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_redm4a1`] = {
+        name = 'weapon_redm4a1',
+        label = 'RED DRAG M4A1',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_tarp`] = {
+        name = 'weapon_tarp',
+        label = 'TAN ARP',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_woarp`] = {
+        name = 'weapon_woarp',
+        label = 'WHITE OUT ARP',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_blueglocks`] = {
+        name = 'weapon_blueglocks',
+        label = 'BLUE GLOCK SWITCH',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_fn57`] = {
+        name = 'weapon_fn57',
+        label = 'FN Five-seveN',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock21`] = {
+        name = 'weapon_glock21',
+        label = 'GLOCK 21',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock41`] = {
+        name = 'weapon_glock41',
+        label = 'GLOCK 41',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glockbeams`] = {
+        name = 'weapon_glockbeams',
+        label = 'GLOCK BEAM SWITCH',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_p30l`] = {
+        name = 'weapon_p30l',
+        label = 'H&K P30L',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_illglock17`] = {
+        name = 'weapon_illglock17',
+        label = 'ILLEGAL GLOCK 17',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_mgglock`] = {
+        name = 'weapon_mgglock',
+        label = 'MG GLOCK',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_midasglock`] = {
+        name = 'weapon_midasglock',
+        label = 'MIDAS GLOCK',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_p210`] = {
+        name = 'weapon_p210',
+        label = 'P210 CARRY',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_sr40`] = {
+        name = 'weapon_sr40',
+        label = 'RUGER SR40',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_t1911`] = {
+        name = 'weapon_t1911',
+        label = 'TAN 1911',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_tglock19`] = {
+        name = 'weapon_tglock19',
+        label = 'TAN G19',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_axe`] = {
+        name = 'weapon_axe',
+        label = 'AXE',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_chair`] = {
+        name = 'weapon_chair',
+        label = 'BRAWL CHAIR',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_krissvector`] = {
+        name = 'weapon_krissvector',
+        label = 'KRISS VECTOR',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_tec9s`] = {
+        name = 'weapon_tec9s',
+        label = 'TEC 9 W STRAP',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_m500`] = {
+        name = 'weapon_m500',
+        label = 'MOSSBERG 500',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_r590`] = {
+        name = 'weapon_r590',
+        label = 'REMINGTON 590',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+
+    -- GG Hunting Weapons
+    [`weapon_huntingrifle`] = {
+        name = 'weapon_huntingrifle',
+        label = 'Hunting Rifle',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_crossbow`] = {
+        name = 'weapon_crossbow',
+        label = 'Hunting Crossbow',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+
+    -- CSGO Knives
+    [`weapon_karambit_forest`] = {
+        name = 'weapon_karambit_forest',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_safarimesh`] = {
+        name = 'weapon_karambit_safarimesh',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_borealforest`] = {
+        name = 'weapon_karambit_borealforest',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_scorched`] = {
+        name = 'weapon_karambit_scorched',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_urbanmasked`] = {
+        name = 'weapon_karambit_urbanmasked',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_rustcoat`] = {
+        name = 'weapon_karambit_rustcoat',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_night`] = {
+        name = 'weapon_karambit_night',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_stained`] = {
+        name = 'weapon_karambit_stained',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_ultraviolet`] = {
+        name = 'weapon_karambit_ultraviolet',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_brightwater`] = {
+        name = 'weapon_karambit_brightwater',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_crimsonweb`] = {
+        name = 'weapon_karambit_crimsonweb',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_freehand`] = {
+        name = 'weapon_karambit_freehand',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_damascussteel`] = {
+        name = 'weapon_karambit_damascussteel',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_casehardend`] = {
+        name = 'weapon_karambit_casehardend',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_bluesteel`] = {
+        name = 'weapon_karambit_bluesteel',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_lore`] = {
+        name = 'weapon_karambit_lore',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_blacklaminated`] = {
+        name = 'weapon_karambit_blacklaminated',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_slaughter`] = {
+        name = 'weapon_karambit_slaughter',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_tigertooth`] = {
+        name = 'weapon_karambit_tigertooth',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase1`] = {
+        name = 'weapon_karambit_dopplerphase1',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase3`] = {
+        name = 'weapon_karambit_dopplerphase3',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_autotronic`] = {
+        name = 'weapon_karambit_autotronic',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_marblefade`] = {
+        name = 'weapon_karambit_marblefade',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase2`] = {
+        name = 'weapon_karambit_dopplerphase2',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase4`] = {
+        name = 'weapon_karambit_dopplerphase4',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp1`] = {
+        name = 'weapon_karambit_gdp1',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp3`] = {
+        name = 'weapon_karambit_gdp3',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp4`] = {
+        name = 'weapon_karambit_gdp4',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_fade`] = {
+        name = 'weapon_karambit_fade',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp2`] = {
+        name = 'weapon_karambit_gdp2',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_blackpearl`] = {
+        name = 'weapon_karambit_blackpearl',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerruby`] = {
+        name = 'weapon_karambit_dopplerruby',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdemerald`] = {
+        name = 'weapon_karambit_gdemerald',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplersapphire`] = {
+        name = 'weapon_karambit_dopplersapphire',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_scorched`] = {
+        name = 'weapon_bf_scorched',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_safarimesh`] = {
+        name = 'weapon_bf_safarimesh',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_urbanmasked`] = {
+        name = 'weapon_bf_urbanmasked',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_forest`] = {
+        name = 'weapon_bf_forest',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_borealforest`] = {
+        name = 'weapon_bf_borealforest',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_ultraviolet`] = {
+        name = 'weapon_bf_ultraviolet',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_night`] = {
+        name = 'weapon_bf_night',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_stained`] = {
+        name = 'weapon_bf_stained',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_rustcoat`] = {
+        name = 'weapon_bf_rustcoat',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_casehardend`] = {
+        name = 'weapon_bf_casehardend',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_bluesteel`] = {
+        name = 'weapon_bf_bluesteel',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_crimsonweb`] = {
+        name = 'weapon_bf_crimsonweb',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_damascussteel`] = {
+        name = 'weapon_bf_damascussteel',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_slaughter`] = {
+        name = 'weapon_bf_slaughter',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_tigertooth`] = {
+        name = 'weapon_bf_tigertooth',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase3`] = {
+        name = 'weapon_bf_dopplerphase3',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase1`] = {
+        name = 'weapon_bf_dopplerphase1',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase2`] = {
+        name = 'weapon_bf_dopplerphase2',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_fade`] = {
+        name = 'weapon_bf_fade',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase4`] = {
+        name = 'weapon_bf_dopplerphase4',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerblackpearl`] = {
+        name = 'weapon_bf_dopplerblackpearl',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerruby`] = {
+        name = 'weapon_bf_dopplerruby',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplersapphire`] = {
+        name = 'weapon_bf_dopplersapphire',
+        label = 'Butterfly',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_safarimesh`] = {
+        name = 'weapon_m9_safarimesh',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_urbanmasked`] = {
+        name = 'weapon_m9_urbanmasked',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_scorched`] = {
+        name = 'weapon_m9_scorched',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_stained`] = {
+        name = 'weapon_m9_stained',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_ultraviolet`] = {
+        name = 'weapon_m9_ultraviolet',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_brightwater`] = {
+        name = 'weapon_m9_brightwater',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_crimsonweb`] = {
+        name = 'weapon_m9_crimsonweb',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_freehand`] = {
+        name = 'weapon_m9_freehand',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_damascussteel`] = {
+        name = 'weapon_m9_damascussteel',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_casehardend`] = {
+        name = 'weapon_m9_casehardend',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_bluesteel`] = {
+        name = 'weapon_m9_bluesteel',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_lore`] = {
+        name = 'weapon_m9_lore',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_blacklaminate`] = {
+        name = 'weapon_m9_blacklaminate',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_slaughter`] = {
+        name = 'weapon_m9_slaughter',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_tigertooth`] = {
+        name = 'weapon_m9_tigertooth',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_doppler1`] = {
+        name = 'weapon_m9_doppler1',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_doppler3`] = {
+        name = 'weapon_m9_doppler3',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_autotronic`] = {
+        name = 'weapon_m9_autotronic',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_marblefade`] = {
+        name = 'weapon_m9_marblefade',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_doppler2`] = {
+        name = 'weapon_m9_doppler2',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_doppler4`] = {
+        name = 'weapon_m9_doppler4',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp1`] = {
+        name = 'weapon_m9_gdp1',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp3`] = {
+        name = 'weapon_m9_gdp3',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp4`] = {
+        name = 'weapon_m9_gdp4',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_fade`] = {
+        name = 'weapon_m9_fade',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp2`] = {
+        name = 'weapon_m9_gdp2',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerblackpearl`] = {
+        name = 'weapon_m9_dopplerblackpearl',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerruby`] = {
+        name = 'weapon_m9_dopplerruby',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdemerald`] = {
+        name = 'weapon_m9_gdemerald',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplersapphire`] = {
+        name = 'weapon_m9_dopplersapphire',
+        label = 'Bayonet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+
+    -- Assets Weapons Pack
+    -- Assault Rifles
+    [`weapon_ak47`] = {
+        name = 'weapon_ak47',
+        label = 'AK-47',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_ak47m2`] = {
+        name = 'weapon_ak47m2',
+        label = 'AK-47 M2',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_ak74`] = {
+        name = 'weapon_ak74',
+        label = 'AK-74',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_aks74`] = {
+        name = 'weapon_aks74',
+        label = 'AKS-74',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_ar15`] = {
+        name = 'weapon_ar15',
+        label = 'AR-15',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_ar16`] = {
+        name = 'weapon_ar16',
+        label = 'AR-16',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_fnfal`] = {
+        name = 'weapon_fnfal',
+        label = 'FN FAL',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_scarh`] = {
+        name = 'weapon_scarh',
+        label = 'SCAR-H',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_tar21`] = {
+        name = 'weapon_tar21',
+        label = 'TAR-21',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_pdm4a1`] = {
+        name = 'weapon_pdm4a1',
+        label = 'PDM M4A1',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_m4`] = {
+        name = 'weapon_m4',
+        label = 'M4A1 Carbine',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_mk47fm`] = {
+        name = 'weapon_mk47fm',
+        label = 'MK47 Mutant',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_m6ic`] = {
+        name = 'weapon_m6ic',
+        label = 'LWRC M6IC',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_scarsc`] = {
+        name = 'weapon_scarsc',
+        label = 'Scar SC',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_groza`] = {
+        name = 'weapon_groza',
+        label = 'OTs-14 Groza',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+
+    -- Pistols
+    [`weapon_de`] = {
+        name = 'weapon_de',
+        label = 'Desert Eagle',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_deagle`] = {
+        name = 'weapon_deagle',
+        label = 'Desert Eagle',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_browning`] = {
+        name = 'weapon_browning',
+        label = 'Browning',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_dp9`] = {
+        name = 'weapon_dp9',
+        label = 'DP9',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_fnfnx45`] = {
+        name = 'weapon_fnfnx45',
+        label = 'FN FNX-45',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_fnx45`] = {
+        name = 'weapon_fnx45',
+        label = 'FN FNX-45',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock17`] = {
+        name = 'weapon_glock17',
+        label = 'Glock 17',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock18c`] = {
+        name = 'weapon_glock18c',
+        label = 'Glock 18C',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock20`] = {
+        name = 'weapon_glock20',
+        label = 'Glock 20',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock22`] = {
+        name = 'weapon_glock22',
+        label = 'Glock 22',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_glock19gen4`] = {
+        name = 'weapon_glock19gen4',
+        label = 'Glock 19 Gen 4',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_m9a3`] = {
+        name = 'weapon_m9a3',
+        label = 'M9A3',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_m45a1`] = {
+        name = 'weapon_m45a1',
+        label = 'M45A1',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_m1911`] = {
+        name = 'weapon_m1911',
+        label = 'M1911',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_manurhin`] = {
+        name = 'weapon_manurhin',
+        label = 'Manurhin',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_python`] = {
+        name = 'weapon_python',
+        label = 'Python',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_ragingbull`] = {
+        name = 'weapon_ragingbull',
+        label = 'Raging Bull',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+
+    -- Submachine Guns
+    [`weapon_draco`] = {
+        name = 'weapon_draco',
+        label = 'Draco',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_mp9`] = {
+        name = 'weapon_mp9',
+        label = 'MP9',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_SMG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_pmxfm`] = {
+        name = 'weapon_pmxfm',
+        label = 'Beretta PMX',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+    [`weapon_mac10`] = {
+        name = 'weapon_mac10',
+        label = 'MAC-10',
+        weapontype = 'Submachine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Riddled / Drilled / Finished / Submachine Gunned'
+    },
+
+    -- Shotguns
+    [`weapon_aa12`] = {
+        name = 'weapon_aa12',
+        label = 'AA-12',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_komrad12`] = {
+        name = 'weapon_komrad12',
+        label = 'Komrad 12',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_mossberg500`] = {
+        name = 'weapon_mossberg500',
+        label = 'Mossberg 500',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_remington870`] = {
+        name = 'weapon_remington870',
+        label = 'Remington 870',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_saiga12g`] = {
+        name = 'weapon_saiga12g',
+        label = 'Saiga 12G',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_spas12`] = {
+        name = 'weapon_spas12',
+        label = 'SPAS-12',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+
+    -- Machine Guns
+    [`weapon_m249`] = {
+        name = 'weapon_m249',
+        label = 'M249',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+    [`weapon_m249_mk2`] = {
+        name = 'weapon_m249_mk2',
+        label = 'M249 MK2',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+    [`weapon_pkm`] = {
+        name = 'weapon_pkm',
+        label = 'PKM',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+    [`weapon_rpd`] = {
+        name = 'weapon_rpd',
+        label = 'RPD',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+    [`weapon_rpd2`] = {
+        name = 'weapon_rpd2',
+        label = 'RPD2',
+        weapontype = 'Light Machine Gun',
+        ammotype = 'AMMO_MG',
+        damagereason = 'Machine gunned / Sprayed / Ruined'
+    },
+
+    -- Sniper Rifles
+    [`weapon_m110`] = {
+        name = 'weapon_m110',
+        label = 'M110',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+    [`weapon_mk14`] = {
+        name = 'weapon_mk14',
+        label = 'MK14',
+        weapontype = 'Sniper Rifle',
+        ammotype = 'AMMO_SNIPER',
+        damagereason = 'Sniped / Picked off / Scoped'
+    },
+
+    -- Melee Weapons
+    [`weapon_katana`] = {
+        name = 'weapon_katana',
+        label = 'Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_karambit`] = {
+        name = 'weapon_karambit',
+        label = 'Karambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_keyboard`] = {
+        name = 'weapon_keyboard',
+        label = 'Keyboard',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_khukuri`] = {
+        name = 'weapon_khukuri',
+        label = 'Khukuri',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_krambit`] = {
+        name = 'weapon_krambit',
+        label = 'Krambit',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_penetrator`] = {
+        name = 'weapon_penetrator',
+        label = 'Penetrator',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_pick`] = {
+        name = 'weapon_pick',
+        label = 'Pickaxe',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_riftedge`] = {
+        name = 'weapon_riftedge',
+        label = 'Rift Edge',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_shiv`] = {
+        name = 'weapon_shiv',
+        label = 'Shiv',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_sledgehammer`] = {
+        name = 'weapon_sledgehammer',
+        label = 'Sledgehammer',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_steel_mace`] = {
+        name = 'weapon_steel_mace',
+        label = 'Steel Mace',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_sword`] = {
+        name = 'weapon_sword',
+        label = 'Sword',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_berserker`] = {
+        name = 'weapon_berserker',
+        label = 'Berserker',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+    [`weapon_dildo`] = {
+        name = 'weapon_dildo',
+        label = 'Dildo',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Melee killed / Whacked / Executed / Beat down / Murdered / Battered'
+    },
+
+    -- Grenades
+    [`weapon_m67`] = {
+        name = 'weapon_m67',
+        label = 'M67 Grenade',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Bombed / Exploded / Detonated / Blew up'
+    },
+    [`weapon_flashbang`] = {
+        name = 'weapon_flashbang',
+        label = 'Flashbang',
+        weapontype = 'Throwable',
+        ammotype = nil,
+        damagereason = 'Died'
+    },
+
+    -- Special
+    [`weapon_bdhg`] = {
+        name = 'weapon_bdhg',
+        label = 'BDHG',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+
+    -- CS:GO Knives Pack (Heist Knives)
+    -- M9 Bayonet Variants
+    [`weapon_m9_autotronic`] = {
+        name = 'weapon_m9_autotronic',
+        label = 'M9 Bayonet Autotronic',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_blacklaminate`] = {
+        name = 'weapon_m9_blacklaminate',
+        label = 'M9 Bayonet Black Laminate',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_bluesteel`] = {
+        name = 'weapon_m9_bluesteel',
+        label = 'M9 Bayonet Blue Steel',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_brightwater`] = {
+        name = 'weapon_m9_brightwater',
+        label = 'M9 Bayonet Bright Water',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_casehardened`] = {
+        name = 'weapon_m9_casehardened',
+        label = 'M9 Bayonet Case Hardened',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_crimsonweb`] = {
+        name = 'weapon_m9_crimsonweb',
+        label = 'M9 Bayonet Crimson Web',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_damascussteel`] = {
+        name = 'weapon_m9_damascussteel',
+        label = 'M9 Bayonet Damascus Steel',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerblackpearl`] = {
+        name = 'weapon_m9_dopplerblackpearl',
+        label = 'M9 Bayonet Doppler Black Pearl',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerp1`] = {
+        name = 'weapon_m9_dopplerp1',
+        label = 'M9 Bayonet Doppler Phase 1',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerp2`] = {
+        name = 'weapon_m9_dopplerp2',
+        label = 'M9 Bayonet Doppler Phase 2',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerp3`] = {
+        name = 'weapon_m9_dopplerp3',
+        label = 'M9 Bayonet Doppler Phase 3',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerp4`] = {
+        name = 'weapon_m9_dopplerp4',
+        label = 'M9 Bayonet Doppler Phase 4',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplerruby`] = {
+        name = 'weapon_m9_dopplerruby',
+        label = 'M9 Bayonet Doppler Ruby',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_dopplersapphire`] = {
+        name = 'weapon_m9_dopplersapphire',
+        label = 'M9 Bayonet Doppler Sapphire',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdemerald`] = {
+        name = 'weapon_m9_gdemerald',
+        label = 'M9 Bayonet Emerald',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_fade`] = {
+        name = 'weapon_m9_fade',
+        label = 'M9 Bayonet Fade',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_freehand`] = {
+        name = 'weapon_m9_freehand',
+        label = 'M9 Bayonet Free Hand',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp1`] = {
+        name = 'weapon_m9_gdp1',
+        label = 'M9 Bayonet Gamma Doppler Phase 1',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp2`] = {
+        name = 'weapon_m9_gdp2',
+        label = 'M9 Bayonet Gamma Doppler Phase 2',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp3`] = {
+        name = 'weapon_m9_gdp3',
+        label = 'M9 Bayonet Gamma Doppler Phase 3',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_gdp4`] = {
+        name = 'weapon_m9_gdp4',
+        label = 'M9 Bayonet Gamma Doppler Phase 4',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_lore`] = {
+        name = 'weapon_m9_lore',
+        label = 'M9 Bayonet Lore',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_marblefade`] = {
+        name = 'weapon_m9_marblefade',
+        label = 'M9 Bayonet Marble Fade',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_safarimesh`] = {
+        name = 'weapon_m9_safarimesh',
+        label = 'M9 Bayonet Safari Mesh',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_scorched`] = {
+        name = 'weapon_m9_scorched',
+        label = 'M9 Bayonet Scorched',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_slaugther`] = {
+        name = 'weapon_m9_slaugther',
+        label = 'M9 Bayonet Slaugther',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_stained`] = {
+        name = 'weapon_m9_stained',
+        label = 'M9 Bayonet Stained',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_tigertooth`] = {
+        name = 'weapon_m9_tigertooth',
+        label = 'M9 Bayonet Tiger Tooth',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_ultraviolet`] = {
+        name = 'weapon_m9_ultraviolet',
+        label = 'M9 Bayonet Ultra Violet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_m9_urbanmasked`] = {
+        name = 'weapon_m9_urbanmasked',
+        label = 'M9 Bayonet Urban Masked',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+
+    -- Butterfly Knife Variants
+    [`weapon_bf_bluesteel`] = {
+        name = 'weapon_bf_bluesteel',
+        label = 'Butterfly Blue Steel',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_borealforest`] = {
+        name = 'weapon_bf_borealforest',
+        label = 'Butterfly Boreal Forest',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_casehardened`] = {
+        name = 'weapon_bf_casehardened',
+        label = 'Butterfly Case Hardened',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_crimsonweb`] = {
+        name = 'weapon_bf_crimsonweb',
+        label = 'Butterfly Crimson Web',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_damascussteel`] = {
+        name = 'weapon_bf_damascussteel',
+        label = 'Butterfly Damascus Steel',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerblackpearl`] = {
+        name = 'weapon_bf_dopplerblackpearl',
+        label = 'Butterfly Doppler Black Pearl',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase1`] = {
+        name = 'weapon_bf_dopplerphase1',
+        label = 'Butterfly Doppler Phase 1',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase2`] = {
+        name = 'weapon_bf_dopplerphase2',
+        label = 'Butterfly Doppler Phase 2',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase3`] = {
+        name = 'weapon_bf_dopplerphase3',
+        label = 'Butterfly Doppler Phase 3',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerphase4`] = {
+        name = 'weapon_bf_dopplerphase4',
+        label = 'Butterfly Doppler Phase 4',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplerruby`] = {
+        name = 'weapon_bf_dopplerruby',
+        label = 'Butterfly Doppler Ruby',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_dopplersapphire`] = {
+        name = 'weapon_bf_dopplersapphire',
+        label = 'Butterfly Doppler Sapphire',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_fade`] = {
+        name = 'weapon_bf_fade',
+        label = 'Butterfly Fade',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_forest`] = {
+        name = 'weapon_bf_forest',
+        label = 'Butterfly Forest',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_night`] = {
+        name = 'weapon_bf_night',
+        label = 'Butterfly Night',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_rustcoat`] = {
+        name = 'weapon_bf_rustcoat',
+        label = 'Butterfly Rust Coat',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_safarimesh`] = {
+        name = 'weapon_bf_safarimesh',
+        label = 'Butterfly Safari Mesh',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_scorched`] = {
+        name = 'weapon_bf_scorched',
+        label = 'Butterfly Scorched',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_slaugther`] = {
+        name = 'weapon_bf_slaugther',
+        label = 'Butterfly Slaugther',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_stained`] = {
+        name = 'weapon_bf_stained',
+        label = 'Butterfly Stained',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_tigertooth`] = {
+        name = 'weapon_bf_tigertooth',
+        label = 'Butterfly Tiger Tooth',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_ultraviolet`] = {
+        name = 'weapon_bf_ultraviolet',
+        label = 'Butterfly Ultra Violet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_bf_urbanmasked`] = {
+        name = 'weapon_bf_urbanmasked',
+        label = 'Butterfly Urban Masked',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+
+    -- Karambit Variants
+    [`weapon_karambit_autotronic`] = {
+        name = 'weapon_karambit_autotronic',
+        label = 'Karambit Autotronic',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_blacklaminate`] = {
+        name = 'weapon_karambit_blacklaminate',
+        label = 'Karambit Black Laminate',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_bluesteel`] = {
+        name = 'weapon_karambit_bluesteel',
+        label = 'Karambit Blue Steel',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_borealforest`] = {
+        name = 'weapon_karambit_borealforest',
+        label = 'Karambit Boreal Forest',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_brightwater`] = {
+        name = 'weapon_karambit_brightwater',
+        label = 'Karambit Bright Water',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_casehardened`] = {
+        name = 'weapon_karambit_casehardened',
+        label = 'Karambit Case Hardened',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_crimsonweb`] = {
+        name = 'weapon_karambit_crimsonweb',
+        label = 'Karambit Crimson Web',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_damascussteel`] = {
+        name = 'weapon_karambit_damascussteel',
+        label = 'Karambit Damascus Steel',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerblackpearl`] = {
+        name = 'weapon_karambit_dopplerblackpearl',
+        label = 'Karambit Doppler BlackPearl',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase1`] = {
+        name = 'weapon_karambit_dopplerphase1',
+        label = 'Karambit Doppler Phase 1',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase2`] = {
+        name = 'weapon_karambit_dopplerphase2',
+        label = 'Karambit Doppler Phase 2',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase3`] = {
+        name = 'weapon_karambit_dopplerphase3',
+        label = 'Karambit Doppler Phase 3',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerphase4`] = {
+        name = 'weapon_karambit_dopplerphase4',
+        label = 'Karambit Doppler Phase 4',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplerruby`] = {
+        name = 'weapon_karambit_dopplerruby',
+        label = 'Karambit Doppler Ruby',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_dopplersapphire`] = {
+        name = 'weapon_karambit_dopplersapphire',
+        label = 'Karambit Doppler Sapphire',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_fade`] = {
+        name = 'weapon_karambit_fade',
+        label = 'Karambit Fade',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_forest`] = {
+        name = 'weapon_karambit_forest',
+        label = 'Karambit Forest',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_freehand`] = {
+        name = 'weapon_karambit_freehand',
+        label = 'Karambit Free Hand',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdemerald`] = {
+        name = 'weapon_karambit_gdemerald',
+        label = 'Karambit Gamma Doppler Emerald',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp1`] = {
+        name = 'weapon_karambit_gdp1',
+        label = 'Karambit Gamma Doppler Phase 1',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp2`] = {
+        name = 'weapon_karambit_gdp2',
+        label = 'Karambit Gamma Doppler Phase 2',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp3`] = {
+        name = 'weapon_karambit_gdp3',
+        label = 'Karambit Gamma Doppler Phase 3',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_gdp4`] = {
+        name = 'weapon_karambit_gdp4',
+        label = 'Karambit Gamma Doppler Phase 4',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_lore`] = {
+        name = 'weapon_karambit_lore',
+        label = 'Karambit Lore',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_marblefade`] = {
+        name = 'weapon_karambit_marblefade',
+        label = 'Karambit Marble Fade',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_night`] = {
+        name = 'weapon_karambit_night',
+        label = 'Karambit Night',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_rustcoat`] = {
+        name = 'weapon_karambit_rustcoat',
+        label = 'Karambit Rust Coat',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_safarimesh`] = {
+        name = 'weapon_karambit_safarimesh',
+        label = 'Karambit Safari Mesh',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_scorched`] = {
+        name = 'weapon_karambit_scorched',
+        label = 'Karambit Scorched',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_slaugther`] = {
+        name = 'weapon_karambit_slaugther',
+        label = 'Karambit Slaugther',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_stained`] = {
+        name = 'weapon_karambit_stained',
+        label = 'Karambit Stained',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_tigertooth`] = {
+        name = 'weapon_karambit_tigertooth',
+        label = 'Karambit Tiger Tooth',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_ultraviolet`] = {
+        name = 'weapon_karambit_ultraviolet',
+        label = 'Karambit Ultra Violet',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    },
+    [`weapon_karambit_urbanmasked`] = {
+        name = 'weapon_karambit_urbanmasked',
+        label = 'Karambit Urban Masked',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'CS GO Knife'
+    }
+}

@@ -13,8 +13,8 @@ return {
     -- Alert When Entering Prison --
     EnterPrisonAlert  = {
         enable = true,
-        header = 'Welcome to Prison, Criminal Scum!',
-        content = 'To reduce your time in prison, get a job from the guard in the cells. Get your ass to work and maybe you\'ll learn a thing or two.',
+        header = 'Welcome to Prison, Criminal Scum Bag!',
+        content = 'To reduce your time in prison, get a job from the guard in the yard. Get your ass to work and maybe you\'ll learn a thing or two.',
     },
 
     -- Enter Prison Spawn Location & Emotes --

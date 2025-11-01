@@ -335,7 +335,7 @@ Config = {
                         label = 'Weapons',
                     },
                     {
-                        type = 'equipment',
+                        type = 'equipments',
                         label = 'Equipment',
                     },
                     {

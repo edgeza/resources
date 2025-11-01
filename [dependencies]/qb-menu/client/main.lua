@@ -1,5 +1,22 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-RegisterNetEvent('QBCore:Client:UpdateObject', function() QBCore = exports['qb-core']:GetCoreObject() end)
+local QBCore = nil
+
+-- Initialize QBCore
+local function GetQBCore()
+    if not QBCore then
+        QBCore = exports['qb-core']:GetCoreObject()
+    end
+    return QBCore
+end
+
+-- Try to get QBCore on resource start
+CreateThread(function()
+    Wait(100)
+    GetQBCore()
+end)
+
+RegisterNetEvent('QBCore:Client:UpdateObject', function() 
+    QBCore = exports['qb-core']:GetCoreObject() 
+end)
 
 local headerShown = false
 local sendData = nil
@@ -18,11 +35,14 @@ end
 local function openMenu(data, sort, skipFirst)
     if not data or not next(data) then return end
     if sort then data = sortData(data, skipFirst) end
+    -- Ensure QBCore is loaded
+    local core = GetQBCore()
 	for _,v in pairs(data) do
 		if v["icon"] then
-			if QBCore.Shared.Items[tostring(v["icon"])] then
-				if not string.find(QBCore.Shared.Items[tostring(v["icon"])].image, "//") and not string.find(v["icon"], "//") then
-                    v["icon"] = "nui://qb-inventory/html/images/"..QBCore.Shared.Items[tostring(v["icon"])].image
+			if core and core.Shared and core.Shared.Items and core.Shared.Items[tostring(v["icon"])] then
+				local itemImage = core.Shared.Items[tostring(v["icon"])].image
+				if itemImage and not string.find(itemImage, "//") and not string.find(v["icon"], "//") then
+                    v["icon"] = "nui://qb-inventory/html/images/"..itemImage
 				end
 			end
 		end

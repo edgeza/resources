@@ -3,7 +3,12 @@ local QBCore = nil
 -- Initialize QBCore
 local function GetQBCore()
     if not QBCore then
-        QBCore = exports['qb-core']:GetCoreObject()
+        local success, result = pcall(function()
+            return exports['qb-core']:GetCoreObject()
+        end)
+        if success and result then
+            QBCore = result
+        end
     end
     return QBCore
 end
@@ -15,7 +20,12 @@ CreateThread(function()
 end)
 
 RegisterNetEvent('QBCore:Client:UpdateObject', function() 
-    QBCore = exports['qb-core']:GetCoreObject() 
+    local success, result = pcall(function()
+        return exports['qb-core']:GetCoreObject()
+    end)
+    if success and result then
+        QBCore = result
+    end
 end)
 
 local headerShown = false
@@ -35,18 +45,28 @@ end
 local function openMenu(data, sort, skipFirst)
     if not data or not next(data) then return end
     if sort then data = sortData(data, skipFirst) end
-    -- Ensure QBCore is loaded
+    -- Safely check if QBCore and Items are available
     local core = GetQBCore()
-	for _,v in pairs(data) do
-		if v["icon"] then
-			if core and core.Shared and core.Shared.Items and core.Shared.Items[tostring(v["icon"])] then
-				local itemImage = core.Shared.Items[tostring(v["icon"])].image
-				if itemImage and not string.find(itemImage, "//") and not string.find(v["icon"], "//") then
-                    v["icon"] = "nui://qb-inventory/html/images/"..itemImage
-				end
-			end
-		end
-	end
+    if core then
+        local shared = core.Shared
+        if shared then
+            local items = shared.Items
+            if items then
+                for _,v in pairs(data) do
+                    if v["icon"] and type(v["icon"]) == "string" then
+                        local iconKey = tostring(v["icon"])
+                        local item = items[iconKey]
+                        if item and type(item) == "table" and item.image then
+                            local itemImage = item.image
+                            if itemImage and type(itemImage) == "string" and not string.find(itemImage, "//") and not string.find(v["icon"], "//") then
+                                v["icon"] = "nui://qb-inventory/html/images/"..itemImage
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
     SetNuiFocus(true, true)
     headerShown = false
     sendData = data

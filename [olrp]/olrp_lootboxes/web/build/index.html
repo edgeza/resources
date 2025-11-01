@@ -63,12 +63,30 @@
 
         .case-content.winning {
             animation: screenShake 0.5s ease-in-out;
+            /* Ensure animation only runs once and doesn't conflict */
+            animation-fill-mode: forwards;
         }
 
         @keyframes screenShake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px) rotate(-1deg); }
-            20%, 40%, 60%, 80% { transform: translateX(10px) rotate(1deg); }
+            0%, 100% { 
+                transform: translateX(0) translateY(0) rotate(0deg);
+            }
+            10%, 30%, 50%, 70%, 90% { 
+                transform: translateX(-8px) translateY(0) rotate(-0.5deg);
+            }
+            20%, 40%, 60%, 80% { 
+                transform: translateX(8px) translateY(0) rotate(0.5deg);
+            }
+        }
+        
+        /* Prevent transform conflicts - use will-change for optimization */
+        .case-content {
+            will-change: transform;
+        }
+        
+        /* Reset transform after shake completes */
+        .case-content:not(.winning) {
+            transform: translateX(0) translateY(0) rotate(0deg);
         }
 
         @keyframes contentSlideIn {
@@ -723,8 +741,16 @@
             
             isOpening = true; // Set flag first to prevent concurrent openings
             
-            // Clean up any existing case state first (but keep isOpening = true)
-            const wasOpening = isOpening;
+            // Clean up any existing case state first
+            const caseContent = document.querySelector('.case-content');
+            if (caseContent) {
+                // Remove all animation classes that could conflict
+                caseContent.classList.remove('winning');
+                // Reset transforms immediately
+                caseContent.style.transform = '';
+                caseContent.style.animation = '';
+            }
+            
             activeTimers.forEach(timer => clearTimeout(timer));
             activeTimers = [];
             
@@ -737,11 +763,18 @@
             const itemTrack = document.getElementById('itemTrack');
             if (itemTrack) {
                 itemTrack.innerHTML = '';
+                itemTrack.style.transform = '';
+                itemTrack.classList.remove('spinning');
+            }
+            
+            const rewardDisplay = document.getElementById('rewardDisplay');
+            if (rewardDisplay) {
+                rewardDisplay.classList.remove('show');
+                rewardDisplay.style.display = 'none';
             }
             
             // Small delay to ensure cleanup completes
             setTimeout(() => {
-                isOpening = wasOpening; // Restore flag
                 currentItems = items;
                 targetItem = reward;
                 
@@ -839,15 +872,19 @@
                 itemSlot.dataset.index = index;
                 
                 // Ensure image path uses inventory directory
-                let imgSrc = item.image;
+                let imgSrc = item.image || '';
                 // Remove any existing path prefixes
                 if (imgSrc.includes('/')) {
                     imgSrc = imgSrc.split('/').pop(); // Get just the filename
                 }
-                imgSrc = inventoryPath + imgSrc;
+                // Try different case variations if original fails
+                const baseImgSrc = inventoryPath + imgSrc;
+                const lowerImgSrc = inventoryPath + imgSrc.toLowerCase();
+                const upperImgSrc = inventoryPath + imgSrc.toUpperCase();
                 
                 itemSlot.innerHTML = `
-                    <img class="item-image" src="${imgSrc}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/70?text=Item'; console.log('Failed to load image: ${imgSrc}')">
+                    <img class="item-image" src="${baseImgSrc}" alt="${item.name}" 
+                         onerror="this.onerror=null; this.src='${lowerImgSrc}'; this.onerror=function(){this.onerror=null; this.src='${upperImgSrc}'; this.onerror=function(){this.src='https://via.placeholder.com/70?text=Item'; console.log('Failed to load image for: ${item.name}');};};">
                     <div class="item-name">${item.name}</div>
                     <div class="item-rarity rarity-${item.rarity.toLowerCase()}">${item.rarity}</div>
                 `;
@@ -959,16 +996,28 @@
                 itemCarousel.style.display = 'none';
                 
                 // Ensure reward image path uses inventory directory
-                let imgSrc = reward.image;
+                let imgSrc = reward.image || '';
                 // Remove any existing path prefixes
                 if (imgSrc.includes('/')) {
                     imgSrc = imgSrc.split('/').pop(); // Get just the filename
                 }
-                imgSrc = inventoryPath + imgSrc;
-                rewardImage.src = imgSrc;
+                // Try different case variations if original fails
+                const baseImgSrc = inventoryPath + imgSrc;
+                const lowerImgSrc = inventoryPath + imgSrc.toLowerCase();
+                const upperImgSrc = inventoryPath + imgSrc.toUpperCase();
+                
+                rewardImage.src = baseImgSrc;
                 rewardImage.onerror = function() {
-                    console.log('Failed to load reward image: ' + imgSrc);
-                    this.src = 'https://via.placeholder.com/120?text=Reward';
+                    this.onerror = null;
+                    this.src = lowerImgSrc;
+                    this.onerror = function() {
+                        this.onerror = null;
+                        this.src = upperImgSrc;
+                        this.onerror = function() {
+                            console.log('Failed to load reward image for: ' + reward.name);
+                            this.src = 'https://via.placeholder.com/120?text=Reward';
+                        };
+                    };
                 };
                 rewardName.textContent = reward.name;
                 rewardAmount.textContent = `Amount: ${reward.amount}`;
@@ -989,11 +1038,22 @@
                 
                 buttons.style.display = 'block';
                 
-                // Add screen shake for epic+ items
+                // Add screen shake for epic+ items - ensure no conflicts
                 const caseContent = document.querySelector('.case-content');
-                if (reward.rarity === 'Legendary' || reward.rarity === 'Epic') {
-                    caseContent.classList.add('winning');
-                    setTimeout(() => caseContent.classList.remove('winning'), 500);
+                if (caseContent && (reward.rarity === 'Legendary' || reward.rarity === 'Epic')) {
+                    // Clear any existing animations first
+                    caseContent.style.animation = '';
+                    // Small delay to ensure transform is reset
+                    requestAnimationFrame(() => {
+                        caseContent.classList.add('winning');
+                        // Remove after animation completes (500ms + small buffer)
+                        setTimeout(() => {
+                            caseContent.classList.remove('winning');
+                            // Ensure transform is reset after shake
+                            caseContent.style.transform = '';
+                            caseContent.style.animation = '';
+                        }, 600);
+                    });
                 }
             }, 500);
         }
@@ -1086,10 +1146,12 @@
                 rewardDisplay.classList.remove('show');
             }
             
-            // Also reset case content winning class if it exists
+            // Also reset case content winning class and animations if they exist
             const caseContent = document.querySelector('.case-content');
             if (caseContent) {
                 caseContent.classList.remove('winning');
+                caseContent.style.transform = '';
+                caseContent.style.animation = '';
             }
             
             // Clear the item track

@@ -19,6 +19,12 @@ local function OpenCase(itemRewarded, caseItems)
         return
     end
     
+    -- Validate input
+    if not itemRewarded or not caseItems then
+        print("^1[Loot Cases] Invalid case data received, ignoring.")
+        return
+    end
+    
     isCaseOpening = true
     
     -- Ensure previous case is closed first
@@ -26,7 +32,12 @@ local function OpenCase(itemRewarded, caseItems)
     SendNUIMessage({type = "Close_caseOpener"})
     
     -- Small delay to ensure cleanup
-    Wait(100)
+    Wait(150)
+    
+    -- Double-check we're still supposed to open (in case cleanup happened)
+    if not isCaseOpening then
+        return
+    end
     
     SetNuiFocus(true, true)
     SendNUIMessage({

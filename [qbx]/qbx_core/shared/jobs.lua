@@ -273,8 +273,8 @@ return {
             },
         },
     },
-    ['westcustoms'] = {
-        label = 'West Coast',
+    ['palmcoast'] = {
+        label = 'Palm Coast',
         type = 'mechanic',
         defaultDuty = true,
         offDutyPay = false,

@@ -90,3 +90,35 @@ AddEventHandler('police:server:sendToJail', function(id, duration, reason)
         lib.callback.await('xt-prison:client:enterJail', targetId, duration)
     end
 end)
+
+if Config.EnableWheelLock then
+    RegisterServerEvent('police:server:attachWheelLock', function(netId)
+        local src = source
+        local vehicle = NetworkGetEntityFromNetworkId(netId)
+        
+        if not DoesEntityExist(vehicle) or not IsEntityAVehicle(vehicle) then return end
+        
+        local Player = Framework.GetPlayer(src)
+        if not Player or not Functions.IsLEO(Player.Job.Name) then return end
+        
+        local state = Entity(vehicle).state
+        if state then
+            state:set('wheelLock', true, true)
+        end
+    end)
+
+    RegisterServerEvent('police:server:removeWheelLock', function(netId)
+        local src = source
+        local vehicle = NetworkGetEntityFromNetworkId(netId)
+        
+        if not DoesEntityExist(vehicle) or not IsEntityAVehicle(vehicle) then return end
+        
+        local Player = Framework.GetPlayer(src)
+        if not Player or not Functions.IsLEO(Player.Job.Name) then return end
+        
+        local state = Entity(vehicle).state
+        if state then
+            state:set('wheelLock', false, true)
+        end
+    end)
+end

@@ -134,3 +134,130 @@ if Config.SendDispatchWhenOfficerDead then
         end)
     end)
 end
+
+if Config.EnableWheelLock then
+    local lockedVehicles = {}
+    
+    AddStateBagChangeHandler('wheelLock', nil, function(bagName, key, value, reserved, replicated)
+        local entity = GetEntityFromStateBagName(bagName)
+        if DoesEntityExist(entity) and IsEntityAVehicle(entity) then
+            local netId = NetworkGetNetworkIdFromEntity(entity)
+            if value == true then
+                lockedVehicles[netId] = true
+            else
+                lockedVehicles[netId] = nil
+            end
+        end
+    end)
+    
+    CreateThread(function()
+        while true do
+            local ped = cache.ped or PlayerPedId()
+            local vehicle = GetVehiclePedIsIn(ped, false)
+            
+            if vehicle ~= 0 and DoesEntityExist(vehicle) then
+                local netId = NetworkGetNetworkIdFromEntity(vehicle)
+                local state = Entity(vehicle).state
+                local isWheelLocked = lockedVehicles[netId] or state.wheelLock == true
+                
+                if isWheelLocked then
+                    local driverSeat = GetPedInVehicleSeat(vehicle, -1)
+                    if driverSeat == ped then
+                        SetVehicleEngineOn(vehicle, false, true, true)
+                        SetVehicleHandbrake(vehicle, true)
+                        SetVehicleForwardSpeed(vehicle, 0.0)
+                        FreezeEntityPosition(vehicle, true)
+                        
+                        DisableControlAction(0, 71, true)
+                        DisableControlAction(0, 72, true)
+                        DisableControlAction(0, 76, true)
+                        DisableControlAction(0, 73, true)
+                    end
+                else
+                    if not GetVehicleHandbrake(vehicle) then
+                        FreezeEntityPosition(vehicle, false)
+                    end
+                end
+            end
+            
+            Wait(0)
+        end
+    end)
+    
+    RegisterNetEvent('police:client:attachWheelLock', function()
+        CreateThread(function()
+            Wait(500)
+            local ped = cache.ped or PlayerPedId()
+            local coords = GetEntityCoords(ped)
+            local vehicle = nil
+            
+            local vehicleInFront = GetVehiclePedIsIn(ped, false)
+            if vehicleInFront ~= 0 and DoesEntityExist(vehicleInFront) then
+                vehicle = vehicleInFront
+            else
+                local closestVehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 5.0, 0, 71)
+                if closestVehicle and DoesEntityExist(closestVehicle) then
+                    vehicle = closestVehicle
+                end
+            end
+            
+            if vehicle and DoesEntityExist(vehicle) then
+                local netId = NetworkGetNetworkIdFromEntity(vehicle)
+                TriggerServerEvent('police:server:attachWheelLock', netId)
+            end
+        end)
+    end)
+    
+    RegisterNetEvent('police:client:removeWheelLock', function()
+        CreateThread(function()
+            Wait(500)
+            local ped = cache.ped or PlayerPedId()
+            local coords = GetEntityCoords(ped)
+            local vehicle = nil
+            
+            local vehicleInFront = GetVehiclePedIsIn(ped, false)
+            if vehicleInFront ~= 0 and DoesEntityExist(vehicleInFront) then
+                vehicle = vehicleInFront
+            else
+                local closestVehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 5.0, 0, 71)
+                if closestVehicle and DoesEntityExist(closestVehicle) then
+                    vehicle = closestVehicle
+                end
+            end
+            
+            if vehicle and DoesEntityExist(vehicle) then
+                local netId = NetworkGetNetworkIdFromEntity(vehicle)
+                TriggerServerEvent('police:server:removeWheelLock', netId)
+            end
+        end)
+    end)
+    
+    RegisterNetEvent('police:client:toggleWheelLock', function()
+        CreateThread(function()
+            Wait(500)
+            local ped = cache.ped or PlayerPedId()
+            local coords = GetEntityCoords(ped)
+            local vehicle = nil
+            
+            local vehicleInFront = GetVehiclePedIsIn(ped, false)
+            if vehicleInFront ~= 0 and DoesEntityExist(vehicleInFront) then
+                vehicle = vehicleInFront
+            else
+                local closestVehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 5.0, 0, 71)
+                if closestVehicle and DoesEntityExist(closestVehicle) then
+                    vehicle = closestVehicle
+                end
+            end
+            
+            if vehicle and DoesEntityExist(vehicle) then
+                local netId = NetworkGetNetworkIdFromEntity(vehicle)
+                local state = Entity(vehicle).state
+                if state and state.wheelLock == true then
+                    TriggerServerEvent('police:server:removeWheelLock', netId)
+                else
+                    TriggerServerEvent('police:server:attachWheelLock', netId)
+                end
+            end
+        end)
+    end)
+end

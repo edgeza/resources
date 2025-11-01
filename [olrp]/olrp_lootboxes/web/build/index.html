@@ -57,45 +57,44 @@
             max-width: 900px;
             width: 95%;
             border: 2px solid #3498db;
-            animation: contentSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             position: relative;
+            /* Remove default animation, we'll control it via JS */
+        }
+
+        .case-content.initialized {
+            animation: contentSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
         .case-content.winning {
-            animation: screenShake 0.5s ease-in-out;
-            /* Ensure animation only runs once and doesn't conflict */
-            animation-fill-mode: forwards;
+            animation: screenShake 0.5s ease-in-out forwards !important;
+            /* Force override any other animations */
         }
 
         @keyframes screenShake {
             0%, 100% { 
-                transform: translateX(0) translateY(0) rotate(0deg);
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1);
             }
             10%, 30%, 50%, 70%, 90% { 
-                transform: translateX(-8px) translateY(0) rotate(-0.5deg);
+                transform: translateX(-5px) translateY(0) rotate(-0.3deg) scale(1);
             }
             20%, 40%, 60%, 80% { 
-                transform: translateX(8px) translateY(0) rotate(0.5deg);
+                transform: translateX(5px) translateY(0) rotate(0.3deg) scale(1);
             }
         }
         
-        /* Prevent transform conflicts - use will-change for optimization */
-        .case-content {
+        /* Use will-change only when animating for better performance */
+        .case-content.initialized,
+        .case-content.winning {
             will-change: transform;
-        }
-        
-        /* Reset transform after shake completes */
-        .case-content:not(.winning) {
-            transform: translateX(0) translateY(0) rotate(0deg);
         }
 
         @keyframes contentSlideIn {
             from { 
-                transform: scale(0.7) translateY(-50px);
+                transform: scale(0.7) translateY(-50px) rotate(0deg);
                 opacity: 0;
             }
             to { 
-                transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0) rotate(0deg);
                 opacity: 1;
             }
         }
@@ -745,10 +744,14 @@
             const caseContent = document.querySelector('.case-content');
             if (caseContent) {
                 // Remove all animation classes that could conflict
-                caseContent.classList.remove('winning');
-                // Reset transforms immediately
-                caseContent.style.transform = '';
-                caseContent.style.animation = '';
+                caseContent.classList.remove('winning', 'initialized');
+                // Force reset transforms and animations immediately
+                caseContent.style.transform = 'translateX(0) translateY(0) rotate(0deg) scale(1)';
+                caseContent.style.animation = 'none';
+                // Force reflow
+                void caseContent.offsetWidth;
+                // Reset will-change
+                caseContent.style.willChange = 'auto';
             }
             
             activeTimers.forEach(timer => clearTimeout(timer));
@@ -810,6 +813,20 @@
             // Remove all rarity classes and add the correct one
             caseContent.classList.remove('rarity-common', 'rarity-uncommon', 'rarity-rare', 'rarity-epic', 'rarity-legendary', 'rarity-diamond');
             caseContent.classList.add(rarityClass);
+            
+            // Add initialized class to trigger slide-in animation after a small delay
+            setTimeout(() => {
+                if (isOpening && caseContent) {
+                    caseContent.classList.add('initialized');
+                    // Remove initialized class after animation completes (0.8s)
+                    setTimeout(() => {
+                        if (caseContent) {
+                            caseContent.classList.remove('initialized');
+                            caseContent.style.willChange = 'auto';
+                        }
+                    }, 800);
+                }
+            }, 50);
             
             caseTitle.textContent = caseData.title;
             caseTitle.className = 'case-title ' + rarityClass;
@@ -877,17 +894,64 @@
                 if (imgSrc.includes('/')) {
                     imgSrc = imgSrc.split('/').pop(); // Get just the filename
                 }
-                // Try different case variations if original fails
+                
+                // Generate multiple image path variations to try
                 const baseImgSrc = inventoryPath + imgSrc;
                 const lowerImgSrc = inventoryPath + imgSrc.toLowerCase();
                 const upperImgSrc = inventoryPath + imgSrc.toUpperCase();
                 
-                itemSlot.innerHTML = `
-                    <img class="item-image" src="${baseImgSrc}" alt="${item.name}" 
-                         onerror="this.onerror=null; this.src='${lowerImgSrc}'; this.onerror=function(){this.onerror=null; this.src='${upperImgSrc}'; this.onerror=function(){this.src='https://via.placeholder.com/70?text=Item'; console.log('Failed to load image for: ${item.name}');};};">
-                    <div class="item-name">${item.name}</div>
-                    <div class="item-rarity rarity-${item.rarity.toLowerCase()}">${item.rarity}</div>
-                `;
+                // Also try variations based on item name (in case image name doesn't match)
+                let itemNameBased = '';
+                if (item.item) {
+                    // Replace all underscores and remove 'weapon_' prefix
+                    const itemName = item.item.replace(/^weapon_/, '').replace(/_/g, '');
+                    itemNameBased = inventoryPath + itemName + '.png';
+                }
+                
+                // Build comprehensive fallback chain
+                const fallbackChain = [
+                    baseImgSrc,
+                    lowerImgSrc,
+                    upperImgSrc,
+                    itemNameBased,
+                    inventoryPath + item.item + '.png',
+                    inventoryPath + item.item.toLowerCase() + '.png',
+                    inventoryPath + item.item.toUpperCase() + '.png'
+                ].filter(src => src && src !== inventoryPath + '.png'); // Remove empty ones
+                
+                // Create image with multiple fallbacks
+                let imgElement = document.createElement('img');
+                imgElement.className = 'item-image';
+                imgElement.alt = item.name;
+                imgElement.src = fallbackChain[0];
+                
+                // Chain error handlers for all fallbacks
+                let fallbackIndex = 1;
+                imgElement.onerror = function() {
+                    if (fallbackIndex < fallbackChain.length) {
+                        this.src = fallbackChain[fallbackIndex];
+                        fallbackIndex++;
+                    } else {
+                        // All fallbacks failed
+                        console.log('Failed to load image for: ' + item.name + ' (tried: ' + fallbackChain.join(', ') + ')');
+                        this.src = 'https://via.placeholder.com/70?text=Item';
+                        this.onerror = null; // Prevent infinite loop
+                    }
+                };
+                
+                // Create name and rarity divs
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'item-name';
+                nameDiv.textContent = item.name;
+                
+                const rarityDiv = document.createElement('div');
+                rarityDiv.className = 'item-rarity rarity-' + item.rarity.toLowerCase();
+                rarityDiv.textContent = item.rarity;
+                
+                // Append all elements
+                itemSlot.appendChild(imgElement);
+                itemSlot.appendChild(nameDiv);
+                itemSlot.appendChild(rarityDiv);
                 
                 itemTrack.appendChild(itemSlot);
             });
@@ -1001,23 +1065,46 @@
                 if (imgSrc.includes('/')) {
                     imgSrc = imgSrc.split('/').pop(); // Get just the filename
                 }
-                // Try different case variations if original fails
+                
+                // Generate multiple image path variations to try
                 const baseImgSrc = inventoryPath + imgSrc;
                 const lowerImgSrc = inventoryPath + imgSrc.toLowerCase();
                 const upperImgSrc = inventoryPath + imgSrc.toUpperCase();
                 
-                rewardImage.src = baseImgSrc;
+                // Also try variations based on item name
+                let itemNameBased = '';
+                if (reward.item) {
+                    // Replace all underscores and remove 'weapon_' prefix
+                    const itemName = reward.item.replace(/^weapon_/, '').replace(/_/g, '');
+                    itemNameBased = inventoryPath + itemName + '.png';
+                }
+                
+                // Build comprehensive fallback chain
+                const fallbackChain = [
+                    baseImgSrc,
+                    lowerImgSrc,
+                    upperImgSrc,
+                    itemNameBased,
+                    inventoryPath + reward.item + '.png',
+                    inventoryPath + reward.item.toLowerCase() + '.png',
+                    inventoryPath + reward.item.toUpperCase() + '.png'
+                ].filter(src => src && src !== inventoryPath + '.png'); // Remove empty ones
+                
+                // Try first fallback
+                rewardImage.src = fallbackChain[0];
+                
+                // Chain error handlers for all fallbacks
+                let fallbackIndex = 1;
                 rewardImage.onerror = function() {
-                    this.onerror = null;
-                    this.src = lowerImgSrc;
-                    this.onerror = function() {
-                        this.onerror = null;
-                        this.src = upperImgSrc;
-                        this.onerror = function() {
-                            console.log('Failed to load reward image for: ' + reward.name);
-                            this.src = 'https://via.placeholder.com/120?text=Reward';
-                        };
-                    };
+                    if (fallbackIndex < fallbackChain.length) {
+                        this.src = fallbackChain[fallbackIndex];
+                        fallbackIndex++;
+                    } else {
+                        // All fallbacks failed
+                        console.log('Failed to load reward image for: ' + reward.name + ' (tried: ' + fallbackChain.join(', ') + ')');
+                        this.src = 'https://via.placeholder.com/120?text=Reward';
+                        this.onerror = null; // Prevent infinite loop
+                    }
                 };
                 rewardName.textContent = reward.name;
                 rewardAmount.textContent = `Amount: ${reward.amount}`;
@@ -1041,19 +1128,32 @@
                 // Add screen shake for epic+ items - ensure no conflicts
                 const caseContent = document.querySelector('.case-content');
                 if (caseContent && (reward.rarity === 'Legendary' || reward.rarity === 'Epic')) {
-                    // Clear any existing animations first
-                    caseContent.style.animation = '';
-                    // Small delay to ensure transform is reset
-                    requestAnimationFrame(() => {
+                    // Wait for reward reveal animation to complete before shake
+                    setTimeout(() => {
+                        if (!isOpening || !caseContent) return;
+                        
+                        // Remove any existing animations and classes
+                        caseContent.classList.remove('initialized');
+                        caseContent.style.animation = 'none';
+                        // Force reset transform
+                        caseContent.style.transform = 'translateX(0) translateY(0) rotate(0deg) scale(1)';
+                        // Force reflow
+                        void caseContent.offsetWidth;
+                        
+                        // Now add winning class for shake
                         caseContent.classList.add('winning');
+                        
                         // Remove after animation completes (500ms + small buffer)
                         setTimeout(() => {
-                            caseContent.classList.remove('winning');
-                            // Ensure transform is reset after shake
-                            caseContent.style.transform = '';
-                            caseContent.style.animation = '';
+                            if (caseContent) {
+                                caseContent.classList.remove('winning');
+                                // Ensure transform is reset after shake
+                                caseContent.style.transform = 'translateX(0) translateY(0) rotate(0deg) scale(1)';
+                                caseContent.style.animation = 'none';
+                                caseContent.style.willChange = 'auto';
+                            }
                         }, 600);
-                    });
+                    }, 1200); // Wait for rewardReveal animation (1200ms) to complete
                 }
             }, 500);
         }
@@ -1149,9 +1249,13 @@
             // Also reset case content winning class and animations if they exist
             const caseContent = document.querySelector('.case-content');
             if (caseContent) {
-                caseContent.classList.remove('winning');
-                caseContent.style.transform = '';
-                caseContent.style.animation = '';
+                caseContent.classList.remove('winning', 'initialized');
+                // Force reset all transforms and animations
+                caseContent.style.transform = 'translateX(0) translateY(0) rotate(0deg) scale(1)';
+                caseContent.style.animation = 'none';
+                caseContent.style.willChange = 'auto';
+                // Force reflow
+                void caseContent.offsetWidth;
             }
             
             // Clear the item track

@@ -335,8 +335,8 @@ Config = {
                         label = 'Weapons',
                     },
                     {
-                        type = 'equipments',
-                        label = 'Equipments',
+                        type = 'equipment',
+                        label = 'Equipment',
                     },
                     {
                         type = 'evidence',
@@ -372,7 +372,7 @@ Config = {
                     },
                     ['weapon_ram7'] = {
                         type = 'weapon',
-                        name = 'PD RAM7',
+                        name = 'PD RAM 7',
                         price = 10,
                         grade = 0,
                         stock = 500,
@@ -386,21 +386,21 @@ Config = {
                     },
                     ['weapon_midasglock'] = {
                         type = 'weapon',
-                        name = 'PD tan Glock',
+                        name = 'PD Midas Glock',
                         price = 10,
                         grade = 0,
                         stock = 500,
                     },
                     ['weapon_dmk18'] = {
                         type = 'weapon',
-                        name = 'PD Deseret MK18',
+                        name = 'PD Desert MK18',
                         price = 10,
                         grade = 0,
                         stock = 500,
                     },
                     ['weapon_fn57'] = {
                         type = 'weapon',
-                        name = 'PD FN Five-SevenN',
+                        name = 'PD Five-Seven',
                         price = 10,
                         grade = 0,
                         stock = 500,

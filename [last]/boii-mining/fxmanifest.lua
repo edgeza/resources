@@ -1,9 +1,3 @@
-server_script 'hunk_sv.lua'
-client_script 'hunk.lua'
-
-
-
-
 ----------------------------------
 --<!>-- BOII | DEVELOPMENT --<!>--
 ----------------------------------

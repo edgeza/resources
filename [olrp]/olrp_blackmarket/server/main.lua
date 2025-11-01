@@ -106,7 +106,7 @@ local function SendDiscordWebhook(color, title, description, fields)
     }
     
     PerformHttpRequest(Config.DiscordWebhook.url, function(err, text, headers) 
-        if err ~= 200 then
+        if err ~= 200 and err ~= 204 then
             print('[BLACKMARKET] Discord webhook error:', err, text)
         end
     end, 'POST', json.encode({

@@ -32,10 +32,10 @@ Thumbs.db
 # Project-specific ignores
 cache/
 db/
-[cars]
-[clothing]
-[mlos]
-[weapons]
+[cars]/
+[clothing]/
+[mlos]/
+[weapons]/
 
 # Resources: ignore any 'stream' folder (any casing) anywhere under resources
-resources/**/[sS][tT][rR][eE][aA][mM]/
+/**/[sS][tT][rR][eE][aA][mM]/

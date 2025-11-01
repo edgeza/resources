@@ -1,0 +1,20 @@
+<Item>
+  <indices content="char_array">
+    10
+    120
+    6
+    11
+    11
+    156
+  </indices>
+  <liveries>
+    <Item value="false" />
+    <Item value="false" />
+    <Item value="false" />
+    <Item value="false" />
+    <Item value="false" />
+    <Item value="false" />
+    <Item value="false" />
+    <Item value="false" />
+  </liveries>
+</Item>

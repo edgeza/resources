@@ -223,7 +223,7 @@ function App() {
 						<div className='character-selector-top'>
 							<IconUsersGroup size={45} color='#228be6' />
 							<Title order={2} fz={32} c={"blue"}>
-								Character Selector
+								Welcome to One Life Roleplay
 							</Title>
 							<Text fw={500} fz={14}>
 								Select the character you want to play

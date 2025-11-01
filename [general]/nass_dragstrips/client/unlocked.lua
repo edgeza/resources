@@ -35,7 +35,11 @@ local lightOffsets = { --Right side, inverted for left
 RegisterNetEvent('nass_dragstrips:startDragTreeCL')
 AddEventHandler('nass_dragstrips:startDragTreeCL', function(stripData, left, right)
     if type(stripData) == "number" then 
-        stripData = dragstrips[tostring(strip)]
+        stripData = dragstrips[tostring(stripData)]
+    end
+
+    if not stripData then
+        return
     end
 
     if stripData.dragtreeType == "nass_dragtree" then
@@ -43,6 +47,9 @@ AddEventHandler('nass_dragstrips:startDragTreeCL', function(stripData, left, rig
         return
     end
 
+    if not stripData.dragtreeType then
+        return
+    end
 
     local dragTree = GetClosestObjectOfType(stripData.dragTree.x, stripData.dragTree.y, stripData.dragTree.z, 3.0, joaat(stripData.dragtreeType), false)
     if #(vector3(stripData.dragTree.x, stripData.dragTree.y, stripData.dragTree.z) - GetEntityCoords(PlayerPedId())) > Config.stripRenderDistance then return end
@@ -97,7 +104,15 @@ AddEventHandler('nass_dragstrips:showDragTreeLight', function(stripData, left, r
         stripData = dragstrips[tostring(stripData)]
     end
 
+    if not stripData then
+        return
+    end
+
     if stripData.dragtreeType == "nass_dragtree" then return end
+
+    if not stripData.dragtreeType then
+        return
+    end
 
     local dragTree = GetClosestObjectOfType(stripData.dragTree.x, stripData.dragTree.y, stripData.dragTree.z, 3.0, joaat(stripData.dragtreeType), false)
     if #(vector3(stripData.dragTree.x, stripData.dragTree.y, stripData.dragTree.z) - GetEntityCoords(PlayerPedId())) > Config.stripRenderDistance then return end
@@ -143,6 +158,9 @@ AddEventHandler('nass_dragstrips:showDragTreeLight', function(stripData, left, r
 end)
 
 function basicDragTree(stripData)
+    if not stripData or not stripData.dragtreeType then
+        return
+    end
     local dragTree = GetClosestObjectOfType(stripData.dragTree.x, stripData.dragTree.y, stripData.dragTree.z, 3.0, joaat(stripData.dragtreeType), false)
     local topCoords = GetOffsetFromEntityInWorldCoords(dragTree, 0.0, -0.4, 2.95)
     if #(topCoords - GetEntityCoords(PlayerPedId())) < Config.stripRenderDistance then

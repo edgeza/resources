@@ -10,7 +10,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
 
     local motd = GetConvar('qbx:motd', '')
     if motd ~= '' then
-        exports.chat:addMessage({ template = motd })
+        exports.mchat:addMessage({ template = motd })
     end
 end)
 

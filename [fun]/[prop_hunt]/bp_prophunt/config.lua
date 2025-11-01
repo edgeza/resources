@@ -6,7 +6,7 @@ Config.Mysql = 'oxmysql' ----- mysql-async , ghmattisql or oxmysql
 
 Config.istarget = true   --------- target system open
 
-Config.targettype = 'qb-target'   ---------- > targetsystem  'ox_target' or 'qb-target' 
+Config.targettype = 'ox_target'   ---------- > targetsystem  'ox_target' or 'qb-target' 
 
 Config.invtype = 'qs'   ---------- > inventorytypes 
 Config.inventory = Config.invtype  -- keep wrapper-compatible key in sync (qb/ox/qs/esx)

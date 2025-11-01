@@ -342,20 +342,20 @@ lib.addCommand('ooc', {
     local playerCoords = GetEntityCoords(GetPlayerPed(source))
     for _, v in pairs(players) do
         if v == source then
-            exports.chat:addMessage(v --[[@as Source]], {
+            exports.mchat:addMessage(v --[[@as Source]], {
                 color = { 0, 0, 255},
                 multiline = true,
                 args = {('OOC | %s'):format(GetPlayerName(source)), message}
             })
         elseif #(playerCoords - GetEntityCoords(GetPlayerPed(v))) < 20.0 then
-            exports.chat:addMessage(v --[[@as Source]], {
+            exports.mchat:addMessage(v --[[@as Source]], {
                 color = { 0, 0, 255},
                 multiline = true,
                 args = {('OOC | %s'):format(GetPlayerName(source)), message}
             })
         elseif IsPlayerAceAllowed(v --[[@as string]], 'admin') then
             if IsOptin(v --[[@as Source]]) then
-                exports.chat:addMessage(v--[[@as Source]], {
+                exports.mchat:addMessage(v--[[@as Source]], {
                     color = { 0, 0, 255},
                     multiline = true,
                     args = {('Proximity OOC | %s'):format(GetPlayerName(source)), message}

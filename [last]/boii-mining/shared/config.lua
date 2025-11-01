@@ -11,7 +11,7 @@ Config.CoreSettings = {
     Core = 'qbx_core', -- The name of your core. Default; qbx_core
     CoreFolder = 'qbx_core', -- The name of your core folder for exports. qbx_core provides 'qb-core'
     TargetName = 'ox_target', -- The name of your third eye targeting. Default; ox_target
-    MenuName = 'ox_lib', -- The name of your menu. Default; ox_lib
+    MenuName = 'qb-menu', -- The name of your menu. Default; qb-menu (must use qb-menu format for menus)
     InputName = 'ox_lib', -- The name of your input menu for billing. Default; ox_lib
 }
 

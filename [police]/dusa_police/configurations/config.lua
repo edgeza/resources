@@ -646,13 +646,6 @@ Config = {
                         stock = 500,
                     },
                     -- GGC Custom Weapons -- Rifles
-                    ['weapon_mk47fm'] = {
-                        type = 'weapon',
-                        name = 'MK47 Mutant',
-                        price = 10,
-                        grade = 0,
-                        stock = 500,
-                    },
                     ['weapon_m6ic'] = {
                         type = 'weapon',
                         name = 'LWRC M6IC',
@@ -670,20 +663,6 @@ Config = {
                     ['weapon_m4'] = {
                         type = 'weapon',
                         name = 'M4A1 Carbine',
-                        price = 10,
-                        grade = 0,
-                        stock = 500,
-                    },
-                    ['weapon_ak74'] = {
-                        type = 'weapon',
-                        name = 'AK-74',
-                        price = 10,
-                        grade = 0,
-                        stock = 500,
-                    },
-                    ['weapon_aks74'] = {
-                        type = 'weapon',
-                        name = 'AKS-74',
                         price = 10,
                         grade = 0,
                         stock = 500,

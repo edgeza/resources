@@ -182,16 +182,10 @@ local function spawnDefault() -- We use a callback to make the server wait on th
     TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
     TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
 
-    DoScreenFadeIn(500)
     while not IsScreenFadedIn() do
         Wait(0)
     end
-    -- Open illenium-appearance menu for first character
-    CreateThread(function()
-        Wait(1500) -- Wait for player to be fully loaded
-        -- illenium-appearance listens for this event for first character creation
-        TriggerEvent('qb-clothes:client:CreateFirstCharacter')
-    end)
+    TriggerEvent('qb-clothes:client:CreateFirstCharacter')
 end
 
 local function spawnLastLocation()
@@ -215,7 +209,6 @@ local function spawnLastLocation()
     TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
     TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
 
-    DoScreenFadeIn(500)
     while not IsScreenFadedIn() do
         Wait(0)
     end
@@ -227,10 +220,6 @@ local function createCharacter(cid, character)
   previewPed()
 
   DoScreenFadeOut(150)
-  while not IsScreenFadedOut() do
-    Wait(0)
-  end
-  
   local newData = lib.callback.await('bub-multichar:server:createCharacter', false, {
     firstname = capString(character.firstName),
     lastname = capString(character.lastName),
@@ -243,54 +232,14 @@ local function createCharacter(cid, character)
     if GetResourceState('qbx_spawn') == 'missing' then
         spawnDefault()
     else
-        destroyPreviewCam()
-        
-        -- Spawn player at default location first
-        pcall(function() exports.spawnmanager:spawnPlayer({
-            x = defaultSpawn.x,
-            y = defaultSpawn.y,
-            z = defaultSpawn.z,
-            heading = defaultSpawn.w
-        }) end)
-        
-        -- Trigger player loaded events
-        TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-        TriggerEvent('QBCore:Client:OnPlayerLoaded')
-        TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
-        TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
-        
-        -- Wait for spawn to complete before triggering spawn UI
-        Wait(500)
-        
-        DoScreenFadeIn(500)
-        while not IsScreenFadedIn() do
-            Wait(0)
-        end
-        
         if config.qbx_properties then
             TriggerEvent('apartments:client:setupSpawnUI', newData)
-            -- Trigger clothing menu after a delay to allow spawn UI to show
-            -- The apartments system might trigger clothing menu after spawn selection,
-            -- but we add a fallback to ensure it opens
-            CreateThread(function()
-                Wait(3000) -- Wait for spawn UI to show
-                -- Open illenium-appearance menu for first character
-                Wait(500)
-                -- illenium-appearance listens for this event for first character creation
-                TriggerEvent('qb-clothes:client:CreateFirstCharacter')
-            end)
         else
             TriggerEvent('qbx_core:client:spawnNoApartments')
-            -- For non-properties, trigger clothing menu directly after a short delay
-            CreateThread(function()
-                Wait(1500)
-                -- Open illenium-appearance menu for first character
-                -- illenium-appearance listens for this event for first character creation
-                TriggerEvent('qb-clothes:client:CreateFirstCharacter')
-            end)
         end
     end
 
+  destroyPreviewCam()
   return true
 end
 

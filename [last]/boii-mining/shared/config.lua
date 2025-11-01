@@ -9,7 +9,7 @@ Config.Debug = false -- enable debug messages
 -- QBox settings
 Config.CoreSettings = {
     Core = 'qbx_core', -- The name of your core. Default; qbx_core
-    CoreFolder = 'qb-core', -- The name of your core folder for exports. qbx_core provides 'qb-core'
+    CoreFolder = 'qbx_core', -- The name of your core folder for exports. qbx_core provides 'qb-core'
     TargetName = 'ox_target', -- The name of your third eye targeting. Default; ox_target
     MenuName = 'ox_lib', -- The name of your menu. Default; ox_lib
     InputName = 'ox_lib', -- The name of your input menu for billing. Default; ox_lib
@@ -17,7 +17,7 @@ Config.CoreSettings = {
 
 -- MLO Settings
 Config.MLO = {
-    k4mb1_cave = true, -- Toggle use of k4mb1 mining cave mlo
+    k4mb1_cave = false, -- Toggle use of k4mb1 mining cave mlo
 }
 
 -- XP settings
@@ -49,8 +49,8 @@ Config.Blips = {
     {title = 'Foundry', colour = 47, id = 648, coords = vector3(2920.56, 2653.48, 43.18), scale = 0.7, useblip = true},
     {title = 'Foundry', colour = 47, id = 648, coords = vector3(1109.53, -2008.29, 31.05), scale = 0.7, useblip = true},
     {title = 'Builders Warehouse', colour = 5, id = 473, coords = vector3(1192.2, -1261.27, 35.18), scale = 0.6, useblip = true},
-    {title = 'Jeweller', colour = 5, id = 617, coords = vector3(-458.67, -67.38, 41.29), scale = 0.6, useblip = true}
-    ,{title = 'Gem Cutting', colour = 46, id = 617, coords = vector3(1077.67, -1987.68, 31.05), scale = 0.6, useblip = true}
+    {title = 'Jeweller', colour = 5, id = 617, coords = vector3(-630.48, -240.63, 38.15), scale = 0.6, useblip = true},
+    {title = 'Gem Cutting', colour = 46, id = 617, coords = vector3(1077.67, -1987.68, 31.05), scale = 0.6, useblip = true}
 }
 
 -- Ped settings

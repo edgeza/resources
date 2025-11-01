@@ -469,16 +469,16 @@ Config = {
                         grade = 0,
                         stock = 500,
                     },
-                    ['small_heal'] = {
+                    ['big_heal'] = {
                         type = 'equipments',
-                        name = 'Small Bandage',
+                        name = 'Big Bandage',
                         price = 1,
                         grade = 0,
                         stock = 500,
                     },
-                    ['big_heal'] = {
+                    ['weapon_flashlight'] = {
                         type = 'equipments',
-                        name = 'Big Bandage',
+                        name = 'Flashlight',
                         price = 1,
                         grade = 0,
                         stock = 500,
@@ -572,13 +572,7 @@ Config = {
                         stock = 500,
                     },
                     -- GGC Custom Weapons -- Lethals
-                    ['weapon_beanbag'] = {
-                        type = 'weapon',
-                        name = 'Bean Bag',
-                        price = 10,
-                        grade = 0,
-                        stock = 500,
-                    },
+                
                     -- GGC Custom Weapons -- Hand Guns
                     ['weapon_glock17'] = {
                         type = 'weapon',

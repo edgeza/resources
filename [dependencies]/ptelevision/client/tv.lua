@@ -125,25 +125,61 @@ function OpenTVMenu()
 end
 
 function PlayBrowser(data)
-    while not IsDuiAvailable(duiObj) do Wait(10) end
+    if not duiObj then
+        print("^1[ptelevision] Error: DUI object not initialized^7")
+        return
+    end
+    local timeout = 0
+    while not IsDuiAvailable(duiObj) and timeout < 100 do 
+        Wait(10)
+        timeout = timeout + 1
+        if not duiObj then
+            print("^1[ptelevision] Error: DUI object destroyed while waiting^7")
+            return
+        end
+    end
+    if timeout >= 100 then
+        print("^1[ptelevision] Error: DUI object not available after timeout^7")
+        return
+    end
     setDuiURL(data.url)
 end
 
 function PlayVideo(data)
-    while not IsDuiAvailable(duiObj) do Wait(10) end
+    if not duiObj then
+        print("^1[ptelevision] Error: DUI object not initialized^7")
+        return
+    end
+    local timeout = 0
+    while not IsDuiAvailable(duiObj) and timeout < 100 do 
+        Wait(10)
+        timeout = timeout + 1
+        if not duiObj then
+            print("^1[ptelevision] Error: DUI object destroyed while waiting^7")
+            return
+        end
+    end
+    if timeout >= 100 then
+        print("^1[ptelevision] Error: DUI object not available after timeout^7")
+        return
+    end
     if (getDuiURL() ~= DEFAULT_URL) then 
         waitForLoad = true
         setDuiURL(DEFAULT_URL)
         while waitForLoad do Wait(10) end
     end
-    SendDuiMessage(duiObj, json.encode({
-        setVideo = true,
-        data = data
-    }))
+    if duiObj then
+        SendDuiMessage(duiObj, json.encode({
+            setVideo = true,
+            data = data
+        }))
+    end
 end
 
 function ResetDisplay()
-    setDuiURL(DEFAULT_URL)
+    if duiObj then
+        setDuiURL(DEFAULT_URL)
+    end
 end
 
 function GetTelevisionLocal(coords)
@@ -201,19 +237,23 @@ end)
 
 RegisterNetEvent("ptelevision:broadcast", function(data, index)
     Channels = data
+    if not duiObj then return end
     if getDuiURL() == DEFAULT_URL then 
         local screen = CURRENT_SCREEN
+        if not screen then return end
         local tvObj = screen.entity
         local _, status = GetTelevision(screen.coords)
         if (status and status.channel == index and data[index] == nil) then 
             ResetDisplay()
             Citizen.Wait(10)
         end
-        SendDuiMessage(duiObj, json.encode({
-            showNotification = true,
-            channel = index,
-            data = data[index]
-        }))
+        if duiObj then
+            SendDuiMessage(duiObj, json.encode({
+                showNotification = true,
+                channel = index,
+                data = data[index]
+            }))
+        end
     end
 end)
 

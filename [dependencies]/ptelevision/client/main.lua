@@ -26,7 +26,11 @@ end
 
 function setDuiURL(url)
 	duiUrl = url
-	SetDuiUrl(duiObj, duiUrl)
+	if duiObj then
+		SetDuiUrl(duiObj, duiUrl)
+	else
+		print("^1[ptelevision] Warning: Cannot set DUI URL - DUI object not initialized^7")
+	end
 end
 
 local sfName = 'generic_texture_renderer'
@@ -105,12 +109,15 @@ function ShowScreen(data)
             SetVolume(coords, modelData.DefaultVolume)
         end
         while duiObj do 
+            if not duiObj then break end
             local pcoords = GetEntityCoords(PlayerPedId())
             local dist = #(coords - pcoords)
-            SendDuiMessage(duiObj, json.encode({
-                setVolume = true,
-                data = GetVolume(dist, range, volume)
-            }))
+            if duiObj then
+                SendDuiMessage(duiObj, json.encode({
+                    setVolume = true,
+                    data = GetVolume(dist, range, volume)
+                }))
+            end
             Citizen.Wait(100)
         end
     end)

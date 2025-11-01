@@ -6703,8 +6703,8 @@ ItemList = {
     ['body_bandage']          = { ['name'] = 'body_bandage', ['label'] = 'Body Bandage', ['weight'] = 1, ['type'] = 'item', ['image'] = 'body_bandage.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = '' },
     ['bandage']               = { ['name'] = 'bandage', ['label'] = 'Bandage', ['weight'] = 1, ['type'] = 'item', ['image'] = 'bandage.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = '' },
     ['medikit']               = { ['name'] = 'medikit', ['label'] = 'Medikit', ['weight'] = 1, ['type'] = 'item', ['image'] = 'medikit.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = '' },
-    ['small_heal']            = { ['name'] = 'small_heal', ['label'] = 'Small Heal', ['weight'] = 1, ['type'] = 'item', ['image'] = 'small_heal.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = '' },
-    ['big_heal']              = { ['name'] = 'big_heal', ['label'] = 'Big Heal', ['weight'] = 1, ['type'] = 'item', ['image'] = 'big_heal.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = '' },
+    ['small_heal']            = { ['name'] = 'small_heal', ['label'] = 'Small Heal', ['weight'] = 1, ['type'] = 'item', ['image'] = 'bandage.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = '' },
+    ['big_heal']              = { ['name'] = 'big_heal', ['label'] = 'Big Heal', ['weight'] = 1, ['type'] = 'item', ['image'] = 'medikit.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = '' },
 
     --['WEAPON_PAINTBALL'] = { ['name'] = 'WEAPON_PAINTBALL', ['label'] = 'PaintBall Weapon', ['weight'] = 1000, ['type'] = 'weapon', ['ammotype'] = 'AMMO_PISTOL', ['image'] = 'WEAPON_PAINTBALL.png', ['unique'] = true, ['useable'] = false, ['description'] = '' },
 

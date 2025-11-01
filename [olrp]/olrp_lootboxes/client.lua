@@ -69,6 +69,10 @@ RegisterNUICallback('forceClose', function(data, cb)
     isRewardPending = false -- Clear pending flag on force close
     SetNuiFocus(false, false)
     SendNUIMessage({type = "Close_caseOpener"})
+    
+    -- Notify server that case was force closed (don't give reward, but clear server state)
+    TriggerServerEvent('olrp_lootcases:forceClose')
+    
     cb('ok')
 end)
 

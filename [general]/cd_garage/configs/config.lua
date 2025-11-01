@@ -680,7 +680,7 @@ Config.JobVehicles = {
             -- OneLife Tower
             [4] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
         },
-        ['westcustoms'] = {
+        ['palmcoast'] = {
             [1] = {coords = vec3(-2043.29, -463.87, 11.36), spawn_coords = vec4(-2048.49, -459.48, 11.39, 230.08), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(-747.82, -2043.29, 8.92, 220.07)
 
             -- OneLife Tower
@@ -843,7 +843,7 @@ Config.JobVehicles = {
             [5] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 3, garage_type = 'car', model = `energytenereride_Bennys`},
             [6] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `dltowtruckbennys`},
         },
-        ['westcustoms'] = {
+        ['palmcoast'] = {
             [1] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 1, garage_type = 'car', model = `energyguinchoride_east`},
             [2] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 3, garage_type = 'car', model = `energyheliride_east`},
             [3] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 2, garage_type = 'car', model = `energysierraride_east`},
@@ -1185,7 +1185,7 @@ Config.Locations = {
     },
 
     {
-        Garage_ID = 'Westcoast',
+        Garage_ID = 'Palm Coast',
         Type = 'car',
         Dist = 4,
         x_1 = -2009.19, y_1 = -487.5, z_1 = 11.37, -- vec4(-2009.19, -487.5, 11.37, 136.65)
@@ -1760,7 +1760,7 @@ Config.Locations = {
         ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'West Coast',
+        Garage_ID = 'Palm Coast',
         Type = 'air',
         Dist = 4,
         x_1 = -2008.18, y_1 = -522.35, z_1 = 11.72, -- vec3(-2008.18, -522.35, 11.72)

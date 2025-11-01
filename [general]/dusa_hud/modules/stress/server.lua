@@ -22,6 +22,10 @@ if config.EnableStress then
         local src = source
         Wait(1500)
         local citizenid = GetIdentifier(src)
+        if not citizenid then
+            print('[ERROR] dusa_hud: Could not get citizenid for source ' .. tostring(src))
+            return
+        end
         local data = db.query("hud_settings", {"stress"}, "citizenid", citizenid)
         if not data or not next(data) then
             local playlist, settings = {}, {}            
@@ -29,12 +33,8 @@ if config.EnableStress then
             stress_data[citizenid] = 0
             TriggerClientEvent('hud:client:UpdateStress', src, stress_data[citizenid])
         else
-            -- Only restore from database if stress_data is nil (initial load)
-            -- This allows temporary stress reductions (from vape) to persist until stress is rebuilt
-            if stress_data[citizenid] == nil then
-                stress_data[citizenid] = data[1].stress
-                TriggerClientEvent('hud:client:UpdateStress', src, stress_data[citizenid])
-            end
+            stress_data[citizenid] = data[1].stress
+            TriggerClientEvent('hud:client:UpdateStress', src, stress_data[citizenid])
         end
     end)
 
@@ -42,7 +42,7 @@ if config.EnableStress then
     AddEventHandler("esx:playerLogout", function(source)
         local src = source
         local citizenid = GetIdentifier(src)
-        if stress_data[citizenid] then
+        if citizenid and stress_data[citizenid] then
             stress_data[citizenid] = math.floor(stress_data[citizenid])
             db.save('hud_settings', 'stress', 'citizenid', stress_data[citizenid], citizenid)
         end
@@ -52,7 +52,7 @@ if config.EnableStress then
     AddEventHandler("QBCore:Server:OnPlayerUnload", function(source)
         local src = source
         local citizenid = GetIdentifier(src)
-        if stress_data[citizenid] then
+        if citizenid and stress_data[citizenid] then
             stress_data[citizenid] = math.floor(stress_data[citizenid])
             db.save('hud_settings', 'stress', 'citizenid', stress_data[citizenid], citizenid)
         end
@@ -70,16 +70,17 @@ if config.EnableStress then
     RegisterNetEvent('hud:server:GainStress', function(amount)
         local src = source
         local citizenid = GetIdentifier(src)
+        if not citizenid then
+            print('[ERROR] dusa_hud: Could not get citizenid for source ' .. tostring(src))
+            return
+        end
         local newStress
         if IsWhitelisted(src) then
             return
         end
-        
-        -- Build from current stress value (don't restore from DB - allows rebuilding from 0 after vape)
         if stress_data[citizenid] == nil then
             stress_data[citizenid] = 0
         end
-        
         newStress = tonumber(stress_data[citizenid]) + amount
         if newStress <= 0 then newStress = 0 end
     
@@ -87,8 +88,7 @@ if config.EnableStress then
             newStress = 100
         end
         stress_data[citizenid] = newStress
-        -- Save stress to database when it increases (from driving, etc.)
-        db.save('hud_settings', 'stress', 'citizenid', math.floor(newStress), citizenid)
+        -- ExecuteSql("UPDATE `"..Config.StressMysqlTable.."` SET stress = '"..newStress.."' WHERE identifier = '"..identifier.."'")
         TriggerClientEvent('hud:client:UpdateStress', src, newStress)
         if newStress > 0 then
             notify(locale('stressing'), 'error')
@@ -98,6 +98,10 @@ if config.EnableStress then
     RegisterNetEvent('hud:server:RelieveStress', function(amount)
         local src = source
         local citizenid = GetIdentifier(src)
+        if not citizenid then
+            print('[ERROR] dusa_hud: Could not get citizenid for source ' .. tostring(src))
+            return
+        end
     
         local newStress
             
@@ -111,8 +115,7 @@ if config.EnableStress then
             newStress = 100
         end
         stress_data[citizenid] = newStress
-        -- DO NOT save to database - this is temporary relief (e.g., from vape)
-        -- Stress will restore from database when CheckStress is called (e.g., when driving starts)
+        -- removed stress update from here
         TriggerClientEvent('hud:client:UpdateStress', src, newStress)
         if newStress > 0 then
             notify(locale('relieved_stress'), 'success')

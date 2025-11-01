@@ -16,7 +16,7 @@ Config.Stashes = {
     --     stashSlots = 125, 
     -- },
 
-    ["westcustoms_stash1"] = {
+    ["palmcoast_stash1"] = {
         stashName = "Perfomance Supplies",
         coords = vec3(-2054.57, -514.67, 12.1), 
         requirecid = false,
@@ -28,7 +28,7 @@ Config.Stashes = {
         stashSize = 10000000,
         stashSlots = 60, 
     },
-    ["westcustoms_stash2"] = {
+    ["palmcoast_stash2"] = {
         stashName = "Service Supplies",
         coords = vec3(-2076.12, -516.6, 12.1), 
         requirecid = false,

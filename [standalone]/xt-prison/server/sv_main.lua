@@ -2,9 +2,74 @@ local db                = require 'modules.server.db'
 local config            = require 'configs.server'
 local prisonBreakcfg    = require 'configs.prisonbreak'
 local utils             = require 'modules.server.utils'
-local ox_inventory      = exports.ox_inventory
 local globalState       = GlobalState
 local confiscated       = {}
+
+-- Inventory System Detection
+local inventorySystem = nil
+if GetResourceState('qs-inventory') == 'started' or GetResourceState('qs-inventory') == 'starting' then
+    inventorySystem = 'qs-inventory'
+elseif GetResourceState('ox_inventory') == 'started' or GetResourceState('ox_inventory') == 'starting' then
+    inventorySystem = 'ox_inventory'
+end
+
+-- Inventory Helper Functions
+local function GetInventoryItems(src)
+    if inventorySystem == 'qs-inventory' then
+        local inventory = exports['qs-inventory']:GetInventory(src)
+        if not inventory then return {} end
+        
+        local items = {}
+        for slot, item in pairs(inventory) do
+            if item and item.name then
+                items[slot] = {
+                    name = item.name,
+                    count = item.amount or item.count or 1,
+                    metadata = item.info or item.metadata or {}
+                }
+            end
+        end
+        return items
+    elseif inventorySystem == 'ox_inventory' then
+        return exports.ox_inventory:GetInventoryItems(src)
+    end
+    return {}
+end
+
+local function AddItem(src, item, count, metadata)
+    if inventorySystem == 'qs-inventory' then
+        local success = exports['qs-inventory']:AddItem(src, item, count or 1)
+        if success and metadata then
+            local inventory = exports['qs-inventory']:GetInventory(src)
+            if inventory then
+                for slot, invItem in pairs(inventory) do
+                    if invItem.name == item then
+                        exports['qs-inventory']:SetItemMetadata(src, slot, metadata)
+                        break
+                    end
+                end
+            end
+        end
+        return success
+    elseif inventorySystem == 'ox_inventory' then
+        return exports.ox_inventory:AddItem(src, item, count or 1, metadata)
+    end
+    return false
+end
+
+local function ClearInventory(src)
+    if inventorySystem == 'qs-inventory' then
+        exports['qs-inventory']:ClearInventory(src)
+    elseif inventorySystem == 'ox_inventory' then
+        exports.ox_inventory:ClearInventory(src)
+    end
+end
+
+local function ReturnInventory(src)
+    if inventorySystem == 'ox_inventory' then
+        exports.ox_inventory:ReturnInventory(src)
+    end
+end
 
 local function savePlayerJailTime(src)
     local state = Player(src).state
@@ -14,7 +79,7 @@ local function savePlayerJailTime(src)
     MySQL.insert.await(db.UPDATE_JAILTIME, { cid, jailTime })
 
     if confiscated[src] then
-        ox_inventory:ReturnInventory(src)
+        ReturnInventory(src)
         confiscated[src] = nil
     end
 end
@@ -61,14 +126,14 @@ RegisterNetEvent('xt-prison:server:removeItems', function()
     if confiscated[src] then return end
 
     local cid = getCharID(src)
-    local playerItems = ox_inventory:GetInventoryItems(src)
+    local playerItems = GetInventoryItems(src)
     local confiscatedItems = MySQL.scalar.await(db.GET_ITEMS, { cid })
 
     confiscatedItems = json.decode(confiscatedItems) or {}
 
     if next(playerItems) and not next(confiscatedItems) then -- Checks if player has items and confiscated table is empty
         MySQL.insert.await(db.CONFISCATE_ITEMS, { cid, json.encode(playerItems) })
-        ox_inventory:ClearInventory(src)
+        ClearInventory(src)
 
         lib.notify(src, {
             title = locale('notify.confiscated'),
@@ -91,17 +156,17 @@ RegisterNetEvent('xt-prison:server:returnItems', function()
 
     if not confiscated[src] then return end
 
-    local prisonInventory = ox_inventory:GetInventoryItems(src) -- Get Prison Inventory
+    local prisonInventory = GetInventoryItems(src) -- Get Prison Inventory
     local confiscatedItems = MySQL.scalar.await(db.GET_ITEMS, { cid }) -- Get Confiscated Items
     confiscatedItems = json.decode(confiscatedItems) or {}
 
-    ox_inventory:ClearInventory(src) -- Clear Prison Inventory
+    ClearInventory(src) -- Clear Prison Inventory
 
     Wait(100)
 
     if next(confiscatedItems) then -- Ensure table is not empty
         for slot, info in pairs(confiscatedItems) do
-            ox_inventory:AddItem(src, info.name, info.count, info.metadata)
+            AddItem(src, info.name, info.count, info.metadata)
         end
 
         MySQL.query.await(db.CLEAR_CONFISCATED_ITEMS, { cid })
@@ -117,7 +182,7 @@ RegisterNetEvent('xt-prison:server:returnItems', function()
 
     for slot, info in pairs(prisonInventory) do -- Return some prison items
         if config.AllowedToKeepItems[info.name] then
-            ox_inventory:AddItem(src, info.name, info.count, info.metadata)
+            AddItem(src, info.name, info.count, info.metadata)
         end
     end
 end)
@@ -147,7 +212,7 @@ end)
 lib.callback.register('xt-prison:server:receiveCanteenMeal', function(source)
     local food = config.CanteenMeal.food
     local drink = config.CanteenMeal.drink
-    if ox_inventory:AddItem(source, food.item, food.count) and ox_inventory:AddItem(source, drink.item, drink.count) then
+    if AddItem(source, food.item, food.count) and AddItem(source, drink.item, drink.count) then
         return true
     end
     return false

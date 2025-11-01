@@ -2,6 +2,24 @@ local globalState       = GlobalState
 local prisonBreakcfg    = require 'configs.prisonbreak'
 local prisonModules     = require 'modules.server.prisonbreak'
 
+-- Inventory System Detection
+local inventorySystem = nil
+if GetResourceState('qs-inventory') == 'started' or GetResourceState('qs-inventory') == 'starting' then
+    inventorySystem = 'qs-inventory'
+elseif GetResourceState('ox_inventory') == 'started' or GetResourceState('ox_inventory') == 'starting' then
+    inventorySystem = 'ox_inventory'
+end
+
+-- Remove Item Helper Function
+local function RemoveItem(src, item, count)
+    if inventorySystem == 'qs-inventory' then
+        return exports['qs-inventory']:RemoveItem(src, item, count or 1)
+    elseif inventorySystem == 'ox_inventory' then
+        return exports.ox_inventory:RemoveItem(src, item, count or 1)
+    end
+    return false
+end
+
 local function setPrisonAlarms(setState)
     if globalState.prisonAlarms == setState then return end
 
@@ -46,7 +64,7 @@ RegisterNetEvent('xt-prison:server:removePrisonbreakItems', function(success)
     local removedCount = 0
 
     for requiredItem, requiredCount in pairs(requiredItems) do
-        if exports.ox_inventory:RemoveItem(src, requiredItem, (requiredCount or 1)) then
+        if RemoveItem(src, requiredItem, (requiredCount or 1)) then
             removedCount += 1
             if removedCount == #requiredItems then
                 break

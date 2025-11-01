@@ -1027,7 +1027,7 @@ WeaponList = {
         name = 'weapon_glock21',
         label = 'GLOCK 21',
         weapontype = 'Pistol',
-        ammotype = 'AMMO_SHOTGUN',
+        ammotype = 'AMMO_MG',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
     },
     [`weapon_glock41`] = {

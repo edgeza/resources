@@ -469,6 +469,20 @@ Config = {
                         grade = 0,
                         stock = 500,
                     },
+                    ['ifaks'] = {
+                        type = 'equipments',
+                        name = 'ifaks',
+                        price = 1,
+                        grade = 0,
+                        stock = 500,
+                    },
+                    ['bandage'] = {
+                        type = 'equipments',
+                        name = 'bandage',
+                        price = 1,
+                        grade = 0,
+                        stock = 500,
+                    },
 
                     -- Evidence
                     ['empty_evidence_bag'] = {

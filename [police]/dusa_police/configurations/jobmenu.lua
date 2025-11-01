@@ -13,11 +13,6 @@ JobMenu = {
                         event = "police:client:CuffPlayerSoft",
                     },
                     {
-                        name = "Hard Cuff",
-                        icon = "fa-solid fa-arrow-right",
-                        event = "police:client:CuffPlayer",
-                    },
-                    {
                         name = "Escort",
                         icon = "fa-solid fa-user-friends",
                         event = "police:client:EscortPlayer",
@@ -36,26 +31,6 @@ JobMenu = {
                         name = "Search",
                         icon = "fa-solid fa-search",
                         event = "police:client:SearchPlayer",
-                    },
-                    {
-                        name = "Seize Cash",
-                        icon = "fa-solid fa-magnifying-glass-dollar",
-                        event = "police:client:SeizeCash",
-                    },
-                    {
-                        name = "Send to Jail",
-                        icon = "fa-solid fa-pause",
-                        event = "police:client:openJail"
-                    },
-                    {
-                        name = "Issue Fine",
-                        icon = "fa-solid fa-money-bill-wave",
-                        event = "police:client:openFine",
-                    },
-                    {
-                        name = "Send to Public",
-                        icon = "fa-solid fa-users",
-                        event = "police:client:openService",
                     },
                 },
             },

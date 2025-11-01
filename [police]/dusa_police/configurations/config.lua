@@ -17,18 +17,6 @@ Config = {
                 event = "police:client:CuffPlayerSoft",
             },
             {
-                name = 'hard_cuff',
-                label = "Hard Cuff",
-                icon = "fa-solid fa-arrow-right",
-                event = "police:client:CuffPlayer",
-            },
-            {
-                name = 'uncuff',
-                label = "Uncuff",
-                icon = "fa-solid fa-arrow-right",
-                event = "police:client:UncuffPlayer",
-            },
-            {
                 name = 'escort',
                 label = "Escort",
                 icon = "fa-solid fa-user-friends",
@@ -51,33 +39,6 @@ Config = {
                 label = "Search",
                 icon = "fa-solid fa-search",
                 event = "police:client:SearchPlayer",
-            },
-            {
-                name = 'seize',
-                label = "Seize Cash",
-                icon = "fa-solid fa-magnifying-glass-dollar",
-                event = "police:client:SeizeCash",
-            },
-            {
-                name = 'sendtojail',
-                label = "Send to Jail",
-                type = 'jail',
-                icon = "fa-solid fa-pause",
-                event = "police:client:openJail",
-            },
-            {
-                name = 'fine',
-                label = "Issue Fine",
-                type = 'fine',
-                icon = "fa-solid fa-money-bill-wave",
-                event = "police:client:openFine",
-            },
-            {
-                name = 'service',
-                label = "Send to Public",
-                type = 'service',
-                icon = "fa-solid fa-users",
-                event = "police:client:openService",
             },
         },
         vehicle = {
@@ -142,7 +103,7 @@ Config = {
 
     -- Handcuff Minigame
     EscapeFromCuff = true,
-    CuffDifficulty = { "medium", "hard", "medium" },
+    CuffDifficulty = { "hard", "hard", "hard" },
     CuffMinigameKeys = { "w", "a", "s", "d" },
     CuffItem = 'handcuffs',
     CuffKeysItem = 'cuff_keys',

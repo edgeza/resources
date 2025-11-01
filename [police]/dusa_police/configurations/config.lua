@@ -469,16 +469,16 @@ Config = {
                         grade = 0,
                         stock = 500,
                     },
-                    ['ifaks'] = {
+                    ['small_heal'] = {
                         type = 'equipments',
-                        name = 'ifaks',
+                        name = 'Small Bandage',
                         price = 1,
                         grade = 0,
                         stock = 500,
                     },
-                    ['bandage'] = {
+                    ['big_heal'] = {
                         type = 'equipments',
-                        name = 'bandage',
+                        name = 'Big Bandage',
                         price = 1,
                         grade = 0,
                         stock = 500,

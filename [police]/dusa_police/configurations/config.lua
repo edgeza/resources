@@ -469,9 +469,9 @@ Config = {
                         grade = 0,
                         stock = 500,
                     },
-                    ['big_heal'] = {
+                    ['medikit'] = {
                         type = 'equipments',
-                        name = 'Big Bandage',
+                        name = 'MedKit',
                         price = 1,
                         grade = 0,
                         stock = 500,

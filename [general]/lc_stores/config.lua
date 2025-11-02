@@ -56,7 +56,7 @@ Config.market_locations = {
 		['truck_parking_location'] = {24.0538,-1357.3694, 29.503,88.4017},
 		['map_blip_coord'] = {25.71,-1346.47,29.49},
 		['sell_blip_coords'] = {
-			{25.96, -1346.96, 29.5, 94.69},
+			{25.96, -1346.96, 29.5},
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -82,7 +82,7 @@ Config.market_locations = {
 		['truck_parking_location'] = {2564.896,366.3779, 108.7248,177.4842},
 		['map_blip_coord'] = {2556.73,382.11,108.62},
 		['sell_blip_coords'] = {
-			{2556.7, 382.32, 108.62, 179.97},
+			{2556.7, 382.32, 108.62},
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -108,7 +108,7 @@ Config.market_locations = {
 		['truck_parking_location'] = {1184.322,-314.0848, 69.4398,279.8044},
 		['map_blip_coord'] = {1163.42,-322.91,69.20},
 		['sell_blip_coords'] = {
-			{1163.47, -323.17, 69.21, 281.11},
+			{1163.47, -323.17, 69.21},
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -134,7 +134,7 @@ Config.market_locations = {
 		['truck_parking_location'] = {-1807.3877,789.4099, 138.4138,220.8947},
 		['map_blip_coord'] = {-1820.92,793.17,138.11},
 		['sell_blip_coords'] = {
-			{-1820.96, 793.34, 138.11, 321.73},
+			{-1820.96, 793.34, 138.11},
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -317,8 +317,8 @@ Config.market_locations = {
 		['truck_parking_location'] = {1686.8475,4922.3828, 42.3414,55.4782},
 		['map_blip_coord'] = {1700.00,4925.55,42.06},
 		['sell_blip_coords'] = {
-			{1702.33, 4928.18, 42.06},
-			{1705.62, 4929.61, 42.06},
+			{1698.82, 4923.95, 42.066},
+
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -344,8 +344,8 @@ Config.market_locations = {
 		['truck_parking_location'] = {-20.8732,-1767.8015, 29.4571,231.7498},
 		['map_blip_coord'] = {-50.81,-1754.87,29.42},
 		['sell_blip_coords'] = {
-			{-51.73, -1753.27, 29.42},
-			{-48.64, -1755.31, 29.42},
+			{-47.87, -1757.27, 29.42},
+
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -372,7 +372,6 @@ Config.market_locations = {
 		['map_blip_coord'] = {1398.45,3607.05,34.98},
 		['sell_blip_coords'] = {
 			{1392.78, 3606.37, 34.98},
-			{1398.97, 3605.65, 34.98},
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -399,7 +398,6 @@ Config.market_locations = {
 		['map_blip_coord'] = {-3041.66,586.27,7.90},
 		['sell_blip_coords'] = {
 			{-3039.53, 584.18, 9.35},
-			{-3041.05, 587.36, 7.91},
 		},
 		['deliveryman_coord'] = {0,0,0},
 		['type'] = '247store',
@@ -425,7 +423,6 @@ Config.market_locations = {
 		['truck_parking_location'] = {1181.8191,2695.3115, 38.2108,268.9558},
 		['map_blip_coord'] = {1164.06,2707.60,38.15},
 		['sell_blip_coords'] = {
-			{1169.2, 2708.01, 38.16},
 			{1165.81, 2710.82, 38.16},
 		},
 		['deliveryman_coord'] = {0,0,0},

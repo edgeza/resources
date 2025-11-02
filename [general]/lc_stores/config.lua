@@ -30,7 +30,7 @@ Config.market_locations = {
 		['truck_parking_location'] = {-707.95, -929.8, 19.01, 180.0},			-- Location that the trucks from Trucker Logistics script will park when delivering cargo for this store (vector3)
 		['map_blip_coord'] = {-714.77,-912.22,19.21},							-- Map blip coordinates, where the map blip will appear (vector3)
 		['sell_blip_coords'] = {												-- The coordinates where customes will buy things on this store (vector3)
-			{-707.41, -914.06, 19.22, 274.46},
+			{-707.36, -914.0, 19.22},
 		},
 		['deliveryman_coord'] = {0,0,0},							-- Coord where the deliveryman will take the jobs you've created
 		['type'] = '247store', 													-- Insert here the market type ID

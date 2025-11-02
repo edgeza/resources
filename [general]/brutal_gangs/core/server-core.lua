@@ -241,16 +241,18 @@ elseif Config['Core']:upper() == 'QBCORE' then
             local gang = {}
             local newValue, newGrades = {}, {}
 
-            for k,v in pairs(grades) do
-                newValue[#newValue+1] = { id = tonumber(k), data = v }
-            end
+            if grades then
+                for k,v in pairs(grades) do
+                    newValue[#newValue+1] = { id = tonumber(k), data = v }
+                end
 
-            table.sort(newValue, function(a, b)
-                return a.id < b.id
-            end)
+                table.sort(newValue, function(a, b)
+                    return a.id < b.id
+                end)
 
-            for k,v in pairs(newValue) do
-                newGrades[v.id] = v.data
+                for k,v in pairs(newValue) do
+                    newGrades[v.id] = v.data
+                end
             end
 
             gang[name] = {
@@ -263,7 +265,7 @@ elseif Config['Core']:upper() == 'QBCORE' then
             Core.Functions.AddGang(name, 
             {
                 label = label,
-                grades = grades,
+                grades = grades or {},
             })
         end
     end

@@ -19,15 +19,19 @@ RESCB("brutal_gangs:server:GetDressing",function(source,cb)
         TriggerEvent('esx_datastore:getDataStore', 'property', GetIdentifier(src), function(store)
             local dressings = store.get('dressing') or {}
         
-            for k,v in pairs(dressings) do
-                table.insert(dressingTable, {label = v.label, skin = v.skin})
+            if dressings then
+                for k,v in pairs(dressings) do
+                    table.insert(dressingTable, {label = v.label, skin = v.skin})
+                end
             end
         end)
         dataArrived = true
     elseif Config['Core']:upper() == 'QBCORE' then
         local results = MySQL.query.await('SELECT * FROM player_outfits WHERE citizenid = ?', { GetIdentifier(src) })
-        for k, v in pairs(results) do
-            table.insert(dressingTable, {label = v.outfitname ~= "" and v.outfitname or "None", skin = results[k].skin, model = v.model})
+        if results then
+            for k, v in pairs(results) do
+                table.insert(dressingTable, {label = v.outfitname ~= "" and v.outfitname or "None", skin = results[k].skin, model = v.model})
+            end
         end
         dataArrived = true
     end

@@ -18,11 +18,16 @@ if Config['Core']:upper() == 'ESX' then
     TSCB = Core.TriggerServerCallback
 
     function GetPlayerJobDatas()
-        return Core.GetPlayerData().job
+        local playerData = Core.GetPlayerData()
+        if playerData and playerData.job then
+            return playerData.job
+        end
+        return nil
     end
 
     function GetPlayersFunction()
-        return Core.Game.GetPlayers()
+        local players = Core.Game.GetPlayers()
+        return players or {}
     end
 
     function GetVehiclePropertiesFunction(vehicle)
@@ -46,11 +51,16 @@ elseif Config['Core']:upper() == 'QBCORE' then
     TSCB = Core.Functions.TriggerCallback
 
     function GetPlayerJobDatas()
-        return Core.Functions.GetPlayerData().gang
+        local playerData = Core.Functions.GetPlayerData()
+        if playerData and playerData.gang then
+            return playerData.gang
+        end
+        return nil
     end
 
     function GetPlayersFunction()
-        return Core.Functions.GetPlayers()
+        local players = Core.Functions.GetPlayers()
+        return players or {}
     end
 
     function GetVehiclePropertiesFunction(vehicle)

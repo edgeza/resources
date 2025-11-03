@@ -4,7 +4,7 @@ Config = {
 
 	img = "qs-inventory/html/images/", -- Set this to your inventory
 
-	Inv = "qs", -- set to "ox" if using OX Inventory, "qs" if using QS Inventory, "qb" for QBCore default
+	Inv = "qb", -- set to "ox" if using OX Inventory, "qb" for QBCore/QB/QS Inventory (they all use QBCore.Shared.Items)
 	Menu = "ox", -- "ox" for ox_lib menus (works with QBox), "qb" for qb-menu (QBCore only)
 	ProgressBar = "qb",
 	Notify = "qb",

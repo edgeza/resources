@@ -417,12 +417,8 @@ local function getItemData(itemName)
 		if items and items[itemName] then
 			return { image = items[itemName].image or itemName, label = items[itemName].label or itemName }
 		end
-	elseif Config.Inv == "qs" then
-		local success, items = pcall(function() return exports["qs-inventory"]:GetItemList() end)
-		if success and items and items[itemName] then
-			return { image = items[itemName].image or itemName, label = items[itemName].label or itemName }
-		end
 	elseif Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[itemName] then
+		-- Works for QBCore, QB-Inventory, and QS-Inventory (they all use QBCore.Shared.Items)
 		return Core.Shared.Items[itemName]
 	end
 	-- Fallback if item data not found

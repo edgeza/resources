@@ -1577,7 +1577,7 @@ Config.market_categories = {
 				['img'] = 'backpack2.png',
 			},
 			['rope'] = {
-				['name'] = "rope",
+				['name'] = "Rope",
 				['price_to_customer'] = 50,
 				['price_to_customer_min'] = 165,
 				['price_to_customer_max'] = 700,

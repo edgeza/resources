@@ -1576,17 +1576,6 @@ Config.market_categories = {
 				['amount_to_delivery'] = 2,
 				['img'] = 'backpack2.png',
 			},
-			['fitbit'] = {
-				['name'] = "OLRP Fitbit",
-				['price_to_customer'] = 1000,
-				['price_to_customer_min'] = 1000,
-				['price_to_customer_max'] = 1000,
-				['price_to_export'] = 1000,
-				['price_to_owner'] = 1000,
-				['amount_to_owner'] = 2,
-				['amount_to_delivery'] = 2,
-				['img'] = 'fitbit.png',
-			},
 			['rope'] = {
 				['name'] = "rope",
 				['price_to_customer'] = 50,

@@ -64,9 +64,18 @@ end
 function GetItemLabel(item)
     local label = "N/A"
     
+    -- Re-check QBCore if it's nil (handles race conditions)
+    if not QBCore then
+        QBCore = exports['qb-core']:GetCoreObject()
+    end
+    
     -- Safety check for QBCore and Shared.Items
     if not QBCore or not QBCore.Shared or not QBCore.Shared.Items then
-        print(string.format('^1[Loot Cases] Warning: QBCore.Shared.Items is nil when trying to get label for: %s', item))
+        -- Only warn once per session to avoid spam
+        if not GetItemLabel.warnedOnce then
+            print(string.format('^3[Loot Cases] Warning: QBCore.Shared.Items is nil. Using item name as fallback for: %s', item))
+            GetItemLabel.warnedOnce = true
+        end
         return item -- Return item name as fallback
     end
     
@@ -90,9 +99,18 @@ function GetWeaponLabel(weapon)
     local weaponLower = string.lower(weapon)
     local label = "N/A"
     
+    -- Re-check QBCore if it's nil (handles race conditions)
+    if not QBCore then
+        QBCore = exports['qb-core']:GetCoreObject()
+    end
+    
     -- Safety check for QBCore and Shared tables
     if not QBCore or not QBCore.Shared then
-        print(string.format('^1[Loot Cases] Warning: QBCore.Shared is nil when trying to get weapon label for: %s', weapon))
+        -- Only warn once per session to avoid spam
+        if not GetWeaponLabel.warnedOnce then
+            print(string.format('^3[Loot Cases] Warning: QBCore.Shared is nil. Using weapon name as fallback for: %s', weapon))
+            GetWeaponLabel.warnedOnce = true
+        end
         return weapon -- Return weapon name as fallback
     end
     

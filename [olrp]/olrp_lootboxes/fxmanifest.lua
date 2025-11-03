@@ -26,4 +26,7 @@ files {
     'web/build/**/*'
 }
 
-dependency '/assetpacks'
+dependencies {
+    'qb-core',
+    '/assetpacks'
+}

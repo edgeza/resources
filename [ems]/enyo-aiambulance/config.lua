@@ -39,7 +39,7 @@ Config.AmbulanceLivery = 2  -- Livery index for the ambulance (default = 0)
 
 -- Configures the maximum speed for the AI ambulance vehicle.
 -- This value determines the top speed that the ambulance can travel when responding to emergencies.
-Config.MaxSpeed = 60.0  -- Maximum speed for the ambulance in miles per hour (default = 15.0)
+Config.MaxSpeed = 200.0  -- Maximum speed for the ambulance in miles per hour (default = 15.0)
 
 -- Defines the model name for the AI boat used in water rescues.
 -- This is the vehicle AI medics will use when water-based rescues are required (e.g., player drowning).
@@ -102,7 +102,7 @@ Config.outfit = {
 -- When set to true, the AI will only dispatch helicopters to provide medical assistance. 
 -- No ground ambulances or stretchers will be used for player transport in this case.
 -- If set to false, both air and ground ambulances may be used depending how hard the death location is to reach by AI medics.
-Config.onlyAirAmbulance = true  -- If true, AI medical help will only arrive via helicopter, with no ground ambulance support.
+Config.onlyAirAmbulance = false  -- If true, AI medical help will only arrive via helicopter, with no ground ambulance support.
 
 Config.cayoAirAmbulance = true -- -- If true, AI medical help will only arrive via helicopter in Cayo Perico Island, make it false if you configurated a hospital in Cayo Perico.
 
@@ -150,10 +150,6 @@ Config.hospitals = {
         -- Additional variables (optional) passed to the revive and notification functions.
         ExtraVariables  = { 
             ["CheckInPoint"] = vector3(308.4696, -595.0331, 43.2918),  -- [Used in QB bed checkin] Coordinates for player check-in (triggered during a revive event)
-            ["ReviveCutSceneVideo"] = "https://youtu.be/JfNRjFB9tBI",  -- Optional video during revive (Supports youtube and local files and bilibili) 
-                                                                       -- https://youtu.be/JfNRjFB9tBI
-                                                                       -- https://www.bilibili.com/video/BV1KT9fYQEC4/
-                                                                       -- videos/cutscene.mp4"
             ["teleportTo"] = vector3(315.01, -582.83, 43.28), -- Teleport here after everything is done
 
         }
@@ -179,10 +175,6 @@ Config.hospitals = {
         
         ExtraVariables  = { 
             ["CheckInPoint"] = vector3(-254.54, 6331.78, 32.43),        -- [Used in QB bed checkin] Check-in point for reviving the player
-            ["ReviveCutSceneVideo"] = "videos/cutscene.mp4",            -- Optional video during revive (Supports youtube and local files and bilibili) 
-                                                                        -- https://youtu.be/JfNRjFB9tBI
-                                                                        -- https://www.bilibili.com/video/BV1KT9fYQEC4/
-                                                                        -- videos/cutscene.mp4"
             --["teleportTo"] = vector3(-253.3137, 6312.3911, 32.4315),  -- Teleport here after everything is done 
 
         }

@@ -1,7 +1,7 @@
 Cfg = {}
 
 --- ### TEBEX - MUSIC - PlayTube  ### ---
-Cfg.TebexTransactionID = "tbx-...." --- GKSPhone TBX-ID Required for PlayTube and Music app. (Example : tbx-....)
+Cfg.TebexTransactionID = "tbx-33523623a53610-fcdd4b" --- GKSPhone TBX-ID Required for PlayTube and Music app. (Example : tbx-....)
 
 --## Media Service Settings ## --
 -- Write the media service name you will use ( fivemanage, fivemerr, gksmedia, customMedia)

@@ -2,7 +2,7 @@ Config = Config or {}
 Config.Debug = false   -- Set to true ONLY for testing/debugging (Keep false for live server)
 
 --- ### FREAMWORK ### ----
-Config.Framework = "auto" -- YOUR FRAMEWORK: qb, esx, qbx, standalone, auto (auto detects automatically)
+Config.Framework = "qbx" -- YOUR FRAMEWORK: qb, esx, qbx, standalone, auto (auto detects automatically)
 
 --- ### Database ### ----
 Config.DatabaseAutoSetup = true -- Automatically sets up database tables (Recommended: true)

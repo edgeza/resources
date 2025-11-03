@@ -410,6 +410,21 @@ RegisterNetEvent('jim-recycle:SellAnim', function(data) local Ped = PlayerPedId(
 	lockInv(false)
 end)
 
+-- Helper function to safely get item data
+local function getItemData(itemName)
+	if Config.Inv == "ox" then
+		local items = exports.ox_inventory:Items()
+		if items and items[itemName] then
+			return { image = items[itemName].image or itemName, label = items[itemName].label or itemName }
+		end
+	elseif Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[itemName] then
+		-- Works for QBCore, QB-Inventory, and QS-Inventory (they all use QBCore.Shared.Items)
+		return Core.Shared.Items[itemName]
+	end
+	-- Fallback if item data not found
+	return { image = itemName, label = itemName }
+end
+
 RegisterNetEvent('jim-recycle:Selling:Menu', function(data)
 	if Selling then return end
 	local sellMenu = {}
@@ -432,20 +447,6 @@ RegisterNetEvent('jim-recycle:Selling:Menu', function(data)
 	elseif Config.Menu == "qb" then exports['qb-menu']:openMenu(sellMenu) end
 	lookEnt(data.Ped)
 end)
-
--- Helper function to safely get item data
-local function getItemData(itemName)
-	if Config.Inv == "ox" then
-		local items = exports.ox_inventory:Items()
-		if items and items[itemName] then
-			return { image = items[itemName].image or itemName, label = items[itemName].label or itemName }
-		end
-	elseif Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[itemName] then
-		return Core.Shared.Items[itemName]
-	end
-	-- Fallback if item data not found
-	return { image = itemName, label = itemName }
-end
 
 --Recyclable Trader
 RegisterNetEvent('jim-recycle:Trade:Menu', function(data)

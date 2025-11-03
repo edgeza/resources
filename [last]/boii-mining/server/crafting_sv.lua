@@ -31,10 +31,10 @@ local function buildCraftMenu(category, src)
     local pData = src and Core.Functions.GetPlayer(src) or nil
     -- removed debug clickable
     for _, r in ipairs(Crafting[category]) do
-        local header = (Core.Shared.Items[r.reward.name] and Core.Shared.Items[r.reward.name].label) or r.reward.name
+        local header = (Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[r.reward.name] and Core.Shared.Items[r.reward.name].label) or r.reward.name
         local reqText = ''
         for req, amt in pairs(r.required) do
-            local label = (Core.Shared.Items[req] and Core.Shared.Items[req].label) or req
+            local label = (Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[req] and Core.Shared.Items[req].label) or req
             reqText = reqText .. amt .. 'x ' .. label .. '</p>'
         end
         -- All jeweller crafts require drill bit present (not always consumed)
@@ -171,7 +171,9 @@ local function handleCraft(data)
     -- Remove required materials (not drill bits)
     for item, amount in pairs(required) do
         pData.Functions.RemoveItem(item, amount)
-        TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[item], 'remove', amount)
+        if Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[item] then
+            TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[item], 'remove', amount)
+        end
         sdbg('removed', amount, item)
     end
     -- 25% break chance: require a drill bit to be present, but only consume it on failure
@@ -180,12 +182,16 @@ local function handleCraft(data)
         sdbg('drillbit break roll', broke)
         if broke then
             pData.Functions.RemoveItem(Config.Tools.DrillBit.name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[Config.Tools.DrillBit.name], 'remove', 1)
+            if Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[Config.Tools.DrillBit.name] then
+                TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[Config.Tools.DrillBit.name], 'remove', 1)
+            end
         end
     end
     -- Add reward
     pData.Functions.AddItem(reward.name, reward.amount)
-    TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[reward.name], 'add', reward.amount)
+    if Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[reward.name] then
+        TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[reward.name], 'add', reward.amount)
+    end
     sdbg('granted', reward.amount, reward.name)
     -- Contextual success notifications
     local r = tostring(reward.name or '')

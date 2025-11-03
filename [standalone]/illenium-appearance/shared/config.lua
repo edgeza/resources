@@ -192,7 +192,7 @@ Config.Stores = {
     },
     {
         type = "clothing",
-        coords = vector4(-705.5, -149.22, 37.42, 122),
+        coords = vec4(-711.88, -153.88, 37.14, 114.18),
         size = vector3(4, 4, 4),
         rotation = 45,
         usePoly = false,
@@ -231,7 +231,7 @@ Config.Stores = {
     },
     {
         type = "clothing",
-        coords = vector4(-168.73, -301.41, 39.73, 238.67),
+        coords = vec4(-161.82, -303.89, 39.46, 246.1),
         size = vector3(4, 4, 4),
         rotation = 45,
         usePoly = false,
@@ -270,7 +270,7 @@ Config.Stores = {
     },
     {
         type = "clothing",
-        coords = vector4(-1445.86, -240.78, 49.82, 36.17),
+        coords = vec4(-1452.07, -235.85, 49.53, 42.58),
         size = vector3(4, 4, 4),
         rotation = 45,
         usePoly = false,
@@ -344,19 +344,6 @@ Config.Stores = {
             vector3(-1111.3771972656, 2709.884765625, 19.11),
             vector3(-1100.8548583984, 2718.638671875, 19.11),
             vector3(-1093.1976318359, 2709.7365722656, 19.11)
-        }
-    },
-    {
-        type = "clothing",
-        coords = vector4(-1119.24, -1440.6, 5.23, 300.5),
-        size = vector3(4, 4, 4),
-        rotation = 45,
-        usePoly = false,
-        points = {
-            vector3(-1124.5535888672, -1444.5367431641, 5.23),
-            vector3(-1118.7023925781, -1441.0450439453, 5.23),
-            vector3(-1121.2891845703, -1434.8474121094, 5.23),
-            vector3(-1128.4727783203, -1439.8254394531, 5.23)
         }
     },
     {

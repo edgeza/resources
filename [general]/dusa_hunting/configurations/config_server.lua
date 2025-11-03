@@ -20,7 +20,7 @@ Config.AnimalRewards = {
             item = 'deer_meat',
             parts = {
                 beef = { 
-                    amount = 5, 
+                    amount = 3, 
                     model = 'propk_deer_beef_raw', 
                     item = 'deer_beef',
                     cook = {
@@ -31,7 +31,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     model = 'propk_deer_rib_raw', 
                     item = 'deer_rib',
                     cook = {
@@ -63,7 +63,7 @@ Config.AnimalRewards = {
             item = 'rabbit_meat',
             parts = {
                 body = { 
-                    amount = 5, 
+                    amount = 1, 
                     model = 'propk_rabbit_raw', 
                     item = 'rabbit_body',
                     cook = {
@@ -85,7 +85,7 @@ Config.AnimalRewards = {
                     }
                 },
                 beef = { 
-                    amount = 5, 
+                    amount = 1, 
                     item = 'rabbit_beef',
                     cook = {
                         method = {'stick', 'grill'},
@@ -105,7 +105,7 @@ Config.AnimalRewards = {
             item = 'bear_meat',
             parts = {
                 beef = { 
-                    amount = 5, 
+                    amount = 7, 
                     model = 'propk_bear_beef_raw', 
                     item = 'bear_beef',
                     cook = {
@@ -116,7 +116,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     model = 'propk_bear_rib_raw', 
                     item = 'bear_rib',
                     cook = {
@@ -148,7 +148,7 @@ Config.AnimalRewards = {
             item = 'redpanda_meat',
             parts = {
                 body = { 
-                    amount = 5, 
+                    amount = 1, 
                     model = 'propk_redpanda_raw', 
                     item = 'redpanda_body',
                     cook = {
@@ -170,7 +170,7 @@ Config.AnimalRewards = {
                     }
                 },
                 beef = { 
-                    amount = 5, 
+                    amount = 1, 
                     item = 'redpanda_beef',
                     cook = {
                         method = {'grill', 'stick'},
@@ -212,7 +212,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     item = 'boar_rib',
                     cook = {
                         method = {'grill'},
@@ -232,7 +232,7 @@ Config.AnimalRewards = {
             item = 'coyote_meat',
             parts = {
                 beef = { 
-                    amount = 5, 
+                    amount = 1, 
                     item = 'coyote_beef',
                     cook = {
                         method = {'grill', 'stick'},
@@ -242,7 +242,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     item = 'coyote_rib',
                     cook = {
                         method = {'grill'},
@@ -282,7 +282,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     item = 'mtlion_rib',
                     cook = {
                         method = {'grill'},
@@ -322,7 +322,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     item = 'lion_rib',
                     cook = {
                         method = {'grill'},
@@ -352,7 +352,7 @@ Config.AnimalRewards = {
             item = 'oryx_meat',
             parts = {
                 beef = { 
-                    amount = 5, 
+                    amount = 2, 
                     item = 'oryx_beef',
                     cook = {
                         method = {'grill', 'stick'},
@@ -362,7 +362,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     item = 'oryx_rib',
                     cook = {
                         method = {'grill'},
@@ -392,7 +392,7 @@ Config.AnimalRewards = {
             item = 'antelope_meat',
             parts = {
                 beef = { 
-                    amount = 5, 
+                    amount = 3, 
                     item = 'antelope_beef',
                     cook = {
                         method = {'grill'},
@@ -402,7 +402,7 @@ Config.AnimalRewards = {
                     }
                 },
                 rib = { 
-                    amount = 2, 
+                    amount = 1, 
                     item = 'antelope_rib',
                     cook = {
                         method = {'grill'},

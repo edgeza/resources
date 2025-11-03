@@ -83,44 +83,44 @@ Shared.Shop = {
     },
     Items = {
         {
-            item = 'weapon_dhr31',
-            price = 10000,
-        },
-        {
-            item = 'snp_ammo',
-            price = 2500,
-        },
-        {
-            item = 'hunting_bait',
-            price = 2000,
-        },
-        {
-            item = 'campfire',
-            price = 1500,
-        },
-        {
-            item = 'primitive_grill',
-            price = 1500,
-        },
-        {
-            item = 'advanced_grill',
-            price = 2000,
-        },
-        {
-            item = 'binocular',
+            item = 'WEAPON_DHR31',
             price = 1000,
         },
         {
+            item = 'ammo-heavysniper',
+            price = 100,
+        },
+        {
+            item = 'hunting_bait',
+            price = 100,
+        },
+        {
+            item = 'campfire',
+            price = 50,
+        },
+        {
+            item = 'primitive_grill',
+            price = 100,
+        },
+        {
+            item = 'advanced_grill',
+            price = 500,
+        },
+        {
+            item = 'binocular',
+            price = 50,
+        },
+        {
             item = 'hunting_trap',
-            price = 1500,
+            price = 250,
         },
         {
             item = 'hunting_laptop',
-            price = 2550,
+            price = 250,
         },
         {
             item = 'hunting_license',
-            price = 8500,
+            price = 250,
         },
     },
     QualityMultipliers = {
@@ -129,177 +129,177 @@ Shared.Shop = {
         [3] = 2.0,    -- Kalite 3: %100 artış (200%)
     },
     Sell = {
--- Deer items
-{
-    item = 'deer_beef',
-    name = 'Deer Beef',
-    price = 2500
-},
-{
-    item = 'deer_rib',
-    name = 'Deer Rib',
-    price = 3500
-},
-{
-    item = 'deer_leg',
-    name = 'Deer Leg',
-    price = 3000
-},
--- Rabbit items
-{
-    item = 'rabbit_body',
-    name = 'Rabbit Body',
-    price = 1500
-},
-{
-    item = 'rabbit_leg',
-    name = 'Rabbit Leg',
-    price = 2000
-},
-{
-    item = 'rabbit_beef',
-    name = 'Rabbit Beef',
-    price = 1500
-},
--- Bear items
-{
-    item = 'bear_beef',
-    name = 'Bear Beef',
-    price = 4500
-},
-{
-    item = 'bear_rib',
-    name = 'Bear Rib',
-    price = 5000
-},
-{
-    item = 'bear_leg',
-    name = 'Bear Leg',
-    price = 4000
-},
--- Red Panda items
-{
-    item = 'redpanda_body',
-    name = 'Red Panda Body',
-    price = 2000
-},
-{
-    item = 'redpanda_leg',
-    name = 'Red Panda Leg',
-    price = 2500
-},
-{
-    item = 'redpanda_beef',
-    name = 'Red Panda Beef',
-    price = 2000
-},
--- Boar items
-{
-    item = 'boar_leg',
-    name = 'Boar Leg',
-    price = 2000
-},
-{
-    item = 'boar_beef',
-    name = 'Boar Beef',
-    price = 1800
-},
-{
-    item = 'boar_rib',
-    name = 'Boar Rib',
-    price = 2000
-},
--- Coyote items
-{
-    item = 'coyote_beef',
-    name = 'Coyote Beef',
-    price = 1900
-},
-{
-    item = 'coyote_rib',
-    name = 'Coyote Rib',
-    price = 2000
-},
-{
-    item = 'coyote_leg',
-    name = 'Coyote Leg',
-    price = 1500
-},
--- Mountain Lion items
-{
-    item = 'mtlion_beef',
-    name = 'Mountain Lion Beef',
-    price = 5000
-},
-{
-    item = 'mtlion_rib',
-    name = 'Mountain Lion Rib',
-    price = 4000
-},
-{
-    item = 'mtlion_leg',
-    name = 'Mountain Lion Leg',
-    price = 4000
-},
--- Lion items
-{
-    item = 'lion_beef',
-    name = 'Lion Beef',
-    price = 5000
-},
-{
-    item = 'lion_rib',
-    name = 'Lion Rib',
-    price = 4000
-},
-{
-    item = 'lion_leg',
-    name = 'Lion Leg',
-    price = 5000
-},
-{
-    item = 'lion_body',
-    name = 'Lion Body',
-    price = 5500
-},
--- Oryx items
-{
-    item = 'oryx_beef',
-    name = 'Oryx Beef',
-    price = 2000
-},
-{
-    item = 'oryx_rib',
-    name = 'Oryx Rib',
-    price = 2000
-},
-{
-    item = 'oryx_leg',
-    name = 'Oryx Leg',
-    price = 1500
-},
--- Antelope items
-{
-    item = 'antelope_beef',
-    name = 'Antelope Beef',
-    price = 3500
-},
-{
-    item = 'antelope_rib',
-    name = 'Antelope Rib',
-    price = 2000
-},
-{
-    item = 'antelope_leg',
-    name = 'Antelope Leg',
-    price = 1500
-},
--- Hide (generic)
-{
-    item = 'hide',
-    name = 'Hide',
-    price = 3250
-},
+        -- Deer items
+        {
+            item = 'deer_beef',
+            name = 'Deer Beef',
+            price = 45
+        },
+        {
+            item = 'deer_rib',
+            name = 'Deer Rib',
+            price = 35
+        },
+        {
+            item = 'deer_leg',
+            name = 'Deer Leg',
+            price = 40
+        },
+        -- Rabbit items
+        {
+            item = 'rabbit_body',
+            name = 'Rabbit Body',
+            price = 25
+        },
+        {
+            item = 'rabbit_leg',
+            name = 'Rabbit Leg',
+            price = 20
+        },
+        {
+            item = 'rabbit_beef',
+            name = 'Rabbit Beef',
+            price = 30
+        },
+        -- Bear items
+        {
+            item = 'bear_beef',
+            name = 'Bear Beef',
+            price = 60
+        },
+        {
+            item = 'bear_rib',
+            name = 'Bear Rib',
+            price = 50
+        },
+        {
+            item = 'bear_leg',
+            name = 'Bear Leg',
+            price = 55
+        },
+        -- Red Panda items
+        {
+            item = 'redpanda_body',
+            name = 'Red Panda Body',
+            price = 35
+        },
+        {
+            item = 'redpanda_leg',
+            name = 'Red Panda Leg',
+            price = 30
+        },
+        {
+            item = 'redpanda_beef',
+            name = 'Red Panda Beef',
+            price = 40
+        },
+        -- Boar items
+        {
+            item = 'boar_leg',
+            name = 'Boar Leg',
+            price = 45
+        },
+        {
+            item = 'boar_beef',
+            name = 'Boar Beef',
+            price = 50
+        },
+        {
+            item = 'boar_rib',
+            name = 'Boar Rib',
+            price = 40
+        },
+        -- Coyote items
+        {
+            item = 'coyote_beef',
+            name = 'Coyote Beef',
+            price = 35
+        },
+        {
+            item = 'coyote_rib',
+            name = 'Coyote Rib',
+            price = 30
+        },
+        {
+            item = 'coyote_leg',
+            name = 'Coyote Leg',
+            price = 35
+        },
+        -- Mountain Lion items
+        {
+            item = 'mtlion_beef',
+            name = 'Mountain Lion Beef',
+            price = 55
+        },
+        {
+            item = 'mtlion_rib',
+            name = 'Mountain Lion Rib',
+            price = 45
+        },
+        {
+            item = 'mtlion_leg',
+            name = 'Mountain Lion Leg',
+            price = 50
+        },
+        -- Lion items
+        {
+            item = 'lion_beef',
+            name = 'Lion Beef',
+            price = 70
+        },
+        {
+            item = 'lion_rib',
+            name = 'Lion Rib',
+            price = 60
+        },
+        {
+            item = 'lion_leg',
+            name = 'Lion Leg',
+            price = 65
+        },
+        {
+            item = 'lion_body',
+            name = 'Lion Body',
+            price = 75
+        },
+        -- Oryx items
+        {
+            item = 'oryx_beef',
+            name = 'Oryx Beef',
+            price = 40
+        },
+        {
+            item = 'oryx_rib',
+            name = 'Oryx Rib',
+            price = 35
+        },
+        {
+            item = 'oryx_leg',
+            name = 'Oryx Leg',
+            price = 40
+        },
+        -- Antelope items
+        {
+            item = 'antelope_beef',
+            name = 'Antelope Beef',
+            price = 45
+        },
+        {
+            item = 'antelope_rib',
+            name = 'Antelope Rib',
+            price = 40
+        },
+        {
+            item = 'antelope_leg',
+            name = 'Antelope Leg',
+            price = 45
+        },
+        -- Hide (generic)
+        {
+            item = 'hide',
+            name = 'Hide',
+            price = 25
+        },
     },
 }
 

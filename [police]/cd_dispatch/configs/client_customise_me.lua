@@ -260,11 +260,23 @@ function Notification(notif_type, message)
         
         elseif Config.Notification == 'ox_lib' then
             if notif_type == 1 then
-                lib.notify({title = L('dispatch'), description = message, type = 'success'})
+                if lib then
+                    lib.notify({title = L('dispatch'), description = message, type = 'success'})
+                else
+                    exports.ox_lib:notify({title = L('dispatch'), description = message, type = 'success'})
+                end
             elseif notif_type == 2 then
-                lib.notify({title = L('dispatch'), description = message, type = 'inform'})
+                if lib then
+                    lib.notify({title = L('dispatch'), description = message, type = 'inform'})
+                else
+                    exports.ox_lib:notify({title = L('dispatch'), description = message, type = 'inform'})
+                end
             elseif notif_type == 3 then
-                lib.notify({title = L('dispatch'), description = message, type = 'error'})
+                if lib then
+                    lib.notify({title = L('dispatch'), description = message, type = 'error'})
+                else
+                    exports.ox_lib:notify({title = L('dispatch'), description = message, type = 'error'})
+                end
             end
 
         elseif Config.Notification == 'chat' then

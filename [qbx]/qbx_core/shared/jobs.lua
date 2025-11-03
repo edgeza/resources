@@ -273,7 +273,7 @@ return {
             },
         },
     },
-    ['palmcoast'] = {
+    ['mechanic'] = {
         label = 'Palm Coast',
         type = 'mechanic',
         defaultDuty = true,

@@ -2,9 +2,9 @@ Config = {
 	Debug = false, -- Toggle Debug Mode
 	Lan = "en",
 
-	img = "qa-inventory/html/images/", -- Set this to your inventory
+	img = "qs-inventory/html/images/", -- Set this to your inventory
 
-	Inv = "qb", -- set to "ox" if using OX Inventory
+	Inv = "qs", -- set to "ox" if using OX Inventory, "qs" if using QS Inventory, "qb" for QBCore default
 	Menu = "ox", -- "ox" for ox_lib menus (works with QBox), "qb" for qb-menu (QBCore only)
 	ProgressBar = "qb",
 	Notify = "qb",

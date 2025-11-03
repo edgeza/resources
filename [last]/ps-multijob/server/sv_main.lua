@@ -5,37 +5,28 @@ local function GetJobs(citizenid)
     MySQL.Async.fetchAll("SELECT jobdata FROM multijobs WHERE citizenid = @citizenid",{
         ["@citizenid"] = citizenid
     }, function(jobs)
-        print("DEBUG GetJobs: Raw database result for " .. citizenid .. ": " .. json.encode(jobs))
-        
         if jobs[1] and jobs[1].jobdata ~= "[]" and jobs[1].jobdata ~= nil and jobs[1].jobdata ~= "{}" then
             jobs = json.decode(jobs[1].jobdata)
-            print("DEBUG GetJobs: Decoded jobs from database: " .. json.encode(jobs))
         else
-            print("DEBUG GetJobs: No jobs found in database, creating from current job")
             local Player = QBCore.Functions.GetOfflinePlayerByCitizenId(citizenid)
             if Player then
                 local temp = {}
-                print("DEBUG GetJobs: Player current job: " .. Player.PlayerData.job.name .. " grade: " .. Player.PlayerData.job.grade.level)
                 if not Config.IgnoredJobs[Player.PlayerData.job.name] then
                     temp[Player.PlayerData.job.name] = Player.PlayerData.job.grade.level
                     MySQL.insert('INSERT INTO multijobs (citizenid, jobdata) VALUES (:citizenid, :jobdata) ON DUPLICATE KEY UPDATE jobdata = :jobdata', {
                         citizenid = citizenid,
                         jobdata = json.encode(temp),
                     })
-                    print("DEBUG GetJobs: Created new job entry: " .. json.encode(temp))
                 else
-                    print("DEBUG GetJobs: Current job is ignored: " .. Player.PlayerData.job.name)
                     -- Add unemployed as a fallback job if current job is ignored
                     temp["unemployed"] = 0
                     MySQL.insert('INSERT INTO multijobs (citizenid, jobdata) VALUES (:citizenid, :jobdata) ON DUPLICATE KEY UPDATE jobdata = :jobdata', {
                         citizenid = citizenid,
                         jobdata = json.encode(temp),
                     })
-                    print("DEBUG GetJobs: Added unemployed as fallback: " .. json.encode(temp))
                 end
                 jobs = temp
             else
-                print("DEBUG GetJobs: Player not found!")
                 jobs = {}
             end
         end
@@ -203,10 +194,6 @@ QBCore.Functions.CreateCallback("ps-multijob:getJobs", function(source, cb)
     local active = {}
     local getjobs = {}
     local Players = QBCore.Functions.GetPlayers()
-    
-    -- Debug: Print player info and jobs
-    print("DEBUG: Player " .. Player.PlayerData.citizenid .. " requesting jobs")
-    print("DEBUG: Raw jobs data: " .. json.encode(jobs))
 
     for i = 1, #Players, 1 do
         local xPlayer = QBCore.Functions.GetPlayer(Players[i])
@@ -258,11 +245,6 @@ QBCore.Functions.CreateCallback("ps-multijob:getJobs", function(source, cb)
         whitelist = whitelistedjobs,
         civilian = civjobs,
     }
-    
-    -- Debug: Print final result
-    print("DEBUG: Final multijobs result: " .. json.encode(multijobs))
-    print("DEBUG: Whitelist jobs count: " .. #whitelistedjobs)
-    print("DEBUG: Civilian jobs count: " .. #civjobs)
     
     cb(multijobs)
 end)

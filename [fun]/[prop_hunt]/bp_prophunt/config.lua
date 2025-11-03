@@ -221,7 +221,7 @@ Config.transobjects = {
 
 Config.GameLocations = { 
     {label = 'Prop Hunt', text = 'Prop Hunt' ,coords = vector3(-282.25, -1922.55, 29.93), heading = 320.0, pedModel = 'a_m_m_farmer_01', blip = {['state'] = false , ['sprite'] = 458, ['size'] = 1.0, ['color'] = 4}},
-    {label = 'Prop Hunt', text = 'Prop Hunt', coords = vector3(1854.0, 3686.0, 34.2), heading = 97.0, pedModel = 'a_m_y_beachvesp_01', blip = {['state'] = false , ['sprite'] = 458, ['size'] = 1.0, ['color'] = 4}}
+    {label = 'Prop Hunt', text = 'Prop Hunt', coords = vec3(1778.51, 3655.76, 34.33), heading = 97.0, pedModel = 'a_m_y_beachvesp_01', blip = {['state'] = false , ['sprite'] = 458, ['size'] = 1.0, ['color'] = 4}}
 }
 
 

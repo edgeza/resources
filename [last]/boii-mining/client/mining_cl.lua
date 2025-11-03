@@ -18,6 +18,7 @@ local SpawnedMineLights = {}
 local SpawnedQuarryTargets = {}
 local SpawnedQuarryCaveTargets = {}
 local SpawnedMineTargets = {}
+local SpawnedJewelBenches = {} -- Track created jewel bench zones to avoid removal warnings
 local SpawnedPaydirt = {}
 local SpawnedBlastRocks = {}
 local ActiveQuarryMarkers = {}
@@ -805,6 +806,13 @@ AddEventHandler('onResourceStop', function(res)
     -- remove lights
     for _, h in ipairs(SpawnedQuarryLights) do if DoesEntityExist(h) then DeleteEntity(h) end end
     for _, h in ipairs(SpawnedMineLights) do if DoesEntityExist(h) then DeleteEntity(h) end end
+    -- remove jewel bench zones
+    if GetResourceState(TargetName) == 'started' then
+        for zoneName, _ in pairs(SpawnedJewelBenches) do
+            pcall(function() exports[TargetName]:removeZone(zoneName) end)
+        end
+    end
+    SpawnedJewelBenches = {} -- Reset tracking table
 end)
 --<!>-- CLEANUP ON RESOURCE STOP --<!>--
 --<!>-- PLACE DYNAMITE HANDLER --<!>--
@@ -1115,8 +1123,10 @@ local function SetupJewelBenches()
 
         -- Create target zone for each bench (idempotent by name in most target resources)
         if GetResourceState(TargetName) == 'started' then
-            -- prevent duplicate zones by trying to remove any existing first (idempotent)
-            pcall(function() exports[TargetName]:removeZone(v.name) end)
+            -- prevent duplicate zones by trying to remove any existing first (only if already created)
+            if SpawnedJewelBenches[v.name] then
+                pcall(function() exports[TargetName]:removeZone(v.name) end)
+            end
             exports[TargetName]:addSphereZone({
                 coords = v.coords,
                 radius = v.radius,
@@ -1135,6 +1145,7 @@ local function SetupJewelBenches()
                     }
                 }
             })
+            SpawnedJewelBenches[v.name] = true -- Mark zone as created
         end
     end
 end

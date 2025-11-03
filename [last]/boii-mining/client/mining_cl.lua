@@ -1095,32 +1095,7 @@ local function SetupJewelBenches()
         waitMs = waitMs + 100
     end
     for k, v in pairs(Config.JewelCutting.Locations) do
-        -- ensure bench prop exists (but avoid duplicates if a mapping or another resource already placed it)
-        if Config.JewelCutting.Prop and Config.JewelCutting.Prop.model then
-            local model = GetHashKey(Config.JewelCutting.Prop.model)
-            local existing = GetClosestObjectOfType(v.coords.x, v.coords.y, v.coords.z, 0.9, model, false, false, false)
-            if existing == 0 then
-                RequestModel(model)
-                while not HasModelLoaded(model) do Wait(0) end
-                local obj = CreateObject(model, v.coords.x, v.coords.y, v.coords.z - 1.0, true, true, false)
-                SetEntityHeading(obj, v.heading or 0.0)
-                SetEntityInvincible(obj, true)
-                SetEntityAsMissionEntity(obj, true, true)
-                FreezeEntityPosition(obj, true)
-                PlaceObjectOnGroundProperly(obj)
-            else
-                if GetEntityModel(existing) == model then
-                    SetEntityHeading(existing, v.heading or 0.0)
-                    local pos = GetEntityCoords(existing)
-                    if #(pos - v.coords) > 0.2 then
-                        SetEntityCoords(existing, v.coords.x, v.coords.y, v.coords.z - 1.0, false, false, false, true)
-                        PlaceObjectOnGroundProperly(existing)
-                        FreezeEntityPosition(existing, true)
-                    end
-                end
-            end
-        end
-
+        -- Server handles spawning networked bench props, client only creates interaction zones
         -- Create target zone for each bench (idempotent by name in most target resources)
         if GetResourceState(TargetName) == 'started' then
             -- prevent duplicate zones by trying to remove any existing first (only if already created)

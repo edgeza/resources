@@ -27,12 +27,10 @@ local Crafting = (Config and Config.Crafting) or {
 
 local function buildCraftMenu(category, src)
     local items = {}
-    -- Use Config.Crafting directly to ensure we always get the latest config
-    local craftingConfig = (Config and Config.Crafting) or Crafting
-    if not craftingConfig[category] then return items end
+    if not Crafting[category] then return items end
     local pData = src and Core.Functions.GetPlayer(src) or nil
     -- removed debug clickable
-    for _, r in ipairs(craftingConfig[category]) do
+    for _, r in ipairs(Crafting[category]) do
         local header = (Core and Core.Shared and Core.Shared.Items and Core.Shared.Items[r.reward.name] and Core.Shared.Items[r.reward.name].label) or r.reward.name
         local reqText = ''
         for req, amt in pairs(r.required) do
@@ -85,9 +83,7 @@ local function buildCraftMenu(category, src)
 end
 
 local function findRecipeByReward(rewardName)
-    -- Use Config.Crafting directly to ensure we always get the latest config
-    local craftingConfig = (Config and Config.Crafting) or Crafting
-    for _, cat in pairs(craftingConfig) do
+    for _, cat in pairs(Crafting) do
         for _, r in ipairs(cat) do
             if r.reward and r.reward.name == rewardName then
                 return r

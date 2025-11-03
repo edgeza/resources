@@ -1,4 +1,4 @@
-local QBCore = exports['qbx_core']:GetCoreObject()
+local QBCore = exports['qb-core']:GetCoreObject()
 
 -- Inventory Detection
 local Inventory = nil

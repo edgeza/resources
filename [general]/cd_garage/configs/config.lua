@@ -604,7 +604,7 @@ Config.JobVehicles = {
             [2] = {coords = vec3(861.66, -1381.54, 26.14), spawn_coords = vec4(855.69, -1365.25, 26.11, 25.65), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
             --SANDY PD
             [3] = {coords = vector3(1868.33, 3686.05, 33.78), spawn_coords = vector4(1872.68, 3687.19, 33.65, 211.34), distance = 10, garage_type = 'car', method = 'regular'}, --Sandy PD (cars)
-            [4] = {coords = vector3(1866.09, 3655.66, 33.9), spawn_coords = vector4(1866.09, 3655.66, 33.9, 27.07), distance = 5, garage_type = 'air', method = 'regular'}, --Sandy PD (helipad)
+            [4] = {coords = vec3(1853.9, 3707.06, 33.97), spawn_coords = vec4(1853.9, 3707.06, 33.97), distance = 5, garage_type = 'air', method = 'regular'}, --Sandy PD (helipad)
             --PALETO PD
             [5] = {coords = vector3(-472.83, 5969.7, 31.31), spawn_coords = vector4(-472.83, 5969.7, 31.31, 35.85), distance = 5, garage_type = 'car', method = 'regular'}, --Paleto PD (cars) 
             [6] = {coords = vector3(-455.51, 5999.89, 39.35), spawn_coords = vector4(-455.03, 5999.82, 39.35, 47.03), distance = 5, garage_type = 'air', method = 'regular'}, --Paleto PD (helipad)

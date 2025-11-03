@@ -105,11 +105,11 @@ Config.DisableNoPaymentOptionForEmployees = false
 
 -- Mechanic Locations
 Config.MechanicLocations = {
-  westcoast = {
+  palmcoast = {
     type = "owned",
     job = "mechanic",
     jobManagementRanks = {4, 5}, -- Only grades 4 and 5 can access management
-    logo = "Westcoast.png",
+    logo = "Palmcoast.png",
     commission = 10, -- %, 10 = 10%
     locations = {
       {

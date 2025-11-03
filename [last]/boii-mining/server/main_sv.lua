@@ -179,20 +179,60 @@ local SpawnedJewelBenches = {}
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
 
+    -- Clean up any existing spawned benches first (in case of restart/duplicate spawns)
+    for _, obj in ipairs(SpawnedJewelBenches) do
+        if obj and DoesEntityExist(obj) then
+            DeleteEntity(obj)
+        end
+    end
+    SpawnedJewelBenches = {}
+
     local propModel = Config and Config.JewelCutting and Config.JewelCutting.Prop and Config.JewelCutting.Prop.model
     local locations = Config and Config.JewelCutting and Config.JewelCutting.Locations
     if not propModel or type(locations) ~= 'table' then return end
 
     local model = GetHashKey(propModel)
+    
+    -- Clean up existing objects at each location before spawning new ones
+    -- This handles cached/duplicate objects from previous spawns
+    for _, v in pairs(locations) do
+        if v and v.coords then
+            local x, y, z = v.coords.x, v.coords.y, v.coords.z
+            -- Check for existing objects at this location and delete them to avoid duplicates
+            local existing = GetClosestObjectOfType(x, y, z, 5.0, model, false, false, false)
+            if existing ~= 0 and DoesEntityExist(existing) then
+                -- Delete existing object(s) - loop to catch all duplicates
+                while existing ~= 0 and DoesEntityExist(existing) do
+                    DeleteEntity(existing)
+                    Wait(10)
+                    existing = GetClosestObjectOfType(x, y, z, 5.0, model, false, false, false)
+                end
+            end
+        end
+    end
+    
+    -- Wait a moment for cleanup to complete
+    Wait(100)
+    
     for _, v in pairs(locations) do
         if v and v.coords then
             local x, y, z = v.coords.x, v.coords.y, v.coords.z
             local h = v.heading or 0.0
+            
+            -- Final check for any remaining objects at this exact location before spawning
+            local existing = GetClosestObjectOfType(x, y, z, 1.0, model, false, false, false)
+            if existing ~= 0 and DoesEntityExist(existing) then
+                DeleteEntity(existing)
+                Wait(10)
+            end
+            
             -- Spawn at configured Z (client code handled ground snapping when client-spawned). Using exact Z avoids burying the prop server-side.
             local obj = CreateObject(model, x, y, z, true, true, false)
             if obj and obj ~= 0 then
                 SetEntityHeading(obj, h)
                 FreezeEntityPosition(obj, true)
+                SetEntityInvincible(obj, true)
+                SetEntityAsMissionEntity(obj, true, true)
                 SpawnedJewelBenches[#SpawnedJewelBenches+1] = obj
             end
         end

@@ -1096,37 +1096,42 @@ local function SetupJewelBenches()
     end
     for k, v in pairs(Config.JewelCutting.Locations) do
         -- Server handles spawning networked bench props, client only creates interaction zones
-        -- Create target zone for each bench (idempotent by name in most target resources)
+        -- Create target zone for each bench (target systems handle duplicates by replacing them)
         if GetResourceState(TargetName) == 'started' then
-            -- prevent duplicate zones by trying to remove any existing first (only if already created)
-            if SpawnedJewelBenches[v.name] then
+            -- Try to remove existing zone only if we've created it before (to avoid warnings)
+            if SpawnedJewelBenches[v.name] and exports[TargetName] and exports[TargetName].removeZone then
                 pcall(function() exports[TargetName]:removeZone(v.name) end)
             end
-            exports[TargetName]:addSphereZone({
-                coords = v.coords,
-                radius = v.radius,
-                options = {
-                    {
-                        name = v.name,
-                        icon = 'fa-solid fa-gem',
-                        label = 'Cut Gems/Craft',
-                        onSelect = function()
-                            TriggerEvent('boii-mining:cl:JewelleryCraftMenu')
-                        end,
-                        canInteract = function()
-                            return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
-                        end,
-                        distance = v.distance
+            -- Create/update zone (target systems handle duplicates automatically)
+            if exports[TargetName] and exports[TargetName].addSphereZone then
+                exports[TargetName]:addSphereZone({
+                    coords = v.coords,
+                    radius = v.radius,
+                    options = {
+                        {
+                            name = v.name,
+                            icon = 'fa-solid fa-gem',
+                            label = 'Cut Gems/Craft',
+                            onSelect = function()
+                                TriggerEvent('boii-mining:cl:JewelleryCraftMenu')
+                            end,
+                            canInteract = function()
+                                return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
+                            end,
+                            distance = v.distance
+                        }
                     }
-                }
-            })
-            SpawnedJewelBenches[v.name] = true -- Mark zone as created
+                })
+                SpawnedJewelBenches[v.name] = true -- Mark zone as created
+            end
         end
     end
 end
 
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
+    -- Reset tracking table on resource start to avoid warnings about non-existent zones
+    SpawnedJewelBenches = {}
     SetupJewelBenches()
 end)
 

@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Keres & Dév'
 description 'Brutal Gang Menu - store.brutalscripts.com'
-version '1.1.8'
+version '1.1.6'
 
 data_file "DLC_ITYP_REQUEST" "stream/brt_rope.ytyp"
 
@@ -19,6 +19,7 @@ server_scripts {
 	'@mysql-async/lib/MySQL.lua', 
 	'config.lua',
 	'core/server-core.lua',
+	'sv_utils.lua',
 	'server/*.lua',
 }
 
@@ -45,6 +46,7 @@ dependencies {
 escrow_ignore {
 	'config.lua',
 	'cl_utils.lua',
+	'sv_utils.lua',
 	'core/client-core.lua',
 	'core/server-core.lua',
 }

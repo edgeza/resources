@@ -14,9 +14,6 @@ ChangedCurrencies = [0, 0]
 AdminGang = null
 AdminHQ = null
 CurrentPage = "home"
-AdminChoosedGang = 0
-DrugMarkers = []
-PlayerIcon = null
 
 let translations = {};
 
@@ -62,8 +59,6 @@ window.addEventListener('message', function(event) {
             }
         }
 
-        ExternalTasks = data.externaltasks
-        PlayerCoords = data.player_coords
         CayoPericoMap = data.cayo_perico
         MyPerms = data.mypermissions
         PlayerJob = data.myjob
@@ -220,14 +215,6 @@ window.addEventListener('message', function(event) {
             $('.timer').css("display", 'none')
         }, 500);
     } 
-    else if (data.action === "OpenInvitationPanel") {
-       show('invitation_menu')
-       $("#panel_invitation .des").html(t('got_invitation')+" <span>"+data.job+" </span>")
-       BackgroundBlur("plugin8", 'panel_invitation')
-    } 
-    else if (data.action === "HideInvitationPanel") {
-       hide('invitation_menu')
-    } 
     else if (data.action === "close") {
         Close()
     }
@@ -334,24 +321,24 @@ function CreateSettingsPage() {
     $("#player_container").html("")
     for (let index = 0; index < GangTable.members.length; index++) {
         $("#player_container").append(`
-            <div class="player_element" id="player_el${index}">
-                <div class="row h-100 mx-2">
-                    <div class="col-5">
-                        <div class="player_name">${GangTable.members[index].name.length>13?GangTable.members[index].name.slice(0, 13)+'...':GangTable.members[index].name}</div>
-                    </div>
-                    <div class="col px-0">
-                        <div class="dropdown">
-                            <button class="rank_change_btn px-3" id="change_perm_btn_${index}" type="button" data-bs-toggle="dropdown" aria-expanded="false">${GangTable.members[index].rank.label.length>7?GangTable.members[index].rank.label.slice(0, 7)+'...':GangTable.members[index].rank.label}</button>
-                            <ul class="dropdown-menu">    
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col px-0">
-                        <button class="top_opener_btn red float-end" id="kick_${index}" onclick="SendKick('${GangTable.members[index].identifier}', id)">${t("kick")}</button>
-                    </div>
+      <div class="player_element" id="player_el${index}">
+        <div class="row h-100 mx-2">
+            <div class="col-5">
+                <div class="player_name">${GangTable.members[index].name.length>13?GangTable.members[index].name.slice(0, 13)+'...':GangTable.members[index].name}</div>
+            </div>
+            <div class="col px-0">
+                <div class="dropdown">
+                    <button class="rank_change_btn px-3" id="change_perm_btn_${index}" type="button" data-bs-toggle="dropdown" aria-expanded="false">${GangTable.members[index].rank.label.length>7?GangTable.members[index].rank.label.slice(0, 7)+'...':GangTable.members[index].rank.label}</button>
+                    <ul class="dropdown-menu">    
+                    </ul>
                 </div>
-            </div>      
-        `)
+            </div>
+            <div class="col px-0">
+                <button class="top_opener_btn red float-end" id="kick_${index}" onclick="SendKick('${GangTable.members[index].identifier}', id)">${t("kick")}</button>
+            </div>
+        </div>
+    </div>      
+    `)
         for (let i = 0; i < GangTable.datas.ranks.length; i++) {
             $("#player_container #player_el" + index + " ul").append(`<li><button class="dropdown-item" id="rank_el${i}" onclick="ChangePlayerPer(id, 'change_perm_btn_${index}', ${i}, '${GangTable.members[index].identifier}', true)">${GangTable.datas.ranks[i].label.length>7?GangTable.datas.ranks[i].label.slice(0, 7)+'...':GangTable.datas.ranks[i].label}</button></li>`)
         }
@@ -473,7 +460,7 @@ function CreateTasksPage(){
                     <div class="des">${Tasks[key].Description}</div>
                     <div class="reward">${Tasks[key].Reward.money.max > 0?`<span class="small_max">MAX </span><span class="green_text">${Tasks[key].Reward.money.max}  ${Currency.balance}</span>`:''}<br>${Tasks[key].Reward.rep.max > 0?`<span class="small_max">MAX </span><span class="purple_text">${Tasks[key].Reward.rep.max}  ${Currency.rep}</span>`:''}</div>
                     <div class="action_part" style="position: absolute; bottom: -5px; right: -30px; height: 40px; width: 300px; scale: 0.8;">
-                            <div class="status_text">${t('remained')}:</div>
+                            <div class="status_text">REMAINED:</div>
                             <div class="status_text right_side">${fancyTimeFormat2(Tasks[key].resettime.current)}</div>
                             <div class="progress_line">
                                 <div class="progress" style="width: ${(Tasks[key].resettime.max-Tasks[key].resettime.current)/Tasks[key].resettime.max*100}%"></div>
@@ -482,35 +469,7 @@ function CreateTasksPage(){
                 </div>
             `)
         }
-    }
-
-    for (const key in ExternalTasks) {
-        if (ExternalTasks[key].resettime.current <= 0){
-            $("#task_container").append(`
-                <div class="task_element can_start">
-                    <div class="label">${ExternalTasks[key].Label}</div>
-                    <div class="des">${ExternalTasks[key].Description}</div>
-                    <div class="action_part" style="position: absolute; bottom: 5px; right: -5px;">
-                        <button class="start_task_btn" id="external_${key}" onclick="StartExternalTask(id, '${ExternalTasks[key].event}', '${ExternalTasks[key].task}')">${t('start')}<img src="assets/arrows.svg"></button>
-                    </div>
-                </div>
-            `)
-        }
-        else{
-            $("#task_container").append(`
-                <div class="task_element">
-                    <div class="label">${ExternalTasks[key].Label}</div>
-                    <div class="des">${ExternalTasks[key].Description}</div>
-                    <div class="action_part" style="position: absolute; bottom: -5px; right: -30px; height: 40px; width: 300px; scale: 0.8;">
-                            <div class="status_text">${t('remained')}:</div>
-                            <div class="status_text right_side">${fancyTimeFormat2(ExternalTasks[key].resettime.current)}</div>
-                            <div class="progress_line">
-                                <div class="progress" style="width: ${(ExternalTasks[key].resettime.max-ExternalTasks[key].resettime.current)/ExternalTasks[key].resettime.max*100}%"></div>
-                            </div>
-                    </div>
-                </div>
-            `)
-        }
+        
     }
 
     $('.disabled_text').css("display", 'none')
@@ -557,7 +516,7 @@ function CreateTasksPage(){
                     <div class="task_element">
                         <div class="label">${ExecutionsTable2[ExecutionsTable[key].key].Label}</div>
                         <div class="des">${ExecutionsTable2[ExecutionsTable[key].key].Description}</div>
-                        <div class="reward">t('preparation')</div>
+                        <div class="reward">PREPARATION</div>
                         <div class="action_part" style="position: absolute; bottom: -5px; right: -30px; height: 40px; width: 300px; scale: 0.8;">
                                 <div class="status_text">${t('remained')}:</div>
                                 <div class="status_text right_side">${fancyTimeFormat3(MaxTime-(LocalTime-ExecutionsTable[key].previous))}</div>
@@ -598,18 +557,6 @@ function StartTask(task, id){
     }))
 }
 
-function StartExternalTask(id, event, task){
-    if (!MyPerms.tasks){
-        WrongAnim(id)
-        return
-    }
-    $.post('https://' + GetParentResourceName() + '/UseButton', JSON.stringify({
-        action: "startexternaltask",
-        event,
-        task
-    }))
-}
-
 function SwitchPage(id, noanim) {
     if (id == 'settings' && !MyPerms.settings) {
         return
@@ -635,7 +582,6 @@ function SwitchPage(id, noanim) {
         $(".gang_menu .map_container").css("display", "block")
         hide2("current_gang")
         hide2("marker_placer")
-        hide2("drug_zone")
         setTimeout(() => {
             LoadMap(noanim)
         }, 2000);
@@ -645,99 +591,101 @@ function SwitchPage(id, noanim) {
         $(".gang_menu .map_container").css("display", "none")
         $(".gang_menu .container").css("display", "block")
         $(".gang_menu .container").html(`
-            <div class="row" style="position: absolute; bottom: 20px; left: 20px;">
-                <div class="col">
-                    <div class="big_sub_con home_con">
-                        <div class="basic_label">${t('tasks')}</div>
-                        <div class="task_container" id="task_container">
+      <div class="row" style="position: absolute; bottom: 20px; left: 20px;">
+        <div class="col">
+            <div class="big_sub_con home_con">
+                <div class="basic_label">${t('tasks')}</div>
+                <div class="task_container" id="task_container">
 
-                        </div>
+                    
+
+                </div>
+            </div>
+        </div>
+        <div class="col px-1">
+            <div class="row" style="margin: 0; margin-bottom: 16px; ">
+                <div class="col p-0">
+                    <div class="side_task_con actbtn home_con ${GraffitiDatas[1] <= 0?'can_start':''}" onclick="SendStartGraffiti()">
+                        <div class="sec_label">${t('spray')}</div>
+                        <div class="reward">${GraffitiDatas[2]} ${Currency.rep}</div>
+                        <div class="des">${t('spray_des')}</div>
+                        ${GraffitiDatas[1] <= 0?`
+                            <div class="action_part" style="position: absolute; bottom: -7px; left: 0px; height: 40px; width: 250px; scale: 1;">
+                                <div class="ready_text">${t('ready')}</div>
+                            </div>
+                            `:`
+                            <div class="action_part" style="position: absolute; bottom: -7px; left: -25px; height: 40px; width: 300px; scale: 0.85;">
+                                <div class="status_text">${t('remained')}:</div>
+                                <div class="status_text right_side">${fancyTimeFormat(GraffitiDatas[1])}</div>
+                                <div class="progress_line">
+                                    <div class="progress" style="width: ${(GraffitiDatas[0]-GraffitiDatas[1])/GraffitiDatas[0]*100}%"></div>
+                                </div>
+                            </div>
+                        `}
                     </div>
                 </div>
-                <div class="col px-1">
-                    <div class="row" style="margin: 0; margin-bottom: 16px; ">
-                        <div class="col p-0">
-                            <div class="side_task_con actbtn home_con ${GraffitiDatas[1] <= 0?'can_start':''}" onclick="SendStartGraffiti()">
-                                <div class="sec_label">${t('spray')}</div>
-                                <div class="reward">${GraffitiDatas[2]} ${Currency.rep}</div>
-                                <div class="des">${t('spray_des')}</div>
-                                ${GraffitiDatas[1] <= 0?`
-                                    <div class="action_part" style="position: absolute; bottom: -7px; left: 0px; height: 40px; width: 250px; scale: 1;">
-                                        <div class="ready_text">${t('ready')}</div>
-                                    </div>
-                                    `:`
-                                    <div class="action_part" style="position: absolute; bottom: -7px; left: -25px; height: 40px; width: 300px; scale: 0.85;">
-                                        <div class="status_text">${t('remained')}:</div>
-                                        <div class="status_text right_side">${fancyTimeFormat(GraffitiDatas[1])}</div>
-                                        <div class="progress_line">
-                                            <div class="progress" style="width: ${(GraffitiDatas[0]-GraffitiDatas[1])/GraffitiDatas[0]*100}%"></div>
-                                        </div>
-                                    </div>
-                                `}
+                <div class="col p-0">
+                    <div class="side_task_con actbtn float-end ${CleanDatas[1] <= 0?'can_start':''} home_con" onclick="SendCleanGraffiti()">
+                        <div class="sec_label">${t('cleaning')}</div>
+                        <div class="reward">${CleanDatas[2]} ${Currency.rep}</div>
+                        <div class="des">${t('clean_des')}</div>
+                        ${CleanDatas[1] <= 0?`
+                            <div class="action_part" style="position: absolute; bottom: -7px; left: 0px; height: 40px; width: 250px; scale: 1;">
+                                <div class="ready_text">${t('ready')}</div>
                             </div>
-                        </div>
-                        <div class="col p-0">
-                            <div class="side_task_con actbtn float-end ${CleanDatas[1] <= 0?'can_start':''} home_con" onclick="SendCleanGraffiti()">
-                                <div class="sec_label">${t('cleaning')}</div>
-                                <div class="reward">${CleanDatas[2]} ${Currency.rep}</div>
-                                <div class="des">${t('clean_des')}</div>
-                                ${CleanDatas[1] <= 0?`
-                                    <div class="action_part" style="position: absolute; bottom: -7px; left: 0px; height: 40px; width: 250px; scale: 1;">
-                                        <div class="ready_text">${t('ready')}</div>
-                                    </div>
-                                    `:`
-                                    <div class="action_part" style="position: absolute; bottom: -7px; left: -25px; height: 40px; width: 300px; scale: 0.85;">
-                                        <div class="status_text">${t('remained')}:</div>
-                                        <div class="status_text right_side">${fancyTimeFormat(CleanDatas[1])}</div>
-                                        <div class="progress_line">
-                                            <div class="progress" style="width: ${(CleanDatas[0]-CleanDatas[1])/CleanDatas[0]*100}%"></div>
-                                        </div>
-                                    </div>
-                                `}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="player_kills home_con" id="player_kills">
-                        <div class="disabled_text">AVAILABLE!<br><a onclick="window.invokeNative('openUrl', 'https://store.brutalscripts.com/product/6551508')" href="https://store.brutalscripts.com/product/6551508" rel="noopener noreferrer" target="_blank">store.brutalscripts.com</a></div>
-                        <i class="fa-solid fa-lock disabled_lock"></i>
-                        <div class="basic_label">PLAYER EXECUTION</div>
-                        <div class="task_container">
-
-                            <div class="task_element can_start">
-                                <div class="label">TRAIN HIT EXECUTION</div>
-                                <div class="des">Tie up the target and place them on the train tracks. Watch as the train takes care of the rest.</div>
-                                <div class="reward"><span class="green_text">READY</span></div>
-                                <div class="action_part" style="position: absolute; bottom: 5px; right: -5px;">
-                                    <button class="start_task_btn">START<img src="assets/arrows.svg"></button>
+                            `:`
+                            <div class="action_part" style="position: absolute; bottom: -7px; left: -25px; height: 40px; width: 300px; scale: 0.85;">
+                                <div class="status_text">${t('remained')}:</div>
+                                <div class="status_text right_side">${fancyTimeFormat(CleanDatas[1])}</div>
+                                <div class="progress_line">
+                                    <div class="progress" style="width: ${(CleanDatas[0]-CleanDatas[1])/CleanDatas[0]*100}%"></div>
                                 </div>
                             </div>
-                            <div class="task_element">
-                                <div class="label">CAR BOMB SETUP</div>
-                                <div class="des">Place the target inside a vehicle, rig it with explosives, and detonate the car remotely.</div>
-                                <div class="reward">PREPARATION</div>
-                                <div class="action_part" style="position: absolute; bottom: -5px; right: -30px; height: 40px; width: 300px; scale: 0.8;">
-                                    <div class="status_text">REMAINED:</div>
-                                    <div class="status_text right_side">12h 06m</div>
-                                    <div class="progress_line">
-                                        <div class="progress"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="task_element can_start">
-                                <div class="label">THROWING OVERBOARD</div>
-                                <div class="des">Bind the target with ropes and throw them overboard. Watch as the water ensures they won’t resurface.</div>
-                                <div class="reward"><span class="green_text">READY</span></div>
-                                <div class="action_part" style="position: absolute; bottom: 5px; right: -5px;">
-                                    <button class="start_task_btn">START<img src="assets/arrows.svg"></button>
-                                </div>
-                            </div>
-
-                        </div>
+                        `}
                     </div>
                 </div>
             </div>
-        `)
+            
+            <div class="player_kills home_con" id="player_kills">
+                <div class="disabled_text">AVAILABLE!<br><a onclick="window.invokeNative('openUrl', 'https://store.brutalscripts.com/product/6551508')" href="https://store.brutalscripts.com/product/6551508" rel="noopener noreferrer" target="_blank">store.brutalscripts.com</a></div>
+                <i class="fa-solid fa-lock disabled_lock"></i>
+                <div class="basic_label">PLAYER EXECUTION</div>
+                <div class="task_container">
+
+                    <div class="task_element can_start">
+                        <div class="label">TRAIN HIT EXECUTION</div>
+                        <div class="des">Tie up the target and place them on the train tracks. Watch as the train takes care of the rest.</div>
+                        <div class="reward"><span class="green_text">READY</span></div>
+                        <div class="action_part" style="position: absolute; bottom: 5px; right: -5px;">
+                            <button class="start_task_btn">START<img src="assets/arrows.svg"></button>
+                        </div>
+                    </div>
+                    <div class="task_element">
+                        <div class="label">CAR BOMB SETUP</div>
+                        <div class="des">Place the target inside a vehicle, rig it with explosives, and detonate the car remotely.</div>
+                        <div class="reward">PREPARATION</div>
+                        <div class="action_part" style="position: absolute; bottom: -5px; right: -30px; height: 40px; width: 300px; scale: 0.8;">
+                            <div class="status_text">REMAINED:</div>
+                            <div class="status_text right_side">12h 06m</div>
+                            <div class="progress_line">
+                                <div class="progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task_element can_start">
+                        <div class="label">THROWING OVERBOARD</div>
+                        <div class="des">Bind the target with ropes and throw them overboard. Watch as the water ensures they won’t resurface.</div>
+                        <div class="reward"><span class="green_text">READY</span></div>
+                        <div class="action_part" style="position: absolute; bottom: 5px; right: -5px;">
+                            <button class="start_task_btn">START<img src="assets/arrows.svg"></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    `)
     CreateTasksPage()
     } else if (id == 'settings') {
         show('top_bar')
@@ -923,28 +871,19 @@ function CreateTopBar() {
     $(".info_bar .members").html('<i class="fa-solid fa-user-group fa-flip-horizontal"></i> ' + GangTable.datas.capacity.members + '/' + GangTable.members.length)
 }
 
-function ChangePlayerPer(id, btn_id, rank_num, player_id, value, bypass) {
+function ChangePlayerPer(id, btn_id, rank_num, player_id, value) {
     if (btn_id == 'inv_rank_btn') {
         ChoosedRank = GangTable.datas.ranks[rank_num].name
     }
     if (value) {
-        if (!bypass){
-            if (!MyPerms.edit_ranks){
-                WrongAnim(btn_id)
-                return
-            }
-        }
-        let rankname
-        if (typeof rank_num === "string"){
-            rankname = rank_num
-        }
-        else{
-            rankname = GangTable.datas.ranks[rank_num].name
+        if (!MyPerms.edit_ranks){
+            WrongAnim(btn_id)
+            return
         }
         $.post('https://' + GetParentResourceName() + '/UseButton', JSON.stringify({
             action: "setmemberrank",
             id: player_id,
-            rankname
+            rankname: GangTable.datas.ranks[rank_num].name
         }))
     }
 
@@ -997,11 +936,6 @@ function TriggerCallback(event, data) {
 function TriggerCallbackExecutions(event, data) {
     data.action = event;
     return $.post('https://brutal_executions/UseButton', JSON.stringify(data)).promise();
-}
-
-function TriggerCallbackDrugs(event, data) {
-    data.action = event;
-    return $.post('https://brutal_drugs/UseButton', JSON.stringify(data)).promise();
 }
 
 function OpenPicReplacer(id){
@@ -1105,12 +1039,10 @@ function SendInvite() {
     hide2('invite_container')
 }
 
-function SendKick(id, btn_id, bypass) {
-    if (!bypass){
-        if (!MyPerms.edit_ranks){
-            WrongAnim(btn_id)
-            return
-        }
+function SendKick(id, btn_id) {
+    if (!MyPerms.edit_ranks){
+        WrongAnim(btn_id)
+        return
     }
     $.post('https://' + GetParentResourceName() + '/UseButton', JSON.stringify({
         action: "kick",
@@ -1270,19 +1202,17 @@ function SpawnVehicle(ID) {
 }
 
 function CreateAdminPanel(){
-    $("#admin_menu #gang_place_chooser ul").html("")
+    $("#admin_menu ul").html("")
     for (let i = 0; i < AdminTable.length; i++) {
-        $("#admin_menu #gang_place_chooser ul").append(`<li><button class="dropdown-item" id="admin_hq_${i}" onclick="SetAdminDatas(id, ${i})">${AdminTable[i].name == ""?t('empty'):AdminTable[i].name}<br><span>${AdminTable[i].hq} | Pos: ${Math.round(AdminTable[i].pos.x)}, ${Math.round(AdminTable[i].pos.y)}, ${Math.round(AdminTable[i].pos.z)}</span></button></li>`)
+        $("#admin_menu ul").append(`<li><button class="dropdown-item" id="admin_hq_${i}" onclick="SetAdminDatas(id, ${i})">${AdminTable[i].name == ""?t('empty'):AdminTable[i].name}<br><span>${AdminTable[i].hq} | Pos: ${Math.round(AdminTable[i].pos.x)}, ${Math.round(AdminTable[i].pos.y)}, ${Math.round(AdminTable[i].pos.z)}</span></button></li>`)
     }
-    SetAdminDatas('admin_hq_'+AdminChoosedGang, AdminChoosedGang)
+    SetAdminDatas('admin_hq_0', 0)
 }
 
 function SetAdminDatas(id, i){
     document.getElementById('main_admin_btn').innerHTML = document.getElementById(id).innerHTML
     AdminGang = AdminTable[i].name
     AdminHQ = AdminTable[i].hq
-
-    AdminChoosedGang = i
 
     if (AdminTable[i].name == ""){
         document.getElementById('admin_gang_name').disabled = false
@@ -1295,56 +1225,6 @@ function SetAdminDatas(id, i){
     document.getElementById('admin_gang_label').value = AdminTable[i].label
     document.getElementById('admin_gang_money').value = AdminTable[i].balance
     document.getElementById('admin_gang_rep').value = AdminTable[i].rep
-
-    if (AdminTable[i].members != undefined){
-        if (AdminTable[i].members.length > 0){
-            $(".admin_menu .player_container").html("")
-            for (let index = 0; index < AdminTable[i].members.length; index++) {
-                $(".admin_menu .player_container").append(`
-                    <div class="player_element" id="player_el${index}">
-                        <div class="row h-100 mx-2">
-                            <div class="col-5">
-                                <div class="player_name">${AdminTable[i].members[index].name.length>13?AdminTable[i].members[index].name.slice(0, 13)+'...':AdminTable[i].members[index].name}</div>
-                            </div>
-                            <div class="col px-0">
-                                <div class="dropdown">
-                                    <button class="rank_change_btn px-3" id="change_perm_btn_${index}" type="button" data-bs-toggle="dropdown" aria-expanded="false">${AdminTable[i].members[index].rank.label.length>7?AdminTable[i].members[index].rank.label.slice(0, 7)+'...':AdminTable[i].members[index].rank.label}</button>
-                                    <ul class="dropdown-menu">    
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col px-0">
-                                <button class="top_opener_btn red float-end" id="kick_${index}" onclick="SendKick('${AdminTable[i].members[index].identifier}', id, true), ReopenAdminPanel()">${t("kick")}</button>
-                            </div>
-                        </div>
-                    </div>      
-                `)
-                for (let _i = 0; _i < AdminTable[i].ranks.length; _i++) {
-                    $(".admin_menu .player_container #player_el" + index + " ul").append(`<li><button class="dropdown-item" id="rank_el${_i}" onclick="ChangePlayerPer(id, 'change_perm_btn_${index}', '${AdminTable[i].ranks[_i].name}', '${AdminTable[i].members[index].identifier}', true, true), ReopenAdminPanel()">${AdminTable[i].ranks[_i].label.length>7?AdminTable[i].ranks[_i].label.slice(0, 7)+'...':AdminTable[i].ranks[_i].label}</button></li>`)
-                }
-            }
-        }
-        else{
-            $(".admin_menu .player_container").html('<div class="text">There are no players in this gang.</div>')
-        }
-        $('.admin_menu #green_admin_btn').html(t('save'))
-        document.getElementById('add_player_btn').disabled = false
-    }
-    else{
-        $(".admin_menu .player_container").html('<div class="text">This gang hq is not is use. Create a gang to use it!</div>')
-        $('.admin_menu #green_admin_btn').html(t('create'))
-        document.getElementById('add_player_btn').disabled = true
-    }
-}
-
-function SendAddPlayer(){
-    let id = document.getElementById('in_add_player').value
-    $.post('https://' + GetParentResourceName() + '/UseButton', JSON.stringify({action: "addplayer", id, job:AdminGang}))
-    document.getElementById('in_add_player').value = ''
-}
-
-function ReopenAdminPanel(){
-    $.post('https://' + GetParentResourceName() + '/UseButton', JSON.stringify({action: "reopen_admin_panel"}))
 }
 
 function DeleteGang(){
@@ -1428,7 +1308,7 @@ function LoadMap(noanim) {
         var sw = map.unproject([0, centercoord], 3 - 1);
         var ne = map.unproject([centercoord, 0], 3 - 1);
         var mapbounds = new L.LatLngBounds(sw, ne);
-        map.setView([PlayerCoords[1], PlayerCoords[0]], 5);
+        map.setView([0, 0], 4);
         map.setMaxBounds(mapbounds);
 
 
@@ -1478,7 +1358,6 @@ function LoadMap(noanim) {
                 OpenedMapGang = false
             }
             hide2("marker_placer")
-            hide2("drug_zone")
         })
     }
 
@@ -1526,7 +1405,6 @@ function LoadMap(noanim) {
                 $('.friend_btn').css("display", "none")
                 $(".current_gang_name").html(MapTable[index].job_label.length>10?MapTable[index].job_label.slice(0, 10)+'...':MapTable[index].job_label)
                 document.getElementById('current_gang_name').classList.remove("faded")
-                document.getElementById('current_gang').classList.remove("green")
                 $(".scout_date").html('')
                 $(".info_con").html(`
                     <div class="gang_info" id="member">Members: ${GangTable.members.length}</div>
@@ -1534,7 +1412,6 @@ function LoadMap(noanim) {
                     <div class="gang_info" id="safe">Safe: ${GangTable.datas.capacity.safe.size}</div>
                 `)
                 $("#raid").css("display", "none")
-                $("#scout").css("display", "none")
             }
             else if(!OpenedMapGang){
                 $('.friend_btn').css("display", "block")
@@ -1653,105 +1530,7 @@ function LoadMap(noanim) {
             }
         }
     }
-
-    for (let index = 0; index < DrugMarkers.length; index++) {
-        if (DrugMarkers[index] != null && DrugMarkers[index].marker != '') {
-            map.removeLayer(DrugMarkers[index].marker);
-        }
-    }
-
-    DrugMarkers = [];
-
-    TriggerCallbackDrugs('getdata', {}).done((cb) => {
-        DrugMarkers = cb
-
-        if (DrugMarkers.length > 0) {
-            for (let index = 0; index < DrugMarkers.length; index++) {
-                const markerData = DrugMarkers[index];
-                const zoom = map.getZoom();
-                const icon = createScaledIcon(zoom, markerData.size, markerData.color1, markerData.color2, markerData.icon);
-
-                markerData.marker = L.marker([markerData.coords[1], markerData.coords[0]], { icon }).addTo(map);
-
-                markerData.marker.on('click', function () {
-                    $('.drug_zone .basic_label').html(markerData.name)
-                    $('.drug_zone .drug_container').html('')
-                    if (markerData.leaderboard.length > 0){
-                        for (let i = 0; i < 8; i++) {
-                            if (markerData.leaderboard[i] != undefined){
-                                if (0.1 > markerData.leaderboard[i].percent){
-                                    markerData.leaderboard[i].percent = 0.1
-                                }
-                                $('.drug_zone .drug_container').append(`
-                                    <div class="gang_element">
-                                        <div class="progress_con">
-                                            <div class="progress" style='height: ${94*markerData.leaderboard[i].percent}px; background-color:${markerData.leaderboard[i].name == PlayerJob?'#C337FB':'#FFFFFF'};'></div>
-                                        </div>
-                                        <div class="label">${markerData.leaderboard[i].label}</div>
-                                    </div>
-                                `)
-                            }
-                        }
-                    }
-                    else{
-                        $('.drug_zone .drug_container').append(`
-                           <div class="text">${t('no_active_gangs')}</div>
-                        `)
-                    }
-                    
-                    show2("drug_zone");
-                });
-            }
-
-            map.on('zoomend', () => {
-                const zoom = map.getZoom();
-
-                for (let i = 0; i < DrugMarkers.length; i++) {
-                    const markerData = DrugMarkers[i];
-                    const icon = createScaledIcon(zoom, markerData.size, markerData.color1, markerData.color2, markerData.icon);
-                    markerData.marker.setIcon(icon);
-                }
-            });
-        }
-    }).catch((error) => {
-        DrugMarkers = [];
-    });
-
-    if (PlayerIcon != null) {
-        map.removeLayer(PlayerIcon);
-    }
-
-    var IconSettings = L.divIcon({
-        html: `<i class="fa-solid fa-location-arrow fa-rotate-by" style="color: #ffffffff; --fa-rotate-angle: ${PlayerCoords[2]*(-1)-45}deg;"></i>`,
-        iconSize: [30, 30],
-        className: 'icon',
-    });
-
-    PlayerIcon = L.marker([PlayerCoords[1], PlayerCoords[0]], {
-        icon: IconSettings
-    });
-    PlayerIcon.addTo(map);
-
     LoadingMap = false
-}
-const baseZoom = 5;  
-
-function createScaledIcon(zoom, Size, Color, Color2, Icon) {
-    const scale = getIconScale(zoom);
-    const size = Size * scale * 1.15;
-
-    return L.divIcon({
-        html: `<div class="drug_marker" style="width: ${size}px; height: ${size}px; background-color: ${Color}; border-color: ${Color2};">
-                   <img src="${Icon}">
-               </div>`,
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2],
-        className: 'icon'
-    });
-}
-
-function getIconScale(zoom) {
-    return Math.pow(2, zoom - baseZoom);
 }
 
 function AddMarker(val, number) {

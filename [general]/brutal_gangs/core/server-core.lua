@@ -68,11 +68,6 @@ if Config['Core']:upper() == 'ESX' then
     function GetItemCount(source, item)
         local xPlayer = GETPFI(source)
 
-        if xPlayer.getInventoryItem(item) == nil then
-            print("^1PROBLEM!^7 The ^3" ..item.. "^7 item is not created.")
-            return 0
-        end
-
         if _esx_ == 'new' then
             return xPlayer.getInventoryItem(item).count
         else
@@ -237,7 +232,13 @@ elseif Config['Core']:upper() == 'QBCORE' then
     end
 
     function CreateCoreJob(name, label, grades)
-        if GetResourceState("qbx_core") == "started" then
+        if GetResourceState("qb-core") == "started" then
+            Core.Functions.AddGang(name, 
+            {
+                label = label,
+                grades = grades,
+            })
+        elseif GetResourceState("qbx_core") == "started" then
             local gang = {}
             local newValue, newGrades = {}, {}
 
@@ -259,12 +260,6 @@ elseif Config['Core']:upper() == 'QBCORE' then
             }
 
             return exports['qbx_core']:CreateGangs(gang)    
-        else 
-            Core.Functions.AddGang(name, 
-            {
-                label = label,
-                grades = grades,
-            })
         end
     end
 

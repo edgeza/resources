@@ -90,7 +90,7 @@ function InventoryOpenFunction(type, job, size)
             exports.ox_inventory:openInventory('stash', { id = "safe_"..job})
         elseif Config.Inventory:lower() == 'qb_inventory' then
             if GetResourceState('qb-inventory') == "started" then
-                TriggerServerEvent("brutal_gangs:qb-inventory:server:OpenInventory", "safe_"..job, {label = Config.Locales.Safe, maxweight = size*1000, slots = 50})
+                TriggerServerEvent("qb-inventory:server:OpenInventory", "safe_"..job, {label = Config.Locales.Safe, maxweight = size*1000, slots = 50})
             else
                 TriggerServerEvent("inventory:server:OpenInventory", "stash", "safe_"..job, {label = Config.Locales.Safe, maxweight = size*1000, slots = 50})
                 TriggerEvent("inventory:client:SetCurrentStash", "safe_"..job)
@@ -121,44 +121,21 @@ function InventoryOpenFunction(type, job, size)
     end
 end
 
-function OpenDressingMenu()
-    if Config.Wardrobe == 'ak47_clothing' then
-        exports['ak47_clothing']:openOutfit() -- if it doesn't work with this export use other event
-        -- TriggerEvent('ak47_clothing:openOutfitMenu') -- Use this only if the first export doesn't work, depend of you'r version
-    elseif Config.Wardrobe == 'codem_apperance' then 
-        TriggerEvent('codem-apperance:OpenWardrobe')
-    elseif Config.Wardrobe == 'fivem_appearance' then 
-        exports['fivem-appearance']:openWardrobe()
-    elseif Config.Wardrobe == 'illenium_appearance' then 
-        TriggerEvent('illenium-appearance:client:openOutfitMenu')
-    elseif Config.Wardrobe == 'qb_clothing' then 
-        TriggerEvent('qb-clothing:client:openOutfitMenu')
-    elseif Config.Wardrobe == 'raid_clothes' then 
-        TriggerEvent('raid_clothes:openmenu')
-    elseif Config.Wardrobe == 'rcore_clothes' then 
-        TriggerEvent('rcore_clothes:openOutfits')
-    elseif Config.Wardrobe == 'rcore_clothing' then 
-        TriggerEvent('rcore_clothing:openChangingRoom')
-    elseif Config.Wardrobe == 'sleek_clothestore' then 
-        exports['sleek-clothestore']:OpenWardrobe()
-    elseif Config.Wardrobe == 'tgiann_clothing' then 
-        TriggerEvent('tgiann-clothing:openOutfitMenu')
-    end
-end
-
 function setPlayerSkin(skinTable)
     if Config['Core']:upper() == 'ESX' then
         TriggerEvent('skinchanger:loadSkin', skinTable.skin)
     elseif Config['Core']:upper() == 'QBCORE' then
-        TriggerEvent("qb-clothes:loadSkin", false, tonumber(skinTable.model), skinTable.skin)
-        TriggerServerEvent("brutal_gangs:server:qbcore-loadPlayerSkin", tonumber(skinTable.model), skinTable.skin)
+        local pedId = PlayerPedId()
+        local skin = exports['illenium-appearance']:getPedAppearance(pedId)
+        skin.components = skinTable.components
+        skin.props = skinTable.props
+        exports['illenium-appearance']:setPlayerAppearance(skin)
+        TriggerServerEvent("brutal_gangs:server:qbcore-loadPlayerSkin", skinTable.model, json.encode(skin))
     end
 end
 
 RegisterNetEvent('brutal_gangs:client:utils:CreateVehicle')
 AddEventHandler('brutal_gangs:client:utils:CreateVehicle', function(Vehicle)
-    local plate = GetVehicleNumberPlateText(Vehicle)
-
     SetVehicleFuelLevel(Vehicle, 100.0)
     DecorSetFloat(Vehicle, "_FUEL_LEVEL", GetVehicleFuelLevel(Vehicle))
 
@@ -173,12 +150,6 @@ end)
 
 RegisterNetEvent('brutal_gangs:client:utils:DeleteVehicle')
 AddEventHandler('brutal_gangs:client:utils:DeleteVehicle', function(Vehicle)
-    local plate = GetVehicleNumberPlateText(Vehicle)
-
-    if Config.BrutalKeys and GetResourceState("brutal_keys") == "started" then 
-		exports.brutal_keys:removeKey(plate, true) 
-	end	
-
     DeleteEntity(Vehicle)
 end)
 
@@ -205,8 +176,3 @@ function EnableMinimap()
     DisplayRadar(true)
     -- Here you can add a trigger to enable your HUD system
 end
-
-RegisterNetEvent('brutal_gangs:client:utils:StartExternalTask')
-AddEventHandler('brutal_gangs:client:utils:StartExternalTask', function()
-    -- Put here any robbery or heist you want to start from the gangmenu 
-end)

@@ -124,6 +124,5 @@
   "reputation": "RUF",
   "exit": "BEENDEN",
   "gang_war": "GANGKRIEG",
-  "stash_des": "Dieses Upgrade erhöht die Speicherkapazität des Verstecks.",
-  "no_active_gangs": "Es gibt keine aktiven Gangs in dieser Zone"
+  "stash_des": "Dieses Upgrade erhöht die Speicherkapazität des Verstecks."
 }

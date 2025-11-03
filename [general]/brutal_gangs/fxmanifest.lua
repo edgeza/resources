@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Keres & Dév'
 description 'Brutal Gangs - store.brutalscripts.com'
-version '1.2.5'
+version '1.2.0'
 
 client_scripts { 
 	'config.lua',
@@ -24,7 +24,6 @@ server_scripts {
 export 'isPlayerInGangJob'
 export 'playerGangRank'
 export 'playerGangRankName'
-export 'getGangLabelbyName'
 
 shared_script {
 	'@ox_lib/init.lua'

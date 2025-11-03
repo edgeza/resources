@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------------
-----------------------------------| BRUTAL GANG ACTIONS :) |----------------------------------
+-------------------------------------| BRUTAL GANGS :) |--------------------------------------
 ----------------------------------------------------------------------------------------------
 
 --[[
@@ -11,21 +11,20 @@ More informations about the script:   https://docs.brutalscripts.com
 
 Config = {
     Core = 'QBCORE',  -- 'ESX' / 'QBCORE' | Other core setting on the 'core' folder.
-    Target = 'oxtarget', -- 'false' / 'oxtarget' / 'qb-target' 
-    Inventory = 'ox_inventory', -- 'ox_inventory' / 'qb_inventory' / 'quasar_inventory' / 'advanced_quasar_inventory' / 'chezza_inventory' / 'codem_inventory' / 'core_inventory' / 'origen_inventory' / 'ps-inventory' // Custom can be add in the cl_utils.lua!!!
-    ProgressBar = '', -- 'progressBars' / 'pogressBar' / 'mythic_progbar' // Custom can be add in the cl_utils.lua!!!
+    Target = 'oxtarget', -- 'oxtarget' / 'qb-target' 
+    Inventory = 'quasar_inventory', -- 'ox_inventory' / 'qb_inventory' / 'quasar_inventory' / 'chezza_inventory' / 'codem_inventory' / 'core_inventory' / 'origen_inventory' / 'ps-inventory' // Custom can be add in the cl_utils.lua!!!
+    ProgressBar = 'pogressBar', -- 'progressBars' / 'pogressBar' / 'mythic_progbar' // Custom can be add in the cl_utils.lua!!!
     BrutalNotify = true, -- Buy here: (4€+VAT) https://store.brutalscripts.com | Or set up your own notify >> cl_utils.lua
     PanelControlMode = 'scroll', -- scroll, key
-    AllowedJobs = {'ballas', 'triads', 'vagos', 'lostmc', 'families', 'angels'}, -- Set to 'false' to allow it to anybody. | Can only be used if 'BlacklistedJobs' is also set to 'false'.
+    AllowedJobs = {'mafia', 'triads', 'vagos', 'lostmc', 'families', 'cartel', 'ballas', 'aztecas', 'disciples'}, -- Set to 'false' to allow it to anybody. | Can only be used if 'BlacklistedJobs' is also set to 'false'.
     BlacklistedJobs = false, -- Set to 'false' to allow it to anybody.
-    HandUpAnimation = {'missminuteman_1ig_2', 'handsup_base'},  -- If you use a different hands up animation on your server change these | Anim Dict, Anim Name
-    AllowWhileDead = true, -- Allow the menu to be used while dead | true / false
+    HandUpAnimation = {'random@mugging3', 'handsup_standing_base'},  -- If you use a different hands up animation on your server change these | Anim Dict, Anim Name
 
     HeadBag = {
         Use = true,
         AppearInMenu = true,
         BlackFade = true,
-        HandsUpRequirement = false,
+        HandsUpRequirement = true,
     },
     
     Hostage = {
@@ -35,13 +34,43 @@ Config = {
         AllowedWeapons = {
             `WEAPON_PISTOL`,
             `WEAPON_COMBATPISTOL`,
+            -- Kyros
+            `WEAPON_BAR15`,
+            `WEAPON_BLACKARP`,
+            `WEAPON_BSCAR`,
+            `WEAPON_THOMPSON`,
+            `WEAPON_LBTARP`,
+            `WEAPON_RAM7`,
+            `WEAPON_REDARP`,
+            `WEAPON_REDM4A1`,
+            `WEAPON_TARP`,
+            `WEAPON_WOARP`,
+            `WEAPON_BLUEGLOCKS`,
+            `WEAPON_FN57`,
+            `WEAPON_GLOCK21`,
+            `WEAPON_GLOCK41`,
+            `WEAPON_GLOCKBEAMS`,
+            `WEAPON_P30L`,
+            `WEAPON_ILLGLOCK17`,
+            `WEAPON_MGGLOCK`,
+            `WEAPON_MIDASGLOCK`,
+            `WEAPON_P210`,
+            `WEAPON_SR40`,
+            `WEAPON_T1911`,
+            `WEAPON_TGLOCK19`,
+            `WEAPON_AXE`,
+            `WEAPON_CHAIR`,
+            `WEAPON_KRISSVECTOR`,
+            `WEAPON_TEC9S`,
+            `WEAPON_M500`,
+            `WEAPON_R590`,
         },
         DisableControls = {24,257,25,263,32,34,31,30,45,22,44,37,23,288,289,170,167,73,199,59,71,72,36,47,264,257,140,141,142,143,75},
     },
 
     PutPlayerInVehicle = {
-        Use = true,
-        AppearInMenu = true,
+        Use = false,
+        AppearInMenu = false,
         HandsUpRequirement = false,
         CustomVehicleTrunkPos = {
             ["elegy"] = {x = 0.0, y = -2.0, z = 0.5}, -- You can add as many as you wish
@@ -65,13 +94,13 @@ Config = {
         Use = true,
         AppearInMenu = true,
         KnockEffect = 'ragdoll', --'animation' or 'ragdoll'
-        Cooldown = {use = true, time = 60}, -- time in sec 
-        Time = 5, -- time in sec, how much time should be the player passed out
+        Cooldown = {use = true, time = 180}, -- time in sec 
+        Time = 3, -- time in sec, how much time should be the player passed out
     },
 
     PullPlayer = {
-        Use = true,
-        AppearInMenu = true,
+        Use = false,
+        AppearInMenu = false,
     },
 
     HandCuff = {
@@ -85,8 +114,8 @@ Config = {
     },
 
     Rob = {
-        Use = true,
-        AppearInMenu = true,
+        Use = false,
+        AppearInMenu = false,
         HandsUpRequirement = true,
         AllowedWeapons = {
             `WEAPON_PISTOL`,
@@ -125,7 +154,7 @@ Config = {
             Command = 'putplayerinvehicle',
             Control = '',  -- Controls list:  https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
             Suggestion = 'Put player in vehicle',
-            BlacklistedVehicles = {'bf400'}, -- false =  not in use
+            BlacklistedVehicles = false, -- false =  not in use
         },
 
         PierceTyre = {
@@ -155,7 +184,7 @@ Config = {
         },
 
         Rob = {
-            Command = 'rob',
+            Command = 'robtest',
             Control = '',  -- Controls list:  https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
             Suggestion = 'Rob out the player'
         },

@@ -33,8 +33,6 @@ function InventoryOpenFunction(type, data)
             end  
         elseif Config.Inventory:lower() == 'quasar_inventory' then
             TriggerServerEvent("inventory:server:OpenInventory", "otherplayer", target)
-        elseif Config.Inventory:lower() == 'advanced_quasar_inventory' then
-            TriggerServerEvent('inventory:server:OpenInventory', 'otherplayer', target, {type = 'all'})
         elseif Config.Inventory:lower() == 'chezza_inventory' then
             TriggerEvent("inventory:openPlayerInventory", target, true)
         elseif Config.Inventory:lower() == 'core_inventory' then
@@ -92,16 +90,15 @@ function HandCuffedEvent(cuffed)
     end
 end
 
-function isPlayerDead(ClosesPlayerId)
-    if GetResourceState("brutal_ambulancejob") == "started" then
-        return exports.brutal_ambulancejob:IsDead(ClosesPlayerId)
-    elseif GetResourceState("wasabi_ambulance") == "started" then
-        return exports.wasabi_ambulance:isPlayerDead(ClosesPlayerId)
-    else
-        if IsEntityDead(ClosesPlayerId) then
-            return true
-        else
-            return false
-        end
+function IsTargetDead(playerId)
+    local retval = false
+    local hasReturned = false
+    TSCB('brutal_gang_actions:server:isPlayerDead', function(result)
+        retval = result
+        hasReturned = true
+    end, playerId)
+    while not hasReturned do
+        Wait(10)
     end
+    return retval
 end

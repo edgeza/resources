@@ -42,7 +42,7 @@ end)
 function StaffCheck(source, AdminGroups)
     local staff = false
 
-    if Config.Core:upper() == 'ESX'then
+    if Config.Core:upper() == 'ESX' then
         local player = Core.GetPlayerFromId(source)
         local playerGroup = player.getGroup()
 

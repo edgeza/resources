@@ -124,12 +124,5 @@
   "reputation": "Reputation",
   "exit": "EXIT",
   "gang_war": "GANG WAR",
-  "stash_des": "This upgrade will increase the storage capacity of the stash.",
-  "add_player": "ADD PLAYER",
-  "add": "ADD",
-  "got_invitation": "You have got an invitation to the following gang:",
-  "invitation": "INVITATION",
-  "accept": "ACCEPT",
-  "decline": "DECLINE",
-  "no_active_gangs": "There are no active gangs in this zone"
+  "stash_des": "This upgrade will increase the storage capacity of the stash."
 }

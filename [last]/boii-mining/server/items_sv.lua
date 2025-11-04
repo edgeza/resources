@@ -16,7 +16,16 @@ local Core = (function()
         return {
             Functions = {
                 GetPlayer = function(source) return qbx:GetPlayer(source) end,
-                CreateUseableItem = function(item, callback) RegisterUsableItem(item, callback) end,
+                CreateUseableItem = function(item, callback)
+                    -- Try QBX RegisterUsableItem
+                    local success = pcall(function() qbx:RegisterUsableItem(item, callback) end)
+                    if not success then
+                        success = pcall(function() qbx:registerUsableItem(item, callback) end)
+                    end
+                    if not success and RegisterUsableItem then
+                        RegisterUsableItem(item, callback)
+                    end
+                end,
                 GetPlayers = function() return GetPlayers() end,
             },
             Shared = {

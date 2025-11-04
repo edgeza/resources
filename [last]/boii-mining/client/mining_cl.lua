@@ -198,13 +198,23 @@ CreateThread(function()
                 end
                 
                 -- Add entity zone with proper error handling
-                if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].AddEntityZone then
+                if GetResourceState(TargetName) == 'started' and exports[TargetName] then
                     local success, result = pcall(function()
-                        return exports[TargetName]:AddEntityZone('mining_peds'..MiningPeds, MiningPeds, {
-                            name = 'mining_peds'..MiningPeds,
-                            heading = GetEntityHeading(MiningPeds),
-                            debugPoly = false,
-                        }, {
+                        -- Try different method names for ox_target/qb-target compatibility
+                        if exports[TargetName].AddEntityZone then
+                            return exports[TargetName]:AddEntityZone('mining_peds'..MiningPeds, MiningPeds, {
+                                name = 'mining_peds'..MiningPeds,
+                                heading = GetEntityHeading(MiningPeds),
+                                debugPoly = false,
+                            }, {
+                        elseif exports[TargetName].addLocalEntity then
+                            return exports[TargetName]:addLocalEntity(MiningPeds, {
+                                name = 'mining_peds'..MiningPeds,
+                                debugPoly = false,
+                            }, {
+                        end
+                    end)
+                    if not success then
                             options = {
                                 {   
                                     icon = v.icon,
@@ -276,7 +286,9 @@ end)
 
 --<!>-- SMELTING --<!>--
 for k, v in pairs(Config.Smelting.Locations.Foundry) do
-    exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, { 
+    local addZone = exports[TargetName].AddCircleZone or exports[TargetName].addCircleZone
+    if addZone then
+        addZone(v.name, v.coords, v.radius, { 
             name= v.name, 
             debugPoly= v.debugPoly, 
             useZ= v.useZ, 
@@ -290,11 +302,14 @@ for k, v in pairs(Config.Smelting.Locations.Foundry) do
         },
         distance = v.distance
     })
+    end
 end
 
 if Config.MLO.k4mb1_cave then
     for k, v in pairs(Config.Smelting.Locations.KambiCave) do
-        exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, { 
+        local addZone = exports[TargetName].AddCircleZone or exports[TargetName].addCircleZone
+        if addZone then
+            addZone(v.name, v.coords, v.radius, { 
                 name= v.name, 
                 debugPoly= v.debugPoly, 
                 useZ= v.useZ, 
@@ -308,6 +323,7 @@ if Config.MLO.k4mb1_cave then
             },
             distance = v.distance
         })
+        end
     end
 end
 --<!>-- SMELTING --<!>--
@@ -1043,7 +1059,9 @@ local function SetupJewelBenches()
         if GetResourceState(TargetName) == 'started' then
             -- prevent duplicate zones by trying to remove any existing first (idempotent)
             pcall(function() exports[TargetName]:RemoveZone(v.name) end)
-            exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, {
+            local addZone = exports[TargetName].AddCircleZone or exports[TargetName].addCircleZone
+            if addZone then
+                addZone(v.name, v.coords, v.radius, {
                     name= v.name,
                     debugPoly= v.debugPoly,
                     useZ= v.useZ,

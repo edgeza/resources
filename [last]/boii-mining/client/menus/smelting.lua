@@ -18,7 +18,35 @@ local Core = (function()
                 GetPlayerData = function() return qbx:GetPlayerData() end,
                 Notify = function(msg, type, length) qbx:Notify(msg, type, length) end,
                 Progressbar = function(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, propTwo, onFinish, onCancel)
-                    qbx:Progressbar(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, propTwo, onFinish, onCancel)
+                    -- QBX uses ox_lib for progressbars
+                    if GetResourceState('ox_lib') == 'started' and lib and lib.progressBar then
+                        local success = lib.progressBar({
+                            label = label,
+                            duration = duration,
+                            useWhileDead = useWhileDead or false,
+                            canCancel = canCancel ~= false,
+                            disable = disableControls or {},
+                            anim = animation or {},
+                            prop = prop or {},
+                            propTwo = propTwo or {},
+                        })
+                        if success and onFinish then
+                            CreateThread(function()
+                                Wait(duration)
+                                onFinish()
+                            end)
+                        elseif not success and onCancel then
+                            onCancel()
+                        end
+                    else
+                        -- Fallback: just wait and call onFinish
+                        if onFinish then
+                            CreateThread(function()
+                                Wait(duration)
+                                onFinish()
+                            end)
+                        end
+                    end
                 end,
                 HasItem = function(item, amount)
                     -- Check player inventory for item

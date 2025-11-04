@@ -197,54 +197,28 @@ CreateThread(function()
                     waitMs = waitMs + 100
                 end
                 
-                -- Add entity zone with proper error handling
-                if GetResourceState(TargetName) == 'started' and exports[TargetName] then
+                -- Add entity zone with ox_target
+                if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addLocalEntity then
                     local success, result = pcall(function()
-                        -- Try different method names for ox_target/qb-target compatibility
-                        if exports[TargetName].AddEntityZone then
-                            -- qb-target style
-                            return exports[TargetName]:AddEntityZone('mining_peds'..MiningPeds, MiningPeds, {
+                        return exports[TargetName]:addLocalEntity(MiningPeds, {
+                            {
                                 name = 'mining_peds'..MiningPeds,
-                                heading = GetEntityHeading(MiningPeds),
-                                debugPoly = false,
-                            }, {
-                                options = {
-                                    {   
-                                        icon = v.icon,
-                                        label = v.label,
-                                        event = v.event,
-                                        canInteract = function(entity)
-                                            if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
-                                            return true
-                                        end,    
-                                    },
-                                },
+                                icon = v.icon,
+                                label = v.label,
+                                onSelect = function()
+                                    TriggerEvent(v.event)
+                                end,
+                                canInteract = function(entity)
+                                    if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
+                                    return true
+                                end,
                                 distance = v.distance
-                            })
-                        elseif exports[TargetName].addLocalEntity then
-                            -- ox_target native API
-                            return exports[TargetName]:addLocalEntity(MiningPeds, {
-                                {
-                                    name = 'mining_peds'..MiningPeds,
-                                    icon = v.icon,
-                                    label = v.label,
-                                    onSelect = function()
-                                        TriggerEvent(v.event)
-                                    end,
-                                    canInteract = function(entity)
-                                        if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
-                                        return true
-                                    end,
-                                    distance = v.distance
-                                }
-                            })
-                        end
+                            }
+                        })
                     end)
                     if not success then
                         print('^1[boii-mining] Error adding entity zone for ped: ' .. tostring(result))
                     end
-                else
-                    print('^3[boii-mining] Warning: target resource not ready or addLocalEntity export not available')
                 end
             else
                 print('^1[boii-mining] Error: Failed to create ped for ' .. (v.name or 'unknown'))
@@ -296,26 +270,36 @@ end)
 
 --<!>-- SMELTING --<!>--
 for k, v in pairs(Config.Smelting.Locations.Foundry) do
-    if GetResourceState(TargetName) == 'started' and exports[TargetName] then
+    if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addSphereZone then
         local success, result = pcall(function()
-            if exports[TargetName].AddCircleZone then
-                -- qb-target style
-                return exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, { 
-                    name= v.name, 
-                    debugPoly= v.debugPoly, 
-                    useZ= v.useZ, 
-                },{ 
-                    options = { 
-                        {
-                            icon = Language.Mining.Smelting.Target['icon'],
-                            label = Language.Mining.Smelting.Target['label'],
-                            event = 'boii-mining:cl:SmeltingMenu'
-                        }, 
-                    },
-                    distance = v.distance
-                })
-            elseif exports[TargetName].addSphereZone then
-                -- ox_target native API
+            return exports[TargetName]:addSphereZone({
+                name = v.name,
+                coords = v.coords,
+                radius = v.radius,
+                debug = v.debugPoly,
+                options = {
+                    {
+                        name = v.name,
+                        icon = Language.Mining.Smelting.Target['icon'],
+                        label = Language.Mining.Smelting.Target['label'],
+                        onSelect = function()
+                            TriggerEvent('boii-mining:cl:SmeltingMenu')
+                        end,
+                        distance = v.distance
+                    }
+                }
+            })
+        end)
+        if not success then
+            print('^1[boii-mining] Error adding smelting zone: ' .. tostring(result))
+        end
+    end
+end
+
+if Config.MLO.k4mb1_cave then
+    for k, v in pairs(Config.Smelting.Locations.KambiCave) do
+        if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addSphereZone then
+            local success, result = pcall(function()
                 return exports[TargetName]:addSphereZone({
                     name = v.name,
                     coords = v.coords,
@@ -333,54 +317,6 @@ for k, v in pairs(Config.Smelting.Locations.Foundry) do
                         }
                     }
                 })
-            end
-        end)
-        if not success then
-            print('^1[boii-mining] Error adding smelting zone: ' .. tostring(result))
-        end
-    end
-end
-
-if Config.MLO.k4mb1_cave then
-    for k, v in pairs(Config.Smelting.Locations.KambiCave) do
-        if GetResourceState(TargetName) == 'started' and exports[TargetName] then
-            local success, result = pcall(function()
-                if exports[TargetName].AddCircleZone then
-                    -- qb-target style
-                    return exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, { 
-                        name= v.name, 
-                        debugPoly= v.debugPoly, 
-                        useZ= v.useZ, 
-                    },{ 
-                        options = { 
-                            {
-                                icon = Language.Mining.Smelting.Target['icon'],
-                                label = Language.Mining.Smelting.Target['label'],
-                                event = 'boii-mining:cl:SmeltingMenu'
-                            }, 
-                        },
-                        distance = v.distance
-                    })
-                elseif exports[TargetName].addSphereZone then
-                    -- ox_target native API
-                    return exports[TargetName]:addSphereZone({
-                        name = v.name,
-                        coords = v.coords,
-                        radius = v.radius,
-                        debug = v.debugPoly,
-                        options = {
-                            {
-                                name = v.name,
-                                icon = Language.Mining.Smelting.Target['icon'],
-                                label = Language.Mining.Smelting.Target['label'],
-                                onSelect = function()
-                                    TriggerEvent('boii-mining:cl:SmeltingMenu')
-                                end,
-                                distance = v.distance
-                            }
-                        }
-                    })
-                end
             end)
             if not success then
                 print('^1[boii-mining] Error adding smelting zone: ' .. tostring(result))
@@ -489,60 +425,40 @@ CreateThread(function()
             PlaceObjectOnGroundProperly(obj)
             SpawnedQuarryCaveTargets[#SpawnedQuarryCaveTargets+1] = obj
             ActiveQuarryCaveMarkers[i] = obj
-            exports[TargetName]:AddTargetEntity(obj, {
-                options = {
-                    {
-                        icon = Language.Mining.Quarry.Dynamite.Target['icon'],
-                        label = Language.Mining.Quarry.Dynamite.Target['label'],
-                        action = function(entity)
-                            local index = idx
-                            if entity and DoesEntityExist(entity) then
-                                exports[TargetName]:RemoveTargetEntity(entity)
-                                safeDeleteMarker(entity)
-                            end
-                            ActiveQuarryCaveMarkers[index] = nil
-                            SetTimeout(90000, function()
-                                if ActiveQuarryCaveMarkers[index] and DoesEntityExist(ActiveQuarryCaveMarkers[index]) then return end
-                                local new = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
-                                SetEntityHeading(new, lw)
-                                SetEntityInvincible(new, true)
-                                FreezeEntityPosition(new, true)
-                                PlaceObjectOnGroundProperly(new)
-                                ActiveQuarryCaveMarkers[index] = new
-                                exports[TargetName]:AddTargetEntity(new, {
-                                    options = {{ icon = Language.Mining.Quarry.Dynamite.Target['icon'], label = Language.Mining.Quarry.Dynamite.Target['label'], action = function()
-                                        local ent = ActiveQuarryCaveMarkers[index]
-                                        if ent and DoesEntityExist(ent) then
-                                            exports[TargetName]:RemoveTargetEntity(ent)
-                                            safeDeleteMarker(ent)
-                                            ActiveQuarryCaveMarkers[index] = nil
-                                        end
-                                        SetTimeout(90000, function()
-                                            if ActiveQuarryCaveMarkers[index] and DoesEntityExist(ActiveQuarryCaveMarkers[index]) then return end
-                                            local newer = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
-                                            SetEntityHeading(newer, lw)
-                                            SetEntityInvincible(newer, true)
-                                            FreezeEntityPosition(newer, true)
-                                            PlaceObjectOnGroundProperly(newer)
-                                            ActiveQuarryCaveMarkers[index] = newer
-                                            exports[TargetName]:AddTargetEntity(newer, {
-                                                options = {{ icon = Language.Mining.Quarry.Dynamite.Target['icon'], label = Language.Mining.Quarry.Dynamite.Target['label'], action = function()
-                                                    TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'QuarryCave' })
-                                                end }},
-                                                distance = 2.0
-                                            })
-                                        end)
-                                        TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'QuarryCave' })
-                                    end }},
-                                    distance = 2.0
-                                })
-                            end)
-                            TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'QuarryCave' })
-                        end
-                    }
-                },
-                distance = 2.0
-            })
+            if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addLocalEntity then
+                local function addTargetToEntity(entity)
+                    exports[TargetName]:addLocalEntity(entity, {
+                        {
+                            icon = Language.Mining.Quarry.Dynamite.Target['icon'],
+                            label = Language.Mining.Quarry.Dynamite.Target['label'],
+                            onSelect = function()
+                                local index = idx
+                                if entity and DoesEntityExist(entity) then
+                                    if exports[TargetName].removeLocalEntity then
+                                        exports[TargetName]:removeLocalEntity(entity)
+                                    end
+                                    safeDeleteMarker(entity)
+                                end
+                                ActiveQuarryCaveMarkers[index] = nil
+                                TriggerServerEvent('boii-mining:sv:TriggerQuarryBlast', index)
+                                SetTimeout(90000, function()
+                                    if ActiveQuarryCaveMarkers[index] and DoesEntityExist(ActiveQuarryCaveMarkers[index]) then return end
+                                    local new = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
+                                    SetEntityHeading(new, lw)
+                                    SetEntityInvincible(new, true)
+                                    FreezeEntityPosition(new, true)
+                                    PlaceObjectOnGroundProperly(new)
+                                    SpawnedQuarryCaveTargets[#SpawnedQuarryCaveTargets+1] = new
+                                    ActiveQuarryCaveMarkers[index] = new
+                                    addTargetToEntity(new)
+                                end)
+                            end,
+                            distance = 2.0
+                        }
+                    })
+                end
+                addTargetToEntity(obj)
+            end
         end
     end
     -- Mineshaft cave blasting markers
@@ -564,60 +480,40 @@ CreateThread(function()
             PlaceObjectOnGroundProperly(obj)
             SpawnedMineTargets[#SpawnedMineTargets+1] = obj
             ActiveMineMarkers[i] = obj
-            exports[TargetName]:AddTargetEntity(obj, {
-                options = {
-                    {
-                        icon = Language.Mining.Mine.Dynamite.Target['icon'],
-                        label = Language.Mining.Mine.Dynamite.Target['label'],
-                        action = function(entity)
-                            local index = idx
-                            if entity and DoesEntityExist(entity) then
-                                exports[TargetName]:RemoveTargetEntity(entity)
-                                safeDeleteMarker(entity)
-                            end
-                            ActiveMineMarkers[index] = nil
-                            SetTimeout(90000, function()
-                                if ActiveMineMarkers[index] and DoesEntityExist(ActiveMineMarkers[index]) then return end
-                                local new = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
-                                SetEntityHeading(new, lw)
-                                SetEntityInvincible(new, true)
-                                FreezeEntityPosition(new, true)
-                                PlaceObjectOnGroundProperly(new)
-                                ActiveMineMarkers[index] = new
-                                exports[TargetName]:AddTargetEntity(new, {
-                                    options = {{ icon = Language.Mining.Mine.Dynamite.Target['icon'], label = Language.Mining.Mine.Dynamite.Target['label'], action = function()
-                                        local ent = ActiveMineMarkers[index]
-                                        if ent and DoesEntityExist(ent) then
-                                            exports[TargetName]:RemoveTargetEntity(ent)
-                                            safeDeleteMarker(ent)
-                                            ActiveMineMarkers[index] = nil
-                                        end
-                                        SetTimeout(90000, function()
-                                            if ActiveMineMarkers[index] and DoesEntityExist(ActiveMineMarkers[index]) then return end
-                                            local newer = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
-                                            SetEntityHeading(newer, lw)
-                                            SetEntityInvincible(newer, true)
-                                            FreezeEntityPosition(newer, true)
-                                            PlaceObjectOnGroundProperly(newer)
-                                            ActiveMineMarkers[index] = newer
-                                            exports[TargetName]:AddTargetEntity(newer, {
-                                                options = {{ icon = Language.Mining.Mine.Dynamite.Target['icon'], label = Language.Mining.Mine.Dynamite.Target['label'], action = function()
-                                                    TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'Mine' })
-                                                end }},
-                                                distance = 2.0
-                                            })
-                                        end)
-                                        TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'Mine' })
-                                    end }},
-                                    distance = 2.0
-                                })
-                            end)
-                            TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'Mine' })
-                        end
-                    }
-                },
-                distance = 2.0
-            })
+            if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addLocalEntity then
+                local function addTargetToEntity(entity)
+                    exports[TargetName]:addLocalEntity(entity, {
+                        {
+                            icon = Language.Mining.Mine.Dynamite.Target['icon'],
+                            label = Language.Mining.Mine.Dynamite.Target['label'],
+                            onSelect = function()
+                                local index = idx
+                                if entity and DoesEntityExist(entity) then
+                                    if exports[TargetName].removeLocalEntity then
+                                        exports[TargetName]:removeLocalEntity(entity)
+                                    end
+                                    safeDeleteMarker(entity)
+                                end
+                                ActiveMineMarkers[index] = nil
+                                TriggerServerEvent('boii-mining:sv:TriggerMineBlast', index)
+                                SetTimeout(90000, function()
+                                    if ActiveMineMarkers[index] and DoesEntityExist(ActiveMineMarkers[index]) then return end
+                                    local new = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
+                                    SetEntityHeading(new, lw)
+                                    SetEntityInvincible(new, true)
+                                    FreezeEntityPosition(new, true)
+                                    PlaceObjectOnGroundProperly(new)
+                                    SpawnedMineTargets[#SpawnedMineTargets+1] = new
+                                    ActiveMineMarkers[index] = new
+                                    addTargetToEntity(new)
+                                end)
+                            end,
+                            distance = 2.0
+                        }
+                    })
+                end
+                addTargetToEntity(obj)
+            end
         end
     end
 end)
@@ -678,12 +574,13 @@ local function spawnSinglePaydirt()
     SpawnedPaydirt[#SpawnedPaydirt+1] = obj
     PaydirtPositions[#PaydirtPositions+1] = vector3(px, py, pz)
 
-    exports[TargetName]:AddTargetEntity(obj, {
-        options = {
+    if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addLocalEntity then
+        exports[TargetName]:addLocalEntity(obj, {
             {
                 icon = Language.Mining.Quarry.Paydirt.Digging.Target['icon'],
                 label = Language.Mining.Quarry.Paydirt.Digging.Target['label'],
-                action = function(entity)
+                onSelect = function()
+                    local entity = obj
                     if isDiggingPaydirt then
                         TriggerEvent('boii-mining:notify', Language.Mining.Quarry.Paydirt.Digging['busy'], 'error')
                         return
@@ -723,7 +620,9 @@ local function spawnSinglePaydirt()
                             Wait(10)
                             NetworkRequestControlOfEntity(handle)
                         end
-                        exports[TargetName]:RemoveTargetEntity(handle)
+                        if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                            exports[TargetName]:removeLocalEntity(handle)
+                        end
                         DeleteEntity(handle)
                         DeleteObject(handle)
                     end
@@ -755,11 +654,11 @@ local function spawnSinglePaydirt()
                 canInteract = function(entity)
                     if not entity or entity == 0 then return false end
                     return GetEntityModel(entity) == GetHashKey(Config.Paydirt.Dirt.Prop.model) and not IsPedInAnyVehicle(PlayerPedId())
-                end
+                end,
+                distance = 1.5
             }
-        },
-        distance = 1.5
-    })
+        })
+    end
 end
 
 CreateThread(function()
@@ -1118,58 +1017,34 @@ local function SetupJewelBenches()
         end
 
         -- Create target zone for each bench (idempotent by name in most target resources)
-        if GetResourceState(TargetName) == 'started' and exports[TargetName] then
+        if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addSphereZone then
             -- prevent duplicate zones by trying to remove any existing first (idempotent)
             pcall(function() 
-                if exports[TargetName].RemoveZone then
-                    exports[TargetName]:RemoveZone(v.name)
-                elseif exports[TargetName].removeZone then
+                if exports[TargetName].removeZone then
                     exports[TargetName]:removeZone(v.name)
                 end
             end)
             local success, result = pcall(function()
-                if exports[TargetName].AddCircleZone then
-                    -- qb-target style
-                    return exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, {
-                        name= v.name,
-                        debugPoly= v.debugPoly,
-                        useZ= v.useZ,
-                    },{
-                        options = {
-                            {
-                                icon = 'fa-solid fa-gem',
-                                label = 'Cut Gems/Craft',
-                                event = 'boii-mining:cl:JewelleryCraftMenu',
-                                canInteract = function(entity)
-                                    return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
-                                end
-                            },
-                        },
-                        distance = v.distance
-                    })
-                elseif exports[TargetName].addSphereZone then
-                    -- ox_target native API
-                    return exports[TargetName]:addSphereZone({
-                        name = v.name,
-                        coords = v.coords,
-                        radius = v.radius,
-                        debug = v.debugPoly,
-                        options = {
-                            {
-                                name = v.name,
-                                icon = 'fa-solid fa-gem',
-                                label = 'Cut Gems/Craft',
-                                onSelect = function()
-                                    TriggerEvent('boii-mining:cl:JewelleryCraftMenu')
-                                end,
-                                canInteract = function(entity)
-                                    return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
-                                end,
-                                distance = v.distance
-                            }
+                return exports[TargetName]:addSphereZone({
+                    name = v.name,
+                    coords = v.coords,
+                    radius = v.radius,
+                    debug = v.debugPoly,
+                    options = {
+                        {
+                            name = v.name,
+                            icon = 'fa-solid fa-gem',
+                            label = 'Cut Gems/Craft',
+                            onSelect = function()
+                                TriggerEvent('boii-mining:cl:JewelleryCraftMenu')
+                            end,
+                            canInteract = function(entity)
+                                return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
+                            end,
+                            distance = v.distance
                         }
-                    })
-                end
+                    }
+                })
             end)
             if not success then
                 print('^1[boii-mining] Error adding jewel bench zone: ' .. tostring(result))

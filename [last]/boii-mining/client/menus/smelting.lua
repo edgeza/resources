@@ -5,7 +5,30 @@
 --<!>-- DO NOT CHANGE ANYTHING BELOW THIS TEXT UNLESS YOU KNOW WHAT YOU ARE DOING! SUPPORT WILL NOT BE PROVIDED IF YOU BREAK THE SCRIPT! --<!>--
 local Core = Config.CoreSettings.Core
 local CoreFolder = Config.CoreSettings.CoreFolder
-local Core = exports[CoreFolder]:GetCoreObject()
+local Core = (function()
+    local success, result = pcall(function() return exports[CoreFolder]:GetCoreObject() end)
+    if success and result then
+        return result
+    end
+    -- QBX fallback: use QBX exports directly
+    local qbx = exports.qbx_core
+    if qbx then
+        return {
+            Functions = {
+                GetPlayerData = function() return qbx:GetPlayerData() end,
+                Notify = function(msg, type, length) qbx:Notify(msg, type, length) end,
+                Progressbar = function(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, propTwo, onFinish, onCancel)
+                    qbx:Progressbar(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, propTwo, onFinish, onCancel)
+                end,
+                HasItem = function(item, amount) return qbx:HasItem(item, amount) end,
+            },
+            Shared = {
+                Items = {}
+            }
+        }
+    end
+    error('Failed to initialize Core - QBX/QBCore not found')
+end)()
 local MenuName = Config.CoreSettings.MenuName
 --<!>-- DO NOT CHANGE ANYTHING ABOVE THIS TEXT UNLESS YOU KNOW WHAT YOU ARE DOING! SUPPORT WILL NOT BE PROVIDED IF YOU BREAK THE SCRIPT! --<!>--
 

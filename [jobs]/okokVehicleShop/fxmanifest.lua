@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'okok#3488'
 description 'okokVehicleShop'
-version '1.0.5'
+version '1.0.3'
 
 ui_page 'web/ui.html'
 

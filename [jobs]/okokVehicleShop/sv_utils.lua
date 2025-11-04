@@ -1,22 +1,17 @@
--- Framework Detection for QBox/QBCore compatibility
--- QBox provides 'qb-core' exports for backward compatibility, so we always use 'qb-core'
--- But we detect which framework is running for other exports (like DrawText/HideText)
-local isQBox = GetResourceState('qbx_core') == 'started'
-local coreResource = 'qb-core' -- QBox provides this for compatibility, QBCore uses it directly
-QBCore = exports[coreResource]:GetCoreObject()
+QBCore = exports["qb-core"]:GetCoreObject()
 
 function GetPlayerMoney(source, type)
-	local Player = QBCore.Functions.GetPlayer(source)
+	local Player = GetPlayer(source)
 	return Player?.PlayerData.money[type]
 end
 
 function RemovePlayerMoney(source, amount, type)
-	local Player = QBCore.Functions.GetPlayer(source)
+	local Player = GetPlayer(source)
 	return Player?.Functions.RemoveMoney(type, amount)
 end
 
 function AddPlayerMoney(source, amount, type)
-	local Player = QBCore.Functions.GetPlayer(source)
+	local Player = GetPlayer(source)
 	return Player?.Functions.AddMoney(type, amount)
 end
 
@@ -61,7 +56,7 @@ end
 RegisterServerEvent('okokVehicleShop:setVehicleOwned')
 AddEventHandler('okokVehicleShop:setVehicleOwned', function (vehicleProps, vehicleModel, personalPurchase, type)
     local source = source
-    local xPlayer = QBCore.Functions.GetPlayer(source)
+    local xPlayer = GetPlayer(source)
 
     local canBuy = lib.callback.await("okokVehicleShop:canBuyVehicle", source)
     if not canBuy then return end
@@ -99,7 +94,7 @@ end)
 -- Callbacks
 
 lib.callback.register('okokVehicleShop:getPlayerVehicles', function(source)
-    local Player = QBCore.Functions.GetPlayer(source)
+    local Player = GetPlayer(source)
     if not Player then return end
     
     local sql = 'SELECT citizenid, plate, vehicle FROM player_vehicles WHERE citizenid = @citizenid'

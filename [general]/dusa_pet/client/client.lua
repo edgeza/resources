@@ -846,22 +846,42 @@ AddEventHandler('dusa-pets:cl:spawnpet', function(modelname)
         local spawnCoord = getSpawnLocation(playerPed)
         Citizen.CreateThread(function() 
             local timeout = 0
-            local maxTimeout = 5000 -- 5 seconds max wait
+            local maxTimeout = 10000 -- 10 seconds max wait for custom models
+            local requestCount = 0
+            local maxRequests = 50
             
-            if not HasModelLoaded(hash) then
-                RequestModel(hash)
+            -- Check if this is a custom addon model (starts with dusa_)
+            local isCustomModel = type(modelname) == "string" and string.find(modelname, "dusa_") ~= nil
+            
+            if isCustomModel then
+                maxTimeout = 15000 -- 15 seconds for custom models
             end
             
-            -- Wait for model to load with timeout
-            while not HasModelLoaded(hash) and timeout < maxTimeout do
-                Wait(100)
-                timeout = timeout + 100
+            -- Initial model request
+            if not HasModelLoaded(hash) then
+                RequestModel(hash)
+                requestCount = requestCount + 1
+            end
+            
+            -- Wait for model to load with timeout and retry logic
+            while not HasModelLoaded(hash) and timeout < maxTimeout and requestCount < maxRequests do
+                Wait(200) -- Longer wait for custom models
+                timeout = timeout + 200
+                
                 if not HasModelLoaded(hash) then
                     RequestModel(hash)
+                    requestCount = requestCount + 1
+                    
+                    -- Debug logging every 2 seconds
+                    if timeout % 2000 == 0 then
+                        print('^3[dusa_pet] Waiting for model to load: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ') - Timeout: ' .. timeout .. 'ms^7')
+                    end
                 end
             end
             
             if HasModelLoaded(hash) then
+                -- Small delay to ensure model is fully loaded
+                Wait(100)
                 pet = CreatePed(28, hash, spawnCoord.x + 1, spawnCoord.y + 1, spawnCoord.z - 1, 1, 1)
                 if DoesEntityExist(pet) then
                     AddRelationshipGroup('PET')
@@ -869,13 +889,15 @@ AddEventHandler('dusa-pets:cl:spawnpet', function(modelname)
                     SetPedRelationshipGroupHash(pet, GetHashKey('PET'))
                     SetPedRelationshipGroupHash(playerPed, GetHashKey('OWNER'))
                     SetRelationshipBetweenGroups(0, GetHashKey("PET"), GetHashKey('OWNER'))
+                    print('^2[dusa_pet] Successfully spawned pet: ' .. tostring(modelname) .. '^7')
                 else
                     Framework.Notify('Failed to spawn pet. Model may not be loaded.', 'error')
-                    print('^1[dusa_pet] ERROR: Failed to create ped with model: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ')^7')
+                    print('^1[dusa_pet] ERROR: Failed to create ped with model: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ') - Model was loaded but CreatePed failed^7')
                 end
             else
                 Framework.Notify('Pet model failed to load. Please try again.', 'error')
-                print('^1[dusa_pet] ERROR: Model failed to load after timeout: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ')^7')
+                print('^1[dusa_pet] ERROR: Model failed to load after timeout: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ') - Timeout: ' .. timeout .. 'ms, Requests: ' .. requestCount .. '^7')
+                print('^3[dusa_pet] Make sure dusa_addonpets resource is started and the model files exist in the stream folder^7')
             end
             -- SetModelAsNoLongerNeeded(hash)
         end)

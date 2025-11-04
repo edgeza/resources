@@ -202,6 +202,7 @@ CreateThread(function()
                     local success, result = pcall(function()
                         -- Try different method names for ox_target/qb-target compatibility
                         if exports[TargetName].AddEntityZone then
+                            -- qb-target style
                             return exports[TargetName]:AddEntityZone('mining_peds'..MiningPeds, MiningPeds, {
                                 name = 'mining_peds'..MiningPeds,
                                 heading = GetEntityHeading(MiningPeds),
@@ -221,22 +222,21 @@ CreateThread(function()
                                 distance = v.distance
                             })
                         elseif exports[TargetName].addLocalEntity then
+                            -- ox_target native API
                             return exports[TargetName]:addLocalEntity(MiningPeds, {
-                                name = 'mining_peds'..MiningPeds,
-                                debugPoly = false,
-                            }, {
-                                options = {
-                                    {   
-                                        icon = v.icon,
-                                        label = v.label,
-                                        event = v.event,
-                                        canInteract = function(entity)
-                                            if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
-                                            return true
-                                        end,    
-                                    },
-                                },
-                                distance = v.distance
+                                {
+                                    name = 'mining_peds'..MiningPeds,
+                                    icon = v.icon,
+                                    label = v.label,
+                                    onSelect = function()
+                                        TriggerEvent(v.event)
+                                    end,
+                                    canInteract = function(entity)
+                                        if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
+                                        return true
+                                    end,
+                                    distance = v.distance
+                                }
                             })
                         end
                     end)
@@ -244,7 +244,7 @@ CreateThread(function()
                         print('^1[boii-mining] Error adding entity zone for ped: ' .. tostring(result))
                     end
                 else
-                    print('^3[boii-mining] Warning: qb-target not ready or AddEntityZone export not available')
+                    print('^3[boii-mining] Warning: target resource not ready or addLocalEntity export not available')
                 end
             else
                 print('^1[boii-mining] Error: Failed to create ped for ' .. (v.name or 'unknown'))
@@ -296,43 +296,95 @@ end)
 
 --<!>-- SMELTING --<!>--
 for k, v in pairs(Config.Smelting.Locations.Foundry) do
-    local addZone = exports[TargetName].AddCircleZone or exports[TargetName].addCircleZone
-    if addZone then
-        addZone(v.name, v.coords, v.radius, { 
-            name= v.name, 
-            debugPoly= v.debugPoly, 
-            useZ= v.useZ, 
-        },{ 
-        options = { 
-            {
-                icon = Language.Mining.Smelting.Target['icon'],
-                label = Language.Mining.Smelting.Target['label'],
-                event = 'boii-mining:cl:SmeltingMenu'
-            }, 
-        },
-        distance = v.distance
-    })
+    if GetResourceState(TargetName) == 'started' and exports[TargetName] then
+        local success, result = pcall(function()
+            if exports[TargetName].AddCircleZone then
+                -- qb-target style
+                return exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, { 
+                    name= v.name, 
+                    debugPoly= v.debugPoly, 
+                    useZ= v.useZ, 
+                },{ 
+                    options = { 
+                        {
+                            icon = Language.Mining.Smelting.Target['icon'],
+                            label = Language.Mining.Smelting.Target['label'],
+                            event = 'boii-mining:cl:SmeltingMenu'
+                        }, 
+                    },
+                    distance = v.distance
+                })
+            elseif exports[TargetName].addSphereZone then
+                -- ox_target native API
+                return exports[TargetName]:addSphereZone({
+                    name = v.name,
+                    coords = v.coords,
+                    radius = v.radius,
+                    debug = v.debugPoly,
+                    options = {
+                        {
+                            name = v.name,
+                            icon = Language.Mining.Smelting.Target['icon'],
+                            label = Language.Mining.Smelting.Target['label'],
+                            onSelect = function()
+                                TriggerEvent('boii-mining:cl:SmeltingMenu')
+                            end,
+                            distance = v.distance
+                        }
+                    }
+                })
+            end
+        end)
+        if not success then
+            print('^1[boii-mining] Error adding smelting zone: ' .. tostring(result))
+        end
     end
 end
 
 if Config.MLO.k4mb1_cave then
     for k, v in pairs(Config.Smelting.Locations.KambiCave) do
-        local addZone = exports[TargetName].AddCircleZone or exports[TargetName].addCircleZone
-        if addZone then
-            addZone(v.name, v.coords, v.radius, { 
-                name= v.name, 
-                debugPoly= v.debugPoly, 
-                useZ= v.useZ, 
-            },{ 
-            options = { 
-                {
-                    icon = Language.Mining.Smelting.Target['icon'],
-                    label = Language.Mining.Smelting.Target['label'],
-                    event = 'boii-mining:cl:SmeltingMenu'
-                }, 
-            },
-            distance = v.distance
-        })
+        if GetResourceState(TargetName) == 'started' and exports[TargetName] then
+            local success, result = pcall(function()
+                if exports[TargetName].AddCircleZone then
+                    -- qb-target style
+                    return exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, { 
+                        name= v.name, 
+                        debugPoly= v.debugPoly, 
+                        useZ= v.useZ, 
+                    },{ 
+                        options = { 
+                            {
+                                icon = Language.Mining.Smelting.Target['icon'],
+                                label = Language.Mining.Smelting.Target['label'],
+                                event = 'boii-mining:cl:SmeltingMenu'
+                            }, 
+                        },
+                        distance = v.distance
+                    })
+                elseif exports[TargetName].addSphereZone then
+                    -- ox_target native API
+                    return exports[TargetName]:addSphereZone({
+                        name = v.name,
+                        coords = v.coords,
+                        radius = v.radius,
+                        debug = v.debugPoly,
+                        options = {
+                            {
+                                name = v.name,
+                                icon = Language.Mining.Smelting.Target['icon'],
+                                label = Language.Mining.Smelting.Target['label'],
+                                onSelect = function()
+                                    TriggerEvent('boii-mining:cl:SmeltingMenu')
+                                end,
+                                distance = v.distance
+                            }
+                        }
+                    })
+                end
+            end)
+            if not success then
+                print('^1[boii-mining] Error adding smelting zone: ' .. tostring(result))
+            end
         end
     end
 end
@@ -1066,28 +1118,61 @@ local function SetupJewelBenches()
         end
 
         -- Create target zone for each bench (idempotent by name in most target resources)
-        if GetResourceState(TargetName) == 'started' then
+        if GetResourceState(TargetName) == 'started' and exports[TargetName] then
             -- prevent duplicate zones by trying to remove any existing first (idempotent)
-            pcall(function() exports[TargetName]:RemoveZone(v.name) end)
-            local addZone = exports[TargetName].AddCircleZone or exports[TargetName].addCircleZone
-            if addZone then
-                addZone(v.name, v.coords, v.radius, {
-                    name= v.name,
-                    debugPoly= v.debugPoly,
-                    useZ= v.useZ,
-                },{
-                options = {
-                    {
-                        icon = 'fa-solid fa-gem',
-                        label = 'Cut Gems/Craft',
-                        event = 'boii-mining:cl:JewelleryCraftMenu',
-                        canInteract = function(entity)
-                            return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
-                        end
-                    },
-                },
-                distance = v.distance
-            })
+            pcall(function() 
+                if exports[TargetName].RemoveZone then
+                    exports[TargetName]:RemoveZone(v.name)
+                elseif exports[TargetName].removeZone then
+                    exports[TargetName]:removeZone(v.name)
+                end
+            end)
+            local success, result = pcall(function()
+                if exports[TargetName].AddCircleZone then
+                    -- qb-target style
+                    return exports[TargetName]:AddCircleZone(v.name, v.coords, v.radius, {
+                        name= v.name,
+                        debugPoly= v.debugPoly,
+                        useZ= v.useZ,
+                    },{
+                        options = {
+                            {
+                                icon = 'fa-solid fa-gem',
+                                label = 'Cut Gems/Craft',
+                                event = 'boii-mining:cl:JewelleryCraftMenu',
+                                canInteract = function(entity)
+                                    return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
+                                end
+                            },
+                        },
+                        distance = v.distance
+                    })
+                elseif exports[TargetName].addSphereZone then
+                    -- ox_target native API
+                    return exports[TargetName]:addSphereZone({
+                        name = v.name,
+                        coords = v.coords,
+                        radius = v.radius,
+                        debug = v.debugPoly,
+                        options = {
+                            {
+                                name = v.name,
+                                icon = 'fa-solid fa-gem',
+                                label = 'Cut Gems/Craft',
+                                onSelect = function()
+                                    TriggerEvent('boii-mining:cl:JewelleryCraftMenu')
+                                end,
+                                canInteract = function(entity)
+                                    return #(GetEntityCoords(PlayerPedId()) - v.coords) < 2.0
+                                end,
+                                distance = v.distance
+                            }
+                        }
+                    })
+                end
+            end)
+            if not success then
+                print('^1[boii-mining] Error adding jewel bench zone: ' .. tostring(result))
             end
         end
     end

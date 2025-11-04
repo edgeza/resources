@@ -1,17 +1,26 @@
-QBCore = exports["qbx-core"]:GetCoreObject()
+-- Framework Detection for QBox/QBCore compatibility
+local coreResource = nil
+if GetResourceState('qbx_core') == 'started' then
+    coreResource = 'qbx_core'
+elseif GetResourceState('qb-core') == 'started' then
+    coreResource = 'qb-core'
+else
+    coreResource = 'qb-core' -- fallback
+end
+QBCore = exports[coreResource]:GetCoreObject()
 
 function GetPlayerMoney(source, type)
-	local Player = GetPlayer(source)
+	local Player = QBCore.Functions.GetPlayer(source)
 	return Player?.PlayerData.money[type]
 end
 
 function RemovePlayerMoney(source, amount, type)
-	local Player = GetPlayer(source)
+	local Player = QBCore.Functions.GetPlayer(source)
 	return Player?.Functions.RemoveMoney(type, amount)
 end
 
 function AddPlayerMoney(source, amount, type)
-	local Player = GetPlayer(source)
+	local Player = QBCore.Functions.GetPlayer(source)
 	return Player?.Functions.AddMoney(type, amount)
 end
 
@@ -56,7 +65,7 @@ end
 RegisterServerEvent('okokVehicleShop:setVehicleOwned')
 AddEventHandler('okokVehicleShop:setVehicleOwned', function (vehicleProps, vehicleModel, personalPurchase, type)
     local source = source
-    local xPlayer = GetPlayer(source)
+    local xPlayer = QBCore.Functions.GetPlayer(source)
 
     local canBuy = lib.callback.await("okokVehicleShop:canBuyVehicle", source)
     if not canBuy then return end
@@ -94,7 +103,7 @@ end)
 -- Callbacks
 
 lib.callback.register('okokVehicleShop:getPlayerVehicles', function(source)
-    local Player = GetPlayer(source)
+    local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return end
     
     local sql = 'SELECT citizenid, plate, vehicle FROM player_vehicles WHERE citizenid = @citizenid'

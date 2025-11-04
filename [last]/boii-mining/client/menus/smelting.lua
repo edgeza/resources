@@ -5,14 +5,7 @@
 --<!>-- DO NOT CHANGE ANYTHING BELOW THIS TEXT UNLESS YOU KNOW WHAT YOU ARE DOING! SUPPORT WILL NOT BE PROVIDED IF YOU BREAK THE SCRIPT! --<!>--
 local Core = Config.CoreSettings.Core
 local CoreFolder = Config.CoreSettings.CoreFolder
-local Core = GetQBCoreObject and GetQBCoreObject() or (function()
-    local success, result = pcall(function() return exports[CoreFolder]:GetCoreObject() end)
-    if success and result then
-        return result
-    else
-        error('Failed to initialize Core object - GetQBCoreObject not available')
-    end
-end)()
+local Core = exports[CoreFolder]:GetCoreObject()
 local MenuName = Config.CoreSettings.MenuName
 --<!>-- DO NOT CHANGE ANYTHING ABOVE THIS TEXT UNLESS YOU KNOW WHAT YOU ARE DOING! SUPPORT WILL NOT BE PROVIDED IF YOU BREAK THE SCRIPT! --<!>--
 

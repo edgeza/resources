@@ -25,8 +25,7 @@ files {
 }
 shared_scripts {
     'shared/config.lua',
-    'shared/language.lua',
-    'shared/core_compat.lua'
+    'shared/language.lua'
 }
 client_scripts {
     'client/**/*'

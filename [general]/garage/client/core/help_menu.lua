@@ -85,12 +85,12 @@ HelpMenu.Commands = {
         category = "ℹ️ Info & Help",
         description = "Help and information commands",
         commands = {
-            {
-                name = "/garage-help",
-                description = "Show this help menu",
-                usage = "/garage-help",
-                example = "/garage-help"
-            },
+            -- {
+            --     name = "/garage-help",
+            --     description = "Show this help menu",
+            --     usage = "/garage-help",
+            --     example = "/garage-help"
+            -- },
             {
                 name = "/garage-info",
                 description = "Information about garage system",

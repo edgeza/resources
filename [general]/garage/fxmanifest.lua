@@ -28,6 +28,7 @@ server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/core/*.lua',
     'server/main.lua',
+    'server/commands.lua', -- Server-side command system (secure)
     'server/api/*.lua',
     'modules/mileage/server.lua',
     -- 'tests/run_all_tests.lua'
@@ -37,8 +38,8 @@ client_scripts {
     'client/utils.lua',  -- Load utils first for callback registration
     'client/core/*.lua',
     'client/main.lua',
-    'client/commands.lua', -- Unified command system
-    -- 'client/core/*.lua',
+    'client/commands.lua', -- Client event handlers (triggered by server commands)
+    -- 'client/commands/*.lua', -- REMOVED: Test commands deleted for security
     'client/api/*.lua',
     'modules/mileage/client.lua',
     -- Test runner (comment out in production)
@@ -63,7 +64,8 @@ escrow_ignore {
     'config/*.lua',
     'shared/*.lua',
     'shared/utils/*.lua',
-    'server/api/*.lua',
+    'server/api/sv_repair.lua',
+    'server/api/test_commands.lua',
     'server/core/modules/*.lua',
     'server/core/validation.lua',
     'client/core/help_menu.lua',

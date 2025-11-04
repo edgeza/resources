@@ -59,4 +59,4 @@ escrow_ignore {
 }
 
 dependency '/assetpacks'
-dependency '/assetpacks'
+dependency 'dusa_addonpets'

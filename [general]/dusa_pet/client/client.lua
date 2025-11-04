@@ -839,25 +839,45 @@ AddEventHandler('dusa-pets:cl:spawnpet', function(modelname)
         pet_clothes = {}
     else
         local playerCoords = GetEntityCoords(PlayerPedId())
-        local hash = modelname
+        -- Convert model name to hash if it's a string
+        local hash = type(modelname) == "string" and GetHashKey(modelname) or modelname
         local playerPed = PlayerPedId()
         local playerGroup = GetPedGroupIndex(playerPed)
         local spawnCoord = getSpawnLocation(playerPed)
         Citizen.CreateThread(function() 
+            local timeout = 0
+            local maxTimeout = 5000 -- 5 seconds max wait
+            
             if not HasModelLoaded(hash) then
                 RequestModel(hash)
-                Wait(10)
             end
-            while not HasModelLoaded(hash) do
-                Wait(10)
+            
+            -- Wait for model to load with timeout
+            while not HasModelLoaded(hash) and timeout < maxTimeout do
+                Wait(100)
+                timeout = timeout + 100
+                if not HasModelLoaded(hash) then
+                    RequestModel(hash)
+                end
             end
-            pet = CreatePed(28, hash, spawnCoord.x + 1, spawnCoord.y + 1, spawnCoord.z - 1, 1, 1)
+            
+            if HasModelLoaded(hash) then
+                pet = CreatePed(28, hash, spawnCoord.x + 1, spawnCoord.y + 1, spawnCoord.z - 1, 1, 1)
+                if DoesEntityExist(pet) then
+                    AddRelationshipGroup('PET')
+                    AddRelationshipGroup('OWNER')
+                    SetPedRelationshipGroupHash(pet, GetHashKey('PET'))
+                    SetPedRelationshipGroupHash(playerPed, GetHashKey('OWNER'))
+                    SetRelationshipBetweenGroups(0, GetHashKey("PET"), GetHashKey('OWNER'))
+                else
+                    Framework.Notify('Failed to spawn pet. Model may not be loaded.', 'error')
+                    print('^1[dusa_pet] ERROR: Failed to create ped with model: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ')^7')
+                end
+            else
+                Framework.Notify('Pet model failed to load. Please try again.', 'error')
+                print('^1[dusa_pet] ERROR: Model failed to load after timeout: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ')^7')
+            end
             -- SetModelAsNoLongerNeeded(hash)
-            AddRelationshipGroup('PET')
-            AddRelationshipGroup('OWNER')
-            SetPedRelationshipGroupHash(pet, GetHashKey('PET'))
-            SetPedRelationshipGroupHash(playerPed, GetHashKey('OWNER'))
-            SetRelationshipBetweenGroups(0, GetHashKey("PET"), GetHashKey('OWNER'))
         end)
 
         dusa.serverCallback('dusa-pets:cb:getPetData', function(result)
@@ -903,12 +923,25 @@ end)
 
 RegisterNetEvent('dusa_pets:cl:loadModels', function()
     for _, v in pairs(Config.PetShop.pets) do
-        if not HasModelLoaded(v.pet) then
-            RequestModel(v.pet)
-            Wait(10)
+        local petHash = type(v.pet) == "string" and GetHashKey(v.pet) or v.pet
+        local timeout = 0
+        local maxTimeout = 5000 -- 5 seconds max wait
+        
+        if not HasModelLoaded(petHash) then
+            RequestModel(petHash)
         end
-        while not HasModelLoaded(v.pet) do
-            Wait(10)
+        
+        -- Wait for model to load with timeout
+        while not HasModelLoaded(petHash) and timeout < maxTimeout do
+            Wait(100)
+            timeout = timeout + 100
+            if not HasModelLoaded(petHash) then
+                RequestModel(petHash)
+            end
+        end
+        
+        if not HasModelLoaded(petHash) then
+            print('^3[dusa_pet] WARNING: Failed to pre-load model: ' .. tostring(v.pet) .. ' (hash: ' .. petHash .. ')^7')
         end
     end
 end)

@@ -1,4 +1,4 @@
-QBCore = exports["qb-core"]:GetCoreObject()
+QBCore = exports["qbx-core"]:GetCoreObject()
 local Translations = Locales[Config.Locale]
 local missionBlips = {}
 MissionCanceled = false
@@ -31,7 +31,7 @@ function TextUI(text)
 end
 
 function GiveVehicleKeys(vehicle, plate)
-    if Config.KeySystem == 'qb-vehiclekeys' then
+    if Config.KeySystem == 'dusa-vehiclekeys' then
         TriggerEvent("vehiclekeys:client:SetOwner", plate)
     end
 end
@@ -510,6 +510,10 @@ AddEventHandler("okokVehicleShop:startMission", function(vehicle_id, mission_id,
 		RemoveBlip(missionBlips.order)
 		missionBlips.order = nil
 	end
+
+	RemoveVehicleKeys(missionVehicle, GetVehicleNumberPlateText(missionVehicle))
+	RemoveVehicleKeys(missionTruck, GetVehicleNumberPlateText(missionTruck))
+
 	TriggerEvent("okokVehicleShop:onFinishMission", missionTruck)
 	if missionTruck ~= nil then
 		DeleteEntity(missionTruck)

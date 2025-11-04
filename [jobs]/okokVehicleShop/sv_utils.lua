@@ -1,4 +1,4 @@
-QBCore = exports["qb-core"]:GetCoreObject()
+QBCore = exports["qbx-core"]:GetCoreObject()
 
 function GetPlayerMoney(source, type)
 	local Player = GetPlayer(source)

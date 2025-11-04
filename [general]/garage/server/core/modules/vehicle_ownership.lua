@@ -34,23 +34,9 @@ function VehicleOwnership.RegisterEvents()
     end)
 end
 
--- Get player's license2 identifier
-local function GetPlayerLicense(source)
-    local identifiers = GetPlayerIdentifiers(source)
-
-    for _, v in pairs(identifiers) do
-        if string.find(v, "license2") then
-            return v
-        end
-    end
-
-    return nil
-end
-
 -- Check if player owns a specific job vehicle
 function VehicleOwnership.IsJobVehicleOwned(source, vehicleModel, jobName)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
     local cacheKey = citizenId .. ":" .. jobName .. ":" .. vehicleModel
 
     -- Check cache first
@@ -89,8 +75,7 @@ end
 
 -- Get ownership data for a job vehicle
 function VehicleOwnership.GetJobVehicleOwnership(source, vehicleModel, jobName)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
     local cacheKey = citizenId .. ":" .. jobName .. ":" .. vehicleModel
 
     -- Check cache first
@@ -137,8 +122,7 @@ end
 
 -- Add first-time job vehicle ownership
 function VehicleOwnership.AddJobVehicleOwnership(source, vehicleModel, plate, playerJob, vehicleProperties)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
 
     -- Check if already owned to prevent duplicates
     if VehicleOwnership.IsJobVehicleOwned(source, vehicleModel, playerJob.name) then
@@ -150,7 +134,7 @@ function VehicleOwnership.AddJobVehicleOwnership(source, vehicleModel, plate, pl
 
     local vehicleData = {
         citizenid = citizenId,
-        license = GetPlayerLicense(source),
+        license = Framework.GetPlayerLicense(source),
         vehicle = vehicleModel,
         hash = GetHashKey(vehicleModel),
         mods = json.encode(vehicleProperties or {}),
@@ -219,8 +203,7 @@ end
 
 -- Update job vehicle properties (save modifications)
 function VehicleOwnership.UpdateJobVehicleProperties(source, vehicleModel, jobName, vehicleProperties, additionalData)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
 
     local updateData = {
         mods = json.encode(vehicleProperties or {}),
@@ -266,8 +249,7 @@ end
 
 -- Get all job vehicles owned by a player
 function VehicleOwnership.GetPlayerJobVehicles(source, jobName)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
 
     local query = 'SELECT * FROM player_vehicles WHERE citizenid = ? AND source_type = ?'
     local params = { citizenId, 'job' }
@@ -310,8 +292,7 @@ end
 
 -- Transfer job vehicle ownership (for job changes)
 function VehicleOwnership.TransferJobVehicleOwnership(source, vehicleModel, oldJobName, newJobName, newGrade)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
 
     -- Check if vehicle is owned in old job
     if not VehicleOwnership.IsJobVehicleOwned(source, vehicleModel, oldJobName) then
@@ -360,8 +341,7 @@ end
 
 -- Remove job vehicle ownership
 function VehicleOwnership.RemoveJobVehicleOwnership(source, vehicleModel, jobName)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
 
     local success = MySQL.Sync.execute(
         'DELETE FROM player_vehicles WHERE citizenid = ? AND vehicle = ? AND source_type = ? AND job_name = ?',
@@ -422,8 +402,7 @@ end
 
 -- Clear player cache on disconnect
 function VehicleOwnership.ClearPlayerCache(source)
-    local Player = Framework.GetPlayer(source)
-    local citizenId = Player.Identifier
+    local citizenId = Framework.GetPlayerIdentifier(source)
     if not citizenId then return end
 
     -- Clear all cache entries for this player

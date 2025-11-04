@@ -33,12 +33,12 @@ local DEBUG_LEVELS = {
 local DEBUG_TOPICS = {
     ["garage-creation"] = { enabled = false, color = "^5", description = "New garage creation and management" },
     ["user-management"] = { enabled = false, color = "^6", description = "User access control and permissions" },
-    ["vehicle-operations"] = { enabled = true, color = "^4", description = "Vehicle parking, spawning, and storage" },
+    ["vehicle-operations"] = { enabled = false, color = "^4", description = "Vehicle parking, spawning, and storage" },
     ["bridge-integration"] = { enabled = false, color = "^3", description = "Framework and bridge interactions" },
     ["database"] = { enabled = false, color = "^2", description = "Database queries and operations" },
     ["ui-interactions"] = { enabled = false, color = "^1", description = "NUI callbacks and UI events" },
     ["zone-management"] = { enabled = false, color = "^7", description = "Garage zones and interaction areas" },
-    ["api"] = { enabled = true, color = "^8", description = "Server API endpoints and callbacks" },
+    ["api"] = { enabled = false, color = "^8", description = "Server API endpoints and callbacks" },
     ["validation"] = { enabled = false, color = "^9", description = "Input validation and security checks" },
     ["system"] = { enabled = false, color = "^0", description = "System startup, initialization, and core operations" },
     ["job-vehicles"] = { enabled = false, color = "^0", description = "Job vehicles and their management" },
@@ -50,14 +50,9 @@ local DEBUG_TOPICS = {
     ["garage-debug"] = { enabled = false, color = "^5", description = "Garage debug" },
     ["vehicle-colors"] = { enabled = false, color = "^5", description = "Vehicle colors" },
     ["impound"] = { enabled = false, color = "^8", description = "Impound" },
-    ["impound-commands"] = { enabled = true, color = "^5", description = "Impound commands debugging" },
     ["admin-editor"] = { enabled = false, color = "^8", description = "Admin editor" },
     ["presets"] = { enabled = false, color = "^6", description = "Presets debugging" },
-    ["vehicle-hover"] = { enabled = true, color = "^5", description = "Vehicle hover debugging" },
-    ["showroom-test"] = { enabled = true, color = "^5", description = "Showroom test debugging" },
-    ["showroom-nui"] = { enabled = true, color = "^5", description = "Showroom NUI debugging" },
-    ["showroom-retrieval"] = { enabled = true, color = "^5", description = "Showroom retrieval debugging" },
-    ["showroom"] = { enabled = true, color = "^5", description = "Showroom debugging" },
+    ["vehicle-hover"] = { enabled = false, color = "^5", description = "Vehicle hover debugging" },
 }
 
 -- Performance optimization: pre-check if any debug is enabled
@@ -310,11 +305,6 @@ end
 _G.DebugManager = DebugManager
 _G.LogDebug = LogDebug
 _G.LogError = LogError
-
--- Komut: Ekran kararmasını düzelt (ClearScreenFade)
-RegisterCommand("ekrankararmafix", function(source, args, raw)
-    DoScreenFadeIn(500)
-end, false)
 
 -- Export the debug manager (backward compatibility for requires)
 return DebugManager

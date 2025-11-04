@@ -14,32 +14,27 @@ Config.Debug = {
     -- Default enabled topics for development
     DefaultTopics = {
         ["garage-creation"] = false,    -- New garage creation features (current focus)
-        ["user-management"] = false,   -- User access control
+        ["user-management"] = true,   -- User access control
         ["vehicle-operations"] = true, -- Vehicle park/spawn operations
-        ["bridge-integration"] = false, -- Framework integration
-        ["database"] = false,          -- Database operations
-        ["ui-interactions"] = false,   -- NUI callbacks
-        ["zone-management"] = false,   -- Garage zones
+        ["bridge-integration"] = true, -- Framework integration
+        ["database"] = true,          -- Database operations
+        ["ui-interactions"] = true,   -- NUI callbacks
+        ["zone-management"] = true,   -- Garage zones
         ["api"] = true,              -- Server API endpoints
-        ["validation"] = false,       -- Input validation
-        ["system"] = false,             -- Core system operations
-        ["job-vehicles"] = false,       -- Job vehicles
-        ["presets"] = false,             -- Presets debugging
-        ["garage-deletion"] = false,     -- Garage deletion
-        ["garage-edit"] = false,         -- Garage edit
-        ["mileage-tracking"] = false,    -- Mileage tracking
+        ["validation"] = true,       -- Input validation
+        ["system"] = true,             -- Core system operations
+        ["job-vehicles"] = true,       -- Job vehicles
+        ["presets"] = true,             -- Presets debugging
+        ["garage-deletion"] = true,     -- Garage deletion
+        ["garage-edit"] = true,         -- Garage edit
+        ["mileage-tracking"] = true,    -- Mileage tracking
         ["vehicle-transfer"] = true,    -- Vehicle transfer operations (Story 2.1)
-        ["repair-system"] = false,       -- Repair & Refuel system (Car Repair Service)
-        ["garage-debug"] = false,        -- Garage debug
-        ["vehicle-colors"] = false,      -- Vehicle colors
-        ["impound"] = false,             -- Impound
-        ["admin-editor"] = false,        -- Admin editor
+        ["repair-system"] = true,       -- Repair & Refuel system (Car Repair Service)
+        ["garage-debug"] = true,        -- Garage debug
+        ["vehicle-colors"] = true,      -- Vehicle colors
+        ["impound"] = true,             -- Impound
+        ["admin-editor"] = true,        -- Admin editor
         ["vehicle-hover"] = true,       -- Vehicle hover and raycast system (Story 2.3)
-        ["showroom-test"] = true,       -- Showroom test debugging
-        ["showroom-nui"] = true,        -- Showroom NUI debugging
-        ["showroom-retrieval"] = true,  -- Showroom retrieval debugging
-        ["showroom"] = true,            -- Showroom debugging
-        ["impound-commands"] = true,    -- Impound commands debugging
     }
 }
 
@@ -58,25 +53,13 @@ Config.Prices = Config.Prices or {}
 -- Vehicle Transfer Pricing (Story 2.1, extensible for Story 2.2)
 Config.Prices.vehicleTransfer = {
     enabled = true,              -- Enable/disable transfer feature
-    feeType = "flat",            -- "flat" or "distance"
-    flatFee = 350,              -- Flat transfer fee (currency units) - used for flat fee or NULL garage vehicles
+    feeType = "flat",            -- "flat" or "distance" (distance for Story 2.2)
+    flatFee = 5000,              -- Flat transfer fee (currency units)
     accountType = "bank",        -- "bank" or "cash" - where to deduct from
 
-    -- Transfer availability settings
-    allowTransferFromNullGarage = true,  -- Allow transfer for vehicles with NULL garage in database
-    allowTransferIfSpawned = true,      -- Allow transfer even if vehicle is spawned in world
-                                         -- If false, only vehicles with NULL garage AND not spawned can be transferred
-                                         -- If true, all vehicles with NULL garage can be transferred (waypoint set if spawned)
-
-    -- Distance-based pricing (Story 2.2)
-    distanceMultiplier = 0.5,    -- Cost multiplier per meter distance (e.g., 0.5 = $0.5 per meter)
-                                 -- Example: 1000m distance × 0.5 = $500 transfer fee
-                                 -- If distance < 1000m: shown as meters (e.g., "850 M")
-                                 -- If distance >= 1000m: shown as kilometers (e.g., "2.4 KM")
-    
-    -- Price limits for distance-based fees
-    minTransferFee = 100,       -- Minimum transfer fee (taban fiyat) - if calculated fee is below this, use this value
-    maxTransferFee = 50000,     -- Maximum transfer fee (tavan fiyat) - if calculated fee is above this, use this value
+    -- Future enhancement (Story 2.2):
+    -- distanceBaseFee = 1000,      -- Base fee for distance-based pricing
+    -- distancePerMeter = 0.5,      -- Additional cost per meter distance
 }
 
 -- Vehicle Repair & Refuel Configuration (Car Repair Service)

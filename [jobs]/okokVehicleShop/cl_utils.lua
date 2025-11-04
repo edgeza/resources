@@ -1,9 +1,4 @@
--- Framework Detection for QBox/QBCore compatibility
--- QBox provides 'qb-core' exports for backward compatibility, so we always use 'qb-core'
--- But we detect which framework is running for other exports (like DrawText/HideText)
-local isQBox = GetResourceState('qbx_core') == 'started'
-local coreResource = 'qb-core' -- QBox provides this for compatibility, QBCore uses it directly
-QBCore = exports[coreResource]:GetCoreObject()
+QBCore = exports["qb-core"]:GetCoreObject()
 local Translations = Locales[Config.Locale]
 local missionBlips = {}
 MissionCanceled = false
@@ -28,15 +23,15 @@ function TextUI(text)
 		end
 	else
 		if text ~= nil then
-			exports[coreResource]:DrawText(text, 'left')
+			exports['qb-core']:DrawText(text, 'left')
 		else
-			exports[coreResource]:HideText()
+			exports['qb-core']:HideText()
 		end
 	end
 end
 
 function GiveVehicleKeys(vehicle, plate)
-    if Config.KeySystem == 'dusa-vehiclekeys' then
+    if Config.KeySystem == 'qb-vehiclekeys' then
         TriggerEvent("vehiclekeys:client:SetOwner", plate)
     end
 end
@@ -515,10 +510,6 @@ AddEventHandler("okokVehicleShop:startMission", function(vehicle_id, mission_id,
 		RemoveBlip(missionBlips.order)
 		missionBlips.order = nil
 	end
-
-	RemoveVehicleKeys(missionVehicle, GetVehicleNumberPlateText(missionVehicle))
-	RemoveVehicleKeys(missionTruck, GetVehicleNumberPlateText(missionTruck))
-
 	TriggerEvent("okokVehicleShop:onFinishMission", missionTruck)
 	if missionTruck ~= nil then
 		DeleteEntity(missionTruck)

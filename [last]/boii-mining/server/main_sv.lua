@@ -5,7 +5,15 @@
 --<!>-- DO NOT EDIT ANYTHING BELOW THIS TEXT UNLESS YOU KNOW WHAT YOU ARE DOING SUPPORT WILL NOT BE PROVIDED IF YOU IGNORE THIS --<!>--
 local Core = Config.CoreSettings.Core
 local CoreFolder = Config.CoreSettings.CoreFolder
-local Core = exports[CoreFolder]:GetCoreObject()
+local Core = (function()
+    local success, result = pcall(function() return exports[CoreFolder]:GetCoreObject() end)
+    if success and result then
+        return result
+    else
+        -- QBX compatibility: return the exports table directly
+        return exports[CoreFolder]
+    end
+end)()
 local PhoneEvent = Config.CoreSettings.PhoneEvent
 local RemoveStress = Config.CoreSettings.RemoveStressEvent
 local MetaDataName = Config.XP.MetaDataName

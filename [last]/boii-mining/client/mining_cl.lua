@@ -956,6 +956,95 @@ RegisterNetEvent('boii-mining:cl:PanPaydirt', function()
 end)
 --<!>-- PAN PAYDIRT --<!>--
 
+--<!>-- WATER DETECTION AND TARGETING ZONE FOR PANNING --<!>--
+local waterPanZone = nil
+local lastPanCheck = {}
+CreateThread(function()
+    while true do
+        Wait(500)
+        local ped = PlayerPedId()
+        local coords = GetEntityCoords(ped)
+        local hasGoldPan = playerHasItem('gold_pan')
+        local hasPaydirt = playerHasItem(Config.Paydirt.Dirt.Return.name)
+        local nearWater = false
+        
+        -- Check if near water (swimming or water probe)
+        if IsPedSwimming(ped) then
+            nearWater = true
+        elseif TestProbeAgainstWater(coords.x, coords.y, coords.z + 1.0, coords.x, coords.y, coords.z - 5.0) then
+            nearWater = true
+        end
+        
+        -- Check if conditions changed
+        local shouldShow = hasGoldPan and hasPaydirt and nearWater and not isDiggingPaydirt
+        local needsUpdate = false
+        if shouldShow ~= (lastPanCheck.shouldShow or false) then
+            needsUpdate = true
+        end
+        
+        -- Create or update targeting zone
+        if shouldShow and GetResourceState(TargetName) == 'started' then
+            if needsUpdate or not waterPanZone then
+                -- Remove old zone if exists
+                if waterPanZone and exports[TargetName] and exports[TargetName].removeZone then
+                    pcall(function() exports[TargetName]:removeZone('water_pan_zone') end)
+                    waterPanZone = nil
+                end
+                
+                -- Create new targeting zone
+                if exports[TargetName] and exports[TargetName].addSphereZone then
+                    local success, result = pcall(function()
+                        return exports[TargetName]:addSphereZone({
+                            name = 'water_pan_zone',
+                            coords = coords,
+                            radius = 2.0,
+                            debug = false,
+                            options = {
+                                {
+                                    name = 'water_pan_zone',
+                                    icon = 'fa-solid fa-hand-holding-water',
+                                    label = 'Pan Paydirt',
+                                    onSelect = function()
+                                        TriggerEvent('boii-mining:cl:PanPaydirt')
+                                    end,
+                                    distance = 2.0
+                                }
+                            }
+                        })
+                    end)
+                    if success then
+                        waterPanZone = result
+                        lastPanCheck.coords = coords
+                        lastPanCheck.updateTime = GetGameTimer()
+                    end
+                end
+            elseif waterPanZone then
+                -- Update zone position periodically to follow player (every 2 seconds)
+                if not lastPanCheck.updateTime or (GetGameTimer() - lastPanCheck.updateTime) > 2000 then
+                    local lastCoords = lastPanCheck.coords or coords
+                    local distance = #(coords - lastCoords)
+                    -- Only update if player moved more than 1 meter
+                    if distance > 1.0 and exports[TargetName] and exports[TargetName].removeZone and exports[TargetName].addSphereZone then
+                        pcall(function() exports[TargetName]:removeZone('water_pan_zone') end)
+                        waterPanZone = nil
+                        lastPanCheck.updateTime = GetGameTimer()
+                        lastPanCheck.coords = coords
+                    end
+                end
+            end
+        else
+            -- Remove zone if conditions not met
+            if waterPanZone and exports[TargetName] and exports[TargetName].removeZone then
+                pcall(function() exports[TargetName]:removeZone('water_pan_zone') end)
+                waterPanZone = nil
+            end
+        end
+        
+        lastPanCheck.shouldShow = shouldShow
+    end
+end)
+--<!>-- WATER DETECTION AND TARGETING ZONE FOR PANNING --<!>--
+
 --<!>-- CLIENT CRAFT MENU OPEN --<!>--
 RegisterNetEvent('boii-mining:cl:OpenCraftMenu', function(shop)
     -- qb-menu expects an array of entries; pass through the built list

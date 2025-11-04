@@ -5,7 +5,27 @@
 --<!>-- DO NOT CHANGE ANYTHING BELOW THIS TEXT UNLESS YOU KNOW WHAT YOU ARE DOING! SUPPORT WILL NOT BE PROVIDED IF YOU BREAK THE SCRIPT! --<!>--
 local Core = Config.CoreSettings.Core
 local CoreFolder = Config.CoreSettings.CoreFolder
-local Core = exports[CoreFolder]:GetCoreObject()
+local Core = (function()
+    local success, result = pcall(function() return exports[CoreFolder]:GetCoreObject() end)
+    if success and result then
+        return result
+    end
+    -- QBX fallback: try lib export
+    local lib = exports.ox_lib or exports.qbx_core and exports.qbx_core.lib
+    if lib and lib.qbx then
+        return {
+            Functions = {
+                GetPlayer = function(source) return lib.qbx.getPlayer(source) end,
+                CreateUseableItem = function(item, callback) lib.qbx.registerUsableItem(item, callback) end,
+                GetPlayers = function() return lib.qbx.getPlayers() end,
+            },
+            Shared = {
+                Items = lib.items or {}
+            }
+        }
+    end
+    error('Failed to initialize Core - QBX/QBCore not found')
+end)()
 --<!>-- DO NOT CHANGE ANYTHING ABOVE THIS TEXT UNLESS YOU KNOW WHAT YOU ARE DOING! SUPPORT WILL NOT BE PROVIDED IF YOU BREAK THE SCRIPT! --<!>--
 
 --<!>-- GUIDE --<!>--

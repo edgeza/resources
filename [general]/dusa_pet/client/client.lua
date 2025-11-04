@@ -846,31 +846,64 @@ AddEventHandler('dusa-pets:cl:spawnpet', function(modelname)
         local spawnCoord = getSpawnLocation(playerPed)
         Citizen.CreateThread(function() 
             local timeout = 0
-            local maxTimeout = 10000 -- 10 seconds max wait for custom models
+            local maxTimeout = 10000 -- 10 seconds max wait for standard models
             local requestCount = 0
             local maxRequests = 50
             
             -- Check if this is a custom addon model (starts with dusa_)
             local isCustomModel = type(modelname) == "string" and string.find(modelname, "dusa_") ~= nil
             
+            -- Also check if it's a model from addonpets (models that might need extra time)
+            local isAddonModel = type(modelname) == "string" and (
+                string.find(modelname, "shepherd_2") ~= nil or
+                string.find(modelname, "husky_2") ~= nil or
+                string.find(modelname, "retriever_2") ~= nil or
+                string.find(modelname, "poodle_2") ~= nil or
+                string.find(modelname, "westy_2") ~= nil or
+                string.find(modelname, "englishbulldog") ~= nil
+            )
+            
             if isCustomModel then
                 maxTimeout = 15000 -- 15 seconds for custom models
+            elseif isAddonModel then
+                maxTimeout = 12000 -- 12 seconds for addon models from dusa_addonpets
             end
             
-            -- Initial model request
-            if not HasModelLoaded(hash) then
+            -- Try requesting with uppercase A_C_ prefix if it starts with a_c_ (for models in peds.meta)
+            if type(modelname) == "string" and string.find(modelname, "^a_c_") then
+                local modelNameUpper = string.gsub(modelname, "^a_c_", "A_C_")
+                local hashUpper = GetHashKey(modelNameUpper)
+                -- Try both hashes and use whichever loads
                 RequestModel(hash)
-                requestCount = requestCount + 1
+                RequestModel(hashUpper)
+                requestCount = requestCount + 2
+            else
+                -- Initial model request
+                if not HasModelLoaded(hash) then
+                    RequestModel(hash)
+                    requestCount = requestCount + 1
+                end
             end
             
             -- Wait for model to load with timeout and retry logic
             while not HasModelLoaded(hash) and timeout < maxTimeout and requestCount < maxRequests do
-                Wait(200) -- Longer wait for custom models
+                Wait(200) -- Longer wait for addon models
                 timeout = timeout + 200
                 
                 if not HasModelLoaded(hash) then
                     RequestModel(hash)
                     requestCount = requestCount + 1
+                    
+                    -- Also try uppercase version if it's an a_c_ model
+                    if type(modelname) == "string" and string.find(modelname, "^a_c_") then
+                        local modelNameUpper = string.gsub(modelname, "^a_c_", "A_C_")
+                        local hashUpper = GetHashKey(modelNameUpper)
+                        RequestModel(hashUpper)
+                        if HasModelLoaded(hashUpper) then
+                            hash = hashUpper -- Use the uppercase version if it loads
+                            break
+                        end
+                    end
                     
                     -- Debug logging every 2 seconds
                     if timeout % 2000 == 0 then
@@ -891,11 +924,15 @@ AddEventHandler('dusa-pets:cl:spawnpet', function(modelname)
                     SetRelationshipBetweenGroups(0, GetHashKey("PET"), GetHashKey('OWNER'))
                     print('^2[dusa_pet] Successfully spawned pet: ' .. tostring(modelname) .. '^7')
                 else
-                    Framework.Notify('Failed to spawn pet. Model may not be loaded.', 'error')
+                    if dusa and dusa.showNotification then
+                        dusa.showNotification('Failed to spawn pet. Model may not be loaded.', 'error')
+                    end
                     print('^1[dusa_pet] ERROR: Failed to create ped with model: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ') - Model was loaded but CreatePed failed^7')
                 end
             else
-                Framework.Notify('Pet model failed to load. Please try again.', 'error')
+                if dusa and dusa.showNotification then
+                    dusa.showNotification('Pet model failed to load. Please try again.', 'error')
+                end
                 print('^1[dusa_pet] ERROR: Model failed to load after timeout: ' .. tostring(modelname) .. ' (hash: ' .. hash .. ') - Timeout: ' .. timeout .. 'ms, Requests: ' .. requestCount .. '^7')
                 print('^3[dusa_pet] Make sure dusa_addonpets resource is started and the model files exist in the stream folder^7')
             end

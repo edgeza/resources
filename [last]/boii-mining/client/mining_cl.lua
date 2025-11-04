@@ -207,29 +207,39 @@ CreateThread(function()
                                 heading = GetEntityHeading(MiningPeds),
                                 debugPoly = false,
                             }, {
+                                options = {
+                                    {   
+                                        icon = v.icon,
+                                        label = v.label,
+                                        event = v.event,
+                                        canInteract = function(entity)
+                                            if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
+                                            return true
+                                        end,    
+                                    },
+                                },
+                                distance = v.distance
+                            })
                         elseif exports[TargetName].addLocalEntity then
                             return exports[TargetName]:addLocalEntity(MiningPeds, {
                                 name = 'mining_peds'..MiningPeds,
                                 debugPoly = false,
                             }, {
+                                options = {
+                                    {   
+                                        icon = v.icon,
+                                        label = v.label,
+                                        event = v.event,
+                                        canInteract = function(entity)
+                                            if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
+                                            return true
+                                        end,    
+                                    },
+                                },
+                                distance = v.distance
+                            })
                         end
                     end)
-                    if not success then
-                            options = {
-                                {   
-                                    icon = v.icon,
-                                    label = v.label,
-                                    event = v.event,
-                                    canInteract = function(entity)
-                                        if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
-                                        return true
-                                    end,    
-                                },
-                            },
-                            distance = v.distance
-                        })
-                    end)
-                    
                     if not success then
                         print('^1[boii-mining] Error adding entity zone for ped: ' .. tostring(result))
                     end

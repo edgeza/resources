@@ -434,9 +434,13 @@ RegisterNetEvent('jim-recycle:Selling:Menu', function(data)
 	end
 	for item, price in pairsByKeys(Config.Prices) do
 		local itemData = getItemData(item)
+		local imagePath = itemData.image
+		if not imagePath:match("%.%w+$") then -- Check if extension already exists
+			imagePath = imagePath .. ".png"
+		end
 		sellMenu[#sellMenu+1] = {
 			disabled = not HasItem(item, 1),
-			icon = "nui://"..Config.img..itemData.image,
+			icon = "nui://"..Config.img..imagePath,
 			header = itemData.label,	txt = Loc[Config.Lan].menu["sell_all"]..price..Loc[Config.Lan].menu["each"],
 			params = { event = "jim-recycle:SellAnim", args = { Ped = data.Ped, item = item } },
 			title = itemData.label, description = Loc[Config.Lan].menu["sell_all"]..price..Loc[Config.Lan].menu["each"],
@@ -453,7 +457,11 @@ RegisterNetEvent('jim-recycle:Trade:Menu', function(data)
 	if Selling then return end
 	local tradeMenu = {}
 	local itemData = getItemData("recyclablematerial")
-	local icon = "nui://"..Config.img..itemData.image
+	local imagePath = itemData.image
+	if not imagePath:match("%.%w+$") then -- Check if extension already exists
+		imagePath = imagePath .. ".png"
+	end
+	local icon = "nui://"..Config.img..imagePath
 	if Config.Menu == "qb" then
 		tradeMenu[#tradeMenu+1] = { icon = icon, header = Loc[Config.Lan].menu["mats_trade"], isMenuHeader = true }
 		tradeMenu[#tradeMenu+1] = { icon = "fas fa-circle-xmark", header = "", txt = Loc[Config.Lan].menu["close"], params = { event = "jim-recycle:CloseMenu" } }
@@ -491,9 +499,13 @@ RegisterNetEvent('jim-recycle:Bottle:Menu', function(data)
 	end
 	for _, item in pairsByKeys(Config.BottleBankTable) do
 		local itemData = getItemData(item)
+		local imagePath = itemData.image
+		if not imagePath:match("%.%w+$") then -- Check if extension already exists
+			imagePath = imagePath .. ".png"
+		end
 		tradeMenu[#tradeMenu+1] = {
 			disabled = not HasItem(item, 1),
-			icon = "nui://"..Config.img..itemData.image,
+			icon = "nui://"..Config.img..imagePath,
 			header = itemData.label, txt = Loc[Config.Lan].menu["sell_all"]..Config.Prices[item]..Loc[Config.Lan].menu["each"],
 			params = { event = "jim-recycle:SellAnim", args = { item = item, Ped = data.Ped } },
 			title = itemData.label, description = Loc[Config.Lan].menu["sell_all"]..Config.Prices[item]..Loc[Config.Lan].menu["each"],

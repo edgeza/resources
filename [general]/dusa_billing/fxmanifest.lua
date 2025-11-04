@@ -39,8 +39,6 @@ lua54 'yes'
 escrow_ignore {
 	'config.lua',
 	'serverconfig.lua',
-    'client/client.lua',
-    'server/server.lua'
 } 
 
 bridge 'dusa_bridge'

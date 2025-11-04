@@ -13,9 +13,10 @@ Config.Commands = {
   PosDevice = "pos"
 }
 
-Config.WAT = 15 -- Tax will be added to invoice amount
+Config.WAT = 10 -- Tax will be added to invoice amount
 Config.AuthorizedJobs = { -- These jobs can create invoices without asking to target (Actually, it will enable the "Is mandatory?" option for those jobs)
   "police",
+  "sheriff",
   "ambulance",
 }
 --------------------------JOB BILLS----------------------------

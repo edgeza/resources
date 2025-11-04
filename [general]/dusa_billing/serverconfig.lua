@@ -1,3 +1,3 @@
 ServerConfig = {
-    MaxBillAmount = 1000000,
+    MaxBillAmount = 100000,
 }

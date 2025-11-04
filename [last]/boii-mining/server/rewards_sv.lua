@@ -53,7 +53,7 @@ RegisterServerEvent('boii-mining:sv:DigPaydirt', function()
     local src = source
     local pData = Core.Functions.GetPlayer(src)
     if not pData then return end
-    local MiningXP = pData.PlayerData.metadata[MetaDataName]
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     local shovelName = Config.Paydirt.Dirt.Required[1].name
     local sackName = Config.Paydirt.Dirt.Required[2].name
     if not pData.Functions.GetItemByName(shovelName) then
@@ -104,7 +104,7 @@ end)
 RegisterServerEvent('boii-mining:sv:PanPaydirt', function()
     local src = source
     local pData = Core.Functions.GetPlayer(src)
-    local MiningXP = pData.PlayerData.metadata[MetaDataName]
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     local regularreward = Config.Paydirt.Panning.Return.Regular[math.random(1, #Config.Paydirt.Panning.Return.Regular)]
     local regularreward2 = Config.Paydirt.Panning.Return.Regular[math.random(1, #Config.Paydirt.Panning.Return.Regular)]
     local highreward = Config.Paydirt.Panning.Return.High[math.random(1, #Config.Paydirt.Panning.Return.High)]
@@ -159,7 +159,7 @@ end)
 RegisterServerEvent('boii-mining:sv:QuarryDrilling', function()
     local src = source
     local pData = Core.Functions.GetPlayer(src)
-    local MiningXP = pData.PlayerData.metadata[MetaDataName]
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     -- Require jackhammer server-side as authoritative check
     local jackName = (Config.Quarry and Config.Quarry.Drilling and Config.Quarry.Drilling.Required and Config.Quarry.Drilling.Required.name) or 'jackhammer'
     if not pData.Functions.GetItemByName(jackName) then
@@ -288,7 +288,7 @@ end)
 RegisterServerEvent('boii-mining:sv:CaveDrilling', function()
     local src = source
     local pData = Core.Functions.GetPlayer(src)
-    local MiningXP = pData.PlayerData.metadata[MetaDataName]
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     -- Require jackhammer server-side as authoritative check
     local jackName = (Config.Mine and Config.Mine.Drilling and Config.Mine.Drilling.Required and Config.Mine.Drilling.Required.name) or 'jackhammer'
     if not pData.Functions.GetItemByName(jackName) then

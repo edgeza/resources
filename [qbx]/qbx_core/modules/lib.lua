@@ -285,6 +285,7 @@ if isServer then
 
         if not pcall(function()
             lib.waitFor(function()
+                if not DoesEntityExist(veh) then return false end
                 local owner = NetworkGetEntityOwner(veh)
                 if ped then
                     --- the owner should be transferred to the driver
@@ -292,9 +293,11 @@ if isServer then
                 else
                     if owner ~= -1 then return true end
                 end
-            end, 'client never set as owner', 5000)
+            end, 'client never set as owner', 10000)
         end) then
-            DeleteEntity(veh)
+            if DoesEntityExist(veh) then
+                DeleteEntity(veh)
+            end
             error('Deleting vehicle which timed out finding an owner')
         end
 

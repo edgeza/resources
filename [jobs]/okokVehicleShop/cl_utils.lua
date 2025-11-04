@@ -1,12 +1,8 @@
 -- Framework Detection for QBox/QBCore compatibility
-local coreResource = nil
-if GetResourceState('qbx_core') == 'started' then
-    coreResource = 'qbx_core'
-elseif GetResourceState('qb-core') == 'started' then
-    coreResource = 'qb-core'
-else
-    coreResource = 'qb-core' -- fallback
-end
+-- QBox provides 'qb-core' exports for backward compatibility, so we always use 'qb-core'
+-- But we detect which framework is running for other exports (like DrawText/HideText)
+local isQBox = GetResourceState('qbx_core') == 'started'
+local coreResource = 'qb-core' -- QBox provides this for compatibility, QBCore uses it directly
 QBCore = exports[coreResource]:GetCoreObject()
 local Translations = Locales[Config.Locale]
 local missionBlips = {}

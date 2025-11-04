@@ -923,25 +923,12 @@ end)
 
 RegisterNetEvent('dusa_pets:cl:loadModels', function()
     for _, v in pairs(Config.PetShop.pets) do
-        local petHash = type(v.pet) == "string" and GetHashKey(v.pet) or v.pet
-        local timeout = 0
-        local maxTimeout = 5000 -- 5 seconds max wait
-        
-        if not HasModelLoaded(petHash) then
-            RequestModel(petHash)
+        if not HasModelLoaded(v.pet) then
+            RequestModel(v.pet)
+            Wait(10)
         end
-        
-        -- Wait for model to load with timeout
-        while not HasModelLoaded(petHash) and timeout < maxTimeout do
-            Wait(100)
-            timeout = timeout + 100
-            if not HasModelLoaded(petHash) then
-                RequestModel(petHash)
-            end
-        end
-        
-        if not HasModelLoaded(petHash) then
-            print('^3[dusa_pet] WARNING: Failed to pre-load model: ' .. tostring(v.pet) .. ' (hash: ' .. petHash .. ')^7')
+        while not HasModelLoaded(v.pet) do
+            Wait(10)
         end
     end
 end)

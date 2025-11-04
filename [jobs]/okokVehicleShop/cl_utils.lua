@@ -1,4 +1,13 @@
-QBCore = exports["qb-core"]:GetCoreObject()
+-- Framework Detection for QBox/QBCore compatibility
+local coreResource = nil
+if GetResourceState('qbx_core') == 'started' then
+    coreResource = 'qbx_core'
+elseif GetResourceState('qb-core') == 'started' then
+    coreResource = 'qb-core'
+else
+    coreResource = 'qb-core' -- fallback
+end
+QBCore = exports[coreResource]:GetCoreObject()
 local Translations = Locales[Config.Locale]
 local missionBlips = {}
 MissionCanceled = false
@@ -23,9 +32,9 @@ function TextUI(text)
 		end
 	else
 		if text ~= nil then
-			exports['qb-core']:DrawText(text, 'left')
+			exports[coreResource]:DrawText(text, 'left')
 		else
-			exports['qb-core']:HideText()
+			exports[coreResource]:HideText()
 		end
 	end
 end

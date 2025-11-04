@@ -162,6 +162,23 @@ AddEventHandler('dusa_billing:sv:syncPos', function(citizen, amount, sender, sen
     end
 end)
 
+RegisterServerEvent('dusa_billing:sv:checkAdminPermission')
+AddEventHandler('dusa_billing:sv:checkAdminPermission', function()
+    local source = source
+    
+    -- Check if player has admin permission using FiveM's ACE system
+    local isAdmin = IsPlayerAceAllowed(source, "dusa_billing.admin") or
+                   IsPlayerAceAllowed(source, "admin") or
+                   IsPlayerAceAllowed(source, "group.admin") or
+                   IsPlayerAceAllowed(source, "command")
+    
+    if isAdmin then
+        TriggerClientEvent('dusa_billing:cl:openAdmin', source)
+    else
+        Framework.Notify(source, 'You do not have permission to use this command.', 'error')
+    end
+end)
+
 RegisterServerEvent('dusa_billing:sv:deleteInvoice')
 AddEventHandler('dusa_billing:sv:deleteInvoice', function(data)
     local source = source

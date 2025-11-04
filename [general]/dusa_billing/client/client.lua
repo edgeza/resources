@@ -115,6 +115,10 @@ RegisterNetEvent('dusa_billing:openPos', function()
     end
 end)
 
+RegisterCommand(Config.Commands.OpenAdminMenu, function()
+    TriggerServerEvent('dusa_billing:sv:checkAdminPermission')
+end)
+
 RegisterCommand(Config.Commands.PosDevice, function()
     if Config.PosForCompany then
         if not isCompany() then

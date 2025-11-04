@@ -1088,6 +1088,7 @@ local function SetupJewelBenches()
                 },
                 distance = v.distance
             })
+            end
         end
     end
 end

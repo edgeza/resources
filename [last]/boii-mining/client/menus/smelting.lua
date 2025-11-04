@@ -20,7 +20,19 @@ local Core = (function()
                 Progressbar = function(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, propTwo, onFinish, onCancel)
                     qbx:Progressbar(name, label, duration, useWhileDead, canCancel, disableControls, animation, prop, propTwo, onFinish, onCancel)
                 end,
-                HasItem = function(item, amount) return qbx:HasItem(item, amount) end,
+                HasItem = function(item, amount)
+                    -- Check player inventory for item
+                    if not item or item == '' then return false end
+                    amount = amount or 1
+                    local pd = qbx:GetPlayerData()
+                    if not pd or not pd.items then return false end
+                    for _, it in pairs(pd.items) do
+                        if it and it.name == item and ((it.amount or it.count or 0) >= amount) then
+                            return true
+                        end
+                    end
+                    return false
+                end,
             },
             Shared = {
                 Items = {}

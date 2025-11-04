@@ -55,8 +55,7 @@ escrow_ignore {
 	'bridge/esx/server.lua',
 	'bridge/qb/server.lua',
 	'config.lua',
-	'client/*.lua',
-	'server/*.lua',
+	'client/functions.lua',
 }
 
 dependency '/assetpacks'

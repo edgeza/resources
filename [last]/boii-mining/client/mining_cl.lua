@@ -348,62 +348,42 @@ CreateThread(function()
             PlaceObjectOnGroundProperly(obj)
             SpawnedQuarryTargets[#SpawnedQuarryTargets+1] = obj
             ActiveQuarryMarkers[i] = obj
-            exports[TargetName]:AddTargetEntity(obj, {
-                options = {
-                    {
-                        icon = Language.Mining.Quarry.Dynamite.Target['icon'],
-                        label = Language.Mining.Quarry.Dynamite.Target['label'],
-                        action = function(entity)
-                            local index = idx
-                            -- remove this target marker and respawn it after 90s
-                            if entity and DoesEntityExist(entity) then
-                                exports[TargetName]:RemoveTargetEntity(entity)
+            if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addLocalEntity then
+                local function addTargetToEntity(entity)
+                    exports[TargetName]:addLocalEntity(entity, {
+                        {
+                            icon = Language.Mining.Quarry.Dynamite.Target['icon'],
+                            label = Language.Mining.Quarry.Dynamite.Target['label'],
+                            onSelect = function()
+                                local index = idx
+                                -- remove this target marker and respawn it after 90s
+                                if entity and DoesEntityExist(entity) then
+                                    if exports[TargetName].removeLocalEntity then
+                                        exports[TargetName]:removeLocalEntity(entity)
+                                    end
                                 safeDeleteMarker(entity)
-                            end
-                            ActiveQuarryMarkers[index] = nil
-                            SetTimeout(90000, function()
-                                -- don't double-spawn if one already exists for this location
-                                if ActiveQuarryMarkers[index] and DoesEntityExist(ActiveQuarryMarkers[index]) then return end
-                                local new = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
-                                SetEntityHeading(new, lw)
-                                SetEntityInvincible(new, true)
-                                FreezeEntityPosition(new, true)
-                                PlaceObjectOnGroundProperly(new)
-                                ActiveQuarryMarkers[index] = new
-                                exports[TargetName]:AddTargetEntity(new, {
-                                    options = {{ icon = Language.Mining.Quarry.Dynamite.Target['icon'], label = Language.Mining.Quarry.Dynamite.Target['label'], action = function(e)
-                                        local ent = ActiveQuarryMarkers[index]
-                                        if ent and DoesEntityExist(ent) then
-                                            exports[TargetName]:RemoveTargetEntity(ent)
-                                            safeDeleteMarker(ent)
-                                            ActiveQuarryMarkers[index] = nil
-                                        end
-                                        SetTimeout(90000, function()
-                                            if ActiveQuarryMarkers[index] and DoesEntityExist(ActiveQuarryMarkers[index]) then return end
-                                            local newer = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
-                                            SetEntityHeading(newer, lw)
-                                            SetEntityInvincible(newer, true)
-                                            FreezeEntityPosition(newer, true)
-                                            PlaceObjectOnGroundProperly(newer)
-                                            ActiveQuarryMarkers[index] = newer
-                                            exports[TargetName]:AddTargetEntity(newer, {
-                                                options = {{ icon = Language.Mining.Quarry.Dynamite.Target['icon'], label = Language.Mining.Quarry.Dynamite.Target['label'], action = function()
-                                                    TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'Quarry' })
-                                                end }},
-                                                distance = 2.0
-                                            })
-                                        end)
-                                        TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'Quarry' })
-                                    end }},
-                                    distance = 2.0
-                                })
-                            end)
-                            TriggerEvent('boii-mining:cl:PlaceDynamite', { area = 'Quarry' })
-                        end
-                    }
-                },
-                distance = 2.0
-            })
+                                end
+                                ActiveQuarryMarkers[index] = nil
+                                TriggerServerEvent('boii-mining:sv:TriggerQuarryBlast', index)
+                                SetTimeout(90000, function()
+                                    -- don't double-spawn if one already exists for this location
+                                    if ActiveQuarryMarkers[index] and DoesEntityExist(ActiveQuarryMarkers[index]) then return end
+                                    local new = CreateObjectNoOffset(model, lx, ly, lz, false, false, false)
+                                    SetEntityHeading(new, lw)
+                                    SetEntityInvincible(new, true)
+                                    FreezeEntityPosition(new, true)
+                                    PlaceObjectOnGroundProperly(new)
+                                    SpawnedQuarryTargets[#SpawnedQuarryTargets+1] = new
+                                    ActiveQuarryMarkers[index] = new
+                                    addTargetToEntity(new)
+                                end)
+                            end,
+                            distance = 2.0
+                        }
+                    })
+                end
+                addTargetToEntity(obj)
+            end
         end
     end
     -- Quarry cave blasting markers (only if cave MLO toggled)

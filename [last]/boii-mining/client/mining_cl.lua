@@ -237,10 +237,20 @@ CreateThread(function()
                                     TriggerEvent(v.event)
                                 end,
                                 canInteract = function(entity)
-                                    if not entity or entity == 0 or not DoesEntityExist(entity) then return false end
-                                    local entityType = GetEntityType(entity)
+                                    if not entity or entity == 0 then return false end
+                                    local success, exists = pcall(function() return DoesEntityExist(entity) end)
+                                    if not success or not exists then return false end
+                                    local entityType = 0
+                                    success = pcall(function() entityType = GetEntityType(entity) end)
+                                    if not success then return false end
                                     if entityType == 1 then -- Ped
-                                        if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
+                                        local pedCheck = false
+                                        success = pcall(function()
+                                            if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) then
+                                                pedCheck = true
+                                            end
+                                        end)
+                                        if success and pedCheck then return false end
                                     end
                                     if IsPedInAnyVehicle(PlayerPedId()) then return false end
                                     return true
@@ -668,8 +678,13 @@ local function spawnSinglePaydirt()
                     setMiningBusy(false)
                 end,
                 canInteract = function(entity)
-                    if not entity or entity == 0 or not DoesEntityExist(entity) then return false end
-                    return GetEntityModel(entity) == GetHashKey(Config.Paydirt.Dirt.Prop.model) and not IsPedInAnyVehicle(PlayerPedId())
+                    if not entity or entity == 0 then return false end
+                    local success, exists = pcall(function() return DoesEntityExist(entity) end)
+                    if not success or not exists then return false end
+                    local model = 0
+                    success = pcall(function() model = GetEntityModel(entity) end)
+                    if not success then return false end
+                    return model == GetHashKey(Config.Paydirt.Dirt.Prop.model) and not IsPedInAnyVehicle(PlayerPedId())
                 end,
                 distance = 1.5
             }
@@ -809,8 +824,12 @@ RegisterNetEvent('boii-mining:cl:ProceedPlaceDynamite', function(data)
                                 TriggerEvent('boii-mining:cl:StartDrillRock', { area = area }, entity)
                             end,
                             canInteract = function(entity)
-                                if not entity or entity == 0 or not DoesEntityExist(entity) then return false end
-                                local mdl = GetEntityModel(entity)
+                                if not entity or entity == 0 then return false end
+                                local success, exists = pcall(function() return DoesEntityExist(entity) end)
+                                if not success or not exists then return false end
+                                local mdl = 0
+                                success = pcall(function() mdl = GetEntityModel(entity) end)
+                                if not success then return false end
                                 if LocalPlayer.state.mining_busy then return false end
                                 return isRockModel(mdl) and not IsPedInAnyVehicle(PlayerPedId())
                             end

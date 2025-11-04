@@ -237,7 +237,12 @@ CreateThread(function()
                                     TriggerEvent(v.event)
                                 end,
                                 canInteract = function(entity)
-                                    if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
+                                    if not entity or entity == 0 or not DoesEntityExist(entity) then return false end
+                                    local entityType = GetEntityType(entity)
+                                    if entityType == 1 then -- Ped
+                                        if IsPedDeadOrDying(entity, true) or IsPedAPlayer(entity) or IsPedInAnyVehicle(PlayerPedId()) then return false end
+                                    end
+                                    if IsPedInAnyVehicle(PlayerPedId()) then return false end
                                     return true
                                 end,
                                 distance = v.distance
@@ -384,12 +389,13 @@ CreateThread(function()
                             label = Language.Mining.Quarry.Dynamite.Target['label'],
                             onSelect = function()
                                 local index = idx
+                                local targetEntity = entity
                                 -- remove this target marker and respawn it after 90s
-                                if entity and DoesEntityExist(entity) then
-                                    if exports[TargetName].removeLocalEntity then
-                                        exports[TargetName]:removeLocalEntity(entity)
+                                if targetEntity and targetEntity ~= 0 and DoesEntityExist(targetEntity) then
+                                    if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                                        exports[TargetName]:removeLocalEntity(targetEntity)
                                     end
-                                safeDeleteMarker(entity)
+                                    safeDeleteMarker(targetEntity)
                                 end
                                 ActiveQuarryMarkers[index] = nil
                                 TriggerServerEvent('boii-mining:sv:TriggerQuarryBlast', index)
@@ -441,11 +447,12 @@ CreateThread(function()
                             label = Language.Mining.Quarry.Dynamite.Target['label'],
                             onSelect = function()
                                 local index = idx
-                                if entity and DoesEntityExist(entity) then
-                                    if exports[TargetName].removeLocalEntity then
-                                        exports[TargetName]:removeLocalEntity(entity)
+                                local targetEntity = entity
+                                if targetEntity and targetEntity ~= 0 and DoesEntityExist(targetEntity) then
+                                    if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                                        exports[TargetName]:removeLocalEntity(targetEntity)
                                     end
-                                    safeDeleteMarker(entity)
+                                    safeDeleteMarker(targetEntity)
                                 end
                                 ActiveQuarryCaveMarkers[index] = nil
                                 TriggerServerEvent('boii-mining:sv:TriggerQuarryBlast', index)
@@ -496,11 +503,12 @@ CreateThread(function()
                             label = Language.Mining.Mine.Dynamite.Target['label'],
                             onSelect = function()
                                 local index = idx
-                                if entity and DoesEntityExist(entity) then
-                                    if exports[TargetName].removeLocalEntity then
-                                        exports[TargetName]:removeLocalEntity(entity)
+                                local targetEntity = entity
+                                if targetEntity and targetEntity ~= 0 and DoesEntityExist(targetEntity) then
+                                    if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                                        exports[TargetName]:removeLocalEntity(targetEntity)
                                     end
-                                    safeDeleteMarker(entity)
+                                    safeDeleteMarker(targetEntity)
                                 end
                                 ActiveMineMarkers[index] = nil
                                 TriggerServerEvent('boii-mining:sv:TriggerMineBlast', index)
@@ -660,7 +668,7 @@ local function spawnSinglePaydirt()
                     setMiningBusy(false)
                 end,
                 canInteract = function(entity)
-                    if not entity or entity == 0 then return false end
+                    if not entity or entity == 0 or not DoesEntityExist(entity) then return false end
                     return GetEntityModel(entity) == GetHashKey(Config.Paydirt.Dirt.Prop.model) and not IsPedInAnyVehicle(PlayerPedId())
                 end,
                 distance = 1.5
@@ -801,7 +809,7 @@ RegisterNetEvent('boii-mining:cl:ProceedPlaceDynamite', function(data)
                                 TriggerEvent('boii-mining:cl:StartDrillRock', { area = area }, entity)
                             end,
                             canInteract = function(entity)
-                                if not entity or entity == 0 then return false end
+                                if not entity or entity == 0 or not DoesEntityExist(entity) then return false end
                                 local mdl = GetEntityModel(entity)
                                 if LocalPlayer.state.mining_busy then return false end
                                 return isRockModel(mdl) and not IsPedInAnyVehicle(PlayerPedId())

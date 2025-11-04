@@ -10,17 +10,17 @@ local Core = (function()
     if success and result then
         return result
     end
-    -- QBX fallback: try lib export
-    local lib = exports.ox_lib or exports.qbx_core and exports.qbx_core.lib
-    if lib and lib.qbx then
+    -- QBX fallback: use QBX exports directly
+    local qbx = exports.qbx_core
+    if qbx then
         return {
             Functions = {
-                GetPlayer = function(source) return lib.qbx.getPlayer(source) end,
-                CreateUseableItem = function(item, callback) lib.qbx.registerUsableItem(item, callback) end,
-                GetPlayers = function() return lib.qbx.getPlayers() end,
+                GetPlayer = function(source) return qbx:GetPlayer(source) end,
+                CreateUseableItem = function(item, callback) RegisterUsableItem(item, callback) end,
+                GetPlayers = function() return GetPlayers() end,
             },
             Shared = {
-                Items = lib.items or {}
+                Items = {}
             }
         }
     end

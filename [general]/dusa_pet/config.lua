@@ -8,7 +8,7 @@ Config = {}
 ------------------------GENERAL OPTIONS------------------------
 ---------------------------------------------------------------
 Config.DefaultPetName = 'Pet'
-Config.Target = 'qb-target' -- false / ox_target / qb-target / qtarget
+Config.Target = 'ox_target' -- false / ox_target / qb-target / qtarget
 Config.Progressbar = 'qb-core' -- ox_lib / qb-core
 Config.DropExploiter = true -- Drop who tries to use event illegally
 -- WAIT
@@ -18,16 +18,16 @@ Config.UpdateInterval = 5 -- Update pet data interval (minutes) -- Default 5 min
 
 -- ILLNESSES
 Config.HealthLimit = 100 -- If health lower than this value, sicknesses will occur
-Config.IllnessChance = 5 -- Define a chance for pet sickness, 5 means %5
+Config.IllnessChance = 35 -- Define a chance for pet sickness, 5 means %5
 Config.IllnessInterval = 180 -- Interval between illness checks (seconds) - Default 180 seconds
 Config.Illnesses = { -- Add new sickness species or remove them (You can translate here tho)
     [1] = {
         illness = 'kennelcough',
-        damage = 1
+        damage = 4
     },
     [2] = {
         illness = 'fatigue',
-        damage = 1
+        damage = 3
     }
 }
 
@@ -681,67 +681,67 @@ Config.PetShop = {
             name = 'Rottweiler',
             pet = 'a_c_chop',
             image = 'rottweiler.png',
-            price = 15
+            price = 2500
         },
         [2] = {
             name = 'Westy',
             pet = 'a_c_westy_2',
             image = 'westy.png',
-            price = 25
+            price = 2500
         },
         [3] = {
             name = 'Pug',
             pet = 'a_c_pug',
             image = 'pug.png',
-            price = 25
+            price = 5000
         },
         [4] = {
             name = 'Shepherd',
             pet = 'a_c_shepherd_2',
             image = 'shepherd.png',
-            price = 15
+            price = 500
         },
         [5] = {
             name = 'Retriever',
             pet = 'a_c_retriever_2',
             image = 'retriever.png',
-            price = 15
+            price = 6000
         },
         [6] = {
             name = 'Poodle',
             pet = 'a_c_poodle_2',
             image = 'poodle.png',
-            price = 15
+            price = 8000
         },
         [7] = {
             name = 'Husky',
             pet = 'a_c_husky_2',
             image = 'husky.png',
-            price = 15
+            price = 6500
         },
         [8] = {
             name = 'Cat',
             pet = 'a_c_cat_01',
             image = 'cat.png',
-            price = 15
+            price = 800
         },
         [9] = {
             name = 'English Bulldog',
             pet = 'dusa_englishbulldog',
             image = 'englishbulldog.png',
-            price = 15
+            price = 2500
         },
         [10] = {
             name = 'Cane Corso',
             pet = 'dusa_cane',
             image = 'canecorso.png',
-            price = 15
+            price = 8000
         },
         [11] = {
             name = 'Sphynx Cat',
             pet = 'dusa_sphynx',
             image = 'sphynx.png',
-            price = 15
+            price = 1200
         },
     }
 }

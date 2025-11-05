@@ -198,7 +198,43 @@ local function calculateTuningHandling(handling, tuningConfig)
           if tuneConfig.handlingOverwritesValues then
             handling[key] = value
           else
-            handling[key] = (handling[key] or 0) + value
+            -- Check if this is a vector field
+            if string.sub(key, 1, 3) == "vec" then
+              -- For vector fields, handle vector addition properly
+              local currentValue = handling[key]
+              local isCurrentVector = currentValue and (type(currentValue) == "vector3" or (type(currentValue) == "table" and currentValue.x ~= nil))
+              local isValueVector = value and (type(value) == "vector3" or (type(value) == "table" and value.x ~= nil))
+              
+              if isCurrentVector and isValueVector then
+                -- Both are vectors, add components
+                handling[key] = vector3(
+                  currentValue.x + value.x,
+                  currentValue.y + value.y,
+                  currentValue.z + value.z
+                )
+              elseif isValueVector then
+                -- Only new value is a vector, use it directly
+                handling[key] = value
+              elseif isCurrentVector then
+                -- Current is vector but new isn't, keep current (don't try to add number to vector)
+                -- Don't modify handling[key] - keep the existing vector value
+              else
+                -- Neither is a vector, create vector from scalar value
+                handling[key] = vector3(value or 0, value or 0, value or 0)
+              end
+            else
+              -- For non-vector fields, add normally
+              -- Safety check: if current value is a vector, don't try to add
+              local currentValue = handling[key]
+              local isCurrentVector = currentValue and (type(currentValue) == "vector3" or (type(currentValue) == "table" and currentValue.x ~= nil))
+              if isCurrentVector then
+                -- Current value is a vector but key doesn't start with "vec", keep current value
+                -- Don't modify handling[key] - keep the existing vector value
+              else
+                -- Safe to add normally
+                handling[key] = (handling[key] or 0) + value
+              end
+            end
           end
         end
       end

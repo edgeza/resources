@@ -391,13 +391,15 @@ function CheckClotheItems(player, source)
 		for k, v in pairs(Config.Clothes) do
 			for wi, data in pairs(v) do
 				if dusa.framework == 'esx' then
-					if player.getInventoryItem(wi) and player.getInventoryItem(wi).count > 0 then
+					local item = player.getInventoryItem(wi)
+					if item and item.count > 0 then
 						if not inventory[wi] then
 							table.insert(inventory, data)
 						end
 					end
 				else
-					if player.Functions.GetItemByName(wi) and player.Functions.GetItemByName(wi).amount > 0 then
+					local item = player.Functions.GetItemByName(wi)
+					if item and item.amount > 0 then
 						if not inventory[wi] then
 							table.insert(inventory, data)
 						end

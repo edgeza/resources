@@ -70,12 +70,21 @@ RegisterNetEvent('an-engine:server:install', function (data)
     local plate = Utils.getPlate(vehicle) --[[@as string]]
     Entity(vehicle).state:set('an_engine', engine, true)
 
-    Installed_Sound[plate] = data.setDefualt and nil or {
-        exhaust = engine,
-        category = category
-    }
+    if data.setDefualt then
+        -- Remove the custom sound entry (set to default)
+        Installed_Sound[plate] = nil
+    else
+        -- Add or update the custom sound entry
+        Installed_Sound[plate] = {
+            exhaust = engine,
+            category = category
+        }
+    end
 
     SaveFileData(Installed_Sound, "installed_sound", "install")
+    
+    -- Sync the updated installed sound data to all clients
+    TriggerClientEvent('an-engineswap:client:updateInstalledSound', -1, plate, Installed_Sound[plate])
     
     -- Wait a moment for state to propagate before applying sound
     local netId = NetworkGetNetworkIdFromEntity(vehicle)

@@ -15,14 +15,7 @@ return {
 	},
 	[3] = {  -- 6STR Tuner
 		coords = vector3(164.66, -3000.39, 5.28),
-		radius = 10.000000,
-		groups = nil,
-		debug = false,
-		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
-	},
-	[4] = {  -- East Customs
-		coords = vector3(847.87, -2122.93, 29.91),
-		radius = 10.000000,
+		radius = 2.000000,
 		groups = nil,
 		debug = false,
 		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }

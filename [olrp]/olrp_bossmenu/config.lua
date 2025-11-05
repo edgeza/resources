@@ -69,8 +69,8 @@ Config.Locations = {
             }
         }
     },
-    ["westcustoms"] = {
-        label = "West Customs",
+    ["palmcoast"] = {
+        label = "Palm Coast",
         logoImage = "logo.png",
         locations = {
             {

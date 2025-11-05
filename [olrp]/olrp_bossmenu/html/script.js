@@ -1039,7 +1039,7 @@ document.addEventListener('keydown', function(event) {
             
             fetch(`https://${GetParentResourceName()}/closeUI`, {
                 method: 'POST'
-            });
+            }).catch(() => {}); // Silently handle errors
         }
     }
 });
@@ -1833,7 +1833,7 @@ function setupEventListeners() {
         
         fetch(`https://${GetParentResourceName()}/closeUI`, {
             method: 'POST'
-        });
+        }).catch(() => {}); // Silently handle errors
     });
     
     setupSocietyEventListeners();
@@ -2845,7 +2845,7 @@ const openApplication = (data) => {
         document.getElementById('application-container').style.display = "none";
         fetch(`https://${GetParentResourceName()}/closeUI`, {
             method: 'POST'
-        });
+        }).catch(() => {}); // Silently handle errors
     });
 
     document.getElementById("finish_task").addEventListener("click", () => {
@@ -2897,9 +2897,14 @@ const openApplication = (data) => {
 // Helper function for FiveM framework
 function GetParentResourceName() {
     try {
-        return window.GetParentResourceName();
+        const resourceName = window.GetParentResourceName();
+        // Ensure we have a valid resource name
+        if (resourceName && typeof resourceName === 'string' && resourceName.length > 0) {
+            return resourceName;
+        }
+        return 'olrp_bossmenu'; // Fallback if undefined or invalid
     } catch (error) {
-        return 'OLRP-bossmenu'; // Default for testing in browser
+        return 'olrp_bossmenu'; // Default for testing in browser
     }
 }
 

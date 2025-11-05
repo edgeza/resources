@@ -112,8 +112,8 @@ Config.MaxStock = 99999999
 Config.IceMachine = {
     ice_itemname = 'cc_icecubes',
     water_itemname = 'cc_waterbottle',
-    WaitTime = 560,
-    MaxIce = 10
+    WaitTime = 250,
+    MaxIce = 25
 }
 
 Config.MaxBillAmount = 100000

@@ -107,7 +107,7 @@ Config.DisableNoPaymentOptionForEmployees = false
 Config.MechanicLocations = {
   palmcoast = {
     type = "owned",
-    job = "mechanic",
+    job = "palmcoast",
     jobManagementRanks = {4, 5}, -- Only grades 4 and 5 can access management
     logo = "Palmcoast.png",
     commission = 10, -- %, 10 = 10%
@@ -304,7 +304,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 1",
         coords = vec3(-2047.29, -485.61, 12.21),
-        job = 'mechanic',
+        job = 'palmcoast',
         grade = '0',
         size = 1.0,
         usePed = false,
@@ -370,7 +370,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 2",
         coords = vec3(-2055.03, -478.89, 12.1),
-        job = 'mechanic',
+        job = 'palmcoast',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -394,7 +394,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 3",
         coords = vec3(-2063.84, -471.7, 12.22),
-        job = 'mechanic',
+        job = 'palmcoast',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -417,7 +417,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 4",
         coords = vec3(-2071.7, -464.93, 12.22),
-        job = 'mechanic',
+        job = 'palmcoast',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -442,7 +442,7 @@ Config.MechanicLocations = {
 
   bennys = {
     type = "owned",
-    job = "mechanic1",
+    job = "bennies",
     jobManagementRanks = {4, 5}, -- Only grades 4 and 5 can access management
     logo = "bennys.png",
     commission = 10, -- %, 10 = 10%
@@ -732,7 +732,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin",
         coords = vector3(-754.4, -2082.7, 9.18),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -755,7 +755,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 2",
         coords = vector3(-767.3, -2093.51, 9.18),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -777,7 +777,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 3",
         coords = vector3(-929.71, -2050.9, 9.05),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -799,7 +799,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 4",
         coords = vector3(-939.03, -2058.61, 9.05),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -822,7 +822,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 5",
         coords = vector3(-951.27, -2030.35, 9.05),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -845,7 +845,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 6",
         coords = vector3(-956.65, -2025.79, 9.05),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -869,7 +869,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 7",
         coords = vector3(-962.16, -2035.21, 9.05),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -893,7 +893,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 8",
         coords = vector3(-971.13, -2043.88, 9.05),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -916,7 +916,7 @@ Config.MechanicLocations = {
       {
         name = "Parts Bin 9",
         coords = vector3(-976.45, -2048.07, 9.05),
-        job = 'mechanic1',
+        job = 'bennies',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1115,7 +1115,7 @@ Config.MechanicLocations = {
   tunershop = {
     label = "6Street Tuner Shop",
     type = "owned",
-    job = "mechanic2",
+    job = "6str",
     jobManagementRanks = {4, 5}, -- Only grades 4 and 5 can access management
     logo = "tunershop.png",
     commission = 10, -- %, 10 = 10%
@@ -1293,7 +1293,7 @@ Config.MechanicLocations = {
       {
         name = "6STR Parts Bin 1",
         coords = vector3(122.01, -3024.77, 7.04),
-        job = 'mechanic2',
+        job = '6str',
         grade = '0',
         size = 1.0,
         usePed = false,
@@ -1336,7 +1336,7 @@ Config.MechanicLocations = {
       {
         name = "6STR Parts Bin 2",
         coords = vector3(130.26, -3031.69, 7.08),
-        job = 'mechanic2',
+        job = '6str',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1362,7 +1362,7 @@ Config.MechanicLocations = {
       {
         name = "6STR Parts Bin 3",
         coords = vector3(128.65, -3050.65, 7.04),
-        job = 'mechanic2',
+        job = '6str',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1386,7 +1386,7 @@ Config.MechanicLocations = {
       {
         name = "6STR Parts Bin 4",
         coords = vector3(148.18, -3050.57, 7.04),
-        job = 'mechanic2',
+        job = '6str',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1410,7 +1410,7 @@ Config.MechanicLocations = {
       {
         name = "6STR Parts Bin 5",
         coords = vector3(126.97, -3008.4, 10.7),
-        job = 'mechanic2',
+        job = '6str',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1434,7 +1434,7 @@ Config.MechanicLocations = {
       {
         name = "6STR Parts Bin 6",
         coords = vector3(153.13, -3012.74, 10.7),
-        job = 'mechanic2',
+        job = '6str',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1459,7 +1459,7 @@ Config.MechanicLocations = {
 
   onelifemechanics = {
     type = "owned",
-    job = "mechanic3",
+    job = "olrpmechanic",
     jobManagementRanks = {4, 5}, -- Only grades 4 and 5 can access management
     logo = "onelife_mechanics.png",
     commission = 10, -- %, 10 = 10%
@@ -1625,7 +1625,7 @@ Config.MechanicLocations = {
       {
         name = "OneLife Mech Parts Bin 1",
         coords = vector3(1148.23, -785.56, 57.6),
-        job = 'mechanic3',
+        job = 'olrpmechanic',
         grade = '0',
         size = 1.0,
         usePed = false,
@@ -1668,7 +1668,7 @@ Config.MechanicLocations = {
       {
         name = "OneLife Mech Parts Bin 2",
         coords = vector3(1153.75, -780.84, 57.6),
-        job = 'mechanic3',
+        job = 'olrpmechanic',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1694,7 +1694,7 @@ Config.MechanicLocations = {
       {
         name = "OneLife Mech Parts Bin 3",
         coords = vector3(1148.99, -794.73, 57.61),
-        job = 'mechanic3',
+        job = 'olrpmechanic',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",
@@ -1718,7 +1718,7 @@ Config.MechanicLocations = {
       {
         name = "OneLife Mech Parts Bin 4",
         coords = vector3(1126.05, -787.22, 57.6),
-        job = 'mechanic3',
+        job = 'olrpmechanic',
         size = 2.0,
         usePed = false,
         pedModel = "s_m_m_lathandy_01",

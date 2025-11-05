@@ -51,24 +51,34 @@ if Config.Keybinding then
     end
 
     function EmoteBindStart(source, args, raw)
-        if #args > 0 then
-            local numkey = tonumber(args[1])
-            local emote = string.lower(args[2])
-            if not (numkey and emote) then
-                DebugPrint('Invalid arguments to EmoteBindStart')
-                return
-            end
-            if type(numkey) == "number" then
-                if EmoteData[emote] then
-                    SetResourceKvp(string.format('%s_emob%s', Config.keybindKVP, numkey), emote)
-                else
-                    EmoteChatMessage("'" .. emote .. "' " .. Translate('notvalidemote') .. "")
-                end
-            else
-                EmoteChatMessage("'" .. numkey .. "' " .. Translate('notvalidkey'))
-            end
+        if #args < 2 then
+            EmoteChatMessage("Usage: /emotebind [key] [emotename] - Example: /emotebind 4 sit")
+            return
+        end
+        
+        local numkey = tonumber(args[1])
+        local emote = args[2] and string.lower(args[2]) or nil
+        
+        if not numkey then
+            EmoteChatMessage("'" .. tostring(args[1]) .. "' " .. Translate('notvalidkey') .. " - Must be a number between 1-6")
+            return
+        end
+        
+        if numkey < 1 or numkey > #Config.KeybindKeys then
+            EmoteChatMessage("Key must be between 1 and " .. #Config.KeybindKeys)
+            return
+        end
+        
+        if not emote or emote == "" then
+            EmoteChatMessage("Invalid emote name")
+            return
+        end
+        
+        if EmoteData[emote] then
+            SetResourceKvp(string.format('%s_emob%s', Config.keybindKVP, numkey), emote)
+            EmoteChatMessage("Emote '" .. emote .. "' bound to key " .. numkey .. " (Numpad " .. Config.KeybindKeys[numkey] .. ")")
         else
-            DebugPrint('Invalid number of arguments to EmoteBindStart')
+            EmoteChatMessage("'" .. emote .. "' " .. Translate('notvalidemote') .. "")
         end
     end
 
@@ -82,15 +92,23 @@ if Config.Keybinding then
     end
 
     function DeleteEmote(args)
-        if #args > 0 then
-            local numkey = tonumber(args[1])
-            if type(numkey) == "number"  then
-                DeleteResourceKvp(string.format('%s_emob%s', Config.keybindKVP, numkey))
-            else
-                EmoteChatMessage("'" .. numkey .. "' " .. Translate('notvalidkey'))
-            end
-        else
-            DebugPrint("invalid")
+        if #args < 1 then
+            EmoteChatMessage("Usage: /emotedelete [key] - Example: /emotedelete 4")
+            return
         end
+        
+        local numkey = tonumber(args[1])
+        if not numkey then
+            EmoteChatMessage("'" .. tostring(args[1]) .. "' " .. Translate('notvalidkey') .. " - Must be a number between 1-6")
+            return
+        end
+        
+        if numkey < 1 or numkey > #Config.KeybindKeys then
+            EmoteChatMessage("Key must be between 1 and " .. #Config.KeybindKeys)
+            return
+        end
+        
+        DeleteResourceKvp(string.format('%s_emob%s', Config.keybindKVP, numkey))
+        EmoteChatMessage("Emote binding removed from key " .. numkey .. " (Numpad " .. Config.KeybindKeys[numkey] .. ")")
     end
 end

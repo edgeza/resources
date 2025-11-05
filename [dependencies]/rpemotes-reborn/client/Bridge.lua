@@ -25,8 +25,9 @@ local function InitializeFramework()
             PlayerData = ESX.GetPlayerData()
             PlayerLoaded = true
         end)
-    elseif GetResourceState('qb-core') == 'started' then
-        QBCore = exports['qb-core']:GetCoreObject()
+    elseif GetResourceState('qb-core') == 'started' or GetResourceState('qbx-core') == 'started' or GetResourceState('qbox-core') == 'started' then
+        local resourceName = GetResourceState('qb-core') == 'started' and 'qb-core' or (GetResourceState('qbx-core') == 'started' and 'qbx-core' or 'qbox-core')
+        QBCore = exports[resourceName]:GetCoreObject()
         Framework = 'qb'
 
         AddEventHandler('QBCore:Client:OnPlayerLoaded', function()

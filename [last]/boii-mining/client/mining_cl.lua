@@ -136,8 +136,9 @@ local function removeJackhammerProp(ped)
     -- ensure local EnumerateObjects exists before use
     if not EnumerateObjects then return end
     for obj in EnumerateObjects() do
-        if DoesEntityExist(obj) and IsEntityAttachedToEntity(obj, ped) then
-            if GetEntityModel(obj) == jackHash then
+        if obj and obj ~= 0 and DoesEntityExist(obj) and IsEntityAttachedToEntity(obj, ped) then
+            local success, model = pcall(function() return GetEntityModel(obj) end)
+            if success and model == jackHash then
                 DeleteObject(obj)
             end
         end
@@ -1145,10 +1146,13 @@ cleanupNearbyJackhammers = function(ped, radius)
     local r = radius or 3.0
     if not EnumerateObjects then return end
     for obj in EnumerateObjects() do
-        if DoesEntityExist(obj) and GetEntityModel(obj) == jackHash then
-            local ocoords = GetEntityCoords(obj)
-            if #(pcoords - ocoords) <= r then
-                forceDeleteEntity(obj)
+        if obj and obj ~= 0 and DoesEntityExist(obj) then
+            local success, model = pcall(function() return GetEntityModel(obj) end)
+            if success and model == jackHash then
+                local ocoords = GetEntityCoords(obj)
+                if #(pcoords - ocoords) <= r then
+                    forceDeleteEntity(obj)
+                end
             end
         end
     end
@@ -1177,13 +1181,16 @@ local function SetupJewelBenches()
                 FreezeEntityPosition(obj, true)
                 PlaceObjectOnGroundProperly(obj)
             else
-                if GetEntityModel(existing) == model then
-                    SetEntityHeading(existing, v.heading or 0.0)
-                    local pos = GetEntityCoords(existing)
-                    if #(pos - v.coords) > 0.2 then
-                        SetEntityCoords(existing, v.coords.x, v.coords.y, v.coords.z - 1.0, false, false, false, true)
-                        PlaceObjectOnGroundProperly(existing)
-                        FreezeEntityPosition(existing, true)
+                if existing and existing ~= 0 and DoesEntityExist(existing) then
+                    local success, existingModel = pcall(function() return GetEntityModel(existing) end)
+                    if success and existingModel == model then
+                        SetEntityHeading(existing, v.heading or 0.0)
+                        local pos = GetEntityCoords(existing)
+                        if #(pos - v.coords) > 0.2 then
+                            SetEntityCoords(existing, v.coords.x, v.coords.y, v.coords.z - 1.0, false, false, false, true)
+                            PlaceObjectOnGroundProperly(existing)
+                            FreezeEntityPosition(existing, true)
+                        end
                     end
                 end
             end

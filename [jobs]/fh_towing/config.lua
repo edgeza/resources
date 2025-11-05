@@ -2,7 +2,7 @@ Config = {}
 
 Config.Target = 'ox'               -- 'qb' for qb-target, 'ox' for ox-target
 Config.JobRestriction = true
-Config.JobList = {["lscustoms"] = 0, ["bennys"] = 0, ["mechanic"] = 0}          -- Jobs that can use the flatbed the number is equal to the lowest job rank that can use the flatbed
+Config.JobList = {["lscustoms"] = 0, ["bennys"] = 0, ["mechanic"] = 0, ["towing"] = 0}          -- Jobs that can use the flatbed the number is equal to the lowest job rank that can use the flatbed
 
 Config.ClassBlacklist =  {10, 11, 14, 15, 16, 20, 21}       -- Vehicle classes that should not be loadable onto the flatbed https://docs.fivem.net/natives/?_0x29439776AAA00A62
 

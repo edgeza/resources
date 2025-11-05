@@ -83,7 +83,7 @@ CreateThread(function()
     while true do
         for k, v in pairs(vehs) do
             if v then
-                if v.time and os.time() >= v.time then
+                if v.time and type(v.time) == 'number' and os.time() >= v.time then
                     if DoesEntityExist(v.entity) then
                         DeleteEntity(v.entity)
                     end

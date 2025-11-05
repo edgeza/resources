@@ -114,6 +114,15 @@ local function AttachTowRope(vehicle)
     ropeAttachedToPlayer = false
     QBCore.Functions.Notify(Config.Messages.ropeAttached, 'success')
     
+    -- Ensure attached vehicle has proper physics and collision
+    SetEntityCollision(attachedVehicle, true, true)
+    SetEntityCanBeDamaged(attachedVehicle, false)
+    SetEntityInvincible(attachedVehicle, false)
+    
+    -- Disable engine on attached vehicle to prevent conflicts
+    SetVehicleEngineOn(attachedVehicle, false, true, false)
+    SetVehicleUndriveable(attachedVehicle, true)
+    
     -- Create physical rope between vehicles
     CreateRope()
     
@@ -129,6 +138,11 @@ local function AttachTowRope(vehicle)
             if not hasTowRope then
                 break
             end
+            
+            -- Ensure attached vehicle maintains proper physics state
+            SetEntityCollision(attachedVehicle, true, true)
+            SetVehicleEngineOn(attachedVehicle, false, true, false)
+            SetVehicleUndriveable(attachedVehicle, true)
             
             local towingCoords = GetEntityCoords(towingVehicle)
             local attachedCoords = GetEntityCoords(attachedVehicle)
@@ -151,14 +165,15 @@ local function AttachTowRope(vehicle)
                 local ropeLength = math.max(distance * 1.2, 5.0)
                 SetRopeLength(ropeEntity, ropeLength)
                 
-                -- Apply towing force when rope is taut (stretched beyond slack)
-                if distance > 15.0 then
+                -- Apply gentle force to keep vehicles aligned, but let rope physics handle most of it
+                if distance > 12.0 then
                     local direction = (towingCoords - attachedCoords) / distance
-                    local stretch = distance - 15.0
-                    local force = direction * (stretch * 0.5)
+                    local stretch = distance - 12.0
+                    -- Much gentler force application
+                    local force = direction * (stretch * 0.2)
                     
-                    -- Apply force to attached vehicle to follow towing vehicle
-                    ApplyForceToEntityCenterOfMass(attachedVehicle, 1, force.x, force.y, force.z * 0.3, false, true, true, true)
+                    -- Apply minimal force, mainly horizontal, let rope handle vertical
+                    ApplyForceToEntityCenterOfMass(attachedVehicle, 1, force.x, force.y, 0.0, false, false, true, true)
                 end
             else
                 -- Recreate rope if it was deleted
@@ -177,6 +192,12 @@ function DetachTowRope()
     if not attachedVehicle then
         QBCore.Functions.Notify('No tow rope attached!', 'error')
         return
+    end
+    
+    -- Restore attached vehicle to normal state
+    if DoesEntityExist(attachedVehicle) then
+        SetVehicleUndriveable(attachedVehicle, false)
+        SetEntityCollision(attachedVehicle, true, true)
     end
     
     -- Delete rope entity

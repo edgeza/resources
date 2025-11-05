@@ -15,15 +15,22 @@ Config.DenyDuty = {
 
 Config.WhitelistJobs = {
 	["police"] = true,
-	["bcso"] = true,
-	--["ambulance"] = true,
-	["mechanic1"] = true,
+	["ambulance"] = true,
+	["palmcoast"] = true,
+	["bennies"] = true,
+	["6str"] = true,
+	["olrpmechanic"] = true,
 	["judge"] = true,
 	["lawyer"] = true,
+	["doj"] = true,
+	["koi"] = true,
+	["catcafe"] = true,
+	["highnotes"] = true,
 	["beanmachine"] = true,
 	["aldente"] = true,
 	["drivingteacher"] = true,
 	["dynasty"] = true,
+	["towing"] = true,
 }
 
 Config.Descriptions = {

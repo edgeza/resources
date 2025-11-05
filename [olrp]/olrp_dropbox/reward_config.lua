@@ -9,7 +9,7 @@ return {
             chance = 50, -- 50% chance
             color = "~w~", -- White color for notifications
             rewards = {
-                {type = "item", item = "markedbills", min = 5000, max = 10000, label = "Cash"},
+                {type = "item", item = "markedbills", min = 2, max = 5, label = "Cash"},
                 {type = "item", item = "meth_bag", min = 10, max = 20, label = "Meth"},
                 {type = "item", item = "crack", min = 10, max = 20, label = "Crack"},
                 {type = "item", item = "coke_pure", min = 10, max = 20, label = "Coke"},
@@ -28,7 +28,7 @@ return {
             chance = 25, -- 25% chance
             color = "~g~", -- Green color for notifications 
             rewards = {
-                {type = "item", item = "markedbills", min = 10000, max = 15000, label = "Cash"},
+                {type = "item", item = "markedbills", min = 5, max = 10, label = "Cash"},
                 {type = "item", item = "meth_bag", min = 20, max = 30, label = "Meth"},
                 {type = "item", item = "crack", min = 20, max = 30, label = "Crack"},
                 {type = "item", item = "coke_pure", min = 20, max = 30, label = "Coke"},
@@ -47,7 +47,7 @@ return {
             chance = 15, -- 15% chance  
             color = "~b~", -- Blue color for notifications
             rewards = {
-                {type = "item", item = "markedbills", min = 15000, max = 20000, label = "Cash"},
+                {type = "item", item = "markedbills", min = 10, max = 12, label = "Cash"},
                 {type = "item", item = "meth_bag", min = 30, max = 40, label = "Meth"},
                 {type = "item", item = "crack", min = 30, max = 40, label = "Crack"},
                 {type = "item", item = "coke_pure", min = 30, max = 40, label = "Coke"},
@@ -66,7 +66,7 @@ return {
             chance = 8, -- 8% chance
             color = "~p~", -- Purple color for notifications
             rewards = {
-                {type = "item", item = "markedbills", min = 25000, max = 50000, label = "Cash"},
+                {type = "item", item = "markedbills", min = 12, max = 18, label = "Cash"},
                 {type = "item", item = "meth_bag", min = 40, max = 50, label = "Meth"},
                 {type = "item", item = "crack", min = 40, max = 50, label = "Crack"},
                 {type = "item", item = "coke_pure", min = 40, max = 50, label = "Coke"},
@@ -87,7 +87,7 @@ return {
             chance = 2, -- 2% chance
             color = "~r~", -- Red color for notifications
             rewards = {
-                {type = "item", item = "markedbills", min = 50000, max = 100000, label = "Cash"},
+                {type = "item", item = "markedbills", min = 18, max = 24, label = "Cash"},
                 {type = "item", item = "meth_bag", min = 50, max = 60, label = "Meth"},
                 {type = "item", item = "crack", min = 50, max = 60, label = "Crack"},
                 {type = "item", item = "coke_pure", min = 50, max = 60, label = "Coke"},

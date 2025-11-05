@@ -2024,7 +2024,7 @@ function updateActivityChart() {
         
         playerTimeOffset = (localHour - serverCurrentHour + 24) % 24;
         
-        console.log(`Player time offset calculated: ${playerTimeOffset} hours (Server: ${serverCurrentHour}, Local: ${localHour})`);
+        // Player time offset calculated (removed debug log)
     }
     
     const maxCount = Math.max(...currentJobData.activityData.map(item => item.count), 1);

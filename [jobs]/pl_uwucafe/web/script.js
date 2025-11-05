@@ -169,8 +169,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({ items: itemsToSend, paymentMethod: 'cash'  })
-        }); 
-        clearCartItems()
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            clearCartItems();
+        })
+        .catch(error => {
+            console.error('Error purchasing items:', error);
+            clearCartItems();
+        });
     });
 
     document.querySelector('.pay-button-bank').addEventListener('click', () => {
@@ -195,8 +207,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({ items: itemsToSend, paymentMethod: 'bank' })
-        }); 
-        clearCartItems()
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            clearCartItems();
+        })
+        .catch(error => {
+            console.error('Error purchasing items:', error);
+            clearCartItems();
+        });
     });
 });
 

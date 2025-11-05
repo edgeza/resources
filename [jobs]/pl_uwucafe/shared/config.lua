@@ -89,7 +89,7 @@ Config.MarkerSettings = {
 
 }
 
-Config.EnableSocietyPayment = false -- If enable you can pay from society for the fridge items
+Config.EnableSocietyPayment = true -- If enable you can pay from society for the fridge items
 Config.Jobname = 'catcafe' -- Job Name
 
 Config.StashInventory = {
@@ -116,8 +116,8 @@ Config.IceMachine = {
     MaxIce = 10
 }
 
-Config.MaxBillAmount = 1000
-Config.Commission = 5 -- Commission percentage for bill payments
+Config.MaxBillAmount = 100000
+Config.Commission = 10 -- Commission percentage for bill payments
 Config.Uniforms = {
     clothes = {
 		male = {

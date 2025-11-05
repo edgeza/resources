@@ -3,10 +3,10 @@ Config, Locales = {}, {}
 -- =========================
 -- CORE/TOGGLES
 -- =========================
-Config.Debug = true -- true = will print some debug messages
+Config.Debug = false -- true = will print some debug messages
 Config.Locale = 'en' -- en
 Config.AddVehiclesFromVehiclesFile = false -- true = will add vehicles from qbcore/shared/vehicles.lua
-Config.QBPermissionsUpdate = true -- set it to true if you have the latest Permissions update
+Config.QBPermissionsUpdate = false -- set it to true if you have the latest Permissions update
 Config.UseRoutingBuckets = true -- true = use routing buckets | false = don't use routing buckets
 Config.UseNewStaffCheckMethod = false -- only works if Config.QBPermissionsUpdate is set to true
 Config.PayForOrder = true -- true = pay for the vehicle when you order it | false = don't pay and only receive the profit when selling
@@ -18,7 +18,7 @@ Config.ShowOwnerBlip = false -- Activate/Deactivate owner blips
 Config.ShowBuyVehicleShopBlip = false -- Activate/Deactivate buy shop blip
 Config.ShowHasOwnerShopBlip = true -- Activate/Deactivate blip of shops with "hasOwner = false"
 Config.TestDrive = true -- Activate/Deactivate test drive
-Config.DevMode = true -- Allows you to restart the script (IMPORTANT: only set this to true if you are configuring the script)
+Config.DevMode = false -- Allows you to restart the script (IMPORTANT: only set this to true if you are configuring the script)
 Config.EventPrefix = "okokVehicleshop" -- this will change the prefix of the events name so if Config.EventPrefix = "example" the events will be "example:event"
 Config.QBCorePrefix = "QBCore"
 Config.qbPrefix = "qb"

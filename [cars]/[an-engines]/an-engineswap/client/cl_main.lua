@@ -402,6 +402,15 @@ RegisterNetEvent('an-engineswap:client:listAllSound', function ()
     Utils.createContext(enginemenuAdmin)
 end)
 
+-- Update client-side installed sound cache when server syncs data
+RegisterNetEvent('an-engineswap:client:updateInstalledSound', function(plate, soundData)
+    if soundData then
+        vehicle_sounds[plate:trim()] = soundData
+    else
+        vehicle_sounds[plate:trim()] = nil
+    end
+end)
+
 -- Apply engine sound immediately after installation with proper validation and retry
 RegisterNetEvent('an-engineswap:client:applySoundNow', function(netId, engineSound)
     local vehicle = NetworkGetEntityFromNetworkId(netId)

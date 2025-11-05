@@ -213,7 +213,7 @@ Config.Stands = {
 
 		vehicleCameraSettings = {
 			location = vec3(291.22, -1161.23, 29.13),
-			camera = vec4(280.91, -1161.08, 29.3, 271.56),
+			camera = vec4(284.04, -1160.87, 29.11, 267.94),
 		},
 
 		vehicleSettings = {

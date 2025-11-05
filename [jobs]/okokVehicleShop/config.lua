@@ -5,7 +5,7 @@ Config, Locales = {}, {}
 -- =========================
 Config.Debug = true -- true = will print some debug messages
 Config.Locale = 'en' -- en
-Config.AddVehiclesFromVehiclesFile = true -- true = will add vehicles from qbcore/shared/vehicles.lua
+Config.AddVehiclesFromVehiclesFile = false -- true = will add vehicles from qbcore/shared/vehicles.lua
 Config.QBPermissionsUpdate = true -- set it to true if you have the latest Permissions update
 Config.UseRoutingBuckets = true -- true = use routing buckets | false = don't use routing buckets
 Config.UseNewStaffCheckMethod = false -- only works if Config.QBPermissionsUpdate is set to true

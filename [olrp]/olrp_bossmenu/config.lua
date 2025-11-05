@@ -231,23 +231,50 @@ Config.ApplicationPoints = {
         maxZ = 44.0,
         label = "EMS Application"
     },
-    ["mechanic"] = {
-        coords = vector3(835.92, -912.54, 25.25),  -- Near the mechanic shop
+    ["bennies"] = {
+        coords = vec3(-920.24, -2035.23, 9.42),  -- Near the mechanic shop
         width = 1.0,
         length = 1.0,
         heading = 0,
         minZ = 25.0,
         maxZ = 26.0,
-        label = "Mechanic Application"
+        label = "Bennies Application"
     },
-    ["mechanic3"] = {
-        coords = vector3(-350.0, -130.0, 39.01),  -- Near OneLife Mechanic Shop
+    ["olrpmechanic"] = {
+        coords = vector3(-347.29, -133.0, 39.01),  -- Near OneLife Mechanic Shop
         width = 1.0,
         length = 1.0,
         heading = 0,
         minZ = 38.0,
         maxZ = 40.0,
         label = "OneLife Mechanic Application"
+    },
+    ["palmcoast"] = {
+        coords = vector3(-2022.88, -498.65, 12.21),  -- Near Palm Coast Mechanic Shop
+        width = 1.0,
+        length = 1.0,
+        heading = 0,
+        minZ = 25.0,
+        maxZ = 26.0,
+        label = "Palm Coast Application"
+    },
+    ["6str"] = {
+        coords = vector3(124.66, -3014.24, 7.04),  -- Near 6str Tunershop
+        width = 1.0,
+        length = 1.0,
+        heading = 0,
+        minZ = 6.0,
+        maxZ = 8.0,
+        label = "6str Tunershop Application"
+    },
+    ["doj"] = {
+        coords = vector3(124.66, -3014.24, 7.04),  -- Near DOJ
+        width = 1.0,
+        length = 1.0,
+        heading = 0,
+        minZ = 6.0,
+        maxZ = 8.0,
+        label = "DOJ Application"
     },
     ["catcafe"] = {
         coords = vector3(-581.0, -1058.0, 22.34),  -- Near Cat Cafe
@@ -336,7 +363,106 @@ Config.ApplicationQuestions = {
             min = 1,
             max = 1024
         }
-    }
+    },
+    ["ambulance"] = {
+        {
+            question = "Why do you want to join the EMS Department?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["mechanic"] = {
+        {
+            question = "Why do you want to join the Mechanic Shop?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["palmcoast"] = {
+        {
+            question = "Why do you want to join the Palm Coast?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["6str"] = {
+        {
+            question = "Why do you want to join the 6str Tunershop?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["bennies"] = {
+        {
+            question = "Why do you want to join the Benny's Motorworks?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["highnotes"] = {
+        {
+            question = "Why do you want to join the High Notes?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["koi"] = {
+        {
+            question = "Why do you want to join the Koi?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["towing"] = {
+        {
+            question = "Why do you want to join the Towing?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["olrpmechanic"] = {
+        {
+            question = "Why do you want to join the OneLife Mechanics?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["catcafe"] = {
+        {
+            question = "Why do you want to join the Cat Cafe?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
+    ["skybar"] = {
+        {
+            question = "Why do you want to join the Sky Bar?",
+            type = "text",
+            required = true,
+            min = 1,
+            max = 1024
+        }
+    },
 }
 
 -- Default settings

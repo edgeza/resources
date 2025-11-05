@@ -807,9 +807,12 @@ RegisterNetEvent('boii-mining:cl:JewelBenchAnim', function(data)
     local bench
     local ped = PlayerPedId()
     for obj in EnumerateObjects() do
-        if GetEntityModel(obj) == GetHashKey(Config.JewelCutting.Prop.model) and #(GetEntityCoords(obj) - GetEntityCoords(ped)) < 4.0 then
-            bench = obj
-            break
+        if obj and obj ~= 0 and DoesEntityExist(obj) then
+            local success, model = pcall(function() return GetEntityModel(obj) end)
+            if success and model == GetHashKey(Config.JewelCutting.Prop.model) and #(GetEntityCoords(obj) - GetEntityCoords(ped)) < 4.0 then
+                bench = obj
+                break
+            end
         end
     end
     local dict = 'anim@amb@machinery@speed_drill@'
@@ -910,11 +913,14 @@ RegisterNetEvent('boii-mining:cl:DoJewelCraft', function(data)
         local pedPos = GetEntityCoords(ped)
         local closest = 9999.0
         for obj in EnumerateObjects() do
-            if GetEntityModel(obj) == GetHashKey(Config.JewelCutting.Prop.model) then
-                local dist = #(GetEntityCoords(obj) - pedPos)
-                if dist < closest and dist < 6.0 then
-                    closest = dist
-                    bench = obj
+            if obj and obj ~= 0 and DoesEntityExist(obj) then
+                local success, model = pcall(function() return GetEntityModel(obj) end)
+                if success and model == GetHashKey(Config.JewelCutting.Prop.model) then
+                    local dist = #(GetEntityCoords(obj) - pedPos)
+                    if dist < closest and dist < 6.0 then
+                        closest = dist
+                        bench = obj
+                    end
                 end
             end
         end

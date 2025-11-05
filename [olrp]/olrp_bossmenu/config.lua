@@ -16,12 +16,12 @@ Config.Locations = {
         logoImage = "logo.png",
         locations = {
             {
-                coords = vector3(448.25, -973.38, 30.69), -- Main Police Station (from cs_bossmenu)
+                coords = vector3(837.28, -1307.94, 28.24), -- Main Police Station
                 width = 1.0,
                 length = 1.0,
                 heading = 144,
-                minZ = 30.0,
-                maxZ = 31.0,
+                minZ = 27.0,
+                maxZ = 29.0,
             },
             {
                 coords = vector3(1853.82, 3689.82, 34.27), -- Sandy Shores Sheriff
@@ -38,12 +38,12 @@ Config.Locations = {
         logoImage = "logo.png",
         locations = {
             {
-                coords = vector3(446.29, -978.88, 30.69), -- Main Hospital (from cs_bossmenu)
+                coords = vector3(334.8, -594.25, 43.28), -- Main Hospital
                 width = 1.0,
                 length = 1.0,
                 heading = 123.06,
-                minZ = 30.0,
-                maxZ = 31.0,
+                minZ = 42.0,
+                maxZ = 44.0,
             },
             {
                 coords = vector3(1839.32, 3673.26, 34.28), -- Sandy Shores Hospital
@@ -69,8 +69,8 @@ Config.Locations = {
             }
         }
     },
-    ["westcustoms"] = {
-        label = "West Customs",
+    ["palmcoast"] = {
+        label = "Palm Coast",
         logoImage = "logo.png",
         locations = {
             {
@@ -83,7 +83,7 @@ Config.Locations = {
             }
         }
     },
-    ["mechanic3"] = {
+    ["olrpmechanic"] = {
         label = "OneLife Mechanics",
         logoImage = "logo.png",
         locations = {
@@ -94,20 +94,6 @@ Config.Locations = {
                 heading = 0,
                 minZ = 38.0,
                 maxZ = 40.0,
-            }
-        }
-    },
-    ["beanmachine"] = {
-        label = "Bean Machine",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(-635.0, -236.54, 38.08), -- Bean Machine Coffee Shop
-                width = 1.0,
-                length = 1.0,
-                heading = 0,
-                minZ = 37.0,
-                maxZ = 39.0,
             }
         }
     },
@@ -125,115 +111,17 @@ Config.Locations = {
             }
         }
     },
-    ["upnatom"] = {
-        label = "Up n Atom",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(92.0, 295.0, 110.21), -- Up n Atom Restaurant
-                width = 1.0,
-                length = 1.0,
-                heading = 0,
-                minZ = 109.0,
-                maxZ = 111.0,
-            }
-        }
-    },
-    ["burgershot"] = {
-        label = "BurgerShot",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(-1192.0, -895.0, 13.99), -- BurgerShot Restaurant
-                width = 1.0,
-                length = 1.0,
-                heading = 0,
-                minZ = 13.0,
-                maxZ = 15.0,
-            }
-        }
-    },
-    ["billiards"] = {
-        label = "Billiards",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(-1355.0, -1487.0, 4.42), -- Billiards Hall
-                width = 1.0,
-                length = 1.0,
-                heading = 0,
-                minZ = 3.0,
-                maxZ = 5.0,
-            }
-        }
-    },
     ["skybar"] = {
         label = "Sky Bar",
         logoImage = "logo.png",
         locations = {
             {
-                coords = vector3(315.0, -930.0, 29.46), -- Sky Bar
+                coords = vector3(-905.65, -448.82, 160.31), -- Sky Bar
                 width = 1.0,
                 length = 1.0,
                 heading = 0,
-                minZ = 28.0,
-                maxZ = 30.0,
-            }
-        }
-    },
-    ["bahamas"] = {
-        label = "Bahamas",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(-1387.0, -588.0, 30.32), -- Bahamas Bar
-                width = 1.0,
-                length = 1.0,
-                heading = 0,
-                minZ = 29.0,
-                maxZ = 31.0,
-            }
-        }
-    },
-    ["skydive"] = {
-        label = "Skydiving",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(-1145.0, -2864.0, 13.95), -- Skydiving Center
-                width = 1.0,
-                length = 1.0,
-                heading = 0,
-                minZ = 13.0,
-                maxZ = 15.0,
-            }
-        }
-    },
-    ["lostmc"] = {
-        label = "Lost MC",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(85.69, -1959.65, 21.12), -- Lost MC Clubhouse (from cs_bossmenu)
-                width = 1.0,
-                length = 1.0,
-                heading = 223.76,
-                minZ = 20.0,
-                maxZ = 22.0,
-            }
-        }
-    },
-    ["ballas"] = {
-        label = "Ballas",
-        logoImage = "logo.png",
-        locations = {
-            {
-                coords = vector3(83.83, -1955.18, 20.75), -- Ballas Territory (from cs_bossmenu)
-                width = 1.0,
-                length = 1.0,
-                heading = 145,
-                minZ = 20.0,
-                maxZ = 22.0,
+                minZ = 159.0,
+                maxZ = 161.0,
             }
         }
     },
@@ -278,6 +166,48 @@ Config.Locations = {
                 maxZ = 6.0,
             }
         }
+    },
+    ["6str"] = {
+        label = "6str Tunershop",
+        logoImage = "logo.png",
+        locations = {
+            {
+                coords = vector3(124.66, -3014.24, 7.04), -- 6str Tunershop
+                width = 1.0,
+                length = 1.0,
+                heading = 0,
+                minZ = 6.0,
+                maxZ = 8.0,
+            }
+        }
+    },
+    ["bennies"] = {
+        label = "Benny's Motorworks",
+        logoImage = "logo.png",
+        locations = {
+            {
+                coords = vector3(-920.45, -2044.41, 14.45), -- Benny's Motorworks
+                width = 1.0,
+                length = 1.0,
+                heading = 0,
+                minZ = 13.0,
+                maxZ = 15.0,
+            }
+        }
+    },
+    ["highnotes"] = {
+        label = "High Notes",
+        logoImage = "logo.png",
+        locations = {
+            {
+                coords = vector3(-852.11, -241.12, 62.18), -- High Notes Weed Shop
+                width = 1.0,
+                length = 1.0,
+                heading = 0,
+                minZ = 61.0,
+                maxZ = 63.0,
+            }
+        }
     }
     -- Add more jobs as needed
 }
@@ -319,15 +249,6 @@ Config.ApplicationPoints = {
         maxZ = 40.0,
         label = "OneLife Mechanic Application"
     },
-    ["beanmachine"] = {
-        coords = vector3(-632.0, -233.0, 38.08),  -- Near Bean Machine
-        width = 1.0,
-        length = 1.0,
-        heading = 0,
-        minZ = 37.0,
-        maxZ = 39.0,
-        label = "Bean Machine Application"
-    },
     ["catcafe"] = {
         coords = vector3(-581.0, -1058.0, 22.34),  -- Near Cat Cafe
         width = 1.0,
@@ -337,33 +258,6 @@ Config.ApplicationPoints = {
         maxZ = 23.0,
         label = "Cat Cafe Application"
     },
-    ["upnatom"] = {
-        coords = vector3(95.0, 298.0, 110.21),  -- Near Up n Atom
-        width = 1.0,
-        length = 1.0,
-        heading = 0,
-        minZ = 109.0,
-        maxZ = 111.0,
-        label = "Up n Atom Application"
-    },
-    ["burgershot"] = {
-        coords = vector3(-1189.0, -892.0, 13.99),  -- Near BurgerShot
-        width = 1.0,
-        length = 1.0,
-        heading = 0,
-        minZ = 13.0,
-        maxZ = 15.0,
-        label = "BurgerShot Application"
-    },
-    ["billiards"] = {
-        coords = vector3(-1352.0, -1484.0, 4.42),  -- Near Billiards Hall
-        width = 1.0,
-        length = 1.0,
-        heading = 0,
-        minZ = 3.0,
-        maxZ = 5.0,
-        label = "Billiards Application"
-    },
     ["skybar"] = {
         coords = vector3(318.0, -927.0, 29.46),  -- Near Sky Bar
         width = 1.0,
@@ -372,24 +266,6 @@ Config.ApplicationPoints = {
         minZ = 28.0,
         maxZ = 30.0,
         label = "Sky Bar Application"
-    },
-    ["bahamas"] = {
-        coords = vector3(-1384.0, -585.0, 30.32),  -- Near Bahamas Bar
-        width = 1.0,
-        length = 1.0,
-        heading = 0,
-        minZ = 29.0,
-        maxZ = 31.0,
-        label = "Bahamas Application"
-    },
-    ["skydive"] = {
-        coords = vector3(-1142.0, -2861.0, 13.95),  -- Near Skydiving Center
-        width = 1.0,
-        length = 1.0,
-        heading = 0,
-        minZ = 13.0,
-        maxZ = 15.0,
-        label = "Skydiving Application"
     },
     ["events"] = {
         coords = vector3(-1034.0, -2734.0, 20.17),  -- Near Events Center
@@ -417,6 +293,15 @@ Config.ApplicationPoints = {
         minZ = 4.0,
         maxZ = 6.0,
         label = "Koi Application"
+    },
+    ["highnotes"] = {
+        coords = vector3(0.0, 0.0, 0.0),  -- Near High Notes Weed Shop (UPDATE COORDINATES)
+        width = 1.0,
+        length = 1.0,
+        heading = 0,
+        minZ = -1.0,
+        maxZ = 1.0,
+        label = "High Notes Application"
     },
     -- Add more points as needed
 }

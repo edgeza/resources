@@ -764,11 +764,11 @@ function petOut()
                     TaskGoToEntity(pet, mamaobj, -1, 2.0, petSpeed, 1073741824.0, 0)
                     local dst2 = #(GetEntityCoords(pet) - GetEntityCoords(mamaobj))
                     if dst2 < 3 then
-                        if PetTable[pet_model].dictionary.eat then
+                        if pet_model and PetTable[pet_model] and PetTable[pet_model].dictionary and PetTable[pet_model].dictionary.eat then
                             LoadAnimDict(PetTable[pet_model].dictionary.eat)
                             TaskPlayAnim(pet, PetTable[pet_model].dictionary.eat, PetTable[pet_model].animation.eat,
                                 8.0, -8, -1, 1, 0, false, false, false)
-                        else
+                        elseif pet_model and PetTable[pet_model] and PetTable[pet_model].dictionary and PetTable[pet_model].dictionary.sit then
                             LoadAnimDict(PetTable[pet_model].dictionary.sit)
                             TaskPlayAnim(pet, PetTable[pet_model].dictionary.sit, PetTable[pet_model].animation.sit,
                                 3.0, -8, -1, 1, 0, false, false, false)
@@ -1033,6 +1033,9 @@ end)
 
 RegisterNetEvent('dusa_pets:petGetIn')
 AddEventHandler('dusa_pets:petGetIn', function()
+    if not pet_model or not PetTable[pet_model] or not PetTable[pet_model].dictionary then
+        return
+    end
     local vehicle
     if GetVehiclePedIsIn(PlayerPedId()) ~= 0 then
         vehicle = GetVehiclePedIsIn(PlayerPedId())
@@ -1149,6 +1152,9 @@ AddEventHandler('dusa_pets:follow', function()
 end)
 
 AddEventHandler('dusa_pets:sit', function()
+    if not pet_model or not PetTable[pet_model] or not PetTable[pet_model].animation or not PetTable[pet_model].dictionary then
+        return
+    end
     sitting = not sitting
     if PetTable[pet_model].animation.sit then
         if sitting then
@@ -1177,6 +1183,9 @@ AddEventHandler('dusa_pets:sit', function()
 end)
 
 AddEventHandler('dusa_pets:lay', function()
+    if not pet_model or not PetTable[pet_model] or not PetTable[pet_model].animation or not PetTable[pet_model].dictionary then
+        return
+    end
     sleeping = not sleeping
     if PetTable[pet_model].animation.sleep then
         if sleeping then
@@ -1199,6 +1208,9 @@ AddEventHandler('dusa_pets:lay', function()
 end)
 
 AddEventHandler('dusa_pets:bark', function()
+    if not pet_model or not PetTable[pet_model] or not PetTable[pet_model].animation or not PetTable[pet_model].dictionary then
+        return
+    end
     barking = not barking
     if PetTable[pet_model].animation.bark then
         if barking then
@@ -1221,6 +1233,9 @@ AddEventHandler('dusa_pets:bark', function()
 end)
 
 AddEventHandler('dusa_pets:paw', function()
+    if not pet_model or not PetTable[pet_model] or not PetTable[pet_model].animation or not PetTable[pet_model].dictionary then
+        return
+    end
     paw = not paw
     if PetTable[pet_model].animation.paw then
         if paw then
@@ -1242,6 +1257,9 @@ AddEventHandler('dusa_pets:paw', function()
 end)
 
 AddEventHandler('dusa_pets:standup', function()
+    if not pet_model or not PetTable[pet_model] or not PetTable[pet_model].animation or not PetTable[pet_model].dictionary then
+        return
+    end
     standup = not standup
     if PetTable[pet_model].animation.dance then
         if standup then
@@ -1263,6 +1281,9 @@ AddEventHandler('dusa_pets:standup', function()
 end)
 
 AddEventHandler('dusa_pets:pet', function()
+    if not pet_model or not PetTable[pet_model] or not PetTable[pet_model].dictionary or not PetTable[pet_model].dictionary.tricks then
+        return
+    end
     petchop = not petchop
     local playerPed = PlayerPedId()
     if petchop then

@@ -1,0 +1,53 @@
+.barcontainer {
+  display: flex;
+  margin: auto;
+  width: 30%;
+  margin-top: 50%; /* Default-Margin-Top */
+}
+
+/* Margin-Top for 21:9-Ratio */
+@media screen and (min-aspect-ratio: 21/9) {
+  .barcontainer {
+      margin-top: 40%; 
+  }
+}
+
+/* Margin-Top for 32:9-Ratio */
+@media screen and (min-aspect-ratio: 32/9) {
+  .barcontainer {
+      margin-top: 25%; 
+  }
+}
+
+.progress-bar__container {
+  width: 80%;
+  height: 2rem;
+  border-radius: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s;
+  will-change: transform;
+  box-shadow: 2px 2px 5px #040514;
+}
+
+.progress-bar {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  content: "";
+  background-color: #04020c;
+  top:0;
+  bottom: 0;
+  left: -100%;
+  border-radius: inherit;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  color: rgb(20, 20, 20);
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+.progress-bar__text {
+  display: none;
+}

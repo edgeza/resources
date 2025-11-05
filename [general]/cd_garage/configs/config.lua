@@ -733,6 +733,11 @@ Config.JobVehicles = {
             -- OneLife Tower
             [1] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
         },
+
+        ['koi'] = {
+            -- Koi Restaurant
+            [1] = {coords = vec3(-1014.77, -1470.86, 5.01), spawn_coords = vec4(-1014.66, -1470.9, 5.01, 41.71), distance = 5, garage_type = 'car', method = 'regular'},
+        },
     },
 
     --This will only be used if any of the 'method'(s) in the table above are set to use 'regular' job vehicles.
@@ -1193,6 +1198,20 @@ Config.Locations = {
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
         x_2 = -2009.19, y_2 = -487.5, z_2 = 11.37, h_2 = 136.65, 
+        EnableBlip = true,
+        JobRestricted = nil,
+        ShellType = '10cargarage_shell',
+    },
+
+    {
+        Garage_ID = 'KOI',
+        Type = 'car',
+        Dist = 4,
+        x_1 = -1064.44, y_1 = -1448.25, z_1 = 5.41, -- vec4(-1064.44, -1448.25, 5.41, 334.45)
+        EventName1 = 'cd_garage:QuickChoose',
+        EventName2 = 'cd_garage:EnterGarage',
+        Name = UIText,
+        x_2 = -1064.44, y_2 = -1448.25, z_2 = 5.41, h_2 = 334.45, 
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',

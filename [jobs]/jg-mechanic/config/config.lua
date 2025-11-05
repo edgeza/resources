@@ -1153,7 +1153,7 @@ Config.MechanicLocations = {
       
 
       {--- Chopper Repairs
-        coords = vector3(166.82, -3009.15, 5.84),
+        coords = vec3(164.23, -2989.6, 5.91),
         size = 3.0,
         showBlip = false,
       },

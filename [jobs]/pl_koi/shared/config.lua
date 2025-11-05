@@ -89,7 +89,7 @@ Config.MarkerSettings = {
 
 }
 
-Config.EnableSocietyPayment = false -- If enable you can pay from society for the fridge items
+Config.EnableSocietyPayment = true -- If enable you can pay from society for the fridge items
 Config.Jobname = 'koi' -- Job Name
 
 Config.StashInventory = {
@@ -107,7 +107,7 @@ Config.StashInventory = {
     TrashCanWeight = 20000,
 }
 
-Config.MaxStock = 100
+Config.MaxStock = 99999999
 
 Config.IceMachine = {
     ice_itemname = 'koi_icecubes',
@@ -116,8 +116,8 @@ Config.IceMachine = {
     MaxIce = 10
 }
 
-Config.MaxBillAmount = 1000
-Config.Commission = 5 -- Commission percentage for bill payments
+Config.MaxBillAmount = 100000
+Config.Commission = 10 -- Commission percentage for bill payments
 Config.Uniforms = {
     clothes = {
 		male = {
@@ -179,38 +179,38 @@ Config.Shop = {
 		label = "Fridge",
 		items = {
             Seafoods = {
-                { name  = "koi_dill_butter", label= "Dill Butter", price =50, amount = 50},
-                { name = "koi_clarified_butter", label="Clarified Butter", price = 50, amount = 50},
-                { name = "koi_white_wine", label="White Wine", price = 50, amount = 50},
-                { name = "koi_truffle_oil", label="Truffle Oil", price = 50, amount = 50},
-                { name = "koi_old_bay_seasoning", label="Old Bay Seasoning", price = 50, amount = 50},
-                { name = "koi_salt", label="Salt", price = 50, amount = 50},
+                { name  = "koi_dill_butter", label= "Dill Butter", price =50, amount = 99999999},
+                { name = "koi_clarified_butter", label="Clarified Butter", price = 99999999, amount = 99999999},
+                { name = "koi_white_wine", label="White Wine", price = 50, amount = 99999999},
+                { name = "koi_truffle_oil", label="Truffle Oil", price = 50, amount = 99999999},
+                { name = "koi_old_bay_seasoning", label="Old Bay Seasoning", price = 50, amount = 99999999},
+                { name = "koi_salt", label="Salt", price = 50, amount = 99999999},
             },
             Drinks = {
                 { name = 'koi_sugar', label = "Sugar", price = 50, amount = 50},
-                { name = "koi_fresh_mint_leaves",label="Fresh Mint Leaves", price = 50, amount = 50},
-                { name = "koi_coconut_cream", label="Coconut Cream", price = 50, amount = 50},
-                { name = "koi_triple_sec", label="Triple Sec", price = 50, amount = 50},
-                { name = "koi_coffee_liquor_kahlua", label="Coffee Liquor", price = 50, amount = 50},
-                { name = "koi_fresh_lemonade", label="Fresh Lamonade", price = 50, amount = 50},
-                { name = "koi_emptycup", label="Koi Empty Cup", price = 50, amount = 50},
-                { name = "koi_waterbottle", label="Koi Water Bottle", price = 50, amount = 50},
+                { name = "koi_fresh_mint_leaves",label="Fresh Mint Leaves", price = 50, amount = 99999999},
+                { name = "koi_coconut_cream", label="Coconut Cream", price = 50, amount = 99999999},
+                { name = "koi_triple_sec", label="Triple Sec", price = 50, amount = 99999999},
+                { name = "koi_coffee_liquor_kahlua", label="Coffee Liquor", price = 50, amount = 99999999},
+                { name = "koi_fresh_lemonade", label="Fresh Lamonade", price = 50, amount = 99999999},
+                { name = "koi_emptycup", label="Koi Empty Cup", price = 50, amount = 99999999},
+                { name = "koi_waterbottle", label="Koi Water Bottle", price = 50, amount = 99999999},
             },
             Steaks = {
-                { name = 'koi_herb_butter',label="Herb Butter", price = 50, amount = 50},
-                { name = 'koi_black_pepper',label="Black Pepper", price = 50, amount = 50},
-                { name = "koi_bearnaise_sauce", label=" Bearnaise Sauce", price = 50, amount = 50},
-                { name = "koi_steakhouse_dry_rub", label="Steakhouse Dry Rub", price = 50, amount = 50},
-                { name = "koi_smoked_sea_salt", label="Smoked Sea Salt", price = 50, amount = 50},
-                { name = "koi_red_wine_reduction", label="Red Wine Reduction", price = 50, amount = 50},
+                { name = 'koi_herb_butter',label="Herb Butter", price = 50, amount = 99999999},
+                { name = 'koi_black_pepper',label="Black Pepper", price = 50, amount = 99999999},
+                { name = "koi_bearnaise_sauce", label=" Bearnaise Sauce", price = 50, amount = 99999999},
+                { name = "koi_steakhouse_dry_rub", label="Steakhouse Dry Rub", price = 50, amount = 99999999},
+                { name = "koi_smoked_sea_salt", label="Smoked Sea Salt", price = 50, amount = 99999999},
+                { name = "koi_red_wine_reduction", label="Red Wine Reduction", price = 50, amount = 99999999},
 
             },
             Desserts = {
-                { name = "koi_mascarpone_cheese", label = "Mascarpone Cheese", price = 50, amount = 50 },
-                { name = "koi_graham_cracker_crust", label = "Graham Cracker Crust", price = 50, amount = 50 },
-                { name = "koi_molten_ganache_filling", label = "Molten Ganache Filling", price = 50, amount = 50 },
-                { name = "koi_caramelized_sugar_topping", label = "Caramelized Sugar Topping", price = 50, amount = 50 },
-                { name = "koi_key_lime_juice", label = "Key Lime Juice", price = 50, amount = 50 }
+                { name = "koi_mascarpone_cheese", label = "Mascarpone Cheese", price = 50, amount = 99999999 },
+                { name = "koi_graham_cracker_crust", label = "Graham Cracker Crust", price = 50, amount = 99999999 },
+                { name = "koi_molten_ganache_filling", label = "Molten Ganache Filling", price = 50, amount = 99999999 },
+                { name = "koi_caramelized_sugar_topping", label = "Caramelized Sugar Topping", price = 50, amount = 99999999 },
+                { name = "koi_key_lime_juice", label = "Key Lime Juice", price = 50, amount = 99999999 }
             },
         }
 	},

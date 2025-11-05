@@ -208,18 +208,18 @@ Config.Stands = {
 		licenseType = "drive_a", -- if you want to use a license system you'll need to set it up on sv_utils.lua
 		currency = "bank", -- used to buy/sell the business and buy vehicle
 		hasOwner = false, -- true = this vehicle shop can have a owner and will need maintenance to have stock | false = no owner and with vehicles all the time, price = max_price set on the database
-		blipCoords = vector3(-867.97, -201.25, 37.84), -- blip position for the vehicle shop
+		blipCoords = vec3(290.65, -1161.58, 29.13), -- blip position for the vehicle shop
 		isVip = false, -- if set to true IT WON'T BE OWNED BY ANYONE and will use vip coins instead of currency, check sv_utils.lua to change the vip coins functions
 
 		vehicleCameraSettings = {
-			location = vector3(-872.93, -191.63, 37.84),
-			camera = vector4(-865.23, -199.74, 38.99, 55.96),
+			location = vec3(291.22, -1161.23, 29.13),
+			camera = vec4(280.91, -1161.08, 29.3, 271.56),
 		},
 
 		vehicleSettings = {
-			sellVehicleCoords = vector3(-882.97, -200.26, 38.64), -- position where the vehicles can be sold
+			sellVehicleCoords = vec3(309.26, -1166.57, 29.29), -- position where the vehicles can be sold
 			purchaseVehicleCoords = { -- positions where the vehicles will be spawned when the player purchases a vehicle
-				{vector4(-896.8, -202.45, 38.37, 72.0)},
+				{vec4(262.25, -1162.84, 29.18, 357.3)},
 			}
 		},
 
@@ -228,17 +228,17 @@ Config.Stands = {
 			price = 100, -- Price of the test drive
 			time = 45, -- Time of the test drive in seconds
 			plate = "TEST", -- Plate of the test drive vehicle [max 8 characters]
-			carLocation = vector4(-891.18, -184.8, 37.89, 0.0), -- Location of the car test drive
+			carLocation = vec4(250.22, -1150.05, 29.28, 176.62), -- Location of the car test drive
 			boatLocation = vector4(-796.85, -1502.27, -0.09, 113.55), -- Location of the boat test drive
 			airLocation = vector4(-1332.52, -2205.1, 13.34, 151.03), -- Location of the air test drive
 		},
 
         markerSettings = {
-			vehicleCoords = vector3(-867.97, -201.25, 37.84), -- Marker/Shop position for vehicle listing
+			vehicleCoords = vec3(288.2, -1172.57, 29.3), -- Marker/Shop position for vehicle listing
         },
 
         targetSettings = {
-			vehicleCoords = vector3(-867.97, -201.25, 37.84), -- Marker/Shop position for vehicle listing
+			vehicleCoords = vec3(288.2, -1172.57, 29.3), -- Marker/Shop position for vehicle listing
         },
 
 		radius = 1, -- Interaction radius for the markers

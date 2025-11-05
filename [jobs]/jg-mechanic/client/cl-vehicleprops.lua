@@ -859,23 +859,60 @@ end)
 -- 
 
 local vehiclePlate = nil
+local lastVehicleEntity = nil
 local function onEnterVehicle(vehicle)
   -- Save DB data of last vehicle when getting out of a vehicle
-  if vehiclePlate then
+  if vehiclePlate and lastVehicleEntity and DoesEntityExist(lastVehicleEntity) then
+    -- Save both statebag data and full vehicle properties (including health)
     lib.callback.await("jg-mechanic:server:save-veh-statebag-data-to-db", false, vehiclePlate, true)
+    
+    -- Also save full vehicle properties including health to ensure damage state persists
+    local props = getVehicleProperties(lastVehicleEntity, true)
+    if props then
+      lib.callback.await("jg-mechanic:server:save-vehicle-props", false, vehiclePlate, props)
+    end
   end
 
   if not vehicle or vehicle == 0 then
     vehiclePlate = nil
+    lastVehicleEntity = nil
     return
   end
 
   -- New vehicle;
   SetTimeout(2000, function()
     vehiclePlate = Framework.Client.GetPlate(vehicle)
+    lastVehicleEntity = vehicle
     retrieveAndApplyVehicleStatebagData(vehicle, vehiclePlate)
   end)
 end
 
 lib.onCache("vehicle", onEnterVehicle)
 if cache.vehicle then onEnterVehicle(cache.vehicle) end -- In case of script restart, lib.onCache does not run if you're already sat in a vehicle
+
+--
+-- Save vehicle properties after repair to ensure fixed state persists
+--
+RegisterNetEvent("jg-mechanic:client:repair-vehicle", function()
+  local vehicle = cache.vehicle
+  if not vehicle or vehicle == 0 then return end
+
+  -- Wait for repair to complete (the encrypted fixing.lua handles the actual repair)
+  -- We need to wait long enough for repair to finish before saving properties
+  SetTimeout(1500, function()
+    if not DoesEntityExist(vehicle) then return end
+
+    local plate = Framework.Client.GetPlate(vehicle)
+    if not plate then return end
+
+    -- Get current vehicle properties (with updated health after repair)
+    local props = getVehicleProperties(vehicle, true)
+    if not props then return end
+
+    -- Verify vehicle is actually repaired (health should be high)
+    if props.engineHealth and props.engineHealth > 500 and props.bodyHealth and props.bodyHealth > 500 then
+      -- Save vehicle properties to database so they persist when stored/retrieved from garage
+      lib.callback.await("jg-mechanic:server:save-vehicle-props", false, plate, props)
+    end
+  end)
+end)

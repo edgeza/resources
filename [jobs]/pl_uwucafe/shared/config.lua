@@ -12,7 +12,7 @@
 Location = {}
 Config = {}
 
-Config.Framework = 'autodetect' -- 'autodetect' or "esx" ,"qb", "qbox"'
+Config.Framework = 'qbox' -- 'autodetect' or "esx" ,"qb", "qbox"'
 
 Config.FrameworkResources = {
     esx = {
@@ -107,7 +107,7 @@ Config.StashInventory = {
     TrashCanWeight = 20000,
 }
 
-Config.MaxStock = 100
+Config.MaxStock = 99999999
 
 Config.IceMachine = {
     ice_itemname = 'cc_icecubes',

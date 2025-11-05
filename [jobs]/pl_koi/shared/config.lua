@@ -107,7 +107,7 @@ Config.StashInventory = {
     TrashCanWeight = 20000,
 }
 
-Config.MaxStock = 100
+Config.MaxStock = 99999999
 
 Config.IceMachine = {
     ice_itemname = 'koi_icecubes',

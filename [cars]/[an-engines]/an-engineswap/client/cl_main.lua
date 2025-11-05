@@ -2,7 +2,14 @@ local ZoneStatus = {}
 local CreatedZone = {}
 local cacheSound = {} -- Move cache outside thread scope for global access
 
-local vehicle_sounds = require 'data.installed_sound'
+local vehicle_sounds_raw = require 'data.installed_sound'
+-- Normalize all plates in vehicle_sounds to remove spaces (match server format)
+local vehicle_sounds = {}
+for plate, data in pairs(vehicle_sounds_raw) do
+    local normalizedPlate = plate:gsub("%s", "")
+    vehicle_sounds[normalizedPlate] = data
+end
+
 local Locations = require "data.location"
 local Sound = require "data.sound"
 
@@ -267,8 +274,8 @@ lib.onCache('vehicle', function(vehicle)
             if cache.seat ~= -1 then return end
             if not DoesEntityExist(vehicle) or GetEntityType(vehicle) ~= 2 then return end
             
-            local vehiclePlate = GetVehicleNumberPlateText(vehicle)
-            local engineSwap = vehicle_sounds[vehiclePlate:trim()]
+            local vehiclePlate = Utils.getPlate(vehicle)
+            local engineSwap = vehicle_sounds[vehiclePlate]
         
             if engineSwap and engineSwap.exhaust then
                 Entity(vehicle).state:set('an_engine', engineSwap.exhaust, true)
@@ -404,10 +411,29 @@ end)
 
 -- Update client-side installed sound cache when server syncs data
 RegisterNetEvent('an-engineswap:client:updateInstalledSound', function(plate, soundData)
+    -- Normalize plate to match server format (remove all spaces)
+    local normalizedPlate = plate:gsub("%s", "")
+    
     if soundData then
-        vehicle_sounds[plate:trim()] = soundData
+        vehicle_sounds[normalizedPlate] = soundData
+        
+        -- If player is currently in a vehicle with this plate, update it immediately
+        if cache.vehicle then
+            local currentPlate = Utils.getPlate(cache.vehicle)
+            if currentPlate == normalizedPlate and soundData.exhaust then
+                Entity(cache.vehicle).state:set('an_engine', soundData.exhaust, true)
+                SetTimeout(200, function()
+                    if DoesEntityExist(cache.vehicle) and GetEntityType(cache.vehicle) == 2 then
+                        pcall(function()
+                            ForceVehicleEngineAudio(cache.vehicle, soundData.exhaust)
+                            cacheSound[cache.vehicle] = soundData.exhaust
+                        end)
+                    end
+                end)
+            end
+        end
     else
-        vehicle_sounds[plate:trim()] = nil
+        vehicle_sounds[normalizedPlate] = nil
     end
 end)
 

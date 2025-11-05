@@ -41,11 +41,4 @@ return {
 		debug = false,
 		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
 	},
-	[6] = {  -- Palm Customs
-		coords = vec3(-2012.23, -496.07, 11.63),
-		radius = 10.000000,
-		groups = nil,
-		debug = false,
-		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
-	},
 }

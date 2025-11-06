@@ -79,7 +79,7 @@ RegisterServerEvent('boii-mining:sv:DigPaydirt', function()
     end
     if Config.XP.Use then
         local oldLevel = computeMiningLevel(MiningXP)
-        local add = math.random(1, 2)
+        local add = math.random(20, 50)
         local newTotal = (MiningXP + add)
         pData.Functions.SetMetaData(MetaDataName, newTotal) -- Edit xp reward here
         local newLevel = computeMiningLevel(newTotal)
@@ -139,7 +139,7 @@ RegisterServerEvent('boii-mining:sv:PanPaydirt', function()
     end 
     if Config.XP.Use then
         local oldLevel = computeMiningLevel(MiningXP)
-        local add = math.random(3, 5)
+        local add = math.random(20, 50)
         local newTotal = (MiningXP + add)
         pData.Functions.SetMetaData(MetaDataName, newTotal) -- Edit xp reward here
         local newLevel = computeMiningLevel(newTotal)
@@ -221,7 +221,7 @@ RegisterServerEvent('boii-mining:sv:QuarryDrilling', function()
     end 
     if Config.XP.Use then
         local oldLevel = computeMiningLevel(MiningXP)
-        local add = math.random(3, 5)
+        local add = math.random(30, 50)
         local newTotal = (MiningXP + add)
         pData.Functions.SetMetaData(MetaDataName, newTotal) -- Edit xp reward here
         local newLevel = computeMiningLevel(newTotal)
@@ -350,7 +350,7 @@ RegisterServerEvent('boii-mining:sv:CaveDrilling', function()
     end 
     if Config.XP.Use then
         local oldLevel = computeMiningLevel(MiningXP)
-        local add = math.random(4, 6)
+        local add = math.random(40, 60)
         local newTotal = (MiningXP + add)
         pData.Functions.SetMetaData(MetaDataName, newTotal) -- Edit xp reward here
         local newLevel = computeMiningLevel(newTotal)

@@ -126,7 +126,7 @@ Config.Impound = {
 
     Authorized_Jobs = { --Only jobs inside this table can impound vehicles or unimpound vehicles.
         ['police'] = true,
-        ['mechanic'] = true,
+        ['towing'] = true,
         --['add_more_here'] = true,
     },
 
@@ -517,21 +517,6 @@ Config.JobVehicles = {
             [21] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
 
         },
-        ['bcso'] = {
-            [1] = {coords = vector3(-477.35, 5975.35, 31.31), spawn_coords = vector4(-483.03, 5980.4, 31.31, 333.43), distance = 5, garage_type = 'car', method = 'regular'}, -- Paleto
-            [2] = {coords = vector3(-455.51, 5999.89, 39.35), spawn_coords = vector4(-455.03, 5999.82, 39.35, 47.03), distance = 5, garage_type = 'air', method = 'regular'}, -- Paleto
-            [3] = {coords = vector3(456.27, -1020.71, 24.45), spawn_coords = vector4(456.27, -1020.71, 24.45, 5.08), distance = 5, garage_type = 'car', method = 'regular'}, -- MRPD
-            [4] = {coords = vector3(450.59, -1014.98, 42.84), spawn_coords = vector4(450.59, -1014.98, 42.84, 0.81), distance = 5, garage_type = 'air', method = 'regular'}, -- MRPD
-            [5] = {coords = vector3(350.34, -1606.96, 29.28), spawn_coords = vector4(351.89, -1605.09, 29.28, 321.04), distance = 5, garage_type = 'car', method = 'regular'}, --Davis PD (cars)
-            [6] = {coords = vector3(384.36, -1619.16, 38.03), spawn_coords = vector4(386.32, -1620.79, 38.03, 51.42), distance = 5, garage_type = 'air', method = 'regular'}, --Davis PD (helipad)
-            [7] = {coords = vector3(-1598.49, -1201.4, 0.82), spawn_coords = vector4(-1609.96, -1210.83, -0.03, 134.45), distance = 20, garage_type = 'boat', method = 'regular'}, --Vespucci Beach (boats)
-            [8] = {coords = vector3(1426.31, 3750.12, 31.76), spawn_coords = vector4(1430.37, 3771.52, 29.86, 336.36), distance = 20, garage_type = 'boat', method = 'regular'}, --Sandy Lake (boats)
-            [9] = {coords = vector3(-1820.11, -946.19, 1.05), spawn_coords = vector4(-1833.75, -951.07, -0.05, 111.0), distance = 20, garage_type = 'boat', method = 'regular'}, --Sandy Lake (boats)
-            --Oil Rig
-            [10] = {coords = vector3(-1414.01, 7255.34, 28.83), spawn_coords = vector4(-1414.01, 7255.34, 28.83, 279.41), distance = 5, garage_type = 'air', method = 'regular'},
-            [11] = {coords = vector3(-2717.98, 6579.49, 28.83), spawn_coords = vector4(-2717.98, 6579.49, 28.83, 274.1), distance = 5, garage_type = 'air', method = 'regular'},
-
-        },
         ['towing'] = {
             [1] = {coords = vector3(482.51, -1338.29, 29.29), spawn_coords = vector4(490.01, -1341.55, 29.23, 359.5), distance = 5, garage_type = 'car', method = 'regular'},
         },
@@ -544,20 +529,7 @@ Config.JobVehicles = {
             -- OneLife Tower
             [5] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
         },
-
-        ['burgershot'] = {
-            [1] = {coords = vector3(-1200.28, -909.08, 13.63), spawn_coords = vector4(-1200.28, -909.08, 13.63, 28.56), distance = 5, garage_type = 'car', method = 'regular'},
-            
-            -- OneLife Tower
-            [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
-        },
-        ['doj'] = {
-            [1] = {coords = vector3(-514.01, -246.6, 35.71), spawn_coords = vector4(-499.98, -257.53, 35.56, 293.37), distance = 5, garage_type = 'car', method = 'regular'},
-
-            -- OneLife Tower
-            [3] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
-        },
-        ['mechanic1'] = {
+        ['bennies'] = {
             [1] = {coords = vector3(-747.82, -2043.29, 8.92), spawn_coords = vector4(-747.82, -2043.29, 8.92, 220.07), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(-747.82, -2043.29, 8.92, 220.07)
             [2] = {coords = vector3(-739.32, -2065.2, 8.9), spawn_coords = vector4(-741.85, -2064.48, 8.91, 40.01), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(-744.98, -2060.75, 8.93, 46.83)
             [3] = {coords = vector3(-897.66, -2035.13, 9.3), spawn_coords = vector4(-900.03, -2037.72, 9.3, 130.14), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(-900.03, -2037.72, 9.3, 130.14)
@@ -571,13 +543,13 @@ Config.JobVehicles = {
             -- OneLife Tower
             [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
         },
-        ['mechanic2'] = {
+        ['6str'] = {
             [1] = {coords = vector3(163.49, -3014.1, 5.93), spawn_coords = vector4(188.12, -3042.35, 5.81, 3.64), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(188.12, -3042.35, 5.81, 3.64) 
 
             -- OneLife Tower
             [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
         },
-         ['mechanic3'] = {
+         ['olrpmechanic'] = {
             [1] = {coords = vector3(1131.67, -769.13, 57.75), spawn_coords = vector4(1131.67, -769.13, 57.75, 271.55), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(1125.02, -797.66, 57.71, 353.76)
 
             -- OneLife Tower
@@ -589,36 +561,6 @@ Config.JobVehicles = {
             -- OneLife Tower
             [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
         },
-        ['beanmachine'] = {
-            [1] = {coords = vector3(111.32, -1049.33, 29.21), spawn_coords = vector4(110.79, -1053.2, 29.2, 249.95), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(290.79, -956.84, 29.3, 87.86)
-
-            -- OneLife Tower
-            [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
-        },
-        ['hennies'] = {
-            [1] = {coords = vector3(-1830.91, -1162.49, 13.02), spawn_coords = vector4(-1828.73, -1164.38, 13.02, 229.21), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(-1828.73, -1164.38, 13.02, 229.21)
-
-            -- OneLife Tower
-            [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
-        },
-        ['upnatom'] = {
-            [1] = {coords = vector3(121.49, 287.66, 109.97), spawn_coords = vector4(119.63, 288.29, 109.97, 70.79), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(-1828.73, -1164.38, 13.02, 229.21)
-
-            -- OneLife Tower
-            [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
-        },
-        ['billiards'] = {
-            [1] = {coords = vector3(-1183.06, -1603.71, 4.39), spawn_coords = vector4(-1180.86, -1602.28, 4.37, 303.94), distance = 5, garage_type = 'car', method = 'regular'}, --vector4(-1180.86, -1602.28, 4.37, 303.94)
-
-            -- OneLife Tower
-            [2] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
-        },
-
-        ['dynasty'] = {
-            -- OneLife Tower
-            [1] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
-        },
-
         ['koi'] = {
             -- Koi Restaurant
             [1] = {coords = vec3(-1014.77, -1470.86, 5.01), spawn_coords = vec4(-1014.66, -1470.9, 5.01, 41.71), distance = 5, garage_type = 'car', method = 'regular'},
@@ -719,58 +661,38 @@ Config.JobVehicles = {
             [1] = {job = 'towing', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `caracaran`},
             [2] = {job = 'towing', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `everonb`},
         },
-        ['burgershot'] = {
-            [1] = {job = 'burgershot', spawn_max = false, plate = 'BS', job_grade = 1, garage_type = 'car', model = `vanburger`},
-        },
-        ['doj'] = {
-            [1] = {job = 'doj', spawn_max = false, plate = 'DOJ', job_grade = 1, garage_type = 'car', model = `presidentrollsroyce4`},
-        },
-        ['mechanic1'] = {
-            [1] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `Shifter_kart`},
-            [2] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `energyguinchoride_Bennys`},
-            [3] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 3, garage_type = 'car', model = `energyheliride_Bennys`},
-            [4] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 2, garage_type = 'car', model = `energysierraride_Bennys`},
-            [5] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 3, garage_type = 'car', model = `energytenereride_Bennys`},
-            [6] = {job = 'mechanic1', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `dltowtruckbennys`},
+        ['bennies'] = {
+            [1] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `Shifter_kart`},
+            [2] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `energyguinchoride_Bennys`},
+            [3] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 3, garage_type = 'car', model = `energyheliride_Bennys`},
+            [4] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 2, garage_type = 'car', model = `energysierraride_Bennys`},
+            [5] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 3, garage_type = 'car', model = `energytenereride_Bennys`},
+            [6] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `dltowtruckbennys`},
         },
         ['palmcoast'] = {
-            [1] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 1, garage_type = 'car', model = `energyguinchoride_east`},
-            [2] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 3, garage_type = 'car', model = `energyheliride_east`},
-            [3] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 2, garage_type = 'car', model = `energysierraride_east`},
-            [4] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 3, garage_type = 'car', model = `energytenereride_east`},
-            [5] = {job = 'mechanic', spawn_max = false, plate = 'EASTC', job_grade = 1, garage_type = 'car', model = `dltowtruckeast`},
+            [1] = {job = 'palmcoast', spawn_max = false, plate = 'EASTC', job_grade = 1, garage_type = 'car', model = `energyguinchoride_east`},
+            [2] = {job = 'palmcoast', spawn_max = false, plate = 'EASTC', job_grade = 3, garage_type = 'car', model = `energyheliride_east`},
+            [3] = {job = 'palmcoast', spawn_max = false, plate = 'EASTC', job_grade = 2, garage_type = 'car', model = `energysierraride_east`},
+            [4] = {job = 'palmcoast', spawn_max = false, plate = 'EASTC', job_grade = 3, garage_type = 'car', model = `energytenereride_east`},
+            [5] = {job = 'palmcoast', spawn_max = false, plate = 'EASTC', job_grade = 1, garage_type = 'car', model = `dltowtruckeast`},
         },
-        ['mechanic3'] = {
-            [1] = {job = 'mechanic3', spawn_max = false, plate = 'onelife', job_grade = 1, garage_type = 'car', model = `energyguinchoride_onelife`},
-            [2] = {job = 'mechanic3', spawn_max = false, plate = 'onelife', job_grade = 3, garage_type = 'car', model = `energyheliride_onelife`},
-            [3] = {job = 'mechanic3', spawn_max = false, plate = 'onelife', job_grade = 2, garage_type = 'car', model = `energysierraride_onelife`},
-            [4] = {job = 'mechanic3', spawn_max = false, plate = 'onelife', job_grade = 3, garage_type = 'car', model = `energytenereride_onelife`},
-            [5] = {job = 'mechanic3', spawn_max = false, plate = 'onelife', job_grade = 1, garage_type = 'car', model = `dltowtruckonelife`},
+        ['olrpmechanic'] = {
+            [1] = {job = 'olrpmechanic', spawn_max = false, plate = 'onelife', job_grade = 1, garage_type = 'car', model = `energyguinchoride_onelife`},
+            [2] = {job = 'olrpmechanic', spawn_max = false, plate = 'onelife', job_grade = 3, garage_type = 'car', model = `energyheliride_onelife`},
+            [3] = {job = 'olrpmechanic', spawn_max = false, plate = 'onelife', job_grade = 2, garage_type = 'car', model = `energysierraride_onelife`},
+            [4] = {job = 'olrpmechanic', spawn_max = false, plate = 'onelife', job_grade = 3, garage_type = 'car', model = `energytenereride_onelife`},
+            [5] = {job = 'olrpmechanic', spawn_max = false, plate = 'onelife', job_grade = 1, garage_type = 'car', model = `dltowtruckonelife`},
             
-        }, ['mechanic2'] = {
-            [1] = {job = 'mechanic2', spawn_max = false, plate = 'tuner', job_grade = 1, garage_type = 'car', model = `energyguinchoride_tuner`},
-            [2] = {job = 'mechanic2', spawn_max = false, plate = 'tuner', job_grade = 3, garage_type = 'car', model = `energyheliride_tuner`},
-            [3] = {job = 'mechanic2', spawn_max = false, plate = 'tuner', job_grade = 2, garage_type = 'car', model = `energysierraride_tuner`},
-            [4] = {job = 'mechanic2', spawn_max = false, plate = 'tuner', job_grade = 3, garage_type = 'car', model = `energytenereride_tuner`},
-            [5] = {job = 'mechanic2', spawn_max = false, plate = 'tuner', job_grade = 1, garage_type = 'car', model = `dltowtrucktuner`},
+        }, ['6str'] = {
+            [1] = {job = '6str', spawn_max = false, plate = 'tuner', job_grade = 1, garage_type = 'car', model = `energyguinchoride_tuner`},
+            [2] = {job = '6str', spawn_max = false, plate = 'tuner', job_grade = 3, garage_type = 'car', model = `energyheliride_tuner`},
+            [3] = {job = '6str', spawn_max = false, plate = 'tuner', job_grade = 2, garage_type = 'car', model = `energysierraride_tuner`},
+            [4] = {job = '6str', spawn_max = false, plate = 'tuner', job_grade = 3, garage_type = 'car', model = `energytenereride_tuner`},
+            [5] = {job = '6str', spawn_max = false, plate = 'tuner', job_grade = 1, garage_type = 'car', model = `dltowtrucktuner`},
         },
         ['catcafe'] = {
             [1] = {job = 'catcafe', spawn_max = false, plate = 'CATCAFE', job_grade = 1, garage_type = 'car', model = `vancat`},
         },
-        ['beanmachine'] = {
-            [1] = {job = 'beanmachine', spawn_max = false, plate = 'BEANM', job_grade = 1, garage_type = 'car', model = `vanbean`},
-        },
-        ['upnatom'] = {
-            [1] = {job = 'upnatom', spawn_max = false, plate = 'UPNATOM', job_grade = 1, garage_type = 'car', model = `vanatom`},
-        },
-        ['billiards'] = {
-            [1] = {job = 'billiards', spawn_max = false, plate = 'BILL', job_grade = 1, garage_type = 'car', model = `vanbilliards`},
-        },
-
-        ['dynasty'] = {
-            [1] = {job = 'dynasty', spawn_max = true, plate = 'ESTATE', job_grade = 1, garage_type = 'car', model = `amwbcometre`},
-        },
-
     }
 }
 

@@ -1,0 +1,1 @@
+AddTextEntry("WEAPON_AR-15HW", "AR-15 HALLOWEEN 2025")

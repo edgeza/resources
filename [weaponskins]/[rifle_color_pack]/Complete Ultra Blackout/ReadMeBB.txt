@@ -1,0 +1,17 @@
+If You Want The Gun To Have More Shine I Recommend Using The Platinum Tint. 
+
+How To Install: 
+
+1. Go Into The Main Directory Of The Game And Make A New Folder And Name It "mods" If You Have Not Already. 
+
+2. Copy The Folder "Update" To The Mods Folder. 
+
+3. Open "OpenIV" And Select GTA V For Windows. 
+
+4. Go Into The Mods Folder And Go Here "update > x64 > dlcpacks > patchday8ng > dlc.rpf > x64 > models > cdimages > weapons.rpf". 
+
+5. Hit "Edit Mode" On The Top Right Of OpenIV. 
+
+6. Drag Both ".ytd" Files Into OpenIV. 
+
+7. Have Fun

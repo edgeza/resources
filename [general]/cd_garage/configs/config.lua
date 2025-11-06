@@ -83,7 +83,7 @@ Config.UniqueGarages = true --Do you want to only be able to get your car from t
 Config.SaveAdvancedVehicleDamage = true --Do you want to save poped tyres, broken doors and broken windows and re-apply them all when spawning a vehicle?
 Config.UseExploitProtection = false --Do you want to enable the cheat engine protection to check the vehicle hashes when a vehicle is stored?
 Config.ResetGarageState = true --Do you want vehicles to be returned to the garage when the script starts/restarts? Auto disabled if using persistent vehicles.
-Config.SpawnGaragePeds = true -- Do you want peds to spawn in the area where a garage is located?
+Config.SpawnGaragePeds = false -- Do you want peds to spawn in the area where a garage is located?
 
 -- ┌──────────────────────────────────────────────────────────────────┐
 -- │                          VEHICLES DATA                           │

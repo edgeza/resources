@@ -126,7 +126,7 @@ Config.Impound = {
 
     Authorized_Jobs = { --Only jobs inside this table can impound vehicles or unimpound vehicles.
         ['police'] = true,
-        ['mechanic'] = true,
+        ['towing'] = true,
         --['add_more_here'] = true,
     },
 

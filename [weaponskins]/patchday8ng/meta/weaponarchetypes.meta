@@ -3,16 +3,16 @@
 <CWeaponModelInfo__InitDataList>
 	<InitDatas>
 		<Item>
-			<modelName>w_pi_combatpistol</modelName>
-			<txdName>w_pi_combatpistol</txdName>
-			<ptfxAssetName>NULL</ptfxAssetName>
-			<lodDist value="500"/>
-		</Item>
-		<Item>
 			<modelName>w_pi_combatpistol_mag1</modelName>
 			<txdName>w_pi_combatpistol_mag1</txdName>
 			<ptfxAssetName>NULL</ptfxAssetName>
 			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_pi_combatpistol</modelName>
+			<txdName>w_pi_combatpistol</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
 		</Item>
 		<Item>
 			<modelName>w_at_pi_supp</modelName>

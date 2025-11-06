@@ -257,8 +257,8 @@
 							<AttachBone>WAPClip</AttachBone>
 							<Components>
 								<Item>
-									<Name>COMPONENT_SAIGA9_CLIP_01</Name>
 									<Default value="true"/>
+									<Name>COMPONENT_SAIGA9_CLIP_01</Name>
 								</Item>
 							</Components>
 						</Item>

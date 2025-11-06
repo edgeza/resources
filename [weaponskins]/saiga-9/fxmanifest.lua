@@ -16,8 +16,4 @@ data_file 'WEAPON_ANIMATIONS_FILE' '**/weaponanimations.meta'
 data_file 'PED_PERSONALITY_FILE' '**/pedpersonality.meta'
 data_file 'WEAPONINFO_FILE' '**/weapons.meta'
 
-client_scripts {
-	'cl_weaponNames.lua',
-	'cl_preload.lua'
-}
-
+client_script 'cl_weaponNames.lua'

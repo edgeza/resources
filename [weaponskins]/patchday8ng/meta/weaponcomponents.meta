@@ -2,18 +2,27 @@
 
 <CWeaponComponentInfoBlob>
 	<Infos>
-		<Item>
-			<Infos>
-				<Item type="CWeaponComponentInfo">
-					<Name>COMPONENT_PATCHDAY_PISTOL_CLIP_01</Name>
-					<Model>w_pi_combatpistol_mag1</Model>
-					<LocName>WT_CLIP1</LocName>
-					<TextureName>w_pi_combatpistol_mag1</TextureName>
-					<SpecularTextureName>w_pi_combatpistol_mag1_spec</SpecularTextureName>
-					<LODDist value="300"/>
-				</Item>
-			</Infos>
+		<Item type="CWeaponComponentClipInfo">
+			<Name>COMPONENT_PATCHDAY_PISTOL_CLIP_01</Name>
+			<Model>w_pi_combatpistol_mag1</Model>
+			<LocName>WCT_CLIP1</LocName>
+			<LocDesc>WCD_PI_CLIP1</LocDesc>
+			<AttachBone>AAPClip</AttachBone>
+			<WeaponAttachBone>WAPClip</WeaponAttachBone>
+			<AccuracyModifier type="NULL"/>
+			<DamageModifier type="NULL"/>
+			<bShownOnWheel value="false"/>
+			<CreateObject value="true"/>
+			<HudDamage value="0"/>
+			<HudSpeed value="0"/>
+			<HudCapacity value="0"/>
+			<HudAccuracy value="0"/>
+			<HudRange value="0"/>
+			<ClipSize value="12"/>
+			<AmmoInfo/>
+			<ReloadData ref="RELOAD_DEFAULT"/>
 		</Item>
 	</Infos>
+	<InfoBlobName/>
 </CWeaponComponentInfoBlob>
 

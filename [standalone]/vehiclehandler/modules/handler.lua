@@ -1,5 +1,5 @@
-local Progress = lib.load('data.progress')
-local Settings = lib.load('data.vehicle')
+local Progress <const> = lib.load('data.progress')
+local Settings <const> = lib.load('data.vehicle')
 
 local BONES <const> = {
     [0] =   'wheel_lf',
@@ -14,11 +14,11 @@ local BONES <const> = {
 ---@field active boolean
 ---@field limited boolean
 ---@field control boolean
+---@field oxfuel boolean
+---@field electric boolean
 ---@field class number | false
 ---@field model number | false
 ---@field data table
----@field oxfuel boolean
----@field electric boolean
 
 ---@class Handler : OxClass
 ---@field private private privateHandlerData
@@ -41,17 +41,17 @@ function Handler:isLimited() return self.private.limited end
 ---@return boolean control
 function Handler:canControl() return self.private.control end
 
----@return number | false class
-function Handler:getClass() return self.private.class end
-
----@return number | false class
-function Handler:getModel() return self.private.model end
-
 ---@return boolean oxfuel
 function Handler:isFuelOx() return self.private.oxfuel end
 
 ---@return boolean electric
 function Handler:isElectric() return self.private.electric end
+
+---@return number | false class
+function Handler:getClass() return self.private.class end
+
+---@return number | false class
+function Handler:getModel() return self.private.model end
 
 ---@param state string
 ---@return number | nil
@@ -64,7 +64,7 @@ end
 ---@return boolean isValid
 function Handler:isValid()
     if not cache.ped then return false end
-    if cache.vehicle or IsPedInAnyPlane(cache.ped) then return true end
+    if cache.vehicle or self.private.class == 16 then return true end
 
     return false
 end
@@ -77,16 +77,17 @@ function Handler:isTireBroken(vehicle, coords)
 
     for k,v in pairs(BONES) do
         local bone = GetEntityBoneIndexByName(vehicle, v)
+        if bone == -1 then goto skip end
 
-        if bone ~= -1 then
-            if IsVehicleTyreBurst(vehicle, k, true) then
-                local pos = GetWorldPositionOfEntityBone(vehicle, bone)
+        if IsVehicleTyreBurst(vehicle, k, true) then
+            local pos = GetWorldPositionOfEntityBone(vehicle, bone)
 
-                if #(coords - pos) < 2.5 then
-                    return true
-                end
+            if #(coords - pos) < 2.5 then
+                return true
             end
         end
+
+        ::skip::
     end
 
     return false
@@ -98,13 +99,13 @@ function Handler:setActive(state)
         self.private.active = state
 
         if state then
+            self.private.electric = GetIsVehicleElectric(self.private.model)
             self.private.class = GetVehicleClass(cache.vehicle) or false
             self.private.model = GetEntityModel(cache.vehicle)
-            self.private.electric = GetIsVehicleElectric(self.private.model)
         else
+            self.private.electric = false
             self.private.class = false
             self.private.model = false
-            self.private.electric = false
             self.private.data = {['engine'] = 0, ['body'] = 0, ['speed'] = 0}
         end
     end
@@ -124,10 +125,17 @@ function Handler:setControl(state)
     end
 end
 
----@param data table<string, number>[]
----@return table<string, number>[] | nil, table<string, number>[] | nil, table<string, number>[] | nil data
+---@class handlerData
+---@field engine number
+---@field body number
+---@field speed number
+
+---@param data handlerData
+---@return number | nil engine
+---@return number |nil body
+---@return number | nil speed
 function Handler:setData(data)
-    if not data then return end
+    if data == nil or type(data) ~= 'table' then return end
 
     self.private.data = data
 
@@ -135,8 +143,11 @@ function Handler:setData(data)
 end
 
 ---@param vehicle number
----@return boolean | nil, vector3 | nil, number | nil, number | nil enginedata
-function Handler:getEngineData(vehicle)
+---@return boolean | nil backengine
+---@return vector3 | nil offset
+---@return number | nil index
+---@return number | nil engine
+function Handler:getFixData(vehicle)
     if not vehicle or vehicle == 0 then return end
 
     local backengine = Settings.backengine[self.private.model]
@@ -155,15 +166,14 @@ function Handler:breakTire(vehicle, index)
     if index == nil or type(index) ~= 'number' then return end
 
     local bone = GetEntityBoneIndexByName(vehicle, BONES[index])
+    if bone == -1 then return end
 
-    if bone ~= -1 then
-        if not IsVehicleTyreBurst(vehicle, index, true) then
+    if not IsVehicleTyreBurst(vehicle, index, true) then
 
-            lib.callback('vehiclehandler:sync', false, function()
-                SetVehicleTyreBurst(vehicle, index, true, 1000.0)
-                BreakOffVehicleWheel(vehicle, index, false, true, true, false)
-            end)
-        end
+        lib.callback('vehiclehandler:sync', false, function()
+            SetVehicleTyreBurst(vehicle, index, true, 1000.0)
+            BreakOffVehicleWheel(vehicle, index, false, true, true, false)
+        end)
     end
 end
 
@@ -202,68 +212,62 @@ end
 ---@param fixtype string
 ---@return boolean success
 function Handler:fixVehicle(vehicle, coords, fixtype)
-    local backengine, offset, hoodindex, engine = self:getEngineData(vehicle)
+    local backengine, offset, hoodindex, engine = self:getFixData(vehicle)
+    local success = false
 
-    if fixtype == 'smallkit' and engine < 500 or fixtype == 'bigkit' and engine < 1000 then
-        if #(coords - offset) < 2.0 then
-            local success = false
-
-            LocalPlayer.state:set("inv_busy", true, true)
-
-            if hoodindex then
-                lib.callback('vehiclehandler:sync', false, function()
-                    SetVehicleDoorOpen(vehicle, hoodindex, false, false)
-                end)
-            end
-
-            if lib.progressCircle(Progress[fixtype]) then
-                success = true
-            end
-
-            if hoodindex then
-                lib.callback('vehiclehandler:sync', false, function()
-                    SetVehicleDoorShut(vehicle, hoodindex, false)
-                end)
-
-                repeat Wait(100)
-                until not IsVehicleDoorFullyOpen(vehicle, hoodindex)
-            end
-
-            if success then
-                lib.callback('vehiclehandler:sync', false, function()
-                    if fixtype == 'smallkit' then
-                        SetVehicleEngineHealth(vehicle, 500.0)
-
-                        if GetVehicleBodyHealth(vehicle) < 500 then
-                            SetVehicleBodyHealth(vehicle, 500.0)
-                        end
-                    elseif fixtype == 'bigkit' then
-                        SetVehicleFixed(vehicle)
-                    end
-
-                    SetVehicleUndriveable(vehicle, false)
-                end)
-            end
-
-            LocalPlayer.state:set("inv_busy", false, true)
-
-            return success
-        else
-            if backengine then
-                lib.notify({
-                    title = locale('notify.backEngine'),
-                    type = 'error'
-                })
-            end
+    if #(coords - offset) >= 2.0 then
+        if backengine then
+            lib.notify({ title = locale('notify.backEngine'), type = 'error' })
         end
-    else
-        lib.notify({
-            title = locale('notify.cannotRepair'),
-            type = 'error'
-        })
+
+        return success
     end
 
-    return false
+    if fixtype == 'smallkit' and engine >= 500 or fixtype == 'bigkit' and engine >= 1000 then
+        lib.notify({ title = locale('notify.cannotRepair'), type = 'error' })
+        return success
+    end
+
+    LocalPlayer.state:set("inv_busy", true, true)
+
+    if hoodindex then
+        lib.callback('vehiclehandler:sync', false, function()
+            SetVehicleDoorOpen(vehicle, hoodindex, false, false)
+        end)
+    end
+
+    if lib.progressCircle(Progress[fixtype]) then
+        success = true
+    end
+
+    if hoodindex then
+        lib.callback('vehiclehandler:sync', false, function()
+            SetVehicleDoorShut(vehicle, hoodindex, false)
+        end)
+
+        repeat Wait(100)
+        until not IsVehicleDoorFullyOpen(vehicle, hoodindex)
+    end
+
+    if success then
+        lib.callback('vehiclehandler:sync', false, function()
+            if fixtype == 'smallkit' then
+                SetVehicleEngineHealth(vehicle, 500.0)
+
+                if GetVehicleBodyHealth(vehicle) < 500 then
+                    SetVehicleBodyHealth(vehicle, 500.0)
+                end
+            elseif fixtype == 'bigkit' then
+                SetVehicleFixed(vehicle)
+            end
+
+            SetVehicleUndriveable(vehicle, false)
+        end)
+    end
+
+    LocalPlayer.state:set("inv_busy", false, true)
+
+    return success
 end
 
 ---@param fixtype string
@@ -273,7 +277,7 @@ function Handler:basicfix(fixtype)
     if not fixtype or type(fixtype) ~= 'string' then return false end
 
     local coords = GetEntityCoords(cache.ped)
-    local vehicle,_ = lib.getClosestVehicle(coords, 3.0, false)
+    local vehicle = lib.getClosestVehicle(coords, 3.0, false)
 	if vehicle == nil or vehicle == 0 then return false end
 
     if fixtype == 'tirekit' then
@@ -288,10 +292,9 @@ function Handler:basicwash()
     if not cache.ped then return false end
 
     local pos = GetEntityCoords(cache.ped)
-    local vehicle,_ = lib.getClosestVehicle(pos, 3.0, false)
+    local vehicle, vehpos = lib.getClosestVehicle(pos, 3.0, false)
 	if vehicle == nil or vehicle == 0 then return false end
 
-    local vehpos = GetEntityCoords(vehicle)
     if #(pos - vehpos) > 3.0 or cache.vehicle then return false end
 
     local success = false
@@ -309,7 +312,6 @@ function Handler:basicwash()
 
     ClearAllPedProps(cache.ped)
     ClearPedTasks(cache.ped)
-
     LocalPlayer.state:set("inv_busy", false, true)
 
     return success
@@ -319,34 +321,42 @@ end
 function Handler:adminfix()
     if not self:isValid() then return false end
 
-    lib.callback('vehiclehandler:sync', false, function()
-        SetVehicleFixed(cache.vehicle)
-        ResetVehicleWheels(cache.vehicle, true)
+    local success = lib.callback.await('ox_lib:checkPlayerAce', false, 'command.fix')
 
-        if self:isFuelOx() then
-            Entity(cache.vehicle).state.fuel = 100.0
-        end
+    if success then
+        lib.callback('vehiclehandler:sync', false, function()
+            SetVehicleFixed(cache.vehicle)
+            ResetVehicleWheels(cache.vehicle, true)
 
-        SetVehicleFuelLevel(cache.vehicle, 100.0)
-        DecorSetFloat(cache.vehicle, '_FUEL_LEVEL', GetVehicleFuelLevel(cache.vehicle))
+            if self:isFuelOx() then
+                Entity(cache.vehicle).state.fuel = 100.0
+            end
 
-        SetVehicleUndriveable(cache.vehicle, false)
-        SetVehicleEngineOn(cache.vehicle, true, true, true)
-    end)
+            SetVehicleFuelLevel(cache.vehicle, 100.0)
+            DecorSetFloat(cache.vehicle, '_FUEL_LEVEL', GetVehicleFuelLevel(cache.vehicle))
 
-    return true
+            SetVehicleUndriveable(cache.vehicle, false)
+            SetVehicleEngineOn(cache.vehicle, true, true, true)
+        end)
+    end
+
+    return success
 end
 
 ---@return boolean success
 function Handler:adminwash()
     if not self:isValid() then return false end
 
-    lib.callback('vehiclehandler:sync', false, function()
-        SetVehicleDirtLevel(cache.vehicle, 0.0)
-        WashDecalsFromVehicle(cache.vehicle, 1.0)
-    end)
+    local success = lib.callback.await('ox_lib:checkPlayerAce', false, 'command.wash')
 
-    return true
+    if success then
+        lib.callback('vehiclehandler:sync', false, function()
+            SetVehicleDirtLevel(cache.vehicle, 0.0)
+            WashDecalsFromVehicle(cache.vehicle, 1.0)
+        end)
+    end
+
+    return success
 end
 
 ---@param newlevel number
@@ -355,21 +365,25 @@ function Handler:adminfuel(newlevel)
     if not self:isValid() then return false end
     if not newlevel then return false end
 
-    newlevel = lib.math.clamp(newlevel, 0.0, 100.0) + 0.0
+    local success = lib.callback.await('ox_lib:checkPlayerAce', false, 'command.setfuel')
 
-    lib.callback('vehiclehandler:sync', false, function()
-        if self:isFuelOx() then
-            Entity(cache.vehicle).state.fuel = newlevel
-        end
+    if success then
+        newlevel = lib.math.clamp(newlevel, 0.0, 100.0) + 0.0
 
-        SetVehicleFuelLevel(cache.vehicle, newlevel)
-        DecorSetFloat(cache.vehicle, '_FUEL_LEVEL', GetVehicleFuelLevel(cache.vehicle))
+        lib.callback('vehiclehandler:sync', false, function()
+            if self:isFuelOx() then
+                Entity(cache.vehicle).state.fuel = newlevel
+            end
 
-        SetVehicleUndriveable(cache.vehicle, false)
-        SetVehicleEngineOn(cache.vehicle, true, true, true)
-    end)
+            SetVehicleFuelLevel(cache.vehicle, newlevel)
+            DecorSetFloat(cache.vehicle, '_FUEL_LEVEL', GetVehicleFuelLevel(cache.vehicle))
 
-    return true
+            SetVehicleUndriveable(cache.vehicle, false)
+            SetVehicleEngineOn(cache.vehicle, true, true, true)
+        end)
+    end
+
+    return success
 end
 
 return Handler

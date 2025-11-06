@@ -169,38 +169,34 @@
 					<DamageFallOffRangeMax value="50.000000"/>
 					<DamageFallOffModifier value="0.500000"/>
 					<VehicleWeaponHash/>
-					<DefaultCameraHash>SHOTGUN_AIM_CAMERA</DefaultCameraHash>
-					<AimCameraHash/>
-					<FireCameraHash/>
-					<CoverCameraHash>SHOTGUN_AIM_IN_COVER_CAMERA</CoverCameraHash>
+					<DefaultCameraHash>DEFAULT_THIRD_PERSON_PED_AIM_CAMERA</DefaultCameraHash>
+					<CoverCameraHash>DEFAULT_THIRD_PERSON_PED_AIM_IN_COVER_CAMERA</CoverCameraHash>
 					<CoverReadyToFireCameraHash/>
 					<RunAndGunCameraHash>DEFAULT_THIRD_PERSON_PED_RUN_AND_GUN_CAMERA</RunAndGunCameraHash>
-					<CinematicShootingCameraHash/>
+					<CinematicShootingCameraHash>DEFAULT_THIRD_PERSON_PED_CINEMATIC_SHOOTING_CAMERA</CinematicShootingCameraHash>
 					<AlternativeOrScopedCameraHash/>
 					<RunAndGunAlternativeOrScopedCameraHash/>
 					<CinematicShootingAlternativeOrScopedCameraHash/>
 					<CameraFov value="45.000000"/>
-					<FirstPersonAimFovMin value="42.000000"/>
-					<FirstPersonAimFovMax value="47.000000"/>
-					<FirstPersonScopeFov value="30.000000"/>
-					<FirstPersonScopeAttachmentFov value="30.000000"/>
+					<FirstPersonScopeFov value="30.00000"/>
+					<FirstPersonScopeAttachmentFov value="30.00000"/>
 					<FirstPersonRNGOffset x="0.000000" y="0.000000" z="0.000000"/>
-					<FirstPersonRNGRotationOffset x="1.000000" y="0.000000" z="1.000000"/>
+					<FirstPersonRNGRotationOffset x="0.000000" y="0.000000" z="0.000000"/>
 					<FirstPersonLTOffset x="0.000000" y="0.000000" z="0.000000"/>
-					<FirstPersonLTRotationOffset x="-0.500000" y="0.000000" z="2.000000"/>
-					<FirstPersonScopeOffset x="0.000000" y="0.310000" z="0.000000"/>
-					<FirstPersonScopeAttachmentOffset x="0.000000" y="0.350000" z="-0.014500"/>
-					<FirstPersonScopeRotationOffset x="-0.500000" y="0.000000" z="0.000000"/>
-					<FirstPersonScopeAttachmentRotationOffset x="0.000000" y="0.000000" z="0.000000"/>
-					<FirstPersonAsThirdPersonIdleOffset x="-0.060000" y="0.000000" z="0.000000"/>
-					<FirstPersonAsThirdPersonRNGOffset x="-0.050000" y="0.000000" z="-0.050000"/>
-					<FirstPersonAsThirdPersonLTOffset x="-0.000000" y="0.100000" z="-0.050000"/>
-					<FirstPersonAsThirdPersonScopeOffset x="0.045000" y="0.050000" z="-0.070000"/>
-					<FirstPersonAsThirdPersonWeaponBlockedOffset x="-0.050000" y="0.100000" z="-0.050000"/>
-					<FirstPersonDofSubjectMagnificationPowerFactorNear value="1.055000"/>
+					<FirstPersonLTRotationOffset x="0.000000" y="0.000000" z="0.000000"/>
+					<FirstPersonScopeOffset x="0.00000" y="-0.0200" z="-0.0230"/>
+					<FirstPersonScopeAttachmentOffset x="0.00000" y="0.0000" z="-0.0280"/>
+					<FirstPersonScopeRotationOffset x="-0.70000" y="0.0000" z="0.0000"/>
+					<FirstPersonScopeAttachmentRotationOffset x="0.00000" y="0.0000" z="0.0000"/>
+					<FirstPersonAsThirdPersonIdleOffset x="-0.07500000" y="0.000000" z="-0.05"/>
+					<FirstPersonAsThirdPersonRNGOffset x="-0.025000" y="0.000000" z="-0.075000"/>
+					<FirstPersonAsThirdPersonLTOffset x="0.025000" y="0.000000" z="-0.0750000"/>
+					<FirstPersonAsThirdPersonScopeOffset x="0.075000" y="-0.050000" z="-0.060000"/>
+					<FirstPersonAsThirdPersonWeaponBlockedOffset x="-0.1000000" y="0.000000" z="-0.100000"/>
+					<FirstPersonDofSubjectMagnificationPowerFactorNear value="1.025000"/>
 					<FirstPersonDofMaxNearInFocusDistance value="0.000000"/>
 					<FirstPersonDofMaxNearInFocusDistanceBlendLevel value="0.300000"/>
-					<ZoomFactorForAccurateMode value="1.000000"/>
+					<ZoomFactorForAccurateMode value="1.300000"/>
 					<RecoilShakeHash>SHOTGUN_RECOIL_SHAKE</RecoilShakeHash>
 					<RecoilShakeHashFirstPerson>FPS_SHOTGUN_RECOIL_SHAKE</RecoilShakeHashFirstPerson>
 					<AccuracyOffsetShakeHash/>
@@ -257,8 +253,8 @@
 							<AttachBone>WAPClip</AttachBone>
 							<Components>
 								<Item>
-									<Name>COMPONENT_SAIGA9_CLIP_01</Name>
 									<Default value="true"/>
+									<Name>COMPONENT_SAIGA9_CLIP_01</Name>
 								</Item>
 							</Components>
 						</Item>

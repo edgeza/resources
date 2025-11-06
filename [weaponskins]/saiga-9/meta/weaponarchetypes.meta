@@ -3,16 +3,16 @@
 <CWeaponModelInfo__InitDataList>
 	<InitDatas>
 		<Item>
-			<modelName>w_sg_heavyshotgun</modelName>
-			<txdName>w_sg_heavyshotgun</txdName>
-			<ptfxAssetName>NULL</ptfxAssetName>
-			<lodDist value="500"/>
-		</Item>
-		<Item>
 			<modelName>w_sg_heavyshotgun_mag1</modelName>
 			<txdName>w_sg_heavyshotgun_mag1</txdName>
 			<ptfxAssetName>NULL</ptfxAssetName>
 			<lodDist value="300"/>
+		</Item>
+		<Item>
+			<modelName>w_sg_heavyshotgun</modelName>
+			<txdName>w_sg_heavyshotgun</txdName>
+			<ptfxAssetName>NULL</ptfxAssetName>
+			<lodDist value="500"/>
 		</Item>
 	</InitDatas>
 </CWeaponModelInfo__InitDataList>

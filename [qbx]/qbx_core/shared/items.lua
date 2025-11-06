@@ -7146,6 +7146,8 @@ ItemList = {
 	weapon_toym16                       = { name = 'weapon_toym16', label = 'TOYM16', weight = 3500, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_TOYM16.png', unique = true, useable = false, description = 'Toy M16 assault rifle' },
 	weapon_saiga9                       = { name = 'weapon_saiga9', label = 'Saiga-9', weight = 3500, type = 'weapon', ammotype = 'AMMO_SHOTGUN', image = 'WEAPON_SAIGA9.png', unique = true, useable = false, description = 'Custom Saiga-9 shotgun' },
 	weapon_patchday_pistol             = { name = 'weapon_patchday_pistol', label = 'Patchday Combat Pistol', weight = 1500, type = 'weapon', ammotype = 'AMMO_PISTOL', image = 'WEAPON_PATCHDAY_PISTOL.png', unique = true, useable = false, description = 'Custom patchday combat pistol' },
+	weapon_m4a1dragon                   = { name = 'weapon_m4a1dragon', label = 'M4A1 Dragon', weight = 3500, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_M4A1DRAGON.png', unique = true, useable = false, description = 'Dragon themed M4A1 assault rifle' },
+	weapon_sabresword                   = { name = 'weapon_sabresword', label = 'SabreSword', weight = 1200, type = 'weapon', ammotype = nil, image = 'WEAPON_SABRESWORD.png', unique = true, useable = false, description = 'Elegant sabre sword' },
 
     -- Pistols
     weapon_de                           = { name = 'weapon_de', label = 'Desert Eagle', weight = 2000, type = 'weapon', ammotype = 'AMMO_PISTOL', image = 'WEAPON_DE.png', unique = true, useable = false, description = 'Powerful handgun' },

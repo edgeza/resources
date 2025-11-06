@@ -263,8 +263,8 @@
 					<TargetSequenceGroup/>
 					<WeaponFlags>CarriedInHand ApplyBulletForce Gun CanLockonOnFoot CanLockonInVehicle CanFreeAim TwoHanded AnimReload AnimCrouchFire UsableOnFoot UsableInCover AllowEarlyExitFromFireAnimAfterBulletFired NoLeftHandIKWhenBlocked AllowCloseQuarterKills HasLowCoverReloads HasLowCoverSwaps LongWeapon ApplyVehicleDamageToEngine UseFPSAimIK UseFPSSecondaryMotion FPSOnlyExitFireAnimAfterRecoilEnds</WeaponFlags>
 					<TintSpecValues ref="TINT_DEFAULT"/>
-					<FiringPatternAliases ref="NULL"/>
-					<ReloadUpperBodyFixupExpressionData ref="DEFAULT"/>
+					<FiringPatternAliases ref="FIRING_PATTERN_SHOTGUN"/>
+					<ReloadUpperBodyFixupExpressionData ref="default"/>
 					<AmmoDiminishingRate value="3"/>
 					<AimingBreathingAdditiveWeight value="1.000000"/>
 					<FiringBreathingAdditiveWeight value="1.000000"/>

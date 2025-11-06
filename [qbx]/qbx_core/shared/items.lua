@@ -7141,6 +7141,12 @@ ItemList = {
     weapon_tar21                        = { name = 'weapon_tar21', label = 'TAR-21', weight = 3800, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_TAR21.png', unique = true, useable = false, description = 'Bullpup assault rifle' },
     weapon_pdm4a1                       = { name = 'weapon_pdm4a1', label = 'PDM M4A1', weight = 3500, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_PDM4A1.png', unique = true, useable = false, description = 'Police M4A1' },
 
+	-- Skins
+	weapon_ar15hw                       = { name = 'weapon_ar15hw', label = 'AR-15 Halloween', weight = 3500, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_AR15HW.png', unique = true, useable = false, description = 'Halloween themed AR-15' },
+	weapon_toym16                       = { name = 'weapon_toym16', label = 'TOYM16', weight = 3500, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_TOYM16.png', unique = true, useable = false, description = 'Toy M16 assault rifle' },
+	weapon_saiga9                       = { name = 'weapon_saiga9', label = 'Saiga-9', weight = 3500, type = 'weapon', ammotype = 'AMMO_SHOTGUN', image = 'WEAPON_SAIGA9.png', unique = true, useable = false, description = 'Custom Saiga-9 shotgun' },
+	weapon_patchday_pistol             = { name = 'weapon_patchday_pistol', label = 'Patchday Combat Pistol', weight = 1500, type = 'weapon', ammotype = 'AMMO_PISTOL', image = 'WEAPON_PATCHDAY_PISTOL.png', unique = true, useable = false, description = 'Custom patchday combat pistol' },
+
     -- Pistols
     weapon_de                           = { name = 'weapon_de', label = 'Desert Eagle', weight = 2000, type = 'weapon', ammotype = 'AMMO_PISTOL', image = 'WEAPON_DE.png', unique = true, useable = false, description = 'Powerful handgun' },
     weapon_browning                      = { name = 'weapon_browning', label = 'Browning', weight = 1200, type = 'weapon', ammotype = 'AMMO_PISTOL', image = 'WEAPON_BROWNING.png', unique = true, useable = false, description = 'Classic pistol' },

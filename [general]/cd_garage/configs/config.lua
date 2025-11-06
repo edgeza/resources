@@ -303,7 +303,7 @@ Config.FakePlates = {
 -- └──────────────────────────────────────────────────────────────────┘
 
 Config.VehicleKeys = {
-    ENABLE = true, --Do you want to use the built in vehicle keys system?
+    ENABLE = false, --Do you want to use the built in vehicle keys system?
     allow_shared_vehicles = true, --If this is enabled, when you give another player a "saved" key to one of your vehicles, it will allow them to spawn your vehicles from their garage.
     command = 'keys', --Command to view the keys UI where you can view, add or remove keys.
 
@@ -374,7 +374,7 @@ Config.PersistentVehicles = { --Requires OneSync to use.
 -- └──────────────────────────────────────────────────────────────────┘
 
 Config.GarageRaid = {
-    ENABLE = true, --Allow police to search by plate for a vehicle in a garage.
+    ENABLE = false, --Allow police to search by plate for a vehicle in a garage.
     required_perms = {
         ['police'] = 0, --The job and minimum grade required to raid a garage. (eg., ['police'] = { 1 } means police job, grade 1 or higher).
         ['sheriff'] = 1,

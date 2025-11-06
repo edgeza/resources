@@ -2899,5 +2899,191 @@ WeaponList = {
         weapontype = 'Pistol',
         ammotype = 'AMMO_PISTOL',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_m4a1dragon`] = {
+        name = 'weapon_m4a1dragon',
+        label = 'M4A1 Dragon',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_sabresword`] = {
+        name = 'weapon_sabresword',
+        label = 'SabreSword',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    -- Rifle Color Pack Skins
+    [`weapon_blue_carbine_rifle`] = {
+        name = 'weapon_blue_carbine_rifle',
+        label = 'Blue Carbine Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_ultra_blackout_rifle`] = {
+        name = 'weapon_ultra_blackout_rifle',
+        label = 'Ultra Blackout Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_lime_black_ar`] = {
+        name = 'weapon_lime_black_ar',
+        label = 'Lime Green And Black AR',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_no_silver_rifle`] = {
+        name = 'weapon_no_silver_rifle',
+        label = 'No Silver Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_white_black_ar`] = {
+        name = 'weapon_white_black_ar',
+        label = 'White And Black AR',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_white_orange_rifle`] = {
+        name = 'weapon_white_orange_rifle',
+        label = 'White And Orange Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    -- Glock Pack Skins
+    [`weapon_candy_apple_glock`] = {
+        name = 'weapon_candy_apple_glock',
+        label = 'Candy Apple Glock',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_catacombs_glock`] = {
+        name = 'weapon_catacombs_glock',
+        label = 'Catacombs Beta Glock',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_freedom_glock`] = {
+        name = 'weapon_freedom_glock',
+        label = 'Freedom Glock',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_hornet_glock`] = {
+        name = 'weapon_hornet_glock',
+        label = 'Hornet Glock',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_safari_glock`] = {
+        name = 'weapon_safari_glock',
+        label = 'Safari Glock',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    -- Thermal Katana Skins
+    [`weapon_cyan_thermal_katana`] = {
+        name = 'weapon_cyan_thermal_katana',
+        label = 'Cyan Thermal Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_lime_thermal_katana`] = {
+        name = 'weapon_lime_thermal_katana',
+        label = 'Lime Thermal Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_pink_thermal_katana`] = {
+        name = 'weapon_pink_thermal_katana',
+        label = 'Pink Thermal Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_purple_thermal_katana`] = {
+        name = 'weapon_purple_thermal_katana',
+        label = 'Purple Thermal Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_red_thermal_katana`] = {
+        name = 'weapon_red_thermal_katana',
+        label = 'Red Thermal Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_white_thermal_katana`] = {
+        name = 'weapon_white_thermal_katana',
+        label = 'White Thermal Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    [`weapon_yellow_thermal_katana`] = {
+        name = 'weapon_yellow_thermal_katana',
+        label = 'Yellow Thermal Katana',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
+    },
+    -- Individual Weapon Skins
+    [`weapon_bombinglr300`] = {
+        name = 'weapon_bombinglr300',
+        label = 'Bombing LR300',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_families_glock_18c`] = {
+        name = 'weapon_families_glock_18c',
+        label = 'Families Glock 18C',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_hypebeast`] = {
+        name = 'weapon_hypebeast',
+        label = 'Hypebeast Carbine Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_paint_splatter`] = {
+        name = 'weapon_paint_splatter',
+        label = 'Paint Splatter Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_pi_revolver`] = {
+        name = 'weapon_pi_revolver',
+        label = 'PI Revolver',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
+    },
+    [`weapon_reaper_machete`] = {
+        name = 'weapon_reaper_machete',
+        label = 'Reaper Machete',
+        weapontype = 'Melee',
+        ammotype = nil,
+        damagereason = 'Knifed / Stabbed / Eviscerated'
     }
 }

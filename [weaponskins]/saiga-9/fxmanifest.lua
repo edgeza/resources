@@ -1,6 +1,6 @@
 fx_version 'cerulean'
 games {'gta5'}
-description 'Add-on weapon generated using vWeaponsToolkit'
+description 'Saiga-9 Weapon - Custom Shotgun Skin'
 
 files{
 	'**/weaponcomponents.meta',
@@ -18,7 +18,3 @@ data_file 'WEAPONINFO_FILE' '**/weapons.meta'
 
 client_script 'cl_weaponNames.lua'
 
-files {
-	'stream/**/*.ydr',
-	'stream/**/*.ytd',
-}

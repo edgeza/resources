@@ -2869,5 +2869,35 @@ WeaponList = {
         weapontype = 'Melee',
         ammotype = nil,
         damagereason = 'CS GO Knife'
+    },
+
+    -- Skins
+    [`weapon_ar15hw`] = {
+        name = 'weapon_ar15hw',
+        label = 'AR-15 Halloween',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_toym16`] = {
+        name = 'weapon_toym16',
+        label = 'TOYM16',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
+    [`weapon_saiga9`] = {
+        name = 'weapon_saiga9',
+        label = 'Saiga-9',
+        weapontype = 'Shotgun',
+        ammotype = 'AMMO_SHOTGUN',
+        damagereason = 'Devastated / Pulverized / Shotgunned'
+    },
+    [`weapon_patchday_pistol`] = {
+        name = 'weapon_patchday_pistol',
+        label = 'Patchday Combat Pistol',
+        weapontype = 'Pistol',
+        ammotype = 'AMMO_PISTOL',
+        damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
     }
 }

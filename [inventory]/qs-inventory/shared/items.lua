@@ -7227,6 +7227,12 @@ ItemList = {
     weapon_m110                         = { name = 'weapon_m110', label = 'M110', weight = 6000, type = 'weapon', ammotype = 'AMMO_SNIPER', image = 'WEAPON_M110.png', unique = true, useable = false, description = 'Semi-auto sniper' },
     weapon_mk14                         = { name = 'weapon_mk14', label = 'MK14', weight = 5500, type = 'weapon', ammotype = 'AMMO_SNIPER', image = 'WEAPON_MK14.png', unique = true, useable = false, description = 'Battle rifle sniper' },
 
+    -- Skins
+    weapon_ar15hw                       = { name = 'weapon_ar15hw', label = 'AR-15 Halloween', weight = 3500, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_AR15HW.png', unique = true, useable = false, description = 'Halloween themed AR-15' },
+    weapon_toym16                       = { name = 'weapon_toym16', label = 'TOYM16', weight = 3500, type = 'weapon', ammotype = 'AMMO_RIFLE', image = 'WEAPON_TOYM16.png', unique = true, useable = false, description = 'Toy M16 assault rifle' },
+    weapon_saiga9                       = { name = 'weapon_saiga9', label = 'Saiga-9', weight = 3500, type = 'weapon', ammotype = 'AMMO_SHOTGUN', image = 'WEAPON_SAIGA9.png', unique = true, useable = false, description = 'Custom Saiga-9 shotgun' },
+    weapon_patchday_pistol             = { name = 'weapon_patchday_pistol', label = 'Patchday Combat Pistol', weight = 1500, type = 'weapon', ammotype = 'AMMO_PISTOL', image = 'WEAPON_PATCHDAY_PISTOL.png', unique = true, useable = false, description = 'Custom patchday combat pistol' },
+
     -- Melee Weapons
     weapon_katana                       = { name = 'weapon_katana', label = 'Katana', weight = 1500, type = 'weapon', ammotype = nil, image = 'WEAPON_KATANA.png', unique = true, useable = false, description = 'Japanese sword' },
     weapon_keyboard                     = { name = 'weapon_keyboard', label = 'Keyboard', weight = 800, type = 'weapon', ammotype = nil, image = 'WEAPON_KEYBOARD.png', unique = true, useable = false, description = 'Office weapon' },
@@ -8715,6 +8721,59 @@ ItemList = {
         ['shouldClose'] = true,
         ['combinable'] = nil,
         ['description'] = 'A battle rifle with sniper capabilities'
+    },
+    -- Skins
+    ['weapon_ar15hw']                 = {
+        ['name'] = 'weapon_ar15hw',
+        ['label'] = 'AR-15 Halloween',
+        ['weight'] = 3500,
+        ['type'] = 'weapon',
+        ['ammotype'] = 'AMMO_RIFLE',
+        ['image'] = 'weapon_ar15hw.png',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Halloween themed AR-15'
+    },
+    ['weapon_toym16']                 = {
+        ['name'] = 'weapon_toym16',
+        ['label'] = 'TOYM16',
+        ['weight'] = 3500,
+        ['type'] = 'weapon',
+        ['ammotype'] = 'AMMO_RIFLE',
+        ['image'] = 'weapon_toym16.png',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Toy M16 assault rifle'
+    },
+    ['weapon_saiga9']                 = {
+        ['name'] = 'weapon_saiga9',
+        ['label'] = 'Saiga-9',
+        ['weight'] = 3500,
+        ['type'] = 'weapon',
+        ['ammotype'] = 'AMMO_SHOTGUN',
+        ['image'] = 'weapon_saiga9.png',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Custom Saiga-9 shotgun'
+    },
+    ['weapon_patchday_pistol']        = {
+        ['name'] = 'weapon_patchday_pistol',
+        ['label'] = 'Patchday Combat Pistol',
+        ['weight'] = 1500,
+        ['type'] = 'weapon',
+        ['ammotype'] = 'AMMO_PISTOL',
+        ['image'] = 'weapon_patchday_pistol.png',
+        ['unique'] = true,
+        ['useable'] = false,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Custom patchday combat pistol'
     },
     ['weapon_famas']                  = {
         ['name'] = 'weapon_famas',

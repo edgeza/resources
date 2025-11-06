@@ -1,0 +1,45 @@
+===========================================
+ALL WEAPON SPAWN CODES - SINGLE LIST
+===========================================
+
+Use: /give 1 [weapon_name] [ammo]
+Replace "1" with your player ID or omit for self.
+
+===========================================
+ALL 31 WEAPONS (Copy-Paste Ready)
+===========================================
+
+/give 1 weapon_ar15hw 500
+/give 1 weapon_toym16 500
+/give 1 weapon_saiga9 500
+/give 1 weapon_patchday_pistol 500
+/give 1 weapon_m4a1dragon 500
+/give 1 weapon_sabresword 1
+/give 1 weapon_blue_carbine_rifle 500
+/give 1 weapon_ultra_blackout_rifle 500
+/give 1 weapon_lime_black_ar 500
+/give 1 weapon_no_silver_rifle 500
+/give 1 weapon_white_black_ar 500
+/give 1 weapon_white_orange_rifle 500
+/give 1 weapon_candy_apple_glock 500
+/give 1 weapon_catacombs_glock 500
+/give 1 weapon_freedom_glock 500
+/give 1 weapon_hornet_glock 500
+/give 1 weapon_safari_glock 500
+/give 1 weapon_cyan_thermal_katana 1
+/give 1 weapon_lime_thermal_katana 1
+/give 1 weapon_pink_thermal_katana 1
+/give 1 weapon_purple_thermal_katana 1
+/give 1 weapon_red_thermal_katana 1
+/give 1 weapon_white_thermal_katana 1
+/give 1 weapon_yellow_thermal_katana 1
+/give 1 weapon_bombinglr300 500
+/give 1 weapon_families_glock_18c 500
+/give 1 weapon_hypebeast 500
+/give 1 weapon_paint_splatter 500
+/give 1 weapon_pi_revolver 500
+/give 1 weapon_reaper_machete 1
+
+===========================================
+TOTAL: 31 WEAPONS
+===========================================

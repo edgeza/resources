@@ -6,7 +6,7 @@
 			<WeaponSlots>
 				<Item>
 					<OrderNumber value="443"/>
-					<Entry>SLOT_WEAPON_AR-15HW</Entry>
+					<Entry>SLOT_WEAPON_AR15HW</Entry>
 				</Item>
 			</WeaponSlots>
 		</Item>
@@ -15,10 +15,10 @@
 		<Item>
 			<Infos>
 				<Item type="CWeaponInfo">
-					<Name>WEAPON_AR-15HW</Name>
+					<Name>WEAPON_AR15HW</Name>
 					<Model>w_ar_halloween2025ar15</Model>
 					<Audio>AUDIO_ITEM_ADVANCEDRIFLE</Audio>
-					<Slot>SLOT_WEAPON_AR-15HW</Slot>
+					<Slot>SLOT_WEAPON_AR15HW</Slot>
 					<DamageType>BULLET</DamageType>
 					<Explosion>
 						<Default>DONTCARE</Default>
@@ -242,7 +242,7 @@
 					<FirstPersonReticuleStyleHash/>
 					<PickupHash>PICKUP_WEAPON_CARBINERIFLE</PickupHash>
 					<MPPickupHash>PICKUP_AMMO_BULLET_MP</MPPickupHash>
-					<HumanNameHash>WEAPON_AR-15HW</HumanNameHash>
+					<HumanNameHash>WEAPON_AR15HW</HumanNameHash>
 					<MovementModeConditionalIdle>MMI_2Handed</MovementModeConditionalIdle>
 					<StatName>CRBNRIFLE</StatName>
 					<KnockdownCount value="-1"/>

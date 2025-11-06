@@ -233,7 +233,7 @@ Config.WeaponPositions = {
     -- Skins
     ['weapon_ar15hw'] = {
         model = 'w_ar_halloween2025ar15',
-        hash = GetHashKey('WEAPON_AR-15HW'),
+        hash = GetHashKey('WEAPON_AR15HW'),
         bone = 24816,
         x = 0.2275,
         y = -0.16,

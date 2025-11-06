@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF - 8"?>
+
+<CWeaponAnimationsSets>
+	<WeaponAnimationsSets>
+		<Item key="Default">
+			<WeaponAnimations>
+				<Item key="WEAPON_SAIGA9">
+					<CoverMovementClipSetHash>cover@move@base@2h</CoverMovementClipSetHash>
+					<CoverMovementExtraClipSetHash>cover@move@extra@2h</CoverMovementExtraClipSetHash>
+					<CoverAlternateMovementClipSetHash>cover@move@ai@base@2h</CoverAlternateMovementClipSetHash>
+					<CoverWeaponClipSetHash>Cover_Wpn_Shotgun</CoverWeaponClipSetHash>
+					<MotionClipSetHash>weapons@shotgun@lo@heavyshotgun</MotionClipSetHash>
+					<MotionFilterHash>BothArms_filter</MotionFilterHash>
+					<MotionCrouchClipSetHash/>
+					<MotionStrafingClipSetHash/>
+					<MotionStrafingStealthClipSetHash/>
+					<MotionStrafingUpperBodyClipSetHash/>
+					<WeaponClipSetHash>weapons@shotgun@lo@heavyshotgun</WeaponClipSetHash>
+					<WeaponClipSetStreamedHash>weapons@shotgun@lo@heavyshotgun_str</WeaponClipSetStreamedHash>
+					<WeaponClipSetHashInjured/>
+					<WeaponClipSetHashStealth>weapons@shotgun@lo@heavyshotgun@stealth</WeaponClipSetHashStealth>
+					<WeaponClipSetHashHiCover/>
+					<AlternativeClipSetWhenBlocked/>
+					<ScopeWeaponClipSet/>
+					<AlternateAimingStandingClipSetHash/>
+					<AlternateAimingCrouchingClipSetHash/>
+					<FiringVariationsStandingClipSetHash>combat_fire_variations_shotgun</FiringVariationsStandingClipSetHash>
+					<FiringVariationsCrouchingClipSetHash/>
+					<AimTurnStandingClipSetHash>combat_aim_turns_shotgun</AimTurnStandingClipSetHash>
+					<AimTurnCrouchingClipSetHash/>
+					<MeleeClipSetHash>melee@shotgun@streamed_core</MeleeClipSetHash>
+					<MeleeVariationClipSetHash/>
+					<MeleeTauntClipSetHash/>
+					<MeleeSupportTauntClipSetHash/>
+					<MeleeStealthClipSetHash/>
+					<ShellShockedClipSetHash>reaction@shellshock@2h</ShellShockedClipSetHash>
+					<JumpUpperbodyClipSetHash>MOVE_JUMP@WEAPONS@SHOTGUN</JumpUpperbodyClipSetHash>
+					<FallUpperbodyClipSetHash>MOVE_FALL@WEAPONS@SHOTGUN</FallUpperbodyClipSetHash>
+					<FromStrafeTransitionUpperBodyClipSetHash>weapons@shotgun@</FromStrafeTransitionUpperBodyClipSetHash>
+					<SwapWeaponFilterHash/>
+					<SwapWeaponInLowCoverFilterHash/>
+					<AnimFireRateModifier value="1.000000"/>
+					<AnimBlindFireRateModifier value="1.000000"/>
+					<AnimWantingToShootFireRateModifier value="-1.000000"/>
+					<UseFromStrafeUpperBodyAimNetwork value="true"/>
+					<AimingDownTheBarrel value="true"/>
+					<WeaponSwapData ref="SWAP_DEFAULT"/>
+					<AimGrenadeThrowNormalClipsetHash>Wpn_Thrown_Grenade_Aiming_Shotgun</AimGrenadeThrowNormalClipsetHash>
+					<AimGrenadeThrowAlternateClipsetHash/>
+				</Item>
+			</WeaponAnimations>
+		</Item>
+	</WeaponAnimationsSets>
+</CWeaponAnimationsSets>
+

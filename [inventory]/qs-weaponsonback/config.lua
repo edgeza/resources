@@ -230,6 +230,51 @@ Config.WeaponPositions = {
         y_rotation = 60.0,
         z_rotation = 190.0
     },
+    -- Skins
+    ['weapon_ar15hw'] = {
+        model = 'w_ar_halloween2025ar15',
+        hash = GetHashKey('WEAPON_AR-15HW'),
+        bone = 24816,
+        x = 0.2275,
+        y = -0.16,
+        z = 0.110,
+        x_rotation = 0.0,
+        y_rotation = -15.0,
+        z_rotation = 2.0
+    },
+    ['weapon_toym16'] = {
+        model = 'w_ar_toym16',
+        hash = GetHashKey('WEAPON_TOYM16'),
+        bone = 24816,
+        x = 0.2275,
+        y = -0.16,
+        z = 0.110,
+        x_rotation = 0.0,
+        y_rotation = -15.0,
+        z_rotation = 2.0
+    },
+    ['weapon_saiga9'] = {
+        model = 'w_sg_heavyshotgun',
+        hash = GetHashKey('WEAPON_SAIGA9'),
+        bone = 10706,
+        x = 0.100,
+        y = 0.17,
+        z = -0.20,
+        x_rotation = 0.0,
+        y_rotation = 60.0,
+        z_rotation = 190.0
+    },
+    ['weapon_patchday_pistol'] = {
+        model = 'w_pi_combatpistol',
+        hash = GetHashKey('WEAPON_PATCHDAY_PISTOL'),
+        bone = 24816,
+        x = -0.140,
+        y = 0.05,
+        z = -0.210,
+        x_rotation = 90.0,
+        y_rotation = 90.0,
+        z_rotation = 50.0
+    },
     -- Add more weapons as needed
 }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF - 8"?>
+
+<CWeaponComponentInfoBlob>
+	<Infos>
+		<Item>
+			<Infos>
+				<Item type="CWeaponComponentInfo">
+					<Name>COMPONENT_SAIGA9_CLIP_01</Name>
+					<Model>w_sg_heavyshotgun_mag1</Model>
+					<LocName>WT_CLIP1</LocName>
+					<TextureName>w_sg_heavyshotgun_mag1</TextureName>
+					<SpecularTextureName>w_sg_heavyshotgun_mag1_spec</SpecularTextureName>
+					<LODDist value="300"/>
+				</Item>
+			</Infos>
+		</Item>
+	</Infos>
+</CWeaponComponentInfoBlob>
+

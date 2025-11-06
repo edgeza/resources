@@ -1,6 +1,12 @@
 if Config.VehicleKeys.ENABLE then
 
-    local KeysTable = {}
+    TriggerEvent('chat:addSuggestion', '/'..Config.VehicleKeys.command, L('chatsuggestion_showkey'))
+    RegisterCommand(Config.VehicleKeys.command, function()
+        ShowKeysUI()
+    end, false)
+
+
+    KeysTable = {}
 
     function CacheVehicle(plate, vehicle)
         if KeysTable[plate] == nil then
@@ -27,6 +33,29 @@ if Config.VehicleKeys.ENABLE then
         end
     end
 
+    function ShowKeysUI()
+        TriggerServerEvent('cd_garage:ShowKeysUI')
+    end
+
+
+    RegisterNetEvent('cd_garage:ShowKeysUI', function(keys, allPlayers)
+        for c, d in pairs(keys.owned) do
+            if not d.name then
+                d.name = GetVehiclesData(d.model).name
+            end
+        end
+
+        TriggerEvent('cd_garage:ToggleNUIFocus')
+        SendNUIMessage({
+            action = 'showkeys',
+            keys = keys,
+            players = allPlayers,
+            use_charname = Config.PlayerListMethod == 'charname' or Config.PlayerListMethod == 'both',
+            use_source = Config.PlayerListMethod == 'source' or Config.PlayerListMethod == 'both'
+        })
+    end)
+
+
     RegisterNetEvent('cd_garage:AddKeys')
     AddEventHandler('cd_garage:AddKeys', function(plate)
         if not plate then return end
@@ -52,56 +81,17 @@ if Config.VehicleKeys.ENABLE then
         GiveVehicleKeys(plate, vehicle)
     end)
 
-
-    TriggerEvent('chat:addSuggestion', '/'..Config.VehicleKeys.Commands.temporary_key, L('chatsuggestion_keytemp'))
-    RegisterCommand(Config.VehicleKeys.Commands.temporary_key, function()
-        local vehicle = GetClosestVehicle(5)
-        if vehicle then
-            local plate = GetPlate(vehicle)
-            if DoesPlayerHaveKeys(plate) then
-                local target_source = GetClosestPlayer(5)
-                if target_source then
-                    TriggerServerEvent('cd_garage:GiveKeys', 'temp', plate, target_source)
-                else
-                    Notif(3, 'no_player_found')
-                end
-            else
-                Notif(3, 'no_keys')
-            end
-        else
-            Notif(3, 'no_vehicle_found')
-        end
-    end)
-    
-    TriggerEvent('chat:addSuggestion', '/'..Config.VehicleKeys.Commands.database_key, L('chatsuggestion_keysave'))
-    RegisterCommand(Config.VehicleKeys.Commands.database_key, function()
-        local vehicle = GetClosestVehicle(5)
-        if vehicle then
-            local plate = GetPlate(vehicle)
-            if DoesPlayerHaveKeys(plate) then
-                local target_source = GetClosestPlayer(5)
-                if target_source then
-                    TriggerServerEvent('cd_garage:GiveKeys', 'save', plate, target_source)
-                else
-                    Notif(3, 'no_player_found')
-                end
-            else
-                Notif(3, 'no_keys')
-            end
-        else
-            Notif(3, 'no_vehicle_found')
-        end
-    end)
-
-    TriggerEvent('chat:addSuggestion', '/'..Config.VehicleKeys.Commands.remove_key, L('chatsuggestion_keyremove'))
-    RegisterCommand(Config.VehicleKeys.Commands.remove_key, function()
-        TriggerServerEvent('cd_garage:ShowKeys')
-    end)
-
     RegisterNetEvent('cd_garage:ShowKeys')
-    AddEventHandler('cd_garage:ShowKeys', function(data)
-        TriggerEvent('cd_garage:ToggleNUIFocus')
-        ShowKeysUI(data)
+    AddEventHandler('cd_garage:ShowKeys', function()
+        ShowKeysUI()
+    end)
+
+    RegisterNUICallback('addkey_temp', function(data)
+        TriggerServerEvent('cd_garage:GiveKeys', 'temp', data.plate, data.target_source)
+    end)
+
+    RegisterNUICallback('addkey_save', function(data)
+        TriggerServerEvent('cd_garage:GiveKeys', 'save', data.plate, data.target_source)
     end)
 
     RegisterNUICallback('removekey', function(data)
@@ -132,16 +122,16 @@ if Config.VehicleKeys.ENABLE then
         end
         TriggerServerEvent('cd_garage:SaveAllVehicleDamage', data)
     end)
-    
+
 
 
     CreateThread(function()
-        while not Authorised do Wait(1000) end
         local show_notif = false
+        local wait = 500
         while true do
             wait = 500
             local ped = PlayerPedId()
-            local vehicle = GetVehiclePedIsIn(ped)
+            local vehicle = GetVehiclePedIsIn(ped, false)
             if GetPedInVehicleSeat(vehicle, -1) == ped then
                 local plate = GetPlate(vehicle)
                 CacheVehicle(plate, vehicle)
@@ -188,16 +178,18 @@ if Config.VehicleKeys.ENABLE then
             SetVehicleIndicatorLights(vehicle, 0, false)
         end)
     end
-    
+
+
+
     if Config.VehicleKeys.Hotwire.ENABLE then
 
         CreateThread(function()
-            while not Authorised do Wait(1000) end
             local result = nil
+            local wait = 500
             while true do
                 wait = 500
                 local ped = PlayerPedId()
-                local vehicle = GetVehiclePedIsIn(ped)
+                local vehicle = GetVehiclePedIsIn(ped, false)
                 if GetPedInVehicleSeat(vehicle, -1) == ped then
                     local plate = GetPlate(vehicle)
                     local data = KeysTable[plate]
@@ -206,17 +198,9 @@ if Config.VehicleKeys.ENABLE then
                         if not data.has_key and GetVehicleClass(vehicle) ~= 13 and IsControlJustReleased(0, Config.Keys.StartHotwire_Key) then
                             TriggerEvent('cd_garage:ToggleNUIFocus')
                             StartCarAlarm(vehicle)
-                            for c, d in ipairs(Config.VehicleKeys.Hotwire.ActionBar) do
-                                result = ActionBar(d.seconds, d.size, d.chances)
-                                if not result then
-                                    break
-                                else
-                                    Wait(3000)
-                                end
-                            end
+                            result = ActionBar()
+                            NUI_status = false
                         end
-
-                        NUI_status = false
                         if result then
                             AddKey(plate)
                             result = nil
@@ -233,65 +217,60 @@ if Config.VehicleKeys.ENABLE then
 
     if Config.VehicleKeys.Lock.ENABLE then
 
-        CreateThread(function()
-            while not Authorised do Wait(1000) end
-            RegisterKeyMapping(Config.VehicleKeys.Lock.command, L('chatsuggestion_vehiclelock'), 'keyboard', Config.VehicleKeys.Lock.key)
-            TriggerEvent('chat:addSuggestion', '/'..Config.VehicleKeys.Lock.command, L('chatsuggestion_vehiclelock'))
-            RegisterCommand(Config.VehicleKeys.Lock.command, function()
-                TriggerEvent('cd_garage:ToggleVehicleLock') --The event to toggle the vehicle lock.
-            end)
+        function LockVehicle(vehicle, play_animation, notify, lights)
+            if not InVehicle() and play_animation then
+                PlayAnimation('mp_common', 'givetake1_a', 1000)
+            end
+            if notify then
+                Notif(3, 'vehicle_locked')
+            end
+            if lights then
+                LockLights(2, vehicle)
+            end
+            TriggerServerEvent('cd_garage:SetVehicleLockState', NetworkGetNetworkIdFromEntity(vehicle), 2)
+        end
 
-            if Config.VehicleKeys.Lock.lock_from_inside then
+        function UnLockVehicle(vehicle, play_animation, notify, lights)
+            if not InVehicle() and play_animation then
+                PlayAnimation('mp_common', 'givetake1_a', 1000)
+            end
+            if notify then
+                Notif(1, 'vehicle_unlocked')
+            end
+            if lights then
+                LockLights(1, vehicle)
+            end
+            TriggerServerEvent('cd_garage:SetVehicleLockState', NetworkGetNetworkIdFromEntity(vehicle), 0)
+        end
+
+        RegisterKeyMapping(Config.VehicleKeys.Lock.command, L('chatsuggestion_vehiclelock'), 'keyboard', Config.VehicleKeys.Lock.key)
+        TriggerEvent('chat:addSuggestion', '/'..Config.VehicleKeys.Lock.command, L('chatsuggestion_vehiclelock'))
+        RegisterCommand(Config.VehicleKeys.Lock.command, function()
+            TriggerEvent('cd_garage:ToggleVehicleLock')
+        end, false)
+
+        RegisterNetEvent('cd_garage:SetVehicleLocked', function(vehicle)
+            LockVehicle(vehicle, false, false, false)
+        end)
+
+        RegisterNetEvent('cd_garage:SetVehicleUnlocked', function(vehicle)
+            UnLockVehicle(vehicle, false, false, false)
+        end)
+
+        if Config.VehicleKeys.Lock.lock_from_inside then
+            CreateThread(function()
                 while true do
                     Wait(500)
                     local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-                    if InVehicle() then
-                        if GetVehicleDoorLockStatus(vehicle) == 2 then
-                            SetVehicleDoorsLocked(vehicle, 4)
-                        end
-                    else
-                        if GetVehicleDoorLockStatus(vehicle) == 4 then
-                            SetVehicleDoorsLocked(vehicle, 2)
-                        end
+                    if InVehicle() and (GetVehicleDoorLockStatus(vehicle) == 2) then
+                        SetVehicleDoorsLocked(vehicle, 4)
                     end
                 end
-            end
-        end)
-
-        function LockVehicle(vehicle, play_animation)
-            Notif(3, 'vehicle_locked')
-            if not InVehicle() and play_animation then
-                PlayAnimation('mp_common', 'givetake1_a', 1000)
-            end
-            SetVehicleDoorsLocked(vehicle, 2)
-            SetVehicleDoorsLockedForAllPlayers(vehicle, true)
-            if IsVehicleEmpty(vehicle) then
-                TriggerServerEvent('cd_garage:SyncVehicleLock', NetworkGetNetworkIdFromEntity(vehicle), 2)
-            else
-                TriggerServerEvent('cd_garage:SyncVehicleLock', NetworkGetNetworkIdFromEntity(vehicle), 2, GetPlayersInVehicle(vehicle))
-            end
-            LockLights(2, vehicle)
-        end
-
-        function UnLockVehicle(vehicle, play_animation)
-            Notif(1, 'vehicle_unlocked')
-            if not InVehicle() and play_animation then
-                PlayAnimation('mp_common', 'givetake1_a', 1000)
-            end
-            SetVehicleDoorsLocked(vehicle, 1)
-            SetVehicleDoorsLockedForAllPlayers(vehicle, false)
-            if IsVehicleEmpty(vehicle) then
-                TriggerServerEvent('cd_garage:SyncVehicleLock', NetworkGetNetworkIdFromEntity(vehicle), 1)
-            else
-                TriggerServerEvent('cd_garage:SyncVehicleLock', NetworkGetNetworkIdFromEntity(vehicle), 1, GetPlayersInVehicle(vehicle))
-            end
-            LockLights(1, vehicle)
+            end)
         end
 
         local cooldown = false
-        RegisterNetEvent('cd_garage:ToggleVehicleLock')
-        AddEventHandler('cd_garage:ToggleVehicleLock', function()
-            while not Authorised do Wait(1000) end
+        RegisterNetEvent('cd_garage:ToggleVehicleLock', function()
             if not cooldown then
                 local vehicle = GetClosestVehicle(5)
                 if vehicle then
@@ -301,9 +280,9 @@ if Config.VehicleKeys.ENABLE then
                         local lock = GetVehicleDoorLockStatus(vehicle)
                         cooldown = true
                         if lock == 0 or lock == 1 then
-                            LockVehicle(vehicle, true)
-                        else
-                            UnLockVehicle(vehicle, true)
+                            LockVehicle(vehicle, true, true, true)
+                        elseif lock == 2 or lock == 4 then
+                            UnLockVehicle(vehicle, true, true, true)
                         end
                         Wait(500)
                         cooldown = false
@@ -315,18 +294,6 @@ if Config.VehicleKeys.ENABLE then
                 end
             else
                 Notif(3, 'lock_cooldown')
-            end
-        end)
-
-        RegisterNetEvent('cd_garage:SyncVehicleLock')
-        AddEventHandler('cd_garage:SyncVehicleLock', function(netid, lock)
-            local vehicle = NetworkGetEntityFromNetworkId(netid)
-            if lock == 2 then
-                SetVehicleDoorsLocked(vehicle, 2)
-                SetVehicleDoorsLockedForAllPlayers(vehicle, true)
-            elseif lock == 1 then
-                SetVehicleDoorsLocked(vehicle, 1)
-                SetVehicleDoorsLockedForAllPlayers(vehicle, false)
             end
         end)
 
@@ -357,14 +324,14 @@ if Config.VehicleKeys.ENABLE then
     end
 
 
-    
+
     if Config.VehicleKeys.Lockpick.ENABLE then
 
         if Config.VehicleKeys.Lockpick.command.ENABLE then
             TriggerEvent('chat:addSuggestion', '/'..Config.VehicleKeys.Lockpick.command.chat_command, L('chatsuggestion_lockpick'))
             RegisterCommand(Config.VehicleKeys.Lockpick.command.chat_command, function()
                 TriggerEvent('cd_garage:LockpickVehicle', false)
-            end)
+            end, false)
         end
 
         local doing_animation = false
@@ -402,7 +369,7 @@ if Config.VehicleKeys.ENABLE then
                         StartCarAlarm(vehicle)
                         local hacking = exports['cd_keymaster']:StartKeyMaster()
                         if hacking then
-                            UnLockVehicle(vehicle, false)
+                            UnLockVehicle(vehicle, false, false, true)
                         else
                             Notif(3, 'lockpicking_failed')
                         end

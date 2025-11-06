@@ -2,15 +2,12 @@ if Config.Mileage.ENABLE then
 
     AdvStatsTable = {}
     
-    CreateThread(function()
-        if Config.Mileage.chat_command then
-            while not Authorised do Wait(1000) end
-            TriggerEvent('chat:addSuggestion', '/'..Config.Mileage.chat_command, L('chatsuggestion_mileage'))
-            RegisterCommand(Config.Mileage.chat_command, function()
-                TriggerEvent('cd_garage:checkmileage')
-            end)
-        end
-    end)
+    if Config.Mileage.chat_command then
+        TriggerEvent('chat:addSuggestion', '/'..Config.Mileage.chat_command, L('chatsuggestion_mileage'))
+        RegisterCommand(Config.Mileage.chat_command, function()
+            TriggerEvent('cd_garage:checkmileage')
+        end)
+    end
 
     function AdvStatsFunction(plate, mileage, maxhealth)
         if AdvStatsTable[plate] == nil then

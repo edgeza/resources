@@ -3,13 +3,14 @@ LoadingDots.Dot, LoadingDots.Timer = '.', 0
 
 function GetPlate(vehicle)
     local plate = GetVehicleNumberPlateText(vehicle)
-    if Config.PlateFormats == 'trimmed' then
+    if not plate then return nil end
+    if Config.VehiclePlateFormats.format == 'trimmed' then
         return Trim(plate)
 
-    elseif Config.PlateFormats == 'with_spaces' then
+    elseif Config.VehiclePlateFormats.format == 'with_spaces' then
         return plate
 
-    elseif Config.PlateFormats == 'mixed' then
+    elseif Config.VehiclePlateFormats.format == 'mixed' then
         return string.gsub(plate, "^%s*(.-)%s*$", "%1")
 
     end
@@ -25,10 +26,10 @@ function GetAllPlateFormats(vehicle)
     return data
 end
 
-function SpawnVehicle(data, jobspawn, jobspawn_owned, tp_invehicle)
+function SpawnVehicle(data, jobspawn, jobspawn_owned, tp_invehicle, persistent)
     InGarage = false
     TriggerEvent('cd_garage:Exit', false)
-    Wait(200)
+
     local ped = PlayerPedId()
     local props
     local model
@@ -38,7 +39,7 @@ function SpawnVehicle(data, jobspawn, jobspawn_owned, tp_invehicle)
     else
         model = data.model
     end
-    
+
     local plate = data.plate
     local adv_stats
     if Config.Mileage.ENABLE and not jobspawn and data.adv_stats then
@@ -46,140 +47,111 @@ function SpawnVehicle(data, jobspawn, jobspawn_owned, tp_invehicle)
     end
 
     if not IsModelValid(model) then
-        return Notif(3, 'invalid_model')
-    end
-
-    -- Patreon tier gating (client guard only, server already enforces in vehicle list)
-    if not jobspawn and Config.PatreonTiers and Config.PatreonTiers.ENABLE then
-        local vehicleModelName = (data and data.vehicle and data.vehicle.model) or model
-        if vehicleModelName then
-            local spawncode = tostring(vehicleModelName):upper()
-            -- Determine if spawncode is gated by any tier
-            local appearsInAnyTier = false
-            local minTier = nil
-            for t, tierData in pairs(Config.PatreonTiers.tiers or {}) do
-                local list = (tierData and tierData.vehicles) or {}
-                for i = 1, #list do
-                    if tostring(list[i]):upper() == spawncode then
-                        appearsInAnyTier = true
-                        minTier = (minTier and math.min(minTier, t)) or t
-                    end
-                end
-            end
-            if appearsInAnyTier then
-                local playerTier = 0
-                if Config.Framework == 'qbcore' then
-                    local p = QBCore.Functions.GetPlayerData()
-                    local md = p and p.metadata or {}
-                    local key = Config.PatreonTiers.metadata_key or 'patreon_tier'
-                    local t = md[key]
-                    if type(t) == 'number' then playerTier = t elseif type(t) == 'string' then playerTier = tonumber(t) or 0 end
-                end
-                local allowed
-                if Config.PatreonTiers.inherit ~= false then
-                    allowed = (tonumber(playerTier or 0) or 0) >= (minTier or 1)
-                else
-                    allowed = (tonumber(playerTier or 0) or 0) == (minTier or 1)
-                end
-                if not allowed then
-                    return Notif(3, 'patreon_garage_denied')
-                end
-            end
-        end
+        CloseAllNUI()
+        Notif(3, 'invalid_model')
+        return
     end
 
     LoadModel(model)
-    if HasModelLoaded(model) then
-        local vehicle = CreateVehicle(model, ExitLocation.x, ExitLocation.y, ExitLocation.z, ExitLocation.h, true, false)
-        if jobspawn then
-            plate = SetPlateRandom(vehicle, plate, props)
-        end
-        RegisterEntity(vehicle)
-
-        NetworkFadeInEntity(vehicle, true, true)
-        SetVehicleOnGroundProperly(vehicle)
-
-        RequestNetworkControl(vehicle)
-        RegisterEntityNetworked(vehicle)
-
-        SetVehicleHasBeenOwnedByPlayer(vehicle, true)
-        SetVehicleNeedsToBeHotwired(vehicle, false)
-        SetEntityAsMissionEntity(vehicle, true, false)
-        local netID = NetworkGetNetworkIdFromEntity(vehicle)
-        SetNetworkIdCanMigrate(netID, true)
-        SetNetworkIdExistsOnAllMachines(netID, true)
-        if tp_invehicle then
-            SetPedIntoVehicle(ped, vehicle, -1)
-        end
-        SetVehicleDirtLevel(vehicle)
-        WashDecalsFromVehicle(vehicle, 1.0)
-        NetworkRequestControlOfEntity(vehicle)
-        SetModelAsNoLongerNeeded(model)
-
-        RequestCollision(ExitLocation, vehicle)
-
-        SetVehRadioStation(vehicle, 'OFF')
-        NetworkFadeInEntity(vehicle, true, true)
-
-        
-
-        if not jobspawn then
-            if props.fuelLevel == nil then
-                props.fuelLevel = 100.0
-            end
-
-            SetVehicleProperties(vehicle, props)
-            SetFuel(vehicle, plate, props.fuelLevel)
-
-            if Config.Mileage.ENABLE and adv_stats then
-                if adv_stats.mileage == nil then
-                    adv_stats.mileage = 0
-                end
-                if adv_stats.maxhealth == nil then
-                    adv_stats.maxhealth = 1000.0
-                end
-                if adv_stats.plate == nil then
-                    adv_stats.plate = plate
-                end
-
-                local max_health = GetMaxHealth(adv_stats.mileage)
-
-                AdvStatsFunction(plate, adv_stats.mileage, max_health)
-
-                if GetVehicleEngineHealth(vehicle) > max_health then
-                    SetVehicleEngineHealth(vehicle, max_health+0.0)
-                end
-            end
-        end
-        
-        CheckSpawnArea(vehicle, vector3(ExitLocation.x, ExitLocation.y, ExitLocation.z))
-        VehicleSpawned(vehicle, plate, props)
-
-        if jobspawn then
-            SetFuel(vehicle, plate, 100.0)
-            if data.spawn_max then
-                SetVehicleMaxMods(vehicle)
-            end
-        else
-            if Config.Mileage.ENABLE then
-                TriggerServerEvent('cd_garage:ChangeInGarageState', plate, 0, AdvStatsTable[plate])
-            else
-                TriggerServerEvent('cd_garage:ChangeInGarageState', plate, 0)
-            end
-        end
-        if jobspawn or jobspawn_owned then
-            TriggerServerEvent('cd_garage:JobVehicleCacheKeys', plate)
-            if Config.JobVehicles.choose_liverys then
-                SetLiverysThread()
-            end
-        end
-        ExitLocation = nil
-        return vehicle
-    else
-        Notif(3, 'loading_failed')
+    if not HasModelLoaded(model) then
         CloseAllNUI()
-        ExitLocation = nil
+        Notif(3, 'loading_failed')
+        return
     end
+
+    if jobspawn then
+        plate = GenerateRandomJobVehiclePlate(plate)
+    end
+
+    if (not jobspawn) or (jobspawn_owned) then
+        if Callback('has_vehicle_already_spawned', data.plate, persistent)then
+            print('^1[cd_garage] ^3Vehicle with plate '..plate..' has already been spawned! Aborting spawn.^0')
+            CloseAllNUI()
+            return
+        end
+    end
+
+    local vehicle = CreateVehicle(model, ExitLocation.x, ExitLocation.y, ExitLocation.z, ExitLocation.h, true, false)
+    SetVehicleNumberPlateText(vehicle, plate)
+    RegisterEntity(vehicle)
+
+    NetworkFadeInEntity(vehicle, true, true)
+    SetVehicleOnGroundProperly(vehicle)
+
+    RequestNetworkControl(vehicle)
+    RegisterEntityNetworked(vehicle)
+
+    SetVehicleHasBeenOwnedByPlayer(vehicle, true)
+    SetVehicleNeedsToBeHotwired(vehicle, false)
+    SetEntityAsMissionEntity(vehicle, true, false)
+    local netID = NetworkGetNetworkIdFromEntity(vehicle)
+    SetNetworkIdCanMigrate(netID, true)
+    SetNetworkIdExistsOnAllMachines(netID, true)
+    if tp_invehicle then
+        SetPedIntoVehicle(ped, vehicle, -1)
+    end
+    SetVehicleDirtLevel(vehicle, 0.0)
+    WashDecalsFromVehicle(vehicle, 1.0)
+    NetworkRequestControlOfEntity(vehicle)
+    SetModelAsNoLongerNeeded(model)
+
+    RequestCollision(ExitLocation, vehicle)
+
+    SetVehRadioStation(vehicle, 'OFF')
+    NetworkFadeInEntity(vehicle, true, true)
+
+
+    if not jobspawn then
+        if props.fuelLevel == nil then
+            props.fuelLevel = 100.0
+        end
+
+        SetVehicleProperties(vehicle, props)
+        SetFuel(vehicle, plate, props.fuelLevel)
+
+        if Config.Mileage.ENABLE and adv_stats then
+            if adv_stats.mileage == nil then
+                adv_stats.mileage = 0
+            end
+            if adv_stats.maxhealth == nil then
+                adv_stats.maxhealth = 1000.0
+            end
+            if adv_stats.plate == nil then
+                adv_stats.plate = plate
+            end
+
+            local max_health = GetMaxHealth(adv_stats.mileage)
+
+            AdvStatsFunction(plate, adv_stats.mileage, max_health)
+
+            if GetVehicleEngineHealth(vehicle) > max_health then
+                SetVehicleEngineHealth(vehicle, max_health+0.0)
+            end
+        end
+    end
+
+    if Config.Mileage.ENABLE and not jobspawn then
+        TriggerServerEvent('cd_garage:UpdateAdvStatsTable', plate, AdvStatsTable[plate])
+    end
+    
+    CheckSpawnArea(vehicle, vector3(ExitLocation.x, ExitLocation.y, ExitLocation.z))
+    VehicleSpawned(vehicle, plate, props, jobspawn and 'regular' or jobspawn_owned and 'owned' or nil)
+    
+    if jobspawn then
+        SetFuel(vehicle, plate, 100.0)
+        if data.spawn_max then
+            SetVehicleMaxMods(vehicle)
+        end
+    end
+
+    if jobspawn or jobspawn_owned then
+        TriggerServerEvent('cd_garage:JobVehicleCacheKeys', plate, {model_string = GetDisplayNameFromVehicleModel(model):lower(), label = GetVehicleLabel_model(model)})
+        if Config.JobVehicles.choose_liverys then
+            SetLiverysThread()
+        end
+    end
+    ExitLocation = nil
+    return vehicle
 end
 
 function GetVehicleProperties(vehicle)
@@ -284,62 +256,21 @@ function SetVehicleProperties(vehicle, props)
 end
 
 function CheckVehicleOnStreets(plate, in_garage, model)
-    if Config.UsingOnesync then
-        local result = Callback('onstreetscheck', {plate = plate, shell_coords = shell_coords})
-        if result == nil then
-            if not in_garage then
-                result = 'outbutnotonstreets'
-                if Config.Return_Vehicle.ENABLE then
-                    local return_price = GetReturnVehiclePrice(model)
-                    return {result = result, message = L('return_vehicle')..''..return_price, return_price = return_price}
-                else
-                    local return_price = GetReturnVehiclePrice(model)
-                    return {result = result, message = L('return_vehicle_disabled'), return_price = ''}
-                end
-            else
-                return {result = 'canspawn'}
-            end
-        else
-            SetNewWaypoint(result.coords.x, result.coords.y)
-            return result
-        end
+    local onStreetsServerCheck = Callback('onstreetscheck', {plate = plate, shell_coords = shell_coords})
+    if onStreetsServerCheck then
+        SetNewWaypoint(onStreetsServerCheck.coords.x, onStreetsServerCheck.coords.y)
+        return onStreetsServerCheck
     else
-        local result = nil
-        local vehicle = GetGamePool('CVehicle')
-        for cd = 1, #vehicle, 1 do
-            if DoesEntityExist(vehicle[cd]) then
-                if Trim(GetVehicleNumberPlateText(vehicle[cd])) == Trim(plate) then
-                    local coords = GetEntityCoords(vehicle[cd])
-                    if shell_coords and GetVehicleEngineHealth(vehicle[cd]) > 0 then
-                        local dist = #(vector3(coords.x, coords.y, coords.z)-vector3(shell_coords.x, shell_coords.y, shell_coords.z))
-                        if dist > 30 then
-                            SetNewWaypoint(coords.x, coords.y)
-                            result = 'onstreets'
-                            return {result = result, message = L('vehicle_onstreets')}
-                        end
-                    elseif GetVehicleEngineHealth(d) > 0 then
-                        SetNewWaypoint(coords.x, coords.y)
-                        result = 'onstreets'
-                        return {result = result, message = L('vehicle_onstreets')}
-                    end
-                end
-            end
-        end
-        if result == nil then
-            if not in_garage then
-                result = 'outbutnotonstreets'
-                if Config.Return_Vehicle.ENABLE then
-                    local return_price = GetReturnVehiclePrice(model)
-                    return {result = result, message = L('return_vehicle')..''..return_price, return_price = return_price}
-                else
-                    local return_price = GetReturnVehiclePrice(model)
-                    return {result = result, message = L('return_vehicle_disabled'), return_price = ''}
-                end
+        if not in_garage then
+            if Config.Return_Vehicle.ENABLE then
+                local return_price = GetReturnVehiclePrice(model)
+                return {result = 'outbutnotonstreets', message = L('return_vehicle')..''..return_price, return_price = return_price}
             else
-                return {result = 'canspawn'}
+                return {result = 'outbutnotonstreets', message = L('return_vehicle_disabled'), return_price = ''}
             end
         end
     end
+    return {result = 'canspawn'}
 end
 
 function CheckSpawnArea(veh, coords)
@@ -566,6 +497,21 @@ function GetClosestVehicle(distance)
         end
         return result
     end
+end
+
+function GetClosestVehicles(distance)
+    local ped = PlayerPedId()
+    local result = {}
+    local ped_coords = GetEntityCoords(ped)
+    local vehicle = GetGamePool('CVehicle')
+    for cd = 1, #vehicle, 1 do
+        local vehcoords = GetEntityCoords(vehicle[cd])
+        local dist = #(ped_coords-vehcoords)
+        if dist < distance then
+            result[#result+1] = vehicle[cd]
+        end
+    end
+    return result
 end
 
 function FindVehicleInArea(coords, distance, plate)
@@ -840,21 +786,6 @@ function PlayAnimation(anim_dict, anim_name, duration)
     RemoveAnimDict(anim_dict)
 end
 
-function DrawText3Ds(x,y,z, text)
-    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
-    local px,py,pz=table.unpack(GetGameplayCamCoords())
-    SetTextScale(0.35, 0.35)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry('STRING')
-    SetTextCentre(1)
-    AddTextComponentString(text)
-    DrawText(_x,_y)
-    local factor = (string.len(text)) / 370
-    DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
-end
-
 function Draw2DText(text)
     SetTextFont(4)
     SetTextScale(0.0, 0.4)
@@ -962,15 +893,13 @@ function CheckBlips(EnableBlip, JobRestricted)
         return false
     elseif JobRestricted == nil then
         return true
-    elseif JobRestricted ~= nil and type(JobRestricted) == 'table' then
+    elseif JobRestricted ~= nil then
         local myjob = GetJob().name
         for c, d in ipairs(JobRestricted) do
             if myjob == d then
                 return true
             end
         end
-        return false
-    else
         return false
     end
 end
@@ -1006,7 +935,7 @@ function OpenTextBox(generate_whitespaces)
         local result = GetOnscreenKeyboardResult()
         if result and (#result > 0 and #result <= 8) then
             local plate = string.gsub(GetCorrectPlateFormat(result:upper()), "^%s*(.-)%s*$", "%1")
-            if Config.PlateFormats == 'with_spaces' and #plate ~= 8 and generate_whitespaces then
+            if Config.VehiclePlateFormats.format == 'with_spaces' and #plate ~= 8 and generate_whitespaces then
                 return GenerateSpacesInPlate(plate)
             else
                 return plate
@@ -1019,12 +948,10 @@ end
 
 function JobRestrictNotif(c, blip)
     local text = ''
-    if type(c) == 'table' then
-        for c, d in ipairs(c) do
-            text = text..' '..d..','
-        end
-        text = text:sub(1, -2):sub(2)
+    for c, d in ipairs(c) do
+        text = text..' '..d..','
     end
+    text = text:sub(1, -2):sub(2)
     if not blip then
         Notif(3, 'job_restricted', text)
     else
@@ -1032,22 +959,107 @@ function JobRestrictNotif(c, blip)
     end
 end
 
-function Callback(action, data)
-    CB_id = CB_id + 1
-    TriggerServerEvent('cd_garage:Callback', CB_id, action, data)
-    local timeout = 0 while CB[CB_id] == nil and timeout <= 50 do Wait(0) timeout=timeout+1 end
-    return CB[CB_id]
+local function fnv1a32(s)
+    local h = 2166136261
+    for i = 1, #s do
+        h = (h ~ s:byte(i)) & 0xFFFFFFFF
+        h = (h * 16777619) % 0x100000000
+    end
+    return h
+end
+
+local ALPH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+local function takeCharsFromInt(n, count)
+    local out = {}
+    for i = 1, count do
+        local idx = (n % #ALPH) + 1
+        out[i] = ALPH:sub(idx, idx)
+        n = math.floor(n / #ALPH)
+    end
+    return table.concat(out)
+end
+
+local __uid_counter = 0
+
+function GenerateUniqueId(length)
+    length = length or 16
+    __uid_counter = __uid_counter + 1
+
+    local parts = {}
+    for _ = 1, math.ceil(length / 6) do
+        local salt = string.format('%d:%d:%d:%d',
+            GetGameTimer()*34, GetGameTimer(), __uid_counter, math.random(0, 0x7FFFFFFF))
+        local h = fnv1a32(salt)
+        parts[#parts+1] = takeCharsFromInt(h, 6)
+    end
+
+    local raw = table.concat(parts):sub(1, length)
+
+    local t = {}
+    for i = 1, #raw do t[i] = raw:sub(i, i) end
+    for i = #t, 2, -1 do
+        local j = math.random(1, i)
+        t[i], t[j] = t[j], t[i]
+    end
+    raw = table.concat(t)
+
+    local out = {}
+    for i = 1, length do
+        out[#out+1] = raw:sub(i, i)
+        if i % 4 == 0 and i < length then out[#out+1] = '-' end
+    end
+    return table.concat(out)
+end
+
+function Callback(action, ...)
+    local id = GenerateUniqueId(16)
+    CB[id] = {
+        returned = false,
+        result = nil
+    }
+
+    TriggerServerEvent('cd_garage:Callback', id, action, ...)
+
+    local startTime = GetGameTimer()
+    local timeout = 5000
+
+    while not CB[id].returned and (GetGameTimer() - startTime) < timeout do
+        Wait(0)
+    end
+
+    local result = CB[id].result
+
+    if not CB[id].returned then
+        print(('[^1ERROR^0] Callback "%s" timed out after %d ms'):format(action, timeout))
+    elseif Config.Debug then
+        print(('[^2DEBUG^0] Callback "%s" completed in %d ms'):format(action, GetGameTimer() - startTime))
+    end
+
+    CB[id] = nil
+    return result
 end
 
 RegisterNetEvent('cd_garage:Callback')
 AddEventHandler('cd_garage:Callback', function(id, result)
-    CB[id] = result
-    Wait(5000)
-    CB[id] = nil
+    if CB[id] then
+        CB[id].result = result
+        CB[id].returned = true
+    end
+end)
+
+RegisterNetEvent('cd_garage:Client:Callback', function(id, action, ...)
+    if action == 'getmodelstring' then
+        TriggerServerEvent('cd_garage:Client:Callback', id, GetDisplayNameFromVehicleModel(...):lower())
+    elseif action == 'getvehiclelabel' then
+        TriggerServerEvent('cd_garage:Client:Callback', id, GetVehicleLabel_model(...))
+    elseif action == 'getvehicledata' then
+        TriggerServerEvent('cd_garage:Client:Callback', id, {model_string = GetDisplayNameFromVehicleModel(...):lower(), label = GetVehicleLabel_model(...)})
+    end
 end)
 
 RegisterNetEvent('cd_garage:ToggleNUIFocus')
 AddEventHandler('cd_garage:ToggleNUIFocus', function()
+    if NUI_status then return end
     NUI_status = true
     while NUI_status do
         SetNuiFocus(NUI_status, NUI_status)
@@ -1058,22 +1070,11 @@ end)
 
 RegisterNetEvent('cd_garage:ToggleNUIFocus2')
 AddEventHandler('cd_garage:ToggleNUIFocus2', function()
+    if NUI_status then return end
     NUI_status = true
     while NUI_status do
         SetNuiFocus(NUI_status, false)
         Wait(100)
     end
     SetNuiFocus(false, false)
-end)
-
-RegisterNetEvent('cd_garage:Enter')
-AddEventHandler('cd_garage:Enter', function(garage_id)
-    -- Tag UI as Patreon when entering Patreon Hub for red theme
-    local isPatreon = (garage_id == 'Patreon Hub')
-    SendNUIMessage({ action = 'cd_garage:setTheme', patreon = isPatreon })
-end)
-
-RegisterNetEvent('cd_garage:Exit')
-AddEventHandler('cd_garage:Exit', function()
-    SendNUIMessage({ action = 'cd_garage:setTheme', patreon = false })
 end)

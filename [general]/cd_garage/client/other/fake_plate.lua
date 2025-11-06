@@ -1,17 +1,14 @@
 if Config.FakePlates.ENABLE then
 
-    CreateThread(function()
-        if Config.FakePlates.RemovePlate.chat_command then
-            while not Authorised do Wait(1000) end
-            TriggerEvent('chat:addSuggestion', '/'..Config.FakePlates.RemovePlate.chat_command, L('chatsuggestion_fakeplate'))
-            RegisterCommand(Config.FakePlates.RemovePlate.chat_command, function()
-                TriggerEvent('cd_garage:FakePlate', 'remove')
-            end)
-        end
-    end)
+    if Config.FakePlates.RemovePlate.chat_command then
+        TriggerEvent('chat:addSuggestion', '/'..Config.FakePlates.RemovePlate.chat_command, L('chatsuggestion_fakeplate'))
+        RegisterCommand(Config.FakePlates.RemovePlate.chat_command, function()
+            TriggerEvent('cd_garage:FakePlate', 'remove')
+        end, false)
+    end
 
     RegisterNetEvent('cd_garage:FakePlate')
-    AddEventHandler('cd_garage:FakePlate', function(action)
+    AddEventHandler('cd_garage:FakePlate', function(action, generatedFakePlate)
         local ped = PlayerPedId()
         if not InVehicle() then
             local vehicle = GetClosestVehicle(5)
@@ -20,13 +17,7 @@ if Config.FakePlates.ENABLE then
                 if action == 'add' then
                     TaskTurnPedToFaceEntity(ped, vehicle, 1000)
                     Wait(1000)
-                    TaskStartScenarioInPlace(ped, 'CODE_HUMAN_MEDIC_TEND_TO_DEAD', 0, true)
-                    local new_plate = OpenTextBox(true)
-                    if new_plate then
-                        TriggerServerEvent('cd_garage:FakePlate', action, current_plate, vehicle, new_plate)
-                    else
-                        Notif(3, 'invalid_plateformat')
-                    end
+                    TriggerServerEvent('cd_garage:FakePlate', action, current_plate, vehicle, generatedFakePlate)
 
                 elseif action == 'remove' then
                     TriggerServerEvent('cd_garage:FakePlate', action, current_plate, vehicle)

@@ -1,42 +1,48 @@
-
-
 fx_version 'cerulean'
 game 'gta5'
 author 'discord.gg/codesign'
 description 'Garage'
-version '4.3.4'
+version '5.0.6'
 lua54 'yes'
 
 shared_scripts {
     'configs/locales.lua',
     'configs/config.lua',
-    'configs/patreon.lua',
     --'@ox_lib/init.lua' --⚠️PLEASE READ⚠️; Uncomment this line if you use 'ox_lib'.⚠️
 }
 
 client_scripts {
+    'client/main/functions.lua',
+    'configs/client_customise_me.lua',
     'client/**/*.lua',
-    'configs/client_customise_me.lua'
+    'configs/client_integrations.lua'
 }
 
 server_scripts {
     '@mysql-async/lib/MySQL.lua', --⚠️PLEASE READ⚠️; Remove this line if you don't use 'mysql-async' or 'oxmysql'.⚠️
     'configs/server_customise_me.lua',
     'configs/server_webhooks.lua',
-    'server/**/*.lua'
+    'server/**/*.lua',
+    'server/other/images.js',
+    'configs/server_integrations.lua'
 }
 
 ui_page {
     'html/index.html'
 }
 files {
+    'configs/config_ui.js',
     'configs/locales_ui.js',
     'html/index.html',
-    'html/css/*.css',
     'html/js/*.js',
-    'html/js/doorLock.js',
+    'html/css/*.css',
+    'html/assets/*.js',
+    'html/assets/*.css',
+    'html/assets/*.woff',
+    'html/assets/*.woff2',
     'html/images/logos/*.png',
-    'html/sound/door_lock.wav'
+    'html/images/vehicles/*.webp',
+    'html/sounds/door_lock.wav'
 }
 
 exports {
@@ -46,7 +52,9 @@ exports {
     'GetKeysData',
     'DoesPlayerHaveKeys',
     'GetPlate',
-    'GetConfig'
+    'GetConfig',
+    'GetMaxHealth',
+    'GetVehicleMileage'
 }
 
 server_exports {
@@ -55,7 +63,10 @@ server_exports {
     'GetMaxHealth',
     'CheckVehicleOwner',
     'GetConfig',
-    'GetVehiclesData'
+    'GetVehiclesData',
+    'GetVehicleMileage',
+    'IsVehicleImpounded',
+    'GetVehicleImpoundData',
 }
 
 dependencies {
@@ -67,6 +78,7 @@ dependencies {
 provide 'qb-garage'
 
 escrow_ignore {
+    'fxmanifest.lua',
     'client/main/functions.lua',
     'client/other/*.lua',
     'configs/*.lua',
@@ -77,5 +89,4 @@ escrow_ignore {
     'server/main/auto_sql_insert.lua',
     'server/other/*.lua'
 }
-
 dependency '/assetpacks'

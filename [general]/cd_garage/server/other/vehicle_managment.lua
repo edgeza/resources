@@ -49,7 +49,7 @@ function VehicleAdd(source, action, data)
                     ['@vehicle'] = data.label
                 })
             end
-            TriggerClientEvent('cd_garage:AddKeys', source, data.plate)
+            TriggerEvent('cd_garage:AddKeysOwnedVehicle', data.plate, data.props.model, data.target)
             Notif(source, 1, 'vehmanagment_added', data.plate, data.target)
             VehicleManagmentLogs(source, action, data.plate, data.target, data.garage_type)
         else
@@ -76,7 +76,7 @@ function VehiclePlate(source, action, data)
     if Result_1 and Result_1[1] ~= nil then
         local Result_2 = DatabaseQuery('SELECT plate FROM '..FW.vehicle_table..' WHERE plate="'..data.new_plate..'"')
         if Result_2[1] == nil then
-            local props = json.decode(ConvertData({Result_1[1].vehicle, Result_1[1].mods}))
+            local props = json.decode(Result_1[1][FW.vehicle_props])
             props.plate = data.new_plate
             DatabaseQuery('UPDATE '..FW.vehicle_table..' SET plate=@new_plate, '..FW.vehicle_props..'=@'..FW.vehicle_props..' WHERE plate=@old_plate', {
                 ['@old_plate'] = data.old_plate,

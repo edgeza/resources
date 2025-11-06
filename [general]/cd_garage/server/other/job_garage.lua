@@ -37,4 +37,4 @@ RegisterCommand('cd_garage_jobvehicles', function(source)
         end
         print('^2CODESIGN JOB VEHICLE CONVERSION FINISHED!^0')
     end
-end)
+end, false)

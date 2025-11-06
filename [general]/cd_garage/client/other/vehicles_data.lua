@@ -36,7 +36,7 @@ end
 
 function GetVehicleLabel(vehicle)
     local vehicleLabel = string.lower(GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)))
-        
+
     if vehicleLabel == 'null' or vehicleLabel == 'carnotfound' or vehicleLabel == 'NULL' then
         vehicleLabel = L('vehicle')
     end
@@ -53,7 +53,7 @@ end
 
 function GetVehicleLabel_model(model)
     local vehicleLabel = string.lower(GetDisplayNameFromVehicleModel(model))
-        
+
     if vehicleLabel == 'null' or vehicleLabel == 'carnotfound' or vehicleLabel == 'NULL' then
         vehicleLabel = L('vehicle')
     end

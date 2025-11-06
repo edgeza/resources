@@ -42,25 +42,21 @@ if Config.GangGarages.ENABLE then
         GangBlipsTable.last_gang_name = gang_name
     end
     
-    CreateThread(function()
-        while not Authorised do Wait(1000) end
 
-        for cc, dd in pairs(Config.Locations) do
-            for c, d in pairs(Config.GangGarages.Locations) do
-                if dd.Garage_ID == d.garage_id then
-                    Config.GangGarages.ENABLE = false
-                    print('^1[error_code-3459]')
-                    break
-                end
+    for cc, dd in pairs(Config.Locations) do
+        for c, d in pairs(Config.GangGarages.Locations) do
+            if dd.Garage_ID == d.garage_id then
+                Config.GangGarages.ENABLE = false
+                print('^1[error_code-3459]')
+                break
             end
-            if DisableGangGarage() then break end
         end
-        if DisableGangGarage() then return end
-        UpdateGangGarageBlips()
-    end)
+        if DisableGangGarage() then break end
+    end
+    if DisableGangGarage() then return end
+    UpdateGangGarageBlips()
 
     CreateThread(function()
-        while not Authorised do Wait(1000) end
         if DisableGangGarage() then return end
         local alreadyEnteredZone = false
         local GlobalText = nil

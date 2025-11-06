@@ -1,9 +1,6 @@
---███████╗██████╗  █████╗ ███╗   ███╗███████╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗
---██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝
---█████╗  ██████╔╝███████║██╔████╔██║█████╗  ██║ █╗ ██║██║   ██║██████╔╝█████╔╝ 
---██╔══╝  ██╔══██╗██╔══██║██║╚██╔╝██║██╔══╝  ██║███╗██║██║   ██║██╔══██╗██╔═██╗ 
---██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗
---╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                            FRAMEWORK                             │
+-- └──────────────────────────────────────────────────────────────────┘
 
 
 ESX, QBCore = nil, nil
@@ -14,7 +11,6 @@ if Config.Framework == 'esx' then
         TriggerEvent(Config.FrameworkTriggers.main, function(obj) ESX = obj end)
     end
 
-    
 elseif Config.Framework == 'qbcore' then
     TriggerEvent(Config.FrameworkTriggers.main, function(obj) QBCore = obj end)
     if QBCore == nil then
@@ -43,7 +39,7 @@ function GetJob(source)
     if Config.Framework == 'esx' then 
         local xPlayer = ESX.GetPlayerFromId(source)
         return xPlayer.job.name
-    
+
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
         return xPlayer.PlayerData.job.name
@@ -67,7 +63,7 @@ function CheckMoney(source, amount, payment_type) --payment_type = What this pay
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
         if xPlayer.PlayerData.money['bank'] >= amount then
-            xPlayer.Functions.RemoveMoney('bank', amount, 'Garage Payment')
+            xPlayer.Functions.RemoveMoney('bank', amount, payment_type)
             return true
         else
             return false
@@ -124,11 +120,15 @@ function CheckPerms(source, action)
 end
 
 function GetCharacterName(source)
+    if CharacterNames[source] then
+        return CharacterNames[source]
+    end
+
     local char_name = L('unknown')
     if Config.Framework == 'esx' then
         local xPlayer = ESX.GetPlayerFromId(source)
         char_name = xPlayer.getName(source)
-    
+
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
         if xPlayer then
@@ -141,10 +141,11 @@ function GetCharacterName(source)
         --get the players permissions (string).
 
     end
+    CharacterNames[source] = char_name
     return char_name
 end
 
-function GetPlayerFromIdentifier(identifier)
+function GetSourceFromIdentifier(identifier)
     if Config.Framework == 'esx' then
         local AllPlayers = ESX.GetPlayers()
         for cd = 1, #AllPlayers do
@@ -172,64 +173,121 @@ function GetPlayerFromIdentifier(identifier)
 end
 
 
--- ██████╗ █████╗ ██╗     ██╗     ██████╗  █████╗  ██████╗██╗  ██╗███████╗
---██╔════╝██╔══██╗██║     ██║     ██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝
---██║     ███████║██║     ██║     ██████╔╝███████║██║     █████╔╝ ███████╗
---██║     ██╔══██║██║     ██║     ██╔══██╗██╔══██║██║     ██╔═██╗ ╚════██║
---╚██████╗██║  ██║███████╗███████╗██████╔╝██║  ██║╚██████╗██║  ██╗███████║
--- ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                            CALLBACKS                             │
+-- └──────────────────────────────────────────────────────────────────┘
 
 
 RegisterServerEvent('cd_garage:Callback')
-AddEventHandler('cd_garage:Callback', function(id, action, data)
+AddEventHandler('cd_garage:Callback', function(id, action, ...)
     local _source = source
     if action == 'mileage' then
-        TriggerClientEvent('cd_garage:Callback', _source, id, GetAdvStats(data))
+        TriggerClientEvent('cd_garage:Callback', _source, id, GetAdvStats(...))
 
     elseif action == 'onstreetscheck' then
-        TriggerClientEvent('cd_garage:Callback', _source, id, OnStreetsCheck(data))
+        TriggerClientEvent('cd_garage:Callback', _source, id, OnStreetsCheck(...))
 
+    elseif action == 'getallplayers' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, GetAllPlayers(_source))
+
+    elseif action == 'getimpounddata' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, GetImpoundData(source, ...))
+
+    elseif action == 'getallimpounddata' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, GetAllImpoundData(...))
+
+    elseif action == 'cancivretrivevehicle' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, CanCivRetriveVehicle(source, ...))
+
+    elseif action == 'generate_new_plate' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, GenerateRandomPlate())
+
+    elseif action == 'search_vehicle_in_garage' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, SearchVehicleInGarage(...))
+
+    elseif action == 'get_vehicle_info' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, GetVehicleInfo(...))
+
+    elseif action == 'has_vehicle_already_spawned' then
+        TriggerClientEvent('cd_garage:Callback', _source, id, HasVehicleAlreadySpawned(...))
     end
 end)
 
+CB = {}
+local CB_id = 0
+
+function Callback(source, action, ...)
+    CB_id = CB_id + 1
+    local id = CB_id
+
+    TriggerClientEvent('cd_garage:Client:Callback', source, id, action, ...)
+    Wait(10)
+
+    local timeout = 0
+    while CB[id] == nil and timeout <= 100 do
+        Wait(0)
+        timeout = timeout + 1
+    end
+
+    local res = CB[id]
+    if res then
+        CB[id] = nil
+        return res
+    else
+        print(('Callback timed out: source=%s id=%d action=%s'):format(tostring(source), id, tostring(action)))
+        return nil
+    end
+end
+
+RegisterServerEvent('cd_garage:Client:Callback', function(id, result)
+    CB[id] = result
+    Wait(5000)
+    CB[id] = nil
+end)
+
 function OnStreetsCheck(data)
-    local self = nil
+    local result = nil
+    local plate = GetCorrectPlateFormat(data.plate)
     for c, d in pairs(GetAllVehicles()) do
         if DoesEntityExist(d) then
-            if GetCorrectPlateFormat(GetVehicleNumberPlateText(d)) == GetCorrectPlateFormat((data.plate)) then
+            if GetCorrectPlateFormat(GetVehicleNumberPlateText(d)) == plate then
                 local coords = GetEntityCoords(d)
                 if data.shell_coords and GetVehicleEngineHealth(d) > 0 then
                     local dist = #(vector3(coords.x, coords.y, coords.z)-vector3(data.shell_coords.x, data.shell_coords.y, data.shell_coords.z))
                     if dist > 30 then
-                        self = {result = 'onstreets', message = L('vehicle_onstreets'), coords = coords}
+                        result = {result = 'onstreets', message = L('vehicle_onstreets'), coords = coords}
                         break
                     end
                 elseif GetVehicleEngineHealth(d) > 0 then
-                    self = {result = 'onstreets', message = L('vehicle_onstreets'), coords = coords}
+                    result = {result = 'onstreets', message = L('vehicle_onstreets'), coords = coords}
                     break
                 end
             end
         end
     end
-    return self
+    return result
 end
 
-
--- ██████╗ ████████╗██╗  ██╗███████╗██████╗ 
---██╔═══██╗╚══██╔══╝██║  ██║██╔════╝██╔══██╗
---██║   ██║   ██║   ███████║█████╗  ██████╔╝
---██║   ██║   ██║   ██╔══██║██╔══╝  ██╔══██╗
---╚██████╔╝   ██║   ██║  ██║███████╗██║  ██║
--- ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-
-
-function FakePlateChange(current_plate, new_plate) --This is triggered when a player adds/removes a fake plate.
-    if GetResourceState('ox_inventory') == 'started' then
-        exports['ox_inventory']:UpdateVehicle(current_plate, new_plate)
+function GetAllPlayers(source)
+    local players = {}
+    local AllPlayers = GetPlayers()
+    for _, src in ipairs(AllPlayers) do
+        src = tonumber(src)
+        if src ~= source then
+            players[#players+1] = {}
+            if Config.PlayerListMethod == 'both' or Config.PlayerListMethod == 'charname' then
+                players[#players].name = GetCharacterName(src)
+            end
+            players[#players].source = src
+        end
     end
-    --You can add other events/exports here to update other inventories when a fake plate is added/removed.
-    
+    return players
 end
+
+
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                              OTHER                               │
+-- └──────────────────────────────────────────────────────────────────┘
 
 AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
     if eventData.secondsRemaining == 60 then
@@ -241,6 +299,9 @@ AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
         end
         if Config.VehicleKeys.ENABLE then
             TriggerClientEvent('cd_garage:SaveAllVehicleDamage', -1)
+        end
+        if Config.PersistentVehicles.ENABLE then
+            TriggerEvent('cd_garage:SavePersistentVehicles')
         end
     end
 end)
@@ -255,6 +316,25 @@ AddEventHandler('txAdmin:events:serverShuttingDown', function()
     if Config.VehicleKeys.ENABLE then
         TriggerClientEvent('cd_garage:SaveAllVehicleDamage', -1)
     end
+    if Config.PersistentVehicles.ENABLE then
+        TriggerEvent('cd_garage:SavePersistentVehicles')
+    end
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
+    if Config.Mileage.ENABLE then
+        TriggerClientEvent('cd_garage:SaveAllMiles', -1)
+    end
+    if Config.Impound.ENABLE then
+        TriggerEvent('cd_garage:SaveImpoundTimers')
+    end
+    if Config.VehicleKeys.ENABLE then
+        TriggerClientEvent('cd_garage:SaveAllVehicleDamage', -1)
+    end
+    if Config.PersistentVehicles.ENABLE then
+        TriggerEvent('cd_garage:SavePersistentVehicles')
+    end
 end)
 
 RegisterServerEvent('cd_garage:DeleteVehicleADV')
@@ -262,84 +342,10 @@ AddEventHandler('cd_garage:DeleteVehicleADV', function(net)
     TriggerClientEvent('cd_garage:DeleteVehicleADV', source, net)
 end)
 
-function ConvertData(...)
-    if ... ~= nil then
-        for c, d in pairs(...) do
-            if d ~= nil then
-                return d
-            end
-        end
-    end
-    return nil
-end
 
-
---███╗   ██╗ ██████╗ ████████╗██╗███████╗██╗ ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
---████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██║██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
---██╔██╗ ██║██║   ██║   ██║   ██║█████╗  ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗
---██║╚██╗██║██║   ██║   ██║   ██║██╔══╝  ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║
---██║ ╚████║╚██████╔╝   ██║   ██║██║     ██║╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║
---╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
-
-
-function Notification(source, notif_type, message)
-    if source and notif_type and message then
-        if Config.Notification == 'esx' then
-            TriggerClientEvent('esx:showNotification', source, message)
-        
-        elseif Config.Notification == 'qbcore' then
-            if notif_type == 1 then
-                TriggerClientEvent('QBCore:Notify', source, message, 'success')
-            elseif notif_type == 2 then
-                TriggerClientEvent('QBCore:Notify', source, message, 'primary')
-            elseif notif_type == 3 then
-                TriggerClientEvent('QBCore:Notify', source, message, 'error')
-            end
-
-        elseif Config.Notification == 'okokNotify' then
-            if notif_type == 1 then
-                TriggerClientEvent('okokNotify:Alert', source, L('garage'), message, 5000, 'success')
-            elseif notif_type == 2 then
-                TriggerClientEvent('okokNotify:Alert', source, L('garage'), message, 5000, 'info')
-            elseif notif_type == 3 then
-                TriggerClientEvent('okokNotify:Alert', source, L('garage'), message, 5000, 'error')
-            end
-
-        elseif Config.Notification == 'ps-ui' then
-            if notif_type == 1 then
-                TriggerClientEvent('ps-ui:Notify', source, message, 'success')
-            elseif notif_type == 2 then
-                TriggerClientEvent('ps-ui:Notify', source, message, 'primary')
-            elseif notif_type == 3 then
-                TriggerClientEvent('ps-ui:Notify', source, message, 'error')
-            end
-
-        elseif Config.Notification == 'ox_lib' then
-            if notif_type == 1 then
-                lib.notify(source, {title = L('garage'), description = message, type = 'success'})
-            elseif notif_type == 2 then
-                lib.notify(source, {title = L('garage'), description = message, type = 'inform'})
-            elseif notif_type == 3 then
-                lib.notify(source, {title = L('garage'), description = message, type = 'error'})
-            end
-
-        elseif Config.Notification == 'chat' then
-                TriggerClientEvent('chatMessage', source, message)
-
-        elseif Config.Notification == 'other' then
-            --add your own notification.
-
-        end
-    end
-end
-
-
---██████╗ ███████╗██████╗ ██╗   ██╗ ██████╗ 
---██╔══██╗██╔════╝██╔══██╗██║   ██║██╔════╝ 
---██║  ██║█████╗  ██████╔╝██║   ██║██║  ███╗
---██║  ██║██╔══╝  ██╔══██╗██║   ██║██║   ██║
---██████╔╝███████╗██████╔╝╚██████╔╝╚██████╔╝
---╚═════╝ ╚══════╝╚═════╝  ╚═════╝  ╚═════╝ 
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                               DEBUG                              │
+-- └──────────────────────────────────────────────────────────────────┘
 
 
 RegisterServerEvent('cd_garage:Debug')
@@ -347,8 +353,8 @@ AddEventHandler('cd_garage:Debug', function()
     local _source = source
     print('^6-----------------------^0')
     print('^1CODESIGN DEBUG^0')
+    print(string.format('^6Source:^0 %s', _source))
     print(string.format('^6Identifier:^0 %s', GetIdentifier(_source)))
-    print(string.format('^6Job Name:^0 %s', GetJob(_source)))
     print(string.format('^6Character Name:^0 %s', GetCharacterName(_source)))
     print(string.format('^6Perms [add]:^0 %s', CheckPerms(_source, 'add')))
     print(string.format('^6Perms [delete]:^0 %s', CheckPerms(_source, 'delete')))

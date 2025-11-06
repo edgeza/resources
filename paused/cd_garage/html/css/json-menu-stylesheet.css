@@ -1,0 +1,277 @@
+:root{
+    --json-menu-background: #0a0a0a;
+    --json-menu-item: #1a1a1a;
+    --json-menu-item-hover: #2a2a2a;
+
+    --json-menu-text: #ffffff;
+    --json-menu-text-alert: #dc3545;
+    --json-menu-text-success: #23CE6B;
+    --json-menu-text-warning: #EECF6D;
+    --json-menu-text-muted: #b0b0b0;
+
+    --json-menu-link: #dc3545;
+    --json-menu-border: #dc3545;
+    --json-menu-shadow: rgba(220, 53, 69, 0.2);
+
+    --davys-grey: #3a3a3a;
+}
+
+.json-menu{
+    color: var(--json-menu-text) !important;
+    padding: .35rem !important;
+    background: var(--json-menu-background) !important;
+    border-radius: .25rem !important;
+    border: 2px solid var(--json-menu-border) !important;
+    box-shadow: 0 8px 25px var(--json-menu-shadow) !important;
+}
+
+/* Dark/Red theme for all menu types */
+.json-menu .json-menu-header{
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+    border-bottom: 2px solid var(--json-menu-border) !important;
+    color: var(--json-menu-text) !important;
+}
+
+.json-menu .json-item-header{
+    background: var(--json-menu-item) !important;
+    border: 1px solid var(--davys-grey) !important;
+    color: var(--json-menu-text) !important;
+    transition: all 0.3s ease;
+}
+
+.json-menu .json-item-header:hover{
+    background: var(--json-menu-item-hover) !important;
+    border-color: var(--json-menu-border) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--json-menu-shadow);
+}
+
+.json-menu > a{
+    background: linear-gradient(135deg, var(--json-menu-link) 0%, #c82333 100%) !important;
+    border: 1px solid var(--json-menu-border) !important;
+    color: var(--json-menu-text) !important;
+    transition: all 0.3s ease;
+}
+
+.json-menu > a:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--json-menu-shadow);
+}
+
+.json-menu > hr{
+    border-top: 1px solid var(--json-menu-border);
+}
+
+.json-menu-header{
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+    padding: 1rem;
+    border-top-left-radius: .25rem !important;
+    border-top-right-radius: .25rem !important;
+    border-bottom: 2px solid var(--json-menu-border) !important;
+    color: var(--json-menu-text) !important;
+}
+
+.json-item-header{
+    background: var(--json-menu-item) !important;
+    border: 1px solid var(--davys-grey) !important;
+    color: var(--json-menu-text) !important;
+    transition: all 0.3s ease;
+}
+
+.json-item-header:hover{
+    background: var(--json-menu-item-hover) !important;
+    border-color: var(--json-menu-border) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--json-menu-shadow);
+}
+
+.json-item{
+    background: var(--json-menu-item) !important;
+    border: 1px solid var(--davys-grey) !important;
+    color: var(--json-menu-text) !important;
+    transition: all 0.3s ease;
+}
+
+.json-item:hover {
+    background: var(--json-menu-item-hover) !important;
+    border-color: var(--json-menu-border) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--json-menu-shadow);
+}
+
+.json-item-footer{
+    background: inherit;
+    border-top: 1px solid var(--davys-grey);
+}
+
+.json-menu-footer{
+    font-size: 80%;
+    color: var(--json-menu-text-muted);
+    padding: 0.5rem;
+    position: relative;
+    background: var(--json-menu-item);
+    border-top: 1px solid var(--json-menu-border);
+}
+
+.json-item-flash {
+    background: linear-gradient(45deg, var(--json-menu-item), 70%, var(--json-menu-text-alert));
+    background-size: 200% 200%;
+    border: 0;
+    animation: json-menu-flash 1s ease infinite;
+    color: var(--json-menu-text) !important;
+}
+
+.json-text-success{
+    color: var(--json-menu-text-success) !important;
+}
+
+.json-text-alert{
+    color: var(--json-menu-text-alert) !important;
+}
+
+.json-text-warning{
+    color: var(--json-menu-text-warning) !important;
+}
+
+.json-menu-list{
+    background: var(--json-menu-item-hover) !important;
+    max-height: calc(80vh - 98px);
+    overflow-y: scroll;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border: 1px solid var(--davys-grey);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+@keyframes json-menu-flash {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* Enhanced scrollbar styling */
+.json-menu-list::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	background-color: var(--json-menu-item);
+	border-radius: .25rem;
+}
+
+.json-menu-list::-webkit-scrollbar
+{
+    width: 8px;
+    background-color: var(--json-menu-item);
+    border-bottom-right-radius: .25rem !important;
+}
+
+.json-menu-list::-webkit-scrollbar-thumb{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.5);
+	background: linear-gradient(135deg, var(--json-menu-link), var(--json-menu-text-alert));
+	border-radius: .25rem;
+}
+
+.json-menu-list::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--json-menu-text-alert), var(--json-menu-link));
+}
+
+/* Button styling within JSON menus */
+.json-menu .btn {
+    background: linear-gradient(135deg, var(--json-menu-link) 0%, #c82333 100%) !important;
+    border: 1px solid var(--json-menu-border) !important;
+    color: var(--json-menu-text) !important;
+    border-radius: .375rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--json-menu-shadow);
+}
+
+.json-menu .btn:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--json-menu-shadow);
+}
+
+/* Input styling within JSON menus */
+.json-menu input, .json-menu textarea, .json-menu select {
+    background-color: var(--json-menu-item) !important;
+    border: 1px solid var(--davys-grey) !important;
+    color: var(--json-menu-text) !important;
+    border-radius: .25rem;
+    transition: all 0.3s ease;
+}
+
+.json-menu input:focus, .json-menu textarea:focus, .json-menu select:focus {
+    border-color: var(--json-menu-border) !important;
+    box-shadow: 0 0 0 0.2rem var(--json-menu-shadow);
+    outline: none;
+}
+
+/* Badge styling within JSON menus */
+.json-menu .badge {
+    background: var(--json-menu-link) !important;
+    color: var(--json-menu-text) !important;
+    border: 1px solid var(--json-menu-border);
+    box-shadow: 0 2px 5px var(--json-menu-shadow);
+}
+
+/* Alert styling within JSON menus */
+.json-menu .alert {
+    background-color: var(--json-menu-item) !important;
+    border: 1px solid var(--json-menu-border) !important;
+    color: var(--json-menu-text) !important;
+    border-radius: .25rem;
+}
+
+/* Progress bar styling within JSON menus */
+.json-menu .progress {
+    background-color: var(--davys-grey) !important;
+    border: 1px solid var(--json-menu-border);
+    border-radius: .25rem;
+}
+
+.json-menu .progress-bar {
+    background: linear-gradient(90deg, var(--json-menu-link), var(--json-menu-text-alert)) !important;
+    border-radius: .25rem;
+}
+
+/* Card styling within JSON menus */
+.json-menu .card {
+    background-color: var(--json-menu-item) !important;
+    border: 1px solid var(--davys-grey) !important;
+    color: var(--json-menu-text) !important;
+    border-radius: .25rem;
+}
+
+.json-menu .card-header {
+    background-color: var(--json-menu-item-hover) !important;
+    border-bottom: 1px solid var(--json-menu-border) !important;
+    color: var(--json-menu-text) !important;
+}
+
+.json-menu .card-body {
+    background-color: var(--json-menu-item) !important;
+    color: var(--json-menu-text) !important;
+}
+
+/* List group styling within JSON menus */
+.json-menu .list-group-item {
+    background-color: var(--json-menu-item) !important;
+    border: 1px solid var(--davys-grey) !important;
+    color: var(--json-menu-text) !important;
+    transition: all 0.3s ease;
+}
+
+.json-menu .list-group-item:hover {
+    background-color: var(--json-menu-item-hover) !important;
+    border-color: var(--json-menu-border) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--json-menu-shadow);
+}
+
+.json-menu .list-group-item.active {
+    background-color: var(--json-menu-link) !important;
+    border-color: var(--json-menu-border) !important;
+    color: var(--json-menu-text) !important;
+}

@@ -3,31 +3,33 @@ Config.Keys={['ESC']=322,['F1']=288,['F2']=289,['F3']=170,['F5']=166,['F6']=167,
 function L(cd) if Locales[Config.Language][cd] then return Locales[Config.Language][cd] else print('Locale is nil ('..cd..')') end end
 
 
---███████╗██████╗  █████╗ ███╗   ███╗███████╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗
---██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝
---█████╗  ██████╔╝███████║██╔████╔██║█████╗  ██║ █╗ ██║██║   ██║██████╔╝█████╔╝ 
---██╔══╝  ██╔══██╗██╔══██║██║╚██╔╝██║██╔══╝  ██║███╗██║██║   ██║██╔══██╗██╔═██╗ 
---██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗
---╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                            FRAMEWORK                             │
+-- └──────────────────────────────────────────────────────────────────┘
 
+-- WHAT DOES 'auto_detect' DO?
+-- Automatically detects key resources and manages all events, exports, and data handling.
 
---WHAT DOES 'auto_detect' DO?
---The 'auto_detect' feature automatically identifies your framework and SQL database resource, and applies the appropriate default settings.
+-- 'auto_detect' will automatically detect your framework.
+Config.Framework = 'auto_detect' --[ 'auto_detect', 'esx', 'qbcore', 'other' ]
 
-Config.Framework = 'auto_detect' --[ 'auto_detect' / 'other' ]   If you select 'auto_detect', only ESX and QBCore frameworks will be detected. Use 'other' for custom frameworks.
-Config.Database = 'auto_detect' --[ 'auto_detect' ]   If you select 'auto_detect', only MySQL, GHMattimysql, and Oxmysql SQL database resources will be detected.
-Config.AutoInsertSQL = true --Would you like the script to insert the necessary SQL tables into your database automatically? If you have already done this, please set it to false.
-Config.Notification = 'other' --[ 'auto_detect' / 'other' ]   If you select 'auto_detect', only ESX, QBCore, okokNotify, ps-ui and ox_lib notifications will be detected. Use 'other' for custom notification resources.
-Config.Language = 'EN' --[ 'EN' / 'CZ' / 'DE' / 'DK' / 'ES' / 'FI' / 'FR' / 'NO' / 'NL' / 'PT' / 'SE' / 'SK' ]   You can add your own locales to locales.lua, but be sure to update the Config.Language to match it.
+-- 'auto_detect' will automatically detect your sql wrapper resource.
+Config.Database = 'auto_detect' --[ 'auto_detect', 'mysql-async', 'ghmattimysql', 'oxmysql' ] 
+
+-- Add your own locales in locales.lua and set Config.Language to match.
+Config.Language = 'EN' --[ 'EN', 'ES', 'FR' ]
+
+-- Automatically inserts required SQL tables into your database. Recommended to enable before updating the script.
+Config.AutoInsertSQL = true
 
 Config.FrameworkTriggers = {
-    esx = { --If you have modified the default event names in the es_extended resource, change them here.
+    esx = { --If you’ve changed the default event names in the es_extended resource, update them here.
         resource_name = 'es_extended',
         main = 'esx:getSharedObject',
         load = 'esx:playerLoaded',
         job = 'esx:setJob'
     },
-    qbcore = { --If you have modified the default event names in the qb-core resource, change them here.
+    qbcore = { --If you’ve changed the default event names in the qb-core resource, update them here.
         resource_name = 'qb-core',
         main = 'QBCore:GetObject',
         load = 'QBCore:Client:OnPlayerLoaded',
@@ -37,50 +39,55 @@ Config.FrameworkTriggers = {
     }
 }
 
+-- 'auto_detect' will automatically detect your interactive resources such as targets or text ui.
+Config.GarageInteractMethod = 'auto_detect' --[ 'auto_detect', 'cd_drawtextui', 'okokTextUI', 'ox_target', 'ps-ui', 'qb-target', 'qbcore', 'vms_notifyv2' ]
 
---██╗███╗   ███╗██████╗  ██████╗ ██████╗ ████████╗ █████╗ ███╗   ██╗████████╗
---██║████╗ ████║██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗  ██║╚══██╔══╝
---██║██╔████╔██║██████╔╝██║   ██║██████╔╝   ██║   ███████║██╔██╗ ██║   ██║   
---██║██║╚██╔╝██║██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══██║██║╚██╗██║   ██║   
---██║██║ ╚═╝ ██║██║     ╚██████╔╝██║  ██║   ██║   ██║  ██║██║ ╚████║   ██║   
---╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝
+-- 'auto_detect' will automatically detect your notification resource.
+Config.Notification = 'auto_detect' --[ 'auto_detect' / 'esx' / 'qbcore' / 'cd_notifications' / 'okokNotify' / 'ps-ui' / 'ox_lib' / 'other' ] 
+
+-- 'auto_detect' will automatically detect your vehicle keys resource.
+Config.VehicleKeysResource = 'auto_detect' -- [ 'auto_detect', 'F_RealCarKeysSystem', 'ak47_qb_vehiclekeys', 'ak47_vehiclekeys', 'fivecode_carkeys', 'loaf_keysystem', 'mk_vehiclekeys', 'MrNewbVehicleKeys', 'qb-vehiclekeys', 'qbx_vehiclekeys', 'qs-vehiclekeys', 'stasiek_vehiclekeys', 't1ger_keys', 'tgiann-hotwire', 'ti_vehicleKeys', 'vehicles_keys', 'wasabi_carlock', 'xd_locksystem' ]
+
+-- 'auto_detect' will automatically detect your vehicle fuel resource.
+Config.VehicleFuelResource = 'auto_detect' -- [ 'auto_detect', 'BigDaddy-Fuel', 'cdn-fuel', 'esx-sna-fuel', 'FRFuel', 'lc_fuel', 'LegacyFuel', 'lj-fuel', 'myFuel', 'ND_Fuel', 'okokGasStation', 'ox_fuel', 'ps-fuel', 'qb-fuel', 'qb-sna-fuel', 'rcore_fuel', 'Renewed-Fuel', 'ti_fuel', 'x-fuel' ]
+
+-- 'auto_detect' will automatically detect your framework and apply the default plate format.
+Config.VehiclePlateFormats = {
+    format = 'auto_detect', --[ 'auto_detect', 'trimmed',  'with_spaces', 'mixed' ] Read our documentation website for more info on this if you are unsure! [https://docs.codesign.pro/paid-scripts/garage/optional-features#vehicle-plate-format].
+    new_plate_format = 'AAAA1111' --Customise the plate formats of newly generated plates. ['A'] = Random Letter, ['1'] = Random Number, [' '] = Whitespace, ['-'] = Dash. Maximun length is 8 including symbols and whitespaces.
+}
 
 
-Config.PlateFormats = 'mixed' --[ 'trimmed' /  'with_spaces' / 'mixed' ] CHOOSE CAREFULLY! Read our documentation website for more info on this if you are unsure! [https://docs.codesign.pro/paid-scripts/garage#step-6-vehicle-plate-format].
-Config.UsingOnesync = true --Do you use OneSync legacy/infinity?
-Config.IdentifierType = 'license' --[ 'steamid' / 'license' ] Choose the identifier type that your server uses.
-Config.UseFrameworkDutySystem = false --Do you want to use your frameworks (esx/qbcore) built-in duty system?
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                            IMPORTANT                             │
+-- └──────────────────────────────────────────────────────────────────┘
+
 Config.Debug = false --To enable debug prints.
+Config.IdentifierType = 'license' --[ 'steamid' / 'license' ] Choose the identifier type that your server uses.
+Config.UseFrameworkDutySystem = true --Do you want to use your frameworks (esx/qbcore) built-in duty system?
+Config.PlayerListMethod = 'both' --[ 'both' / 'charname' / 'source' ] --Choose how you want the player list to be displayed in the garage UI. 'both' will show both character name and source, 'charname' will only show character name, and 'source' will only show source.
 
-
---███╗   ███╗ █████╗ ██╗███╗   ██╗
---████╗ ████║██╔══██╗██║████╗  ██║
---██╔████╔██║███████║██║██╔██╗ ██║
---██║╚██╔╝██║██╔══██║██║██║╚██╗██║
---██║ ╚═╝ ██║██║  ██║██║██║ ╚████║
---╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                             MAIN                                 │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.Keys = {
     QuickChoose_Key = Config.Keys['E'], --The key to open the quick garage (default E).
     EnterGarage_Key = Config.Keys['H'], --The key to open the inside garage (default H).
     StoreVehicle_Key = Config.Keys['G'], --The key to store your vehicle (default G).
+    GarageRaid_Key = Config.Keys['K'], --The key to raid a garage (default K).
     StartHotwire_Key = Config.Keys['E'] --The key to start hotwiring a vehicle (default E).
 }
 
 Config.UniqueGarages = true --Do you want to only be able to get your car from the garage you last put it in?
 Config.SaveAdvancedVehicleDamage = true --Do you want to save poped tyres, broken doors and broken windows and re-apply them all when spawning a vehicle?
 Config.UseExploitProtection = false --Do you want to enable the cheat engine protection to check the vehicle hashes when a vehicle is stored?
-Config.ResetGarageState = true --Do you want the in_garage state of all vehicles to be reset when the script starts/restarts?
+Config.ResetGarageState = true --Do you want vehicles to be returned to the garage when the script starts/restarts? Auto disabled if using persistent vehicles.
+Config.SpawnGaragePeds = true -- Do you want peds to spawn in the area where a garage is located?
 
-
---██╗   ██╗███████╗██╗  ██╗██╗ ██████╗██╗     ███████╗███████╗    ██████╗  █████╗ ████████╗ █████╗ 
---██║   ██║██╔════╝██║  ██║██║██╔════╝██║     ██╔════╝██╔════╝    ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗
---██║   ██║█████╗  ███████║██║██║     ██║     █████╗  ███████╗    ██║  ██║███████║   ██║   ███████║
---╚██╗ ██╔╝██╔══╝  ██╔══██║██║██║     ██║     ██╔══╝  ╚════██║    ██║  ██║██╔══██║   ██║   ██╔══██║
--- ╚████╔╝ ███████╗██║  ██║██║╚██████╗███████╗███████╗███████║    ██████╔╝██║  ██║   ██║   ██║  ██║
---  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                          VEHICLES DATA                           │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.VehiclesData = {
     ENABLE = true, --Do you want to allow the script to grab vehicles data ( ESX: from the 'vehicles' table in the database / QBCORE: from the shared.lua ).
@@ -95,7 +102,7 @@ Config.VehiclesData = {
 }
 
 Config.GarageTax = {
-    ENABLE = false, --Do you want to enable the vehicle tax system? (each vehicle will be taxed 1 time per server restart).
+    ENABLE = true, --Do you want to enable the vehicle tax system? (each vehicle will be taxed 1 time per server restart).
     method = 'default', --[ 'default' / 'vehicles_data' ] Read below for more info on each on these 2 options.
     default_price = 1000, --If 'default' method is chosen, then it will be a set price to return any vehicle. (eg., $500 fee).
     vehiclesdata_price_multiplier = 1 --If 'vehicles_data' method is chosen, the return vehicle price will be a % of the vehcles value. (eg., 1% of a $50,000 car would be a $500 fee).
@@ -109,13 +116,9 @@ Config.Return_Vehicle = { --This is the price players pay for their vehicle to b
 }
 
 
---██╗███╗   ███╗██████╗  ██████╗ ██╗   ██╗███╗   ██╗██████╗ 
---██║████╗ ████║██╔══██╗██╔═══██╗██║   ██║████╗  ██║██╔══██╗
---██║██╔████╔██║██████╔╝██║   ██║██║   ██║██╔██╗ ██║██║  ██║
---██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║╚██╗██║██║  ██║
---██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝
---╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ 
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                          IMPOUND                                 │
+-- └──────────────────────────────────────────────────────────────────┘ 
 
 Config.Impound = {
     ENABLE = true, --Do you want to use the built in impound system?
@@ -123,27 +126,21 @@ Config.Impound = {
 
     Authorized_Jobs = { --Only jobs inside this table can impound vehicles or unimpound vehicles.
         ['police'] = true,
-        ['bcso'] = true,
-        ['towing'] = true,
+        ['mechanic'] = true,
         --['add_more_here'] = true,
     },
 
     Impound_Fee = { --This is the price players pay for their vehicle to be unimpounded.
         method = 'default', --[ 'default' / 'vehicles_data' ] Read below for more info on each of these 2 options. (Config.VehiclesData.ENABLE must be enabled if you want to use 'vehicles_data').
-        default_price = 2000, --If 'default' method is chosen, then it will be a set price to unimpounded any vehicle. (eg., $1000 fee).
+        default_price = 1000, --If 'default' method is chosen, then it will be a set price to unimpounded any vehicle. (eg., $1000 fee).
         vehiclesdata_price_multiplier = 1 --If 'vehicles_data' method is chosen, the unimpounded vehicle price will be a % of the vehcles value. (eg., 1% of a $50,000 car would be a $500 fee).
     }
 }
 
-
---████████╗██████╗  █████╗ ███╗   ██╗███████╗███████╗███████╗██████╗     ██╗   ██╗███████╗██╗  ██╗██╗ ██████╗██╗     ███████╗
---╚══██╔══╝██╔══██╗██╔══██╗████╗  ██║██╔════╝██╔════╝██╔════╝██╔══██╗    ██║   ██║██╔════╝██║  ██║██║██╔════╝██║     ██╔════╝
---   ██║   ██████╔╝███████║██╔██╗ ██║███████╗█████╗  █████╗  ██████╔╝    ██║   ██║█████╗  ███████║██║██║     ██║     █████╗  
---   ██║   ██╔══██╗██╔══██║██║╚██╗██║╚════██║██╔══╝  ██╔══╝  ██╔══██╗    ╚██╗ ██╔╝██╔══╝  ██╔══██║██║██║     ██║     ██╔══╝  
---   ██║   ██║  ██║██║  ██║██║ ╚████║███████║██║     ███████╗██║  ██║     ╚████╔╝ ███████╗██║  ██║██║╚██████╗███████╗███████╗
---   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝      ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝
-
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                        TRANSFER VEHICLE                          │
+-- └──────────────────────────────────────────────────────────────────┘
+ 
 Config.TransferVehicle = {
     ENABLE = true, --Do you want to use the built features to transfer vehicles to another player?
     chat_command = 'transfervehicle', --Customise the chat command to transfer vehicles.
@@ -245,13 +242,9 @@ Config.TransferVehicle = {
 }
 
 
---████████╗██████╗  █████╗ ███╗   ██╗███████╗███████╗███████╗██████╗      ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗
---╚══██╔══╝██╔══██╗██╔══██╗████╗  ██║██╔════╝██╔════╝██╔════╝██╔══██╗    ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝
---   ██║   ██████╔╝███████║██╔██╗ ██║███████╗█████╗  █████╗  ██████╔╝    ██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗  
---   ██║   ██╔══██╗██╔══██║██║╚██╗██║╚════██║██╔══╝  ██╔══╝  ██╔══██╗    ██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝  
---   ██║   ██║  ██║██║  ██║██║ ╚████║███████║██║     ███████╗██║  ██║    ╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗
---   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                         TRANSFER GARAGE                          │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.TransferGarage = {
     ENABLE = true, --Do you want to allow players to pay for their vehicles to be transferred to another garage?
@@ -259,16 +252,12 @@ Config.TransferGarage = {
 }
 
 
---██████╗ ██████╗ ██╗██╗   ██╗ █████╗ ████████╗███████╗     ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗███████╗
---██╔══██╗██╔══██╗██║██║   ██║██╔══██╗╚══██╔══╝██╔════╝    ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝
---██████╔╝██████╔╝██║██║   ██║███████║   ██║   █████╗      ██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗  ███████╗
---██╔═══╝ ██╔══██╗██║╚██╗ ██╔╝██╔══██║   ██║   ██╔══╝      ██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝  ╚════██║
---██║     ██║  ██║██║ ╚████╔╝ ██║  ██║   ██║   ███████╗    ╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗███████║
---╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝  ╚═╝   ╚═╝   ╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                         PRIVATE GARAGE                           │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.PrivateGarages = {
-    ENABLE = false, --Do you want to use the built private garages?
+    ENABLE = true, --Do you want to use the built private garages?
     create_chat_command = 'privategarage', --Customise the chat command to create a private garage to sell to a player.
     delete_chat_command = 'privategaragedelete', --Customise the chat command to delete a players private garage.
 
@@ -278,14 +267,9 @@ Config.PrivateGarages = {
     }
 }
 
-
---██████╗ ██████╗  ██████╗ ██████╗ ███████╗██████╗ ████████╗██╗   ██╗     ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗███████╗
---██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██╔════╝██╔══██╗╚══██╔══╝╚██╗ ██╔╝    ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝██╔════╝
---██████╔╝██████╔╝██║   ██║██████╔╝█████╗  ██████╔╝   ██║    ╚████╔╝     ██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗  ███████╗
---██╔═══╝ ██╔══██╗██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗   ██║     ╚██╔╝      ██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝  ╚════██║
---██║     ██║  ██║╚██████╔╝██║     ███████╗██║  ██║   ██║      ██║       ╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗███████║
---╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝        ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                         PROPERTY GARAGE                          │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.PropertyGarages = {
     ENABLE = true, --Do you want to use built in property garages?
@@ -293,16 +277,12 @@ Config.PropertyGarages = {
 }
 
 
---███████╗ █████╗ ██╗  ██╗███████╗    ██████╗ ██╗      █████╗ ████████╗███████╗███████╗
---██╔════╝██╔══██╗██║ ██╔╝██╔════╝    ██╔══██╗██║     ██╔══██╗╚══██╔══╝██╔════╝██╔════╝
---█████╗  ███████║█████╔╝ █████╗      ██████╔╝██║     ███████║   ██║   █████╗  ███████╗
---██╔══╝  ██╔══██║██╔═██╗ ██╔══╝      ██╔═══╝ ██║     ██╔══██║   ██║   ██╔══╝  ╚════██║
---██║     ██║  ██║██║  ██╗███████╗    ██║     ███████╗██║  ██║   ██║   ███████╗███████║
---╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                           FAKE PLATES                            │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.FakePlates = {
-    ENABLE = false, --Do you want to use the built in fake plate system?
+    ENABLE = true, --Do you want to use the built in fake plate system?
     item_name = 'fakeplate', --The name of the usable item to add a fake plate.
 
     RemovePlate = {
@@ -318,23 +298,14 @@ Config.FakePlates = {
 }
 
 
---██╗   ██╗███████╗██╗  ██╗██╗ ██████╗██╗     ███████╗    ██╗  ██╗███████╗██╗   ██╗███████╗
---██║   ██║██╔════╝██║  ██║██║██╔════╝██║     ██╔════╝    ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔════╝
---██║   ██║█████╗  ███████║██║██║     ██║     █████╗      █████╔╝ █████╗   ╚████╔╝ ███████╗
---╚██╗ ██╔╝██╔══╝  ██╔══██║██║██║     ██║     ██╔══╝      ██╔═██╗ ██╔══╝    ╚██╔╝  ╚════██║
--- ╚████╔╝ ███████╗██║  ██║██║╚██████╗███████╗███████╗    ██║  ██╗███████╗   ██║   ███████║
---  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝    ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                             KEYS                                 │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.VehicleKeys = {
-    ENABLE = false, --Do you want to use the built in vehicle keys system?
-    allow_shared_vehicles = false, --If this is enabled, when you give another player a "saved" key to one of your vehicles, it will allow them to spawn your vehicles from their garage.
-
-    Commands = {
-        temporary_key = 'givekey', --These keys will be deleted on script/server restart (but keys will save if you relog).
-        database_key = 'givekeysave', --These keys will be saved in the database meaning even after script/server restart the player will still have these keys.
-        remove_key = 'removekey' --Remove temporary and database keys from a player.
-    },
+    ENABLE = true, --Do you want to use the built in vehicle keys system?
+    allow_shared_vehicles = true, --If this is enabled, when you give another player a "saved" key to one of your vehicles, it will allow them to spawn your vehicles from their garage.
+    command = 'keys', --Command to view the keys UI where you can view, add or remove keys.
 
     Hotwire = {
         ENABLE = true, --Do you want players to only be able to drive vehicles they have the keys for?
@@ -371,30 +342,50 @@ Config.VehicleKeys = {
 }
 
 
---███╗   ███╗██╗██╗     ███████╗ █████╗  ██████╗ ███████╗
---████╗ ████║██║██║     ██╔════╝██╔══██╗██╔════╝ ██╔════╝
---██╔████╔██║██║██║     █████╗  ███████║██║  ███╗█████╗  
---██║╚██╔╝██║██║██║     ██╔══╝  ██╔══██║██║   ██║██╔══╝  
---██║ ╚═╝ ██║██║███████╗███████╗██║  ██║╚██████╔╝███████╗
---╚═╝     ╚═╝╚═╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                            MILEAGE                               │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.Mileage = {
     ENABLE = true, --Do you want to use the built in vehicle mileage system? The higher the miles the lower the vehicles max health will be. (or you can repurpose this for any other use).
     chat_command = 'checkmiles', --Customise the chat command to check your vehicles miles and max health.
     mileage_multiplier = 1.0, --If you increase this number it will increase how fast vehicles gain miles. (decrease to lower).
-    speed_metrics = 'kilometers', --(miles/kilometers) Choose what you want the mileage to display as.
+    speed_metrics = 'miles', --(miles/kilometers) Choose what you want the mileage to display as.
     show_maxhealth = false --Do you want to show the max health of the vehicle you are in when you use the /checkmiles command?
 }
 
 
--- ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗    ███████╗██████╗  █████╗  ██████╗███████╗
---██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝    ██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝
---██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗      ███████╗██████╔╝███████║██║     █████╗  
---██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝      ╚════██║██╔═══╝ ██╔══██║██║     ██╔══╝  
---╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗    ███████║██║     ██║  ██║╚██████╗███████╗
--- ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                       PERSISTENT VEHICLES                        │
+-- └──────────────────────────────────────────────────────────────────┘
 
+Config.PersistentVehicles = { --Requires OneSync to use.
+    ENABLE = true, --Do you want to use the built-in persistent vehicle feature?
+    SaveAfterRestart = {
+        ENABLE = true, --Do you want vehicles to be saved and restored after a server restart?
+        save_regular_job_vehicles = true, --Do you want regular job vehicles spawned from cd_garage to be saved and restored after a server restart?
+        save_owned_job_vehicles = true --Do you want personal or society owned job vehicles to be saved and restored after a server restart?
+    }
+}
+
+
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                         GARAGE RAID                              │
+-- └──────────────────────────────────────────────────────────────────┘
+
+Config.GarageRaid = {
+    ENABLE = true, --Allow police to search by plate for a vehicle in a garage.
+    required_perms = {
+        ['police'] = 0, --The job and minimum grade required to raid a garage. (eg., ['police'] = { 1 } means police job, grade 1 or higher).
+        ['sheriff'] = 1,
+        --['add_more_here'] = 1,
+    }
+}
+
+
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                         GARAGE SPACE                             │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.GarageSpace = {
     ENABLE = false, --Do you want to limit the amount of cars each player can hold?
@@ -422,25 +413,9 @@ Config.GarageSpace = {
 }
 
 
---██████╗ ███████╗██████╗ ███████╗██╗███████╗████████╗███████╗███╗   ██╗████████╗    ██╗   ██╗███████╗██╗  ██╗██╗ ██████╗██╗     ███████╗███████╗
---██╔══██╗██╔════╝██╔══██╗██╔════╝██║██╔════╝╚══██╔══╝██╔════╝████╗  ██║╚══██╔══╝    ██║   ██║██╔════╝██║  ██║██║██╔════╝██║     ██╔════╝██╔════╝
---██████╔╝█████╗  ██████╔╝███████╗██║███████╗   ██║   █████╗  ██╔██╗ ██║   ██║       ██║   ██║█████╗  ███████║██║██║     ██║     █████╗  ███████╗
---██╔═══╝ ██╔══╝  ██╔══██╗╚════██║██║╚════██║   ██║   ██╔══╝  ██║╚██╗██║   ██║       ╚██╗ ██╔╝██╔══╝  ██╔══██║██║██║     ██║     ██╔══╝  ╚════██║
---██║     ███████╗██║  ██║███████║██║███████║   ██║   ███████╗██║ ╚████║   ██║        ╚████╔╝ ███████╗██║  ██║██║╚██████╗███████╗███████╗███████║
---╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝   ╚═╝         ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝
-
-
-Config.PersistentVehicles = { --Requires OneSync to use.
-    ENABLE = true --Do you want to use the built-in persistent vehicle feature?
-}
-
-
---██╗   ██╗███████╗██╗  ██╗██╗ ██████╗██╗     ███████╗    ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗███╗   ███╗███████╗███╗   ██╗████████╗
---██║   ██║██╔════╝██║  ██║██║██╔════╝██║     ██╔════╝    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝████╗ ████║██╔════╝████╗  ██║╚══██╔══╝
---██║   ██║█████╗  ███████║██║██║     ██║     █████╗      ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██╔████╔██║█████╗  ██╔██╗ ██║   ██║   
---╚██╗ ██╔╝██╔══╝  ██╔══██║██║██║     ██║     ██╔══╝      ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   
--- ╚████╔╝ ███████╗██║  ██║██║╚██████╗███████╗███████╗    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                         STAFF COMMANDS                           │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.StaffPerms = {
     ['add'] = {
@@ -485,99 +460,9 @@ Config.StaffPerms = {
 }
 
 
---██╗███╗   ██╗███████╗██╗██████╗ ███████╗     ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗
---██║████╗  ██║██╔════╝██║██╔══██╗██╔════╝    ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝
---██║██╔██╗ ██║███████╗██║██║  ██║█████╗      ██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗  
---██║██║╚██╗██║╚════██║██║██║  ██║██╔══╝      ██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝  
---██║██║ ╚████║███████║██║██████╔╝███████╗    ╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗
---╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═════╝ ╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-
-
-Config.InsideGarage = {
-    ENABLE = true, --Do you want to allow players to use the inside garage?
-    only_showcars_inthisgarage = false, --Do you want the inside garage to only show the vehicles which are currently stored at that garage (eg., garage A).  (this works for inside garage only, even with this enabled all the cars will show in the outside UI).
-    shell_z_axis = 30, --This is how low under the ground the garage shell will spawn, you could use math.random(10,50) to make it random each time so players dont see each other in their garage.
-    shell_time_script = 'easytime', --Choose which time script you are using so we can set the time when you enter the shell. [ 'easytime' / 'vsync' / 'qbcore' / 'other' ].
-    engines_on = false, --Do you want the vehicles engine will be turned on when you enter the inside garage?
-    lights_on = false, --Do you want the vehicles headlights will be turned on when you enter the inside garage?
-    use_spotlight = true, --Do you want the spotlight to shine on the closest vehicle?
-    
-    Insidegarage_Blacklist = { --Vehicles inside this table will not be spawned inside the garage, this is used for large vehicles that will not fit.
-        [`flatbed`] = true,
-        --[`add_more_here`] = true,
-    },
-
-    Car_Offsets = { --This is the offsets of the vehicles inside the garage.
-        ['10cargarage_shell'] = {
-            [1] = {x = -4, y = 6.5, z = 0.0, h = 135.0},--1
-            [2] = {x = -4, y = 10.8, z = 0.0, h = 135.0},--2
-            [3] = {x = -4, y = 15.1, z = 0.0, h = 135.0},--3
-            [4] = {x = -4, y = 19.4, z = 0.0, h = 135.0},--4
-            [5] = {x = -4, y = 23.7, z = 0.0, h = 135.0},--5
-
-            [6] = {x = -12, y = 23.7, z = 0.0, h = 225.0},--6
-            [7] = {x = -12, y = 19.4, z = 0.0, h = 225.0},--7
-            [8] = {x = -12, y = 15.1, z = 0.0, h = 225.0},--8
-            [9] = {x = -12, y = 10.8, z = 0.0, h = 225.0},--9
-            [10] = {x = -12, y = 6.5, z = 0.0, h = 225.0}--10
-        },
-
-        ['40cargarage_shell'] = {
-            [1] = {x = 7.0, y = -7.0, z = 0.0, h = 352.0},--1
-            [2] = {x = 11.0, y = -8.0, z = 0.0, h = 352.0},--2
-            [3] = {x = 15.0, y = -9.0, z = 0.0, h = 352.0},--3
-            [4] = {x = 19.0, y = -10.0, z = 0.0, h = 352.0},--4
-            [5] = {x = 23.0, y = -11.0, z = 0.0, h = 352.0},--5
-            [6] = {x = 27.0, y = -12.0, z = 0.0, h = 352.0},--6
-            [7] = {x = 31.0, y = -13.0, z = 0.0, h = 352.0},--7
-            [8] = {x = 35.0, y = -14.0, z = 0.0, h = 352.0},--8
-            [9] = {x = 39.0, y = -15.0, z = 0.0, h = 352.0},--9
-            [10] = {x = 43.0, y = -16.0, z = 0.0, h = 352.0},--10
-
-            [11] = {x = 7.0, y = 5.0, z = 0.0, h = 162.0},--11
-            [12] = {x = 11.0, y = 4.0, z = 0.0, h = 162.0},--12
-            [13] = {x = 15.0, y = 3.0, z = 0.0, h = 162.0},--13
-            [14] = {x = 19.0, y = 2.0, z = 0.0, h = 162.0},--14
-            [15] = {x = 23.0, y = 1.0, z = 0.0, h = 162.0},--15
-            [16] = {x = 27.0, y = 0.0, z = 0.0, h = 162.0},--16
-            [17] = {x = 31.0, y = -1.0, z = 0.0, h = 162.0},--17
-            [18] = {x = 35.0, y = -2.0, z = 0.0, h = 162.0},--18
-            [19] = {x = 39.0, y = -3.0, z = 0.0, h = 162.0},--19
-            [20] = {x = 43.0, y = -4.0, z = 0.0, h = 162.0},--20
-
-            [21] = {x = -7.0, y = 5.0, z = 0.0, h = 192.0},--21
-            [22] = {x = -11.0, y = 4.0, z = 0.0, h = 192.0},--22
-            [23] = {x = -15.0, y = 3.0, z = 0.0, h = 192.0},--23
-            [24] = {x = -19.0, y = 2.0, z = 0.0, h = 192.0},--24
-            [25] = {x = -23.0, y = 1.0, z = 0.0, h = 192.0},--25
-            [26] = {x = -27.0, y = 0.0, z = 0.0, h = 192.0},--26
-            [27] = {x = -31.0, y = -1.0, z = 0.0, h = 192.0},--27
-            [28] = {x = -35.0, y = -2.0, z = 0.0, h = 192.0},--28
-            [29] = {x = -39.0, y = -3.0, z = 0.0, h = 192.0},--29
-            [30] = {x = -43.0, y = -4.0, z = 0.0, h = 192.0},--30
-
-            [31] = {x = -7.0, y = -7.0, z = 0.0, h = 13.0},--31
-            [32] = {x = -11.0, y = -8.0, z = 0.0, h = 13.0},--32
-            [33] = {x = -15.0, y = -9.0, z = 0.0, h = 13.0},--33
-            [34] = {x = -19.0, y = -10.0, z = 0.0, h = 13.0},--34
-            [35] = {x = -23.0, y = -11.0, z = 0.0, h = 13.0},--35
-            [36] = {x = -27.0, y = -12.0, z = 0.0, h = 13.0},--36
-            [37] = {x = -31.0, y = -13.0, z = 0.0, h = 13.0},--37
-            [38] = {x = -35.0, y = -14.0, z = 0.0, h = 13.0},--38
-            [39] = {x = -39.0, y = -15.0, z = 0.0, h = 13.0},--39
-            [40] = {x = -43.0, y = -16.0, z = 0.0, h = 13.0},--40
-        }
-    }
-}
-
-
---     ██╗ ██████╗ ██████╗     ██╗   ██╗███████╗██╗  ██╗██╗ ██████╗██╗     ███████╗███████╗
---     ██║██╔═══██╗██╔══██╗    ██║   ██║██╔════╝██║  ██║██║██╔════╝██║     ██╔════╝██╔════╝
---     ██║██║   ██║██████╔╝    ██║   ██║█████╗  ███████║██║██║     ██║     █████╗  ███████╗
---██   ██║██║   ██║██╔══██╗    ╚██╗ ██╔╝██╔══╝  ██╔══██║██║██║     ██║     ██╔══╝  ╚════██║
---╚█████╔╝╚██████╔╝██████╔╝     ╚████╔╝ ███████╗██║  ██║██║╚██████╗███████╗███████╗███████║
--- ╚════╝  ╚═════╝ ╚═════╝       ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝╚══════╝╚══════╝╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                          JOB VEHICLES                            │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.JobVehicles = {
     ENABLE = true, --Do you want players with defined jobs (below) to be able to use the garage ui to spawn job vehicles? (if disabled none of the options below will be used).
@@ -643,8 +528,8 @@ Config.JobVehicles = {
             [8] = {coords = vector3(1426.31, 3750.12, 31.76), spawn_coords = vector4(1430.37, 3771.52, 29.86, 336.36), distance = 20, garage_type = 'boat', method = 'regular'}, --Sandy Lake (boats)
             [9] = {coords = vector3(-1820.11, -946.19, 1.05), spawn_coords = vector4(-1833.75, -951.07, -0.05, 111.0), distance = 20, garage_type = 'boat', method = 'regular'}, --Sandy Lake (boats)
             --Oil Rig
-            [9] = {coords = vector3(-1414.01, 7255.34, 28.83), spawn_coords = vector4(-1414.01, 7255.34, 28.83, 279.41), distance = 5, garage_type = 'air', method = 'regular'},
-            [10] = {coords = vector3(-2717.98, 6579.49, 28.83), spawn_coords = vector4(-2717.98, 6579.49, 28.83, 274.1), distance = 5, garage_type = 'air', method = 'regular'},
+            [10] = {coords = vector3(-1414.01, 7255.34, 28.83), spawn_coords = vector4(-1414.01, 7255.34, 28.83, 279.41), distance = 5, garage_type = 'air', method = 'regular'},
+            [11] = {coords = vector3(-2717.98, 6579.49, 28.83), spawn_coords = vector4(-2717.98, 6579.49, 28.83, 274.1), distance = 5, garage_type = 'air', method = 'regular'},
 
         },
         ['towing'] = {
@@ -657,7 +542,7 @@ Config.JobVehicles = {
             [4] = {coords = vector3(-1598.49, -1201.4, 0.82),   spawn_coords = vector4(-1609.96, -1210.83, -0.03, 134.45),  distance = 20,  garage_type = 'boat',   method = 'regular'}, --Vespucci Beach (boats)
 
             -- OneLife Tower
-            [1] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
+            [5] = {coords = vector3(-974.73, -269.58, 38.3), spawn_coords = vector4(-974.73, -269.58, 38.3, 217.87), distance = 5, garage_type = 'car', method = 'regular'},
         },
 
         ['burgershot'] = {
@@ -890,13 +775,9 @@ Config.JobVehicles = {
 }
 
 
--- ██████╗  █████╗ ███╗   ██╗ ██████╗      ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗███████╗
---██╔════╝ ██╔══██╗████╗  ██║██╔════╝     ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝██╔════╝
---██║  ███╗███████║██╔██╗ ██║██║  ███╗    ██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗  ███████╗
---██║   ██║██╔══██║██║╚██╗██║██║   ██║    ██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝  ╚════██║
---╚██████╔╝██║  ██║██║ ╚████║╚██████╔╝    ╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗███████║
--- ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                           GANG GARAGES                           │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.GangGarages = {
     ENABLE = false, --Do you want players in defined gangs to be able to use this specific gang garage?
@@ -917,21 +798,99 @@ Config.GangGarages = {
         --distance: If the player is within the 'distance' of these coords ^, they can open the gang garage UI.
         --garage_type: The type of vehicles that can be accessed from this location ('car' / 'boat', 'air').
 
-        --[1] = {gang = 'triads', garage_id = 'Triads', coords = vector3(-141.98, 897.08, 235.64), spawn_coords = vector4(-141.98, 897.08, 235.64, 324.5), distance = 10, garage_type = 'car'}, --Triads House
+        [1] = {gang = 'ballas', garage_id = 'Ballas', coords = vector3(102.48, -1955.1, 20.73), spawn_coords = vector4(104.51, -1954.2, 20.27, 336.53), distance = 10, garage_type = 'car'}, --GROVE STREET
         --[2] = {gang = 'CHANGE_ME', garage_id = 'CHANGE_ME', coords = vector3(0.0, 0.0, 0.0), spawn_coords = vector4(0.0, 0.0, 0.0, 0.0), distance = 10, garage_type = 'car'},
     },
 }
 
 
---██████╗ ██╗     ██╗██████╗ ███████╗
---██╔══██╗██║     ██║██╔══██╗██╔════╝
---██████╔╝██║     ██║██████╔╝███████╗
---██╔══██╗██║     ██║██╔═══╝ ╚════██║
---██████╔╝███████╗██║██║     ███████║
---╚═════╝ ╚══════╝╚═╝╚═╝     ╚══════╝
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                         INSIDE GARAGE                            │
+-- └──────────────────────────────────────────────────────────────────┘
+
+Config.InsideGarage = {
+    ENABLE = true, --Do you want to allow players to use the inside garage?
+    only_showcars_inthisgarage = false, --Do you want the inside garage to only show the vehicles which are currently stored at that garage (eg., garage A).  (this works for inside garage only, even with this enabled all the cars will show in the outside UI).
+    shell_z_axis = 30, --This is how low under the ground the garage shell will spawn.
+    engines_on = false, --Do you want the vehicles engine will be turned on when you enter the inside garage?
+    lights_on = false, --Do you want the vehicles headlights will be turned on when you enter the inside garage?
+    use_spotlight = true, --Do you want the spotlight to shine on the closest vehicle?
+
+    Insidegarage_Blacklist = { --Vehicles inside this table will not be spawned inside the garage, this is used for large vehicles that will not fit.
+        [`flatbed`] = true,
+        --[`add_more_here`] = true,
+    },
+
+    Car_Offsets = { --This is the offsets of the vehicles inside the garage.
+        ['10cargarage_shell'] = {
+            [1] = {x = -4, y = 6.5, z = 0.0, h = 135.0},--1
+            [2] = {x = -4, y = 10.8, z = 0.0, h = 135.0},--2
+            [3] = {x = -4, y = 15.1, z = 0.0, h = 135.0},--3
+            [4] = {x = -4, y = 19.4, z = 0.0, h = 135.0},--4
+            [5] = {x = -4, y = 23.7, z = 0.0, h = 135.0},--5
+
+            [6] = {x = -12, y = 23.7, z = 0.0, h = 225.0},--6
+            [7] = {x = -12, y = 19.4, z = 0.0, h = 225.0},--7
+            [8] = {x = -12, y = 15.1, z = 0.0, h = 225.0},--8
+            [9] = {x = -12, y = 10.8, z = 0.0, h = 225.0},--9
+            [10] = {x = -12, y = 6.5, z = 0.0, h = 225.0}--10
+        },
+
+        ['40cargarage_shell'] = {
+            [1] = {x = 7.0, y = -7.0, z = 0.0, h = 352.0},--1
+            [2] = {x = 11.0, y = -8.0, z = 0.0, h = 352.0},--2
+            [3] = {x = 15.0, y = -9.0, z = 0.0, h = 352.0},--3
+            [4] = {x = 19.0, y = -10.0, z = 0.0, h = 352.0},--4
+            [5] = {x = 23.0, y = -11.0, z = 0.0, h = 352.0},--5
+            [6] = {x = 27.0, y = -12.0, z = 0.0, h = 352.0},--6
+            [7] = {x = 31.0, y = -13.0, z = 0.0, h = 352.0},--7
+            [8] = {x = 35.0, y = -14.0, z = 0.0, h = 352.0},--8
+            [9] = {x = 39.0, y = -15.0, z = 0.0, h = 352.0},--9
+            [10] = {x = 43.0, y = -16.0, z = 0.0, h = 352.0},--10
+
+            [11] = {x = 7.0, y = 5.0, z = 0.0, h = 162.0},--11
+            [12] = {x = 11.0, y = 4.0, z = 0.0, h = 162.0},--12
+            [13] = {x = 15.0, y = 3.0, z = 0.0, h = 162.0},--13
+            [14] = {x = 19.0, y = 2.0, z = 0.0, h = 162.0},--14
+            [15] = {x = 23.0, y = 1.0, z = 0.0, h = 162.0},--15
+            [16] = {x = 27.0, y = 0.0, z = 0.0, h = 162.0},--16
+            [17] = {x = 31.0, y = -1.0, z = 0.0, h = 162.0},--17
+            [18] = {x = 35.0, y = -2.0, z = 0.0, h = 162.0},--18
+            [19] = {x = 39.0, y = -3.0, z = 0.0, h = 162.0},--19
+            [20] = {x = 43.0, y = -4.0, z = 0.0, h = 162.0},--20
+
+            [21] = {x = -7.0, y = 5.0, z = 0.0, h = 192.0},--21
+            [22] = {x = -11.0, y = 4.0, z = 0.0, h = 192.0},--22
+            [23] = {x = -15.0, y = 3.0, z = 0.0, h = 192.0},--23
+            [24] = {x = -19.0, y = 2.0, z = 0.0, h = 192.0},--24
+            [25] = {x = -23.0, y = 1.0, z = 0.0, h = 192.0},--25
+            [26] = {x = -27.0, y = 0.0, z = 0.0, h = 192.0},--26
+            [27] = {x = -31.0, y = -1.0, z = 0.0, h = 192.0},--27
+            [28] = {x = -35.0, y = -2.0, z = 0.0, h = 192.0},--28
+            [29] = {x = -39.0, y = -3.0, z = 0.0, h = 192.0},--29
+            [30] = {x = -43.0, y = -4.0, z = 0.0, h = 192.0},--30
+
+            [31] = {x = -7.0, y = -7.0, z = 0.0, h = 13.0},--31
+            [32] = {x = -11.0, y = -8.0, z = 0.0, h = 13.0},--32
+            [33] = {x = -15.0, y = -9.0, z = 0.0, h = 13.0},--33
+            [34] = {x = -19.0, y = -10.0, z = 0.0, h = 13.0},--34
+            [35] = {x = -23.0, y = -11.0, z = 0.0, h = 13.0},--35
+            [36] = {x = -27.0, y = -12.0, z = 0.0, h = 13.0},--36
+            [37] = {x = -31.0, y = -13.0, z = 0.0, h = 13.0},--37
+            [38] = {x = -35.0, y = -14.0, z = 0.0, h = 13.0},--38
+            [39] = {x = -39.0, y = -15.0, z = 0.0, h = 13.0},--39
+            [40] = {x = -43.0, y = -16.0, z = 0.0, h = 13.0},--40
+        }
+    }
+}
 
 
-Config.Unique_Blips = false --Do you want each garage to be named by its unique id, for example: 'Garage A'? (If disabled all garages will be called 'Garage').
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                             BLIPS                                │
+-- └──────────────────────────────────────────────────────────────────┘
+
+
+Config.Unique_Blips = true --Do you want each garage to be named by its unique id, for example: 'Garage A'? (If disabled all garages will be called 'Garage').
 Config.Blip = { --You can find more info on blips here - https://docs.fivem.net/docs/game-references/blips.
     ['car'] = {
         sprite = 357, --Icon of the blip.
@@ -943,25 +902,22 @@ Config.Blip = { --You can find more info on blips here - https://docs.fivem.net/
     ['boat'] = {
         sprite = 357,
         scale = 0.6,
-        colour = 8,
+        colour = 9,
         name = L('harbor')..' '
     },
 
     ['air'] = {
         sprite = 357,
         scale = 0.6,
-        colour = 5,
+        colour = 9,
         name = L('hangar')..' '
     }
 }
 
 
--- ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗    ██╗      ██████╗  ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
---██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝    ██║     ██╔═══██╗██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
---██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗      ██║     ██║   ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗
---██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝      ██║     ██║   ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║
---╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗    ███████╗╚██████╔╝╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║
--- ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝    ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                          GARAGE LOCATIONS                        │
+-- └──────────────────────────────────────────────────────────────────┘
 
 local UIText
 if Config.InsideGarage.ENABLE then
@@ -985,56 +941,56 @@ Config.Locations = {
         ShellType = '10cargarage_shell', --[ '10cargarage_shell' / '40cargarage_shell' / nil ] --You can choose the shell which is loaded when you enter the inside garage from this location. If you set it to nil the script will load a shell based on the amount of cars you own.
     },
     {
-        Garage_ID = 'Life Invader', --The very first car garage's `garage_id` must be the same as the default value of the `garage_id` in the database as when a vehicle is purchased it gets sent to this garage. You can change the garage id's to what ever you like but make sure to also change the default garage_id in the database.
-        Type = 'car', --The type of vehicles which use this garage. ('car'/'boat'/'air').
-        Dist = 10, --The distance that you can use this garage.
-        x_1 = -1099.8, y_1 = -258.85, z_1 = 37.67, --This is the location of the garage, where you press e to open for example. vector3(-1099.8, -258.85, 37.67)
-        EventName1 = 'cd_garage:QuickChoose', --DONT CHANGE THIS.
-        EventName2 = 'cd_garage:EnterGarage', --DONT CHANGE THIS.
-        Name = UIText, --You dont need to change this.
-        x_2 = -1100.82, y_2 = -261.32, z_2 = 37.69, h_2 = 201.92, --This is the location where the vehicle spawns. vector4(-1100.82, -261.32, 37.69, 201.92)
-        EnableBlip = true, --If disabled, this garage blip will not show on the map.
-        JobRestricted = nil, --This will allow only players with certain jobs to use this. This is not a job garage, its still a normal garage. (SINGLE JOB EXAMPLE:  JobRestricted = {'police'},  MULTIPLE JOBS EXAMPLE:  JobRestricted = {'police', 'ambulance'}, )
-        ShellType = '10cargarage_shell', --[ '10cargarage_shell' / '40cargarage_shell' / nil ] --You can choose the shell which is loaded when you enter the inside garage from this location. If you set it to nil the script will load a shell based on the amount of cars you own.
+        Garage_ID = 'Life Invader',
+        Type = 'car',
+        Dist = 10,
+        x_1 = -1099.8, y_1 = -258.85, z_1 = 37.67,
+        EventName1 = 'cd_garage:QuickChoose',
+        EventName2 = 'cd_garage:EnterGarage',
+        Name = UIText,
+        x_2 = -1100.82, y_2 = -261.32, z_2 = 37.69, h_2 = 201.92,
+        EnableBlip = true,
+        JobRestricted = nil,
+        ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'Airport Offsite garage', --The very first car garage's `garage_id` must be the same as the default value of the `garage_id` in the database as when a vehicle is purchased it gets sent to this garage. You can change the garage id's to what ever you like but make sure to also change the default garage_id in the database.
-        Type = 'car', --The type of vehicles which use this garage. ('car'/'boat'/'air').
-        Dist = 10, --The distance that you can use this garage.
-        x_1 = -1715.11, y_1 = -2973.16, z_1 = 14.15, --This is the location of the garage, where you press e to open for example. vector3(-1099.8, -258.85, 37.67)
-        EventName1 = 'cd_garage:QuickChoose', --DONT CHANGE THIS.
-        EventName2 = 'cd_garage:EnterGarage', --DONT CHANGE THIS.
-        Name = UIText, --You dont need to change this.
-        x_2 = -1705.22, y_2 = -2930.69, z_2 = 13.94, h_2 = 238.66, --This is the location where the vehicle spawns. vector4(-1100.82, -261.32, 37.69, 201.92)
-        EnableBlip = true, --If disabled, this garage blip will not show on the map.
-        JobRestricted = nil, --This will allow only players with certain jobs to use this. This is not a job garage, its still a normal garage. (SINGLE JOB EXAMPLE:  JobRestricted = {'police'},  MULTIPLE JOBS EXAMPLE:  JobRestricted = {'police', 'ambulance'}, )
-        ShellType = '10cargarage_shell', --[ '10cargarage_shell' / '40cargarage_shell' / nil ] --You can choose the shell which is loaded when you enter the inside garage from this location. If you set it to nil the script will load a shell based on the amount of cars you own.
+        Garage_ID = 'Airport Offsite garage',
+        Type = 'car',
+        Dist = 10,
+        x_1 = -1715.11, y_1 = -2973.16, z_1 = 14.15,
+        EventName1 = 'cd_garage:QuickChoose',
+        EventName2 = 'cd_garage:EnterGarage',
+        Name = UIText,
+        x_2 = -1705.22, y_2 = -2930.69, z_2 = 13.94, h_2 = 238.66,
+        EnableBlip = true,
+        JobRestricted = nil,
+        ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'Formula 1', --The very first car garage's `garage_id` must be the same as the default value of the `garage_id` in the database as when a vehicle is purchased it gets sent to this garage. You can change the garage id's to what ever you like but make sure to also change the default garage_id in the database.
-        Type = 'car', --The type of vehicles which use this garage. ('car'/'boat'/'air').
-        Dist = 10, --The distance that you can use this garage.
-        x_1 = 4405, y_1 = 7864.03, z_1 = 89.2,--This is the location of the garage, where you press e to open for example. vector3(636.3, 603.18, 128.91)
-        EventName1 = 'cd_garage:QuickChoose', --DONT CHANGE THIS.
-        EventName2 = 'cd_garage:EnterGarage', --DONT CHANGE THIS.
-        Name = UIText, --You dont need to change this.
-        x_2 = 4487.82, y_2 = 7845.72, z_2 = 88.13, h_2 = 6.49, --This is the location where the vehicle spawns. vector4(637.03, 602.95, 128.91, 252.48) // vector4(-1989.99, -321.62, 43.68, 55.99)
-        EnableBlip = true, --If disabled, this garage blip will not show on the map.
-        JobRestricted = nil, --This will allow only players with certain jobs to use this. This is not a job garage, its still a normal garage. (SINGLE JOB EXAMPLE:  JobRestricted = {'police'},  MULTIPLE JOBS EXAMPLE:  JobRestricted = {'police', 'ambulance'}, )
-        ShellType = '10cargarage_shell', --[ '10cargarage_shell' / '40cargarage_shell' / nil ] --You can choose the shell which is loaded when you enter the inside garage from this location. If you set it to nil the script will load a shell based on the amount of cars you own.
+        Garage_ID = 'Formula 1',
+        Type = 'car',
+        Dist = 10,
+        x_1 = 4405, y_1 = 7864.03, z_1 = 89.2,
+        EventName1 = 'cd_garage:QuickChoose',
+        EventName2 = 'cd_garage:EnterGarage',
+        Name = UIText,
+        x_2 = 4487.82, y_2 = 7845.72, z_2 = 88.13, h_2 = 6.49,
+        EnableBlip = true,
+        JobRestricted = nil,
+        ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'City Hall', --The very first car garage's `garage_id` must be the same as the default value of the `garage_id` in the database as when a vehicle is purchased it gets sent to this garage. You can change the garage id's to what ever you like but make sure to also change the default garage_id in the database.
-        Type = 'car', --The type of vehicles which use this garage. ('car'/'boat'/'air').
-        Dist = 10, --The distance that you can use this garage.
-        x_1 = -511.84, y_1 = -261.91, z_1 = 35.44, --This is the location of the garage, where you press e to open for example.
-        EventName1 = 'cd_garage:QuickChoose', --DONT CHANGE THIS.
-        EventName2 = 'cd_garage:EnterGarage', --DONT CHANGE THIS.
-        Name = UIText, --You dont need to change this.
-        x_2 = -510.57, y_2 = -266.59, z_2 = 35.6, h_2 = 106.42, --This is the location where the vehicle spawns.
-        EnableBlip = true, --If disabled, this garage blip will not show on the map.
-        JobRestricted = nil, --This will allow only players with certain jobs to use this. This is not a job garage, its still a normal garage. (SINGLE JOB EXAMPLE:  JobRestricted = {'police'},  MULTIPLE JOBS EXAMPLE:  JobRestricted = {'police', 'ambulance'}, )
-        ShellType = '10cargarage_shell', --[ '10cargarage_shell' / '40cargarage_shell' / nil ] --You can choose the shell which is loaded when you enter the inside garage from this location. If you set it to nil the script will load a shell based on the amount of cars you own.
+        Garage_ID = 'City Hall',
+        Type = 'car',
+        Dist = 10,
+        x_1 = -511.84, y_1 = -261.91, z_1 = 35.44,
+        EventName1 = 'cd_garage:QuickChoose',
+        EventName2 = 'cd_garage:EnterGarage',
+        Name = UIText,
+        x_2 = -510.57, y_2 = -266.59, z_2 = 35.6, h_2 = 106.42,
+        EnableBlip = true,
+        JobRestricted = nil,
+        ShellType = '10cargarage_shell',
     }, 
     {
         Garage_ID = 'Motels', --PINK MOTEL
@@ -1163,10 +1119,10 @@ Config.Locations = {
     },
 
     {
-        Garage_ID = 'Bennys RaceTrack', --Airport
+        Garage_ID = 'Bennys RaceTrack',
         Type = 'car',
         Dist = 5,
-        x_1 = -780.16, y_1 = -2040.77, z_1 = 8.88, -- vector4(-780.16, -2040.77, 8.88, 316.16)
+        x_1 = -780.16, y_1 = -2040.77, z_1 = 8.88,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1176,10 +1132,10 @@ Config.Locations = {
         ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'Bennys Workshop', --Airport
+        Garage_ID = 'Bennys Workshop',
         Type = 'car',
         Dist = 5,
-        x_1 = -941.27, y_1 = -2078.73, z_1 = 9.3, -- vector4(-941.27, -2078.73, 9.3, 225.66)
+        x_1 = -941.27, y_1 = -2078.73, z_1 = 9.3,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1188,40 +1144,37 @@ Config.Locations = {
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
-
     {
         Garage_ID = 'Palm Coast',
         Type = 'car',
         Dist = 4,
-        x_1 = -2009.19, y_1 = -487.5, z_1 = 11.37, -- vec4(-2009.19, -487.5, 11.37, 136.65)
+        x_1 = -2009.19, y_1 = -487.5, z_1 = 11.37,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -2009.19, y_2 = -487.5, z_2 = 11.37, h_2 = 136.65, 
+        x_2 = -2009.19, y_2 = -487.5, z_2 = 11.37, h_2 = 136.65,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
-
     {
         Garage_ID = 'KOI',
         Type = 'car',
         Dist = 4,
-        x_1 = -1064.44, y_1 = -1448.25, z_1 = 5.41, -- vec4(-1064.44, -1448.25, 5.41, 334.45)
+        x_1 = -1064.44, y_1 = -1448.25, z_1 = 5.41,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -1064.44, y_2 = -1448.25, z_2 = 5.41, h_2 = 334.45, 
+        x_2 = -1064.44, y_2 = -1448.25, z_2 = 5.41, h_2 = 334.45,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
-
     {
         Garage_ID = 'BurgerShot',
         Type = 'car',
         Dist = 10,
-        x_1 = -1177.81, y_1 = -900.97, z_1 = 13.27, -- vector4(-1177.81, -900.97, 13.27, 303.11)
+        x_1 = -1177.81, y_1 = -900.97, z_1 = 13.27,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1231,10 +1184,10 @@ Config.Locations = {
         ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'Up \'n Atom', --PALETO
+        Garage_ID = 'Up \'n Atom',
         Type = 'car',
         Dist = 2,
-        x_1 = 105.32, y_1 = 303.12, z_1 = 109.66, -- vector4(105.32, 303.12, 109.66, 159.63)
+        x_1 = 105.32, y_1 = 303.12, z_1 = 109.66,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1247,7 +1200,7 @@ Config.Locations = {
         Garage_ID = 'Offroad Dealer',
         Type = 'car',
         Dist = 10,
-        x_1 = 1712.68, y_1 = 4803.19, z_1 = 41.77, -- vector4(1712.68, 4803.19, 41.77, 92.27)
+        x_1 = 1712.68, y_1 = 4803.19, z_1 = 41.77,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1260,7 +1213,7 @@ Config.Locations = {
         Garage_ID = 'Pillbox Hospital',
         Type = 'car',
         Dist = 10,
-        x_1 = 242.55, y_1 = -564.51, z_1 = 43.28, -- vector4(242.55, -564.51, 43.28, 249.86)
+        x_1 = 242.55, y_1 = -564.51, z_1 = 43.28,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1273,7 +1226,7 @@ Config.Locations = {
         Garage_ID = 'Trucking',
         Type = 'car',
         Dist = 10,
-        x_1 = 1196.67, y_1 = -3105.51, z_1 = 6.03, -- vector4(1196.67, -3105.51, 6.03, 356.66)
+        x_1 = 1196.67, y_1 = -3105.51, z_1 = 6.03,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1286,11 +1239,11 @@ Config.Locations = {
         Garage_ID = 'Triads',
         Type = 'car',
         Dist = 2,
-        x_1 = -817.76, y_1 = -728.46, z_1 = 23.78, --vector3(-817.65, -725.01, 23.78)
+        x_1 = -817.76, y_1 = -728.46, z_1 = 23.78,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -817.76, y_2 = -728.46, z_2 = 23.78, h_2 = 178.37, --vector4(-817.76, -728.46, 23.78, 178.37)
+        x_2 = -817.76, y_2 = -728.46, z_2 = 23.78, h_2 = 178.37,
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1299,7 +1252,7 @@ Config.Locations = {
         Garage_ID = 'Vagos',
         Type = 'car',
         Dist = 5,
-        x_1 = 1354.56, y_1 = -2077.01, z_1 = 52.0, -- vector4(1354.56, -2077.01, 52.0, 299.92)
+        x_1 = 1354.56, y_1 = -2077.01, z_1 = 52.0,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1312,7 +1265,7 @@ Config.Locations = {
         Garage_ID = 'LostMC',
         Type = 'car',
         Dist = 5,
-        x_1 = 996.41, y_1 = -128.58, z_1 = 74.46, -- vector4(996.41, -128.58, 74.46, 134.98)
+        x_1 = 996.41, y_1 = -128.58, z_1 = 74.46,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1325,7 +1278,7 @@ Config.Locations = {
         Garage_ID = 'BeanMachine',
         Type = 'car',
         Dist = 5,
-        x_1 = 105.83, y_1 = -1062.95, z_1 = 29.19, -- vector4vector4(105.83, -1062.95, 29.19, 244.8)
+        x_1 = 105.83, y_1 = -1062.95, z_1 = 29.19,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
@@ -1338,11 +1291,11 @@ Config.Locations = {
         Garage_ID = 'UpNAtom',
         Type = 'car',
         Dist = 5,
-        x_1 = 77.87, y_1 = 257.62, z_1 = 108.95, -- vector4(77.87, 257.62, 108.95, 162.48)
+        x_1 = 77.87, y_1 = 257.62, z_1 = 108.95,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 78.04, y_2 = 255.02, z_2 = 108.94, h_2 = 65.09, --vector4(78.04, 255.02, 108.94, 65.09)
+        x_2 = 78.04, y_2 = 255.02, z_2 = 108.94, h_2 = 65.09,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1351,11 +1304,11 @@ Config.Locations = {
         Garage_ID = 'Families',
         Type = 'car',
         Dist = 5,
-        x_1 = -2588.61, y_1 = 1930.73, z_1 = 167.29, -- vector4(-2588.61, 1930.73, 167.29, 280.9)
+        x_1 = -2588.61, y_1 = 1930.73, z_1 = 167.29,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -2588.61, y_2 = 1930.73, z_2 = 167.29, h_2 = 280.9, --vector4(-2588.61, 1930.73, 167.29, 280.9)
+        x_2 = -2588.61, y_2 = 1930.73, z_2 = 167.29, h_2 = 280.9,
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1364,11 +1317,11 @@ Config.Locations = {
         Garage_ID = 'Mafia',
         Type = 'car',
         Dist = 3,
-        x_1 = -1490.75, y_1 = 21.89, z_1 = 54.72, -- vector4(-1490.75, 21.89, 54.72, 354.96)
+        x_1 = -1490.75, y_1 = 21.89, z_1 = 54.72,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -1490.75, y_2 = 21.89, z_2 = 54.72, h_2 = 354.96, --vector4(-1920.45, 2048.89, 140.73, 255.74)
+        x_2 = -1490.75, y_2 = 21.89, z_2 = 54.72, h_2 = 354.96,
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1377,39 +1330,37 @@ Config.Locations = {
         Garage_ID = 'Cartel',
         Type = 'car',
         Dist = 3,
-        x_1 = -2805.0, y_1 = 1451.54, z_1 = 100.76, --vector3(-2805.0, 1451.54, 100.76)
+        x_1 = -2805.0, y_1 = 1451.54, z_1 = 100.76,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -2808.02, y_2 = 1448.21, z_2 = 100.78, h_2 = 270.66, --vector4(-2808.02, 1448.21, 100.78, 270.66)
+        x_2 = -2808.02, y_2 = 1448.21, z_2 = 100.78, h_2 = 270.66,
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
-    
     {
-        Garage_ID = 'Ballas', --GROVE
+        Garage_ID = 'Ballas',
         Type = 'car',
         Dist = 4,
-        x_1 = -86.4, y_1 = -1815.49, z_1 = 26.95, --vector4(-86.4, -1815.49, 26.95, 237.08)
+        x_1 = -86.4, y_1 = -1815.49, z_1 = 26.95,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -86.4, y_2 = -1815.49, z_2 = 26.95, h_2 = 237.08,  --vector4(-86.4, -1815.49, 26.95, 237.08)
+        x_2 = -86.4, y_2 = -1815.49, z_2 = 26.95, h_2 = 237.08,
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
-    
     {
         Garage_ID = 'Recycling City',
         Type = 'car',
         Dist = 5,
-        x_1 = 763.52, y_1 = -1400.93, z_1 = 26.51, --vector4(763.52, -1400.93, 26.51, 187.35)
+        x_1 = 763.52, y_1 = -1400.93, z_1 = 26.51,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 768.85, y_2 = -1404.51, z_2 = 26.51, h_2 = 234.19, --vector4(768.85, -1404.51, 26.51, 234.19)
+        x_2 = 768.85, y_2 = -1404.51, z_2 = 26.51, h_2 = 234.19,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1418,11 +1369,11 @@ Config.Locations = {
         Garage_ID = 'Recycling Paleto',
         Type = 'car',
         Dist = 5,
-        x_1 = 50.08, y_1 = 6465.47, z_1 = 31.45, --vector4(50.08, 6465.47, 31.45, 215.63)
+        x_1 = 50.08, y_1 = 6465.47, z_1 = 31.45,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 52.51, y_2 = 6456.31, z_2 = 31.31, h_2 = 135.48, --vector4(52.51, 6456.31, 31.31, 135.48)
+        x_2 = 52.51, y_2 = 6456.31, z_2 = 31.31, h_2 = 135.48,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1431,11 +1382,11 @@ Config.Locations = {
         Garage_ID = 'Local Dealership',
         Type = 'car',
         Dist = 5,
-        x_1 = -42.56, y_1 = -1116.51, z_1 = 26.44, ---vector4(-42.56, -1116.51, 26.44, 66.93)
+        x_1 = -42.56, y_1 = -1116.51, z_1 = 26.44,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -47.99, y_2 = -1116.35, z_2 = 26.44, h_2 = 359.15, --vector4(-47.99, -1116.35, 26.44, 359.15)
+        x_2 = -47.99, y_2 = -1116.35, z_2 = 26.44, h_2 = 359.15,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1444,11 +1395,11 @@ Config.Locations = {
         Garage_ID = 'OneLife Dealership',
         Type = 'car',
         Dist = 5,
-        x_1 = 109.72, y_1 = -127.38, z_1 = 54.75, --vector4(109.72, -127.38, 54.75, 192.71)
+        x_1 = 109.72, y_1 = -127.38, z_1 = 54.75,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 109.45, y_2 = -133.88, z_2 = 54.75, h_2 = 70.9, --vector4(109.45, -133.88, 54.75, 70.9)
+        x_2 = 109.45, y_2 = -133.88, z_2 = 54.75, h_2 = 70.9,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1457,11 +1408,11 @@ Config.Locations = {
         Garage_ID = '6STR Tuner Shop',
         Type = 'car',
         Dist = 5,
-        x_1 = 166.07, y_1 = -3044.84, z_1 = 5.46, --vector4(166.07, -3044.84, 5.46, 272.13)
+        x_1 = 166.07, y_1 = -3044.84, z_1 = 5.46,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 166.07, y_2 = -3044.84, z_2 = 5.46, h_2 = 272.13, --vector4(166.07, -3044.84, 5.46, 272.13)
+        x_2 = 166.07, y_2 = -3044.84, z_2 = 5.46, h_2 = 272.13,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1470,11 +1421,11 @@ Config.Locations = {
         Garage_ID = 'Billiards',
         Type = 'car',
         Dist = 2,
-        x_1 = -1173.89, y_1 = -1593.63, z_1 = 4.31, --vector4(-1173.89, -1593.63, 4.31, 283.32)
+        x_1 = -1173.89, y_1 = -1593.63, z_1 = 4.31,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -1162.26, y_2 = -1591.37, z_2 = 4.35, h_2 = 280.26, --vector4(-1162.26, -1591.37, 4.35, 280.26)
+        x_2 = -1162.26, y_2 = -1591.37, z_2 = 4.35, h_2 = 280.26,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1483,25 +1434,24 @@ Config.Locations = {
         Garage_ID = 'AOD Clubhouse',
         Type = 'car',
         Dist = 9,
-        x_1 = 290.91, y_1 = 6646.89, z_1 = 29.77, --vector3(290.91, 6646.89, 29.77)
+        x_1 = 290.91, y_1 = 6646.89, z_1 = 29.77,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 286.43, y_2 = 6646.97, z_2 = 29.77, h_2 = 89.47, --vector4(286.43, 6646.97, 29.77, 89.47)
+        x_2 = 286.43, y_2 = 6646.97, z_2 = 29.77, h_2 = 89.47,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
-
     {
         Garage_ID = 'OneLife Bike Dealership',
         Type = 'car',
         Dist = 2,
-        x_1 = -851.77, y_1 = -217.62, z_1 = 37.65, --vector4(-851.77, -217.62, 37.65, 304.92)
+        x_1 = -851.77, y_1 = -217.62, z_1 = 37.65,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -856.13, y_2 = -210.11, z_2 = 37.89, h_2 = 282.79, --vector4(-856.13, -210.11, 37.89, 282.79)
+        x_2 = -856.13, y_2 = -210.11, z_2 = 37.89, h_2 = 282.79,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1510,11 +1460,11 @@ Config.Locations = {
         Garage_ID = 'Paintball',
         Type = 'car',
         Dist = 2,
-        x_1 = -221.29, y_1 = -2036.92, z_1 = 27.62, --vvector4(-221.29, -2036.92, 27.62, 240.05)
+        x_1 = -221.29, y_1 = -2036.92, z_1 = 27.62,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -219.82, y_2 = -2037.77, z_2 = 27.62, h_2 = 239.22, --vector4(-219.82, -2037.77, 27.62, 239.22)
+        x_2 = -219.82, y_2 = -2037.77, z_2 = 27.62, h_2 = 239.22,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1523,11 +1473,11 @@ Config.Locations = {
         Garage_ID = 'PD Garage',
         Type = 'car',
         Dist = 4,
-        x_1 = 829.44, y_1 = -1365.37, z_1 = 26.13, --vec4(829.44, -1365.37, 26.13, 9.91)
+        x_1 = 829.44, y_1 = -1365.37, z_1 = 26.13,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 829.44, y_2 = -1365.37, z_2 = 26.13, h_2 = 9.91, --vec4(829.44, -1365.37, 26.13, 9.91)
+        x_2 = 829.44, y_2 = -1365.37, z_2 = 26.13, h_2 = 9.91,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1536,11 +1486,11 @@ Config.Locations = {
         Garage_ID = 'Ballas',
         Type = 'car',
         Dist = 4,
-        x_1 = 11.12, y_1 = -1823.73, z_1 = 25.05, --vector4(11.12, -1823.73, 25.05, 141.23)
+        x_1 = 11.12, y_1 = -1823.73, z_1 = 25.05,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 11.12, y_2 = -1823.73, z_2 = 25.05, h_2 = 141.23, --vector4(11.12, -1823.73, 25.05, 141.23)
+        x_2 = 11.12, y_2 = -1823.73, z_2 = 25.05, h_2 = 141.23,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1549,11 +1499,11 @@ Config.Locations = {
         Garage_ID = 'Aztecas',
         Type = 'car',
         Dist = 6,
-        x_1 = 1001.02, y_1 = -2509.91, z_1 = 28.3, --vector4(1001.02, -2509.91, 28.3, 33.73)
+        x_1 = 1001.02, y_1 = -2509.91, z_1 = 28.3,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 1001.02, y_2 = -2509.91, z_2 = 28.3, h_2 = 33.73, --vector4(1001.02, -2509.91, 28.3, 33.73)
+        x_2 = 1001.02, y_2 = -2509.91, z_2 = 28.3, h_2 = 33.73,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1562,11 +1512,11 @@ Config.Locations = {
         Garage_ID = 'Paleto Farm',
         Type = 'car',
         Dist = 2,
-        x_1 = 408.79, y_1 = 6504.48, z_1 = 27.89, --vector4(408.79, 6504.48, 27.89, 169.96)
+        x_1 = 408.79, y_1 = 6504.48, z_1 = 27.89,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 408.79, y_2 = 6504.48, z_2 = 27.89, h_2 = 169.96, --vector4(503.43, -1521.4, 29.29, 47.32)
+        x_2 = 408.79, y_2 = 6504.48, z_2 = 27.89, h_2 = 169.96,
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1575,11 +1525,11 @@ Config.Locations = {
         Garage_ID = 'Disciples',
         Type = 'car',
         Dist = 2,
-        x_1 = -104.63, y_1 = 821.49, z_1 = 235.73, --vector4(-104.63, 821.49, 235.73, 10.27)
+        x_1 = -104.63, y_1 = 821.49, z_1 = 235.73,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -104.63, y_2 = 821.49, z_2 = 235.73, h_2 = 10.27, --vector4(2029.73, 3372.46, 46.8, 224.08)
+        x_2 = -104.63, y_2 = 821.49, z_2 = 235.73, h_2 = 10.27,
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1588,11 +1538,11 @@ Config.Locations = {
         Garage_ID = 'UWU Cafe',
         Type = 'car',
         Dist = 6,
-        x_1 = -581.5, y_1 = -1100.82, z_1 = 22.18, --vector4(-581.5, -1100.82, 22.18, 90.04)
+        x_1 = -581.5, y_1 = -1100.82, z_1 = 22.18,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -581.5, y_2 = -1100.82, z_2 = 22.18, h_2 = 90.04, --vector4(-581.5, -1100.82, 22.18, 90.04)
+        x_2 = -581.5, y_2 = -1100.82, z_2 = 22.18, h_2 = 90.04,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
@@ -1601,16 +1551,16 @@ Config.Locations = {
         Garage_ID = 'Hennies',
         Type = 'car',
         Dist = 6,
-        x_1 = -1843.76, y_1 = -1215.05, z_1 = 13.02, --vector4(-1843.76, -1215.05, 13.02, 207.37)
+        x_1 = -1843.76, y_1 = -1215.05, z_1 = 13.02,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -1843.65, y_2 = -1227.29, z_2 = 13.02, h_2 = 307.99, --vector4(-1843.65, -1227.29, 13.02, 307.99)
+        x_2 = -1843.65, y_2 = -1227.29, z_2 = 13.02, h_2 = 307.99,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
-    {--Muscles Gym
+    {
         Garage_ID = 'Muscles Gym',
         Type = 'car',
         Dist = 5,
@@ -1618,13 +1568,12 @@ Config.Locations = {
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -767.58, y_2 = 235.2, z_2 = 75.69, h_2 = 258.95, --vector4(-767.58, 235.2, 75.69, 258.95)
+        x_2 = -767.58, y_2 = 235.2, z_2 = 75.69, h_2 = 258.95,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
-        
     },
-    {--Towing
+    {
         Garage_ID = 'Towing',
         Type = 'car',
         Dist = 5,
@@ -1632,13 +1581,12 @@ Config.Locations = {
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 484.95, y_2 = -1338.64, z_2 = 29.28, h_2 = 355.74, --vector4(-767.58, 235.2, 75.69, 258.95)
+        x_2 = 484.95, y_2 = -1338.64, z_2 = 29.28, h_2 = 355.74,
         EnableBlip = true,
-        JobRestricted = 'towing',
+        JobRestricted = {'towing'},
         ShellType = '10cargarage_shell',
-        
     },
-    {--Towing Civ
+    {
         Garage_ID = 'Towing',
         Type = 'car',
         Dist = 5,
@@ -1646,12 +1594,17 @@ Config.Locations = {
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = 499.93, y_2 = -1317.29, z_2 = 29.23, h_2 = 304.27, --vector4(-767.58, 235.2, 75.69, 258.95)
+        x_2 = 499.93, y_2 = -1317.29, z_2 = 29.23, h_2 = 304.27,
         EnableBlip = true,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
-        
     },
+
+
+
+
+
+
     {   --THIS IS A BOAT GARAGE, YOU CAN REMOVE OR ADD NEW BOAT GARAGES IF YOU WISH.
         Garage_ID = 'A', --The very first boat garage's `garage_id` must be the same as the default value of the garage_id in the database as when a vehicle is purchased it gets sent to this garage.
         Type = 'boat',
@@ -1663,6 +1616,7 @@ Config.Locations = {
         EnableBlip = true,
         JobRestricted = nil,
     },
+
     {   --THIS IS AN AIR GARAGE, YOU CAN REMOVE OR ADD NEW AIR GARAGES IF YOU WISH.
         Garage_ID = 'A', --The very first air garage's `garage_id` must be the same as the default value of the `garage_id` in the database as when a vehicle is purchased it gets sent to this garage.
         Type = 'air',
@@ -1678,10 +1632,10 @@ Config.Locations = {
         Garage_ID = 'Sky Bar',
         Type = 'air',
         Dist = 5,
-        x_1 = 399.05, y_1 = 5542.99, z_1 = 777.33,--vector3(399.05, 5542.99, 777.33)
+        x_1 = 399.05, y_1 = 5542.99, z_1 = 777.33,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        x_2 = 390.63, y_2 = 5542.72, z_2 = 777.33, h_2 = 267.27,--vector4(390.63, 5542.72, 777.33, 267.27)
+        x_2 = 390.63, y_2 = 5542.72, z_2 = 777.33, h_2 = 267.27,
         EnableBlip = false,
         JobRestricted = nil,
     },
@@ -1690,10 +1644,10 @@ Config.Locations = {
         Garage_ID = 'Families Air',
         Type = 'air',
         Dist = 3,
-        x_1 = -2583.91, y_1 = 1885.3, z_1 = 172.87,--vector4(-2583.91, 1885.3, 172.87, 95.27)
+        x_1 = -2583.91, y_1 = 1885.3, z_1 = 172.87,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        x_2 = -2583.91, y_2 = 1885.3, z_2 = 172.87, h_2 = 95.27,--vector4(-2583.91, 1885.3, 172.87, 95.27)
+        x_2 = -2583.91, y_2 = 1885.3, z_2 = 172.87, h_2 = 95.27,
         EnableBlip = false,
         JobRestricted = nil,
     },
@@ -1701,10 +1655,10 @@ Config.Locations = {
         Garage_ID = 'Mafia Air',
         Type = 'air',
         Dist = 3,
-        x_1 = -1847.74, y_1 = 2086.27, z_1 = 142.19,--vector4(-1847.74, 2086.27, 142.19, 134.9)
+        x_1 = -1847.74, y_1 = 2086.27, z_1 = 142.19,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        x_2 = -1847.74, y_2 = 2086.27, z_2 = 142.19, h_2 = 134.9,--vector4(-1847.74, 2086.27, 142.19, 134.9)
+        x_2 = -1847.74, y_2 = 2086.27, z_2 = 142.19, h_2 = 134.9,
         EnableBlip = false,
         JobRestricted = nil,
     },
@@ -1712,10 +1666,10 @@ Config.Locations = {
         Garage_ID = 'Cartel Air',
         Type = 'air',
         Dist = 3,
-        x_1 = -2809.43, y_1 = 1471.24, z_1 = 104.05,--vector3(-2809.43, 1471.24, 104.05)
+        x_1 = -2809.43, y_1 = 1471.24, z_1 = 104.05,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        x_2 = -2809.43, y_2 = 1471.24, z_2 = 104.05, h_2 = 215.89,--vector4(-2809.43, 1471.24, 104.05, 215.89)
+        x_2 = -2809.43, y_2 = 1471.24, z_2 = 104.05, h_2 = 215.89,
         EnableBlip = false,
         JobRestricted = nil,
     },
@@ -1723,10 +1677,10 @@ Config.Locations = {
         Garage_ID = 'Triads Air',
         Type = 'air',
         Dist = 3,
-        x_1 = -154.82, y_1 = 940.31, z_1 = 237.11,--vector4(-154.82, 940.31, 237.11, 235.27)
+        x_1 = -154.82, y_1 = 940.31, z_1 = 237.11,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        x_2 = -154.82, y_2 = 940.31, z_2 = 237.11, h_2 = 235.27,--vector4(-154.82, 940.31, 237.11, 235.27)
+        x_2 = -154.82, y_2 = 940.31, z_2 = 237.11, h_2 = 235.27,
         EnableBlip = false,
         JobRestricted = nil,
     },
@@ -1734,21 +1688,21 @@ Config.Locations = {
         Garage_ID = 'Vagos Air',
         Type = 'air',
         Dist = 3,
-        x_1 = 621.9, y_1 = 894.17, z_1 = 248.42,--vector4(621.9, 894.17, 248.42, 262.01)
+        x_1 = 621.9, y_1 = 894.17, z_1 = 248.42,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        x_2 = 621.9, y_2 = 894.17, z_2 = 248.42, h_2 = 262.01,--vector4(621.9, 894.17, 248.42, 262.01)
+        x_2 = 621.9, y_2 = 894.17, z_2 = 248.42, h_2 = 262.01,
         EnableBlip = false,
         JobRestricted = nil,
     },
-        {   
+    {   
         Garage_ID = 'Disciples Air',
         Type = 'air',
         Dist = 3,
-        x_1 = 1981.16, y_1 = 3325.73, z_1 = 47.30,--vector4(1981.16, 3325.73, 47.3, 267.8)
+        x_1 = 1981.16, y_1 = 3325.73, z_1 = 47.30,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        x_2 = 1981.16, y_2 = 3325.73, z_2 = 47.30, h_2 = 267.80,--vector4(1981.16, 3325.73, 47.3, 267.8)
+        x_2 = 1981.16, y_2 = 3325.73, z_2 = 47.30, h_2 = 267.80,
         EnableBlip = false,
         JobRestricted = nil,
     },
@@ -1756,78 +1710,63 @@ Config.Locations = {
         Garage_ID = 'AOD Clubhouse Air',
         Type = 'air',
         Dist = 9,
-        x_1 = 247.39, y_1 = 6645.08, z_1 = 29.77, --vector4(247.39, 6645.08, 29.77, 268.71)
+        x_1 = 247.39, y_1 = 6645.08, z_1 = 29.77,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        Name = UIText,
-        x_2 = 253.35, y_2 = 6644.86, z_2 = 29.77, h_2 = 268.71, --vector4(253.35, 6644.86, 29.77, 268.71)
+        x_2 = 253.35, y_2 = 6644.86, z_2 = 29.77, h_2 = 268.71,
         EnableBlip = true,
         JobRestricted = nil,
-        ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'Bennys Track', --Airport
+        Garage_ID = 'Bennys Track',
         Type = 'air',
         Dist = 5,
-        x_1 = -770.01, y_1 = -2020.43, z_1 = 8.85, -- vector3(-770.01, -2020.43, 8.85)
+        x_1 = -770.01, y_1 = -2020.43, z_1 = 8.85,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        Name = UIText,
-        x_2 = -764.91, y_2 = -2026.83, z_2 = 8.88, h_2 = 222.31,  -- vector4(-764.91, -2026.83, 8.88, 222.31)
+        x_2 = -764.91, y_2 = -2026.83, z_2 = 8.88, h_2 = 222.31,
         EnableBlip = true,
         JobRestricted = nil,
-        ShellType = '10cargarage_shell',
     },
     {
         Garage_ID = 'Palm Coast',
         Type = 'air',
         Dist = 4,
-        x_1 = -2008.18, y_1 = -522.35, z_1 = 11.72, -- vec3(-2008.18, -522.35, 11.72)
+        x_1 = -2008.18, y_1 = -522.35, z_1 = 11.72,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        Name = UIText,
-        x_2 = -1986.74, y_2 = -504.48, z_2 = 12.05, h_2 = 138.84, -- vec4(-1986.74, -504.48, 12.05, 138.84)
+        x_2 = -1986.74, y_2 = -504.48, z_2 = 12.05, h_2 = 138.84,
         EnableBlip = true,
         JobRestricted = nil,
-        ShellType = '10cargarage_shell',
     },
     {
         Garage_ID = 'Bennys Workshop',
         Type = 'air',
         Dist = 4,
-        x_1 = -940.92, y_1 = -2010.78, z_1 = 9.51, -- vector3(-940.75, -2010.92, 9.51)
+        x_1 = -940.92, y_1 = -2010.78, z_1 = 9.51,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        Name = UIText,
-        x_2 = -940.62, y_2 = -2011.14, z_2 = 9.51, h_2 = 226.96, -- vector4(-940.62, -2011.14, 9.51, 226.96)
+        x_2 = -940.62, y_2 = -2011.14, z_2 = 9.51, h_2 = 226.96,
         EnableBlip = true,
         JobRestricted = nil,
-        ShellType = '10cargarage_shell',
     },
     {
         Garage_ID = '6STR Tuner Shop',
         Type = 'air',
         Dist = 4,
-        x_1 = 162.86, y_1 = -3009.53, z_1 = 5.94, -- vector4(162.86, -3009.53, 5.94, 270.38)
+        x_1 = 162.86, y_1 = -3009.53, z_1 = 5.94,
         EventName1 = 'cd_garage:QuickChoose',
         Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
-        Name = UIText,
-        x_2 = 162.86, y_2 = -3009.53, z_2 = 5.94, h_2 = 270.38, -- vector4(162.86, -3009.53, 5.94, 270.38)
+        x_2 = 162.86, y_2 = -3009.53, z_2 = 5.94, h_2 = 270.38,
         EnableBlip = true,
         JobRestricted = nil,
-        ShellType = '10cargarage_shell',
     },
-
 }
 
 
---██╗███╗   ███╗██████╗  ██████╗ ██╗   ██╗███╗   ██╗██████╗     ██╗      ██████╗  ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
---██║████╗ ████║██╔══██╗██╔═══██╗██║   ██║████╗  ██║██╔══██╗    ██║     ██╔═══██╗██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
---██║██╔████╔██║██████╔╝██║   ██║██║   ██║██╔██╗ ██║██║  ██║    ██║     ██║   ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗
---██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║╚██╗██║██║  ██║    ██║     ██║   ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║
---██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝    ███████╗╚██████╔╝╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║
---╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝     ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                        IMPOUND LOCATIONS                         │
+-- └──────────────────────────────────────────────────────────────────┘
 
 Config.ImpoundLocations = { --DO NOT CHANGE THE TABLE IDENTIFIERSs, for example - ['car_2'], if you wish to add more, then name the next one ['car_3']. It must have either 'car'/'boat'/'air' in the name and also be unique.
     ['car_1'] = {
@@ -1839,6 +1778,18 @@ Config.ImpoundLocations = { --DO NOT CHANGE THE TABLE IDENTIFIERSs, for example 
             scale = 0.5, --Size of the blip.
             colour = 3, --Colour of the blip.
             name = L('car_city_impound'), --This can be changed in the Locales.
+        }
+    },
+
+    ['car_2'] = {
+        ImpoundID = 2,
+        coords = {x = 1893.48, y = 3713.50, z = 32.77},
+        spawnpoint = {x = 1887.123, y = 3710.348, z = 31.92, h = 212.0},
+        blip = {
+            sprite = 357,
+            scale = 0.5,
+            colour = 3,
+            name = L('car_sandy_impound'),
         }
     },
 
@@ -1867,14 +1818,9 @@ Config.ImpoundLocations = { --DO NOT CHANGE THE TABLE IDENTIFIERSs, for example 
     },
 }
 
-
--- ██████╗ ████████╗██╗  ██╗███████╗██████╗ 
---██╔═══██╗╚══██╔══╝██║  ██║██╔════╝██╔══██╗
---██║   ██║   ██║   ███████║█████╗  ██████╔╝
---██║   ██║   ██║   ██╔══██║██╔══╝  ██╔══██╗
---╚██████╔╝   ██║   ██║  ██║███████╗██║  ██║
--- ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                              OTHER                               │
+-- └──────────────────────────────────────────────────────────────────┘
 
 function Round(cd) return math.floor(cd+0.5) end
 function Trim(cd) return cd:gsub('%s+', '') end
@@ -1884,25 +1830,21 @@ function GetConfig()
 end
 
 function GetCorrectPlateFormat(plate)
-    if Config.PlateFormats == 'trimmed' then
+    if Config.VehiclePlateFormats.format == 'trimmed' then
         return Trim(plate)
 
-    elseif Config.PlateFormats == 'with_spaces' then
+    elseif Config.VehiclePlateFormats.format == 'with_spaces' then
         return plate
 
-    elseif Config.PlateFormats == 'mixed' then
+    elseif Config.VehiclePlateFormats.format == 'mixed' then
         return string.gsub(plate, "^%s*(.-)%s*$", "%1")
     end
 end
 
 
--- █████╗ ██╗   ██╗████████╗ ██████╗     ██████╗ ███████╗████████╗███████╗ ██████╗████████╗
---██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗    ██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝
---███████║██║   ██║   ██║   ██║   ██║    ██║  ██║█████╗     ██║   █████╗  ██║        ██║   
---██╔══██║██║   ██║   ██║   ██║   ██║    ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   
---██║  ██║╚██████╔╝   ██║   ╚██████╔╝    ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   
---╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝     ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   
-        
+-- ┌──────────────────────────────────────────────────────────────────┐
+-- │                            AUTO DETECT                           │
+-- └──────────────────────────────────────────────────────────────────┘     
 
 -----DO NOT TOUCH ANYTHING BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING.-----
 if Config.Framework == 'auto_detect' then
@@ -1911,11 +1853,19 @@ if Config.Framework == 'auto_detect' then
     elseif GetResourceState(Config.FrameworkTriggers.qbcore.resource_name) == 'started' then
         Config.Framework = 'qbcore'
     end
-    if Config.Framework == 'esx' or Config.Framework == 'qbcore' then
-        for c, d in pairs(Config.FrameworkTriggers[Config.Framework]) do
-            Config.FrameworkTriggers[c] = d
-        end
-        Config.FrameworkTriggers.esx, Config.FrameworkTriggers.qbcore = nil, nil
+end
+if Config.Framework == 'esx' or Config.Framework == 'qbcore' then
+    for c, d in pairs(Config.FrameworkTriggers[Config.Framework]) do
+        Config.FrameworkTriggers[c] = d
+    end
+    Config.FrameworkTriggers.esx, Config.FrameworkTriggers.qbcore = nil, nil
+end
+
+if Config.VehiclePlateFormats.format then
+    if Config.Framework == 'esx' then
+        Config.VehiclePlateFormats.format = 'trimmed'
+    elseif Config.Framework == 'qbcore' then
+        Config.VehiclePlateFormats.format = 'mixed'
     end
 end
 
@@ -1930,15 +1880,144 @@ if Config.Database == 'auto_detect' then
 end
 
 if Config.Notification == 'auto_detect' then
-    if GetResourceState('okokNotify') == 'started' then
+    if GetResourceState('cd_notifications') == 'started' then
+        Config.Notification = 'cd_notifications'
+    elseif GetResourceState('mythic_notify') == 'started' then
+        Config.Notification = 'mythic_notify'
+    elseif GetResourceState('okokNotify') == 'started' then
         Config.Notification = 'okokNotify'
-    elseif GetResourceState('ps-ui') == 'started' then
-        Config.Notification = 'ps-ui'
+    elseif GetResourceState('origen_notify') == 'started' then
+        Config.Notification = 'origen_notify'
     elseif GetResourceState('ox_lib') == 'started' then
         Config.Notification = 'ox_lib'
+    elseif GetResourceState('pNotify') == 'started' then
+        Config.Notification = 'pNotify'
+    elseif GetResourceState('ps-ui') == 'started' then
+        Config.Notification = 'ps-ui'
+    elseif GetResourceState('rtx_notify') == 'started' then
+        Config.Notification = 'rtx_notify'
+    elseif GetResourceState('vms_notifyv2') == 'started' then
+        Config.Notification = 'vms_notifyv2'
     else
-        Config.Notification = Config.Framework
-        if Config.Notification == 'standalone' or Config.Notification == 'vrp' then Config.Notification = 'chat' end
+        if Config.Framework == 'esx' or Config.Framework == 'qbcore' then
+            Config.Notification = Config.Framework
+        else
+            Config.Notification = 'chat'
+        end
+    end
+end
+
+if Config.GarageInteractMethod == 'auto_detect' then
+    if GetResourceState('cd_drawtextui') == 'started' then
+        Config.GarageInteractMethod = 'cd_drawtextui'
+    elseif GetResourceState('jg-textui') == 'started' then
+        Config.GarageInteractMethod = 'jg-textui'
+    elseif GetResourceState('okokTextUI') == 'started' then
+        Config.GarageInteractMethod = 'okokTextUI'
+    elseif GetResourceState('ox_target') == 'started' then
+        Config.GarageInteractMethod = 'ox_target'
+    elseif GetResourceState('ps-ui') == 'started' then
+        Config.GarageInteractMethod = 'ps-ui'
+    elseif GetResourceState('qb-target') == 'started' then
+        Config.GarageInteractMethod = 'qb-target'
+    elseif GetResourceState('qbcore') == 'started' then
+        Config.GarageInteractMethod = 'qbcore'
+    elseif GetResourceState('vms_notifyv2') == 'started' then
+        Config.GarageInteractMethod = 'vms_notifyv2'
+    end
+end
+
+if Config.VehicleFuelResource == 'auto_detect' then
+    if GetResourceState('BigDaddy-Fuel') == 'started' then
+        Config.VehicleFuelResource = 'BigDaddy-Fuel'
+    elseif GetResourceState('cdn-fuel') == 'started' then
+        Config.VehicleFuelResource = 'cdn-fuel'
+    elseif GetResourceState('esx-sna-fuel') == 'started' then
+        Config.VehicleFuelResource = 'esx-sna-fuel'
+    elseif GetResourceState('FRFuel') == 'started' then
+        Config.VehicleFuelResource = 'FRFuel'
+    elseif GetResourceState('lc_fuel') == 'started' then
+        Config.VehicleFuelResource = 'lc_fuel'
+    elseif GetResourceState('LegacyFuel') == 'started' then
+        Config.VehicleFuelResource = 'LegacyFuel'
+    elseif GetResourceState('lj-fuel') == 'started' then
+        Config.VehicleFuelResource = 'lj-fuel'
+    elseif GetResourceState('myFuel') == 'started' then
+        Config.VehicleFuelResource = 'myFuel'
+    elseif GetResourceState('ND_Fuel') == 'started' then
+        Config.VehicleFuelResource = 'ND_Fuel'
+    elseif GetResourceState('okokGasStation') == 'started' then
+        Config.VehicleFuelResource = 'okokGasStation'
+    elseif GetResourceState('ox_fuel') == 'started' then
+        Config.VehicleFuelResource = 'ox_fuel'
+    elseif GetResourceState('ps-fuel') == 'started' then
+        Config.VehicleFuelResource = 'ps-fuel'
+    elseif GetResourceState('qb-fuel') == 'started' then
+        Config.VehicleFuelResource = 'qb-fuel'
+    elseif GetResourceState('qb-sna-fuel') == 'started' then
+        Config.VehicleFuelResource = 'qb-sna-fuel'
+    elseif GetResourceState('rcore_fuel') == 'started' then
+        Config.VehicleFuelResource = 'rcore_fuel'
+    elseif GetResourceState('Renewed-Fuel') == 'started' then
+        Config.VehicleFuelResource = 'Renewed-Fuel'
+    elseif GetResourceState('ti_fuel') == 'started' then
+        Config.VehicleFuelResource = 'ti_fuel'
+    elseif GetResourceState('x-fuel') == 'started' then
+        Config.VehicleFuelResource = 'x-fuel'
+    else
+        Config.VehicleFuelResource = 'none'
+    end
+end
+
+if Config.VehicleKeysResource == 'auto_detect' then
+    if GetResourceState('F_RealCarKeysSystem') == 'started' then
+        Config.VehicleKeysResource = 'F_RealCarKeysSystem'
+    elseif GetResourceState('ak47_qb_vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'ak47_qb_vehiclekeys'
+    elseif GetResourceState('ak47_vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'ak47_vehiclekeys'
+    elseif GetResourceState('fivecode_carkeys') == 'started' then
+        Config.VehicleKeysResource = 'fivecode_carkeys'
+    elseif GetResourceState('loaf_keysystem') == 'started' then
+        Config.VehicleKeysResource = 'loaf_keysystem'
+    elseif GetResourceState('mk_vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'mk_vehiclekeys'
+    elseif GetResourceState('MrNewbVehicleKeys') == 'started' then
+        Config.VehicleKeysResource = 'MrNewbVehicleKeys'
+    elseif GetResourceState('qb-vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'qb-vehiclekeys'
+    elseif GetResourceState('qbx_vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'qbx_vehiclekeys'
+    elseif GetResourceState('qs-vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'qs-vehiclekeys'
+    elseif GetResourceState('stasiek_vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'stasiek_vehiclekeys'
+    elseif GetResourceState('t1ger_keys') == 'started' then
+        Config.VehicleKeysResource = 't1ger_keys'
+    elseif GetResourceState('tgiann-hotwire') == 'started' then
+        Config.VehicleKeysResource = 'tgiann-hotwire'
+    elseif GetResourceState('ti_vehicleKeys') == 'started' then
+        Config.VehicleKeysResource = 'ti_vehicleKeys'
+    elseif GetResourceState('vehicles_keys') == 'started' then
+        Config.VehicleKeysResource = 'vehicles_keys'
+    elseif GetResourceState('wasabi_carlock') == 'started' then
+        Config.VehicleKeysResource = 'wasabi_carlock'
+    elseif GetResourceState('xd_locksystem') == 'started' then
+        Config.VehicleKeysResource = 'xd_locksystem'
+    else
+        Config.VehicleKeysResource = 'none'
+    end
+end
+
+if Config.TimeWeatherResource == 'auto_detect' then
+    if GetResourceState('cd_easytime') == 'started' then
+        Config.TimeWeatherResource = 'cd_easytime'
+    elseif GetResourceState('vsync') == 'started' then
+        Config.TimeWeatherResource = 'vsync'
+    elseif GetResourceState('qb-weathersync') == 'started' then
+        Config.TimeWeatherResource = 'qb-weathersync'
+    else
+        Config.TimeWeatherResource = 'none'
     end
 end
 
@@ -1966,5 +2045,9 @@ if not Config.VehiclesData.ENABLE then
     Config.Impound.Impound_Fee.method = 'default'
     Config.GarageTax.method = 'default'
     Config.Return_Vehicle.method = 'default'
+end
+
+if Config.PersistentVehicles.ENABLE then
+    Config.ResetGarageState = false
 end
 -----DO NOT TOUCH ANYTHING ABOVE THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING.-----

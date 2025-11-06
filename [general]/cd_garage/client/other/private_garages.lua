@@ -3,7 +3,6 @@ if Config.PrivateGarages.ENABLE then
     local BlipTable = {}
 
     CreateThread(function()
-        while not Authorised do Wait(1000) end
         TriggerEvent('chat:addSuggestion', '/'..Config.PrivateGarages.create_chat_command, L('chatsuggestion_privategarage_1'), {{ name=L('chatsuggestion_playerid_1'), help=L('chatsuggestion_playerid_2')}, {name=L('chatsuggestion_garagename_1'), help=L('chatsuggestion_garagename_2')}, {name=L('chatsuggestion_privategarage_2'), help=L('chatsuggestion_privategarage_3')} })
         RegisterCommand(Config.PrivateGarages.create_chat_command, function(source, args)
             if Config.PrivateGarages.Authorized_Jobs[GetJob().name] then
@@ -22,7 +21,6 @@ if Config.PrivateGarages.ENABLE then
                         EventName1 = 'cd_garage:PrivateGarage',
                         Name = '<b>'..L('garage')..'</b></p>'..L('open_garage_1')..' </p>'..L('notif_storevehicle'),
                         EnableBlip = false,
-                        JobRestricted = nil,
                     }
                     TriggerServerEvent('cd_garage:SavePrivateGarage', target_source, data)
                 else
@@ -31,7 +29,7 @@ if Config.PrivateGarages.ENABLE then
             else
                 Notif(3, 'no_permissions')
             end
-        end)
+        end, false)
 
         TriggerEvent('chat:addSuggestion', '/'..Config.PrivateGarages.delete_chat_command, L('chatsuggestion_privategarage_4'), {{ name=L('chatsuggestion_privategarage_5'), help=L('chatsuggestion_privategarage_6')}})
         RegisterCommand(Config.PrivateGarages.delete_chat_command, function(source, args)
@@ -44,7 +42,7 @@ if Config.PrivateGarages.ENABLE then
             else
                 Notif(3, 'no_permissions')
             end
-        end)
+        end, false)
     end)
 
     RegisterNetEvent('cd_garage:LoadPrivateGarages')
@@ -73,18 +71,10 @@ if Config.PrivateGarages.ENABLE then
         SetBlipSprite(blip, Config.Blip[data.Type].sprite)
         SetBlipDisplay(blip, 4)
         SetBlipScale(blip, Config.Blip[data.Type].scale)
-        if data.Garage_ID == 'Patreon Hub' then
-            SetBlipColour(blip, 1) -- red
-        else
-            SetBlipColour(blip, Config.Blip[data.Type].colour)
-        end
+        SetBlipColour(blip, Config.Blip[data.Type].colour)
         SetBlipAsShortRange(blip, true)
         BeginTextCommandSetBlipName('STRING')
-        if data.Garage_ID == 'Patreon Hub' then
-            AddTextComponentSubstringPlayerName('Patreon Garage: '..data.Garage_ID)
-        else
-            AddTextComponentSubstringPlayerName(Config.Blip[data.Type].name:sub(1, -2)..': '..data.Garage_ID)
-        end
+        AddTextComponentSubstringPlayerName(Config.Blip[data.Type].name:sub(1, -2)..': '..data.Garage_ID)
         EndTextCommandSetBlipName(blip)
     end
 

@@ -1,5 +1,5 @@
 if Config.InsideGarage.ENABLE then
-    
+
     RegisterNetEvent('cd_garage:StartThread_1')
     AddEventHandler('cd_garage:StartThread_1', function()
         CreateThread(function()
@@ -12,34 +12,6 @@ if Config.InsideGarage.ENABLE then
                     if vehicle.state then
                         for cd = 1, #MyCars do
                             if MyCars[cd] ~= nil then
-                                -- Patreon-only garage filter: hide vehicles not in tier when inside Patreon garage
-                                if CurrentGarage == 'Patreon Hub' and Config.PatreonTiers and Config.PatreonTiers.ENABLE then
-                                    local appearsInAny = false
-                                    local minTier = nil
-                                    for t, tierData in pairs(Config.PatreonTiers.tiers or {}) do
-                                        local list = (tierData and tierData.vehicles) or {}
-                                        for i = 1, #list do
-                                            if tostring(list[i]):upper() == tostring(MyCars[cd].vehicle.model):upper() then
-                                                appearsInAny = true
-                                                minTier = (minTier and math.min(minTier, t)) or t
-                                            end
-                                        end
-                                    end
-                                    if appearsInAny then
-                                        local p = QBCore and QBCore.Functions.GetPlayerData() or nil
-                                        local md = p and p.metadata or {}
-                                        local key = Config.PatreonTiers.metadata_key or 'patreon_tier'
-                                        local tier = md and md[key]
-                                        local tierNum = 0
-                                        if type(tier) == 'number' then tierNum = tier elseif type(tier) == 'string' then tierNum = tonumber(tier) or 0 end
-                                        if (Config.PatreonTiers.inherit ~= false and tierNum < (minTier or 1)) or (Config.PatreonTiers.inherit == false and tierNum ~= (minTier or 1)) then
-                                            goto continue_thread1
-                                        end
-                                    else
-                                        -- Not in any tier list: do not display in Patreon Garage
-                                        goto continue_thread1
-                                    end
-                                end
                                 if MyCars[cd].vehicle == vehicle.vehicle then
                                     if Config.InsideGarage.use_spotlight then
                                         DrawSpotlight(vehicle.coords)
@@ -69,7 +41,6 @@ if Config.InsideGarage.ENABLE then
                                     end
                                 end
                             end
-                            ::continue_thread1::
                         end
                     end
                 else
@@ -92,38 +63,10 @@ if Config.InsideGarage.ENABLE then
                     if vehicle.state then
                         for cd = 1, #MyCars do
                             if MyCars[cd] ~= nil then
-                                -- Patreon-only: hide non-tier vehicles from UI hover list
-                                if CurrentGarage == 'Patreon Hub' and Config.PatreonTiers and Config.PatreonTiers.ENABLE then
-                                    local appearsInAny = false
-                                    local minTier = nil
-                                    for t, tierData in pairs(Config.PatreonTiers.tiers or {}) do
-                                        local list = (tierData and tierData.vehicles) or {}
-                                        for i = 1, #list do
-                                            if tostring(list[i]):upper() == tostring(MyCars[cd].vehicle.model):upper() then
-                                                appearsInAny = true
-                                                minTier = (minTier and math.min(minTier, t)) or t
-                                            end
-                                        end
-                                    end
-                                    if appearsInAny then
-                                        local p = QBCore and QBCore.Functions.GetPlayerData() or nil
-                                        local md = p and p.metadata or {}
-                                        local key = Config.PatreonTiers.metadata_key or 'patreon_tier'
-                                        local tier = md and md[key]
-                                        local tierNum = 0
-                                        if type(tier) == 'number' then tierNum = tier elseif type(tier) == 'string' then tierNum = tonumber(tier) or 0 end
-                                        if (Config.PatreonTiers.inherit ~= false and tierNum < (minTier or 1)) or (Config.PatreonTiers.inherit == false and tierNum ~= (minTier or 1)) then
-                                            goto continue_thread2
-                                        end
-                                    else
-                                        goto continue_thread2
-                                    end
-                                end
                                 if MyCars[cd].vehicle == vehicle.vehicle and lastvehicle ~= vehicle.vehicle then
                                     ShowInsideGarage_UI(MyCars[cd])
                                 end
                             end
-                            ::continue_thread2::
                         end
                     else
                         HideInsideGarage_UI()

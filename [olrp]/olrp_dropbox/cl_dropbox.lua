@@ -65,14 +65,14 @@ end
 
 local function grabDropbox()
     -- Get collection time based on rarity
-    local collectionTime = 5000 -- Default 5 seconds
+    local collectionTime = 30000 -- Default 5 seconds
     if olrpDropbox.rarity then
         local times = {
             Common = 5000,    -- 5 seconds
-            Uncommon = 5000,  -- 5 seconds
-            Rare = 5000,      -- 5 seconds
-            Epic = 5000,      -- 5 seconds
-            Legendary = 5000  -- 5 seconds
+            Uncommon = 10000,  -- 5 seconds
+            Rare = 20000,      -- 5 seconds
+            Epic = 25000,      -- 5 seconds
+            Legendary = 30000  -- 5 seconds
         }
         collectionTime = times[olrpDropbox.rarity] or 5000
     end

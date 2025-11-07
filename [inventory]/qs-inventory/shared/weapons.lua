@@ -2900,6 +2900,13 @@ WeaponList = {
         ammotype = 'AMMO_PISTOL',
         damagereason = 'Pistoled / Blasted / Plugged / Bust a cap in'
     },
+    [`weapon_patchday8ng`] = {
+        name = 'weapon_patchday8ng',
+        label = 'Patchday8ng Carbine Rifle',
+        weapontype = 'Assault Rifle',
+        ammotype = 'AMMO_RIFLE',
+        damagereason = 'Ended / Rifled / Shot down / Floored'
+    },
     [`weapon_m4a1dragon`] = {
         name = 'weapon_m4a1dragon',
         label = 'M4A1 Dragon',

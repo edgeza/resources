@@ -111,6 +111,45 @@ ItemList = {
     ['plush_06a'] = {['name'] = 'plush_06a', ['label'] = 'Plush Toy 06', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_06a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
     ['plush_07a'] = {['name'] = 'plush_07a', ['label'] = 'Plush Toy 07', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_07a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
     ['plush_08a'] = {['name'] = 'plush_08a', ['label'] = 'Plush Toy 08', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_08a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
+
+    --Storm Chaser Items
+
+    ['storm_tablet'] = {
+       ['name'] = 'storm_tablet',
+       ['label'] = 'Storm Tablet',
+       ['weight'] = 1000,
+       ['type'] = 'item',
+       ['image'] = 'storm_tablet.png',
+       ['unique'] = true,
+       ['useable'] = true,
+       ['shouldClose'] = true,
+       ['combinable'] = nil,
+       ['description'] = 'Portable doppler display for storm chasing crews.'
+   },
+   ['storm_probe'] = {
+       ['name'] = 'storm_probe',
+       ['label'] = 'Storm Probe',
+       ['weight'] = 4500,
+       ['type'] = 'item',
+       ['image'] = 'storm_probe.png',
+       ['unique'] = false,
+       ['useable'] = true,
+       ['shouldClose'] = true,
+       ['combinable'] = nil,
+       ['description'] = 'Deployable probe that captures storm data.'
+   },
+   ['storm_data'] = {
+       ['name'] = 'storm_data',
+       ['label'] = 'Storm Data Drive',
+       ['weight'] = 150,
+       ['type'] = 'item',
+       ['image'] = 'storm_drive.png',
+       ['unique'] = false,
+       ['useable'] = false,
+       ['shouldClose'] = true,
+       ['combinable'] = nil,
+       ['description'] = 'Collected atmospheric telemetry ready for sale.'
+   },
     
     ['weapon_unarmed']                  = {
         ['name'] = 'weapon_unarmed',

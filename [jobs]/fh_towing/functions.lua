@@ -1,8 +1,17 @@
 -- If you don't want to use the build in system, this is for notifications when all goes according to plan. (i.e. vehicle is loaded)
+local function sendBrutalNotify(title, message, notifType)
+    notifType = notifType or 'info'
+    if GetResourceState and GetResourceState('brutal_notify') == 'started' then
+        exports['brutal_notify']:SendAlert(title or 'TOWING', message or '', 5000, notifType, true)
+    else
+        print(('[fh_towing] %s: %s'):format(notifType:upper(), message))
+    end
+end
+
 RegisterNetEvent("fh_towing:client:InfoNotification", function(notificationText)
 -- You can change this to your prefered notification System --
 
-    exports['mythic_notify']:DoHudText('inform', notificationText)
+    sendBrutalNotify('TOWING', notificationText, 'info')
     --ESX.ShowNotification(notificationText)
     --exports['okokNotify']:Alert('Detailer', notificationText, Time, 'info', false)
 
@@ -12,7 +21,7 @@ end)
 RegisterNetEvent("fh_towing:client:WarningNotification", function(notificationText)
 -- You can change this to your prefered notification System --
 
-    exports['mythic_notify']:DoHudText('error', notificationText)
+    sendBrutalNotify('TOWING', notificationText, 'error')
     --ESX.ShowNotification(notificationText)
     --exports['okokNotify']:Alert('Detailer', notificationText, Time, 'error', false)
 

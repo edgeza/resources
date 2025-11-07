@@ -510,6 +510,10 @@ AddEventHandler("okokVehicleShop:startMission", function(vehicle_id, mission_id,
 		RemoveBlip(missionBlips.order)
 		missionBlips.order = nil
 	end
+
+	RemoveVehicleKeys(missionVehicle, GetVehicleNumberPlateText(missionVehicle))
+	RemoveVehicleKeys(missionTruck, GetVehicleNumberPlateText(missionTruck))
+
 	TriggerEvent("okokVehicleShop:onFinishMission", missionTruck)
 	if missionTruck ~= nil then
 		DeleteEntity(missionTruck)

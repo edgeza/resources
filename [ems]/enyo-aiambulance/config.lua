@@ -102,7 +102,7 @@ Config.outfit = {
 -- When set to true, the AI will only dispatch helicopters to provide medical assistance. 
 -- No ground ambulances or stretchers will be used for player transport in this case.
 -- If set to false, both air and ground ambulances may be used depending how hard the death location is to reach by AI medics.
-Config.onlyAirAmbulance = false  -- If true, AI medical help will only arrive via helicopter, with no ground ambulance support.
+Config.onlyAirAmbulance = true  -- If true, AI medical help will only arrive via helicopter, with no ground ambulance support.
 
 Config.cayoAirAmbulance = true -- -- If true, AI medical help will only arrive via helicopter in Cayo Perico Island, make it false if you configurated a hospital in Cayo Perico.
 

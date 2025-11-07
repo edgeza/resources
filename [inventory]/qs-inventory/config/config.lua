@@ -149,7 +149,7 @@ Config.BlockedLabelChangeItems       = {     -- [EDIT] Items that cannot be rena
 --──────────────────────────────────────────────────────────────────────────────
 Config.UsableItemsFromHotbar         = true -- [EDIT] Use items from hotbar (1–5).
 Config.BlockedItemsHotbar            = {    -- [EDIT] Items blocked from hotbar use.
-    'lockpick',
+    'handcuffs',
     -- Add more here ...
 }
 

@@ -13,11 +13,7 @@ RegisterNetEvent(Config.InventoryPrefix .. ':client:OpenInventory', function(Pla
     ToggleHud(false)
     ToggleHotbar(false)
     SetFocus(true)
-    if Config.IdleCamera then
-        IdleCamera(true)
-    else
-        IdleCamera(false)
-    end
+    IdleCamera(true)
     SetPedCanPlayAmbientAnims(PlayerPedId(), false)
     SetResourceKvp('idleCam', 'off')
 

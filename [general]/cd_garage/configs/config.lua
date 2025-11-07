@@ -486,7 +486,7 @@ Config.JobVehicles = {
         ['police'] = { --If you choose to add more tables here for more jobs, they must be the jobs name, not the label.
             --MISSION ROW PD
             [1] = {coords = vec3(844.12, -1334.6, 26.1), spawn_coords = vec4(853.58, -1332.39, 26.12, 60.87), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row PD (cars)
-            [2] = {coords = vec3(861.66, -1381.54, 26.14), spawn_coords = vec4(854.35, -1368.69, 26.12, 21.74), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
+            [2] = {coords = vec3(837.83, -1408.09, 26.13), spawn_coords = vec4(837.83, -1408.09, 26.13, 309.39), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
             --SANDY PD
             [3] = {coords = vector3(1868.33, 3686.05, 33.78), spawn_coords = vector4(1872.68, 3687.19, 33.65, 211.34), distance = 10, garage_type = 'car', method = 'regular'}, --Sandy PD (cars)
             [4] = {coords = vector3(1853.9, 3707.06, 33.97), spawn_coords = vector4(1853.1, 3706.57, 33.97, 209.84), distance = 5, garage_type = 'air', method = 'regular'}, --Sandy PD (helipad)

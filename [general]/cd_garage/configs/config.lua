@@ -487,6 +487,12 @@ Config.JobVehicles = {
             --MISSION ROW PD
             [1] = {coords = vec3(844.12, -1334.6, 26.1), spawn_coords = vec4(853.58, -1332.39, 26.12, 60.87), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row PD (cars)
             [2] = {coords = vec3(837.83, -1408.09, 26.13), spawn_coords = vec4(837.83, -1408.09, 26.13, 309.39), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
+            [3] = {coords = vec3(862.16, -1374.08, 26.13), spawn_coords = vec4(862.16, -1374.08, 26.13, 40.2), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row SWAT
+            [4] = {coords = vec3(860.31, -1380.29, 26.14), spawn_coords = vec4(860.31, -1380.29, 26.14, 39.68), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row AGU
+            [5] = {coords = vec3(857.48, -1385.3, 26.15), spawn_coords = vec4(857.48, -1385.3, 26.15, 38.14), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row AGU
+            [6] = {coords = vec3(857.46, -1385.67, 26.15), spawn_coords = vec4(857.46, -1385.67, 26.15, 35.63), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row Detective
+            [7] = {coords = vec3(854.65, -1390.74, 26.14), spawn_coords = vec4(854.65, -1390.74, 26.14, 32.67), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row Traffic
+            [8] = {coords = vec3(851.99, -1395.94, 26.13), spawn_coords = vec4(851.99, -1395.94, 26.13, 42.96), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row Aviation
             --SANDY PD
             [3] = {coords = vector3(1868.33, 3686.05, 33.78), spawn_coords = vector4(1872.68, 3687.19, 33.65, 211.34), distance = 10, garage_type = 'car', method = 'regular'}, --Sandy PD (cars)
             [4] = {coords = vector3(1853.9, 3707.06, 33.97), spawn_coords = vector4(1853.1, 3706.57, 33.97, 209.84), distance = 5, garage_type = 'air', method = 'regular'}, --Sandy PD (helipad)

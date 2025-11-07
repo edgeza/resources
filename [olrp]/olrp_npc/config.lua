@@ -17,8 +17,8 @@ Config.LowPlayerThreshold = 10   -- 1-10 players: use high density (0.75)
 Config.HighPlayerThreshold = 100  -- 100+ players: use low density (0.25)
 
 -- Density values
-Config.HighDensity = 0.2  -- Density when few players (1-10 players)
-Config.LowDensity = 0.05   -- Density when many players (100+ players)
+Config.HighDensity = 0.0  -- Density when few players (1-10 players)
+Config.LowDensity = 0.00   -- Density when many players (100+ players)
 
 -- Update interval (milliseconds) - How often to check player count and update density
 Config.UpdateInterval = 60000    -- Check every 5 seconds

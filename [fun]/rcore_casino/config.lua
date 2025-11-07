@@ -3,7 +3,7 @@ Config = {
     Locale = "en", -- en
 
     -- Map
-    MapType = 4,
+    MapType = 2,
     -- 1: UncleJust Casino / DlcIplLoader
     -- 2: Gabz Casino
     -- 3: NoPixel Casino

@@ -35,7 +35,7 @@ Config.dismiss      = 73            -- X Press to dismiss help-message
 
 
 -- Door options
-Config.VehicleOpen = true           -- If the vehicle must be unlocked to be towed
+Config.VehicleOpen = false           -- If the vehicle must be unlocked to be towed
 Config.DoorOpening = true           -- If you want to give wrecker driver the ability to unlock cars
 Config.DoorOpeningTime = 15         -- How long the opening of a locked vehicle takes (in seconds)
 Config.UnlockDistance = 0.7         -- How close you need to be to the vehicle to unlock it

@@ -67,7 +67,7 @@ Config.Flatbeds = {
     {
         model = `flatbed`,
         bone = 'chassis',
-        controlOffset = vector3(-1.5, -1.2, 0.0),
+        controlOffset = vec3(206.32, -829.41, 30.8),
         attachOffset = vector3(0.0, -2.6, 1.05),
         unloadOffset = vector3(0.25, -7.5, 0.1),
         initialTilt = 0.0

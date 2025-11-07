@@ -61,9 +61,9 @@ Config.TruckList = {
         model = 'flatbed',                          -- The model of the towtruck or trailer
         trailer = false,                            -- If true overrides Config.MotorOn because trailers dont have engines
         extraBlacklist = {},                        -- If there should be any Vehicle classes that cant be loaded whit this flatbed/trailer
-        controlPos = vector3(-1.59, -1.62, -0.14),  -- The offset of the vehicle from where the flatbed should be controlled
-        attachPos = vector3(0.0, -2.5, 0.8),        -- The inital position of the vehicle on the flatbed
-        unloadPos = vector3(0.015, -9.368, -0.235), -- The position where the car will be placed after unloading it
+        controlPos = vec3(214.03, -830.57, 30.62),  -- The offset of the vehicle from where the flatbed should be controlled
+        attachPos = vec3(213.14, -828.43, 32.17),        -- The inital position of the vehicle on the flatbed
+        unloadPos = vec3(221.58, -831.68, 30.45), -- The position where the car will be placed after unloading it
         initialTilt = 0.0,                          -- The initial tilt when the vehicle ist first brought up on the flatbed
         bone = 'chassis_dummy',                         -- The vehicle bone from where the offset will be calculated
     },

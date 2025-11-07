@@ -46,7 +46,7 @@ Config.GarageInteractMethod = 'auto_detect' --[ 'auto_detect', 'cd_drawtextui', 
 Config.Notification = 'auto_detect' --[ 'auto_detect' / 'esx' / 'qbcore' / 'cd_notifications' / 'okokNotify' / 'ps-ui' / 'ox_lib' / 'other' ] 
 
 -- 'auto_detect' will automatically detect your vehicle keys resource.
-Config.VehicleKeysResource = 'auto_detect' -- [ 'auto_detect', 'F_RealCarKeysSystem', 'ak47_qb_vehiclekeys', 'ak47_vehiclekeys', 'fivecode_carkeys', 'loaf_keysystem', 'mk_vehiclekeys', 'MrNewbVehicleKeys', 'qb-vehiclekeys', 'qbx_vehiclekeys', 'qs-vehiclekeys', 'stasiek_vehiclekeys', 't1ger_keys', 'tgiann-hotwire', 'ti_vehicleKeys', 'vehicles_keys', 'wasabi_carlock', 'xd_locksystem' ]
+Config.VehicleKeysResource = 'auto_detect' -- [ 'auto_detect', 'F_RealCarKeysSystem', 'ak47_qb_vehiclekeys', 'ak47_vehiclekeys', 'dusa_vehiclekeys', 'fivecode_carkeys', 'loaf_keysystem', 'mk_vehiclekeys', 'MrNewbVehicleKeys', 'qb-vehiclekeys', 'qbx_vehiclekeys', 'qs-vehiclekeys', 'stasiek_vehiclekeys', 't1ger_keys', 'tgiann-hotwire', 'ti_vehicleKeys', 'vehicles_keys', 'wasabi_carlock', 'xd_locksystem' ]
 
 -- 'auto_detect' will automatically detect your vehicle fuel resource.
 Config.VehicleFuelResource = 'auto_detect' -- [ 'auto_detect', 'BigDaddy-Fuel', 'cdn-fuel', 'esx-sna-fuel', 'FRFuel', 'lc_fuel', 'LegacyFuel', 'lj-fuel', 'myFuel', 'ND_Fuel', 'okokGasStation', 'ox_fuel', 'ps-fuel', 'qb-fuel', 'qb-sna-fuel', 'rcore_fuel', 'Renewed-Fuel', 'ti_fuel', 'x-fuel' ]
@@ -1898,6 +1898,8 @@ if Config.VehicleKeysResource == 'auto_detect' then
         Config.VehicleKeysResource = 'ak47_qb_vehiclekeys'
     elseif GetResourceState('ak47_vehiclekeys') == 'started' then
         Config.VehicleKeysResource = 'ak47_vehiclekeys'
+    elseif GetResourceState('dusa_vehiclekeys') == 'started' then
+        Config.VehicleKeysResource = 'dusa_vehiclekeys'
     elseif GetResourceState('fivecode_carkeys') == 'started' then
         Config.VehicleKeysResource = 'fivecode_carkeys'
     elseif GetResourceState('loaf_keysystem') == 'started' then

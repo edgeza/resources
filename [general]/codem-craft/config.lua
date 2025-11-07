@@ -61,8 +61,8 @@ Config.CraftNpc = {
         },
         ["ped"] = {
             ["model"] = 0xED0CE4C6,
-            ["position"] = vector3(2760.7, 1548.76, 30.79),
-            ["heading"] = 135.00,
+            ["position"] = vec3(1096.96, -1986.93, 42.46),
+            ["heading"] = 325.0,
             ["show"] = false, -- true show -- false hide
         },
         ["craftitems"] = {

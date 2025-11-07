@@ -115,54 +115,54 @@ return {
                 payment = 2000
             },
             [1] = {
-                name = 'Officer / Trooper',
+                name = 'Officer',
                 payment = 2500
             },
             [2] = {
-                name = 'Snr Officer / Trooper',
+                name = 'Snr Officer',
                 payment = 3000
             },
             [3] = {
-                name = 'Corporal / Ranger',
+                name = 'Corporal',
                 payment = 3500
             },
             [4] = {
-                name = 'Interceptor Jnr',
+                name = 'Sergeant',
                 payment = 3500
             },
             [5] = {
-                name = 'Interceptor Snr',
+                name = 'Lieutenant',
                 payment = 3500
             },
             [6] = {
-                name = 'Sergeant',
+                name = 'K9 Unit',
                 payment = 4000
             },
             [7] = {
-                name = 'Lieutenant',
+                name = 'Captain',
                 payment = 4500
             },
             [8] = {
-                name = 'Captain / Major',
+                name = 'Commander',
                 payment = 5000
             },
             [9] = {
-                name = 'Assistant Chief / Sheriff',
+                name = 'Assistant Chief',
                 isboss = true,
                 payment = 6000
             },
             [10] = {
-                name = 'Deputy Chief / Sheriff',
+                name = 'Deputy Chief',
                 isboss = true,
                 payment = 6500
             },
             [11] = {
-                name = 'Sheriff',
+                name = ''Chief Of Police',
                 isboss = true,
                 payment = 7500
             },
             [12] = {
-                name = 'Chief Of Police',
+                name = 'Police Commissioner',
                 isboss = true,
                 payment = 8000
             },

@@ -139,6 +139,9 @@ function GiveVehicleKeys(plate, vehicle) -- Triggered when giving keys to a vehi
         elseif keysResource == 'ak47_vehiclekeys' then
             exports['ak47_vehiclekeys']:GiveKey(plate, false)
 
+        elseif keysResource == 'dusa_vehiclekeys' then
+            TriggerServerEvent('dusa_vehiclekeys:server:AcquireVehicleKeys', plate)
+
         elseif keysResource == 'F_RealCarKeysSystem' then
             TriggerServerEvent('F_RealCarKeysSystem:generateVehicleKeys', plate)
 

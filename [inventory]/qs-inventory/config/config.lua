@@ -342,7 +342,7 @@ Config.Genders                       = {
 Config.OpenInventoryAnim             = true                                      -- [EDIT] Play animation when opening inventory
 Config.OpenInventoryScene            = false                                     -- [EDIT] Toggle scene animation
 Config.Logo                          = 'https://i.ibb.co/CJfj6KV/Mini-copia.png' -- [EDIT] Logo (URL or local path)
-Config.IdleCamera                    = true                                      -- [EDIT] Enable idle camera while inventory open
+Config.IdleCamera                    = false                                     -- [EDIT] Enable idle camera while inventory open
 
 --──────────────────────────────────────────────────────────────────────────────
 -- Sidebar & Display Options                                                   [EDIT]

@@ -32,7 +32,7 @@
 					<WheelSlot>WHEEL_SHOTGUN</WheelSlot>
 					<Group>GROUP_SHOTGUN</Group>
 					<AmmoInfo ref="AMMO_SHOTGUN"/>
-					<AimingInfo ref="RIFLE_HI_BASE_STRAFE"/>
+					<AimingInfo ref="SHOTGUN_BASE_STRAFE"/>
 					<ClipSize value="6"/>
 					<AccuracySpread value="1.500000"/>
 					<AccurateModeAccuracyModifier value="0.500000"/>

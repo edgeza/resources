@@ -69,3 +69,4 @@ Write-Host "`nAll weapon structures created!"
 Write-Host "Note: This script creates directory structure. Full XML files need to be generated separately."
 
 
+

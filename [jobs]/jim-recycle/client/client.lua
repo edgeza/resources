@@ -1,5 +1,6 @@
 PlayerJob, onDuty, Peds, Targets, searchProps, Props, randPackage = {}, false, {}, {}, {}, {}, nil
 local TrollyProp = nil
+local scrapProps = {}
 local emotecancelled = false
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -206,9 +207,13 @@ function EndJob()
 	if TrollyProp then destroyProp(TrollyProp) TrollyProp = nil end
 	for i = 1, #searchProps do SetEntityDrawOutline(searchProps[i], false) end
 	randPackage = nil
-	if scrapProp then
-		destroyProp(scrapProp)
-		scrapProp = nil
+	if scrapProps then
+		for i = 1, #scrapProps do
+			if scrapProps[i] then
+				destroyProp(scrapProps[i])
+			end
+		end
+		scrapProps = {}
 	end
 end
 
@@ -219,6 +224,14 @@ function ClearProps()
 	for k in pairs(Config.scrapPool) do unloadModel(Config.scrapPool[k].model) end
 	if Targets["DropOff"] then exports.ox_target:removeEntity(TrollyProp) end
 	unloadModel(GetEntityModel(TrollyProp)) DeleteObject(TrollyProp)
+	if scrapProps then
+		for i = 1, #scrapProps do
+			if scrapProps[i] then
+				unloadModel(GetEntityModel(scrapProps[i])) DeleteObject(scrapProps[i])
+			end
+		end
+		scrapProps = {}
+	end
 end
 
 --Pick one of the crates for the player to choose, generate outline + target
@@ -311,13 +324,34 @@ RegisterNetEvent("jim-recycle:PickupPackage:Hold", function(data) local Ped = Pl
 	exports.ox_target:removeEntity(randPackage, "Search")
 	SetEntityDrawOutline(randPackage, false) randPackage = nil
 
-	--Make prop to put in hands
+	--Make props to put in hands (stacked)
 	loadAnimDict("anim@heists@box_carry@")
     TaskPlayAnim(Ped, "anim@heists@box_carry@" ,"idle", 5.0, -1, -1, 50, 0, false, false, false)
-	local v = Config.scrapPool[math.random(1, #Config.scrapPool)]
 	local PedCoords = GetEntityCoords(Ped, true)
-    scrapProp = makeProp({prop = v.model, coords = vec4(PedCoords.x, PedCoords.y, PedCoords.z, 0.0)}, 1, 1)
-    AttachEntityToEntity(scrapProp, Ped, GetPedBoneIndex(Ped, 18905), v.xPos, v.yPos, v.zPos, v.xRot, v.yRot, v.zRot, 20.0, true, true, false, true, 1, true)
+	
+	-- Clear any existing props
+	if scrapProps then
+		for i = 1, #scrapProps do
+			if scrapProps[i] then destroyProp(scrapProps[i]) end
+		end
+		scrapProps = {}
+	end
+	
+	-- Create multiple stacked props (3-5 props stacked vertically)
+	local stackCount = math.random(3, 5)
+	local baseZOffset = 0.0
+	local stackSpacing = 0.15 -- Spacing between stacked items
+	
+	for i = 1, stackCount do
+		local v = Config.scrapPool[math.random(1, #Config.scrapPool)]
+		local prop = makeProp({prop = v.model, coords = vec4(PedCoords.x, PedCoords.y, PedCoords.z, 0.0)}, 1, 1)
+		
+		-- Calculate stacked position - each prop stacks on top of the previous one
+		local stackedZPos = v.zPos + (baseZOffset + (i - 1) * stackSpacing)
+		
+		AttachEntityToEntity(prop, Ped, GetPedBoneIndex(Ped, 18905), v.xPos, v.yPos, stackedZPos, v.xRot, v.yRot, v.zRot, 20.0, true, true, false, true, 1, true)
+		scrapProps[#scrapProps + 1] = prop
+	end
 
 	--Create target for drop off location
 	SetEntityDrawOutline(TrollyProp, true)
@@ -356,7 +390,14 @@ RegisterNetEvent("jim-recycle:PickupPackage:Finish", function(data) local Ped = 
 	Wait(3000)
 	--When animation is complete
 	--Empty hands
-	destroyProp(scrapProp) scrapProp = nil
+	if scrapProps then
+		for i = 1, #scrapProps do
+			if scrapProps[i] then
+				destroyProp(scrapProps[i])
+			end
+		end
+		scrapProps = {}
+	end
 	ClearPedTasks(Ped)
 	FreezeEntityPosition(Ped, false)
 	toggleItem(true, "recyclablematerial", math.random(Config.RecycleAmounts["Recycle"].Min, Config.RecycleAmounts["Recycle"].Max))
@@ -523,6 +564,13 @@ AddEventHandler('onResourceStop', function(r) if r ~= GetCurrentResourceName() t
 	for _, v in pairs(Props) do unloadModel(GetEntityModel(v)) DeleteObject(v) end
 	for _, v in pairs(searchProps) do unloadModel(GetEntityModel(v)) DeleteObject(v) end
 	unloadModel(GetEntityModel(TrollyProp)) DeleteObject(TrollyProp)
-	unloadModel(GetEntityModel(scrapProp)) DeleteObject(scrapProp)
+	if scrapProps then
+		for i = 1, #scrapProps do
+			if scrapProps[i] then
+				unloadModel(GetEntityModel(scrapProps[i])) DeleteObject(scrapProps[i])
+			end
+		end
+		scrapProps = {}
+	end
 	for _, v in pairs(searchProps) do unloadModel(GetEntityModel(v)) DeleteObject(v) end
 end)

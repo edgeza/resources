@@ -7,6 +7,11 @@ function GiveKeyCar(callback_vehicle)
     local model = GetDisplayNameFromVehicleModel(GetEntityModel(callback_vehicle))
     local plate = GetVehicleNumberPlateText(callback_vehicle)
     exports['qs-vehiclekeys']:GiveKeys(plate, model, true)
+  elseif GetResourceState('dusa_vehiclekeys') == 'started' then
+    local plate = GetVehicleNumberPlateText(callback_vehicle)
+    if plate and plate ~= '' then
+      exports['dusa_vehiclekeys']:GiveKeys(plate)
+    end
   elseif GetResourceState('qb-vehiclekeys') == 'started' then
     local plate = GetVehicleNumberPlateText(callback_vehicle)
     TriggerEvent("vehiclekeys:client:SetOwner", plate)

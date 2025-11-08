@@ -1,6 +1,6 @@
 return { 
         {
-            id = 'MOthWoq',
+            id = 'R3d9pQs',
             obj = 'h4_prop_h4_cctv_pole_04',
             coords = vec3(798.318481, -1271.045776, 26.380291),
             rot = 0.0,

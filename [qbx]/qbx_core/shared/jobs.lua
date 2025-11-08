@@ -157,7 +157,7 @@ return {
                 payment = 6500
             },
             [11] = {
-                name = ''Chief Of Police',
+                name = 'Chief Of Police',
                 isboss = true,
                 payment = 7500
             },

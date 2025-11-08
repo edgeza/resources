@@ -1,0 +1,156 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+body {
+    background: transparent;
+}
+
+.tablet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1100px;
+    height: 680px;
+    background: rgba(7, 12, 22, 0.92);
+    border-radius: 22px;
+    border: 2px solid rgba(0, 173, 239, 0.4);
+    color: #eaf4ff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 173, 239, 0.12);
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+}
+
+.header h1 {
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.close {
+    background: rgba(255, 70, 85, 0.85);
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    line-height: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.close:hover {
+    background: rgba(255, 70, 85, 1);
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    padding: 18px 24px 26px 24px;
+    gap: 22px;
+}
+
+.map-wrapper {
+    position: relative;
+    flex: 1;
+    background: linear-gradient(135deg, rgba(3, 16, 32, 0.8), rgba(2, 9, 20, 0.92));
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 173, 239, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+}
+
+#stormMap {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(9, 13, 23, 0.9), rgba(6, 8, 14, 0.95));
+    border-radius: 8px;
+}
+
+.overlay {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 6px;
+    font-size: 14px;
+    color: #9bd6ff;
+    letter-spacing: 0.5px;
+}
+
+.sidebar {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sidebar section {
+    background: rgba(4, 8, 14, 0.75);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 173, 239, 0.12);
+    padding: 16px 20px;
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #7bd8ff;
+}
+
+.section-body p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d1e9ff;
+    margin-bottom: 6px;
+}
+
+.section-body.state-idle {
+    color: #99b8d6;
+}
+
+.probe {
+    padding: 10px 12px;
+    background: rgba(0, 173, 239, 0.08);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid transparent;
+}
+
+.probe.ready {
+    border-color: rgba(0, 200, 120, 0.6);
+    background: rgba(0, 200, 120, 0.12);
+}
+
+.probe p {
+    margin: 0;
+    color: #eaf4ff;
+}
+
+.instructions p {
+    margin-bottom: 6px;
+}
+

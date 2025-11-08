@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Storm Tablet</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="tablet" class="tablet hidden">
+            <div class="header">
+                <h1>Storm Intel Tablet</h1>
+                <button id="closeBtn" class="close">×</button>
+            </div>
+            <div class="content">
+                <div class="map-wrapper">
+                    <canvas id="stormMap" width="640" height="640"></canvas>
+                    <div id="stormStatus" class="overlay"></div>
+                </div>
+                <div class="sidebar">
+                    <section>
+                        <h2>Storm Cell</h2>
+                        <div id="stormDetails" class="section-body state-idle">
+                            <p>No active storms detected.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Probes</h2>
+                        <div id="probeList" class="section-body">
+                            <p>Deploy probes ahead of the storm track to gather data.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Instructions</h2>
+                        <div class="section-body instructions">
+                            <p>1. Use your storm tablet to track active cells.</p>
+                            <p>2. Deploy probes in the projected path.</p>
+                            <p>3. Retrieve probes once data is captured.</p>
+                            <p>4. Sell storm data at the news station.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
+

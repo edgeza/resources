@@ -221,11 +221,43 @@ function App() {
 				<div className='container'>
 					{visible && (
 						<div className='character-selector-top'>
-							<IconUsersGroup size={45} color='#ff0000' />
-							<Title order={2} fz={32} c={"red"}>
+							<IconUsersGroup 
+								size={50} 
+								style={{
+									color: '#ffffff',
+									filter: 'drop-shadow(0 0 10px rgba(34, 139, 230, 0.6)) drop-shadow(0 0 20px rgba(34, 139, 230, 0.4))',
+									marginBottom: '15px',
+									animation: 'pulse 2s ease-in-out infinite'
+								}} 
+							/>
+							<Title 
+								order={2} 
+								fz={42}
+								fw={700}
+								style={{
+									background: 'linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%)',
+									WebkitBackgroundClip: 'text',
+									WebkitTextFillColor: 'transparent',
+									backgroundClip: 'text',
+									textShadow: '0 0 30px rgba(255, 255, 255, 0.5)',
+									letterSpacing: '1px',
+									marginBottom: '10px',
+									position: 'relative',
+									display: 'inline-block',
+									fontFamily: 'system-ui, -apple-system, sans-serif'
+								}}
+							>
 								Welcome to OneLife Roleplay
 							</Title>
-							<Text fw={500} fz={14}>
+							<Text 
+								fw={500} 
+								fz={16}
+								style={{
+									color: 'rgba(255, 255, 255, 0.9)',
+									letterSpacing: '0.5px',
+									textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
+								}}
+							>
 								Select the character you want to play
 							</Text>
 						</div>

@@ -22,6 +22,7 @@ let currentApplications = [];
 let currentApplicationDetails = null;
 let currentApplicationQuestions = [];
 let chartInstance = null;
+let activityChartInstance = null;
 let currentTimeframe = 'week';
 let currentEmployeePermissions = {};
 let selectedEmployeeForPermissions = null;
@@ -2006,18 +2007,15 @@ function initializePlayerTimeOffset() {
     playerTimeOffset = null;
 }
 
-// Update activity chart
+// Update activity chart - Line Chart Version
 function updateActivityChart() {
     if (!currentJobData.activityData || !Array.isArray(currentJobData.activityData) || currentJobData.activityData.length === 0) return;
     
-    const activityChart = document.getElementById('activity-chart');
-    if (!activityChart) return;
-    
-    activityChart.innerHTML = '';
+    const canvas = document.getElementById('activity-line-chart');
+    if (!canvas) return;
     
     if (playerTimeOffset === null) {
         const localHour = new Date().getHours();
-
         let serverCurrentHourIndex = 0;
         let maxActivity = -1;
         
@@ -2029,33 +2027,131 @@ function updateActivityChart() {
         }
         
         const serverCurrentHour = currentJobData.activityData[serverCurrentHourIndex].hour;
-        
         playerTimeOffset = (localHour - serverCurrentHour + 24) % 24;
-        
-        // Player time offset calculated (removed debug log)
     }
     
-    const maxCount = Math.max(...currentJobData.activityData.map(item => item.count), 1);
+    // Prepare data for line chart
+    const labels = [];
+    const data = [];
+    const sortedData = [...currentJobData.activityData].sort((a, b) => {
+        const hourA = (a.hour + playerTimeOffset) % 24;
+        const hourB = (b.hour + playerTimeOffset) % 24;
+        return hourA - hourB;
+    });
     
-    currentJobData.activityData.forEach(item => {
-        const hourBar = document.createElement('div');
-        hourBar.className = 'hour-bar';
-        
-        const heightPercentage = Math.max((item.count / maxCount) * 95, 5);
-        hourBar.style.height = `${heightPercentage}%`;
-        
+    sortedData.forEach(item => {
         const playerLocalHour = (item.hour + playerTimeOffset) % 24;
-        const formattedHour = playerLocalHour.toString().padStart(2, '0');
-        
-        hourBar.setAttribute('data-hour', `${formattedHour}:00`);
-        hourBar.setAttribute('data-count', item.count);
-        hourBar.setAttribute('data-original-hour', item.hour);
-        
-        // Add modern styling attributes
-        hourBar.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        hourBar.style.cursor = 'pointer';
-        
-        activityChart.appendChild(hourBar);
+        labels.push(`${playerLocalHour.toString().padStart(2, '0')}:00`);
+        data.push(item.count);
+    });
+    
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#dc2626';
+    const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
+    
+    // Destroy existing chart
+    if (activityChartInstance) {
+        activityChartInstance.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Create gradient
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, primaryColor + '80');
+    gradient.addColorStop(1, primaryColor + '00');
+    
+    activityChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Activity',
+                data: data,
+                borderColor: primaryColor,
+                backgroundColor: gradient,
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: primaryColor,
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointHoverBackgroundColor: primaryLight,
+                pointHoverBorderColor: '#ffffff',
+                pointHoverBorderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1000,
+                easing: 'easeOutQuart'
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                    backdropFilter: 'blur(10px)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    titleFont: { size: 13, weight: '600' },
+                    bodyFont: { size: 12, weight: '500' },
+                    padding: 10,
+                    cornerRadius: 8,
+                    displayColors: false,
+                    borderColor: primaryColor,
+                    borderWidth: 1,
+                    callbacks: {
+                        title: function(context) {
+                            return context[0].label;
+                        },
+                        label: function(context) {
+                            return `${context.parsed.y} employees`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.08)',
+                        lineWidth: 1,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        font: { size: 11, weight: '500' },
+                        padding: 8,
+                        stepSize: 1
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        font: { size: 11, weight: '500' },
+                        padding: 8,
+                        maxRotation: 0
+                    }
+                }
+            },
+            onHover: (event, activeElements) => {
+                canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+            }
+        }
     });
 }
 
@@ -3116,41 +3212,42 @@ function createTransactionsChart(transactions) {
         chartInstance.destroy();
     }
 
-    const chartContainer = document.getElementById('transactions-chart');
-    if (!chartContainer) return;
+    const canvas = document.getElementById('transactions-line-chart');
+    if (!canvas) return;
 
     const chartData = prepareChartData(transactions, currentTimeframe);
     
     const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
     const primaryDarkColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-dark').trim();
+    const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
 
-    const ctx = document.createElement('canvas');
-    ctx.width = chartContainer.offsetWidth;
-    ctx.height = chartContainer.offsetHeight;
-    chartContainer.innerHTML = '';
-    chartContainer.appendChild(ctx);
+    const ctx = canvas.getContext('2d');
 
-    // Create gradient for bars
-    const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, primaryColor || '#dc2626');
-    gradient.addColorStop(1, primaryDarkColor || '#b91c1c');
+    // Create gradient for line chart
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, primaryColor + '80');
+    gradient.addColorStop(1, primaryColor + '00');
     
     chartInstance = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: chartData.labels,
             datasets: [{
                 label: 'Transaction Amount',
                 data: chartData.values,
-                backgroundColor: gradient,
                 borderColor: primaryColor || '#dc2626',
-                borderWidth: 2,
-                borderRadius: 8,
-                borderSkipped: false,
-                barThickness: 'flex',
-                maxBarThickness: 40,
-                barPercentage: 0.7,
-                categoryPercentage: 0.8
+                backgroundColor: gradient,
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: primaryColor || '#dc2626',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointHoverBackgroundColor: primaryLight || '#ef4444',
+                pointHoverBorderColor: '#ffffff',
+                pointHoverBorderWidth: 3
             }]
         },
         options: {
@@ -3158,27 +3255,7 @@ function createTransactionsChart(transactions) {
             maintainAspectRatio: false,
             animation: {
                 duration: 1000,
-                easing: 'easeOutQuart',
-                onComplete: function() {
-                    const chart = this.chart;
-                    const ctx = chart.ctx;
-                    ctx.save();
-                    const meta = chart.getDatasetMeta(0);
-                    meta.data.forEach((bar, index) => {
-                        const value = chartData.values[index];
-                        if (value > 0) {
-                            const gradient = ctx.createLinearGradient(
-                                bar.x - bar.width / 2, bar.y,
-                                bar.x + bar.width / 2, bar.y
-                            );
-                            gradient.addColorStop(0, primaryColor || '#dc2626');
-                            gradient.addColorStop(0.5, primaryColor || '#dc2626');
-                            gradient.addColorStop(1, primaryDarkColor || '#b91c1c');
-                            bar.options.backgroundColor = gradient;
-                        }
-                    });
-                    ctx.restore();
-                }
+                easing: 'easeOutQuart'
             },
             interaction: {
                 intersect: false,
@@ -3259,7 +3336,7 @@ function createTransactionsChart(transactions) {
                 }
             },
             onHover: (event, activeElements) => {
-                ctx.canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
             }
         }
     });

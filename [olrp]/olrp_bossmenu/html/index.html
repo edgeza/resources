@@ -52,56 +52,56 @@
     </div>
     
     <div id="container" class="container" style="display: none;">
-        <!-- Sidebar Navigation -->
-        <div class="sidebar">
-            <div class="sidebar-logo">
-                <img src="images/logo.png" alt="OLRP" style="width: 100%; height: 100%; object-fit: contain;">
+        <!-- Top Navigation Bar -->
+        <nav class="top-navbar">
+            <div class="navbar-brand">
+                <img src="images/logo.png" alt="OLRP" class="navbar-logo">
+                <span class="navbar-title" id="department-title">Dashboard</span>
             </div>
-            <a class="nav-item active" data-page="dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-            <a class="nav-item" data-page="employees">
-                <i class="fas fa-users"></i>
-                <span>Employees</span>
-            </a>
-            <a class="nav-item" data-page="society">
-                <i class="fas fa-coins"></i>
-                <span>Society</span>
-            </a>
-            <a class="nav-item" data-page="permissions">
-                <i class="fas fa-key"></i>
-                <span>Permissions</span>
-            </a>
-            <a class="nav-item" data-page="applications">
-                <i class="fas fa-file-alt"></i>
-                <span>Applications</span>
-            </a>
-            <a class="nav-item" data-page="settings">
-                <i class="fas fa-cog"></i>
-                <span>Settings</span>
-            </a>
-            <a class="nav-item" style="margin-top: auto;" id="close-ui">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Close</span>
-            </a>
-        </div>
+            <div class="navbar-menu">
+                <a class="nav-item active" data-page="dashboard" title="Dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a class="nav-item" data-page="employees" title="Employees">
+                    <i class="fas fa-users"></i>
+                    <span>Employees</span>
+                </a>
+                <a class="nav-item" data-page="society" title="Society">
+                    <i class="fas fa-coins"></i>
+                    <span>Society</span>
+                </a>
+                <a class="nav-item" data-page="permissions" title="Permissions">
+                    <i class="fas fa-key"></i>
+                    <span>Permissions</span>
+                </a>
+                <a class="nav-item" data-page="applications" title="Applications">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                </a>
+                <a class="nav-item" data-page="settings" title="Settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn btn-icon" id="refresh-data-btn" title="Refresh Data">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button class="btn btn-icon" id="close-ui" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </nav>
 
         <!-- Main Content Area -->
         <div class="content">
             <!-- Dashboard Page -->
             <div class="page active" id="dashboard-page">
-                <header>
-                    <div class="header-title">
-                        <h1 id="department-title">Dashboard</h1>
-                        <p id="employees-count">Managing 0 employees</p>
-                    </div>
-                    <div class="header-actions">
-                        <button class="btn btn-outline" id="refresh-data-btn">
-                            <i class="fas fa-sync-alt"></i> Refresh Data
-                        </button>
-                    </div>
-                </header>
+                <div class="page-header">
+                    <h2 class="page-title">Overview</h2>
+                    <p class="page-subtitle" id="employees-count">Managing 0 employees</p>
+                </div>
 
                 <div class="dashboard-grid modern-grid">
                     <div class="stat-card modern-stat-card">
@@ -154,42 +154,43 @@
                     </div>
                 </div>
 
-                <div class="charts-row">
-                    <div class="chart-container modern-chart-card">
+                <div class="charts-section">
+                    <div class="chart-card full-width">
                         <div class="chart-header">
                             <div class="chart-title-wrapper">
                                 <i class="fas fa-chart-line chart-icon"></i>
-                                <div class="chart-title">Activity Overview - By Hour</div>
+                                <div>
+                                    <div class="chart-title">Activity Timeline</div>
+                                    <div class="chart-subtitle">Employee activity by hour</div>
+                                </div>
                             </div>
                             <div class="chart-actions">
-                                <div class="chart-action modern-action-btn" id="download-activity" title="Download Chart">
-                                    <i class="fas fa-download"></i>
-                                </div>
-                                <div class="chart-action modern-action-btn" id="expand-activity" title="Expand View">
+                                <button class="chart-action-btn" id="expand-activity" title="Expand View">
                                     <i class="fas fa-expand"></i>
-                                </div>
+                                </button>
                             </div>
                         </div>
-                        <div class="chart-content-wrapper">
-                            <div class="activity-chart modern-activity-chart" id="activity-chart">
-                                <!-- Generated dynamically by JavaScript -->
-                            </div>
+                        <div class="chart-wrapper">
+                            <canvas id="activity-line-chart"></canvas>
                         </div>
                     </div>
-                    <div class="chart-container modern-chart-card">
+                </div>
+
+                <div class="content-split">
+                    <div class="chart-card">
                         <div class="chart-header">
                             <div class="chart-title-wrapper">
                                 <i class="fas fa-users chart-icon"></i>
-                                <div class="chart-title">Online Employees</div>
-                            </div>
-                            <div class="chart-actions">
-                                <div class="chart-action modern-action-btn" id="refresh-online" title="Refresh List">
-                                    <i class="fas fa-sync-alt"></i>
+                                <div>
+                                    <div class="chart-title">Online Employees</div>
+                                    <div class="chart-subtitle" id="online-count">0 online</div>
                                 </div>
                             </div>
+                            <button class="chart-action-btn" id="refresh-online" title="Refresh">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
                         </div>
                         <div class="employee-list modern-employee-list" id="online-employees">
-                            <!-- Generated dynamically by JavaScript -->
                             <div class="empty-list">No employees currently online</div>
                         </div>
                     </div>
@@ -308,11 +309,14 @@
                 </div>
 
                 <div class="society-actions-container">
-                    <div class="chart-container society-chart-container modern-chart-card">
+                    <div class="chart-card full-width">
                         <div class="chart-header">
                             <div class="chart-title-wrapper">
-                                <i class="fas fa-chart-bar chart-icon"></i>
-                                <div class="chart-title">Transaction Activity</div>
+                                <i class="fas fa-chart-line chart-icon"></i>
+                                <div>
+                                    <div class="chart-title">Transaction Timeline</div>
+                                    <div class="chart-subtitle">Financial activity over time</div>
+                                </div>
                             </div>
                             <div class="chart-actions">
                                 <div class="dropdown modern-dropdown">
@@ -328,8 +332,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chart-content-wrapper">
-                            <div id="transactions-chart" class="transactions-chart modern-transactions-chart"></div>
+                        <div class="chart-wrapper">
+                            <canvas id="transactions-line-chart"></canvas>
                         </div>
                     </div>
 

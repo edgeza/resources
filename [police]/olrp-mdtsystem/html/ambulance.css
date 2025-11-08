@@ -1,0 +1,252 @@
+/* Ambulance MDT Theme */
+:root {
+    --ambulance-primary: #CC0000;
+    --ambulance-secondary: #FF0000;
+    --ambulance-accent: #00E676;
+    --ambulance-dark: #8B0000;
+    --ambulance-light: #FF3333;
+}
+
+body.ambulance-theme {
+    --primary-color: var(--ambulance-primary);
+    --primary-dark: var(--ambulance-dark);
+    --primary-light: var(--ambulance-secondary);
+    --accent-color: var(--ambulance-accent);
+}
+
+/* Force red background for ambulance */
+body.ambulance-theme .mdt-container {
+    background: linear-gradient(135deg, rgba(204, 0, 0, 0.15) 0%, rgba(139, 0, 0, 0.1) 100%);
+}
+
+body.ambulance-theme .mdt-header {
+    background: linear-gradient(135deg, rgba(204, 0, 0, 0.25) 0%, rgba(139, 0, 0, 0.15) 100%);
+    border-bottom: 2px solid var(--ambulance-primary);
+}
+
+body.ambulance-theme .mdt-sidebar {
+    background: linear-gradient(180deg, rgba(204, 0, 0, 0.2) 0%, rgba(139, 0, 0, 0.12) 100%);
+}
+
+body.ambulance-theme .mdt-main {
+    background: linear-gradient(135deg, rgba(204, 0, 0, 0.08) 0%, rgba(139, 0, 0, 0.04) 100%);
+}
+
+/* Ambulance specific styling */
+.ambulance-emblem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+.ambulance-emblem-icon {
+    font-size: 48px;
+    color: var(--ambulance-primary);
+    margin-right: var(--spacing-sm);
+}
+
+.ambulance-emblem-text {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--ambulance-primary);
+    text-transform: uppercase;
+}
+
+/* Medical Records Styling */
+.medical-record {
+    background: linear-gradient(135deg, rgba(233, 30, 99, 0.1) 0%, rgba(192, 24, 91, 0.05) 100%);
+    border-left: 4px solid var(--ambulance-primary);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    border-radius: var(--radius-md);
+}
+
+.medical-record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.medical-record-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+}
+
+.medical-record-date {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.severity-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.severity-critical {
+    background: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+    border: 1px solid #F44336;
+}
+
+.severity-urgent {
+    background: rgba(255, 152, 0, 0.2);
+    color: #FF9800;
+    border: 1px solid #FF9800;
+}
+
+.severity-normal {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+/* Patient Card */
+.patient-card {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(18, 18, 18, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.patient-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--ambulance-primary);
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2);
+}
+
+/* Emergency Call Badge */
+.emergency-call {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Medical Response Time */
+.response-time {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--ambulance-accent);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+/* Treatment Status */
+.treatment-status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 6px 10px;
+    background: var(--ambulance-primary);
+    color: white;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Vitals Display */
+.vitals-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: rgba(233, 30, 99, 0.05);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-sm);
+}
+
+.vital-item {
+    text-align: center;
+}
+
+.vital-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vital-value {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--ambulance-primary);
+    margin-top: var(--spacing-xs);
+}
+
+/* Ambulance Sidebar Theme */
+body.ambulance-theme .nav-item.active {
+    background: linear-gradient(90deg, rgba(204, 0, 0, 0.4) 0%, transparent 100%);
+    border-left-color: var(--ambulance-primary);
+    color: #CC0000 !important;
+}
+
+body.ambulance-theme .sidebar-header {
+    background: linear-gradient(135deg, rgba(204, 0, 0, 0.25) 0%, rgba(139, 0, 0, 0.15) 100%);
+}
+
+body.ambulance-theme .widget {
+    background: linear-gradient(135deg, rgba(204, 0, 0, 0.12) 0%, rgba(139, 0, 0, 0.06) 100%);
+    border: 1px solid rgba(204, 0, 0, 0.3);
+}
+
+body.ambulance-theme .widget:hover {
+    border-color: rgba(204, 0, 0, 0.5);
+    box-shadow: 0 8px 15px rgba(204, 0, 0, 0.3);
+}
+
+/* Ambulance Scrollbar */
+body.ambulance-theme ::-webkit-scrollbar-track {
+    background: rgba(139, 0, 0, 0.3);
+}
+
+body.ambulance-theme ::-webkit-scrollbar-thumb {
+    background: rgba(204, 0, 0, 0.6);
+}
+
+body.ambulance-theme ::-webkit-scrollbar-thumb:hover {
+    background: #CC0000;
+}
+
+body.ambulance-theme ::-webkit-scrollbar-corner {
+    background: rgba(139, 0, 0, 0.3);
+}
+
+body.ambulance-theme * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(204, 0, 0, 0.6) rgba(139, 0, 0, 0.3);
+}
+
+/* Status Indicators */
+.status-available {
+    color: #4CAF50;
+}
+
+.status-busy {
+    color: #FF9800;
+}
+
+.status-responding {
+    color: #F44336;
+    animation: pulse 1.5s infinite;
+}

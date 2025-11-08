@@ -59,7 +59,7 @@ config.JobColors = {
 
 config.OnDutyOnly = true -- Set true if only on duty players can see the alert and open dispatch menu
 config.enableBodycam = true
-config.TimeFormat = '12h' -- 12h: Shows current time like 5:24 PM | 24h: Shows time like 17:24
+config.TimeFormat = '24h' -- 12h: Shows current time like 5:24 PM | 24h: Shows time like 17:24
 config.TimeType = 'real' -- real: Shows real time | game: Shows game time
 config.defaultCallsign = 'NO CALLSIGN'
 config.IncludePolice = true -- Include police in shooting alerts
@@ -96,14 +96,8 @@ config.emsJobs = {
 
 -- SET MINIMUM JOB GRADE TO ACCESS DISPATCH FULL AUTHORIZATION
 config.accessManagement = {
-    ["police"] = 4,
-    ["sheriff"] = 3,
-    ["ambulance"] = 3,
-    ["state"] = 3,
-    ["bcso"] = 3,
-    ["fib"] = 4,
-    ["ranger"] = 2,
-    ["highway"] = 3,
+    ["police"] = 12,
+    ["ambulance"] = 10,
 }
 
 
@@ -398,7 +392,7 @@ config.DefaultAlerts = {
     Autotheft = true,
     Melee = false,
     PlayerDowned = true,
-    Explosion = false
+    Explosion = true
 }
 
 -- Specify hunting and zones that will not send alerts
@@ -451,7 +445,7 @@ config.AlertOptions = {
         color = 1,
         scale = 1.5,
         length = 2,
-        sound = 'Lose_1st',
+        sound = 'notification',
         sound2 = 'GTAO_FM_Events_Soundset',
         offset = false,
         flash = false,
@@ -487,7 +481,7 @@ config.AlertOptions = {
         color = 3,
         scale = 1.5,
         length = 2,
-        sound = 'dispatch',
+        sound = 'notification',
         offset = false,
         flash = false,
         takescreenshot = false
@@ -498,7 +492,7 @@ config.AlertOptions = {
         color = 3,
         scale = 1.5,
         length = 2,
-        sound = 'dispatch',
+        sound = 'notification',
         offset = false,
         flash = false,
         takescreenshot = false
@@ -533,7 +527,7 @@ config.AlertOptions = {
         color = 1,
         scale = 1.5,
         length = 2,
-        sound = 'panicbutton',
+        sound = 'panic_sound',
         offset = false,
         flash = true,
         takescreenshot = true
@@ -544,7 +538,7 @@ config.AlertOptions = {
         color = 1,
         scale = 1.5,
         length = 2,
-        sound = 'panicbutton',
+        sound = 'panic_sound',
         offset = false,
         flash = true,
         takescreenshot = true
@@ -555,7 +549,7 @@ config.AlertOptions = {
         color = 1,
         scale = 1.5,
         length = 2,
-        sound = 'panicbutton',
+        sound = 'panic_sound',
         offset = false,
         flash = true,
         takescreenshot = true
@@ -566,7 +560,7 @@ config.AlertOptions = {
         color = 3,
         scale = 1.5,
         length = 2,
-        sound = 'panicbutton',
+        sound = 'panic_sound',
         offset = false,
         flash = false,
         takescreenshot = true

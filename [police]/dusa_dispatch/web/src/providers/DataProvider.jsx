@@ -814,7 +814,7 @@ export const DataProvider = ({ children }) => {
     // Play a notification sound
     if (window && typeof window.Audio === 'function') {
       try {
-        const audio = new window.Audio('sound/notification.wav');
+        const audio = new window.Audio('sounds/notification.wav');
         audio.volume = 1;
         audio.currentTime = 0;
         audio.play();

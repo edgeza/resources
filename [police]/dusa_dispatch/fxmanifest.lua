@@ -64,6 +64,7 @@ files {
 	'web/dist/icon/*.*',
 	'web/dist/radar/*.*',
 	'web/dist/mapStyles/**',
+	'web/dist/sounds/*.*',
     'modules/**/*.lua',
     'edit/*.lua',
 }

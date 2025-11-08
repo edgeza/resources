@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+}
+
+.muffuq-anim-enter-active {
+  transition: all 0.8s ease;
+}
+
+.muffuq-anim-leave-active {
+  transition: all 0.8s ease;
+}
+
+.muffuq-anim-enter,
+.muffuq-anim-leave-to {
+  transform: translateY(70%);
+  opacity: 0;
+}
+
+.router-animation-enter-active {
+  transition: 0.5s ease-in-out;
+}
+
+.router-animation-leave-active {
+  transition: 0.5s ease-in-out;
+}
+
+.router-animation-enter,
+.router-animation-leave-to {
+  opacity: 0;
+}

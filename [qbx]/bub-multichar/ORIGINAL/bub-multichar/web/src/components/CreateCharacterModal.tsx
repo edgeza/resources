@@ -41,31 +41,14 @@ const CreateCharacterModal: React.FC<Props> = (props) => {
 		);
 	};
 
-	const inputStyles = {
-		input: {
-			background: 'rgba(255, 255, 255, 0.08)',
-			backdropFilter: 'blur(10px)',
-			WebkitBackdropFilter: 'blur(10px)',
-			border: '1px solid rgba(255, 255, 255, 0.18)',
-			color: 'rgba(255, 255, 255, 0.95)',
-			borderRadius: '10px',
-		},
-		label: {
-			color: 'rgba(255, 255, 255, 0.9)',
-			fontWeight: 500,
-			marginBottom: '8px',
-		},
-	};
-
 	return (
-		<form onSubmit={form.onSubmit((values) => handleSubmit(values))} style={{ gap: '20px', display: 'flex', flexDirection: 'column' }}>
+		<form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
 			<Group grow>
 				<TextInput
 					data-autofocus
 					required
 					placeholder='Your firstname'
 					label='Firstname'
-					styles={inputStyles}
 					{...form.getInputProps("firstName")}
 				/>
 
@@ -73,7 +56,6 @@ const CreateCharacterModal: React.FC<Props> = (props) => {
 					required
 					placeholder='Your lastname'
 					label='Lastname'
-					styles={inputStyles}
 					{...form.getInputProps("lastName")}
 				/>
 			</Group>
@@ -82,7 +64,6 @@ const CreateCharacterModal: React.FC<Props> = (props) => {
 				required
 				placeholder='Your nationality'
 				label='Nationality'
-				styles={inputStyles}
 				{...form.getInputProps("nationality")}
 			/>
 
@@ -93,7 +74,6 @@ const CreateCharacterModal: React.FC<Props> = (props) => {
 				data={["Male", "Female"]}
 				defaultValue='Male'
 				allowDeselect={false}
-				styles={inputStyles}
 				{...form.getInputProps("gender")}
 			/>
 
@@ -106,38 +86,11 @@ const CreateCharacterModal: React.FC<Props> = (props) => {
 				defaultValue={new Date("2006-12-31")}
 				minDate={new Date("1900-01-01")}
 				maxDate={new Date("2006-12-31")}
-				styles={inputStyles}
 				{...form.getInputProps("birthdate")}
 			/>
 
 			<Group justify='flex-end' mt='xl'>
-				<Button 
-					color='green' 
-					variant='light' 
-					type='submit'
-					h={40}
-					radius="md"
-					style={{
-						background: 'rgba(34, 197, 94, 0.15)',
-						backdropFilter: 'blur(10px)',
-						WebkitBackdropFilter: 'blur(10px)',
-						border: '1px solid rgba(34, 197, 94, 0.3)',
-						color: 'rgba(255, 255, 255, 0.95)',
-						fontWeight: 600,
-						transition: 'all 0.2s ease',
-						minWidth: '120px',
-					}}
-					onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
-						e.currentTarget.style.background = 'rgba(34, 197, 94, 0.25)';
-						e.currentTarget.style.borderColor = 'rgba(34, 197, 94, 0.5)';
-						e.currentTarget.style.transform = 'translateY(-2px)';
-					}}
-					onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
-						e.currentTarget.style.background = 'rgba(34, 197, 94, 0.15)';
-						e.currentTarget.style.borderColor = 'rgba(34, 197, 94, 0.3)';
-						e.currentTarget.style.transform = 'translateY(0)';
-					}}
-				>
+				<Button color='green' variant='light' type='submit'>
 					Create
 				</Button>
 			</Group>

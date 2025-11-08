@@ -301,7 +301,7 @@ Config.Stashes = {
     },
     ["pap_stash_chief"] = {
         stashName = "HC Evidence",
-        coords = vector3(436.01, -981.35, 34.23), 
+        coords = vec3(834.36, -1302.79, 19.85), 
         requirecid = true,
         jobrequired = false,
         gangrequired = false,
@@ -312,14 +312,13 @@ Config.Stashes = {
             "CYW76741", -- Pap
             "NSA85830", -- Jo Anne
             "LZJ64461", -- Marlien
-            "ZCG68283", -- Joshua
         },
         stashSize = 30000000,
         stashSlots = 1000, 
     },
     ["pap_stash_chief2"] = {
         stashName = "HC Evidence 2",
-        coords = vector3(436.2, -977.46, 34.23), 
+        coords = vec3(828.54, -1303.35, 19.85), 
         requirecid = true,
         jobrequired = false,
         gangrequired = false,
@@ -330,14 +329,13 @@ Config.Stashes = {
             "CYW76741", -- Pap
             "NSA85830", -- Jo Anne
             "LZJ64461", -- Marlien
-            "ZCG68283", -- Joshua
         },
         stashSize = 30000000,
         stashSlots = 1000, 
     },
     ["pap_stash_chief3"] = {
         stashName = "HC Evidence 3",
-        coords = vector3(444.47, -978.08, 34.23), 
+        coords = vec3(827.02, -1301.25, 19.85), 
         requirecid = true,
         jobrequired = false,
         gangrequired = false,
@@ -348,14 +346,13 @@ Config.Stashes = {
             "CYW76741", -- Pap
             "NSA85830", -- Jo Anne
             "LZJ64461", -- Marlien
-            "ZCG68283", -- Joshua
         },
         stashSize = 30000000,
         stashSlots = 1000, 
     },
     ["pd_legal_weapons"] = {
         stashName = "Legal Weapons",
-        coords = vector3(436.44, -976.88, 30.93), 
+        coords = vec3(828.88, -1301.54, 28.24), 
         requirecid = true,
         jobrequired = false,
         gangrequired = false,

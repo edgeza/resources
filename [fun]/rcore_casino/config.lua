@@ -36,7 +36,7 @@ Config = {
 
     -- Target
     UseTarget = true, -- whether to use target zones or not
-    TargetZoneType = 3, -- 1: q_target, 2: bt_target, 3: qb-target, 4: ox_target
+    TargetZoneType = 4, -- 1: q_target, 2: bt_target, 3: qb-target, 4: ox_target
 
     -- Chips, Inventory Settings
     UseVirtualChips = true, -- false: use inventory for chips, true: use virtual chips which are saved in the casino_players table

@@ -16,7 +16,7 @@
 			<Infos>
 				<Item type="CWeaponInfo">
 					<Name>WEAPON_CYAN_THERMAL_KATANA</Name>
-					<Model>w_me_machette_lr</Model>
+					<Model>w_me_katana</Model>
 					<Audio/>
 					<Slot>SLOT_WEAPON_CYAN_THERMAL_KATANA</Slot>
 					<DamageType>MELEE</DamageType>

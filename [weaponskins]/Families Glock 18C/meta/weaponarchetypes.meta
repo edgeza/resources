@@ -4,13 +4,13 @@
 	<InitDatas>
 		<Item>
 			<modelName>w_pi_appistol_mag1</modelName>
-			<txdName>w_pi_appistol_mag1</txdName>
+			<txdName>w_pi_families_glock_mag1</txdName>
 			<ptfxAssetName>NULL</ptfxAssetName>
 			<lodDist value="300"/>
 		</Item>
 		<Item>
 			<modelName>w_pi_appistol</modelName>
-			<txdName>w_pi_appistol</txdName>
+			<txdName>w_pi_families_glock</txdName>
 			<ptfxAssetName>NULL</ptfxAssetName>
 			<lodDist value="500"/>
 		</Item>

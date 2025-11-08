@@ -3,8 +3,8 @@
 <CWeaponModelInfo__InitDataList>
 	<InitDatas>
 		<Item>
-			<modelName>w_me_machette_lr</modelName>
-			<txdName>w_me_machette_lr</txdName>
+			<modelName>w_me_katana</modelName>
+			<txdName>w_me_purple_thermal_katana</txdName>
 			<ptfxAssetName>NULL</ptfxAssetName>
 			<lodDist value="500"/>
 		</Item>

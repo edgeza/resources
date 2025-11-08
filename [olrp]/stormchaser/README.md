@@ -9,6 +9,7 @@ Dynamic storm chasing gameplay loop for Qbox/QBCore servers. Storm cells spawn r
 - Equipment loop with reusable `storm_probe` deployables and `storm_tablet` access item.
 - Reward pipeline that converts collected probe data into sellable intel at the Weazel News desk.
 - Automatic client sync for storms, probes, and keybind support (`F1` by default).
+- Optional synced tornado funnel that grows with the storm, applies wind forces, screenshake, and siren audio cues.
 
 ## Installation
 
@@ -68,6 +69,7 @@ All tunables live in `config.lua`. Highlights:
 - `NewsStation`: location & blip for selling data. If `qb-target` is running, an interaction zone is added automatically.
 - `Tablet.openKey`: change or disable the default keybind for opening the tablet UI.
 - `WeatherTrigger`: tie storms to specific weather types (default: `RAIN`, `THUNDER`, `OVERCAST`). Set `enabled = false` to revert to time-based spawns or toggle `despawnOnMismatch` if you want storms to end when the weather clears.
+- `Tornado`: tune growth speed, scale, wind force, audio behaviour, and particle asset. Set `enabled = false` if you prefer storms without the funnel. If you use `InteractSound`, set `audio.useInteractSound = true` and provide sound names/volumes.
 
 ## Gameplay Loop
 
@@ -86,6 +88,7 @@ All tunables live in `config.lua`. Highlights:
 - Verify `storm_data` drives pay out when sold at the news station (`qb-target` interaction or `/stormtablet` menu if target is missing).
 - Test reconnecting mid-storm to ensure the tablet resyncs storm and probe states.
 - Force weather changes in Renewed-Weathersync (or via admin menu) to confirm storms spawn immediately when the configured types begin and respect `despawnOnMismatch` if enabled.
+- Watch a full storm lifecycle: confirm the tornado particle appears at spawn, scales up over time, pushes nearby peds/vehicles, and that siren/wind audio triggers per your config. Toggle `Tornado.audio.useInteractSound` if you want to drive sounds through InteractSound.
 
 ## Notes
 

@@ -14,6 +14,16 @@ local tabletState = {
 local probes = {}
 local lastProbePrompt = 0
 local probeModel = `prop_tool_box_04`
+local tornadoState = {
+    active = false,
+    coords = nil,
+    scale = 0.0,
+    progress = 0.0,
+    fx = nil,
+    assetLoaded = false,
+    lastSiren = 0,
+    lastWind = 0
+}
 local function ensureProbeModelLoaded()
     if HasModelLoaded(probeModel) then return true end
     RequestModel(probeModel)
@@ -61,6 +71,123 @@ local function updateStormBlip(data)
     else
         SetBlipCoords(stormState.blip, data.coords.x, data.coords.y, data.coords.z)
     end
+end
+
+local function loadTornadoAsset()
+    if tornadoState.assetLoaded or not Config.Tornado or not Config.Tornado.enabled then
+        return tornadoState.assetLoaded
+    end
+    local particle = Config.Tornado.particle or {}
+    if not particle.asset then return false end
+    RequestNamedPtfxAsset(particle.asset)
+    local waited = 0
+    while not HasNamedPtfxAssetLoaded(particle.asset) do
+        Wait(50)
+        waited += 50
+        if waited >= 5000 then
+            debugPrint('Failed to load tornado particle asset:', particle.asset)
+            return false
+        end
+    end
+    tornadoState.assetLoaded = true
+    return true
+end
+
+local function stopTornadoFx()
+    if tornadoState.fx then
+        StopParticleFxLooped(tornadoState.fx, 0)
+        tornadoState.fx = nil
+    end
+    tornadoState.active = false
+    tornadoState.coords = nil
+    tornadoState.scale = 0.0
+    tornadoState.progress = 0.0
+    tornadoState.lastSiren = 0
+    tornadoState.lastWind = 0
+end
+
+local function playPositionalSound(sound, set, coords)
+    if not sound or not set or not coords then return end
+    local soundId = GetSoundId()
+    PlaySoundFromCoord(soundId, sound, coords.x, coords.y, coords.z, set, false, 0, false)
+    ReleaseSoundId(soundId)
+end
+
+local function handleTornadoAudio(coords)
+    local audioCfg = Config.Tornado and Config.Tornado.audio
+    if not audioCfg or not audioCfg.enabled or not coords then return end
+    local now = GetGameTimer()
+
+    if audioCfg.useInteractSound then
+        if tornadoState.lastSiren == 0 or now - tornadoState.lastSiren >= (audioCfg.sirenInterval or 6000) then
+            TriggerServerEvent('stormchaser:server:tornadoInteractSound', 'siren')
+            tornadoState.lastSiren = now
+        end
+        if audioCfg.windInterval and (tornadoState.lastWind == 0 or now - tornadoState.lastWind >= audioCfg.windInterval) then
+            TriggerServerEvent('stormchaser:server:tornadoInteractSound', 'wind')
+            tornadoState.lastWind = now
+        end
+        return
+    end
+
+    local fallback = audioCfg.fallback or {}
+    if audioCfg.sirenInterval and (tornadoState.lastSiren == 0 or now - tornadoState.lastSiren >= audioCfg.sirenInterval) then
+        if fallback.siren then
+            playPositionalSound(fallback.siren.sound, fallback.siren.set, coords)
+        end
+        tornadoState.lastSiren = now
+    end
+    if audioCfg.windInterval and (tornadoState.lastWind == 0 or now - tornadoState.lastWind >= audioCfg.windInterval) then
+        if fallback.wind then
+            playPositionalSound(fallback.wind.sound, fallback.wind.set, coords)
+        end
+        tornadoState.lastWind = now
+    end
+end
+
+local function updateTornadoFx(coords, scale)
+    if not Config.Tornado or not Config.Tornado.enabled then return end
+    if not coords then
+        stopTornadoFx()
+        return
+    end
+    if not loadTornadoAsset() then return end
+
+    local particle = Config.Tornado.particle or {}
+    if tornadoState.fx then
+        SetParticleFxLoopedScale(tornadoState.fx, scale)
+        SetParticleFxLoopedCoords(tornadoState.fx, coords.x, coords.y, coords.z)
+    else
+        UseParticleFxAssetNextCall(particle.asset)
+        tornadoState.fx = StartParticleFxLoopedAtCoord(
+            particle.effect or 'ent_core_bz_tornado',
+            coords.x, coords.y, coords.z,
+            0.0, 0.0, 0.0,
+            scale,
+            false, false, false, false
+        )
+    end
+end
+
+local function updateTornadoState(tornadoData)
+    if not Config.Tornado or not Config.Tornado.enabled then
+        return
+    end
+
+    if not tornadoData then
+        if tornadoState.active then
+            stopTornadoFx()
+        end
+        return
+    end
+
+    tornadoState.active = true
+    tornadoState.coords = vector3(tornadoData.coords.x, tornadoData.coords.y, tornadoData.coords.z)
+    tornadoState.scale = tornadoData.scale or tornadoState.scale
+    tornadoState.progress = tornadoData.progress or tornadoState.progress
+
+    updateTornadoFx(tornadoState.coords, tornadoState.scale)
+    handleTornadoAudio(tornadoState.coords)
 end
 
 local function sendStormToUI()
@@ -166,11 +293,13 @@ RegisterNetEvent('stormchaser:client:updateStorm', function(data)
             action = 'stormUpdate',
             storm = nil
         })
+        updateTornadoState(nil)
         return
     end
 
     updateStormBlip(data)
     sendStormToUI()
+    updateTornadoState(data.tornado)
 end)
 
 RegisterNetEvent('stormchaser:client:syncProbes', function(serverProbes)
@@ -300,6 +429,7 @@ AddEventHandler('onResourceStop', function(res)
         end
     end
     exports['qb-core']:HideText()
+    stopTornadoFx()
 end)
 
 local function requestInitialState()
@@ -342,6 +472,66 @@ end)
 
 RegisterNetEvent('stormchaser:client:initiateSell', function()
     TriggerServerEvent('stormchaser:server:sellData')
+end)
+
+CreateThread(function()
+    while true do
+        if tornadoState.active and tornadoState.coords then
+            local ped = PlayerPedId()
+            local pedCoords = GetEntityCoords(ped)
+            local center = tornadoState.coords
+            local diff = center - pedCoords
+            local distance = #(diff)
+
+            handleTornadoAudio(center)
+
+            local forceCfg = Config.Tornado.force or {}
+            local radius = forceCfg.radius or 0.0
+
+            if radius > 0 and distance <= radius then
+                local factor = 1.0 - (distance / radius)
+                local direction = vector3(0.0, 0.0, 0.0)
+                local magnitude = #(diff)
+                if magnitude > 0.0 then
+                    direction = diff / magnitude
+                end
+                local push = (forceCfg.player or 30.0) * factor
+                local vertical = (forceCfg.vertical or 8.0) * factor
+                ApplyForceToEntity(ped, 1, direction.x * push, direction.y * push, vertical, 0.0, 0.0, 0.0, 0, false, true, true, true, false, true)
+            end
+
+            if IsPedInAnyVehicle(ped, false) then
+                local veh = GetVehiclePedIsIn(ped, false)
+                if veh and veh ~= 0 then
+                    local vehCoords = GetEntityCoords(veh)
+                    local vDiff = center - vehCoords
+                    local vDist = #(vDiff)
+                    if radius > 0 and vDist <= radius then
+                        local factor = 1.0 - (vDist / radius)
+                        local direction = vector3(0.0, 0.0, 0.0)
+                        local magnitude = #(vDiff)
+                        if magnitude > 0.0 then
+                            direction = vDiff / magnitude
+                        end
+                        local push = (forceCfg.vehicle or 80.0) * factor
+                        local vertical = (forceCfg.vertical or 8.0) * factor
+                        ApplyForceToEntity(veh, 1, direction.x * push, direction.y * push, vertical, 0.0, 0.0, 0.0, 0, false, true, true, true, false, true)
+                    end
+                end
+            end
+
+            local shakeCfg = Config.Tornado.screenShake or {}
+            if shakeCfg.radius and shakeCfg.radius > 0 and distance <= shakeCfg.radius then
+                local factor = 1.0 - (distance / shakeCfg.radius)
+                local intensity = (shakeCfg.min or 0.1) + ((shakeCfg.max or 0.3) - (shakeCfg.min or 0.1)) * factor
+                ShakeGameplayCam('LARGE_EXPLOSION_SHAKE', intensity)
+            end
+
+            Wait(250)
+        else
+            Wait(1000)
+        end
+    end
 end)
 
 

@@ -43,6 +43,45 @@ Config.Tablet = {
     enableKeybind = true
 }
 
+Config.Tornado = {
+    enabled = true,
+    growMinutes = 4,
+    scale = {
+        min = 0.6,
+        max = 1.75
+    },
+    force = {
+        radius = 85.0,
+        vertical = 12.0,
+        player = 45.0,
+        vehicle = 120.0
+    },
+    screenShake = {
+        radius = 160.0,
+        min = 0.1,
+        max = 0.4
+    },
+    audio = {
+        enabled = true,
+        sirenInterval = 6500,
+        windInterval = 4500,
+        useInteractSound = false,
+        interact = {
+            siren = 'tornado_siren',
+            wind = 'tornado_wind',
+            volume = 0.45
+        },
+        fallback = {
+            siren = { sound = 'MP_AWARD', set = 'HUD_FRONTEND_DEFAULT_SOUNDSET' },
+            wind = { sound = 'WIND', set = 'OCEAN' }
+        }
+    },
+    particle = {
+        asset = 'core_bz',
+        effect = 'ent_core_bz_tornado'
+    }
+}
+
 Config.WeatherTrigger = {
     enabled = true,
     weatherTypes = {

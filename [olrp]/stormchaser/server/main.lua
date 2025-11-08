@@ -7,6 +7,27 @@ local weatherState = {
     current = nil
 }
 
+local function getTornadoState()
+    if not Config.Tornado or not Config.Tornado.enabled or not activeStorm then
+        return nil
+    end
+
+    local growMinutes = Config.Tornado.growMinutes or 3
+    local growSeconds = math.max(1, growMinutes * 60)
+    local elapsed = math.max(0, os.time() - activeStorm.created)
+    local progress = math.min(1.0, elapsed / growSeconds)
+
+    local minScale = (Config.Tornado.scale and Config.Tornado.scale.min) or 0.5
+    local maxScale = (Config.Tornado.scale and Config.Tornado.scale.max) or 1.5
+    local scale = minScale + (maxScale - minScale) * progress
+
+    return {
+        coords = activeStorm.coords,
+        progress = progress,
+        scale = scale
+    }
+end
+
 local function canSpawnDuringWeather()
     if not Config.WeatherTrigger or not Config.WeatherTrigger.enabled then
         return true
@@ -46,7 +67,8 @@ local function sendStormUpdate(target)
         heading = activeStorm.heading,
         radius = Config.StormRadius,
         expires = activeStorm.expires,
-        created = activeStorm.created
+        created = activeStorm.created,
+        tornado = getTornadoState()
     } or nil)
 end
 
@@ -431,5 +453,20 @@ CreateThread(function()
             },
             distance = 2.0
         })
+end)
+
+RegisterNetEvent('stormchaser:server:tornadoInteractSound', function(kind)
+    local src = source
+    if not Config.Tornado or not Config.Tornado.enabled then return end
+    local audioCfg = Config.Tornado.audio
+    if not audioCfg or not audioCfg.enabled or not audioCfg.useInteractSound then return end
+    local interact = audioCfg.interact or {}
+    local volume = interact.volume or 0.45
+
+    if kind == 'siren' and interact.siren then
+        TriggerClientEvent('InteractSound_CL:PlayOnOne', src, interact.siren, volume)
+    elseif kind == 'wind' and interact.wind then
+        TriggerClientEvent('InteractSound_CL:PlayOnOne', src, interact.wind, volume)
+    end
 end)
 

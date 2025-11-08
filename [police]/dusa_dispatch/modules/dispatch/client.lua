@@ -122,11 +122,21 @@ local function addBlip(data, blipData)
     if not Functions.IsPolice(Framework.Player.Job.Name) then return end
     CreateThread(function()
         createBlip(data, blipData)
-        if not alertsMuted and alertShown then
+        if not alertsMuted then
             if not blipData.sound or blipData.sound == "Lose_1st" then
                 PlaySound(-1, blipData.sound or "Lose_1st", blipData.sound2 or "GTAO_FM_Events_Soundset", 0, 0, 1)
             else
-                TriggerServerEvent("InteractSound_SV:PlayOnSource", blipData.sound, 0.25)
+                -- Play sound directly from resource's sounds folder
+                local soundName = blipData.sound
+                local soundUrl = "nui://dusa_dispatch/sounds/" .. soundName .. ".wav"
+                local soundVolume = 0.25
+                
+                -- Try to use xsound if available, otherwise use InteractSound
+                if GetResourceState('xsound') == 'started' then
+                    exports.xsound:PlayUrl(soundName, soundUrl, soundVolume, false)
+                else
+                    TriggerServerEvent("InteractSound_SV:PlayOnSource", soundName, soundVolume)
+                end
             end
         end
     end)

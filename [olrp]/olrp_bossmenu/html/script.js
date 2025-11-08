@@ -812,14 +812,18 @@ function setupChartTimeframeListeners() {
     const timeframeOptions = document.querySelectorAll('#timeframe-dropdown a');
     
     if (timeframeSelector) {
-        timeframeSelector.addEventListener('click', function() {
+        timeframeSelector.addEventListener('click', function(e) {
+            e.stopPropagation();
             dropdown.classList.toggle('show');
+            timeframeSelector.classList.toggle('active');
         });
         
         window.addEventListener('click', function(event) {
-            if (!event.target.matches('.dropdown-btn') && 
-                !event.target.parentNode.matches('.dropdown-btn')) {
+            if (!event.target.matches('.modern-dropdown-btn') && 
+                !event.target.closest('.modern-dropdown-btn') &&
+                !event.target.closest('.modern-dropdown-content')) {
                 dropdown.classList.remove('show');
+                timeframeSelector.classList.remove('active');
             }
         });
     }
@@ -832,9 +836,13 @@ function setupChartTimeframeListeners() {
             
             const buttonText = timeframe === 'day' ? 'Today' : 
                               timeframe === 'week' ? 'Last 7 days' : 'Last 30 days';
-            document.querySelector('#timeframe-selector span').textContent = buttonText;
+            const buttonSpan = document.querySelector('#timeframe-selector span');
+            if (buttonSpan) {
+                buttonSpan.textContent = buttonText;
+            }
             
             dropdown.classList.remove('show');
+            timeframeSelector.classList.remove('active');
             
             if (societyData && societyData.transactions) {
                 createTransactionsChart(societyData.transactions);
@@ -2043,6 +2051,10 @@ function updateActivityChart() {
         hourBar.setAttribute('data-count', item.count);
         hourBar.setAttribute('data-original-hour', item.hour);
         
+        // Add modern styling attributes
+        hourBar.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        hourBar.style.cursor = 'pointer';
+        
         activityChart.appendChild(hourBar);
     });
 }
@@ -3118,6 +3130,11 @@ function createTransactionsChart(transactions) {
     chartContainer.innerHTML = '';
     chartContainer.appendChild(ctx);
 
+    // Create gradient for bars
+    const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, primaryColor || '#dc2626');
+    gradient.addColorStop(1, primaryDarkColor || '#b91c1c');
+    
     chartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -3125,36 +3142,80 @@ function createTransactionsChart(transactions) {
             datasets: [{
                 label: 'Transaction Amount',
                 data: chartData.values,
-                backgroundColor: primaryColor || '#4a6cfa',   
-                borderColor: primaryDarkColor || '#3a56c8',  
-                borderWidth: 1,
-                borderRadius: 4,
+                backgroundColor: gradient,
+                borderColor: primaryColor || '#dc2626',
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false,
                 barThickness: 'flex',
-                maxBarThickness: 30
+                maxBarThickness: 40,
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: {
+                duration: 1000,
+                easing: 'easeOutQuart',
+                onComplete: function() {
+                    const chart = this.chart;
+                    const ctx = chart.ctx;
+                    ctx.save();
+                    const meta = chart.getDatasetMeta(0);
+                    meta.data.forEach((bar, index) => {
+                        const value = chartData.values[index];
+                        if (value > 0) {
+                            const gradient = ctx.createLinearGradient(
+                                bar.x - bar.width / 2, bar.y,
+                                bar.x + bar.width / 2, bar.y
+                            );
+                            gradient.addColorStop(0, primaryColor || '#dc2626');
+                            gradient.addColorStop(0.5, primaryColor || '#dc2626');
+                            gradient.addColorStop(1, primaryDarkColor || '#b91c1c');
+                            bar.options.backgroundColor = gradient;
+                        }
+                    });
+                    ctx.restore();
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
             scales: {
                 y: {
                     beginAtZero: true,
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)'
+                        color: 'rgba(255, 255, 255, 0.08)',
+                        lineWidth: 1,
+                        drawBorder: false
                     },
                     ticks: {
-                        color: 'rgba(255, 255, 255, 0.7)',
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        font: {
+                            size: 12,
+                            weight: '500'
+                        },
+                        padding: 10,
                         callback: function(value) {
-                            return '$' + value;
+                            return '$' + value.toLocaleString();
                         }
                     }
                 },
                 x: {
                     grid: {
-                        display: false
+                        display: false,
+                        drawBorder: false
                     },
                     ticks: {
-                        color: 'rgba(255, 255, 255, 0.7)'
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        font: {
+                            size: 12,
+                            weight: '500'
+                        },
+                        padding: 12
                     }
                 }
             },
@@ -3163,16 +3224,42 @@ function createTransactionsChart(transactions) {
                     display: false
                 },
                 tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    enabled: true,
+                    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                    backdropFilter: 'blur(10px)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
+                    titleFont: {
+                        size: 14,
+                        weight: '600'
+                    },
+                    bodyFont: {
+                        size: 13,
+                        weight: '500'
+                    },
+                    padding: 12,
+                    cornerRadius: 10,
                     displayColors: false,
+                    borderColor: primaryColor || '#dc2626',
+                    borderWidth: 1,
+                    boxPadding: 8,
                     callbacks: {
+                        title: function(context) {
+                            return context[0].label;
+                        },
                         label: function(context) {
-                            return '$' + context.raw;
+                            const value = context.raw;
+                            const sign = value >= 0 ? '+' : '';
+                            return `${sign}$${value.toLocaleString()}`;
+                        },
+                        afterLabel: function(context) {
+                            return '';
                         }
                     }
                 }
+            },
+            onHover: (event, activeElements) => {
+                ctx.canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
             }
         }
     });

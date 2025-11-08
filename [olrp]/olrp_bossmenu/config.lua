@@ -186,7 +186,7 @@ Config.Locations = {
         logoImage = "logo.png",
         locations = {
             {
-                coords = vector3(-920.45, -2044.41, 14.45), -- Benny's Motorworks
+                coords = vector3(-774.3, -2075.97, 8.99),
                 width = 1.0,
                 length = 1.0,
                 heading = 0,

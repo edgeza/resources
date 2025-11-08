@@ -1,0 +1,54 @@
+-- Full list of giveitem commands for all weaponskins (ID 2)
+-- Copy and paste these commands in-game to test all weapons
+
+-- [glock_pack] Weapons
+
+Holds it in hand, but can't ADS
+/giveitem 2 WEAPON_CANDY_APPLE_GLOCK 1
+/giveitem 2 WEAPON_CATACOMBS_GLOCK 1
+/giveitem 2 WEAPON_FREEDOM_GLOCK 1
+/giveitem 2 WEAPON_HORNET_GLOCK 1
+/giveitem 2 WEAPON_SAFARI_GLOCK 1
+
+-- [rifle_color_pack] Weapons
+Pull out, cand ADS, but all of them have texture/color issues. They all look the same and dont have the colors
+/giveitem 2 WEAPON_BLUE_CARBINE_RIFLE 1
+/giveitem 2 WEAPON_ULTRA_BLACKOUT_RIFLE 1
+/giveitem 2 WEAPON_LIME_BLACK_AR 1
+/giveitem 2 WEAPON_NO_SILVER_RIFLE 1
+/giveitem 2 WEAPON_WHITE_BLACK_AR 1
+/giveitem 2 WEAPON_WHITE_ORANGE_RIFLE 1
+/giveitem 2 WEAPON_BOMBINGLR300 1
+/giveitem 2 WEAPON_FAMILIES_GLOCK_18C 1
+
+Pull out, cand ADS,
+/giveitem 2 WEAPON_PATCHDAY_PISTOL 1
+/giveitem 2 WEAPON_PI_REVOLVER 1
+/giveitem 2 WEAPON_SAIGA9 1
+
+
+Pull out, can ADS, but all of them have texture/color issues / looks like the wrong gun. They all look the same and dont have the colors
+/giveitem 2 WEAPON_HYPEBEAST 1
+/giveitem 2 WEAPON_PAINT_SPLATTER 1
+/giveitem 2 WEAPON_PATCHDAY8NG 1
+
+Pull out, but all of them have texture/color issues. They all look the same and dont have the colors. The katana looks like the Machete and not the katana
+-- [Thermal Katana] Weapons
+/giveitem 2 WEAPON_CYAN_THERMAL_KATANA 1
+/giveitem 2 WEAPON_LIME_THERMAL_KATANA 1
+/giveitem 2 WEAPON_PINK_THERMAL_KATANA 1
+/giveitem 2 WEAPON_PURPLE_THERMAL_KATANA 1
+/giveitem 2 WEAPON_RED_THERMAL_KATANA 1
+/giveitem 2 WEAPON_WHITE_THERMAL_KATANA 1
+/giveitem 2 WEAPON_YELLOW_THERMAL_KATANA 1
+/giveitem 2 WEAPON_REAPER_MACHETE 1
+
+
+
+These work perfectly
+-- Standalone Weapon Skins
+/giveitem 2 WEAPON_AR15HW 1
+/giveitem 2 WEAPON_M4A1DRAGON 1
+/giveitem 2 WEAPON_SABRESWORD 1
+/giveitem 2 WEAPON_TOYM16 1
+

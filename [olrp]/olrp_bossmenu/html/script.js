@@ -540,6 +540,15 @@ function openApplicationDetails(applicationId) {
 
 // Apply theme color based on selection
 function applyThemeColor(color) {
+    // Remove custom RGB theme if it exists
+    const customThemeStyle = document.getElementById('custom-rgb-theme');
+    if (customThemeStyle) {
+        customThemeStyle.remove();
+    }
+    
+    // Clear custom RGB color from settings
+    appSettings.customRgbColor = null;
+    
     // Set the theme attribute on the body element
     document.body.setAttribute('data-theme', color);
     
@@ -629,12 +638,24 @@ function updateChartColors() {
 function checkChartHealth() {
     // Check activity chart
     const activityCanvas = document.getElementById('activity-line-chart');
-    if (activityCanvas && activityCanvas.offsetParent !== null) {
-        // Canvas is visible
+    const activityPage = activityCanvas?.closest('.page');
+    if (activityCanvas && activityPage && activityPage.classList.contains('active')) {
+        // Canvas is visible and page is active
         if (!activityChartInstance || activityChartInstance.destroyed) {
             // Chart is missing but canvas exists and is visible - recreate
-            if (currentJobData && currentJobData.activityData && currentJobData.activityData.length > 0) {
+            if (currentJobData && currentJobData.activityData && Array.isArray(currentJobData.activityData) && currentJobData.activityData.length > 0) {
                 console.log('Recreating missing activity chart');
+                updateActivityChart();
+            }
+        } else {
+            // Chart exists, verify it's still valid
+            try {
+                if (activityChartInstance.canvas && activityChartInstance.canvas.width === 0) {
+                    console.log('Activity chart canvas has zero width, recreating');
+                    updateActivityChart();
+                }
+            } catch (e) {
+                console.warn('Activity chart validation error:', e);
                 updateActivityChart();
             }
         }
@@ -642,13 +663,27 @@ function checkChartHealth() {
     
     // Check transactions chart
     const transactionsCanvas = document.getElementById('transactions-line-chart');
-    if (transactionsCanvas && transactionsCanvas.offsetParent !== null) {
-        // Canvas is visible
+    const transactionsPage = transactionsCanvas?.closest('.page');
+    if (transactionsCanvas && transactionsPage && transactionsPage.classList.contains('active')) {
+        // Canvas is visible and page is active
         if (!chartInstance || chartInstance.destroyed) {
             // Chart is missing but canvas exists and is visible - recreate
-            if (societyData && societyData.transactions && societyData.transactions.length > 0) {
+            if (societyData && societyData.transactions && Array.isArray(societyData.transactions) && societyData.transactions.length > 0) {
                 console.log('Recreating missing transactions chart');
                 createTransactionsChart(societyData.transactions);
+            }
+        } else {
+            // Chart exists, verify it's still valid
+            try {
+                if (chartInstance.canvas && chartInstance.canvas.width === 0) {
+                    console.log('Transactions chart canvas has zero width, recreating');
+                    createTransactionsChart(societyData.transactions);
+                }
+            } catch (e) {
+                console.warn('Transactions chart validation error:', e);
+                if (societyData && societyData.transactions) {
+                    createTransactionsChart(societyData.transactions);
+                }
             }
         }
     }
@@ -1112,6 +1147,11 @@ document.addEventListener('DOMContentLoaded', function() {
     setupPermissionsEventListeners();
     setupHireEmployeeModal();
     initializePlayerTimeOffset();
+    
+    // Try to setup RGB color picker (will retry when settings page opens if elements don't exist)
+    setTimeout(() => {
+        setupRgbColorPicker();
+    }, 500);
 });
 
 document.addEventListener('keydown', function(event) {
@@ -1787,6 +1827,37 @@ function setupEventListeners() {
                     navItem.classList.remove('active');
                 });
                 this.classList.add('active');
+                
+                // Initialize RGB color picker when settings page is opened
+                if (pageId === 'settings') {
+                    setTimeout(() => {
+                        // Reset initialization flag if elements weren't found before
+                        const redSlider = document.getElementById('rgb-red');
+                        if (redSlider && !rgbColorPickerInitialized) {
+                            setupRgbColorPicker();
+                        } else if (!redSlider) {
+                            rgbColorPickerInitialized = false;
+                            console.warn('RGB color picker elements still not found on settings page');
+                        }
+                    }, 100);
+                }
+                
+                // Ensure charts are created when their pages become active
+                if (pageId === 'dashboard') {
+                    setTimeout(() => {
+                        if (currentJobData && currentJobData.activityData && !activityChartInstance) {
+                            updateActivityChart();
+                        }
+                    }, 200);
+                }
+                
+                if (pageId === 'society') {
+                    setTimeout(() => {
+                        if (societyData && societyData.transactions && !chartInstance) {
+                            createTransactionsChart(societyData.transactions);
+                        }
+                    }, 200);
+                }
             }
         });
     });
@@ -2154,10 +2225,23 @@ function initializePlayerTimeOffset() {
 
 // Update activity chart - Line Chart Version
 function updateActivityChart() {
-    if (!currentJobData.activityData || !Array.isArray(currentJobData.activityData) || currentJobData.activityData.length === 0) return;
+    if (!currentJobData || !currentJobData.activityData || !Array.isArray(currentJobData.activityData) || currentJobData.activityData.length === 0) {
+        console.warn('Activity chart: No activity data available');
+        return;
+    }
     
     const canvas = document.getElementById('activity-line-chart');
-    if (!canvas) return;
+    if (!canvas) {
+        console.warn('Activity chart: Canvas element not found');
+        return;
+    }
+    
+    // Ensure canvas is visible
+    const canvasParent = canvas.closest('.page');
+    if (canvasParent && !canvasParent.classList.contains('active')) {
+        console.warn('Activity chart: Canvas is not in active page');
+        return;
+    }
     
     if (playerTimeOffset === null) {
         const localHour = new Date().getHours();
@@ -3458,6 +3542,20 @@ function OpenJobManager(jobName) {
 
 function createTransactionsChart(transactions) {
     if (!transactions || transactions.length === 0) {
+        console.warn('Transactions chart: No transaction data available');
+        return;
+    }
+
+    const canvas = document.getElementById('transactions-line-chart');
+    if (!canvas) {
+        console.warn('Transactions chart: Canvas element not found');
+        return;
+    }
+    
+    // Ensure canvas is visible
+    const canvasParent = canvas.closest('.page');
+    if (canvasParent && !canvasParent.classList.contains('active')) {
+        console.warn('Transactions chart: Canvas is not in active page');
         return;
     }
 
@@ -3469,12 +3567,6 @@ function createTransactionsChart(transactions) {
             console.warn('Error destroying transactions chart:', e);
         }
         chartInstance = null;
-    }
-
-    const canvas = document.getElementById('transactions-line-chart');
-    if (!canvas) {
-        console.warn('Transactions chart canvas not found');
-        return;
     }
     
     const ctx = canvas.getContext('2d');
@@ -3698,6 +3790,8 @@ function prepareChartData(transactions, timeframe) {
 }
 
 // RGB Color Picker Functions
+let rgbColorPickerInitialized = false;
+
 function setupRgbColorPicker() {
     const redSlider = document.getElementById('rgb-red');
     const greenSlider = document.getElementById('rgb-green');
@@ -3707,7 +3801,20 @@ function setupRgbColorPicker() {
     const blueInput = document.getElementById('rgb-blue-value');
     const applyBtn = document.getElementById('apply-rgb-color');
     
-    if (!redSlider || !greenSlider || !blueSlider) return;
+    if (!redSlider || !greenSlider || !blueSlider) {
+        console.warn('RGB color picker elements not found, will retry when settings page opens');
+        rgbColorPickerInitialized = false;
+        return;
+    }
+    
+    // Prevent duplicate initialization
+    if (rgbColorPickerInitialized) {
+        console.log('RGB color picker already initialized');
+        return;
+    }
+    
+    console.log('RGB color picker setup successful');
+    rgbColorPickerInitialized = true;
     
     // Sync sliders with inputs and apply live
     [redSlider, greenSlider, blueSlider].forEach((slider, index) => {
@@ -3716,9 +3823,9 @@ function setupRgbColorPicker() {
             if (inputs[index]) inputs[index].value = this.value;
             updateRgbPreview();
             // Apply live
-            const r = parseInt(redSlider.value);
-            const g = parseInt(greenSlider.value);
-            const b = parseInt(blueSlider.value);
+            const r = parseInt(redSlider.value) || 0;
+            const g = parseInt(greenSlider.value) || 0;
+            const b = parseInt(blueSlider.value) || 0;
             applyCustomRgbColor({r, g, b});
             appSettings.customRgbColor = {r, g, b};
             appSettings.themeColor = null;
@@ -3734,9 +3841,9 @@ function setupRgbColorPicker() {
             if (sliders[index]) sliders[index].value = value;
             updateRgbPreview();
             // Apply live
-            const r = parseInt(redSlider.value);
-            const g = parseInt(greenSlider.value);
-            const b = parseInt(blueSlider.value);
+            const r = parseInt(redSlider.value) || 0;
+            const g = parseInt(greenSlider.value) || 0;
+            const b = parseInt(blueSlider.value) || 0;
             applyCustomRgbColor({r, g, b});
             appSettings.customRgbColor = {r, g, b};
             appSettings.themeColor = null;
@@ -3744,13 +3851,24 @@ function setupRgbColorPicker() {
     });
     
     if (applyBtn) {
-        applyBtn.addEventListener('click', function() {
-            const r = parseInt(redSlider.value);
-            const g = parseInt(greenSlider.value);
-            const b = parseInt(blueSlider.value);
+        // Remove any existing listeners
+        const newApplyBtn = applyBtn.cloneNode(true);
+        applyBtn.parentNode.replaceChild(newApplyBtn, applyBtn);
+        
+        newApplyBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const r = parseInt(redSlider.value) || 0;
+            const g = parseInt(greenSlider.value) || 0;
+            const b = parseInt(blueSlider.value) || 0;
+            
+            console.log('Apply RGB color clicked:', {r, g, b});
+            
             applyCustomRgbColor({r, g, b});
             appSettings.customRgbColor = {r, g, b};
             appSettings.themeColor = null;
+            
             showNotification('Custom color applied successfully');
             
             // Save to server
@@ -3760,6 +3878,10 @@ function setupRgbColorPicker() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(appSettings)
+            }).then(() => {
+                console.log('Settings saved to server');
+            }).catch(err => {
+                console.error('Error saving settings:', err);
             });
         });
     }
@@ -3803,14 +3925,31 @@ function applyCustomRgbColor(rgb) {
     const lightG = Math.min(255, g + 10);
     const lightB = Math.min(255, b + 10);
     
-    // Apply CSS variables
-    document.documentElement.style.setProperty('--primary', `rgb(${r}, ${g}, ${b})`);
-    document.documentElement.style.setProperty('--primary-dark', `rgb(${darkR}, ${darkG}, ${darkB})`);
-    document.documentElement.style.setProperty('--primary-light', `rgb(${lightR}, ${lightG}, ${lightB})`);
-    document.documentElement.style.setProperty('--primary-rgb', `${r}, ${g}, ${b}`);
-    document.documentElement.style.setProperty('--secondary', `rgb(${Math.max(0, r - 60)}, ${Math.max(0, g - 20)}, ${Math.max(0, b - 20)})`);
-    document.documentElement.style.setProperty('--accent', `rgb(${lightR}, ${lightG}, ${lightB})`);
-    document.documentElement.style.setProperty('--shadow-glass', `0 8px 32px rgba(${r}, ${g}, ${b}, 0.2)`);
+    // Remove data-theme attribute to allow CSS variables to take precedence
+    document.body.removeAttribute('data-theme');
+    
+    // Apply CSS variables with !important equivalent by using inline styles
+    const style = document.createElement('style');
+    style.id = 'custom-rgb-theme';
+    style.textContent = `
+        :root {
+            --primary: rgb(${r}, ${g}, ${b}) !important;
+            --primary-dark: rgb(${darkR}, ${darkG}, ${darkB}) !important;
+            --primary-light: rgb(${lightR}, ${lightG}, ${lightB}) !important;
+            --primary-rgb: ${r}, ${g}, ${b} !important;
+            --secondary: rgb(${Math.max(0, r - 60)}, ${Math.max(0, g - 20)}, ${Math.max(0, b - 20)}) !important;
+            --accent: rgb(${lightR}, ${lightG}, ${lightB}) !important;
+            --shadow-glass: 0 8px 32px rgba(${r}, ${g}, ${b}, 0.2) !important;
+        }
+    `;
+    
+    // Remove existing custom theme if any
+    const existingStyle = document.getElementById('custom-rgb-theme');
+    if (existingStyle) {
+        existingStyle.remove();
+    }
+    
+    document.head.appendChild(style);
     
     // Update charts
     updateChartColors();

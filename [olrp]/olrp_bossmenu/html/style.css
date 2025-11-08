@@ -833,6 +833,7 @@ tr:hover td {
     cursor: pointer;
     transition: all 0.2s ease;
     border-bottom: 2px solid transparent;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .tab.active {
@@ -842,6 +843,21 @@ tr:hover td {
 
 .tab:hover:not(.active) {
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+body.light-mode .tab {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .tab.active {
+    color: var(--primary) !important;
+    border-bottom-color: var(--primary) !important;
+}
+
+body.light-mode .tab:hover:not(.active) {
+    color: #1a1a1a !important;
+    border-bottom-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .form-group {
@@ -1475,42 +1491,71 @@ body.compact-view .employee-item {
 
     .society-action-card input[type="number"],
     .society-action-card select {
-        height: 48px;
+        height: 52px;
         margin-bottom: 0;
-        padding: 12px 16px;
-        background: rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
+        padding: 14px 18px;
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
         color: white;
         font-size: 14px;
-        transition: all 0.2s ease;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
     }
     
     .society-action-card input[type="number"]:focus,
     .society-action-card select:focus {
         outline: none;
         border-color: var(--primary);
-        box-shadow: 0 0 0 2px rgba(var(--primary-rgb, 220, 38, 38), 0.2);
+        background: rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 220, 38, 38), 0.25),
+                    0 4px 12px rgba(var(--primary-rgb, 220, 38, 38), 0.15);
+        transform: translateY(-2px);
+    }
+
+    .society-action-card input[type="number"]:hover,
+    .society-action-card select:hover {
+        border-color: rgba(255, 255, 255, 0.25);
+        background: rgba(0, 0, 0, 0.3);
     }
 
     .society-action-card label {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         display: block;
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 14px;
-        font-weight: 500;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     .society-action-card .btn {
         margin-top: auto;
         width: 100%;
         justify-content: center;
-        padding: 14px 24px;
+        padding: 16px 28px;
         height: auto;
-        min-height: 48px;
+        min-height: 52px;
         font-size: 15px;
-        font-weight: 600;
-        border-radius: 10px;
+        font-weight: 700;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        box-shadow: 0 8px 24px rgba(var(--primary-rgb, 220, 38, 38), 0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .society-action-card .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(var(--primary-rgb, 220, 38, 38), 0.5);
+        background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    }
+
+    .society-action-card .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 16px rgba(var(--primary-rgb, 220, 38, 38), 0.3);
     }
 
     .society-action-card {
@@ -1519,41 +1564,90 @@ body.compact-view .employee-item {
         min-height: 280px;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
         backdrop-filter: blur(20px);
-        border-radius: 16px;
-        padding: 24px;
+        border-radius: 20px;
+        padding: 28px;
         border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+                    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+                    0 0 40px rgba(var(--primary-rgb, 220, 38, 38), 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
+        overflow: hidden;
+        will-change: transform;
+    }
+
+    .society-action-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, 
+            var(--primary) 0%, 
+            var(--primary-light) 50%, 
+            var(--primary) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
     }
 
     .society-action-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 
+                    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+                    0 0 60px rgba(var(--primary-rgb, 220, 38, 38), 0.2);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .society-action-card:hover::before {
+        opacity: 1;
     }
 
     .society-card-title {
         font-size: 18px;
         font-weight: 600;
-        margin-bottom: 20px;
-        padding-bottom: 16px;
+        margin-bottom: 24px;
+        padding-bottom: 18px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.95);
         letter-spacing: 0.3px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
     }
     
     .society-card-title i {
-        font-size: 20px;
-        color: var(--primary);
-        width: 32px;
-        height: 32px;
+        font-size: 22px;
+        color: white;
+        width: 48px;
+        height: 48px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(var(--primary-rgb, 220, 38, 38), 0.15);
-        border-radius: 8px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(var(--primary-rgb, 220, 38, 38), 0.4);
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .society-card-title i::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 12px;
+        padding: 2px;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .society-action-card:hover .society-card-title i::after {
+        opacity: 0.6;
     }
 
 
@@ -4228,10 +4322,47 @@ body.light-mode .online-indicator {
     color: var(--success) !important;
 }
 
+body.light-mode .nav-item {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .nav-item:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #1a1a1a !important;
+}
+
+body.light-mode .nav-item.active {
+    background: linear-gradient(135deg, rgba(var(--primary-rgb, 220, 38, 38), 0.15) 0%, rgba(var(--primary-rgb, 220, 38, 38), 0.1) 100%) !important;
+    color: var(--primary) !important;
+}
+
+body.light-mode .nav-item.active i {
+    color: var(--primary) !important;
+}
+
 body.light-mode .top-navbar {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: #1a1a1a;
+}
+
+body.light-mode .employee-item,
+body.light-mode .modern-employee-list .employee-item,
+body.light-mode .employee-list .employee-item {
+    color: #1a1a1a !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .employee-item:hover,
+body.light-mode .modern-employee-list .employee-item:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .employee-item .employee-name,
+body.light-mode .employee-item .employee-grade,
+body.light-mode .employee-item .employee-status {
+    color: #1a1a1a !important;
 }
 
 body.light-mode .chart-card,

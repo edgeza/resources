@@ -568,24 +568,65 @@ function applyThemeColor(color) {
 
 // Update all chart colors when theme changes
 function updateChartColors() {
-    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#dc2626';
-    const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
+    // Get colors from computed style, ensuring we get the actual applied color
+    const computedStyle = getComputedStyle(document.documentElement);
+    let primaryColor = computedStyle.getPropertyValue('--primary').trim();
+    
+    // If color is in rgb format, convert it properly
+    if (!primaryColor || primaryColor === '') {
+        primaryColor = '#dc2626';
+    }
+    
+    // Ensure we have a valid color format
+    if (primaryColor.startsWith('rgb')) {
+        // Convert rgb(r, g, b) to hex if needed, or keep as rgb
+        // Chart.js can handle rgb format
+    } else if (!primaryColor.startsWith('#')) {
+        primaryColor = '#dc2626';
+    }
+    
+    const primaryLight = computedStyle.getPropertyValue('--primary-light').trim() || primaryColor.replace(')', ', 0.8)').replace('rgb', 'rgba');
+    if (!primaryLight || primaryLight === '') {
+        primaryLight = primaryColor;
+    }
+    
+    console.log('Updating chart colors:', { primaryColor, primaryLight });
     
     // Update activity chart
     if (activityChartInstance && !activityChartInstance.destroyed) {
         try {
-            const ctx = activityChartInstance.canvas.getContext('2d');
-            if (ctx && activityChartInstance.data && activityChartInstance.data.datasets && activityChartInstance.data.datasets[0]) {
-                const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                gradient.addColorStop(0, primaryColor + '80');
-                gradient.addColorStop(1, primaryColor + '00');
+            const canvas = activityChartInstance.canvas;
+            const ctx = canvas.getContext('2d');
+            if (ctx && canvas && activityChartInstance.data && activityChartInstance.data.datasets && activityChartInstance.data.datasets[0]) {
+                // Get canvas dimensions for gradient
+                const chartArea = activityChartInstance.chartArea || { top: 0, bottom: canvas.height };
+                const gradientHeight = chartArea.bottom - chartArea.top || canvas.height || 300;
+                
+                // Create new gradient with proper dimensions
+                const gradient = ctx.createLinearGradient(0, chartArea.top || 0, 0, chartArea.bottom || gradientHeight);
+                let colorStart, colorEnd;
+                if (primaryColor.trim().startsWith('rgb')) {
+                    colorStart = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0.5)');
+                    colorEnd = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0)');
+                } else {
+                    colorStart = primaryColor + '80';
+                    colorEnd = primaryColor + '00';
+                }
+                gradient.addColorStop(0, colorStart);
+                gradient.addColorStop(1, colorEnd);
                 
                 activityChartInstance.data.datasets[0].borderColor = primaryColor;
                 activityChartInstance.data.datasets[0].backgroundColor = gradient;
                 activityChartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
                 activityChartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
-                if (activityChartInstance.options && activityChartInstance.options.plugins && activityChartInstance.options.plugins.tooltip) {
-                    activityChartInstance.options.plugins.tooltip.borderColor = primaryColor;
+                activityChartInstance.data.datasets[0].pointBorderColor = '#ffffff';
+                activityChartInstance.data.datasets[0].pointHoverBorderColor = '#ffffff';
+                
+                if (activityChartInstance.options && activityChartInstance.options.plugins) {
+                    if (activityChartInstance.options.plugins.tooltip) {
+                        activityChartInstance.options.plugins.tooltip.borderColor = primaryColor;
+                        activityChartInstance.options.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                    }
                 }
                 activityChartInstance.update('none');
             }
@@ -593,30 +634,50 @@ function updateChartColors() {
             console.warn('Error updating activity chart colors:', e);
             // Try to recreate chart if it's broken
             if (currentJobData && currentJobData.activityData) {
-                updateActivityChart();
+                setTimeout(() => updateActivityChart(), 100);
             }
         }
     } else if (!activityChartInstance && currentJobData && currentJobData.activityData) {
         // Chart was destroyed but data exists - recreate it
-        updateActivityChart();
+        setTimeout(() => updateActivityChart(), 100);
     }
     
     // Update transactions chart
     if (chartInstance && !chartInstance.destroyed) {
         try {
             if (societyData && societyData.transactions && chartInstance.data && chartInstance.data.datasets && chartInstance.data.datasets[0]) {
-                const ctx = chartInstance.canvas.getContext('2d');
-                if (ctx) {
-                    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                    gradient.addColorStop(0, primaryColor + '80');
-                    gradient.addColorStop(1, primaryColor + '00');
+                const canvas = chartInstance.canvas;
+                const ctx = canvas.getContext('2d');
+                if (ctx && canvas) {
+                    // Get canvas dimensions for gradient
+                    const chartArea = chartInstance.chartArea || { top: 0, bottom: canvas.height };
+                    const gradientHeight = chartArea.bottom - chartArea.top || canvas.height || 300;
+                    
+                    // Create new gradient with proper dimensions
+                    const gradient = ctx.createLinearGradient(0, chartArea.top || 0, 0, chartArea.bottom || gradientHeight);
+                    let colorStart, colorEnd;
+                    if (primaryColor.trim().startsWith('rgb')) {
+                        colorStart = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0.5)');
+                        colorEnd = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0)');
+                    } else {
+                        colorStart = primaryColor + '80';
+                        colorEnd = primaryColor + '00';
+                    }
+                    gradient.addColorStop(0, colorStart);
+                    gradient.addColorStop(1, colorEnd);
                     
                     chartInstance.data.datasets[0].borderColor = primaryColor;
                     chartInstance.data.datasets[0].backgroundColor = gradient;
                     chartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
                     chartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
-                    if (chartInstance.options && chartInstance.options.plugins && chartInstance.options.plugins.tooltip) {
-                        chartInstance.options.plugins.tooltip.borderColor = primaryColor;
+                    chartInstance.data.datasets[0].pointBorderColor = '#ffffff';
+                    chartInstance.data.datasets[0].pointHoverBorderColor = '#ffffff';
+                    
+                    if (chartInstance.options && chartInstance.options.plugins) {
+                        if (chartInstance.options.plugins.tooltip) {
+                            chartInstance.options.plugins.tooltip.borderColor = primaryColor;
+                            chartInstance.options.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                        }
                     }
                     chartInstance.update('none');
                 }
@@ -625,12 +686,12 @@ function updateChartColors() {
             console.warn('Error updating transactions chart colors:', e);
             // Try to recreate chart if it's broken
             if (societyData && societyData.transactions) {
-                createTransactionsChart(societyData.transactions);
+                setTimeout(() => createTransactionsChart(societyData.transactions), 100);
             }
         }
     } else if (!chartInstance && societyData && societyData.transactions) {
         // Chart was destroyed but data exists - recreate it
-        createTransactionsChart(societyData.transactions);
+        setTimeout(() => createTransactionsChart(societyData.transactions), 100);
     }
 }
 
@@ -1798,9 +1859,15 @@ function setupApplicationEventListeners() {
 
     const refreshApplicationsBtn = document.getElementById('refresh-applications-btn');
     if (refreshApplicationsBtn) {
-        refreshApplicationsBtn.addEventListener('click', function(e) {
+        // Remove any existing listeners by cloning
+        const newBtn = refreshApplicationsBtn.cloneNode(true);
+        refreshApplicationsBtn.parentNode.replaceChild(newBtn, refreshApplicationsBtn);
+        
+        newBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
+            console.log('Refresh applications button clicked');
             refreshApplications();
         });
     }
@@ -2274,8 +2341,16 @@ function updateActivityChart() {
         data.push(item.count);
     });
     
-    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#dc2626';
-    const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
+    // Get primary color from CSS variable
+    let primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+    if (!primaryColor || primaryColor === '') {
+        primaryColor = '#dc2626';
+    }
+    
+    let primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim();
+    if (!primaryLight || primaryLight === '') {
+        primaryLight = '#ef4444';
+    }
     
     // Destroy existing chart safely
     if (activityChartInstance && !activityChartInstance.destroyed) {
@@ -2293,10 +2368,20 @@ function updateActivityChart() {
         return;
     }
     
-    // Create gradient
+    // Create gradient - handle both rgb() and hex formats
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, primaryColor + '80');
-    gradient.addColorStop(1, primaryColor + '00');
+    let colorStart, colorEnd;
+    if (primaryColor.trim().startsWith('rgb')) {
+        // Convert rgb(r, g, b) to rgba(r, g, b, alpha)
+        colorStart = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0.5)');
+        colorEnd = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0)');
+    } else {
+        // Hex format - append alpha
+        colorStart = primaryColor + '80';
+        colorEnd = primaryColor + '00';
+    }
+    gradient.addColorStop(0, colorStart);
+    gradient.addColorStop(1, colorEnd);
     
     activityChartInstance = new Chart(ctx, {
         type: 'line',
@@ -2565,6 +2650,10 @@ function updateEmployeesTables() {
     const employeesTable = document.getElementById('employees-table');
     const managementTable = document.getElementById('management-employees-table');
     
+    if (!employeesTable || !managementTable) {
+        console.warn('Employee tables not found');
+        return;
+    }
     
     employeesTable.innerHTML = '';
     managementTable.innerHTML = '';
@@ -3577,14 +3666,36 @@ function createTransactionsChart(transactions) {
 
     const chartData = prepareChartData(transactions, currentTimeframe);
     
-    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#dc2626';
-    const primaryDarkColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-dark').trim() || '#b91c1c';
-    const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
+    // Get primary color from CSS variable
+    let primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+    if (!primaryColor || primaryColor === '') {
+        primaryColor = '#dc2626';
+    }
+    
+    let primaryDarkColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-dark').trim();
+    if (!primaryDarkColor || primaryDarkColor === '') {
+        primaryDarkColor = '#b91c1c';
+    }
+    
+    let primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim();
+    if (!primaryLight || primaryLight === '') {
+        primaryLight = '#ef4444';
+    }
 
-    // Create gradient for line chart
+    // Create gradient for line chart - handle both rgb() and hex formats
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, primaryColor + '80');
-    gradient.addColorStop(1, primaryColor + '00');
+    let colorStart, colorEnd;
+    if (primaryColor.trim().startsWith('rgb')) {
+        // Convert rgb(r, g, b) to rgba(r, g, b, alpha)
+        colorStart = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0.5)');
+        colorEnd = primaryColor.trim().replace('rgb', 'rgba').replace(')', ', 0)');
+    } else {
+        // Hex format - append alpha
+        colorStart = primaryColor + '80';
+        colorEnd = primaryColor + '00';
+    }
+    gradient.addColorStop(0, colorStart);
+    gradient.addColorStop(1, colorEnd);
     
     chartInstance = new Chart(ctx, {
         type: 'line',
@@ -3593,17 +3704,17 @@ function createTransactionsChart(transactions) {
             datasets: [{
                 label: 'Transaction Amount',
                 data: chartData.values,
-                borderColor: primaryColor || '#dc2626',
+                borderColor: primaryColor,
                 backgroundColor: gradient,
                 borderWidth: 3,
                 fill: true,
                 tension: 0.4,
                 pointRadius: 4,
                 pointHoverRadius: 6,
-                pointBackgroundColor: primaryColor || '#dc2626',
+                pointBackgroundColor: primaryColor,
                 pointBorderColor: '#ffffff',
                 pointBorderWidth: 2,
-                pointHoverBackgroundColor: primaryLight || '#ef4444',
+                pointHoverBackgroundColor: primaryLight,
                 pointHoverBorderColor: '#ffffff',
                 pointHoverBorderWidth: 3
             }]
@@ -3951,8 +4062,11 @@ function applyCustomRgbColor(rgb) {
     
     document.head.appendChild(style);
     
-    // Update charts
-    updateChartColors();
+    // Force a small delay to ensure CSS variables are updated in the DOM
+    setTimeout(() => {
+        // Update charts with new colors
+        updateChartColors();
+    }, 100);
 }
 
 // Employee Details Panel Functions

@@ -195,10 +195,43 @@ function App() {
 			title: "Delete your character",
 			centered: true,
 			children: (
-				<Text size='sm'>Are you sure you want to delete your character?</Text>
+				<Text size='sm' c="rgba(255, 255, 255, 0.8)">
+					Are you sure you want to delete your character? This action cannot be undone.
+				</Text>
 			),
 			labels: { confirm: "Delete character", cancel: "Cancel" },
-			confirmProps: { color: "red" },
+			confirmProps: { 
+				color: "red",
+				style: {
+					background: 'rgba(239, 68, 68, 0.15)',
+					backdropFilter: 'blur(10px)',
+					WebkitBackdropFilter: 'blur(10px)',
+					border: '1px solid rgba(239, 68, 68, 0.3)',
+					color: 'rgba(255, 255, 255, 0.95)',
+					fontWeight: 500,
+				}
+			},
+			styles: {
+				content: {
+					background: 'rgba(20, 20, 25, 0.95)',
+					backdropFilter: 'blur(30px) saturate(180%)',
+					WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+					border: '1px solid rgba(255, 255, 255, 0.18)',
+					borderRadius: '20px',
+					boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+				},
+				header: {
+					background: 'rgba(255, 255, 255, 0.05)',
+					borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+				},
+				title: {
+					color: 'white',
+					fontWeight: 600,
+				},
+				close: {
+					color: 'rgba(255, 255, 255, 0.7)',
+				},
+			},
 			onCancel: () => console.log("Cancel"),
 			onConfirm: () => HandleDelete(citizenid),
 		});
@@ -210,6 +243,27 @@ function App() {
 				onClose={close}
 				title={"Create Character " + (createCharacterId + 1)}
 				centered
+				styles={{
+					content: {
+						background: 'rgba(20, 20, 25, 0.95)',
+						backdropFilter: 'blur(30px) saturate(180%)',
+						WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+						border: '1px solid rgba(255, 255, 255, 0.18)',
+						borderRadius: '20px',
+						boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+					},
+					header: {
+						background: 'rgba(255, 255, 255, 0.05)',
+						borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+					},
+					title: {
+						color: 'white',
+						fontWeight: 600,
+					},
+					close: {
+						color: 'rgba(255, 255, 255, 0.7)',
+					},
+				}}
 			>
 				<CreateCharacterModal
 					id={createCharacterId + 1}
@@ -221,62 +275,48 @@ function App() {
 				<div className='container'>
 					{visible && (
 						<div className='character-selector-top'>
-							<IconUsersGroup 
-								size={50} 
-								style={{
-									color: '#ffffff',
-									filter: 'drop-shadow(0 0 10px rgba(34, 139, 230, 0.6)) drop-shadow(0 0 20px rgba(34, 139, 230, 0.4))',
-									marginBottom: '15px',
-									animation: 'pulse 2s ease-in-out infinite'
-								}} 
-							/>
-							<Title 
-								order={2} 
-								fz={42}
-								fw={700}
-								style={{
-									background: 'linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%)',
-									WebkitBackgroundClip: 'text',
-									WebkitTextFillColor: 'transparent',
-									backgroundClip: 'text',
-									textShadow: '0 0 30px rgba(255, 255, 255, 0.5)',
-									letterSpacing: '1px',
-									marginBottom: '10px',
-									position: 'relative',
-									display: 'inline-block',
-									fontFamily: 'system-ui, -apple-system, sans-serif'
-								}}
-							>
-								Welcome to OneLife Roleplay
+							<IconUsersGroup size={50} style={{ color: 'rgba(120, 119, 198, 0.9)', filter: 'drop-shadow(0 0 10px rgba(120, 119, 198, 0.5))' }} />
+							<Title order={2} fz={36} c={"white"} fw={700} style={{ 
+								background: 'linear-gradient(135deg, rgba(120, 119, 198, 1) 0%, rgba(255, 119, 198, 1) 100%)',
+								WebkitBackgroundClip: 'text',
+								WebkitTextFillColor: 'transparent',
+								backgroundClip: 'text',
+								textShadow: '0 0 30px rgba(120, 119, 198, 0.3)'
+							}}>
+								Welcome to One Life Roleplay
 							</Title>
-							<Text 
-								fw={500} 
-								fz={16}
-								style={{
-									color: 'rgba(255, 255, 255, 0.9)',
-									letterSpacing: '0.5px',
-									textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
-								}}
-							>
+							<Text fw={400} fz={16} c="rgba(255, 255, 255, 0.8)">
 								Select the character you want to play
 							</Text>
 						</div>
 					)}
 
 					<Transition transition='slide-up' mounted={visible}>
-						{(style) => (
+						{(style: React.CSSProperties) => (
 							<ScrollArea style={{ ...style }} w={1650}>
 								<div className='multichar'>
 									{[...Array(allowedCharacters)].map((_, index) => {
 										const character = characters[index];
 										return character ? (
-											<div key={character.citizenid} className={`character-card ${isSelected === character.cid ? 'selected' : ''}`}>
-												<Group justify='space-between'>
-													<Text fw={600} fz={18}>{character.name}</Text>
+											<div className='character-card'>
+												<Group justify='space-between' style={{ marginBottom: '5px' }}>
+													<Text fw={600} fz={20} c="white" style={{ 
+														textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
+													}}>
+														{character.name}
+													</Text>
 													<Badge
-														color='rgba(196, 196, 196, 1)'
 														variant='light'
-														radius='sm'
+														radius='md'
+														style={{
+															background: 'rgba(255, 255, 255, 0.1)',
+															backdropFilter: 'blur(10px)',
+															WebkitBackdropFilter: 'blur(10px)',
+															border: '1px solid rgba(255, 255, 255, 0.2)',
+															color: 'rgba(255, 255, 255, 0.9)',
+															fontSize: '11px',
+															fontWeight: 500
+														}}
 													>
 														{character.citizenid}
 													</Badge>
@@ -287,34 +327,50 @@ function App() {
 														isSelected === character.cid ? "show" : "hide"
 													}
 												>
-													<div className='character-details-container'>
-														<SimpleGrid cols={2} spacing={10}>
-															{character.metadata &&
-																character.metadata.length > 0 &&
-																character.metadata.map((metadata) => (
-																	<InfoCard
-																		key={metadata.key}
-																		icon={metadata.key}
-																		label={metadata.value}
-																	/>
-																))}
-														</SimpleGrid>
-													</div>
+													<SimpleGrid cols={2} spacing={3}>
+														{character.metadata &&
+															character.metadata.length > 0 &&
+															character.metadata.map((metadata: { key: string; value: string }) => (
+																<InfoCard
+																	key={metadata.key}
+																	icon={metadata.key}
+																	label={metadata.value}
+																/>
+															))}
+													</SimpleGrid>
 
-													<Divider color='rgba(255, 255, 255, 0.2)' my={15} />
+													<Divider 
+														color='rgba(255, 255, 255, 0.1)' 
+														size="sm"
+														style={{ margin: '5px 0' }}
+													/>
 
 													<div className='character-card-actions'>
 														<Button
 															color='green'
-															variant='filled'
+															variant='light'
 															fullWidth
 															leftSection={<IconPlayerPlay size={16} />}
-															h={40}
-															radius='md'
+															h={38}
+															radius="md"
 															style={{
-																background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(22, 163, 74, 0.9) 100%)',
-																border: '1px solid rgba(255, 255, 255, 0.2)',
+																background: 'rgba(34, 197, 94, 0.15)',
 																backdropFilter: 'blur(10px)',
+																WebkitBackdropFilter: 'blur(10px)',
+																border: '1px solid rgba(34, 197, 94, 0.3)',
+																color: 'rgba(255, 255, 255, 0.95)',
+																fontWeight: 500,
+																transition: 'all 0.2s ease',
+															}}
+															onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+																e.currentTarget.style.background = 'rgba(34, 197, 94, 0.25)';
+																e.currentTarget.style.borderColor = 'rgba(34, 197, 94, 0.5)';
+																e.currentTarget.style.transform = 'translateY(-2px)';
+															}}
+															onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+																e.currentTarget.style.background = 'rgba(34, 197, 94, 0.15)';
+																e.currentTarget.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+																e.currentTarget.style.transform = 'translateY(0)';
 															}}
 															onClick={() => {
 																HandlePlay(character.citizenid);
@@ -325,15 +381,29 @@ function App() {
 
 														<Button
 															color='red'
-															variant='filled'
+															variant='light'
 															fullWidth
 															leftSection={<IconTrash size={16} />}
-															h={40}
-															radius='md'
+															h={38}
+															radius="md"
 															style={{
-																background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.8) 0%, rgba(220, 38, 38, 0.9) 100%)',
-																border: '1px solid rgba(255, 255, 255, 0.2)',
+																background: 'rgba(239, 68, 68, 0.15)',
 																backdropFilter: 'blur(10px)',
+																WebkitBackdropFilter: 'blur(10px)',
+																border: '1px solid rgba(239, 68, 68, 0.3)',
+																color: 'rgba(255, 255, 255, 0.95)',
+																fontWeight: 500,
+																transition: 'all 0.2s ease',
+															}}
+															onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+																e.currentTarget.style.background = 'rgba(239, 68, 68, 0.25)';
+																e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+																e.currentTarget.style.transform = 'translateY(-2px)';
+															}}
+															onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+																e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)';
+																e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+																e.currentTarget.style.transform = 'translateY(0)';
 															}}
 															onClick={() => {
 																openDeleteModal(character.citizenid);
@@ -351,14 +421,28 @@ function App() {
 												>
 													<Button
 														color='blue'
-														variant='filled'
+														variant='light'
 														fullWidth
-														h={40}
-														radius='md'
+														h={38}
+														radius="md"
 														style={{
-															background: 'linear-gradient(135deg, rgba(34, 139, 230, 0.8) 0%, rgba(25, 113, 194, 0.9) 100%)',
-															border: '1px solid rgba(255, 255, 255, 0.2)',
+															background: 'rgba(59, 130, 246, 0.15)',
 															backdropFilter: 'blur(10px)',
+															WebkitBackdropFilter: 'blur(10px)',
+															border: '1px solid rgba(59, 130, 246, 0.3)',
+															color: 'rgba(255, 255, 255, 0.95)',
+															fontWeight: 500,
+															transition: 'all 0.2s ease',
+														}}
+														onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+															e.currentTarget.style.background = 'rgba(59, 130, 246, 0.25)';
+															e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.5)';
+															e.currentTarget.style.transform = 'translateY(-2px)';
+														}}
+														onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+															e.currentTarget.style.background = 'rgba(59, 130, 246, 0.15)';
+															e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+															e.currentTarget.style.transform = 'translateY(0)';
 														}}
 														onClick={() => {
 															HandleSelect(character.cid, character.citizenid);
@@ -377,7 +461,29 @@ function App() {
 													color='blue'
 													variant='light'
 													fullWidth
-													leftSection={<IconPlus size={24} />}
+													leftSection={<IconPlus size={28} />}
+													h={50}
+													radius="md"
+													style={{
+														background: 'rgba(120, 119, 198, 0.15)',
+														backdropFilter: 'blur(10px)',
+														WebkitBackdropFilter: 'blur(10px)',
+														border: '1px solid rgba(120, 119, 198, 0.3)',
+														color: 'rgba(255, 255, 255, 0.95)',
+														fontWeight: 600,
+														fontSize: '16px',
+														transition: 'all 0.3s ease',
+													}}
+													onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+														e.currentTarget.style.background = 'rgba(120, 119, 198, 0.25)';
+														e.currentTarget.style.borderColor = 'rgba(120, 119, 198, 0.5)';
+														e.currentTarget.style.transform = 'scale(1.02)';
+													}}
+													onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+														e.currentTarget.style.background = 'rgba(120, 119, 198, 0.15)';
+														e.currentTarget.style.borderColor = 'rgba(120, 119, 198, 0.3)';
+														e.currentTarget.style.transform = 'scale(1)';
+													}}
 													onClick={() => {
 														open();
 														setCreateCharacterId(index);

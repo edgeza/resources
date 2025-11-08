@@ -20,16 +20,10 @@ Config.Enabled = true
 Config.LowPlayerThreshold = 10   -- 1-10 players: use high density
 Config.HighPlayerThreshold = 100  -- 100+ players: use low density
 
-<<<<<<< Updated upstream
--- Density values
-Config.HighDensity = 0.0  -- Density when few players (1-10 players)
-Config.LowDensity = 0.00   -- Density when many players (100+ players)
-=======
 -- Density values (0.0 = no NPCs, 1.0 = full GTA Online density)
 -- These values are clamped between 0.0 and 1.0
-Config.HighDensity = 0.2  -- Density when few players (1-10 players)
-Config.LowDensity = 0.05   -- Density when many players (100+ players)
->>>>>>> Stashed changes
+Config.HighDensity = 0.0  -- Density when few players (1-10 players)
+Config.LowDensity = 0.0   -- Density when many players (100+ players)
 
 -- Update interval (milliseconds) - How often to check player count and update target density
 -- Note: Density is applied every frame, this only updates the target value

@@ -112,7 +112,7 @@ local ambulances = {
 	['ak47_ambulancejob'] = 'ak47'
 }
 
-Config.Ambulance = 'brutal'
+Config.Ambulance = dependencyCheck(ambulances) or 'brutal'
 
 --[[
     This section is configurable for inventory locking during Deathmatch. It depends on your inventory system, as it requires multiple events from it.

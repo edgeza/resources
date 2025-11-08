@@ -1455,9 +1455,11 @@ end
 local function CasinoOpenStateChanged(isOpen, nextOpenTime, forceClosed)
     OPEN_STATE = {isOpen, nextOpenTime}
     FORCE_CLOSED = forceClosed
-    if not OPEN_STATE[1] and IsEntityInCasino(PlayerPedId()) then
-        Casino_ShowNotInOpenHoursPrompt(true)
-        StopFromPlaying()
+    if IN_CASINO then
+        if not OPEN_STATE[1] and IsEntityInCasino(PlayerPedId()) then
+            Casino_ShowNotInOpenHoursPrompt(true)
+            StopFromPlaying()
+        end
     end
 end
 
@@ -1525,9 +1527,23 @@ function OnEnterCasino()
             ForceDeleteEntity(jWheel)
         end
         Wait(100)
-    end
-
-    if Config.MapType == 5 then
+    elseif Config.MapType == 12 then
+        CreateModelSwap(-1501.01, -592.945, 30.28, 1.0, GetHashKey("vw_prop_casino_3cardpoker_01b"),
+            GetHashKey("vw_prop_casino_3cardpoker_01"))
+        CreateModelSwap(-1505.3, -592.8, 30.28, 1.0, GetHashKey("vw_prop_casino_roulette_01b"),
+            GetHashKey("vw_prop_casino_roulette_01"))
+        CreateModelSwap(-1509.7, -592.4, 30.2, 1.0, GetHashKey("vw_prop_casino_roulette_01b"),
+            GetHashKey("vw_prop_casino_roulette_01"))
+        CreateModelSwap(-1513.6, -591.6, 30.28, 1.0, GetHashKey("vw_prop_casino_blckjack_01b"),
+            GetHashKey("vw_prop_casino_blckjack_01"))
+    elseif Config.MapType == 13 then
+        CreateModelSwap(-1378.6, -1057.6, 10.7, 1.0, GetHashKey("vw_prop_casino_roulette_01b"),
+            GetHashKey("vw_prop_casino_roulette_01"))
+        CreateModelSwap(-1375.2, -1057.2, 10.7, 1.0, GetHashKey("vw_prop_casino_3cardpoker_01b"),
+            GetHashKey("vw_prop_casino_3cardpoker_01"))
+        CreateModelSwap(-1374.23, -1066.28, 10.7, 1.0, GetHashKey("vw_prop_casino_blckjack_01b"),
+            GetHashKey("vw_prop_casino_blckjack_01"))
+    elseif Config.MapType == 5 then
         -- Request coliision on enter
         -- SetEntityCoordsNoOffset(PlayerPedId(), Config.EnterPosition)
         SetEntityHeading(PlayerPedId(), 247.53)
@@ -2252,6 +2268,12 @@ AddEventHandler("Casino:AdminShowMenu", function(states)
     GameStates_ShowMenu()
 end)
 
+-- server allows player to open chip management
+RegisterNetEvent("Casino:AdminChipManagement")
+AddEventHandler("Casino:AdminChipManagement", function(playerList)
+    GameStates_ChipManagement(playerList)
+end)
+
 -- standalone: server allows player to open the workers menu & edit workers
 RegisterNetEvent("Casino:AdminShowWorkers")
 AddEventHandler("Casino:AdminShowWorkers", function(workers)
@@ -2643,6 +2665,20 @@ end
 CASINO_BLIP = SetCasinoBlip(BLIP_POS_EXTERIORBLIP, Config.CASINO_BLIP_ID, Translation.Get("BLIP_CASINO"), true)
 
 function StartCasinoBouncerScene()
+    local initialCoords = vector3(917.190674, 67.115181, 79.661957)
+    local sceneCoords = vector3(922.668030, 42.495995, 81.106354 - 0.9)
+    local sceneRot = vector3(0, 0, 0)
+    local camAnimCoord = vec3(916.739746, 51.812984, 81.547272)
+    local camAnimRot = vec3(-1.216172, 0.057050, -120.999947)
+
+    if Config.MapType == 11 then
+        initialCoords = vec3(-266.877411, -899.825500, 32.317165)
+        sceneCoords = vec3(-266.877411, -899.825500 + 1.4, 32.317165 - 0.9)
+        camAnimCoord = vec3(-277.613556, -895.336609, 35.284294)
+        camAnimRot = vec3(-14.885425, 0.057705, -109.154701)
+        sceneRot = vector3(0, 0, 90.0)
+    end
+
     if CASINO_BEING_KICKED then
         return
     end
@@ -2655,7 +2691,7 @@ function StartCasinoBouncerScene()
     end)
     DoScreenFadeOut(500)
     Wait(500)
-    SetEntityCoordsNoOffset(PlayerPedId(), 917.190674, 67.115181, 79.661957)
+    SetEntityCoordsNoOffset(PlayerPedId(), camAnimCoord)
     Wait(500)
 
     local tOutDict = "mini@strip_club@throwout_d@"
@@ -2669,7 +2705,6 @@ function StartCasinoBouncerScene()
         Wait(33)
     end
 
-    local sceneCoords = vector3(922.668030, 42.495995, 81.106354 - 0.9)
     local bouncer1 = CreatePed(4, GetHashKey("s_m_m_bouncer_01"), sceneCoords)
     local bouncer2 = CreatePed(4, GetHashKey("s_m_m_bouncer_02"), sceneCoords)
     local myself = ClonePed(PlayerPedId(), 0.0, false)
@@ -2685,13 +2720,15 @@ function StartCasinoBouncerScene()
     SetPedComponentVariation(bouncer1, 11, 0, 0, 0)
     SetPedComponentVariation(bouncer1, 8, 1, 0, 0)
 
-    local cam = CreateCam("DEFAULT_ANIMATED_CAMERA", true)
-    SetCamCoord(cam, 922.668030, 42.495995, 81.106354)
+    local cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
+    SetCamCoord(cam, camAnimCoord.x, camAnimCoord.y, camAnimCoord.z)
+    SetCamRot(cam, camAnimRot.x, camAnimRot.y, camAnimRot.z, 2)
     SetCamActive(cam, true)
+    SetCamFov(cam, 60.0)
     RenderScriptCams(true, true, 1, true, true)
-    PlayCamAnim(cam, "throwout_d_cam", tOutDict, 910.080, 45.454, 79.894, 0.0, 0.0, 200.0, 0, 0)
+    ShakeCam(cam, "HAND_SHAKE", 1.5)
 
-    local initialPos, initialRot = GetInitialAnimOffsets(tOutDict, "throwout_d_victim", sceneCoords, 0, 0, 0)
+    local initialPos, initialRot = GetInitialAnimOffsets(tOutDict, "throwout_d_victim", sceneCoords, sceneRot)
     local scene = CreateSynchronizedScene(initialPos, initialRot, 2)
 
     TaskSynchronizedScene(myself, scene, tOutDict, "throwout_d_victim", 2.0, -1.5, 13, 16, 2.0, 0)

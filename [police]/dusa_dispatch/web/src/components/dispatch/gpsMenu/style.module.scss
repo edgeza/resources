@@ -1,0 +1,203 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 1vw;
+  width: 26vw;
+  height: 80%;
+  border-radius: 0.55038rem;
+  pointer-events: all;
+  background: linear-gradient(
+    180deg,
+    #070707 0%,
+    rgba(7, 7, 7, 0.96) 100%
+  );
+  overflow: hidden;
+}
+
+.menuHead {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: max-content;
+  padding: 1vw;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  .smallIcon{
+    position: absolute;
+    z-index: 1;
+    right: 0.8vw;
+    top: 0.3vw;
+    cursor: pointer;
+    img{
+      width: 1.5vw;
+      height: auto;
+    }
+  }
+  .headBorder {
+    position: absolute;
+    top: 0;
+    width: 6vw;
+    height: 0.4vw;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+  h2 {
+    text-align: center;
+    -webkit-text-stroke-width: 0.7324395179748535px;
+    font-family: var(--font-satoshi);
+    font-size: 2.3vw;
+    font-weight: 600;
+  }
+  p {
+    color: rgba(255, 255, 255, 0.52);
+    text-align: center;
+    font-family: var(--font-satoshi);
+    font-size: 0.8vw;
+    font-weight: 500;
+  }
+}
+
+.gpsMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  width: 100%;
+  height: max-content;
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    padding: 0.5vw;
+    border-radius: 0.98569rem;
+    border: 1.504px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(9.547733306884766px);
+    p{
+        padding: 0.4vw;
+        cursor: pointer;
+        text-align: center;
+        font-size: 0.8vw;
+        font-family: var(--font-satoshi);
+        font-weight: 700;
+        color: #7D7D7E;
+        transition: 0.3s ease-in-out;
+        border-radius: 0.70525rem;
+        border: 2.344px solid #ffffff00;
+
+    }
+  }
+  .create{
+    padding: 0.4vw;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.8vw;
+    font-family: var(--font-satoshi);
+    font-weight: 700;
+    color: #7D7D7E;
+    transition: 0.3s ease-in-out;
+    border-radius: 0.70525rem;
+  }
+}
+
+.body{
+    position: relative;
+    width: 100%;
+    height: 70%;
+}
+
+.police {
+  .menuHead {
+    .headBorder {
+      background-color: #1fa2ec;
+      box-shadow: 0px 0px 8vw 0.9vw #1fa2ec;
+    }
+    h2 {
+      -webkit-text-stroke-color: #1fa2ec;
+      background: linear-gradient(
+        98deg,
+        #24a9f4 2.03%,
+        rgba(31, 169, 246, 0) 103.6%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  .gpsMenu{
+    .tab{
+        p{
+            &.active{
+                color: #1fa2ec;
+                border-radius: 0.70525rem;
+                border: 2.344px solid #268DC7;
+                background: rgba(31, 162, 236, 0.10);
+                box-shadow: 0px 0px 17.974px 0px rgba(236, 31, 31, 0.17);
+            }
+            &:hover{
+                color: #1fa2ec;
+            }
+        }
+    }
+    .create{
+            color: #1fa2ec;
+            border-radius: 0.70525rem;
+            border: 2.344px solid #268DC7;
+            background: rgba(31, 162, 236, 0.10);
+            box-shadow: 0px 0px 17.974px 0px rgba(236, 31, 31, 0.17);
+            &:hover{
+                background: rgba(31, 162, 236, 0.20);
+            }
+    }
+  }
+}
+
+.ambulance {
+  .menuHead {
+    .headBorder {
+      background-color: #ff3939;
+      box-shadow: 0px 0px 8vw 0.9vw #ff3939;
+    }
+    h2 {
+      -webkit-text-stroke-color: #ff3939;
+      background: linear-gradient(
+        98deg,
+        #ff3939 2.03%,
+        rgba(255, 57, 57, 0) 103.6%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+    .gpsMenu{
+        .tab{
+            p{
+                &.active{
+                    color: #ff3939;
+                    border-radius: 0.70525rem;
+                    border: 2.344px solid #ff3939;
+                    background: rgba(255, 57, 57, 0.10);
+                    box-shadow: 0px 0px 17.974px 0px rgba(236, 31, 31, 0.17);
+                }
+                &:hover{
+                    color: #ff3939;
+                }
+            }
+        }
+        .create{
+                color: #ff3939;
+                border-radius: 0.70525rem;
+                border: 2.344px solid #ff3939;
+                background: rgba(255, 57, 57, 0.10);
+                box-shadow: 0px 0px 17.974px 0px rgba(236, 31, 31, 0.17);
+                &:hover{
+                    background: rgba(255, 57, 57, 0.20);
+                }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+SetTimeout(1000, function ()
+    Framework.CreateUseableItem('bodycam', function (source)
+        TriggerClientEvent('dusa_dispatch:toggleBodycam', source)
+    end)
+end)

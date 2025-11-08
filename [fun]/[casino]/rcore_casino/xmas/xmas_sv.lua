@@ -87,12 +87,12 @@ AddEventHandler("Casino:XmasUseTree", function(treeId)
     local cooldowns = json.decode(cache.xmasCooldowns) or {}
 
     -- in cooldown
-    if cooldowns and cooldowns[treeId] and os.time() < cooldowns[treeId] then
+    if cooldowns and cooldowns[treeId] and GetServerTime() < cooldowns[treeId] then
         return
     end
 
     -- save cooldown
-    local cooldown = os.time() + tree.cooldown
+    local cooldown = GetServerTime() + tree.cooldown
     cooldowns[treeId] = cooldown
     cache.xmasCooldowns = json.encode(cooldowns)
 

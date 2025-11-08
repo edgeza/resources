@@ -670,5 +670,8 @@ Translation["en"] = {
     HORSEGAME_BALANCE = "CURRENT BALANCE",
     HORSEGAME_STARTS = "EVENT STARTS IN",
     ABOUT = "About",
+    ADMIN_MENU_CHIP_MNG = "Chip Management",
+    ADMIN_MENU_GAMESTATES = "Game States",
+    ADMIN_MENU_CHIPS_NEWBALANCE = "New Balance",
 }
 

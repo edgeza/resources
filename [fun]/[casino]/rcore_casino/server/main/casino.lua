@@ -506,6 +506,9 @@ function Pay(playerId, item, chips, game)
     if game ~= "Cashier" then
         local logMessage = "Paid for: " .. item .. " in " .. game
         AddLogEvent(playerId, logMessage, -chips, true)
+        if Config.EnableSociety then
+            GiveMoneyToSociety(chips)
+        end
     end
 
     Cache:IncrementPlayerState(playerId, "Score", -chips)
@@ -544,6 +547,10 @@ function Win(playerId, item, chips, game)
     if game ~= "Cashier" then
         local logMessage = "Won: " .. item .. " in " .. game
         AddLogEvent(playerId, logMessage, chips, true)
+
+        if Config.EnableSociety then
+            RemoveMoneyFromSociety(chips)
+        end
     end
 
     Cache:IncrementPlayerState(playerId, "Score", chips)
@@ -796,8 +803,9 @@ AddEventHandler("Casino:SaveAmbientPeds", function(buffer)
         return
     end
     local fileNames = {"peddata.txt", "peddata_gabz.txt", "peddata_gabz.txt", "peddata_k4mb1.txt", "peddata_gtao.txt",
-                       "0", "peddata_oldk4mb1.txt", "0", "peddata_cawles.txt", "peddata_molo.txt"}
-                       
+                       "0", "peddata_oldk4mb1.txt", "0", "peddata_cawles.txt", "peddata_molo.txt", "0",
+                       "peddata_atlantis.txt", "peddata_town.txt"}
+
     local fileName = fileNames[Config.MapType]
     if not fileName then
         return
@@ -999,7 +1007,9 @@ function PrintInfo()
     end
     local frameworks = {"ESX", "QB", "Standalone", "Custom"}
     local mapNames = {"DLCiplLoader", "Gabz Casino", "NoPixel Casino", "k4mb1", "GTA:O Interior",
-                      "Underground Casino PALETO", "K4MB1 old enterable casino", "Patoche MLO Casino underground", "Clawles: Casino Los Santos", "Molo Casino"}
+                      "Underground Casino PALETO", "K4MB1 old enterable casino", "Patoche MLO Casino underground",
+                      "Clawles: Casino Los Santos", "Molo Casino", "Jurassic Jackpot Casino", "Atlantis Casino",
+                      "The Town Resort & Casino"}
     local dateTime = os.date("%d.%m.%Y, %I:%M %p", GetServerTime())
 
     print("^3")
@@ -1287,6 +1297,58 @@ AddEventHandler("Casino:AdminShowMenu", function()
     end
 
     TriggerClientEvent("Casino:AdminShowMenu", playerId, GameStates)
+end)
+
+-- Admin: Standalone chip management: Get player list
+RegisterNetEvent("Casino:AdminChipManagement")
+AddEventHandler("Casino:AdminChipManagement", function()
+    local playerId = source
+    if not IsPlayerAdmin(playerId) then
+        return
+    end
+    local playerList = {}
+    for _, playerId in ipairs(GetPlayers()) do
+        local id = GetPlayerIdentifier(playerId)
+        if id and id ~= -1 then
+            local name = GetPlayerName(playerId)
+            local o = {
+                name = name,
+                id = id,
+                playerId = playerId,
+                chips = GetPlayerChips(playerId)
+            }
+            table.insert(playerList, o)
+        end
+    end
+    TriggerClientEvent("Casino:AdminChipManagement", playerId, playerList)
+end)
+
+-- Admin: Standalone chip management: Edit player balance
+RegisterNetEvent("Casino:AdminEditPlayerChips")
+AddEventHandler("Casino:AdminEditPlayerChips", function(managingId, newBalance)
+    local playerId = source
+    managingId = tonumber(managingId)
+    newBalance = tonumber(newBalance)
+    if not IsPlayerAdmin(playerId) then
+        return
+    end
+
+    local identifier = GetPlayerIdentifier(managingId)
+    if not identifier or identifier == -1 then
+        return
+    end
+
+    local actualBalance = GetPlayerChips(managingId)
+    if not actualBalance then
+        return
+    end
+
+    local diff = newBalance - actualBalance
+    if diff > 0 then
+        Win(managingId, "Admin Edit", diff, "Admin Edit")
+    elseif diff < 0 then
+        Pay(managingId, "Admin Edit", -diff, "Admin Edit")
+    end
 end)
 
 -- Admin: Request casino workers

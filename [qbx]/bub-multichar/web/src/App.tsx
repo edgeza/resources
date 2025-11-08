@@ -238,7 +238,7 @@ function App() {
 									{[...Array(allowedCharacters)].map((_, index) => {
 										const character = characters[index];
 										return character ? (
-											<div className={`character-card ${isSelected === character.cid ? 'selected' : ''}`}>
+											<div key={character.citizenid} className={`character-card ${isSelected === character.cid ? 'selected' : ''}`}>
 												<Group justify='space-between'>
 													<Text fw={600} fz={18}>{character.name}</Text>
 													<Badge

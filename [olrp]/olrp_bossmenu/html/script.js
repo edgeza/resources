@@ -25,6 +25,7 @@ let chartInstance = null;
 let activityChartInstance = null;
 let currentTimeframe = 'week';
 let currentEmployeePermissions = {};
+let chartHealthCheckInterval = null;
 let selectedEmployeeForPermissions = null;
 let currentJobGrades = {};
 let playerTimeOffset = null;
@@ -127,7 +128,14 @@ function setupHireEmployeeModal() {
     // Add event listener to the Hire Employee button
     const hireEmployeeBtn = document.getElementById('hire-employee-btn');
     if (hireEmployeeBtn) {
-        hireEmployeeBtn.addEventListener('click', function() {
+        // Remove any existing listeners
+        const newBtn = hireEmployeeBtn.cloneNode(true);
+        hireEmployeeBtn.parentNode.replaceChild(newBtn, hireEmployeeBtn);
+        
+        // Add fresh event listener
+        newBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             openHireModal();
         });
     }
@@ -555,33 +563,113 @@ function updateChartColors() {
     const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
     
     // Update activity chart
-    if (activityChartInstance) {
-        const ctx = activityChartInstance.canvas.getContext('2d');
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, primaryColor + '80');
-        gradient.addColorStop(1, primaryColor + '00');
-        
-        activityChartInstance.data.datasets[0].borderColor = primaryColor;
-        activityChartInstance.data.datasets[0].backgroundColor = gradient;
-        activityChartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
-        activityChartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
-        activityChartInstance.options.plugins.tooltip.borderColor = primaryColor;
-        activityChartInstance.update('none');
+    if (activityChartInstance && !activityChartInstance.destroyed) {
+        try {
+            const ctx = activityChartInstance.canvas.getContext('2d');
+            if (ctx && activityChartInstance.data && activityChartInstance.data.datasets && activityChartInstance.data.datasets[0]) {
+                const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                gradient.addColorStop(0, primaryColor + '80');
+                gradient.addColorStop(1, primaryColor + '00');
+                
+                activityChartInstance.data.datasets[0].borderColor = primaryColor;
+                activityChartInstance.data.datasets[0].backgroundColor = gradient;
+                activityChartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
+                activityChartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
+                if (activityChartInstance.options && activityChartInstance.options.plugins && activityChartInstance.options.plugins.tooltip) {
+                    activityChartInstance.options.plugins.tooltip.borderColor = primaryColor;
+                }
+                activityChartInstance.update('none');
+            }
+        } catch (e) {
+            console.warn('Error updating activity chart colors:', e);
+            // Try to recreate chart if it's broken
+            if (currentJobData && currentJobData.activityData) {
+                updateActivityChart();
+            }
+        }
+    } else if (!activityChartInstance && currentJobData && currentJobData.activityData) {
+        // Chart was destroyed but data exists - recreate it
+        updateActivityChart();
     }
     
     // Update transactions chart
-    if (chartInstance && societyData && societyData.transactions) {
-        const ctx = chartInstance.canvas.getContext('2d');
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, primaryColor + '80');
-        gradient.addColorStop(1, primaryColor + '00');
-        
-        chartInstance.data.datasets[0].borderColor = primaryColor;
-        chartInstance.data.datasets[0].backgroundColor = gradient;
-        chartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
-        chartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
-        chartInstance.options.plugins.tooltip.borderColor = primaryColor;
-        chartInstance.update('none');
+    if (chartInstance && !chartInstance.destroyed) {
+        try {
+            if (societyData && societyData.transactions && chartInstance.data && chartInstance.data.datasets && chartInstance.data.datasets[0]) {
+                const ctx = chartInstance.canvas.getContext('2d');
+                if (ctx) {
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                    gradient.addColorStop(0, primaryColor + '80');
+                    gradient.addColorStop(1, primaryColor + '00');
+                    
+                    chartInstance.data.datasets[0].borderColor = primaryColor;
+                    chartInstance.data.datasets[0].backgroundColor = gradient;
+                    chartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
+                    chartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
+                    if (chartInstance.options && chartInstance.options.plugins && chartInstance.options.plugins.tooltip) {
+                        chartInstance.options.plugins.tooltip.borderColor = primaryColor;
+                    }
+                    chartInstance.update('none');
+                }
+            }
+        } catch (e) {
+            console.warn('Error updating transactions chart colors:', e);
+            // Try to recreate chart if it's broken
+            if (societyData && societyData.transactions) {
+                createTransactionsChart(societyData.transactions);
+            }
+        }
+    } else if (!chartInstance && societyData && societyData.transactions) {
+        // Chart was destroyed but data exists - recreate it
+        createTransactionsChart(societyData.transactions);
+    }
+}
+
+// Chart health check - ensures charts don't disappear
+function checkChartHealth() {
+    // Check activity chart
+    const activityCanvas = document.getElementById('activity-line-chart');
+    if (activityCanvas && activityCanvas.offsetParent !== null) {
+        // Canvas is visible
+        if (!activityChartInstance || activityChartInstance.destroyed) {
+            // Chart is missing but canvas exists and is visible - recreate
+            if (currentJobData && currentJobData.activityData && currentJobData.activityData.length > 0) {
+                console.log('Recreating missing activity chart');
+                updateActivityChart();
+            }
+        }
+    }
+    
+    // Check transactions chart
+    const transactionsCanvas = document.getElementById('transactions-line-chart');
+    if (transactionsCanvas && transactionsCanvas.offsetParent !== null) {
+        // Canvas is visible
+        if (!chartInstance || chartInstance.destroyed) {
+            // Chart is missing but canvas exists and is visible - recreate
+            if (societyData && societyData.transactions && societyData.transactions.length > 0) {
+                console.log('Recreating missing transactions chart');
+                createTransactionsChart(societyData.transactions);
+            }
+        }
+    }
+}
+
+// Start chart health monitoring
+function startChartHealthMonitoring() {
+    // Clear existing interval if any
+    if (chartHealthCheckInterval) {
+        clearInterval(chartHealthCheckInterval);
+    }
+    
+    // Check chart health every 5 seconds
+    chartHealthCheckInterval = setInterval(checkChartHealth, 5000);
+}
+
+// Stop chart health monitoring
+function stopChartHealthMonitoring() {
+    if (chartHealthCheckInterval) {
+        clearInterval(chartHealthCheckInterval);
+        chartHealthCheckInterval = null;
     }
 }
 
@@ -1668,7 +1756,14 @@ function setupApplicationEventListeners() {
         });
     });
 
-    document.getElementById('refresh-applications-btn').addEventListener('click', refreshApplications);
+    const refreshApplicationsBtn = document.getElementById('refresh-applications-btn');
+    if (refreshApplicationsBtn) {
+        refreshApplicationsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            refreshApplications();
+        });
+    }
 }
 
 // Set event listeners
@@ -1824,9 +1919,43 @@ function setupEventListeners() {
     // RGB Color Picker Setup
     setupRgbColorPicker();
     
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkMode');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', function() {
+            appSettings.darkMode = this.checked;
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                document.body.classList.remove('light-mode');
+            } else {
+                document.body.classList.add('light-mode');
+                document.body.classList.remove('dark-mode');
+            }
+        });
+    }
+    
+    // Compact View Toggle
+    const compactViewToggle = document.getElementById('compactView');
+    if (compactViewToggle) {
+        compactViewToggle.addEventListener('change', function() {
+            appSettings.compactView = this.checked;
+            if (this.checked) {
+                document.body.classList.add('compact-view');
+            } else {
+                document.body.classList.remove('compact-view');
+            }
+        });
+    }
+    
     // Refresh data
-    document.getElementById('refresh-data-btn').addEventListener('click', refreshJobData);
-    document.getElementById('refresh-online').addEventListener('click', refreshJobData);
+    const refreshDataBtn = document.getElementById('refresh-data-btn');
+    if (refreshDataBtn) {
+        refreshDataBtn.addEventListener('click', refreshJobData);
+    }
+    const refreshOnlineBtn = document.getElementById('refresh-online');
+    if (refreshOnlineBtn) {
+        refreshOnlineBtn.addEventListener('click', refreshJobData);
+    }
     
     // Theme color selection
     document.querySelectorAll('.color-option').forEach(option => {
@@ -1852,6 +1981,9 @@ function setupEventListeners() {
             clearInterval(window.playtimeUpdateTimer);
             window.playtimeUpdateTimer = null;
         }
+        
+        // Stop chart health monitoring when UI closes
+        stopChartHealthMonitoring();
         
         fetch(`https://${GetParentResourceName()}/closeUI`, {
             method: 'POST'
@@ -2061,12 +2193,21 @@ function updateActivityChart() {
     const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#dc2626';
     const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
     
-    // Destroy existing chart
-    if (activityChartInstance) {
-        activityChartInstance.destroy();
+    // Destroy existing chart safely
+    if (activityChartInstance && !activityChartInstance.destroyed) {
+        try {
+            activityChartInstance.destroy();
+        } catch (e) {
+            console.warn('Error destroying activity chart:', e);
+        }
+        activityChartInstance = null;
     }
     
     const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        console.error('Could not get canvas context for activity chart');
+        return;
+    }
     
     // Create gradient
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -2677,6 +2818,9 @@ function refreshJobData() {
             
             // Initialize new features
             initializeNewFeatures();
+            
+            // Ensure charts are healthy after refresh
+            setTimeout(checkChartHealth, 1000);
         }
         
         setTimeout(() => {
@@ -2740,6 +2884,9 @@ window.addEventListener('message', function(event) {
         
         // Initialize new features
         initializeNewFeatures();
+        
+        // Start chart health monitoring
+        startChartHealthMonitoring();
         
         // Set automatic refresh timer
         setupAutoRefresh();
@@ -3314,20 +3461,33 @@ function createTransactionsChart(transactions) {
         return;
     }
 
-    if (chartInstance) {
-        chartInstance.destroy();
+    // Destroy existing chart safely
+    if (chartInstance && !chartInstance.destroyed) {
+        try {
+            chartInstance.destroy();
+        } catch (e) {
+            console.warn('Error destroying transactions chart:', e);
+        }
+        chartInstance = null;
     }
 
     const canvas = document.getElementById('transactions-line-chart');
-    if (!canvas) return;
+    if (!canvas) {
+        console.warn('Transactions chart canvas not found');
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        console.error('Could not get canvas context for transactions chart');
+        return;
+    }
 
     const chartData = prepareChartData(transactions, currentTimeframe);
     
-    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-    const primaryDarkColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-dark').trim();
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#dc2626';
+    const primaryDarkColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-dark').trim() || '#b91c1c';
     const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
-
-    const ctx = canvas.getContext('2d');
 
     // Create gradient for line chart
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -3549,12 +3709,19 @@ function setupRgbColorPicker() {
     
     if (!redSlider || !greenSlider || !blueSlider) return;
     
-    // Sync sliders with inputs
+    // Sync sliders with inputs and apply live
     [redSlider, greenSlider, blueSlider].forEach((slider, index) => {
         const inputs = [redInput, greenInput, blueInput];
         slider.addEventListener('input', function() {
             if (inputs[index]) inputs[index].value = this.value;
             updateRgbPreview();
+            // Apply live
+            const r = parseInt(redSlider.value);
+            const g = parseInt(greenSlider.value);
+            const b = parseInt(blueSlider.value);
+            applyCustomRgbColor({r, g, b});
+            appSettings.customRgbColor = {r, g, b};
+            appSettings.themeColor = null;
         });
     });
     
@@ -3566,6 +3733,13 @@ function setupRgbColorPicker() {
             this.value = value;
             if (sliders[index]) sliders[index].value = value;
             updateRgbPreview();
+            // Apply live
+            const r = parseInt(redSlider.value);
+            const g = parseInt(greenSlider.value);
+            const b = parseInt(blueSlider.value);
+            applyCustomRgbColor({r, g, b});
+            appSettings.customRgbColor = {r, g, b};
+            appSettings.themeColor = null;
         });
     });
     
@@ -3578,6 +3752,15 @@ function setupRgbColorPicker() {
             appSettings.customRgbColor = {r, g, b};
             appSettings.themeColor = null;
             showNotification('Custom color applied successfully');
+            
+            // Save to server
+            fetch(`https://${GetParentResourceName()}/saveSettings`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(appSettings)
+            });
         });
     }
     

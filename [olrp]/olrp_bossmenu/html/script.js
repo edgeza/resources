@@ -807,8 +807,26 @@ function applySettings(settings) {
     // Apply compact view
     if (appSettings.compactView) {
         document.body.classList.add('compact-view');
+        // Recreate charts after layout change
+        setTimeout(() => {
+            if (currentJobData && currentJobData.activityData) {
+                updateActivityChart();
+            }
+            if (societyData && societyData.transactions) {
+                createTransactionsChart(societyData.transactions);
+            }
+        }, 300);
     } else {
         document.body.classList.remove('compact-view');
+        // Recreate charts after layout change
+        setTimeout(() => {
+            if (currentJobData && currentJobData.activityData) {
+                updateActivityChart();
+            }
+            if (societyData && societyData.transactions) {
+                createTransactionsChart(societyData.transactions);
+            }
+        }, 300);
     }
     
     // Set refresh timer
@@ -2082,6 +2100,16 @@ function setupEventListeners() {
             } else {
                 document.body.classList.remove('compact-view');
             }
+            
+            // Recreate charts after layout change to prevent breaking
+            setTimeout(() => {
+                if (currentJobData && currentJobData.activityData) {
+                    updateActivityChart();
+                }
+                if (societyData && societyData.transactions) {
+                    createTransactionsChart(societyData.transactions);
+                }
+            }, 300);
         });
     }
     

@@ -152,6 +152,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="stat-card modern-stat-card">
+                        <div class="stat-card-icon-wrapper">
+                            <i class="fas fa-file-alt stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <div class="stat-card-title">Pending Applications</div>
+                            <div class="stat-card-value" id="dashboard-pending-apps">0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-hourglass-half"></i> awaiting review
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card modern-stat-card">
+                        <div class="stat-card-icon-wrapper">
+                            <i class="fas fa-coins stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <div class="stat-card-title">Society Balance</div>
+                            <div class="stat-card-value" id="dashboard-society-balance">$0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-wallet"></i> available funds
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="charts-section">
@@ -226,46 +250,90 @@
 
             <!-- Employees Page -->
             <div class="page" id="employees-page">
-                <header>
-                    <div class="header-title">
-                        <h1>Employee Management</h1>
-                        <p id="employees-management-count">Managing 0 employees</p>
-                    </div>
-                    <div class="header-actions">
-                        <button class="btn btn-primary" id="hire-employee-btn">
-                            <i class="fas fa-user-plus"></i> Hire Employee
-                        </button>
-                    </div>
-                </header>
+                <div class="page-header">
+                    <h2 class="page-title">Employee Management</h2>
+                    <p class="page-subtitle" id="employees-management-count">Managing 0 employees</p>
+                </div>
 
                 <div class="employee-management">
-                    <div class="tabs">
-                        <div class="tab active" data-filter="all">All</div>
-                        <div class="tab" data-filter="online">Online</div>
-                        <div class="tab" data-filter="offline">Offline</div>
-                        <div class="tab" data-filter="management">Management</div>
+                    <div class="employee-toolbar">
+                        <div class="tabs">
+                            <div class="tab active" data-filter="all">All</div>
+                            <div class="tab" data-filter="online">Online</div>
+                            <div class="tab" data-filter="offline">Offline</div>
+                            <div class="tab" data-filter="management">Management</div>
+                        </div>
+                        <div class="toolbar-actions">
+                            <input type="text" id="search-management-employee" placeholder="Search employees...">
+                            <button class="btn btn-primary" id="hire-employee-btn">
+                                <i class="fas fa-user-plus"></i> Hire Employee
+                            </button>
+                        </div>
                     </div>
 
-                    <input type="text" id="search-management-employee" placeholder="Search employees...">
-
-                    <div class="table-container">
-                        <table width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Rank</th>
-                                    <th>Status</th>
-                                    <th class="playtime-column">Play Time</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="management-employees-table">
-                                <!-- Generated dynamically by JavaScript -->
-                                <tr>
-                                    <td colspan="5" class="empty-table">Loading data...</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="employee-content-layout">
+                        <div class="employee-table-section">
+                            <div class="table-container">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Rank</th>
+                                            <th>Status</th>
+                                            <th>Play Time</th>
+                                            <th>Performance</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="management-employees-table">
+                                        <tr>
+                                            <td colspan="6" class="empty-table">Loading data...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="employee-details-panel" id="employee-details-panel" style="display: none;">
+                            <div class="employee-details-header">
+                                <h3 id="selected-employee-name">Employee Name</h3>
+                                <button class="btn-icon" id="close-employee-details">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="employee-details-content">
+                                <div class="employee-detail-section">
+                                    <h4><i class="fas fa-chart-line"></i> Performance Metrics</h4>
+                                    <div class="performance-metrics">
+                                        <div class="metric-item">
+                                            <span class="metric-label">Total Hours</span>
+                                            <span class="metric-value" id="emp-total-hours">0h</span>
+                                        </div>
+                                        <div class="metric-item">
+                                            <span class="metric-label">This Week</span>
+                                            <span class="metric-value" id="emp-week-hours">0h</span>
+                                        </div>
+                                        <div class="metric-item">
+                                            <span class="metric-label">Activity Score</span>
+                                            <span class="metric-value" id="emp-activity-score">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="employee-detail-section">
+                                    <h4><i class="fas fa-history"></i> Hire History</h4>
+                                    <div class="hire-history-list" id="hire-history-list">
+                                        <div class="empty-list">No hire history available</div>
+                                    </div>
+                                </div>
+                                <div class="employee-detail-section">
+                                    <h4><i class="fas fa-sticky-note"></i> Notes</h4>
+                                    <textarea id="employee-notes-text" class="employee-notes-input" placeholder="Add notes about this employee..."></textarea>
+                                    <button class="btn btn-primary" id="save-employee-notes" style="margin-top: 10px; width: 100%;">
+                                        <i class="fas fa-save"></i> Save Notes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -417,76 +485,223 @@
             
             <!-- Permissions Page -->
             <div class="page" id="permissions-page">
-                <header>
-                    <div class="header-title">
-                        <h1><i class="fas fa-key"></i> Employee Permissions</h1>
-                        <p>Assign specific access rights to employees</p>
-                    </div>
-                    <div class="header-actions">
-                        <button class="btn btn-outline" id="refresh-permissions-btn">
-                            <i class="fas fa-sync-alt"></i> Refresh Permissions
-                        </button>
-                    </div>
-                </header>
+                <div class="page-header">
+                    <h2 class="page-title"><i class="fas fa-key"></i> Employee Permissions</h2>
+                    <p class="page-subtitle">Manage access rights and permissions for employees</p>
+                </div>
             
-                <div class="permissions-container">
-                    <div class="permissions-selection">
-                        <div class="form-group">
-                            <label for="permissions-employee-select">Select Employee</label>
-                            <select id="permissions-employee-select" class="permissions-select">
-                                <option value="">-- Select an employee --</option>
-                                <!-- Employees will be loaded dynamically -->
-                            </select>
+                <div class="permissions-layout">
+                    <div class="permissions-sidebar">
+                        <div class="permissions-search">
+                            <input type="text" id="permissions-search" placeholder="Search employees...">
+                        </div>
+                        <div class="permissions-employee-list" id="permissions-employee-list">
+                            <!-- Employees will be loaded dynamically -->
                         </div>
                     </div>
             
-                    <div class="permissions-content" id="permissions-content" style="display: none;">
-                        <div class="permissions-card">
-                            <div class="permissions-title">Access Rights</div>
-                            <p class="permissions-description">Select which features this employee can access</p>
+                    <div class="permissions-main" id="permissions-main" style="display: none;">
+                        <div class="permissions-header">
+                            <div>
+                                <h3 id="permissions-employee-name">Select an employee</h3>
+                                <p id="permissions-employee-rank">-</p>
+                            </div>
+                            <button class="btn-icon" id="close-permissions-view">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
             
-                            <div class="toggle-container">
-                                <p>Dashboard Access</p>
-                                <label class="toggle">
-                                    <input type="checkbox" id="perm-dashboard">
-                                    <span class="toggle-slider"></span>
-                                </label>
+                        <div class="permissions-grid">
+                            <div class="permission-category">
+                                <div class="permission-category-header">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <h4>Dashboard & Overview</h4>
+                                </div>
+                                <div class="permission-items">
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">View Dashboard</span>
+                                            <span class="permission-desc">Access to main dashboard</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-dashboard">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">View Statistics</span>
+                                            <span class="permission-desc">See employee statistics</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-statistics">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
             
-                            <div class="toggle-container">
-                                <p>Employee Management</p>
-                                <label class="toggle">
-                                    <input type="checkbox" id="perm-employees">
-                                    <span class="toggle-slider"></span>
-                                </label>
+                            <div class="permission-category">
+                                <div class="permission-category-header">
+                                    <i class="fas fa-users"></i>
+                                    <h4>Employee Management</h4>
+                                </div>
+                                <div class="permission-items">
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">View Employees</span>
+                                            <span class="permission-desc">See employee list</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-employees">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Edit Employees</span>
+                                            <span class="permission-desc">Modify employee details</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-edit-employees">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Hire Employees</span>
+                                            <span class="permission-desc">Add new employees</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-hiringfiring">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Fire Employees</span>
+                                            <span class="permission-desc">Remove employees</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-fire">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
             
-                            <div class="toggle-container">
-                                <p>Society Finances</p>
-                                <label class="toggle">
-                                    <input type="checkbox" id="perm-society">
-                                    <span class="toggle-slider"></span>
-                                </label>
+                            <div class="permission-category">
+                                <div class="permission-category-header">
+                                    <i class="fas fa-coins"></i>
+                                    <h4>Financial Management</h4>
+                                </div>
+                                <div class="permission-items">
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">View Society</span>
+                                            <span class="permission-desc">See financial overview</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-society">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Deposit Money</span>
+                                            <span class="permission-desc">Add funds to society</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-deposit">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Withdraw Money</span>
+                                            <span class="permission-desc">Remove funds from society</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-withdraw">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Transfer Money</span>
+                                            <span class="permission-desc">Transfer to employees</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-transfer">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
             
-                            <div class="toggle-container">
-                                <p>Application Review</p>
-                                <label class="toggle">
-                                    <input type="checkbox" id="perm-applications">
-                                    <span class="toggle-slider"></span>
-                                </label>
+                            <div class="permission-category">
+                                <div class="permission-category-header">
+                                    <i class="fas fa-file-alt"></i>
+                                    <h4>Applications</h4>
+                                </div>
+                                <div class="permission-items">
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">View Applications</span>
+                                            <span class="permission-desc">See job applications</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-applications">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Review Applications</span>
+                                            <span class="permission-desc">Accept/reject applications</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-review-apps">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
             
-                            <div class="toggle-container">
-                                <p>Hiring & Firing</p>
-                                <label class="toggle">
-                                    <input type="checkbox" id="perm-hiringfiring">
-                                    <span class="toggle-slider"></span>
-                                </label>
+                            <div class="permission-category">
+                                <div class="permission-category-header">
+                                    <i class="fas fa-cog"></i>
+                                    <h4>System Settings</h4>
+                                </div>
+                                <div class="permission-items">
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">Manage Permissions</span>
+                                            <span class="permission-desc">Change employee permissions</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-manage-permissions">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="permission-item">
+                                        <div class="permission-info">
+                                            <span class="permission-name">System Settings</span>
+                                            <span class="permission-desc">Access settings page</span>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" id="perm-settings">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
             
-                        <div class="save-permissions-container">
+                        <div class="permissions-footer">
+                            <button class="btn btn-outline" id="reset-permissions-btn">
+                                <i class="fas fa-undo"></i> Reset to Default
+                            </button>
                             <button class="btn btn-primary" id="save-permissions-btn">
                                 <i class="fas fa-save"></i> Save Permissions
                             </button>
@@ -497,46 +712,34 @@
             
             <!-- Applications Page -->
             <div class="page" id="applications-page">
-                <header>
-                    <div class="header-title">
-                        <h1>Job Applications</h1>
-                        <p id="applications-count">0 pending applications</p>
-                    </div>
-                    <div class="header-actions">
-                        <button class="btn btn-outline" id="refresh-applications-btn">
-                            <i class="fas fa-sync-alt"></i> Refresh Applications
-                        </button>
-                    </div>
-                </header>
+                <div class="page-header">
+                    <h2 class="page-title">Job Applications</h2>
+                    <p class="page-subtitle" id="applications-count">0 pending applications</p>
+                </div>
 
                 <div class="applications-container">
-                    <div class="tabs">
-                        <div class="tab active" data-filter="all">All</div>
-                        <div class="tab" data-filter="pending">Pending</div>
-                        <div class="tab" data-filter="accepted">Accepted</div>
-                        <div class="tab" data-filter="rejected">Rejected</div>
-                        <div class="tab" data-filter="finish">Finished</div>
+                    <div class="applications-toolbar">
+                        <div class="tabs">
+                            <div class="tab active" data-filter="all">All</div>
+                            <div class="tab" data-filter="pending">Pending</div>
+                            <div class="tab" data-filter="accepted">Accepted</div>
+                            <div class="tab" data-filter="rejected">Rejected</div>
+                            <div class="tab" data-filter="finish">Finished</div>
+                        </div>
+                        <div class="toolbar-actions">
+                            <input type="text" id="search-application" placeholder="Search applications...">
+                            <button class="btn btn-outline" id="refresh-applications-btn">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
                     </div>
 
-                    <input type="text" id="search-application" placeholder="Search applications...">
-
-                    <div class="table-container">
-                        <table width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Date Submitted</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="applications-table">
-                                <!-- Generated dynamically by JavaScript -->
-                                <tr>
-                                    <td colspan="4" class="empty-table">No applications to display</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="applications-grid" id="applications-grid">
+                        <!-- Applications will be displayed as cards -->
+                        <div class="empty-state">
+                            <i class="fas fa-file-alt"></i>
+                            <p>No applications to display</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -571,49 +774,9 @@
                         </div>
 
                         <div class="toggle-container">
-                            <p>Show Animations</p>
-                            <label class="toggle">
-                                <input type="checkbox" id="showAnimations" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="toggle-container">
                             <p>Compact View</p>
                             <label class="toggle">
                                 <input type="checkbox" id="compactView">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="color-picker">
-                            <label>Theme Color</label>
-                            <div class="color-options">
-                                <div class="color-option color-midnight-red active" data-color="midnight-red"></div>
-                                <div class="color-option color-blue" data-color="blue"></div>
-                                <div class="color-option color-purple" data-color="purple"></div>
-                                <div class="color-option color-green" data-color="green"></div>
-                                <div class="color-option color-orange" data-color="orange"></div>
-                                <div class="color-option color-cyan" data-color="cyan"></div>
-                                <div class="color-option color-pink" data-color="pink"></div>
-                            </div>
-                        </div>
-
-                    <div class="settings-card">
-                        <div class="settings-title">Display Settings</div>
-
-                        <div class="toggle-container">
-                            <p>Show Play Time</p>
-                            <label class="toggle">
-                                <input type="checkbox" id="showPlaytime" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="toggle-container">
-                            <p>Show Location</p>
-                            <label class="toggle">
-                                <input type="checkbox" id="showLocation" checked>
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
@@ -631,6 +794,42 @@
                                 <option value="alert">Alert</option>
                                 <option value="chime">Chime</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="settings-title">Theme Color (RGB)</div>
+                        <p class="settings-description">Customize your theme with RGB color picker</p>
+                        
+                        <div class="rgb-color-picker">
+                            <div class="rgb-control-group">
+                                <label for="rgb-red">Red</label>
+                                <div class="rgb-slider-container">
+                                    <input type="range" id="rgb-red" min="0" max="255" value="220" class="rgb-slider">
+                                    <input type="number" id="rgb-red-value" min="0" max="255" value="220" class="rgb-input">
+                                </div>
+                            </div>
+                            <div class="rgb-control-group">
+                                <label for="rgb-green">Green</label>
+                                <div class="rgb-slider-container">
+                                    <input type="range" id="rgb-green" min="0" max="255" value="38" class="rgb-slider">
+                                    <input type="number" id="rgb-green-value" min="0" max="255" value="38" class="rgb-input">
+                                </div>
+                            </div>
+                            <div class="rgb-control-group">
+                                <label for="rgb-blue">Blue</label>
+                                <div class="rgb-slider-container">
+                                    <input type="range" id="rgb-blue" min="0" max="255" value="38" class="rgb-slider">
+                                    <input type="number" id="rgb-blue-value" min="0" max="255" value="38" class="rgb-input">
+                                </div>
+                            </div>
+                            <div class="rgb-preview">
+                                <div class="rgb-preview-box" id="rgb-preview"></div>
+                                <div class="rgb-hex-display" id="rgb-hex">#DC2626</div>
+                            </div>
+                            <button class="btn btn-outline" id="apply-rgb-color" style="margin-top: 15px; width: 100%;">
+                                <i class="fas fa-palette"></i> Apply Custom Color
+                            </button>
                         </div>
                     </div>
                 </div>

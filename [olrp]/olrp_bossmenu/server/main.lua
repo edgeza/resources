@@ -1260,10 +1260,52 @@ RegisterNetEvent('olrp-bossmenu:server:UpdateApplicationStatus', function(applic
                 local targetCitizenId = application.citizenid
                 local targetPlayer = QBCore.Functions.GetPlayerByCitizenId(targetCitizenId)
                 
-                if targetPlayer then
-                    if status == 'accepted' then
-                        TriggerClientEvent('QBCore:Notify', targetPlayer.PlayerData.source, "Your job application has been accepted! Visit the workplace to start.", "success")
-                    elseif status == 'rejected' then
+                if status == 'accepted' then
+                    -- Auto-hire the applicant when application is accepted
+                    local jobName = application.job
+                    local defaultGrade = 0 -- Start at lowest grade
+                    
+                    -- Check if job exists and get default grade
+                    if QBCore.Shared.Jobs[jobName] then
+                        -- Find the lowest grade
+                        local lowestGrade = 999
+                        for grade, _ in pairs(QBCore.Shared.Jobs[jobName].grades) do
+                            local gradeNum = tonumber(grade)
+                            if gradeNum and gradeNum < lowestGrade then
+                                lowestGrade = gradeNum
+                            end
+                        end
+                        if lowestGrade ~= 999 then
+                            defaultGrade = lowestGrade
+                        end
+                    end
+                    
+                    if targetPlayer then
+                        -- Player is online - hire them immediately
+                        targetPlayer.Functions.SetJob(jobName, defaultGrade)
+                        TriggerClientEvent('QBCore:Notify', targetPlayer.PlayerData.source, "Your job application has been accepted! You've been hired as " .. QBCore.Shared.Jobs[jobName].label, "success")
+                        TriggerClientEvent('olrp-bossmenu:client:JobChanged', -1, jobName)
+                        
+                        -- Log the hire
+                        TriggerEvent('qb-log:server:CreateLog', 'jobmanagement', 'Application Hire', 'green', string.format('%s (%s) was hired via application acceptance for job %s at rank %s', 
+                            GetPlayerName(targetPlayer.PlayerData.source), targetCitizenId, jobName, defaultGrade))
+                    else
+                        -- Player is offline - set job in database for when they join
+                        MySQL.Async.execute('UPDATE players SET job = ? WHERE citizenid = ?', {
+                            json.encode({name = jobName, label = QBCore.Shared.Jobs[jobName].label, payment = QBCore.Shared.Jobs[jobName].grades[tostring(defaultGrade)].payment, onduty = true, isboss = false, grade = {name = QBCore.Shared.Jobs[jobName].grades[tostring(defaultGrade)].name, level = defaultGrade}}),
+                            targetCitizenId
+                        }, function(rowsChanged)
+                            if rowsChanged > 0 then
+                                -- Log the offline hire
+                                TriggerEvent('qb-log:server:CreateLog', 'jobmanagement', 'Application Hire (Offline)', 'green', string.format('Offline player %s was hired via application acceptance for job %s at rank %s', 
+                                    targetCitizenId, jobName, defaultGrade))
+                            end
+                        end)
+                    end
+                    
+                    TriggerClientEvent('QBCore:Notify', src, "Application accepted and employee hired successfully", "success")
+                elseif targetPlayer then
+                    if status == 'rejected' then
                         TriggerClientEvent('QBCore:Notify', targetPlayer.PlayerData.source, "Your job application has been rejected.", "error")
                     elseif status == 'finish' then
                         TriggerClientEvent('QBCore:Notify', targetPlayer.PlayerData.source, "Your job application process has been completed. You can apply again if needed.", "info")

@@ -299,16 +299,16 @@ function refreshApplications() {
 
 // Update applications table
 function updateApplicationsTable() {
-    const tableBody = document.getElementById('applications-table');
-    if (!tableBody) {
-        console.error("Applications table not found");
+    const applicationsGrid = document.getElementById('applications-grid');
+    if (!applicationsGrid) {
+        console.error("Applications grid not found");
         return;
     }
     
-    tableBody.innerHTML = '';
+    applicationsGrid.innerHTML = '';
     
     if (!currentApplications || currentApplications.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="4" class="empty-table">No applications to display</td></tr>';
+        applicationsGrid.innerHTML = '<div class="empty-state"><i class="fas fa-file-alt"></i><p>No applications to display</p></div>';
         return;
     }
     
@@ -336,61 +336,58 @@ function updateApplicationsTable() {
     });
     
     if (filteredApplications.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="4" class="empty-table">No matching applications</td></tr>';
+        applicationsGrid.innerHTML = '<div class="empty-state"><i class="fas fa-search"></i><p>No matching applications</p></div>';
         return;
     }
     
     filteredApplications.forEach(application => {
-        const tr = document.createElement('tr');
-        tr.setAttribute('data-id', application.id);
-        tr.setAttribute('data-status', application.status);
+        const card = document.createElement('div');
+        card.className = `application-card ${application.status}`;
+        card.setAttribute('data-id', application.id);
         
         // Format date
         const submittedDate = new Date(application.date_submitted);
-        const formattedDate = `${submittedDate.toLocaleDateString()} ${submittedDate.toLocaleTimeString()}`;
+        const formattedDate = submittedDate.toLocaleDateString('en-US', { 
+            month: 'short', 
+            day: 'numeric', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
         
-        // Status class
-        let statusClass = '';
-        let statusText = application.status;
+        // Status text
+        let statusText = application.status.charAt(0).toUpperCase() + application.status.slice(1);
+        if (statusText === 'Finish') statusText = 'Finished';
         
-        switch(application.status) {
-            case 'pending':
-                statusClass = 'status-warning';
-                statusText = 'Pending';
-                break;
-            case 'accepted':
-                statusClass = 'status-success';
-                statusText = 'Accepted';
-                break;
-            case 'rejected':
-                statusClass = 'status-danger';
-                statusText = 'Rejected';
-                break;
-            case 'finish':
-                statusClass = 'status-success';
-                statusText = 'Finished';
-                break;
-        }
-        
-        tr.innerHTML = `
-            <td>${application.name}</td>
-            <td>${formattedDate}</td>
-            <td><span class="status ${statusClass}">${statusText}</span></td>
-            <td>
-                <div class="employee-actions">
-                    <div class="action-btn view-application" data-id="${application.id}"><i class="fas fa-eye"></i></div>
+        card.innerHTML = `
+            <div class="application-card-header">
+                <div>
+                    <div class="application-card-name">${application.name}</div>
+                    <div class="application-card-date">${formattedDate}</div>
                 </div>
-            </td>
+                <span class="application-card-status ${application.status}">${statusText}</span>
+            </div>
+            <div class="application-card-actions">
+                <button class="btn btn-outline view-application-btn" data-id="${application.id}">
+                    <i class="fas fa-eye"></i> View Details
+                </button>
+            </div>
         `;
         
-        tableBody.appendChild(tr);
+        applicationsGrid.appendChild(card);
     });
     
-    // Add event listeners to view buttons
-    document.querySelectorAll('.view-application').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const applicationId = this.getAttribute('data-id');
-            openApplicationDetails(applicationId);
+    // Add event listeners
+    document.querySelectorAll('.view-application-btn, .application-card').forEach(element => {
+        element.addEventListener('click', function(e) {
+            if (e.target.closest('.view-application-btn')) {
+                const btn = e.target.closest('.view-application-btn');
+                const applicationId = btn.getAttribute('data-id');
+                openApplicationDetails(applicationId);
+            } else if (this.classList.contains('application-card')) {
+                const applicationId = this.getAttribute('data-id');
+                openApplicationDetails(applicationId);
+            }
         });
     });
 }
@@ -548,9 +545,43 @@ function applyThemeColor(color) {
         activeOption.classList.add('active');
     }
     
-    // Update chart if it exists
+    // Update charts with new theme colors
+    updateChartColors();
+}
+
+// Update all chart colors when theme changes
+function updateChartColors() {
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#dc2626';
+    const primaryLight = getComputedStyle(document.documentElement).getPropertyValue('--primary-light').trim() || '#ef4444';
+    
+    // Update activity chart
+    if (activityChartInstance) {
+        const ctx = activityChartInstance.canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, primaryColor + '80');
+        gradient.addColorStop(1, primaryColor + '00');
+        
+        activityChartInstance.data.datasets[0].borderColor = primaryColor;
+        activityChartInstance.data.datasets[0].backgroundColor = gradient;
+        activityChartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
+        activityChartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
+        activityChartInstance.options.plugins.tooltip.borderColor = primaryColor;
+        activityChartInstance.update('none');
+    }
+    
+    // Update transactions chart
     if (chartInstance && societyData && societyData.transactions) {
-        createTransactionsChart(societyData.transactions);
+        const ctx = chartInstance.canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, primaryColor + '80');
+        gradient.addColorStop(1, primaryColor + '00');
+        
+        chartInstance.data.datasets[0].borderColor = primaryColor;
+        chartInstance.data.datasets[0].backgroundColor = gradient;
+        chartInstance.data.datasets[0].pointBackgroundColor = primaryColor;
+        chartInstance.data.datasets[0].pointHoverBackgroundColor = primaryLight;
+        chartInstance.options.plugins.tooltip.borderColor = primaryColor;
+        chartInstance.update('none');
     }
 }
 
@@ -559,22 +590,22 @@ function applySettings(settings) {
     appSettings = {...appSettings, ...settings};
     
     // Update settings interface
-    document.getElementById('darkMode').checked = appSettings.darkMode;
-    document.getElementById('showAnimations').checked = appSettings.showAnimations;
-    document.getElementById('compactView').checked = appSettings.compactView;
-    document.getElementById('showPlaytime').checked = appSettings.showPlaytime;
-    document.getElementById('showLocation').checked = appSettings.showLocation;
-    document.getElementById('refreshInterval').value = appSettings.refreshInterval;
-    document.getElementById('notificationSound').value = appSettings.notificationSound;
+    const darkModeEl = document.getElementById('darkMode');
+    const compactViewEl = document.getElementById('compactView');
+    const refreshIntervalEl = document.getElementById('refreshInterval');
+    const notificationSoundEl = document.getElementById('notificationSound');
     
-    // Update theme color
-    document.querySelectorAll('.color-option').forEach(option => {
-        option.classList.remove('active');
-    });
-    document.querySelector(`.color-option[data-color="${appSettings.themeColor}"]`)?.classList.add('active');
+    if (darkModeEl) darkModeEl.checked = appSettings.darkMode;
+    if (compactViewEl) compactViewEl.checked = appSettings.compactView;
+    if (refreshIntervalEl) refreshIntervalEl.value = appSettings.refreshInterval;
+    if (notificationSoundEl) notificationSoundEl.value = appSettings.notificationSound;
     
-    // Apply theme color
-    applyThemeColor(appSettings.themeColor);
+    // Apply custom RGB color if set
+    if (appSettings.customRgbColor) {
+        applyCustomRgbColor(appSettings.customRgbColor);
+    } else if (appSettings.themeColor) {
+        applyThemeColor(appSettings.themeColor);
+    }
     
     // Apply dark mode
     if (appSettings.darkMode) {
@@ -585,41 +616,15 @@ function applySettings(settings) {
         document.body.classList.remove('dark-mode');
     }
     
-    // Apply animations
-    if (appSettings.showAnimations) {
-        document.body.classList.add('show-animations');
-        document.body.classList.remove('hide-animations');
-    } else {
-        document.body.classList.add('hide-animations');
-        document.body.classList.remove('show-animations');
-    }
-
-    if (chartInstance && societyData && societyData.transactions) {
-        createTransactionsChart(societyData.transactions);
-    }
+    // Always show playtime - removed toggle
+    document.body.classList.add('show-playtime');
+    document.body.classList.remove('hide-playtime');
     
     // Apply compact view
     if (appSettings.compactView) {
         document.body.classList.add('compact-view');
     } else {
         document.body.classList.remove('compact-view');
-    }
-    
-    // Apply visibility settings
-    if (appSettings.showPlaytime) {
-        document.body.classList.add('show-playtime');
-        document.body.classList.remove('hide-playtime');
-    } else {
-        document.body.classList.add('hide-playtime');
-        document.body.classList.remove('show-playtime');
-    }
-    
-    if (appSettings.showLocation) {
-        document.body.classList.add('show-location');
-        document.body.classList.remove('hide-location');
-    } else {
-        document.body.classList.add('hide-location');
-        document.body.classList.remove('show-location');
     }
     
     // Set refresh timer
@@ -1771,13 +1776,11 @@ function setupEventListeners() {
     document.getElementById('save-settings-btn').addEventListener('click', function() {
         const settings = {
             darkMode: document.getElementById('darkMode').checked,
-            showAnimations: document.getElementById('showAnimations').checked,
             compactView: document.getElementById('compactView').checked,
-            showPlaytime: document.getElementById('showPlaytime').checked,
-            showLocation: document.getElementById('showLocation').checked,
             refreshInterval: parseInt(document.getElementById('refreshInterval').value),
             notificationSound: document.getElementById('notificationSound').value,
-            themeColor: document.querySelector('.color-option.active')?.getAttribute('data-color') || 'blue'
+            themeColor: appSettings.themeColor || 'midnight-red',
+            customRgbColor: appSettings.customRgbColor || null
         };
         
         // Send settings to server
@@ -1798,18 +1801,28 @@ function setupEventListeners() {
         // Reset to default settings
         const defaultSettings = {
             darkMode: true,
-            showAnimations: true,
             compactView: false,
             notificationSound: 'default',
-            themeColor: 'blue',
+            themeColor: 'midnight-red',
             refreshInterval: 60,
-            showPlaytime: true,
-            showLocation: true
+            customRgbColor: null
         };
+        
+        // Reset RGB sliders
+        document.getElementById('rgb-red').value = 220;
+        document.getElementById('rgb-green').value = 38;
+        document.getElementById('rgb-blue').value = 38;
+        document.getElementById('rgb-red-value').value = 220;
+        document.getElementById('rgb-green-value').value = 38;
+        document.getElementById('rgb-blue-value').value = 38;
+        updateRgbPreview();
         
         applySettings(defaultSettings);
         showNotification('Settings reset to defaults');
     });
+    
+    // RGB Color Picker Setup
+    setupRgbColorPicker();
     
     // Refresh data
     document.getElementById('refresh-data-btn').addEventListener('click', refreshJobData);
@@ -2415,6 +2428,9 @@ function updateEmployeesTables() {
     (employee.playTime ? formatTime(employee.playTime) : 'Updating...') : 
     (employee.playTime ? formatTime(employee.playTime) : 'N/A');
         
+        // Calculate performance score
+        const performanceScore = calculatePerformanceScore(employee);
+        
         tr.innerHTML = `
             <td>
                 <div class="employee-info">
@@ -2434,8 +2450,18 @@ function updateEmployeesTables() {
             <td><span class="status ${statusClass}">${statusText}</span></td>
             <td>${playTimeText}</td>
             <td>
+                <div class="performance-badge ${performanceScore.class}">
+                    <i class="fas ${performanceScore.icon}"></i> ${performanceScore.text}
+                </div>
+            </td>
+            <td>
                 <div class="employee-actions">
-                    <div class="action-btn edit-employee" data-citizenid="${employee.citizenid}"><i class="fas fa-pen"></i></div>
+                    <div class="action-btn view-employee-details" data-citizenid="${employee.citizenid}" title="View Details">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="action-btn edit-employee" data-citizenid="${employee.citizenid}" title="Edit">
+                        <i class="fas fa-pen"></i>
+                    </div>
                 </div>
             </td>
         `;
@@ -2445,11 +2471,68 @@ function updateEmployeesTables() {
     
     // Add event listeners for edit buttons
     document.querySelectorAll('.edit-employee').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
             const citizenid = this.getAttribute('data-citizenid');
             openEditModal(citizenid);
         });
     });
+    
+    // Add event listeners for view details buttons
+    document.querySelectorAll('.view-employee-details').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const citizenid = this.getAttribute('data-citizenid');
+            openEmployeeDetails(citizenid);
+        });
+    });
+    
+    // Make table rows clickable to open details
+    document.querySelectorAll('#management-employees-table tr[data-status]').forEach(row => {
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', function(e) {
+            if (!e.target.closest('.action-btn')) {
+                const citizenid = this.querySelector('[data-citizenid]')?.getAttribute('data-citizenid');
+                if (citizenid) {
+                    openEmployeeDetails(citizenid);
+                }
+            }
+        });
+    });
+}
+
+// Calculate performance score for employee
+function calculatePerformanceScore(employee) {
+    let score = 'N/A';
+    let icon = 'fa-question';
+    let className = 'performance-neutral';
+    
+    if (employee.playTime) {
+        const hours = Math.floor(employee.playTime / 60);
+        if (hours > 100) {
+            score = 'Excellent';
+            icon = 'fa-star';
+            className = 'performance-excellent';
+        } else if (hours > 50) {
+            score = 'Good';
+            icon = 'fa-check-circle';
+            className = 'performance-good';
+        } else if (hours > 20) {
+            score = 'Average';
+            icon = 'fa-minus-circle';
+            className = 'performance-average';
+        } else {
+            score = 'Low';
+            icon = 'fa-exclamation-circle';
+            className = 'performance-low';
+        }
+    }
+    
+    if (employee.isOnline) {
+        score += ' (Online)';
+    }
+    
+    return { text: score, icon: icon, class: className };
 }
 
 // Update dashboard stats
@@ -2513,6 +2596,23 @@ function updateDashboardStats() {
         document.getElementById('common-grade').textContent = gradeData[commonGrade].name;
         document.getElementById('common-grade-count').textContent = gradeData[commonGrade].count;
     }
+    
+    // Update dashboard pending applications count
+    if (currentApplications && Array.isArray(currentApplications)) {
+        const pendingCount = currentApplications.filter(app => app.status === 'pending').length;
+        const pendingAppsEl = document.getElementById('dashboard-pending-apps');
+        if (pendingAppsEl) {
+            pendingAppsEl.textContent = pendingCount;
+        }
+    }
+    
+    // Update dashboard society balance
+    if (societyData && societyData.balance !== undefined) {
+        const balanceEl = document.getElementById('dashboard-society-balance');
+        if (balanceEl) {
+            balanceEl.textContent = formatMoney(societyData.balance);
+        }
+    }
 }
 
 function refreshJobGrades() {    
@@ -2574,6 +2674,9 @@ function refreshJobData() {
             updateActivityChart();
             updateOnlineEmployees();
             updateEmployeesTables();
+            
+            // Initialize new features
+            initializeNewFeatures();
         }
         
         setTimeout(() => {
@@ -2634,6 +2737,9 @@ window.addEventListener('message', function(event) {
         updateActivityChart();
         updateOnlineEmployees();
         updateEmployeesTables();
+        
+        // Initialize new features
+        initializeNewFeatures();
         
         // Set automatic refresh timer
         setupAutoRefresh();
@@ -3429,4 +3535,319 @@ function prepareChartData(transactions, timeframe) {
     }
     
     return { labels, values };
+}
+
+// RGB Color Picker Functions
+function setupRgbColorPicker() {
+    const redSlider = document.getElementById('rgb-red');
+    const greenSlider = document.getElementById('rgb-green');
+    const blueSlider = document.getElementById('rgb-blue');
+    const redInput = document.getElementById('rgb-red-value');
+    const greenInput = document.getElementById('rgb-green-value');
+    const blueInput = document.getElementById('rgb-blue-value');
+    const applyBtn = document.getElementById('apply-rgb-color');
+    
+    if (!redSlider || !greenSlider || !blueSlider) return;
+    
+    // Sync sliders with inputs
+    [redSlider, greenSlider, blueSlider].forEach((slider, index) => {
+        const inputs = [redInput, greenInput, blueInput];
+        slider.addEventListener('input', function() {
+            if (inputs[index]) inputs[index].value = this.value;
+            updateRgbPreview();
+        });
+    });
+    
+    [redInput, greenInput, blueInput].forEach((input, index) => {
+        const sliders = [redSlider, greenSlider, blueSlider];
+        input.addEventListener('input', function() {
+            let value = parseInt(this.value) || 0;
+            value = Math.max(0, Math.min(255, value));
+            this.value = value;
+            if (sliders[index]) sliders[index].value = value;
+            updateRgbPreview();
+        });
+    });
+    
+    if (applyBtn) {
+        applyBtn.addEventListener('click', function() {
+            const r = parseInt(redSlider.value);
+            const g = parseInt(greenSlider.value);
+            const b = parseInt(blueSlider.value);
+            applyCustomRgbColor({r, g, b});
+            appSettings.customRgbColor = {r, g, b};
+            appSettings.themeColor = null;
+            showNotification('Custom color applied successfully');
+        });
+    }
+    
+    // Initialize preview
+    updateRgbPreview();
+}
+
+function updateRgbPreview() {
+    const red = parseInt(document.getElementById('rgb-red').value) || 0;
+    const green = parseInt(document.getElementById('rgb-green').value) || 0;
+    const blue = parseInt(document.getElementById('rgb-blue').value) || 0;
+    
+    const hex = '#' + [red, green, blue].map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+    }).join('').toUpperCase();
+    
+    const previewBox = document.getElementById('rgb-preview');
+    const hexDisplay = document.getElementById('rgb-hex');
+    
+    if (previewBox) {
+        previewBox.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+    }
+    if (hexDisplay) {
+        hexDisplay.textContent = hex;
+    }
+}
+
+function applyCustomRgbColor(rgb) {
+    const r = rgb.r || rgb[0] || 220;
+    const g = rgb.g || rgb[1] || 38;
+    const b = rgb.b || rgb[2] || 38;
+    
+    // Calculate darker and lighter variants
+    const darkR = Math.max(0, r - 30);
+    const darkG = Math.max(0, g - 10);
+    const darkB = Math.max(0, b - 10);
+    
+    const lightR = Math.min(255, r + 30);
+    const lightG = Math.min(255, g + 10);
+    const lightB = Math.min(255, b + 10);
+    
+    // Apply CSS variables
+    document.documentElement.style.setProperty('--primary', `rgb(${r}, ${g}, ${b})`);
+    document.documentElement.style.setProperty('--primary-dark', `rgb(${darkR}, ${darkG}, ${darkB})`);
+    document.documentElement.style.setProperty('--primary-light', `rgb(${lightR}, ${lightG}, ${lightB})`);
+    document.documentElement.style.setProperty('--primary-rgb', `${r}, ${g}, ${b}`);
+    document.documentElement.style.setProperty('--secondary', `rgb(${Math.max(0, r - 60)}, ${Math.max(0, g - 20)}, ${Math.max(0, b - 20)})`);
+    document.documentElement.style.setProperty('--accent', `rgb(${lightR}, ${lightG}, ${lightB})`);
+    document.documentElement.style.setProperty('--shadow-glass', `0 8px 32px rgba(${r}, ${g}, ${b}, 0.2)`);
+    
+    // Update charts
+    updateChartColors();
+}
+
+// Employee Details Panel Functions
+function openEmployeeDetails(citizenid) {
+    const employee = currentJobData.employees?.find(emp => emp.citizenid === citizenid);
+    if (!employee) return;
+    
+    const panel = document.getElementById('employee-details-panel');
+    const nameEl = document.getElementById('selected-employee-name');
+    const totalHoursEl = document.getElementById('emp-total-hours');
+    const weekHoursEl = document.getElementById('emp-week-hours');
+    const activityScoreEl = document.getElementById('emp-activity-score');
+    const notesEl = document.getElementById('employee-notes-text');
+    
+    if (!panel) return;
+    
+    if (nameEl) nameEl.textContent = employee.name;
+    if (totalHoursEl) totalHoursEl.textContent = formatTime(employee.playTime || 0);
+    if (weekHoursEl) {
+        // Calculate weekly hours (simplified - would need actual data)
+        const weeklyHours = Math.floor((employee.playTime || 0) / 7);
+        weekHoursEl.textContent = formatTime(weeklyHours);
+    }
+    if (activityScoreEl) {
+        // Calculate activity score based on playtime and online status
+        const score = employee.isOnline ? 'Active' : 'Inactive';
+        activityScoreEl.textContent = score;
+    }
+    if (notesEl) notesEl.value = employee.note || '';
+    
+    panel.style.display = 'block';
+    
+    // Load hire history (would need server data)
+    loadEmployeeHireHistory(citizenid);
+}
+
+function closeEmployeeDetails() {
+    const panel = document.getElementById('employee-details-panel');
+    if (panel) panel.style.display = 'none';
+}
+
+function loadEmployeeHireHistory(citizenid) {
+    const historyList = document.getElementById('hire-history-list');
+    if (!historyList) return;
+    
+    // This would fetch from server - placeholder for now
+    historyList.innerHTML = '<div class="empty-list">No hire history available</div>';
+}
+
+// Permissions Sidebar Functions
+function setupPermissionsSidebar() {
+    const employeeList = document.getElementById('permissions-employee-list');
+    if (!employeeList || !currentJobData.employees) return;
+    
+    employeeList.innerHTML = '';
+    
+    currentJobData.employees.forEach(employee => {
+        const item = document.createElement('div');
+        item.className = 'permissions-employee-item';
+        item.setAttribute('data-citizenid', employee.citizenid);
+        item.innerHTML = `
+            <div style="font-weight: 500; margin-bottom: 4px;">${employee.name}</div>
+            <div style="font-size: 12px; color: rgba(255,255,255,0.6);">${employee.gradeName}</div>
+        `;
+        
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.permissions-employee-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            this.classList.add('active');
+            loadEmployeePermissions(employee.citizenid);
+        });
+        
+        employeeList.appendChild(item);
+    });
+}
+
+function loadEmployeePermissions(citizenid) {
+    const mainPanel = document.getElementById('permissions-main');
+    const nameEl = document.getElementById('permissions-employee-name');
+    const rankEl = document.getElementById('permissions-employee-rank');
+    
+    if (!mainPanel) return;
+    
+    const employee = currentJobData.employees?.find(emp => emp.citizenid === citizenid);
+    if (!employee) return;
+    
+    if (nameEl) nameEl.textContent = employee.name;
+    if (rankEl) rankEl.textContent = employee.gradeName;
+    
+    mainPanel.style.display = 'block';
+    
+    // Load permissions (would fetch from server)
+    // For now, set defaults
+    document.getElementById('perm-dashboard').checked = false;
+    document.getElementById('perm-employees').checked = false;
+    document.getElementById('perm-society').checked = false;
+    document.getElementById('perm-applications').checked = false;
+    document.getElementById('perm-hiringfiring').checked = false;
+}
+
+// Setup employee details close button
+function setupEmployeeDetailsListeners() {
+    const closeBtn = document.getElementById('close-employee-details');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeEmployeeDetails);
+    }
+    
+    const saveNotesBtn = document.getElementById('save-employee-notes');
+    if (saveNotesBtn) {
+        saveNotesBtn.addEventListener('click', function() {
+            const panel = document.getElementById('employee-details-panel');
+            const nameEl = document.getElementById('selected-employee-name');
+            if (!panel || !nameEl) return;
+            
+            const employee = currentJobData.employees?.find(emp => emp.name === nameEl.textContent);
+            if (!employee) return;
+            
+            const notes = document.getElementById('employee-notes-text').value;
+            
+            // Save notes to server
+            fetch(`https://${GetParentResourceName()}/saveEmployeeNotes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    citizenid: employee.citizenid,
+                    notes: notes
+                })
+            }).then(() => {
+                showNotification('Employee notes saved successfully');
+            });
+        });
+    }
+}
+
+// Setup permissions listeners
+function setupPermissionsListeners() {
+    const closeBtn = document.getElementById('close-permissions-view');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            const mainPanel = document.getElementById('permissions-main');
+            if (mainPanel) mainPanel.style.display = 'none';
+            document.querySelectorAll('.permissions-employee-item').forEach(el => {
+                el.classList.remove('active');
+            });
+        });
+    }
+    
+    const resetBtn = document.getElementById('reset-permissions-btn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            document.querySelectorAll('#permissions-main input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        });
+    }
+    
+    const saveBtn = document.getElementById('save-permissions-btn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function() {
+            const activeEmployee = document.querySelector('.permissions-employee-item.active');
+            if (!activeEmployee) {
+                showNotification('Please select an employee first', 'error');
+                return;
+            }
+            
+            const citizenid = activeEmployee.getAttribute('data-citizenid');
+            const permissions = {
+                dashboard: document.getElementById('perm-dashboard').checked,
+                employees: document.getElementById('perm-employees').checked,
+                society: document.getElementById('perm-society').checked,
+                applications: document.getElementById('perm-applications').checked,
+                hiringfiring: document.getElementById('perm-hiringfiring').checked,
+                editEmployees: document.getElementById('perm-edit-employees')?.checked || false,
+                fire: document.getElementById('perm-fire')?.checked || false,
+                deposit: document.getElementById('perm-deposit')?.checked || false,
+                withdraw: document.getElementById('perm-withdraw')?.checked || false,
+                transfer: document.getElementById('perm-transfer')?.checked || false,
+                reviewApps: document.getElementById('perm-review-apps')?.checked || false,
+                managePermissions: document.getElementById('perm-manage-permissions')?.checked || false,
+                settings: document.getElementById('perm-settings')?.checked || false,
+                statistics: document.getElementById('perm-statistics')?.checked || false
+            };
+            
+            fetch(`https://${GetParentResourceName()}/savePermissions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    citizenid: citizenid,
+                    permissions: permissions
+                })
+            }).then(() => {
+                showNotification('Permissions saved successfully');
+            });
+        });
+    }
+    
+    // Permissions search
+    const searchInput = document.getElementById('permissions-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.permissions-employee-item').forEach(item => {
+                const name = item.textContent.toLowerCase();
+                item.style.display = name.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    }
+}
+
+// Initialize new features after data loads
+function initializeNewFeatures() {
+    setupPermissionsSidebar();
+    setupEmployeeDetailsListeners();
+    setupPermissionsListeners();
 }

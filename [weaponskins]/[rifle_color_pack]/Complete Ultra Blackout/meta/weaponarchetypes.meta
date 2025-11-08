@@ -4,13 +4,13 @@
 	<InitDatas>
 		<Item>
 			<modelName>w_ar_carbinerifle_mag1</modelName>
-			<txdName>w_ar_carbinerifle_mag1</txdName>
+			<txdName>w_ar_ultra_blackout_mag1</txdName>
 			<ptfxAssetName>NULL</ptfxAssetName>
 			<lodDist value="300"/>
 		</Item>
 		<Item>
 			<modelName>w_ar_carbinerifle</modelName>
-			<txdName>w_ar_carbinerifle</txdName>
+			<txdName>w_ar_ultra_blackout</txdName>
 			<ptfxAssetName>NULL</ptfxAssetName>
 			<lodDist value="500"/>
 		</Item>

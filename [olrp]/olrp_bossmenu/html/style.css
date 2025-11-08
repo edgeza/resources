@@ -1034,9 +1034,20 @@ option:focus {
 }
 
 body.light-mode select {
-    color: #333333;
-    background-color: #f5f5f5 !important;
-    border: 1px solid #cccccc;
+    color: #1a1a1a !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+body.light-mode select:focus {
+    background-color: rgba(255, 255, 255, 1) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 220, 38, 38), 0.15) !important;
+}
+
+body.light-mode select:hover {
+    border-color: rgba(0, 0, 0, 0.3) !important;
+    background-color: rgba(255, 255, 255, 1) !important;
 }
 
 select,
@@ -4363,6 +4374,221 @@ body.light-mode .employee-item .employee-name,
 body.light-mode .employee-item .employee-grade,
 body.light-mode .employee-item .employee-status {
     color: #1a1a1a !important;
+}
+
+/* Toggle Buttons Light Mode */
+body.light-mode .toggle-container p {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .toggle-slider {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-mode .toggle-slider:before {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.light-mode input:checked + .toggle-slider {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+body.light-mode input:checked + .toggle-slider:before {
+    background-color: #ffffff !important;
+}
+
+/* Settings Page Light Mode */
+body.light-mode .settings-container,
+body.light-mode .settings-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: #1a1a1a !important;
+}
+
+body.light-mode .settings-title {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .header-title h1,
+body.light-mode .header-title p {
+    color: #1a1a1a !important;
+}
+
+/* Form Elements Light Mode */
+body.light-mode .form-group label {
+    color: #1a1a1a !important;
+}
+
+body.light-mode input[type="number"],
+body.light-mode input[type="text"],
+body.light-mode input[type="email"],
+body.light-mode textarea {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    color: #1a1a1a !important;
+}
+
+body.light-mode input[type="number"]:focus,
+body.light-mode input[type="text"]:focus,
+body.light-mode input[type="email"]:focus,
+body.light-mode textarea:focus {
+    border-color: var(--primary) !important;
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 220, 38, 38), 0.15) !important;
+}
+
+body.light-mode input[type="number"]::placeholder,
+body.light-mode input[type="text"]::placeholder,
+body.light-mode textarea::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* RGB Color Picker Light Mode */
+body.light-mode .rgb-color-picker,
+body.light-mode .rgb-control-group label {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .rgb-slider {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .rgb-slider::-webkit-slider-thumb {
+    background: var(--primary) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-mode .rgb-slider::-moz-range-thumb {
+    background: var(--primary) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-mode .rgb-input {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    color: #1a1a1a !important;
+}
+
+body.light-mode .rgb-preview {
+    background: rgba(255, 255, 255, 0.5) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .rgb-preview-box {
+    border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Search Inputs Light Mode */
+body.light-mode #search-employee,
+body.light-mode #search-management-employee,
+body.light-mode #search-application {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    color: #1a1a1a !important;
+}
+
+body.light-mode #search-employee::placeholder,
+body.light-mode #search-management-employee::placeholder,
+body.light-mode #search-application::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+body.light-mode #search-employee:focus,
+body.light-mode #search-management-employee:focus,
+body.light-mode #search-application:focus {
+    border-color: var(--primary) !important;
+    background: rgba(255, 255, 255, 1) !important;
+}
+
+/* Toolbar Actions Light Mode */
+body.light-mode .toolbar-actions input {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    color: #1a1a1a !important;
+}
+
+/* Table Headers Light Mode */
+body.light-mode th {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #1a1a1a !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode td {
+    color: #1a1a1a !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode tr:hover td {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Empty States Light Mode */
+body.light-mode .empty-table,
+body.light-mode .empty-list,
+body.light-mode .empty-state {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Modal Light Mode */
+body.light-mode .modal-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: #1a1a1a !important;
+}
+
+body.light-mode .modal-title,
+body.light-mode .modal-body {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .modal-close {
+    color: #1a1a1a !important;
+}
+
+body.light-mode .modal-close:hover {
+    color: var(--primary) !important;
+}
+
+/* Buttons Light Mode - Ensure visibility */
+body.light-mode .btn {
+    color: #ffffff !important;
+}
+
+body.light-mode .btn-outline {
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    color: #1a1a1a !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+body.light-mode .btn-outline:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+/* Permission Items Light Mode */
+body.light-mode .permission-item {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .permission-item:hover {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Employee Toolbar Light Mode */
+body.light-mode .employee-toolbar,
+body.light-mode .applications-toolbar {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .tabs {
+    border-bottom-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 body.light-mode .chart-card,

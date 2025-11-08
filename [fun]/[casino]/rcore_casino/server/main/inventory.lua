@@ -1,4 +1,31 @@
 Inventories = {
+    [Inventory.jpr] = {
+        AddItem = function(playerId, item, count)
+            return exports['jpr-inventory']:AddItem(playerId, item, count)
+        end,
+        RemoveItem = function(playerId, item, count)
+            return exports['jpr-inventory']:RemoveItem(playerId, item, count)
+        end,
+        GetItemCount = function(playerId, item)
+            return exports['jpr-inventory']:GetItemCount(playerId, item)
+        end
+    },
+    [Inventory.Tgiann] = {
+        AddItem = function(playerId, item, count)
+            return exports["tgiann-inventory"]:AddItem(playerId, item, count)
+        end,
+        RemoveItem = function(playerId, item, count)
+            return exports["tgiann-inventory"]:RemoveItem(playerId, item, count)
+        end,
+        GetItemCount = function(playerId, item)
+            local item = exports['tgiann-inventory']:GetItemByName(playerId, item)
+            if item then
+                return item.amount
+            else
+                return 0
+            end
+        end
+    },
     [Inventory.Origen] = {
         AddItem = function(playerId, item, count)
             return exports["origen_inventory"]:AddItem(playerId, item, count)
@@ -8,7 +35,7 @@ Inventories = {
         end,
         GetItemCount = function(playerId, item)
             return exports["origen_inventory"]:GetItemTotalAmount(playerId, item)
-        end,
+        end
     },
     [Inventory.OX] = {
         AddItem = function(playerId, item, count)
@@ -19,7 +46,7 @@ Inventories = {
         end,
         GetItemCount = function(playerId, item)
             return exports["ox_inventory"]:GetItemCount(playerId, item)
-        end,
+        end
     },
     [Inventory.CodeM] = {
         AddItem = function(playerId, item, count)
@@ -30,7 +57,7 @@ Inventories = {
         end,
         GetItemCount = function(playerId, item)
             return exports['codem-inventory']:GetItemsTotalAmount(playerId, item)
-        end,
+        end
     },
     [Inventory.LJ] = {
         AddItem = function(playerId, item, count)
@@ -42,7 +69,7 @@ Inventories = {
         GetItemCount = function(playerId, item)
             local itemByName = exports["lj_inventory"]:GetItemByName(playerId, item)
             return itemByName and itemByName.amount or 0
-        end,
+        end
     },
     [Inventory.MF] = {
         AddItem = function(playerId, item, count)
@@ -57,7 +84,7 @@ Inventories = {
             local identifier = GetPlayerIdentifier(playerId)
             local item = exports["mf_inventory"]:getInventoryItem(identifier, item)
             return item and item.count or 0
-        end,
+        end
     },
     [Inventory.PS] = {
         AddItem = function(playerId, item, count)
@@ -70,7 +97,7 @@ Inventories = {
         GetItemCount = function(playerId, item)
             local itemByName = exports["ps_inventory"]:GetItemByName(playerId, item)
             return itemByName and itemByName.amount or 0
-        end,
+        end
     },
     [Inventory.QS] = {
         AddItem = function(playerId, item, count)
@@ -81,7 +108,7 @@ Inventories = {
         end,
         GetItemCount = function(playerId, item)
             return exports['qs-inventory']:GetItemTotalAmount(playerId, item)
-        end,
+        end
     },
     [Inventory.Framework] = {
         AddItem = function(playerId, item, count)
@@ -109,8 +136,8 @@ Inventories = {
                 end
             end
             return 0
-        end,
-    },
+        end
+    }
 }
 
 -- adds casino inventory item
@@ -146,7 +173,7 @@ function GetPlayerCasinoItemCount(playerId, item)
         return inv.GetItemCount(playerId, item)
     else
         print("Inventory resource not found")
-    end    
+    end
 end
 
 local currentInventory

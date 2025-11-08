@@ -1,0 +1,82 @@
+.body{
+    padding: 1vw;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        width: 0vw;
+    }
+    &::-webkit-scrollbar-thumb{
+        background: rgba(255, 255, 255, 0);
+        border-radius: 0.18138rem;
+    }
+    &::-webkit-scrollbar-track{
+        background: rgba(255, 255, 255, 0);
+        border-radius: 0.18138rem;
+    }
+}
+
+.common{
+    padding: 1vw;
+    margin-bottom: 1vw;
+    background: rgba(0, 0, 0, 0.16);
+    border: 1.185px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    .title{
+        border-radius: 0.30225rem;
+        padding: 0.5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        h3{
+            font-size: 1.2vw;
+            font-weight: 700;
+            font-family: var(--font-satoshi);
+        }
+    }
+    .commonList{
+        padding: 1vw 0 0 0;
+        .item{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5vw;
+            padding: 0.5vw;
+            border-radius: 0.18138rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(208, 208, 208, 0.04);
+            color: #737373;
+            font-weight: 700;
+            font-family: var(--font-satoshi);
+            font-size: 0.95vw;
+            text-transform: uppercase;
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+            &.active{
+                background: rgba(0, 0, 0, 0.16);
+                color: white;
+            }
+            &.connect{
+                color: rgb(0, 255, 68);
+            }
+        }
+    }
+    .commonConnect{
+        padding: 0.4vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.18138rem;
+        font-weight: 900;
+        font-family: var(--font-satoshi);
+        font-size: 0.95vw;
+        text-transform: uppercase;
+        color: black;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        &:hover{
+            color: #fff;
+        }
+    }
+}

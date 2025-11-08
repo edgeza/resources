@@ -1,4 +1,50 @@
 SocietyBanking = {
+    [Society.QsBanking] = {
+        AddMoney = function(money)
+            exports['qs-banking']:AddMoney(Config.SocietyName, money, "casino")
+        end,
+        RemoveMoney = function(money)
+            exports['qs-banking']:RemoveMoney(Config.SocietyName, money, "casino")
+        end,
+        GetBalance = function()
+            local accountData = exports['qs-banking']:GetAccount(Config.SocietyName)
+            return accountData and (accountData.balance or accountData.money or accountData.amount) or 0
+        end
+    },
+    [Society.Tgiann] = {
+        AddMoney = function(money)
+            exports["tgiann-bank"]:AddJobMoney(Config.SocietyName, money)
+        end,
+        RemoveMoney = function(money)
+            exports["tgiann-bank"]:RemoveJobMoney(Config.SocietyName, money)
+        end,
+        GetBalance = function()
+            return exports["tgiann-bank"]:GetJobAccountBalance(Config.SocietyName)
+        end
+    },
+    [Society.Origen] = {
+        AddMoney = function(money)
+            exports['origen_masterjob']:AddBusinessMoney(Config.SocietyName, money)
+        end,
+        RemoveMoney = function(money)
+            exports['origen_masterjob']:RemoveBusinessMoney(Config.SocietyName, money)
+        end,
+        GetBalance = function()
+            return exports['origen_masterjob']:GetBusinessMoney(Config.SocietyName)
+        end
+    },
+    [Society.WasabiBanking] = {
+        AddMoney = function(money)
+            exports.wasabi_banking:AddMoney(Config.SocietyName, money)
+        end,
+        RemoveMoney = function(money)
+            exports.wasabi_banking:RemoveMoney(Config.SocietyName, money)
+        end,
+        GetBalance = function()
+            local account = exports.wasabi_banking:GetAccount(Config.SocietyName)
+            return account.balance or account.money or account.amount or 0
+        end
+    },
     [Society.ManagementFunds] = {
         AddMoney = function(money)
             local result = MySQL.query.await(
@@ -62,6 +108,17 @@ SocietyBanking = {
         end,
         GetBalance = function()
             return exports['qb-banking']:GetAccountBalance(Config.SocietyName)
+        end
+    },
+    [Society.Tgg] = {
+        AddMoney = function(money)
+            exports['tgg-banking']:AddSocietyMoney(Config.SocietyName, money)
+        end,
+        RemoveMoney = function(money)
+            exports['tgg-banking']:RemoveSocietyMoney(Config.SocietyName, money)
+        end,
+        GetBalance = function()
+            return exports['tgg-banking']:GetSocietyAccountMoney(Config.SocietyName) or 0
         end
     },
     [Society.QbBanking] = {
@@ -227,8 +284,13 @@ function GetSocietyResource()
 
     -- we can check before hand if the server is running qb-banking and is specific version for exports if not we will simply remove it from the Society list because we dont need it.
     local qbBakingResourceName = SocietyResourceName[Society.QbBanking]
-    if IsResourceStarted(qbBakingResourceName) and GetResourceMetadata(qbBakingResourceName, 'version', 0) >= '2.0.0' then
-        currentSociety = Society.QbBanking
+
+    if IsResourceStarted(qbBakingResourceName) then
+        local qbBakingResourceVersion = GetResourceMetadata(qbBakingResourceName, "version"):gsub("%D+", "")
+        qbBakingResourceVersion = tonumber(qbBakingResourceVersion)
+        if (qbBakingResourceVersion or 0) >= 200 then
+            currentSociety = Society.QbBanking
+        end
         return currentSociety
     else
         if Society[Society.QbBanking] then

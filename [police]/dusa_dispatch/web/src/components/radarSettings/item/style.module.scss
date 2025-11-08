@@ -1,0 +1,128 @@
+.radarChange {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5vw;
+  border-radius: 0.23744rem;
+  border: 1.266px solid rgba(255, 255, 255, 0.08);
+  background: rgba(217, 217, 217, 0.04);
+  .radarText {
+    font-family: var(--font-satoshi);
+    color: #fff;
+    font-size: 0.8vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    p {
+      color: #858585;
+      font-size: 0.7vw;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+  .radarAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+    .radarSwitch {
+      position: relative;
+      display: flex;
+      gap: 1.2vw;
+      padding: 0.7vw;
+      border-radius: 0.41869rem;
+      border: 0.852px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+      color: #7d7d7e;
+      font-family: var(--font-satoshi);
+      font-size: 0.9vw;
+      font-style: normal;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      .activeSwitch {
+        color: black;
+      }
+      p {
+        z-index: 1;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+      }
+      .switchItem {
+        position: absolute;
+        width: 2vw;
+        height: 1.8vw;
+        transition: 0.3s ease-in-out;
+        border-radius: 0.41869rem;
+        border: 1.356px solid #e0e0e0;
+        background: #e0e0e0;
+        top: 0.4vw;
+        right: 0.3vw;
+      }
+      .switchActive {
+        right: 2.7vw;
+      }
+    }
+    .radarButton {
+      display: flex;
+      gap: 0.5vw;
+      .radarButtonItem {
+        cursor: pointer;
+        user-select: none;
+        padding: 0.5vw;
+        color: #d1d1d1;
+        font-family: var(--font-satoshi);
+        font-size: 0.8vw;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.278rem; /* 184.615% */
+        letter-spacing: 0.01063rem;
+        border-radius: 0.41869rem;
+        border: 1.075px solid #292c2c;
+        background: #18191a;
+        transition: 0.3s ease-in-out;
+      }
+      .activeButton {
+        color: black;
+        border-radius: 0.41869rem;
+        background: #1c97dd;
+        box-shadow: 0px 0px 33.858px 0px rgba(28, 151, 221, 0.25);
+      }
+    }
+    .radarInput{
+        width: 6vw;
+        height: 2.5vw;
+        input{
+            width: 100%;
+            height: 100%;
+            outline: none;
+            color: #fff;
+            font-family: var(--font-satoshi);
+            font-size: 0.9vw;
+            text-align: center;
+            border-radius: 0.41869rem;
+            border: 0.852px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+        }
+    }
+    .radarReset{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-satoshi);
+        color: #A7A7A7;
+        font-size: 1vw;
+        user-select: none;
+        cursor: pointer;
+        width: 4vw;
+        height: 2.5vw;
+        border-radius: 0.41869rem;
+        border: 0.852px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+    }
+  }
+}

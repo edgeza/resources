@@ -356,6 +356,43 @@ function DrinkingBar_ShowMenu()
     RageUI.Visible(drinksMenu, true)
 end
 
+function GameStates_ChipManagement(playerList)
+    InfoPanel_UpdateNotification(nil)
+    CloseAllMenus()
+    local playersMenu = RageUI.CreateMenu("", Translation.Get("ADMIN_MENU_CHIP_MNG"), 25, 25,
+        "shopui_title_casino_banner", "shopui_title_casino_banner")
+    function RageUI.PoolMenus:ChipMngUI()
+        playersMenu:IsVisible(function(i)
+            for k, v in pairs(playerList) do
+                i:AddButton(v.name, nil, {
+                    IsDisabled = false,
+                    RightLabel = v.chips,
+                    RightLabelColor = RageUI.ItemsColour.White
+                }, nil, function()
+                    ShowTextInputBox(Translation.Get("ADMIN_MENU_CHIPS_NEWBALANCE"), v.chips, function(newBalance)
+                        newBalance = tonumber(newBalance)
+                        if newBalance then
+                            v.chips = newBalance
+                            GameStates_ChipManagement(playerList)
+                            TriggerServerEvent("Casino:AdminEditPlayerChips", v.playerId, newBalance)
+                        end
+                    end)
+                end)
+            end
+            i:AddSeparator(" ")
+            i:AddButton(Translation.Get("BTN_CLOSE"), nil, {
+                IsDisabled = false,
+                RightLabelColor = RageUI.ItemsColour.White,
+                RightBadge = RageUI.BadgeStyle.Alert
+            }, nil, function()
+                CloseAllMenus()
+            end)
+        end, function(Panels)
+        end)
+    end
+    RageUI.Visible(playersMenu, true)
+end
+
 function GameStates_ShowMenu()
     InfoPanel_UpdateNotification(nil)
     CloseAllMenus()
@@ -364,6 +401,14 @@ function GameStates_ShowMenu()
 
     function RageUI.PoolMenus:CashierUI()
         statesMenu:IsVisible(function(i)
+            i:AddSeparator(Translation.Get("ADMIN_MENU_CHIP_MNG"))
+            i:AddButton(Translation.Get("ADMIN_MENU_CHIP_MNG"), nil, {
+                IsDisabled = false,
+                RightLabelColor = RageUI.ItemsColour.White
+            }, nil, function()
+                TriggerServerEvent("Casino:AdminChipManagement")
+            end)
+            i:AddSeparator(Translation.Get("ADMIN_MENU_GAMESTATES"))
             for n = 1, #GameStates do
                 local v = GameStates[n]
                 i:AddButton(v.title, nil, {

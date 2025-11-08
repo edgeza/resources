@@ -1,0 +1,111 @@
+:root {
+  --font: "Orbitron", sans-serif;
+  --font-satoshi: "Satoshi", sans-serif;
+  --font-bebas: "Bebas Neue", sans-serif;
+  --contexify-menu-bgColor: rgba(40, 40, 40, 0.98);
+  --contexify-separator-color: #4c4c4c;
+  --contexify-item-color: #fff;
+  --contexify-activeItem-color: #fff;
+  --contexify-activeItem-bgColor: #3498db;
+  --contexify-rightSlot-color: #6f6e77;
+  --contexify-activeRightSlot-color: #fff;
+  --contexify-arrow-color: #6f6e77;
+  --contexify-activeArrow-color: #fff;
+  --toastify-font-family: "Satoshi", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  // background-color: rgb(0, 0, 0);
+  overflow: hidden;
+  font-family: var(--font-satoshi);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.contexify__submenu--is-open > .contexify__item__content {
+  font-family: var(--font-satoshi) !important;
+}
+
+.Dropdown-control {
+  width: 10.5vw;
+  border-radius: 0.36675rem !important;
+  border: 0.746px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  background-color: transparent !important;
+  outline: none !important;
+  color: #858585 !important;
+  font-weight: 500;
+  font-size: 1vw;
+  font-family: var(--font-satoshi);
+  cursor: pointer;
+}
+
+.settings-dropdown {
+  .Dropdown-control {
+    width: 100%;
+  }
+}
+
+.Dropdown-arrow {
+  display: none !important;
+}
+
+.Dropdown-menu {
+  border-radius: 0.36675rem;
+  border: 0.746px solid rgba(255, 255, 255, 0.08);
+  border-top: 0px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4.737556457519531px);
+  font-weight: 500;
+  font-size: 1vw;
+  font-family: var(--font-satoshi);
+  padding: 0.5vw;
+  &::-webkit-scrollbar {
+    width: 0vw;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 1vw;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 1vw;
+  }
+}
+
+.Dropdown-option {
+  border-radius: 0.34069rem;
+  border: 0.693px solid rgba(255, 255, 255, 0.63);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4.401008605957031px);
+  margin-bottom: 0.5vw;
+  color: #a7a7a7 !important;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  &.is-selected {
+    border-radius: 0.34069rem;
+    border: 0.693px solid rgba(255, 255, 255, 0.63);
+    background: rgba(255, 255, 255, 0.83);
+    backdrop-filter: blur(4.401008605957031px);
+    color: black !important;
+  }
+  &:hover {
+    background: rgba(255, 255, 255, 0.83);
+    color: black !important;
+  }
+}

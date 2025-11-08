@@ -403,6 +403,24 @@ function PrepareDefaultInterior(interior)
     PinInteriorInMemory(interior)
 end
 
+function ShowTextInputBox(caption, defaultText, onFinish)
+    EditorInputActive = true
+    AddTextEntry("FMMC_KEY_TIP8", caption)
+    DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", defaultText, "", "", "", 120)
+    CreateThread(function()
+        local keyboardInput = ""
+        while UpdateOnscreenKeyboard() == 0 do
+            Wait(100)
+        end
+        if UpdateOnscreenKeyboard() == 1 then
+            keyboardInput = GetOnscreenKeyboardResult()
+        end
+        if onFinish then
+            onFinish(keyboardInput)
+        end
+    end)
+end
+
 function LoadCasinoAtCoordsAndWait()
     if Config.LOAD_SCENE then
         local t = GetGameTimer() + 2000
@@ -1033,13 +1051,31 @@ function LerpEntityAdvanced(entity, x, y, z, speed)
     return o
 end
 
+
 function IsEntityInCasino(entity)
     local int = GetInteriorFromEntity(entity)
-    local roomCount = GetInteriorRoomCount(int)
-    local firstRoom = GetInteriorRoomName(int, 1)
+
+    if Config.MapType == 13 then
+        if int == 0 then
+            return IsEntityInArea(PlayerPedId(), CASINO_AREA1_MIN, CASINO_AREA1_MAX, true, true) or
+                       IsEntityInArea(PlayerPedId(), CASINO_AREA2_MIN, CASINO_AREA2_MAX, true, true)
+        end
+    end
+
     if int == 0 then
         return false
     end
+
+    local roomCount = GetInteriorRoomCount(int)
+    local firstRoom = GetInteriorRoomName(int, 1)
+    if Config.MapType == 13 then
+        return firstRoom == "main"
+    end
+
+    if Config.MapType == 12 then
+        return firstRoom == "room01"
+    end
+
     if Config.MapType == 9 then
         return firstRoom == "RM_1"
     end
@@ -1153,7 +1189,7 @@ function ShowHelpNotification(text)
             })
             return
         elseif Config.NotifySystem == 6 and text and text ~= "" then
-            exports["origen_notify"]:ShowNotification(newNotification) 
+            exports["origen_notify"]:ShowNotification(text)
         end
     end
     BeginTextCommandDisplayHelp("THREESTRINGS")

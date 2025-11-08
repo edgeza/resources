@@ -1,0 +1,74 @@
+.leaflet-draw-toolbar {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 1vw;
+  gap: 1.5vw !important;
+  border: none !important;
+}
+
+.leaflet-draw-edit-edit {
+  display: none !important;
+}
+
+.leaflet-draw-draw-polyline {
+  border-radius: 0.5rem !important;
+  border: none !important;
+  background-color: black !important;
+  transform: scale(1.5);
+}
+
+.leaflet-draw-draw-polygon {
+  border-radius: 0.5rem !important;
+  border: none !important;
+  background-color: black !important;
+  transform: scale(1.5);
+}
+
+.leaflet-draw-draw-circle {
+  border-radius: 0.5rem !important;
+  border: none !important;
+  background-color: black !important;
+  transform: scale(1.5);
+}
+
+.leaflet-draw-draw-marker {
+  border-radius: 0.5rem !important;
+  border: none !important;
+  background-color: black !important;
+  transform: scale(1.5);
+}
+
+.leaflet-draw-draw-circlemarker {
+  border-radius: 0.5rem !important;
+  border: none !important;
+  background-color: black !important;
+  transform: scale(1.5);
+}
+
+.leaflet-draw-edit-remove{
+    border-radius: 0.5rem !important;
+    border: none !important;
+    background-color: black !important;
+    transform: scale(1.5);
+}
+
+.leaflet-draw-actions-bottom{
+    li{
+      &:last-child{
+        display: none;
+      }
+    }
+}
+
+.leaflet-popup-content-wrapper{
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-close-button{
+  display: none !important;
+}
+
+.leaflet-popup-tip-container{
+  display: none !important;
+}

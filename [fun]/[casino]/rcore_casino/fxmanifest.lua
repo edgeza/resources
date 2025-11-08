@@ -1,5 +1,3 @@
-
-
 fx_version 'adamant'
 games { 'gta5' }
 
@@ -11,7 +9,7 @@ dependencies {
    -- 'rcore_casino_interior'
 }
 
-version '1.6.0'
+version '1.8.1'
 
 client_scripts {
     '@ox_lib/init.lua', -- for ox_notify
@@ -140,6 +138,8 @@ files {
     'client/interior/peddata_gtao.txt',
     'client/interior/peddata_oldk4mb1.txt',
     'client/interior/peddata_cawles.txt',
+    'client/interior/peddata_atlantis.txt',
+    'client/interior/peddata_town.txt',
 }
 
 lua54 "yes"

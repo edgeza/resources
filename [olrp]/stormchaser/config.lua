@@ -43,6 +43,16 @@ Config.Tablet = {
     enableKeybind = true
 }
 
+Config.WeatherTrigger = {
+    enabled = true,
+    weatherTypes = {
+        RAIN = true,
+        THUNDER = true,
+        OVERCAST = true
+    },
+    despawnOnMismatch = false
+}
+
 Config.MapBounds = {
     min = vector2(-3700.0, -4200.0),
     max = vector2(4400.0, 800.0)

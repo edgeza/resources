@@ -3,6 +3,22 @@ local Config = Config
 
 local activeStorm = nil
 local activeProbes = {}
+local weatherState = {
+    current = nil
+}
+
+local function canSpawnDuringWeather()
+    if not Config.WeatherTrigger or not Config.WeatherTrigger.enabled then
+        return true
+    end
+
+    if not weatherState.current then
+        return false
+    end
+
+    local weatherTypes = Config.WeatherTrigger.weatherTypes or {}
+    return weatherTypes[weatherState.current] == true
+end
 
 local function debugPrint(...)
     if not Config.Debug then return end
@@ -92,6 +108,11 @@ local function payoutForQuality(quality)
 end
 
 local function spawnStorm()
+    if Config.WeatherTrigger and Config.WeatherTrigger.enabled and not canSpawnDuringWeather() then
+        debugPrint('Blocked storm spawn; unsuitable weather:', weatherState.current or 'unknown')
+        return false
+    end
+
     local id = ('storm-%s'):format(os.time() .. math.random(100, 999))
     local coords = getRandomStormCoords()
     local heading = math.random(0, 359)
@@ -112,6 +133,7 @@ local function spawnStorm()
 
     debugPrint(('Spawned storm %s at (%.2f, %.2f) heading %d'):format(id, coords.x, coords.y, heading))
     sendStormUpdate()
+    return true
 end
 
 local function endStorm()
@@ -194,13 +216,17 @@ local function stormSpawner()
         if activeStorm then
             Wait(60000)
         else
-            local min = Config.StormSpawnIntervalMinutes.min * 60000
-            local max = Config.StormSpawnIntervalMinutes.max * 60000
-            local waitTime = math.random(min, max)
-            Wait(waitTime)
+            if not canSpawnDuringWeather() then
+                Wait(60000)
+            else
+                local min = Config.StormSpawnIntervalMinutes.min * 60000
+                local max = Config.StormSpawnIntervalMinutes.max * 60000
+                local waitTime = math.random(min, max)
+                Wait(waitTime)
 
-            if not activeStorm then
-                spawnStorm()
+                if not activeStorm then
+                    spawnStorm()
+                end
             end
         end
     end
@@ -208,6 +234,41 @@ end
 
 Citizen.CreateThread(stormLoop)
 Citizen.CreateThread(stormSpawner)
+
+local function updateWeatherState(weatherData)
+    if type(weatherData) ~= 'table' then return end
+    local previous = weatherState.current
+    local weatherType = weatherData.weather
+    if type(weatherType) == 'string' then
+        weatherType = weatherType:upper()
+    else
+        weatherType = nil
+    end
+    weatherState.current = weatherType
+
+    if previous == weatherState.current then return end
+
+    debugPrint(('Weather changed from %s to %s'):format(previous or 'nil', weatherState.current or 'nil'))
+
+    if canSpawnDuringWeather() and not activeStorm then
+        debugPrint('Triggering storm spawn due to weather change.')
+        spawnStorm()
+    elseif activeStorm and Config.WeatherTrigger and Config.WeatherTrigger.despawnOnMismatch and not canSpawnDuringWeather() then
+        debugPrint('Ending active storm due to weather mismatch.')
+        endStorm()
+    end
+end
+
+if Config.WeatherTrigger and Config.WeatherTrigger.enabled then
+    local initialWeather = GlobalState.weather
+    if initialWeather then
+        updateWeatherState(initialWeather)
+    end
+
+    AddStateBagChangeHandler('weather', 'global', function(_, _, value)
+        updateWeatherState(value)
+    end)
+end
 
 RegisterNetEvent('stormchaser:server:requestSync', function()
     local src = source

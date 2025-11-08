@@ -67,6 +67,7 @@ All tunables live in `config.lua`. Highlights:
 - `BasePayout` and `QualityMultiplier`: scale rewards per probe quality tier.
 - `NewsStation`: location & blip for selling data. If `qb-target` is running, an interaction zone is added automatically.
 - `Tablet.openKey`: change or disable the default keybind for opening the tablet UI.
+- `WeatherTrigger`: tie storms to specific weather types (default: `RAIN`, `THUNDER`, `OVERCAST`). Set `enabled = false` to revert to time-based spawns or toggle `despawnOnMismatch` if you want storms to end when the weather clears.
 
 ## Gameplay Loop
 
@@ -84,6 +85,7 @@ All tunables live in `config.lua`. Highlights:
 - Ensure probes respect the per-player limit and return the item when collected.
 - Verify `storm_data` drives pay out when sold at the news station (`qb-target` interaction or `/stormtablet` menu if target is missing).
 - Test reconnecting mid-storm to ensure the tablet resyncs storm and probe states.
+- Force weather changes in Renewed-Weathersync (or via admin menu) to confirm storms spawn immediately when the configured types begin and respect `despawnOnMismatch` if enabled.
 
 ## Notes
 

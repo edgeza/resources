@@ -14,6 +14,12 @@ let stormTrail = [];
 
 const MAX_TRAIL_POINTS = 30;
 
+function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+}
+
 function toggleTablet(show) {
     isVisible = show;
     tablet.classList.toggle('hidden', !show);
@@ -169,14 +175,38 @@ function drawProbes() {
 
 function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(6, 10, 18, 0.9)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    drawBackground();
 
     drawTrail();
     drawStorm();
     drawProbes();
 
     requestAnimationFrame(render);
+}
+
+function drawBackground() {
+    const { width, height } = canvas;
+    const grad = ctx.createLinearGradient(0, 0, width, height);
+    grad.addColorStop(0, 'rgba(10, 18, 34, 0.95)');
+    grad.addColorStop(1, 'rgba(4, 8, 16, 0.95)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = 'rgba(0, 110, 190, 0.15)';
+    ctx.lineWidth = 1;
+    const gridSize = 40;
+    for (let x = 0; x <= width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+    }
+    for (let y = 0; y <= height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+    }
 }
 
 window.addEventListener('message', (event) => {
@@ -225,5 +255,7 @@ document.addEventListener('keyup', (event) => {
     }
 });
 
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 render();
 

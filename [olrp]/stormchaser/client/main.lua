@@ -13,6 +13,22 @@ local tabletState = {
 
 local probes = {}
 local lastProbePrompt = 0
+local probeModel = `prop_tool_box_04`
+local function ensureProbeModelLoaded()
+    if HasModelLoaded(probeModel) then return true end
+    RequestModel(probeModel)
+    local waited = 0
+    while not HasModelLoaded(probeModel) do
+        Wait(50)
+        waited += 50
+        if waited >= 5000 then
+            QBCore.Functions.Notify('Probe hardware failed to initialize.', 'error')
+            return false
+        end
+    end
+    return true
+end
+
 
 local function debugPrint(...)
     if not Config.Debug then return end
@@ -166,10 +182,14 @@ RegisterNetEvent('stormchaser:client:syncProbes', function(serverProbes)
     probes = {}
 
     for id, entry in pairs(serverProbes) do
-        local obj = CreateObjectNoOffset(`prop_tool_box_04`, entry.coords.x, entry.coords.y, entry.coords.z - 1.0, false, false, false)
+        if not ensureProbeModelLoaded() then
+            return
+        end
+        local obj = CreateObjectNoOffset(probeModel, entry.coords.x, entry.coords.y, entry.coords.z - 1.0, false, false, false)
         if obj ~= 0 then
             SetEntityHeading(obj, entry.heading or 0.0)
             FreezeEntityPosition(obj, true)
+            SetModelAsNoLongerNeeded(probeModel)
         end
         probes[id] = {
             obj = obj,
@@ -204,10 +224,14 @@ RegisterNetEvent('stormchaser:client:updateProbe', function(id, data)
     entry.owner = data.owner or entry.owner
 
     if not entry.obj or not DoesEntityExist(entry.obj) then
-        local obj = CreateObjectNoOffset(`prop_tool_box_04`, entry.coords.x, entry.coords.y, entry.coords.z - 1.0, false, false, false)
+        if not ensureProbeModelLoaded() then
+            return
+        end
+        local obj = CreateObjectNoOffset(probeModel, entry.coords.x, entry.coords.y, entry.coords.z - 1.0, false, false, false)
         if obj ~= 0 then
             SetEntityHeading(obj, data.heading or 0.0)
             FreezeEntityPosition(obj, true)
+            SetModelAsNoLongerNeeded(probeModel)
         end
         entry.obj = obj
     end
@@ -219,6 +243,10 @@ RegisterNetEvent('stormchaser:client:deployProbe', function()
     local ped = PlayerPedId()
     if IsPedInAnyVehicle(ped, true) then
         QBCore.Functions.Notify('Exit your vehicle to deploy the probe.', 'error')
+        return
+    end
+
+    if not ensureProbeModelLoaded() then
         return
     end
 
@@ -238,6 +266,7 @@ RegisterNetEvent('stormchaser:client:deployProbe', function()
     ClearPedTasks(ped)
 
     TriggerServerEvent('stormchaser:server:deployProbe', dropCoords, GetEntityHeading(ped))
+    SetModelAsNoLongerNeeded(probeModel)
 end)
 
 RegisterNetEvent('stormchaser:client:toggleTablet', function()
@@ -314,4 +343,5 @@ end)
 RegisterNetEvent('stormchaser:client:initiateSell', function()
     TriggerServerEvent('stormchaser:server:sellData')
 end)
+
 

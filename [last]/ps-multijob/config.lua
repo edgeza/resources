@@ -7,7 +7,8 @@ Config.MaxJobs = 3
 Config.IgnoredJobs = {
 	["unemployed"] = true,
 	["ambulance"] = true,
-	["bcso"] = true
+	["bcso"] = true,
+	["police"] = true,
 }
 Config.DenyDuty = {
 }

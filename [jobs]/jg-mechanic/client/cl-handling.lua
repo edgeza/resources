@@ -199,22 +199,28 @@ local function calculateTuningHandling(handling, tuningConfig)
             handling[key] = value
           else
             -- Check if this is a vector field
-            if string.sub(key, 1, 3) == "vec" then
+            local keyIsVectorField = string.sub(key, 1, 3) == "vec"
+            local valueIsVector = value and (type(value) == "vector3" or (type(value) == "table" and value.x ~= nil))
+
+            if keyIsVectorField then
               -- For vector fields, handle vector addition properly
               local currentValue = handling[key]
               local isCurrentVector = currentValue and (type(currentValue) == "vector3" or (type(currentValue) == "table" and currentValue.x ~= nil))
-              local isValueVector = value and (type(value) == "vector3" or (type(value) == "table" and value.x ~= nil))
               
-              if isCurrentVector and isValueVector then
+              if isCurrentVector and valueIsVector then
                 -- Both are vectors, add components
                 handling[key] = vector3(
                   currentValue.x + value.x,
                   currentValue.y + value.y,
                   currentValue.z + value.z
                 )
-              elseif isValueVector then
+              elseif valueIsVector then
                 -- Only new value is a vector, use it directly
-                handling[key] = value
+                if type(value) == "table" then
+                  handling[key] = vector3(value.x or 0.0, value.y or 0.0, value.z or 0.0)
+                else
+                  handling[key] = value
+                end
               elseif isCurrentVector then
                 -- Current is vector but new isn't, keep current (don't try to add number to vector)
                 -- Don't modify handling[key] - keep the existing vector value
@@ -230,9 +236,22 @@ local function calculateTuningHandling(handling, tuningConfig)
               if isCurrentVector then
                 -- Current value is a vector but key doesn't start with "vec", keep current value
                 -- Don't modify handling[key] - keep the existing vector value
-              else
+              elseif valueIsVector then
+                -- New value is a vector but key isn't marked as one, fallback to direct assignment
+                -- Convert simple tables to a vector3 for consistency
+                if type(value) == "table" and type(value.x) == "number" then
+                  handling[key] = vector3(value.x, value.y or 0.0, value.z or 0.0)
+                else
+                  handling[key] = value
+                end
+              elseif type(value) == "boolean" then
+                handling[key] = value
+              elseif type(value) == "number" then
                 -- Safe to add normally
-                handling[key] = (handling[key] or 0) + value
+                handling[key] = (handling[key] or 0.0) + value
+              else
+                -- Non numeric types fallback to direct assignment to avoid invalid arithmetic
+                handling[key] = value
               end
             end
           end

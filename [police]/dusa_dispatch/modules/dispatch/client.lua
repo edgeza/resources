@@ -122,7 +122,7 @@ local function addBlip(data, blipData)
     if not Functions.IsPolice(Framework.Player.Job.Name) then return end
     CreateThread(function()
         createBlip(data, blipData)
-        if not alertsMuted and alertShown then
+        if not alertsMuted then
             if not blipData.sound or blipData.sound == "Lose_1st" then
                 PlaySound(-1, blipData.sound or "Lose_1st", blipData.sound2 or "GTAO_FM_Events_Soundset", 0, 0, 1)
             else

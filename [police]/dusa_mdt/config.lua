@@ -8,7 +8,7 @@ config.debug = false
 
 ------------------------GENERAL OPTIONS------------------------
 ---------------------------------------------------------------
-config.separateMdt = true -- If true, MDT data will be separate for each job. If you want to set it shared between all jobs, set it to false
+config.separateMdt = false -- If true, MDT data will be separate for each job. If you want to set it shared between all jobs, set it to false
 config.JobThemes = { -- red blue purple orange aqua green white black
     ['police'] = 'blue',
     ['state'] = 'aqua',
@@ -18,15 +18,15 @@ config.JobThemes = { -- red blue purple orange aqua green white black
     ['ranger'] = 'green',
 }
 config.defaultlanguage = 'en' -- Default language for the MDT | en, de, es, fr, pt, tr, it, af, bg, da, el, et, fi, hu, lb, lt, pl, ro, ru, sr, sv, zh
-config.billing = 'scriptname' -- dusabilling, quasarbilling, codestudiobilling, okokbilling, esxbilling, jimpayment, jaksam
-config.jail = 'scriptname' -- pickle, esxjail, rcore, tkjail
-config.communityservice = 'scriptname' -- esxcommunityservice, qbcommunityservice
+config.billing = 'dusabilling' -- dusabilling, quasarbilling, codestudiobilling, okokbilling, esxbilling, jimpayment, jaksam
+config.jail = '' -- pickle, esxjail, rcore, tkjail
+config.communityservice = '' -- esxcommunityservice, qbcommunityservice
 config.Webhook = 'https://discordapp.com/api/webhooks/1212186619117838437/dXljYYvqkBpbmfW3vhrM_A1xp2286ix_WoQudx4fwWRn6jkZYavKURf6WtjXHJVfOqZm' -- Images will be uploaded here
 config.alerttimeout = 2 * 60000 -- 2 minute default
 config.excelLink = 'https://docs.google.com/document/d/1xYT1TaxQ_hmnPa2XXfkrBqQA_-7N0qrluI9VPWagdKI/edit?rm=minimal' -- Link to the excel sheet, this is used for the Excel tab 
 config.policejobs = { -- list of jobs who can access the MDT
-    "police",
-    "bcso"
+    "police"
+  --  "bcso"
     -- "sheriff",
     -- "state"
 }

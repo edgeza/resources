@@ -1,3 +1,5 @@
+local isOpened = false
+
 function mdt:open()
     if not cache.citizenid then cache.citizenid = bridge.getIdentifier() end
     if isPolice() then
@@ -117,6 +119,18 @@ end)
 RegisterNetEvent('dusa_mdt:open', function()
     mdt:open()
 end)
+
+-- Keybind to open MDT with K key
+lib.addKeybind({
+    name = 'openmdt',
+    description = 'Open MDT',
+    defaultKey = 'K',
+    onPressed = function()
+        if not isOpened then
+            mdt:open()
+        end
+    end,
+})
 
 RegisterNUICallback('close', function(_, cb)
     isOpened = false

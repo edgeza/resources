@@ -318,36 +318,16 @@ class MDTSystem {
         document.querySelectorAll('.nav-item').forEach(item => {
             item.classList.remove('active');
         });
-        const navTarget = document.querySelector(`[data-page="${page}"]`);
-        if (navTarget) {
-            navTarget.classList.add('active');
-        }
+        document.querySelector(`[data-page="${page}"]`)?.classList.add('active');
 
-        // Hide all pages and remove active state
-        const allPages = document.querySelectorAll('.page');
-        allPages.forEach(el => {
-            el.classList.remove('active');
-            // Force-hide to avoid any stylesheet conflicts
-            el.style.display = 'none';
+        // Update active page
+        document.querySelectorAll('.page').forEach(pageEl => {
+            pageEl.classList.remove('active');
         });
-
-        // Show requested page
-        const targetPage = document.getElementById(`${page}-page`);
-        if (!targetPage) {
-            console.warn(`MDT: Page element not found for`, page);
-            return;
-        }
-        targetPage.classList.add('active');
-        // Force-show to ensure visibility even if CSS specificity interferes
-        targetPage.style.display = 'block';
+        document.getElementById(`${page}-page`)?.classList.add('active');
 
         this.currentPage = page;
-        // Load data safely
-        try {
-            this.loadPageData(page);
-        } catch (e) {
-            console.error('MDT: Error loading page data for', page, e);
-        }
+        this.loadPageData(page);
     }
 
     async loadPageData(page) {

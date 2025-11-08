@@ -109,19 +109,7 @@ CreateThread(function()
     AddTextComponentString("Formula 1")
     EndTextCommandSetBlipName(blip)
 end)
-CreateThread(function()
-    local blip = AddBlipForCoord(115.79, -1953.42, 20.75) -- Replace with your race start coords
 
-    SetBlipSprite(blip, 458)          -- Racing flag icon
-    SetBlipDisplay(blip, 4)           -- Display type
-    SetBlipScale(blip, 0.7)           -- Size of blip
-    SetBlipColour(blip, 5)            -- Yellow color
-    SetBlipAsShortRange(blip, true)   -- Only show when nearby
-
-    BeginTextCommandSetBlipName("STRING")
-    AddTextComponentString("Suspicious Homie")
-    EndTextCommandSetBlipName(blip)
-end)
 CreateThread(function()
     local blip = AddBlipForCoord(-947.38, -284.68, 81.45) -- Replace with your race start coords
 

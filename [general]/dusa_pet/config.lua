@@ -110,7 +110,7 @@ Config.Keybinds = {
     },
     ["petmenu"] = {
         command = "petmenu",
-        key = "K",
+        key = "L",
         description = "Pet Menu",
         func = function()
             OpenPetMenu()

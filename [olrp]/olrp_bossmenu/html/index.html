@@ -103,58 +103,92 @@
                     </div>
                 </header>
 
-                <div class="dashboard-grid">
-                    <div class="stat-card">
-                        <div class="stat-card-title">Total Employees</div>
-                        <div class="stat-card-value" id="total-employees">0</div>
-                        <div class="stat-card-trend">
-                            <i class="fas fa-users"></i> <span id="status-online">0</span> currently online
+                <div class="dashboard-grid modern-grid">
+                    <div class="stat-card modern-stat-card">
+                        <div class="stat-card-icon-wrapper">
+                            <i class="fas fa-users stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <div class="stat-card-title">Total Employees</div>
+                            <div class="stat-card-value" id="total-employees">0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-circle online-indicator"></i> <span id="status-online">0</span> currently online
+                            </div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-card-title">Average Work Hours</div>
-                        <div class="stat-card-value" id="avg-hours">0</div>
-                        <div class="stat-card-trend">
-                            <i class="fas fa-clock"></i> hours per employee weekly
+                    <div class="stat-card modern-stat-card">
+                        <div class="stat-card-icon-wrapper">
+                            <i class="fas fa-clock stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <div class="stat-card-title">Average Work Hours</div>
+                            <div class="stat-card-value" id="avg-hours">0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-chart-line"></i> hours per employee weekly
+                            </div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-card-title">Highest Rank</div>
-                        <div class="stat-card-value" id="highest-grade">-</div>
-                        <div class="stat-card-trend">
-                            <i class="fas fa-star"></i> <span id="highest-grade-count">0</span> employees at this rank
+                    <div class="stat-card modern-stat-card">
+                        <div class="stat-card-icon-wrapper">
+                            <i class="fas fa-star stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <div class="stat-card-title">Highest Rank</div>
+                            <div class="stat-card-value" id="highest-grade">-</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-user-shield"></i> <span id="highest-grade-count">0</span> employees at this rank
+                            </div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-card-title">Most Common Rank</div>
-                        <div class="stat-card-value" id="common-grade">-</div>
-                        <div class="stat-card-trend">
-                            <i class="fas fa-user-friends"></i> <span id="common-grade-count">0</span> employees at this rank
+                    <div class="stat-card modern-stat-card">
+                        <div class="stat-card-icon-wrapper">
+                            <i class="fas fa-user-friends stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <div class="stat-card-title">Most Common Rank</div>
+                            <div class="stat-card-value" id="common-grade">-</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-layer-group"></i> <span id="common-grade-count">0</span> employees at this rank
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="charts-row">
-                    <div class="chart-container">
+                    <div class="chart-container modern-chart-card">
                         <div class="chart-header">
-                            <div class="chart-title">Activity Overview - By Hour</div>
+                            <div class="chart-title-wrapper">
+                                <i class="fas fa-chart-line chart-icon"></i>
+                                <div class="chart-title">Activity Overview - By Hour</div>
+                            </div>
                             <div class="chart-actions">
-                                <div class="chart-action" id="download-activity"><i class="fas fa-download"></i></div>
-                                <div class="chart-action" id="expand-activity"><i class="fas fa-expand"></i></div>
+                                <div class="chart-action modern-action-btn" id="download-activity" title="Download Chart">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <div class="chart-action modern-action-btn" id="expand-activity" title="Expand View">
+                                    <i class="fas fa-expand"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="activity-chart" id="activity-chart">
-                            <!-- Generated dynamically by JavaScript -->
+                        <div class="chart-content-wrapper">
+                            <div class="activity-chart modern-activity-chart" id="activity-chart">
+                                <!-- Generated dynamically by JavaScript -->
+                            </div>
                         </div>
                     </div>
-                    <div class="chart-container">
+                    <div class="chart-container modern-chart-card">
                         <div class="chart-header">
-                            <div class="chart-title">Online Employees</div>
+                            <div class="chart-title-wrapper">
+                                <i class="fas fa-users chart-icon"></i>
+                                <div class="chart-title">Online Employees</div>
+                            </div>
                             <div class="chart-actions">
-                                <div class="chart-action" id="refresh-online"><i class="fas fa-sync-alt"></i></div>
+                                <div class="chart-action modern-action-btn" id="refresh-online" title="Refresh List">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="employee-list" id="online-employees">
+                        <div class="employee-list modern-employee-list" id="online-employees">
                             <!-- Generated dynamically by JavaScript -->
                             <div class="empty-list">No employees currently online</div>
                         </div>
@@ -274,24 +308,29 @@
                 </div>
 
                 <div class="society-actions-container">
-                    <div class="chart-container society-chart-container">
+                    <div class="chart-container society-chart-container modern-chart-card">
                         <div class="chart-header">
-                            <div class="chart-title">Transaction Activity</div>
+                            <div class="chart-title-wrapper">
+                                <i class="fas fa-chart-bar chart-icon"></i>
+                                <div class="chart-title">Transaction Activity</div>
+                            </div>
                             <div class="chart-actions">
-                                <div class="dropdown">
-                                    <button id="timeframe-selector" class="dropdown-btn">
+                                <div class="dropdown modern-dropdown">
+                                    <button id="timeframe-selector" class="dropdown-btn modern-dropdown-btn">
                                         <span>Last 7 days</span>
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
-                                    <div id="timeframe-dropdown" class="dropdown-content">
-                                        <a href="#" data-timeframe="day">Today</a>
-                                        <a href="#" data-timeframe="week">Last 7 days</a>
-                                        <a href="#" data-timeframe="month">Last 30 days</a>
+                                    <div id="timeframe-dropdown" class="dropdown-content modern-dropdown-content">
+                                        <a href="#" data-timeframe="day"><i class="fas fa-calendar-day"></i> Today</a>
+                                        <a href="#" data-timeframe="week"><i class="fas fa-calendar-week"></i> Last 7 days</a>
+                                        <a href="#" data-timeframe="month"><i class="fas fa-calendar-alt"></i> Last 30 days</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="transactions-chart" class="transactions-chart"></div>
+                        <div class="chart-content-wrapper">
+                            <div id="transactions-chart" class="transactions-chart modern-transactions-chart"></div>
+                        </div>
                     </div>
 
                     <div class="society-actions-row">
@@ -800,3 +839,4 @@
 </body>
 
 </html>
+

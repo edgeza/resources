@@ -221,9 +221,9 @@ function App() {
 				<div className='container'>
 					{visible && (
 						<div className='character-selector-top'>
-							<IconUsersGroup size={45} color='#228be6' />
-							<Title order={2} fz={32} c={"blue"}>
-								Welcome to One Life Roleplay
+							<IconUsersGroup size={45} color='#ff0000' />
+							<Title order={2} fz={32} c={"red"}>
+								Welcome to OneLife Roleplay
 							</Title>
 							<Text fw={500} fz={14}>
 								Select the character you want to play
@@ -238,9 +238,9 @@ function App() {
 									{[...Array(allowedCharacters)].map((_, index) => {
 										const character = characters[index];
 										return character ? (
-											<div className='character-card'>
+											<div className={`character-card ${isSelected === character.cid ? 'selected' : ''}`}>
 												<Group justify='space-between'>
-													<Text fw={500}>{character.name}</Text>
+													<Text fw={600} fz={18}>{character.name}</Text>
 													<Badge
 														color='rgba(196, 196, 196, 1)'
 														variant='light'
@@ -255,27 +255,35 @@ function App() {
 														isSelected === character.cid ? "show" : "hide"
 													}
 												>
-													<SimpleGrid cols={2} spacing={3}>
-														{character.metadata &&
-															character.metadata.length > 0 &&
-															character.metadata.map((metadata) => (
-																<InfoCard
-																	key={metadata.key}
-																	icon={metadata.key}
-																	label={metadata.value}
-																/>
-															))}
-													</SimpleGrid>
+													<div className='character-details-container'>
+														<SimpleGrid cols={2} spacing={10}>
+															{character.metadata &&
+																character.metadata.length > 0 &&
+																character.metadata.map((metadata) => (
+																	<InfoCard
+																		key={metadata.key}
+																		icon={metadata.key}
+																		label={metadata.value}
+																	/>
+																))}
+														</SimpleGrid>
+													</div>
 
-													<Divider color='gray' />
+													<Divider color='rgba(255, 255, 255, 0.2)' my={15} />
 
 													<div className='character-card-actions'>
 														<Button
 															color='green'
-															variant='light'
+															variant='filled'
 															fullWidth
-															leftSection={<IconPlayerPlay size={14} />}
-															h={30}
+															leftSection={<IconPlayerPlay size={16} />}
+															h={40}
+															radius='md'
+															style={{
+																background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(22, 163, 74, 0.9) 100%)',
+																border: '1px solid rgba(255, 255, 255, 0.2)',
+																backdropFilter: 'blur(10px)',
+															}}
 															onClick={() => {
 																HandlePlay(character.citizenid);
 															}}
@@ -285,10 +293,16 @@ function App() {
 
 														<Button
 															color='red'
-															variant='light'
+															variant='filled'
 															fullWidth
-															leftSection={<IconTrash size={14} />}
-															h={30}
+															leftSection={<IconTrash size={16} />}
+															h={40}
+															radius='md'
+															style={{
+																background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.8) 0%, rgba(220, 38, 38, 0.9) 100%)',
+																border: '1px solid rgba(255, 255, 255, 0.2)',
+																backdropFilter: 'blur(10px)',
+															}}
 															onClick={() => {
 																openDeleteModal(character.citizenid);
 															}}
@@ -305,9 +319,15 @@ function App() {
 												>
 													<Button
 														color='blue'
-														variant='light'
+														variant='filled'
 														fullWidth
-														h={30}
+														h={40}
+														radius='md'
+														style={{
+															background: 'linear-gradient(135deg, rgba(34, 139, 230, 0.8) 0%, rgba(25, 113, 194, 0.9) 100%)',
+															border: '1px solid rgba(255, 255, 255, 0.2)',
+															backdropFilter: 'blur(10px)',
+														}}
 														onClick={() => {
 															HandleSelect(character.cid, character.citizenid);
 														}}

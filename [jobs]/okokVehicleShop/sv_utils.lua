@@ -62,6 +62,7 @@ AddEventHandler('okokVehicleShop:setVehicleOwned', function (vehicleProps, vehic
     if not canBuy then return end
 
     if type == 'vehicles' then type = 'car' end -- type returns the type of the stand, so if you add a type luxury and you want to save it as type car, make the same if as here
+    if type == 'lux' then type = 'car' end -- map lux shop type to car type for vehicle ownership
 
     if personalPurchase then
         MySQL.query('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (@license, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {

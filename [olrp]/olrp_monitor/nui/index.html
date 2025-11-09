@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLRP Economy Monitor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="midnight-red">
+    <div id="container" class="container" style="display: none;">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <a class="nav-item active" data-page="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a class="nav-item" data-page="players">
+                <i class="fas fa-users"></i>
+                <span>Players</span>
+            </a>
+            <a class="nav-item" data-page="moneyflow">
+                <i class="fas fa-project-diagram"></i>
+                <span>Money Flow</span>
+            </a>
+            <a class="nav-item" data-page="statistics">
+                <i class="fas fa-chart-bar"></i>
+                <span>Statistics</span>
+            </a>
+            <a class="nav-item" style="margin-top: auto;" id="close-ui">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Close</span>
+            </a>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content">
+            <!-- Dashboard Page -->
+            <div class="page active" id="dashboard-page">
+                <header>
+                    <div class="header-title">
+                        <h1>Economy Dashboard</h1>
+                        <p id="dashboard-subtitle">Monitoring server economy in real-time</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" id="refresh-data-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
+                    </div>
+                </header>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-title">Total Economy</div>
+                        <div class="stat-card-value" id="total-economy">$0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-dollar-sign"></i> Cash + Bank combined
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Total Crypto</div>
+                        <div class="stat-card-value" id="total-crypto">₿ 0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-bitcoin"></i> Cryptocurrency holdings
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Total Vehicles</div>
+                        <div class="stat-card-value" id="total-vehicles">0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-car"></i> Vehicles across all players
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Total Players</div>
+                        <div class="stat-card-value" id="total-players">0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-users"></i> Players in database
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Average Networth</div>
+                        <div class="stat-card-value" id="avg-networth">$0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-chart-line"></i> Per player average
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Suspicious Players</div>
+                        <div class="stat-card-value" id="suspicious-count">0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-exclamation-triangle"></i> Flagged for review
+                        </div>
+                    </div>
+                    <div class="stat-card abuse-card">
+                        <div class="stat-card-title">Hidden Trucking Money</div>
+                        <div class="stat-card-value" id="total-trucking">$0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-truck"></i> Total in trucking system
+                        </div>
+                    </div>
+                    <div class="stat-card abuse-card">
+                        <div class="stat-card-title">Savings Accounts</div>
+                        <div class="stat-card-value" id="total-savings">$0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-piggy-bank"></i> Total in savings
+                        </div>
+                    </div>
+                    <div class="stat-card abuse-card">
+                        <div class="stat-card-title">Society Accounts</div>
+                        <div class="stat-card-value" id="total-societies">$0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-building"></i> Total in societies
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">Top 10 Richest Players</div>
+                            <div class="chart-actions">
+                                <div class="chart-action" id="refresh-top-players"><i class="fas fa-sync-alt"></i></div>
+                            </div>
+                        </div>
+                        <div class="top-players-list" id="top-players-list">
+                            <div class="empty-list">Loading top players...</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">Wealth Distribution</div>
+                        </div>
+                        <div class="wealth-distribution" id="wealth-distribution">
+                            <div class="empty-list">Loading distribution data...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Players Page -->
+            <div class="page" id="players-page">
+                <header>
+                    <div class="header-title">
+                        <h1>Player Economy</h1>
+                        <p id="players-count">Viewing 0 players</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" id="refresh-players-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <button class="btn btn-primary" id="export-data-btn">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                    </div>
+                </header>
+
+                <div class="filters-container">
+                    <div class="tabs">
+                        <div class="tab active" data-filter="all">All Players</div>
+                        <div class="tab" data-filter="suspicious">Suspicious</div>
+                        <div class="tab" data-filter="top100">Top 100</div>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="search-player" placeholder="Search by name or citizenid...">
+                        <select id="sort-by">
+                            <option value="networth">Sort by Networth</option>
+                            <option value="cash">Sort by Cash</option>
+                            <option value="bank">Sort by Bank</option>
+                            <option value="crypto">Sort by Crypto</option>
+                            <option value="vehicles">Sort by Vehicles</option>
+                            <option value="items">Sort by Items</option>
+                            <option value="truckingMoney">Sort by Trucking Money</option>
+                            <option value="savingsAccount">Sort by Savings</option>
+                            <option value="societyAccounts">Sort by Societies</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="table-title">Player Economy Data</div>
+                        <div class="table-actions">
+                            <span id="table-info">Showing 0-0 of 0</span>
+                        </div>
+                    </div>
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th class="sortable" data-sort="cash">Cash 💵</th>
+                                <th class="sortable" data-sort="bank">Bank 🏦</th>
+                                <th class="sortable" data-sort="crypto">Crypto ₿</th>
+                                <th class="sortable" data-sort="vehicles">Vehicles 🚗</th>
+                                <th class="sortable" data-sort="items">Items 📦</th>
+                                <th class="sortable" data-sort="truckingMoney">Trucking 💰</th>
+                                <th class="sortable" data-sort="savingsAccount">Savings 🏦</th>
+                                <th class="sortable" data-sort="societyAccounts">Societies 🏢</th>
+                                <th class="sortable" data-sort="networth">Networth 💎</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="players-table">
+                            <tr>
+                                <td colspan="12" class="empty-table">Loading player data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <button class="btn btn-outline" id="prev-page" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                        <span id="page-info">Page 1 of 1</span>
+                        <button class="btn btn-outline" id="next-page" disabled>Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Abuse Detection Page -->
+            <div class="page" id="abuse-page">
+                <header>
+                    <div class="header-title">
+                        <h1><i class="fas fa-exclamation-triangle"></i> Abuse Detection</h1>
+                        <p>Players flagged for suspicious activity</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" id="refresh-abuse-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </header>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card abuse-card">
+                        <div class="stat-card-title">High Cash Flags</div>
+                        <div class="stat-card-value" id="high-cash-count">0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-money-bill-wave"></i> Exceeds cash threshold
+                        </div>
+                    </div>
+                    <div class="stat-card abuse-card">
+                        <div class="stat-card-title">High Bank Flags</div>
+                        <div class="stat-card-value" id="high-bank-count">0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-university"></i> Exceeds bank threshold
+                        </div>
+                    </div>
+                    <div class="stat-card abuse-card">
+                        <div class="stat-card-title">Excessive Vehicles</div>
+                        <div class="stat-card-value" id="excessive-vehicles-count">0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-car"></i> Too many vehicles
+                        </div>
+                    </div>
+                    <div class="stat-card abuse-card">
+                        <div class="stat-card-title">Extreme Networth</div>
+                        <div class="stat-card-value" id="extreme-networth-count">0</div>
+                        <div class="stat-card-trend">
+                            <i class="fas fa-gem"></i> Unusually high networth
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <div class="table-title">Flagged Players</div>
+                        <div class="table-actions">
+                            <input type="text" id="search-abuse" placeholder="Search flagged players...">
+                        </div>
+                    </div>
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Flags</th>
+                                <th>Cash</th>
+                                <th>Bank</th>
+                                <th>Vehicles</th>
+                                <th>Networth</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="abuse-table">
+                            <tr>
+                                <td colspan="7" class="empty-table">No suspicious players detected</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Money Flow Page -->
+            <div class="page" id="moneyflow-page">
+                <header>
+                    <div class="header-title">
+                        <h1><i class="fas fa-project-diagram"></i> Money Flow Analysis</h1>
+                        <p>Visualize how money flows for each player</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="player-search-wrapper">
+                            <input type="text" id="moneyflow-player-search" placeholder="Search player by name or citizenid..." autocomplete="off">
+                            <div class="player-search-results" id="player-search-results"></div>
+                        </div>
+                        <button class="btn btn-outline" id="refresh-flow-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </header>
+
+                <div class="moneyflow-container">
+                    <div class="moneyflow-info-card">
+                        <h3 id="flow-player-name">Select a player to view money flow</h3>
+                        <div class="flow-stats-grid" id="flow-stats-grid">
+                            <!-- Stats will be populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="moneyflow-visualization">
+                        <div class="flow-canvas-container">
+                            <canvas id="flow-canvas"></canvas>
+                            <div class="flow-legend" id="flow-legend">
+                                <!-- Legend will be populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="moneyflow-timeline">
+                        <h3>Transaction Timeline</h3>
+                        <div class="timeline-container" id="timeline-container">
+                            <div class="empty-list">No transactions to display</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Page -->
+            <div class="page" id="statistics-page">
+                <header>
+                    <div class="header-title">
+                        <h1><i class="fas fa-chart-bar"></i> Economy Statistics</h1>
+                        <p>Detailed analytics and insights</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" id="refresh-stats-btn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Cash Distribution</h3>
+                        </div>
+                        <div class="stats-content" id="cash-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Cash:</span>
+                                <span class="stat-value" id="stats-total-cash">$0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average Cash:</span>
+                                <span class="stat-value" id="stats-avg-cash">$0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Median Cash:</span>
+                                <span class="stat-value" id="stats-median-cash">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Bank Distribution</h3>
+                        </div>
+                        <div class="stats-content" id="bank-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Bank:</span>
+                                <span class="stat-value" id="stats-total-bank">$0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average Bank:</span>
+                                <span class="stat-value" id="stats-avg-bank">$0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Median Bank:</span>
+                                <span class="stat-value" id="stats-median-bank">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Vehicle Statistics</h3>
+                        </div>
+                        <div class="stats-content" id="vehicle-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Vehicles:</span>
+                                <span class="stat-value" id="stats-total-vehicles">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average per Player:</span>
+                                <span class="stat-value" id="stats-avg-vehicles">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Total Value:</span>
+                                <span class="stat-value" id="stats-vehicle-value">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Networth Analysis</h3>
+                        </div>
+                        <div class="stats-content" id="networth-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Networth:</span>
+                                <span class="stat-value" id="stats-total-networth">$0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average Networth:</span>
+                                <span class="stat-value" id="stats-avg-networth">$0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Top 1% Average:</span>
+                                <span class="stat-value" id="stats-top1-networth">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Details Modal -->
+    <div class="modal" id="player-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-user"></i> Player Details</div>
+                <div class="modal-close">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div class="player-details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Name:</span>
+                        <span class="detail-value" id="detail-name">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Citizen ID:</span>
+                        <span class="detail-value" id="detail-citizenid">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Cash:</span>
+                        <span class="detail-value" id="detail-cash">$0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Bank:</span>
+                        <span class="detail-value" id="detail-bank">$0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Crypto:</span>
+                        <span class="detail-value" id="detail-crypto">₿ 0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Vehicles:</span>
+                        <span class="detail-value" id="detail-vehicles">0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Items:</span>
+                        <span class="detail-value" id="detail-items">0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Trucking Money:</span>
+                        <span class="detail-value" id="detail-trucking">$0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Savings Account:</span>
+                        <span class="detail-value" id="detail-savings">$0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Society Accounts:</span>
+                        <span class="detail-value" id="detail-societies">$0</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Networth:</span>
+                        <span class="detail-value highlight" id="detail-networth">$0</span>
+                    </div>
+                </div>
+                <div class="society-list-container" id="society-list-container" style="display: none;">
+                    <h4>Society Accounts Breakdown</h4>
+                    <div id="society-list"></div>
+                </div>
+                <div class="abuse-flags-container" id="abuse-flags-container" style="display: none;">
+                    <h4>⚠️ Abuse Flags</h4>
+                    <div id="abuse-flags-list"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+

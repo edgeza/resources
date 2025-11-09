@@ -50,6 +50,7 @@ Lang["br"] = {
 	contract_page_cargo_fragile: "Carga frágil",
 	contract_page_cargo_valuable: "Carga valiosa",
 	contract_page_cargo_urgent: "Carga urgente",
+    contract_page_cargo_illegal: "Carga ilegal",
 	contract_page_button_start_job: "Iniciar Entrega",
 	contract_page_button_start_job_party: "Iniciar em grupo",
 	contract_page_button_cancel_job: "Cancelar Entrega",
@@ -204,6 +205,26 @@ Lang["br"] = {
 			<BR>Nivel 6:
 			<li>12% de recompensa para entregas de cargas urgentes</li>
 		</ul>`,
+    skills_page_illegal_title: "Carga ilegal",
+    skills_page_illegal_desc: `
+        <p>Contrabandear mercadorias é um negócio de alto risco e alta recompensa. Apenas os motoristas mais ousados e astutos se atrevem a aceitar esses trabalhos sombrios.</p>
+        <ul>
+            Nível 1:
+            <li> Desbloqueia trabalhos com carga ilegal</li>
+            <li> Bônus de 2% na recompensa por entregas ilegais</li>
+            <li> Bônus de 10% de experiência por entregas ilegais</li>
+            <BR> Nível 2:
+            <li> Bônus de 4% na recompensa por entregas ilegais</li>
+            <BR> Nível 3:
+            <li> Bônus de 6% na recompensa por entregas ilegais</li>
+            <BR> Nível 4:
+            <li> Bônus de 8% na recompensa por entregas ilegais</li>
+            <BR> Nível 5:
+            <li> Bônus de 10% na recompensa por entregas ilegais</li>
+            <BR> Nível 6:
+            <li> Bônus de 12% na recompensa por entregas ilegais</li>
+        </ul>
+    `,
 
 	party_page_title: "Grupos",
 	party_page_desc: "Crie ou participe de um grupo para fazer entregas em conjunto com seus amigos.",

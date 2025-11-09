@@ -50,6 +50,7 @@ Lang["fr"] = {
 	contract_page_cargo_fragile: "Cargaison fragile",
 	contract_page_cargo_valuable: "Cargaison précieuse",
 	contract_page_cargo_urgent: "Cargaison urgente",
+    contract_page_cargo_illegal: "Cargaison illégale",
 	contract_page_button_start_job: "Commencer le travail",
 	contract_page_button_start_job_party: "Démarrer en groupe",
 	contract_page_button_cancel_job: "Annuler le travail",
@@ -204,6 +205,26 @@ Lang["fr"] = {
 			<BR> Level 6:
 			<li> 30% récompense pour les livraisons de fret urgentes </li>
 		</ul>`,
+    skills_page_illegal_title: "Cargaison illégale",
+    skills_page_illegal_desc: `
+        <p>Faire de la contrebande est une activité à haut risque et à haute récompense. Seuls les conducteurs les plus audacieux et rusés osent entreprendre ces missions clandestines.</p>
+        <ul>
+            Niveau 1 :
+            <li> Débloque les missions de cargaison illégale</li>
+            <li> Bonus de 2% sur la récompense des livraisons illégales</li>
+            <li> Bonus de 10% d’expérience pour les livraisons illégales</li>
+            <BR> Niveau 2 :
+            <li> Bonus de 4% sur la récompense des livraisons illégales</li>
+            <BR> Niveau 3 :
+            <li> Bonus de 6% sur la récompense des livraisons illégales</li>
+            <BR> Niveau 4 :
+            <li> Bonus de 8% sur la récompense des livraisons illégales</li>
+            <BR> Niveau 5 :
+            <li> Bonus de 10% sur la récompense des livraisons illégales</li>
+            <BR> Niveau 6 :
+            <li> Bonus de 12% sur la récompense des livraisons illégales</li>
+        </ul>
+    `,
 
 	party_page_title: "Faire la fête",
 	party_page_desc: "Créez ou rejoignez une fête pour livrer avec vos amis.",

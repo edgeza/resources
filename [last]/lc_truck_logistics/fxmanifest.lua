@@ -1,5 +1,3 @@
-
-
 fx_version 'cerulean'
 game 'gta5'
 author 'LixeiroCharmoso'
@@ -45,4 +43,3 @@ files {
 
 dependency "lc_utils"
 dependency '/assetpacks'
-dependency 'oxmysql'

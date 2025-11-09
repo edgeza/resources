@@ -50,6 +50,7 @@ Lang["de"] = {
 	contract_page_cargo_fragile: "Empfindliche Fracht",
 	contract_page_cargo_valuable: "Wertvolle Fracht",
 	contract_page_cargo_urgent: "Dringende Fracht",
+    contract_page_cargo_illegal: "Illegale Fracht",
 	contract_page_button_start_job: "Job starten",
 	contract_page_button_start_job_party: "In Gruppe starten",
 	contract_page_button_cancel_job: "Job abbrechen",
@@ -204,6 +205,26 @@ Lang["de"] = {
 			<BR> Level 6:
 			<li> 30% Belohnung für dringende Frachtlieferungen </li>
 		</ul>`,
+    skills_page_illegal_title: "Illegale Fracht",
+    skills_page_illegal_desc: `
+        <p>Der Schmuggel von Schmuggelware ist ein Geschäft mit hohem Risiko und hoher Belohnung. Nur die mutigsten und gerissensten Fahrer wagen sich an diese dunklen Aufträge.</p>
+        <ul>
+            Stufe 1:
+            <li> Schaltet illegale Frachtaufträge frei</li>
+            <li> 2% Belohnungsbonus für illegale Lieferungen</li>
+            <li> 10% Erfahrungsbonus für illegale Lieferungen</li>
+            <BR> Stufe 2:
+            <li> 4% Belohnungsbonus für illegale Lieferungen</li>
+            <BR> Stufe 3:
+            <li> 6% Belohnungsbonus für illegale Lieferungen</li>
+            <BR> Stufe 4:
+            <li> 8% Belohnungsbonus für illegale Lieferungen</li>
+            <BR> Stufe 5:
+            <li> 10% Belohnungsbonus für illegale Lieferungen</li>
+            <BR> Stufe 6:
+            <li> 12% Belohnungsbonus für illegale Lieferungen</li>
+        </ul>
+    `,
 
 	party_page_title: "Party",
 	party_page_desc: "Erstelle oder tritt einer Party bei, um gemeinsam mit Freunden zu liefern.",

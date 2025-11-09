@@ -50,6 +50,7 @@ Lang["zh-cn"] = {
 	contract_page_cargo_fragile: '易碎货物',
 	contract_page_cargo_valuable: '贵重货物',
 	contract_page_cargo_urgent: '加急货物',
+    contract_page_cargo_illegal: "非法货物",
 	contract_page_button_start_job: '接取工作',
 	contract_page_button_start_job_party: '接取工作(车队)',
 	contract_page_button_cancel_job: '取消工作',
@@ -204,6 +205,26 @@ Lang["zh-cn"] = {
 			<BR> 阶段-6:
 			<li> 交付紧急货物时增加 30% 奖励资金 </li>
 		</ul>`,
+    skills_page_illegal_title: "非法货物",
+    skills_page_illegal_desc: `
+        <p>走私是一个高风险高回报的行业。只有最勇敢、最狡猾的司机才敢接下这些黑暗的任务。</p>
+        <ul>
+            等级 1：
+            <li> 解锁非法货物任务</li>
+            <li> 非法交付奖励增加 2%</li>
+            <li> 非法交付经验增加 10%</li>
+            <BR> 等级 2：
+            <li> 非法交付奖励增加 4%</li>
+            <BR> 等级 3：
+            <li> 非法交付奖励增加 6%</li>
+            <BR> 等级 4：
+            <li> 非法交付奖励增加 8%</li>
+            <BR> 等级 5：
+            <li> 非法交付奖励增加 10%</li>
+            <BR> 等级 6：
+            <li> 非法交付奖励增加 12%</li>
+        </ul>
+    `,
 
 	party_page_title: '联盟车队',
 	party_page_desc: '创建或加入车队与您的朋友一起交付货物.',

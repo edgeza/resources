@@ -34,14 +34,7 @@ end
 
 function beforeStartContract(source,contract_id)
 	-- Here you can do any verification when a player is starting a contract. return true or false
-	local Player = QBCore.Functions.GetPlayer(source)
-	local PlayerData = Player.PlayerData
-	if PlayerData.metadata.licences.drive_c then 
-		return true
-	else
-		TriggerClientEvent('brutal_notify:SendAlert', source, 'Trucking', 'You need a valid truck license.', 5000, 'error', true)
-		return false
-	end
+	return true
 end
 
 function afterfinishContract(source,received_amount,received_xp,distance,contract_data)

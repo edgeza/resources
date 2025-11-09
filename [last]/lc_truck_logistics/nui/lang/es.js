@@ -50,6 +50,7 @@ Lang["es"] = {
 	contract_page_cargo_fragile: "Carga frágil",
 	contract_page_cargo_valuable: "Carga valiosa",
 	contract_page_cargo_urgent: "Carga urgente",
+    contract_page_cargo_illegal: "Carga ilegal",
 	contract_page_button_start_job: "Iniciar trabajo",
 	contract_page_button_start_job_party: "Iniciar en grupo",
 	contract_page_button_cancel_job: "Cancelar trabajo",
@@ -201,6 +202,26 @@ Lang["es"] = {
 		<BR> Nivel 6:
 		<li> 30% de recompensa por entregas de carga urgente </li>
 	</ul>`,
+    skills_page_illegal_title: "Carga ilegal",
+    skills_page_illegal_desc: `
+        <p>El contrabando es un negocio de alto riesgo y alta recompensa. Solo los conductores más audaces y astutos se atreven a aceptar estos trabajos sombríos.</p>
+        <ul>
+            Nivel 1:
+            <li> Desbloquea trabajos de carga ilegal</li>
+            <li> 2% de bonificación en recompensa por entregas ilegales</li>
+            <li> 10% de bonificación de experiencia por entregas ilegales</li>
+            <BR> Nivel 2:
+            <li> 4% de bonificación en recompensa por entregas ilegales</li>
+            <BR> Nivel 3:
+            <li> 6% de bonificación en recompensa por entregas ilegales</li>
+            <BR> Nivel 4:
+            <li> 8% de bonificación en recompensa por entregas ilegales</li>
+            <BR> Nivel 5:
+            <li> 10% de bonificación en recompensa por entregas ilegales</li>
+            <BR> Nivel 6:
+            <li> 12% de bonificación en recompensa por entregas ilegales</li>
+        </ul>
+    `,
 	
 	party_page_title: "Fiesta",
 	party_page_desc: "Únete con amigos para hacer entregas juntos. Crea o únete a una fiesta para hacer los trabajos más divertidos y rentables.",

@@ -1,31 +1,31 @@
 let config;
 
 window.addEventListener("message", async function (event) {
-	let item = event.data;
-	let list_item;
-	if (item.utils) {
-		if (typeof Lang === "undefined") {
-			await Utils.loadLanguageModules(item.utils);
-		}
-	}
-	if (item.resourceName) {
-		Utils.setResourceName(item.resourceName);
-	}
-	if (item.showmenu) {
-		config = item.dados.config;
-		let contracts = item.dados.trucker_available_contracts;
-		let users = item.dados.trucker_users;
-		let myTrucks = item.dados.trucker_trucks;
-		let drivers = item.dados.trucker_drivers;
-		let top_truckers = item.dados.top_truckers;
-		let loans = item.dados.trucker_loans;
-		let trucker_party_members = item.dados.trucker_party_members;
-		let trucker_party = item.dados.trucker_party;
+    let item = event.data;
+    let list_item;
+    if (item.utils) {
+        if (typeof Lang === "undefined") {
+            await Utils.loadLanguageModules(item.utils);
+        }
+    }
+    if (item.resourceName) {
+        Utils.setResourceName(item.resourceName);
+    }
+    if (item.showmenu) {
+        config = item.dados.config;
+        let contracts = item.dados.trucker_available_contracts;
+        let users = item.dados.trucker_users;
+        let myTrucks = item.dados.trucker_trucks;
+        let drivers = item.dados.trucker_drivers;
+        let top_truckers = item.dados.top_truckers;
+        let loans = item.dados.trucker_loans;
+        let trucker_party_members = item.dados.trucker_party_members;
+        let trucker_party = item.dados.trucker_party;
 
-		if (item.update != true) {
-			// Open on first time
-			$("#sidebar-ul").empty();
-			$("#sidebar-ul").append(`
+        if (item.update != true) {
+            // Open on first time
+            $("#sidebar-ul").empty();
+            $("#sidebar-ul").append(`
 			<li id="sidebar-main" onclick="openPage('main')">
 				<i class="fas fa-user-circle"></i>
 				<span class="tooltip">${Utils.translate("sidebar_profile")}</span>
@@ -75,95 +75,95 @@ window.addEventListener("message", async function (event) {
 				<span class="tooltip">${Utils.translate("sidebar_close")}</span>
 			</li>
 			`);
-			$("#main-title-div").empty();
-			$("#main-title-div").append(`
+            $("#main-title-div").empty();
+            $("#main-title-div").append(`
 				<h4 class="text-uppercase">${Utils.translate("statistics_page_title")}</h4>
 				<p>${Utils.translate("statistics_page_desc")}</p>
 			`);
-			$("#profile-money-span").empty();
-			$("#profile-money-span").append(Utils.translate("statistics_page_money"));
-			$("#profile-money-earned-span").empty();
-			$("#profile-money-earned-span").append(Utils.translate("statistics_page_money_earned"));
-			$("#profile-deliveries-span").empty();
-			$("#profile-deliveries-span").append(Utils.translate("statistics_page_deliveries"));
-			$("#profile-distance-traveled-span").empty();
-			$("#profile-distance-traveled-span").append(Utils.translate("statistics_page_distance"));
-			$("#profile-exp-1-span").empty();
-			$("#profile-exp-1-span").append(Utils.translate("statistics_page_exp"));
-			$("#profile-skill-points-span").empty();
-			$("#profile-skill-points-span").append(Utils.translate("statistics_page_skill"));
-			$("#profile-trucks-span").empty();
-			$("#profile-trucks-span").append(Utils.translate("statistics_page_trucks"));
-			$("#profile-drivers-span").empty();
-			$("#profile-drivers-span").append(Utils.translate("statistics_page_drivers"));
+            $("#profile-money-span").empty();
+            $("#profile-money-span").append(Utils.translate("statistics_page_money"));
+            $("#profile-money-earned-span").empty();
+            $("#profile-money-earned-span").append(Utils.translate("statistics_page_money_earned"));
+            $("#profile-deliveries-span").empty();
+            $("#profile-deliveries-span").append(Utils.translate("statistics_page_deliveries"));
+            $("#profile-distance-traveled-span").empty();
+            $("#profile-distance-traveled-span").append(Utils.translate("statistics_page_distance"));
+            $("#profile-exp-1-span").empty();
+            $("#profile-exp-1-span").append(Utils.translate("statistics_page_exp"));
+            $("#profile-skill-points-span").empty();
+            $("#profile-skill-points-span").append(Utils.translate("statistics_page_skill"));
+            $("#profile-trucks-span").empty();
+            $("#profile-trucks-span").append(Utils.translate("statistics_page_trucks"));
+            $("#profile-drivers-span").empty();
+            $("#profile-drivers-span").append(Utils.translate("statistics_page_drivers"));
 
-			$("#top-truckers-title-div").html(`
+            $("#top-truckers-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("statistics_page_top_truckers")}</h4>
 				<p>${Utils.translate("statistics_page_top_truckers_desc")}</p>
 			`);
-			$("#job-title-div").html(`
+            $("#job-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("contract_page_title")}</h4>
 				<p>${Utils.translate("contract_page_desc")}</p>
 			`);
 
-			$("#freight-title-div").html(`
+            $("#freight-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("contract_page_title_freight")}</h4>
 				<p>${Utils.translate("contract_page_desc_freight")}</p>
 			`);
 
-			$("#trucks-title-div").html(`
+            $("#trucks-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("trucks_page_title")}</h4>
 				<p>${Utils.translate("trucks_page_desc")}</p>
 			`);
 
-			$("#drivers-title-div").html(`
+            $("#drivers-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("mydrivers_page_title")}</h4>
 				<p>${Utils.translate("mydrivers_page_desc")}</p>
 			`);
 
-			$("#bank-title-div").html(`
+            $("#bank-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("bank_page_title")}</h4>
 				<p>${Utils.translate("bank_page_desc")}</p>
 			`);
 
-			$("#recruitment-title-div").html(`
+            $("#recruitment-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("drivers_page_title")}</h4>
 				<p>${Utils.translate("drivers_page_desc")}</p>
 			`);
 
-			$("#dealership-title-div").html(`
+            $("#dealership-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("dealership_page_title")}</h4>
 				<p>${Utils.translate("dealership_page_desc")}</p>
 			`);
 
-			$("#party-title-div").html(`
+            $("#party-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("party_page_title")}</h4>
 				<p>${Utils.translate("party_page_desc")}</p>
 			`);
 
-			$("#skills-title").empty();
-			$("#skills-title").append(Utils.translate("skills_page_title"));
+            $("#skills-title").empty();
+            $("#skills-title").append(Utils.translate("skills_page_title"));
 
-			$("#withdraw-money-btn").text(Utils.translate("bank_page_withdraw"));
-			$("#deposit-money-btn").text(Utils.translate("bank_page_deposit"));
-			$("#active-loans-title").text(`${Utils.translate("bank_page_active_loans")}`);
-			$("#bank-balance-text").text(`${Utils.translate("bank_page_balance")}`);
-			$("#bank-loans-title").text(`${Utils.translate("bank_page_loan_title")}`);
-			$("#bank-loans-desc").html(`${Utils.translate("bank_page_loan_desc").format(Utils.currencyFormat(config.max_emprestimo))}`);
-			$("#bank-loans-btn").text(`${Utils.translate("bank_page_loan_button")}`);
-			$("#loan-value-title").text(`${Utils.translate("bank_page_loan_value_title")}`);
-			$("#loan-daily-title").text(`${Utils.translate("bank_page_loan_daily_title")}`);
-			$("#loan-remaining-title").text(`${Utils.translate("bank_page_loan_remaining_title")}`);
-			$("#loan-date-title").text(`${Utils.translate("bank_page_loan_date_title")}`);
+            $("#withdraw-money-btn").text(Utils.translate("bank_page_withdraw"));
+            $("#deposit-money-btn").text(Utils.translate("bank_page_deposit"));
+            $("#active-loans-title").text(`${Utils.translate("bank_page_active_loans")}`);
+            $("#bank-balance-text").text(`${Utils.translate("bank_page_balance")}`);
+            $("#bank-loans-title").text(`${Utils.translate("bank_page_loan_title")}`);
+            $("#bank-loans-desc").html(`${Utils.translate("bank_page_loan_desc").format(Utils.currencyFormat(config.max_emprestimo))}`);
+            $("#bank-loans-btn").text(`${Utils.translate("bank_page_loan_button")}`);
+            $("#loan-value-title").text(`${Utils.translate("bank_page_loan_value_title")}`);
+            $("#loan-daily-title").text(`${Utils.translate("bank_page_loan_daily_title")}`);
+            $("#loan-remaining-title").text(`${Utils.translate("bank_page_loan_remaining_title")}`);
+            $("#loan-date-title").text(`${Utils.translate("bank_page_loan_date_title")}`);
 
-			$("#loan-modal-title").text(`${Utils.translate("bank_page_loan_title")}`);
-			$("#loan-modal-desc").text(`${Utils.translate("bank_page_loan_modal_desc")}`);
+            $("#loan-modal-title").text(`${Utils.translate("bank_page_loan_title")}`);
+            $("#loan-modal-desc").text(`${Utils.translate("bank_page_loan_modal_desc")}`);
 
-			let loan_list = ``;
-			for (const loan_id in config.loans.plans) {
-				const checkedAttribute = loan_id == 0 ? "checked" : "";
-				const loan = config.loans.plans[loan_id];
-				loan_list += `
+            let loan_list = ``;
+            for (const loan_id in config.loans.plans) {
+                const checkedAttribute = loan_id == 0 ? "checked" : "";
+                const loan = config.loans.plans[loan_id];
+                loan_list += `
 					<div class="form-check mb-2">
 						<input class="form-check-input" type="radio" name="loan-radio" id="loan-${loan_id}" value="${loan_id}" ${checkedAttribute}>
 						<label class="form-check-label" for="loan-${loan_id}">
@@ -171,68 +171,74 @@ window.addEventListener("message", async function (event) {
 						</label>
 					</div>
 				`;
-			}
-			$("#loan-list-container").html(loan_list);
-			$("#loan-modal-cancel").text(`${Utils.translate("bank_page_modal_cancel")}`);
-			$("#loan-modal-submit").text(`${Utils.translate("bank_page_loan_modal_submit")}`);
+            }
+            $("#loan-list-container").html(loan_list);
+            $("#loan-modal-cancel").text(`${Utils.translate("bank_page_modal_cancel")}`);
+            $("#loan-modal-submit").text(`${Utils.translate("bank_page_loan_modal_submit")}`);
 
-			$("#deposit-modal-title").text(`${Utils.translate("bank_page_deposit_modal_title")}`);
-			$("#deposit-modal-desc").text(`${Utils.translate("bank_page_deposit_modal_desc")}`);
-			$("#deposit-modal-money-amount").attr("placeholder", Utils.translate("bank_page_modal_placeholder"));
-			$("#deposit-modal-cancel").text(`${Utils.translate("bank_page_modal_cancel")}`);
-			$("#deposit-modal-submit").text(`${Utils.translate("bank_page_deposit_modal_submit")}`);
+            $("#deposit-modal-title").text(`${Utils.translate("bank_page_deposit_modal_title")}`);
+            $("#deposit-modal-desc").text(`${Utils.translate("bank_page_deposit_modal_desc")}`);
+            $("#deposit-modal-money-amount").attr("placeholder", Utils.translate("bank_page_modal_placeholder"));
+            $("#deposit-modal-cancel").text(`${Utils.translate("bank_page_modal_cancel")}`);
+            $("#deposit-modal-submit").text(`${Utils.translate("bank_page_deposit_modal_submit")}`);
 
-			$("#withdraw-modal-title").text(`${Utils.translate("bank_page_withdraw_modal_title")}`);
-			$("#withdraw-modal-desc").text(`${Utils.translate("bank_page_withdraw_modal_desc")}`);
-			$("#withdraw-modal-money-amount").attr("placeholder", Utils.translate("bank_page_modal_placeholder"));
-			$("#withdraw-modal-cancel").text(`${Utils.translate("bank_page_modal_cancel")}`);
-			$("#withdraw-modal-submit").text(`${Utils.translate("bank_page_withdraw_modal_submit")}`);
+            $("#withdraw-modal-title").text(`${Utils.translate("bank_page_withdraw_modal_title")}`);
+            $("#withdraw-modal-desc").text(`${Utils.translate("bank_page_withdraw_modal_desc")}`);
+            $("#withdraw-modal-money-amount").attr("placeholder", Utils.translate("bank_page_modal_placeholder"));
+            $("#withdraw-modal-cancel").text(`${Utils.translate("bank_page_modal_cancel")}`);
+            $("#withdraw-modal-submit").text(`${Utils.translate("bank_page_withdraw_modal_submit")}`);
 
-			$("#skills-description-1").empty();
-			$("#skills-description-1").append(Utils.translate("skills_page_description"));
-			$("#skills-description-2").empty();
-			$("#skills-description-2").append(Utils.translate("skills_page_description"));
-			$("#skills-description-3").empty();
-			$("#skills-description-3").append(Utils.translate("skills_page_description"));
-			$("#skills-description-4").empty();
-			$("#skills-description-4").append(Utils.translate("skills_page_description"));
-			$("#skills-description-5").empty();
-			$("#skills-description-5").append(Utils.translate("skills_page_description"));
-			$("#product-type-title").empty();
-			$("#product-type-title").append(Utils.translate("skills_page_product_type_title"));
-			$("#product-type-desc").empty();
-			$("#product-type-desc").append(Utils.translate("skills_page_product_type_description"));
-			$("#distance-title").empty();
-			$("#distance-title").append(Utils.translate("skills_page_distance_title"));
-			$("#distance-desc").empty();
-			$("#distance-desc").append(Utils.translate("skills_page_distance_description"));
-			$("#valuable-skill-title").empty();
-			$("#valuable-skill-title").append(Utils.translate("skills_page_valuable_title"));
-			$("#valuable-skill-desc").empty();
-			$("#valuable-skill-desc").append(Utils.translate("skills_page_valuable_desc"));
-			$("#fragile-skill-title").empty();
-			$("#fragile-skill-title").append(Utils.translate("skills_page_fragile_title"));
-			$("#fragile-skill-desc").empty();
-			$("#fragile-skill-desc").append(Utils.translate("skills_page_fragile_desc"));
-			$("#fast-skill-title").empty();
-			$("#fast-skill-title").append(Utils.translate("skills_page_fast_title"));
-			$("#fast-skill-desc").empty();
-			$("#fast-skill-desc").append(Utils.translate("skills_page_fast_desc"));
+            $("#skills-description-1").empty();
+            $("#skills-description-1").append(Utils.translate("skills_page_description"));
+            $("#skills-description-2").empty();
+            $("#skills-description-2").append(Utils.translate("skills_page_description"));
+            $("#skills-description-3").empty();
+            $("#skills-description-3").append(Utils.translate("skills_page_description"));
+            $("#skills-description-4").empty();
+            $("#skills-description-4").append(Utils.translate("skills_page_description"));
+            $("#skills-description-5").empty();
+            $("#skills-description-5").append(Utils.translate("skills_page_description"));
+            $("#skills-description-6").empty();
+            $("#skills-description-6").append(Utils.translate("skills_page_description"));
+            $("#product-type-title").empty();
+            $("#product-type-title").append(Utils.translate("skills_page_product_type_title"));
+            $("#product-type-desc").empty();
+            $("#product-type-desc").append(Utils.translate("skills_page_product_type_description"));
+            $("#distance-title").empty();
+            $("#distance-title").append(Utils.translate("skills_page_distance_title"));
+            $("#distance-desc").empty();
+            $("#distance-desc").append(Utils.translate("skills_page_distance_description"));
+            $("#valuable-skill-title").empty();
+            $("#valuable-skill-title").append(Utils.translate("skills_page_valuable_title"));
+            $("#valuable-skill-desc").empty();
+            $("#valuable-skill-desc").append(Utils.translate("skills_page_valuable_desc"));
+            $("#fragile-skill-title").empty();
+            $("#fragile-skill-title").append(Utils.translate("skills_page_fragile_title"));
+            $("#fragile-skill-desc").empty();
+            $("#fragile-skill-desc").append(Utils.translate("skills_page_fragile_desc"));
+            $("#fast-skill-title").empty();
+            $("#fast-skill-title").append(Utils.translate("skills_page_fast_title"));
+            $("#fast-skill-desc").empty();
+            $("#fast-skill-desc").append(Utils.translate("skills_page_fast_desc"));
+            $("#illegal-skill-title").empty();
+            $("#illegal-skill-title").append(Utils.translate("skills_page_illegal_title"));
+            $("#illegal-skill-desc").empty();
+            $("#illegal-skill-desc").append(Utils.translate("skills_page_illegal_desc"));
 
-			let form = document.getElementById("party-form-create");
-			form.style.opacity = "0";
-			form.style.maxHeight = "0";
-			form.style.fontSize = "0";
-			form.style.position = "absolute";
+            let form = document.getElementById("party-form-create");
+            form.style.opacity = "0";
+            form.style.maxHeight = "0";
+            form.style.fontSize = "0";
+            form.style.position = "absolute";
 
-			let formJoin = document.getElementById("party-form-join");
-			formJoin.style.opacity = "0";
-			formJoin.style.maxHeight = "0";
-			formJoin.style.fontSize = "0";
-			formJoin.style.position = "absolute";
+            let formJoin = document.getElementById("party-form-join");
+            formJoin.style.opacity = "0";
+            formJoin.style.maxHeight = "0";
+            formJoin.style.fontSize = "0";
+            formJoin.style.position = "absolute";
 
-			$("#party-form-container-create").empty();
-			$("#party-form-container-create").append(`
+            $("#party-form-container-create").empty();
+            $("#party-form-container-create").append(`
 				<input id="party-name" maxlength="30" class="input-party form-control form-control-sm" name="name" type="text" placeholder="${Utils.translate("party_page_name")}" oninput="Utils.invalidMsg(this);" required>
 				<input id="party-desc" maxlength="300" class="input-party form-control form-control-sm" name="desc" type="text" placeholder="${Utils.translate("party_page_subtitle")}" oninput="Utils.invalidMsg(this);" required>
 				<input id="party-password" maxlength="20" class="input-party form-control form-control-sm input-pass" name="password" type="password" placeholder="${Utils.translate("party_page_password")}">
@@ -245,43 +251,43 @@ window.addEventListener("message", async function (event) {
 				<div class="ShowSubmitErrorCreate" style="display:none;"></div>
 				<button class="btn btn-primary btn-block submit-party-form btn-sm" id="submit-party-form">${Utils.translate("party_page_finish_button").format(Utils.currencyFormat(config.party.price_to_create), Utils.currencyFormat(0))}</button>
 			`);
-			$("#party-create-btn").empty();
-			$("#party-create-btn").append(`${Utils.translate("party_page_create")}`);
-			$("#party-join-btn").empty();
-			$("#party-join-btn").append(`${Utils.translate("party_page_join")}`);
+            $("#party-create-btn").empty();
+            $("#party-create-btn").append(`${Utils.translate("party_page_create")}`);
+            $("#party-join-btn").empty();
+            $("#party-join-btn").append(`${Utils.translate("party_page_join")}`);
 
-			$("#party-form-container-join").empty();
-			$("#party-form-container-join").append(`
+            $("#party-form-container-join").empty();
+            $("#party-form-container-join").append(`
 				<input id="party-name-join" class="input-party form-control form-control-sm" name="name" type="text" placeholder="${Utils.translate("party_page_name")}" oninput="Utils.invalidMsg(this);" required>
 				<input id="party-password-join" class="input-party form-control form-control-sm input-pass" name="password" type="password" placeholder="${Utils.translate("party_page_password")}">
 				<div class="ShowSubmitErrorJoin" style="display:none;"></div>
 				<button class="btn btn-primary btn-block submit-party-form btn-sm" id="submit-party-form-join">${Utils.translate("party_page_finish_button_2")}</button>
 			`);
 
-			$(".sidebar-navigation ul li").removeClass("active");
-			$("#sidebar-main").addClass("active");
+            $(".sidebar-navigation ul li").removeClass("active");
+            $("#sidebar-main").addClass("active");
 
-			if (config.disable_drivers) {
-				$("#sidebar-drivers-page").css("display", "none");
-				$("#sidebar-my-drivers-page").css("display", "none");
-			}
-			if (config.disable_loans) {
-				$("#loans-card-container").removeClass("d-flex");
-				$("#loans-card-container").css("display", "none");
-			}
+            if (config.disable_drivers) {
+                $("#sidebar-drivers-page").css("display", "none");
+                $("#sidebar-my-drivers-page").css("display", "none");
+            }
+            if (config.disable_loans) {
+                $("#loans-card-container").removeClass("d-flex");
+                $("#loans-card-container").css("display", "none");
+            }
 
-			$("#css-toggle").prop("checked", users.dark_theme).change();
+            $("#css-toggle").prop("checked", users.dark_theme).change();
 
-			$(".main").fadeIn(200);
-			openPage("main");
-		}
+            $(".main").fadeIn(200);
+            openPage("main");
+        }
 
-		$("#player-info-level").text(config.player_level);
-		$("#player-info-skill").text(Utils.numberFormat(users.exp));
-		$("#player-info-money").text(Utils.currencyFormat(users.money, 0));
+        $("#player-info-level").text(config.player_level);
+        $("#player-info-skill").text(Utils.numberFormat(users.exp));
+        $("#player-info-money").text(Utils.currencyFormat(users.money, 0));
 
-		$("#diagnostic-body").empty();
-		$("#diagnostic-body").append(`
+        $("#diagnostic-body").empty();
+        $("#diagnostic-body").append(`
 			<div class="media d-flex">
 				<div class="media-body text-left">
 					<h3 class="text-success">100 %</h3><span>${Utils.translate("diagnostic_page_chassi")}</span>
@@ -294,8 +300,8 @@ window.addEventListener("message", async function (event) {
 				<div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 		`);
-		$("#diagnostic-engine").empty();
-		$("#diagnostic-engine").append(`
+        $("#diagnostic-engine").empty();
+        $("#diagnostic-engine").append(`
 			<div class="media d-flex">
 				<div class="media-body text-left">
 					<h3 class="text-success">100 %</h3><span>${Utils.translate("diagnostic_page_engine")}</span>
@@ -308,8 +314,8 @@ window.addEventListener("message", async function (event) {
 				<div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 		`);
-		$("#diagnostic-transmission").empty();
-		$("#diagnostic-transmission").append(`
+        $("#diagnostic-transmission").empty();
+        $("#diagnostic-transmission").append(`
 			<div class="media d-flex">
 				<div class="media-body text-left">
 					<h3 class="text-success">100 %</h3><span>${Utils.translate("diagnostic_page_transmission")}</span>
@@ -322,8 +328,8 @@ window.addEventListener("message", async function (event) {
 				<div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 		`);
-		$("#diagnostic-wheels").empty();
-		$("#diagnostic-wheels").append(`
+        $("#diagnostic-wheels").empty();
+        $("#diagnostic-wheels").append(`
 			<div class="media d-flex">
 				<div class="media-body text-left">
 					<h3 class="text-success">100 %</h3><span>${Utils.translate("diagnostic_page_wheels")}</span>
@@ -337,83 +343,83 @@ window.addEventListener("message", async function (event) {
 			</div>
 		`);
 
-		$("#diagnostic-fuel-bar").empty();
-		$("#diagnostic-fuel-bar").append(`
+        $("#diagnostic-fuel-bar").empty();
+        $("#diagnostic-fuel-bar").append(`
 			<div class="progress progress-bar-vertical">
 				<div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 100%;"></div>
 			</div>
 			<img src="img/icons/fuel.png" style="width: 40px;" class="mt-3">
 		`);
 
-		$("#new-contracts-1").empty();
-		$("#new-contracts-1").append(Utils.translate("new_contracts").format(config.cooldown));
-		$("#new-contracts-2").empty();
-		$("#new-contracts-2").append(Utils.translate("new_contracts").format(config.cooldown));
+        $("#new-contracts-1").empty();
+        $("#new-contracts-1").append(Utils.translate("new_contracts").format(config.cooldown));
+        $("#new-contracts-2").empty();
+        $("#new-contracts-2").append(Utils.translate("new_contracts").format(config.cooldown));
 
-		$("#profile-money").empty();
-		$("#profile-money").append(Utils.currencyFormat(users.money, 0));
-		$("#bank-money").empty();
-		$("#bank-money").append(Utils.currencyFormat(users.money, 0));
+        $("#profile-money").empty();
+        $("#profile-money").append(Utils.currencyFormat(users.money, 0));
+        $("#bank-money").empty();
+        $("#bank-money").append(Utils.currencyFormat(users.money, 0));
 
-		$("#withdraw-modal-money-available").text(`${Utils.translate("bank_page_modal_money_available").format(Utils.currencyFormat(users.money))}`);
-		$("#deposit-modal-money-available").text(`${Utils.translate("bank_page_modal_money_available").format(Utils.currencyFormat(item.dados.available_money))}`);
+        $("#withdraw-modal-money-available").text(`${Utils.translate("bank_page_modal_money_available").format(Utils.currencyFormat(users.money))}`);
+        $("#deposit-modal-money-available").text(`${Utils.translate("bank_page_modal_money_available").format(Utils.currencyFormat(item.dados.available_money))}`);
 
-		$("#profile-money-earned").empty();
-		$("#profile-money-earned").append(Utils.currencyFormat(users.total_earned, 0));
-		$("#profile-deliveries").empty();
-		$("#profile-deliveries").append(users.finished_deliveries);
-		$("#profile-exp-1").empty();
-		$("#profile-exp-1").append(Utils.numberFormat(users.exp));
-		$("#profile-exp-2").empty();
-		let exp_r = 0;
-		if (users.exp >= config.required_xp_to_levelup[config.required_xp_to_levelup.length - 1]) {
-			exp_r = 100;
-		} else if (config.player_level == 0) {
-			let max = config.required_xp_to_levelup[config.player_level];
-			let exp = users.exp;
-			exp_r = Math.round((exp * 100) / max);
-		} else {
-			for (const key in config.required_xp_to_levelup) {
-				if (users.exp < config.required_xp_to_levelup[key]) {
-					let max = config.required_xp_to_levelup[key] - config.required_xp_to_levelup[key - 1];
-					let exp = users.exp - config.required_xp_to_levelup[key - 1];
-					exp_r = Math.round((exp * 100) / max);
-					if (exp_r >= 0) {
-						break;
-					}
-				}
-			}
-		}
-		$("#profile-exp-2").append(`<div class="progress-bar bg-amber accent-4" role="progressbar" style="width: ${exp_r}%" aria-valuenow="${exp_r}" aria-valuemin="0" aria-valuemax="100"></div>`);
-		$("#profile-distance-traveled").empty();
-		$("#profile-distance-traveled").append(Utils.numberFormat(users.traveled_distance, 2) + "km");
-		$("#profile-skill-points").empty();
-		$("#profile-skill-points").append(users.skill_points);
-		$("#profile-trucks").empty();
-		$("#profile-trucks").append(myTrucks.length);
-		$("#profile-drivers").empty();
-		let drivers_count = 0;
-		for (const driver of drivers) {
-			if (driver.user_id != null && driver.user_id != undefined) {
-				drivers_count++;
-			}
-		}
-		$("#profile-drivers").append(drivers_count);
+        $("#profile-money-earned").empty();
+        $("#profile-money-earned").append(Utils.currencyFormat(users.total_earned, 0));
+        $("#profile-deliveries").empty();
+        $("#profile-deliveries").append(users.finished_deliveries);
+        $("#profile-exp-1").empty();
+        $("#profile-exp-1").append(Utils.numberFormat(users.exp));
+        $("#profile-exp-2").empty();
+        let exp_r = 0;
+        if (users.exp >= config.required_xp_to_levelup[config.required_xp_to_levelup.length - 1]) {
+            exp_r = 100;
+        } else if (config.player_level == 0) {
+            let max = config.required_xp_to_levelup[config.player_level];
+            let exp = users.exp;
+            exp_r = Math.round((exp * 100) / max);
+        } else {
+            for (const key in config.required_xp_to_levelup) {
+                if (users.exp < config.required_xp_to_levelup[key]) {
+                    let max = config.required_xp_to_levelup[key] - config.required_xp_to_levelup[key - 1];
+                    let exp = users.exp - config.required_xp_to_levelup[key - 1];
+                    exp_r = Math.round((exp * 100) / max);
+                    if (exp_r >= 0) {
+                        break;
+                    }
+                }
+            }
+        }
+        $("#profile-exp-2").append(`<div class="progress-bar bg-amber accent-4" role="progressbar" style="width: ${exp_r}%" aria-valuenow="${exp_r}" aria-valuemin="0" aria-valuemax="100"></div>`);
+        $("#profile-distance-traveled").empty();
+        $("#profile-distance-traveled").append(Utils.numberFormat(users.traveled_distance, 2) + "km");
+        $("#profile-skill-points").empty();
+        $("#profile-skill-points").append(users.skill_points);
+        $("#profile-trucks").empty();
+        $("#profile-trucks").append(myTrucks.length);
+        $("#profile-drivers").empty();
+        let drivers_count = 0;
+        for (const driver of drivers) {
+            if (driver.user_id != null && driver.user_id != undefined) {
+                drivers_count++;
+            }
+        }
+        $("#profile-drivers").append(drivers_count);
 
-		$("#top-truckers-list").empty();
-		let c = 1;
-		let icon;
-		for (const top_users of top_truckers) {
-			if (c == 1) {
-				icon = "fa-medal amber accent-4 font-large-2";
-			} else if (c == 2) {
-				icon = "fa-medal blue-grey lighten-3 font-large-1";
-			} else if (c == 3) {
-				icon = "fa-medal bronze font-large-0";
-			} else {
-				icon = "fa-check-circle checkicon font-small-3";
-			}
-			$("#top-truckers-list").append(`
+        $("#top-truckers-list").empty();
+        let c = 1;
+        let icon;
+        for (const top_users of top_truckers) {
+            if (c == 1) {
+                icon = "fa-medal amber accent-4 font-large-2";
+            } else if (c == 2) {
+                icon = "fa-medal blue-grey lighten-3 font-large-1";
+            } else if (c == 3) {
+                icon = "fa-medal bronze font-large-0";
+            } else {
+                icon = "fa-check-circle checkicon font-small-3";
+            }
+            $("#top-truckers-list").append(`
 			<li class="d-flex justify-content-between card-theme">
 				<div class="d-flex flex-row align-items-center"><i class="fas ${icon}"></i>
 					<div class="ml-2">
@@ -425,26 +431,32 @@ window.addEventListener("message", async function (event) {
 					</div>
 				</div>
 			</li>`);
-			c++;
-		}
+            c++;
+        }
 
-		$("#job-page-list").empty();
-		$("#freight-page-list").empty();
-		for (const contract of contracts) {
-			if (!contract.distance) {
-				continue;
-			}
-			let icon = "";
-			let border = "";
-			if (contract.external_data) {
-				icon = `<i class="fas fa-trophy trophyicon"></i>`;
-				border = ` style="border: 1px solid gold;"`;
-			}
-			if (config.dealership[contract.truck]) {
-				icon = `<img src="${config.dealership[contract.truck].img}" class="img-width" alt="${config.dealership[contract.truck].img}">`;
-			}
-			icon += `<img src="img/trailers/${contract.trailer}.png" class="img-width" alt="${contract.trailer}">`;
-			list_item = `
+        $("#job-page-list").empty();
+        $("#freight-page-list").empty();
+        for (const contract of contracts) {
+            if (!contract.distance) {
+                continue;
+            }
+            if (contract.illegal == 1 && users.illegal == 0) {
+                continue;
+            }
+            let icon = "";
+            let border = "";
+            if (contract.external_data) {
+                icon = `<i class="fas fa-trophy trophyicon"></i>`;
+                border = ` style="border: 1px solid gold;"`;
+            }
+            if (contract.illegal == 1) {
+                border = ` style="border: 1px solid #dc3545;"`;
+            }
+            if (config.dealership[contract.truck]) {
+                icon = `<img src="${config.dealership[contract.truck].img}" class="img-width" alt="${config.dealership[contract.truck].img}">`;
+            }
+            icon += `<img src="img/trailers/${contract.trailer}.png" class="img-width" alt="${contract.trailer}">`;
+            list_item = `
 			<ul class="list list-inline mb-2">
 				<li class="d-flex justify-content-between card-theme"${border}>
 					<div class="d-flex flex-row align-items-center">${icon}
@@ -460,38 +472,41 @@ window.addEventListener("message", async function (event) {
 						<div class="d-flex flex-column mr-2">
 							<div class="profile-image">
 							`;
-			if (contract.cargo_type == 1) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_explosive")}"><img src="img/icons/explosive-1.png" width="30"></div>`;
-			} else if (contract.cargo_type == 2) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_flammablegas")}"><img src="img/icons/flamable-2.png" width="30"></div>`;
-			} else if (contract.cargo_type == 3) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_flammableliquid")}"><img src="img/icons/flamable-3.png" width="30"></div>`;
-			} else if (contract.cargo_type == 4) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_flammablesolid")}"><img src="img/icons/flamable-4.png" width="30"></div>`;
-			} else if (contract.cargo_type == 5) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_toxic")}"><img src="img/icons/toxic-6.png" width="30"></div>`;
-			} else if (contract.cargo_type == 6) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_corrosive")}"><img src="img/icons/corrosive-8.png" width="30"></div>`;
-			}
-			if (contract.fragile == 1) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_fragile")}"><img src="img/icons/fragile.png" width="30"></div>`;
-			}
-			if (contract.valuable == 1) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_valuable")}"><img src="img/icons/valuable.png" width="30"></div>`;
-			}
-			if (contract.fast == 1) {
-				list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_urgent")}"><img src="img/icons/fast.png" width="30"></div>`;
-			}
-			let partystart_btn = "";
-			if (trucker_party != undefined && !contract.external_data) {
-				partystart_btn = `<button onclick="startContract(${contract.contract_id},true)" type="button" class="btn btn-dark waves-effect waves-light">${Utils.translate("contract_page_button_start_job_party")}</button>`;
-			}
-			let button = `<button onclick="startContract(${contract.contract_id},false)" type="button" class="btn btn-primary waves-effect waves-light">${Utils.translate("contract_page_button_start_job")}</button>`;
-			if (contract.progress) {
-				button = `<button onclick="cancelContract(${contract.contract_id})" type="button" class="btn btn-outline-danger waves-effect waves-light">${Utils.translate("contract_page_button_cancel_job")}</button>`;
-				partystart_btn = "";
-			}
-			list_item += `
+            if (contract.cargo_type == 1) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_explosive")}"><img src="img/icons/explosive-1.png" width="30"></div>`;
+            } else if (contract.cargo_type == 2) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_flammablegas")}"><img src="img/icons/flamable-2.png" width="30"></div>`;
+            } else if (contract.cargo_type == 3) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_flammableliquid")}"><img src="img/icons/flamable-3.png" width="30"></div>`;
+            } else if (contract.cargo_type == 4) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_flammablesolid")}"><img src="img/icons/flamable-4.png" width="30"></div>`;
+            } else if (contract.cargo_type == 5) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_toxic")}"><img src="img/icons/toxic-6.png" width="30"></div>`;
+            } else if (contract.cargo_type == 6) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_corrosive")}"><img src="img/icons/corrosive-8.png" width="30"></div>`;
+            }
+            if (contract.fragile == 1) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_fragile")}"><img src="img/icons/fragile.png" width="30"></div>`;
+            }
+            if (contract.valuable == 1) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_valuable")}"><img src="img/icons/valuable.png" width="30"></div>`;
+            }
+            if (contract.fast == 1) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_urgent")}"><img src="img/icons/fast.png" width="30"></div>`;
+            }
+            if (contract.illegal == 1) {
+                list_item += `<div data-tooltip-location="left" data-tooltip="${Utils.translate("contract_page_cargo_illegal")}"><img src="img/icons/illegal.png" width="30"></div>`;
+            }
+            let partystart_btn = "";
+            if (trucker_party != undefined && !contract.external_data) {
+                partystart_btn = `<button onclick="startContract(${contract.contract_id},true)" type="button" class="btn btn-dark waves-effect waves-light">${Utils.translate("contract_page_button_start_job_party")}</button>`;
+            }
+            let button = `<button onclick="startContract(${contract.contract_id},false)" type="button" class="btn btn-primary waves-effect waves-light">${Utils.translate("contract_page_button_start_job")}</button>`;
+            if (contract.progress) {
+                button = `<button onclick="cancelContract(${contract.contract_id})" type="button" class="btn btn-outline-danger waves-effect waves-light">${Utils.translate("contract_page_button_cancel_job")}</button>`;
+                partystart_btn = "";
+            }
+            list_item += `
 							</div>
 						</div>
 						<div class="btn-group" role="group">
@@ -502,32 +517,33 @@ window.addEventListener("message", async function (event) {
 				</li>
 			</ul>
 			`;
-			if (contract.contract_type == 0) {
-				$("#job-page-list").append(list_item);
-			} else {
-				$("#freight-page-list").append(list_item);
-			}
-		}
+            if (contract.contract_type == 0) {
+                $("#job-page-list").append(list_item);
+            } else {
+                $("#freight-page-list").append(list_item);
+            }
+        }
 
-		$("#skills-desc").empty();
-		$("#skills-desc").append(Utils.translate("skills_page_desc").format(users.skill_points));
-		setSkill("distance", users.distance);
-		setSkill("product_type", users.product_type);
-		setSkill("valuable", users.valuable);
-		setSkill("fragile", users.fragile);
-		setSkill("fast", users.fast);
+        $("#skills-desc").empty();
+        $("#skills-desc").append(Utils.translate("skills_page_desc").format(users.skill_points));
+        setSkill("distance", users.distance);
+        setSkill("product_type", users.product_type);
+        setSkill("valuable", users.valuable);
+        setSkill("fragile", users.fragile);
+        setSkill("fast", users.fast);
+        setSkill("illegal", users.illegal);
 
-		$("#dealership-page-list").empty();
-		list_item = ``;
-		const sorted_dealership = Utils.sortElement(config.dealership, ["required_level", "price"]);
-		for (const truck of sorted_dealership) {
-			let button_html = `<div class="mx-3 mt-3 mb-2"><button onclick="buyTruck('${truck.id}')" type="button" class="btn btn-primary btn-block"><small>${Utils.translate("dealership_page_buy_button")}</small></button></div> <small class="d-flex justify-content-center text-muted">${Utils.translate("dealership_page_bottom_text")}</small>`;
-			let dealership_locked_background = "";
-			if (config.player_level < truck.required_level) {
-				button_html = `<div class="mx-3 mt-4 mb-2"><div class="d-flex align-items-center" style="min-height: 35px;"><i class="fa-solid fa-lock text-muted"></i><span class=" ml-2 small">${Utils.translate("trucks_page_unlock").format(truck.required_level)}</span></div></div>`;
-				dealership_locked_background = "dealership-locked-background";
-			}
-			list_item += `
+        $("#dealership-page-list").empty();
+        list_item = ``;
+        const sorted_dealership = Utils.sortElement(config.dealership, ["required_level", "price"]);
+        for (const truck of sorted_dealership) {
+            let button_html = `<div class="mx-3 mt-3 mb-2"><button onclick="buyTruck('${truck.id}')" type="button" class="btn btn-primary btn-block"><small>${Utils.translate("dealership_page_buy_button")}</small></button></div> <small class="d-flex justify-content-center text-muted">${Utils.translate("dealership_page_bottom_text")}</small>`;
+            let dealership_locked_background = "";
+            if (config.player_level < truck.required_level) {
+                button_html = `<div class="mx-3 mt-4 mb-2"><div class="d-flex align-items-center" style="min-height: 35px;"><i class="fa-solid fa-lock text-muted"></i><span class=" ml-2 small">${Utils.translate("trucks_page_unlock").format(truck.required_level)}</span></div></div>`;
+                dealership_locked_background = "dealership-locked-background";
+            }
+            list_item += `
 				<div class="card ${dealership_locked_background}">
 					<img src="${truck.img}" class="card-img-top" width="100%">
 					<div class="card-body pt-0 px-0">
@@ -557,44 +573,44 @@ window.addEventListener("message", async function (event) {
 					</div>
 				</div>
 				`;
-		}
-		$("#dealership-page-list").append(list_item);
+        }
+        $("#dealership-page-list").append(list_item);
 
-		$("#diagnostic-title-div").html(`
+        $("#diagnostic-title-div").html(`
 			<h4 class="text-uppercase">${Utils.translate("diagnostic_page_title")} <small></small></h4>
 			<p>${Utils.translate("diagnostic_page_desc")}</p>
 		`);
-		$("#repair-truck-img").attr("src", "img/truck_placeholder.png");
+        $("#repair-truck-img").attr("src", "img/truck_placeholder.png");
 
-		$("#trucks-page-list").empty();
-		list_item = "";
-		for (const truck of myTrucks) {
-			truck.body = truck.body / 10;
-			truck.engine = truck.engine / 10;
-			truck.transmission = truck.transmission / 10;
-			truck.wheels = truck.wheels / 10;
-			if (truck.driver == 0) {
-				$("#repair-truck-img").attr("src", config.dealership[truck.truck_name].img);
-				$("#diagnostic-title-div").empty();
-				$("#diagnostic-title-div").append(`
+        $("#trucks-page-list").empty();
+        list_item = "";
+        for (const truck of myTrucks) {
+            truck.body = truck.body / 10;
+            truck.engine = truck.engine / 10;
+            truck.transmission = truck.transmission / 10;
+            truck.wheels = truck.wheels / 10;
+            if (truck.driver == 0) {
+                $("#repair-truck-img").attr("src", config.dealership[truck.truck_name].img);
+                $("#diagnostic-title-div").empty();
+                $("#diagnostic-title-div").append(`
 					<h4 class="text-uppercase">${Utils.translate("diagnostic_page_title")} <small>(${config.dealership[truck.truck_name].name})</small></h4>
 					<p>${Utils.translate("diagnostic_page_desc")}</p>
 				`);
-				let color;
-				let bgcolor;
+                let color;
+                let bgcolor;
 
-				if (truck.body > 80) {
-					color = "text-success";
-					bgcolor = "bg-success";
-				} else if (truck.body > 40) {
-					color = "text-warning";
-					bgcolor = "bg-warning";
-				} else {
-					color = "text-danger";
-					bgcolor = "bg-danger";
-				}
-				$("#diagnostic-body").empty();
-				$("#diagnostic-body").append(`
+                if (truck.body > 80) {
+                    color = "text-success";
+                    bgcolor = "bg-success";
+                } else if (truck.body > 40) {
+                    color = "text-warning";
+                    bgcolor = "bg-warning";
+                } else {
+                    color = "text-danger";
+                    bgcolor = "bg-danger";
+                }
+                $("#diagnostic-body").empty();
+                $("#diagnostic-body").append(`
 					<div class="media d-flex">
 						<div class="media-body text-left">
 							<h3 class="${color}">${truck.body} %</h3><small>${Utils.translate("diagnostic_page_chassi")} (${Utils.currencyFormat((100 - truck.body) * config.repair_price.body)})</small>
@@ -608,18 +624,18 @@ window.addEventListener("message", async function (event) {
 					</div>
 				`);
 
-				if (truck.engine > 80) {
-					color = "text-success";
-					bgcolor = "bg-success";
-				} else if (truck.engine > 40) {
-					color = "text-warning";
-					bgcolor = "bg-warning";
-				} else {
-					color = "text-danger";
-					bgcolor = "bg-danger";
-				}
-				$("#diagnostic-engine").empty();
-				$("#diagnostic-engine").append(`
+                if (truck.engine > 80) {
+                    color = "text-success";
+                    bgcolor = "bg-success";
+                } else if (truck.engine > 40) {
+                    color = "text-warning";
+                    bgcolor = "bg-warning";
+                } else {
+                    color = "text-danger";
+                    bgcolor = "bg-danger";
+                }
+                $("#diagnostic-engine").empty();
+                $("#diagnostic-engine").append(`
 					<div class="media d-flex">
 						<div class="media-body text-left">
 							<h3 class="${color}">${truck.engine} %</h3><small>${Utils.translate("diagnostic_page_engine")} (${Utils.currencyFormat((100 - truck.engine) * config.repair_price.engine)})</small>
@@ -633,18 +649,18 @@ window.addEventListener("message", async function (event) {
 					</div>
 				`);
 
-				if (truck.transmission > 80) {
-					color = "text-success";
-					bgcolor = "bg-success";
-				} else if (truck.transmission > 40) {
-					color = "text-warning";
-					bgcolor = "bg-warning";
-				} else {
-					color = "text-danger";
-					bgcolor = "bg-danger";
-				}
-				$("#diagnostic-transmission").empty();
-				$("#diagnostic-transmission").append(`
+                if (truck.transmission > 80) {
+                    color = "text-success";
+                    bgcolor = "bg-success";
+                } else if (truck.transmission > 40) {
+                    color = "text-warning";
+                    bgcolor = "bg-warning";
+                } else {
+                    color = "text-danger";
+                    bgcolor = "bg-danger";
+                }
+                $("#diagnostic-transmission").empty();
+                $("#diagnostic-transmission").append(`
 					<div class="media d-flex">
 						<div class="media-body text-left">
 							<h3 class="${color}">${truck.transmission} %</h3><small>${Utils.translate("diagnostic_page_transmission")} (${Utils.currencyFormat((100 - truck.transmission) * config.repair_price.transmission)})</small>
@@ -658,18 +674,18 @@ window.addEventListener("message", async function (event) {
 					</div>
 				`);
 
-				if (truck.wheels > 80) {
-					color = "text-success";
-					bgcolor = "bg-success";
-				} else if (truck.wheels > 40) {
-					color = "text-warning";
-					bgcolor = "bg-warning";
-				} else {
-					color = "text-danger";
-					bgcolor = "bg-danger";
-				}
-				$("#diagnostic-wheels").empty();
-				$("#diagnostic-wheels").append(`
+                if (truck.wheels > 80) {
+                    color = "text-success";
+                    bgcolor = "bg-success";
+                } else if (truck.wheels > 40) {
+                    color = "text-warning";
+                    bgcolor = "bg-warning";
+                } else {
+                    color = "text-danger";
+                    bgcolor = "bg-danger";
+                }
+                $("#diagnostic-wheels").empty();
+                $("#diagnostic-wheels").append(`
 					<div class="media d-flex">
 						<div class="media-body text-left">
 							<h3 class="${color}">${truck.wheels} %</h3><small>${Utils.translate("diagnostic_page_wheels")} (${Utils.currencyFormat((100 - truck.wheels) * config.repair_price.wheels)})</small>
@@ -683,19 +699,19 @@ window.addEventListener("message", async function (event) {
 					</div>
 				`);
 
-				let refuel_btn = ``;
-				if (truck.fuel < 98) {
-					refuel_btn = `
+                let refuel_btn = ``;
+                if (truck.fuel < 98) {
+                    refuel_btn = `
 					<span class="mt-2">${Utils.translate("diagnostic_page_refuel_label")}</span>
 					<button onclick="refuelTruck(${truck.truck_id})" class="btn btn-danger mt-1">${Utils.currencyFormat((100 - truck.fuel) * config.repair_price.fuel, 0)}</button>`;
-				}
-				if (truck.fuel > 20) {
-					bgcolor = "bg-warning";
-				} else {
-					bgcolor = "bg-danger";
-				}
-				$("#diagnostic-fuel-bar").empty();
-				$("#diagnostic-fuel-bar").append(`
+                }
+                if (truck.fuel > 20) {
+                    bgcolor = "bg-warning";
+                } else {
+                    bgcolor = "bg-danger";
+                }
+                $("#diagnostic-fuel-bar").empty();
+                $("#diagnostic-fuel-bar").append(`
 					<div class="fuel-progress-bar-container card-theme d-flex align-items-center flex-column p-3">
 						<div class="progress progress-bar-vertical">
 							<div class="progress-bar ${bgcolor} progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: ${truck.fuel}%;"></div>
@@ -706,8 +722,8 @@ window.addEventListener("message", async function (event) {
 						${refuel_btn}
 					</div>
 				`);
-			}
-			list_item += `
+            }
+            list_item += `
 				<li class="d-flex justify-content-between card-theme">
 					<div class="d-flex flex-row align-items-center"><img src="${config.dealership[truck.truck_name].img}" class="img-width" alt="User-Profile-Image">
 						<div class="ml-2">
@@ -737,15 +753,15 @@ window.addEventListener("message", async function (event) {
 					</div>
 				</li>
 				`;
-		}
-		$("#trucks-page-list").append(list_item);
+        }
+        $("#trucks-page-list").append(list_item);
 
-		$("#recruitment-page-list").empty();
-		$("#drivers-page-list").empty();
-		list_item = ``;
-		for (const driver of drivers) {
-			if (driver.user_id == null || driver.user_id == undefined) {
-				list_item += `
+        $("#recruitment-page-list").empty();
+        $("#drivers-page-list").empty();
+        list_item = ``;
+        for (const driver of drivers) {
+            if (driver.user_id == null || driver.user_id == undefined) {
+                list_item += `
 					<div class="card user-card">
 						<div class="card-block">
 							<div class="user-image">
@@ -778,19 +794,19 @@ window.addEventListener("message", async function (event) {
 						</div>
 					</div>
 					`;
-			} else {
-				let fuel_color = `warning`;
-				let refuel_btn = ``;
-				let refuel_bar = ``;
-				let truck_assigned = myTrucks.find((truck) => truck.driver == driver.driver_id);
-				if (truck_assigned) {
-					if (truck_assigned.fuel < 98) {
-						refuel_btn = `<a class="dropdown-item text-black-50" onclick="refuelTruck(${truck_assigned.truck_id})">${Utils.translate("drivers_page_refuel_button").format(Utils.currencyFormat((100 - truck_assigned.fuel) * config.repair_price.fuel, 0))}</a>`;
-						if (truck_assigned.fuel < 20) {
-							fuel_color = "danger";
-						}
-					}
-					refuel_bar = `<div class="d-flex flex-row text-black-50 small">
+            } else {
+                let fuel_color = `warning`;
+                let refuel_btn = ``;
+                let refuel_bar = ``;
+                let truck_assigned = myTrucks.find((truck) => truck.driver == driver.driver_id);
+                if (truck_assigned) {
+                    if (truck_assigned.fuel < 98) {
+                        refuel_btn = `<a class="dropdown-item text-black-50" onclick="refuelTruck(${truck_assigned.truck_id})">${Utils.translate("drivers_page_refuel_button").format(Utils.currencyFormat((100 - truck_assigned.fuel) * config.repair_price.fuel, 0))}</a>`;
+                        if (truck_assigned.fuel < 20) {
+                            fuel_color = "danger";
+                        }
+                    }
+                    refuel_bar = `<div class="d-flex flex-row text-black-50 small">
 						<div class="d-flex align-items-center mr-3">
 							<img src="img/icons/fuel.png" width="35px">
 							<div class="ml-1">
@@ -799,8 +815,8 @@ window.addEventListener("message", async function (event) {
 							</div>
 						</div>
 					</div>`;
-				}
-				$("#drivers-page-list").append(`
+                }
+                $("#drivers-page-list").append(`
 					<li class="d-flex justify-content-between card-theme">
 						<div class="d-flex flex-row align-items-center">
 							<img src="${driver.img}" class="img-radius img-width" alt="User-Profile-Image">
@@ -833,14 +849,14 @@ window.addEventListener("message", async function (event) {
 						</div>
 					</li>
 				`);
-			}
-		}
-		$("#recruitment-page-list").append(list_item);
+            }
+        }
+        $("#recruitment-page-list").append(list_item);
 
-		$("#loan-table-body").empty();
-		$("#loan-table-container").css("display", "none");
-		for (const loan of loans) {
-			$("#loan-table-body").append(`
+        $("#loan-table-body").empty();
+        $("#loan-table-container").css("display", "none");
+        for (const loan of loans) {
+            $("#loan-table-body").append(`
 				<tr>
 					<td>${Utils.currencyFormat(loan.loan)}</td>
 					<td>${Utils.currencyFormat(loan.day_cost)}</td>
@@ -849,16 +865,16 @@ window.addEventListener("message", async function (event) {
 					<td><button class="btn btn-outline-primary" style="min-width: 200px;" onclick="payLoan(${loan.id},${loan.remaining_amount})" >${Utils.translate("bank_page_loan_pay")}</button></td>
 				</tr>
 			`);
-			$("#loan-table-container").css("display", "");
-		}
+            $("#loan-table-container").css("display", "");
+        }
 
-		if (trucker_party != undefined) {
-			let quit_str = `<button onclick="quitParty()" class="btn btn-danger">${Utils.translate("party_quit")}</button>`;
-			if (trucker_party.owner == 1) {
-				quit_str = `<button onclick="deleteParty()" class="btn btn-danger">${Utils.translate("party_delete")}</button>`;
-			}
-			$("#party-title-div").empty();
-			$("#party-title-div").append(`
+        if (trucker_party != undefined) {
+            let quit_str = `<button onclick="quitParty()" class="btn btn-danger">${Utils.translate("party_quit")}</button>`;
+            if (trucker_party.owner == 1) {
+                quit_str = `<button onclick="deleteParty()" class="btn btn-danger">${Utils.translate("party_delete")}</button>`;
+            }
+            $("#party-title-div").empty();
+            $("#party-title-div").append(`
 				<h4 class="text-uppercase">${trucker_party.name} <small>(${trucker_party.members_count}/${trucker_party.members})</small></h4>
 				<div class="party-title-container">
 					<p>${trucker_party.description}</p>
@@ -866,24 +882,24 @@ window.addEventListener("message", async function (event) {
 				</div>
 			`);
 
-			$("#party-form-container-base").css("display", "none");
-			$("#party-container-members").css("display", "");
+            $("#party-form-container-base").css("display", "none");
+            $("#party-container-members").css("display", "");
 
-			$("#party-container-members").empty();
-			for (const member of trucker_party_members) {
-				let kick_str = "";
-				if (trucker_party.owner == 1 && trucker_party.user_id != member.user_id) {
-					kick_str = `<button onclick="kickParty(\'${member.user_id}\')" class="btn btn-danger">${Utils.translate("party_kick")}</button>`;
-				}
-				let owner_str = "";
-				if (member.owner) {
-					owner_str = `<div data-tooltip-location="left" data-tooltip="${Utils.translate("party_leader")}"><img src="img/icons/crown.png" width="30"></div>`;
-				}
-				let online_str = "fas fa-xmark-circle xicon";
-				if (member.online) {
-					online_str = "fas fa-check-circle checkicon";
-				}
-				$("#party-container-members").append(`
+            $("#party-container-members").empty();
+            for (const member of trucker_party_members) {
+                let kick_str = "";
+                if (trucker_party.owner == 1 && trucker_party.user_id != member.user_id) {
+                    kick_str = `<button onclick="kickParty(\'${member.user_id}\')" class="btn btn-danger">${Utils.translate("party_kick")}</button>`;
+                }
+                let owner_str = "";
+                if (member.owner) {
+                    owner_str = `<div data-tooltip-location="left" data-tooltip="${Utils.translate("party_leader")}"><img src="img/icons/crown.png" width="30"></div>`;
+                }
+                let online_str = "fas fa-xmark-circle xicon";
+                if (member.online) {
+                    online_str = "fas fa-check-circle checkicon";
+                }
+                $("#party-container-members").append(`
 					<ul class="list list-inline mb-2">
 						<li class="d-flex justify-content-between card-theme">
 							<div class="d-flex flex-row align-items-center"><i class="${online_str}" aria-hidden="true"></i>
@@ -910,282 +926,282 @@ window.addEventListener("message", async function (event) {
 						</li>
 					</ul>
 				`);
-			}
-		} else {
-			$("#party-title-div").html(`
+            }
+        } else {
+            $("#party-title-div").html(`
 				<h4 class="text-uppercase">${Utils.translate("party_page_title")}</h4>
 				<p>${Utils.translate("party_page_desc")}</p>
 			`);
-			$("#party-form-container-base").css("display", "");
-			$("#party-container-members").css("display", "none");
-		}
+            $("#party-form-container-base").css("display", "");
+            $("#party-container-members").css("display", "none");
+        }
 
-		$(function () {
-			$(".input-pass").blur(function () {
-				let PasswordVal = $("#party-password").val();
-				let ConfirmPasswordVal = $("#party-password-confirm").val();
-				if (PasswordVal != ConfirmPasswordVal && ConfirmPasswordVal.length > 0 && PasswordVal.length > 0) {
-					$(".ShowPasswordNotMatchesError").show();
-				} else {
-					$(".ShowPasswordNotMatchesError").hide();
-				}
-			});
-			$("#party-members").keyup(function () {
-				if ($(this).val() > config.party.max_members) {
-					this.value = config.party.max_members;
-				}
-				if ($(this).val() && $(this).val() <= 0) {
-					this.value = 1;
-				}
-				$(".party-members-container span").text(Utils.currencyFormat($(this).val() * config.party.price_per_member));
-				$("#submit-party-form").text(Utils.translate("party_page_finish_button").format(Utils.currencyFormat(config.party.price_to_create), Utils.currencyFormat($(this).val() * config.party.price_per_member)));
-			});
-		});
+        $(function () {
+            $(".input-pass").blur(function () {
+                let PasswordVal = $("#party-password").val();
+                let ConfirmPasswordVal = $("#party-password-confirm").val();
+                if (PasswordVal != ConfirmPasswordVal && ConfirmPasswordVal.length > 0 && PasswordVal.length > 0) {
+                    $(".ShowPasswordNotMatchesError").show();
+                } else {
+                    $(".ShowPasswordNotMatchesError").hide();
+                }
+            });
+            $("#party-members").keyup(function () {
+                if ($(this).val() > config.party.max_members) {
+                    this.value = config.party.max_members;
+                }
+                if ($(this).val() && $(this).val() <= 0) {
+                    this.value = 1;
+                }
+                $(".party-members-container span").text(Utils.currencyFormat($(this).val() * config.party.price_per_member));
+                $("#submit-party-form").text(Utils.translate("party_page_finish_button").format(Utils.currencyFormat(config.party.price_to_create), Utils.currencyFormat($(this).val() * config.party.price_per_member)));
+            });
+        });
 
-		$(".sidebar-navigation ul li").on("click", function () {
-			$("li").removeClass("active");
-			$(this).addClass("active");
-		});
-	}
-	if (item.hidemenu) {
-		$(".main").fadeOut(200);
-	}
+        $(".sidebar-navigation ul li").on("click", function () {
+            $("li").removeClass("active");
+            $(this).addClass("active");
+        });
+    }
+    if (item.hidemenu) {
+        $(".main").fadeOut(200);
+    }
 });
 
 function getDriverLevelHTML(value) {
-	let html = "";
-	for (let i = 1; i <= 6; i++) {
-		if (i <= value) {
-			html += `<li class="actived bg-success"></li>`;
-		} else {
-			html += "<li></li>";
-		}
-	}
-	return html;
+    let html = "";
+    for (let i = 1; i <= 6; i++) {
+        if (i <= value) {
+            html += `<li class="actived bg-success"></li>`;
+        } else {
+            html += "<li></li>";
+        }
+    }
+    return html;
 }
 
 function getDriverAvailableTrucksHTML(myTrucks, driver, config) {
-	let html = "";
-	let has_truck = null;
-	for (const truck of myTrucks) {
-		if (truck.driver == driver.driver_id) {
-			has_truck = truck.truck_id;
-			html += `<option selected="selected">${config.dealership[truck.truck_name].name} (+${config.dealership[truck.truck_name].driver_bonus}%)</option>`;
-		} else {
-			if (truck.driver == null) {
-				html += `<option truck_id="${truck.truck_id}" driver_id="${driver.driver_id}">${config.dealership[truck.truck_name].name} (+${config.dealership[truck.truck_name].driver_bonus}%)</option>`;
-			}
-		}
-	}
-	if (has_truck == null) {
-		html = `<option selected="selected">${Utils.translate("drivers_page_pick_truck")}</option>${html}`;
-	} else {
-		html = `<option driver_id="${driver.driver_id}">${Utils.translate("drivers_page_pick_truck")}</option>${html}`;
-	}
-	return html;
+    let html = "";
+    let has_truck = null;
+    for (const truck of myTrucks) {
+        if (truck.driver == driver.driver_id) {
+            has_truck = truck.truck_id;
+            html += `<option selected="selected">${config.dealership[truck.truck_name].name} (+${config.dealership[truck.truck_name].driver_bonus}%)</option>`;
+        } else {
+            if (truck.driver == null) {
+                html += `<option truck_id="${truck.truck_id}" driver_id="${driver.driver_id}">${config.dealership[truck.truck_name].name} (+${config.dealership[truck.truck_name].driver_bonus}%)</option>`;
+            }
+        }
+    }
+    if (has_truck == null) {
+        html = `<option selected="selected">${Utils.translate("drivers_page_pick_truck")}</option>${html}`;
+    } else {
+        html = `<option driver_id="${driver.driver_id}">${Utils.translate("drivers_page_pick_truck")}</option>${html}`;
+    }
+    return html;
 }
 
 function getMyTruckHTML(truck) {
-	return truck.driver == 0 ? `<button onclick="spawnTruck(${truck.truck_id})" class="btn btn-primary mr-2">${Utils.translate("trucks_page_spawn")}</button> <button onclick="setDriver(null,'${truck.truck_id}')" class="btn btn-outline-primary mr-2">${Utils.translate("trucks_page_remove")}</button>` : `<button onclick="setDriver('0','${truck.truck_id}')" class="btn btn-primary mr-2">${Utils.translate("trucks_page_select")}</button>`;
+    return truck.driver == 0 ? `<button onclick="spawnTruck(${truck.truck_id})" class="btn btn-primary mr-2">${Utils.translate("trucks_page_spawn")}</button> <button onclick="setDriver(null,'${truck.truck_id}')" class="btn btn-outline-primary mr-2">${Utils.translate("trucks_page_remove")}</button>` : `<button onclick="setDriver('0','${truck.truck_id}')" class="btn btn-primary mr-2">${Utils.translate("trucks_page_select")}</button>`;
 }
 
 function setSkill(id, newValue) {
-	$("#" + id).empty();
-	for (let i = 1; i <= 6; i++) {
-		if (i <= newValue) {
-			if (i == 1) {
-				$("#" + id).append(`<div class="steps bg-success"> <span><i class="fas fa-check"></i></span> </div>`);
-			} else {
-				$("#" + id).append(`<span class="line bg-success"></span><div class="steps bg-success"> <span><i class="fas fa-check"></i></span> </div>`);
-			}
-		} else {
-			if (i == 1) {
-				$("#" + id).append(`<div class="redsteps" onclick="upgradeSkill('${id}',${i})"> <span class="font-weight-bold">${i}</span> </div>`);
-			} else {
-				$("#" + id).append(`</div> <span class="redline"></span><div class="redsteps" onclick="upgradeSkill('${id}',${i})"> <span class="font-weight-bold">${i}</span>`);
-			}
-		}
-	}
+    $("#" + id).empty();
+    for (let i = 1; i <= 6; i++) {
+        if (i <= newValue) {
+            if (i == 1) {
+                $("#" + id).append(`<div class="steps bg-success"> <span><i class="fas fa-check"></i></span> </div>`);
+            } else {
+                $("#" + id).append(`<span class="line bg-success"></span><div class="steps bg-success"> <span><i class="fas fa-check"></i></span> </div>`);
+            }
+        } else {
+            if (i == 1) {
+                $("#" + id).append(`<div class="redsteps" onclick="upgradeSkill('${id}',${i})"> <span class="font-weight-bold">${i}</span> </div>`);
+            } else {
+                $("#" + id).append(`</div> <span class="redline"></span><div class="redsteps" onclick="upgradeSkill('${id}',${i})"> <span class="font-weight-bold">${i}</span>`);
+            }
+        }
+    }
 }
 
 function openPage(pageN) {
-	$(".pages").css("display", "none");
-	$(`.${pageN}-page`).css("display", "block");
+    $(".pages").css("display", "none");
+    $(`.${pageN}-page`).css("display", "block");
 
-	let titleHeight = $(`#${pageN}-title-div`).outerHeight(true) ?? 0;
-	let footerHeight = $(`#${pageN}-footer-div`).outerHeight(true) ?? 0;
-	$(":root").css(`--${pageN}-title-height`, titleHeight + footerHeight + "px");
+    let titleHeight = $(`#${pageN}-title-div`).outerHeight(true) ?? 0;
+    let footerHeight = $(`#${pageN}-footer-div`).outerHeight(true) ?? 0;
+    $(":root").css(`--${pageN}-title-height`, titleHeight + footerHeight + "px");
 }
 
 function createParty() {
-	let form = document.getElementById("party-form-create");
-	let form2 = document.getElementById("party-form-join");
-	if (form.style.opacity === "1" || form2.style.opacity === "1") {
-		form.style.opacity = "0";
-		form.style.maxHeight = "0";
-		form.style.fontSize = "0";
+    let form = document.getElementById("party-form-create");
+    let form2 = document.getElementById("party-form-join");
+    if (form.style.opacity === "1" || form2.style.opacity === "1") {
+        form.style.opacity = "0";
+        form.style.maxHeight = "0";
+        form.style.fontSize = "0";
 
-		form2.style.opacity = "0";
-		form2.style.maxHeight = "0";
-		form2.style.fontSize = "0";
-		setTimeout(function () {
-			form.style.position = "absolute";
-		}, 300);
-		setTimeout(function () {
-			form2.style.position = "absolute";
-		}, 300);
-	} else {
-		form2.style.opacity = "0";
-		form2.style.maxHeight = "0";
-		form2.style.fontSize = "0";
+        form2.style.opacity = "0";
+        form2.style.maxHeight = "0";
+        form2.style.fontSize = "0";
+        setTimeout(function () {
+            form.style.position = "absolute";
+        }, 300);
+        setTimeout(function () {
+            form2.style.position = "absolute";
+        }, 300);
+    } else {
+        form2.style.opacity = "0";
+        form2.style.maxHeight = "0";
+        form2.style.fontSize = "0";
 
-		form.style.opacity = "1";
-		form.style.maxHeight = "1000px";
-		form.style.fontSize = "15px";
-		form.style.position = "";
-	}
+        form.style.opacity = "1";
+        form.style.maxHeight = "1000px";
+        form.style.fontSize = "15px";
+        form.style.position = "";
+    }
 }
 
 function joinParty() {
-	let form = document.getElementById("party-form-join");
-	let form2 = document.getElementById("party-form-create");
-	if (form.style.opacity === "1" || form2.style.opacity === "1") {
-		form.style.opacity = "0";
-		form.style.maxHeight = "0";
-		form.style.fontSize = "0";
+    let form = document.getElementById("party-form-join");
+    let form2 = document.getElementById("party-form-create");
+    if (form.style.opacity === "1" || form2.style.opacity === "1") {
+        form.style.opacity = "0";
+        form.style.maxHeight = "0";
+        form.style.fontSize = "0";
 
-		form2.style.opacity = "0";
-		form2.style.maxHeight = "0";
-		form2.style.fontSize = "0";
-		setTimeout(function () {
-			form.style.position = "absolute";
-		}, 300);
-		setTimeout(function () {
-			form2.style.position = "absolute";
-		}, 300);
-	} else {
-		form2.style.opacity = "0";
-		form2.style.maxHeight = "0";
-		form2.style.fontSize = "0";
+        form2.style.opacity = "0";
+        form2.style.maxHeight = "0";
+        form2.style.fontSize = "0";
+        setTimeout(function () {
+            form.style.position = "absolute";
+        }, 300);
+        setTimeout(function () {
+            form2.style.position = "absolute";
+        }, 300);
+    } else {
+        form2.style.opacity = "0";
+        form2.style.maxHeight = "0";
+        form2.style.fontSize = "0";
 
-		form.style.opacity = "1";
-		form.style.maxHeight = "1000px";
-		form.style.fontSize = "15px";
-		form.style.position = "";
-	}
+        form.style.opacity = "1";
+        form.style.maxHeight = "1000px";
+        form.style.fontSize = "15px";
+        form.style.position = "";
+    }
 }
 
 $(document).ready(function () {
-	$("#css-toggle").on("change", function () {
-		if ($(this).prop("checked") == false) {
-			// Light theme
-			$("#css-bs-light").prop("disabled", false);
-			$("#css-light").prop("disabled", false);
-			$("#css-bs-dark").prop("disabled", true);
-			$("#css-dark").prop("disabled", true);
-			$("#dark-theme-icon").css("display", "");
-			$("#light-theme-icon").css("display", "none");
-			changeTheme(0);
-		} else if ($(this).prop("checked") == true) {
-			// Dark theme
-			$("#css-bs-dark").prop("disabled", false);
-			$("#css-dark").prop("disabled", false);
-			$("#css-bs-light").prop("disabled", true);
-			$("#css-light").prop("disabled", true);
-			$("#dark-theme-icon").css("display", "none");
-			$("#light-theme-icon").css("display", "");
-			changeTheme(1);
-		}
-	});
+    $("#css-toggle").on("change", function () {
+        if ($(this).prop("checked") == false) {
+            // Light theme
+            $("#css-bs-light").prop("disabled", false);
+            $("#css-light").prop("disabled", false);
+            $("#css-bs-dark").prop("disabled", true);
+            $("#css-dark").prop("disabled", true);
+            $("#dark-theme-icon").css("display", "");
+            $("#light-theme-icon").css("display", "none");
+            changeTheme(0);
+        } else if ($(this).prop("checked") == true) {
+            // Dark theme
+            $("#css-bs-dark").prop("disabled", false);
+            $("#css-dark").prop("disabled", false);
+            $("#css-bs-light").prop("disabled", true);
+            $("#css-light").prop("disabled", true);
+            $("#dark-theme-icon").css("display", "none");
+            $("#light-theme-icon").css("display", "");
+            changeTheme(1);
+        }
+    });
 
-	$("#party-form-create").on("submit", function (e) {
-		e.preventDefault();
-		let form = $("#party-form-create").serializeArray();
-		if (form[2].value !== form[3].value) {
-			$(".ShowPasswordNotMatchesError").show();
-			return;
-		}
-		Utils.post("createParty", { name: form[0].value, desc: form[1].value, pass: form[2].value, cpass: form[3].value, members: form[4].value });
-	});
+    $("#party-form-create").on("submit", function (e) {
+        e.preventDefault();
+        let form = $("#party-form-create").serializeArray();
+        if (form[2].value !== form[3].value) {
+            $(".ShowPasswordNotMatchesError").show();
+            return;
+        }
+        Utils.post("createParty", { name: form[0].value, desc: form[1].value, pass: form[2].value, cpass: form[3].value, members: form[4].value });
+    });
 
-	$("#party-form-join").on("submit", function (e) {
-		e.preventDefault();
-		let form = $("#party-form-join").serializeArray();
-		Utils.post("joinParty", { name: form[0].value, pass: form[1].value });
-	});
+    $("#party-form-join").on("submit", function (e) {
+        e.preventDefault();
+        let form = $("#party-form-join").serializeArray();
+        Utils.post("joinParty", { name: form[0].value, pass: form[1].value });
+    });
 
-	$("#form-deposit-money").on("submit", function (e) {
-		e.preventDefault();
-		let form = $("#form-deposit-money").serializeArray();
-		$("#deposit-modal-money-amount").val(null);
-		$("#deposit-modal").modal("hide");
-		Utils.post("depositMoney", { amount: form[0].value });
-	});
+    $("#form-deposit-money").on("submit", function (e) {
+        e.preventDefault();
+        let form = $("#form-deposit-money").serializeArray();
+        $("#deposit-modal-money-amount").val(null);
+        $("#deposit-modal").modal("hide");
+        Utils.post("depositMoney", { amount: form[0].value });
+    });
 
-	$("#form-withdraw-money").on("submit", function (e) {
-		e.preventDefault();
-		let form = $("#form-withdraw-money").serializeArray();
-		$("#withdraw-modal-money-amount").val(null);
-		$("#withdraw-modal").modal("hide");
-		Utils.post("withdrawMoney", { amount: form[0].value });
-	});
+    $("#form-withdraw-money").on("submit", function (e) {
+        e.preventDefault();
+        let form = $("#form-withdraw-money").serializeArray();
+        $("#withdraw-modal-money-amount").val(null);
+        $("#withdraw-modal").modal("hide");
+        Utils.post("withdrawMoney", { amount: form[0].value });
+    });
 
-	$("#form-loan").on("submit", function (e) {
-		e.preventDefault();
-		let form = $("#form-loan").serializeArray();
-		$("#loans-modal").modal("hide");
-		Utils.post("loan", { loan_id: form[0].value });
-	});
+    $("#form-loan").on("submit", function (e) {
+        e.preventDefault();
+        let form = $("#form-loan").serializeArray();
+        $("#loans-modal").modal("hide");
+        Utils.post("loan", { loan_id: form[0].value });
+    });
 });
 
 function closeUI() {
-	Utils.post("close", "");
+    Utils.post("close", "");
 }
 function startContract(contract_id, party) {
-	Utils.post("startContract", { id: contract_id, party: party });
+    Utils.post("startContract", { id: contract_id, party: party });
 }
 function cancelContract(contract_id) {
-	Utils.post("cancelContract", { id: contract_id });
+    Utils.post("cancelContract", { id: contract_id });
 }
 function sellTruck(truck_id, truck_name) {
-	Utils.showDefaultDangerModal(() => Utils.post("sellTruck", { truck_id: truck_id, truck_name: truck_name }), Utils.translate("confirmation_modal_sell_vehicle"));
+    Utils.showDefaultDangerModal(() => Utils.post("sellTruck", { truck_id: truck_id, truck_name: truck_name }), Utils.translate("confirmation_modal_sell_vehicle"));
 }
 function buyTruck(truck_name) {
-	Utils.post("buyTruck", { truck_name: truck_name });
+    Utils.post("buyTruck", { truck_name: truck_name });
 }
 function spawnTruck(truck_id) {
-	Utils.post("spawnTruck", { truck_id: truck_id });
+    Utils.post("spawnTruck", { truck_id: truck_id });
 }
 function refuelTruck(truck_id) {
-	Utils.post("refuelTruck", { truck_id: truck_id });
+    Utils.post("refuelTruck", { truck_id: truck_id });
 }
 function fireDriver(driver_id) {
-	Utils.post("fireDriver", { driver_id: driver_id });
+    Utils.post("fireDriver", { driver_id: driver_id });
 }
 function hireDriver(driver_id) {
-	Utils.post("hireDriver", { driver_id: driver_id });
+    Utils.post("hireDriver", { driver_id: driver_id });
 }
 function upgradeSkill(id, i) {
-	Utils.post("upgradeSkill", { id: id, value: i });
+    Utils.post("upgradeSkill", { id: id, value: i });
 }
 function repairTruck(id) {
-	Utils.post("repairTruck", { id: id });
+    Utils.post("repairTruck", { id: id });
 }
 function setDriver(driver_id, truck_id) {
-	Utils.post("setDriver", { driver_id: driver_id, truck_id: truck_id });
+    Utils.post("setDriver", { driver_id: driver_id, truck_id: truck_id });
 }
 function changeTheme(dark_theme) {
-	Utils.post("changeTheme", { dark_theme });
+    Utils.post("changeTheme", { dark_theme });
 }
 function payLoan(loan_id,remaining_amount) {
-	Utils.showDefaultDangerModal(() => Utils.post("payLoan", { loan_id }), Utils.translate("confirmation_modal_loan_payoff").format(Utils.currencyFormat(remaining_amount)));
+    Utils.showDefaultDangerModal(() => Utils.post("payLoan", { loan_id }), Utils.translate("confirmation_modal_loan_payoff").format(Utils.currencyFormat(remaining_amount)));
 }
 function kickParty(user_id) {
-	Utils.post("kickParty", { user_id: user_id });
+    Utils.post("kickParty", { user_id: user_id });
 }
 function deleteParty() {
-	Utils.showDefaultDangerModal(() => Utils.post("deleteParty", {}), Utils.translate("confirmation_modal_delete_party"));
+    Utils.showDefaultDangerModal(() => Utils.post("deleteParty", {}), Utils.translate("confirmation_modal_delete_party"));
 }
 function quitParty() {
-	Utils.post("quitParty", {});
+    Utils.post("quitParty", {});
 }

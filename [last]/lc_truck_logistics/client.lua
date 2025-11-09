@@ -4,6 +4,7 @@ menu_active = false
 current_location = nil
 loading = false
 cooldown = nil
+is_store_truck_text_shown = false
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- LOCATIONS
@@ -38,9 +39,14 @@ function createTargetsThread()
 end
 
 function openTruckerUiCallback(location)
-	current_location = location
-	TriggerServerEvent("truck_logistics:getData",current_location)
+    if location and Config.trucker_locations[location] then
+        current_location = location
+        TriggerServerEvent("truck_logistics:getData",current_location)
+    else
+        print("^3ERROR: Location parameter sent in openUI is invalid or nil: '^1" .. (location or "nil") .. "^3'^7")
+    end
 end
+exports('openUI', openTruckerUiCallback)
 
 RegisterNetEvent('truck_logistics:open')
 AddEventHandler('truck_logistics:open', function(dados,update)
@@ -168,6 +174,7 @@ AddEventHandler('truck_logistics:spawnTruck', function(truck_data)
 
 	while IsEntityAVehicle(truck) do
 		timer = 2000
+		is_store_truck_text_shown = false
 		local ped = PlayerPedId()
 		local veh = GetVehiclePedIsIn(ped,false)
 		if veh == truck then
@@ -179,6 +186,7 @@ AddEventHandler('truck_logistics:spawnTruck', function(truck_data)
 						timer = 2
 						Utils.Markers.drawMarker(39,x,y,z+0.6,2.0)
 						if distance <= 5.0 then
+							is_store_truck_text_shown = true
 							Utils.Markers.drawText2D(Utils.translate('press_e_to_store_truck'), 8,0.5,0.95,0.50,255,255,255,180)
 							if IsControlJustPressed(0,38) and IsEntityAVehicle(truck) then
 								TriggerServerEvent("truck_logistics:updateTruckStatus",truck_data,GetVehicleEngineHealth(truck),GetVehicleBodyHealth(truck),vehicle_fuel,Utils.Vehicles.getVehicleProperties(truck))
@@ -186,6 +194,7 @@ AddEventHandler('truck_logistics:spawnTruck', function(truck_data)
 								Utils.Blips.removeBlip(truck_blip)
 								truck = nil
 								truck_blip = nil
+								is_store_truck_text_shown = false
 								return
 							end
 						end
@@ -207,6 +216,7 @@ AddEventHandler('truck_logistics:spawnTruck', function(truck_data)
 	Utils.Blips.removeBlip(truck_blip)
 	truck = nil
 	truck_blip = nil
+	is_store_truck_text_shown = false
 end)
 
 Citizen.CreateThread(function()
@@ -324,10 +334,6 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
 	exports['lc_utils']:notify("success",Utils.translate('started_job'))
 	loading = false
 
-	createVehicleMarkersThread()
-
-	TriggerServerEvent('truck_logistics:updateContract',contract_data.contract_id, true)
-
 	if contract_data.external_data then
 		x,y,z,h = contract_data.external_data.x,contract_data.external_data.y,contract_data.external_data.z,contract_data.external_data.h
 	else
@@ -336,6 +342,28 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
 
 	route_blip = Utils.Blips.createBlipForCoords(x,y,z,1,5,Utils.translate('destination_blip'),1.0,true)
 
+	-- Create additional threads
+	createVehicleMarkersThread()
+	if contract_data.fast == 1 then
+		local cargo_timer = contract_data.distance * Config.jobs.special_cargo.urgent.seconds_per_km
+		createVehicleFastCargoTimerThread(math.floor(cargo_timer))
+	end
+
+	local net_trailer = NetworkGetNetworkIdFromEntity(trailer)
+    if Utils.Config.custom_scripts_compatibility.target == "disabled" then
+        SetNetworkIdCanMigrate(net_trailer, false) -- Prevents trailer from changing owners (server owns it)
+        SetEntityAsMissionEntity(trailer, true, true) -- Ensures the trailer is persistent and controllable
+
+        NetworkRequestControlOfEntity(trailer)
+
+        TriggerServerEvent('truck_logistics:server:createInspectVehicleThread', contract_data, net_trailer)
+    else
+        TriggerServerEvent('truck_logistics:server:registerNetVehicleId', contract_data, net_trailer)
+    end
+
+	TriggerServerEvent('truck_logistics:updateContract',contract_data.contract_id, true)
+
+	-- Start delivery
 	closeUI()
 
 	local timer = 2000
@@ -367,7 +395,7 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
 					trailer = nil
 					trailer_blip = nil
 					route_blip = nil
-					if not Config.jobs.must_bring_truck_back or contract_data.contract_type ~= 0 then
+					if not Config.jobs.truck_rental.must_return_truck or contract_data.contract_type ~= 0 then
 						TriggerServerEvent("truck_logistics:finishContract",GetVehicleEngineHealth(truck),GetVehicleBodyHealth(truck),trailer_body)
 					end
 					is_finished = true
@@ -395,15 +423,18 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
 			break
 		end
 
-		if IsControlPressed(0,Config.jobs['cancel_job']) then
+		if IsControlPressed(0,Config.jobs.cancel_job_key) then
 			TriggerEvent('truck_logistics:cancelContract',contract_data)
 			break
 		end
 		Wait(timer)
 	end
 
+	TriggerServerEvent('truck_logistics:server:registerNetVehicleId', nil, net_trailer)
+
 	while IsEntityAVehicle(truck) and contract_data.contract_type == 0 do 
 		timer = 2000
+        is_store_truck_text_shown = false
 		local ped = PlayerPedId()
 		local veh = GetVehiclePedIsIn(ped,false)
 		for k,v in pairs(Config.trucker_locations) do
@@ -414,9 +445,10 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
 				if veh == truck and distance <= 20.0 then
 					Utils.Markers.drawMarker(39,x,y,z+0.6,2.0)
 					if distance <= 5.0 then
+                        is_store_truck_text_shown = true
 						Utils.Markers.drawText2D(Utils.translate('press_e_to_store_truck'), 8,0.5,0.95,0.50,255,255,255,180)
 						if IsControlJustPressed(0,38) then
-							if Config.jobs.must_bring_truck_back and is_finished then
+							if Config.jobs.truck_rental.must_return_truck and is_finished then
 								TriggerServerEvent("truck_logistics:finishContract",GetVehicleEngineHealth(truck),GetVehicleBodyHealth(truck),trailer_body)
 							end
 							Utils.Vehicles.deleteVehicle(truck)
@@ -448,6 +480,8 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
 
 	Utils.Vehicles.removeKeysFromPlate(truck_properties.plate,contract_data.truck)
 	Utils.Vehicles.removeKeysFromPlate(trailer_properties.plate,contract_data.trailer)
+	is_store_truck_text_shown = false
+	Wait(100)
 	TriggerEvent('truck_logistics:cancelContract',contract_data)
 	TriggerServerEvent('truck_logistics:updateContract',contract_data.contract_id, false)
 end)
@@ -482,13 +516,13 @@ function createVehicleMarkersThread()
 			local distance_truck = #(player_coords - truck_coords)
 			local distance_trailer = #(player_coords - trailer_coods)
 			if distance_truck < 50.0 and GetVehiclePedIsIn(ped,false) ~= truck and not IsEntityAttachedToEntity(truck,trailer) then
-				timer = 5
+				timer = 2
 				local tx,ty,tz = table.unpack(truck_coords)
 				Utils.Markers.drawMarker(0,tx,ty,tz+3.1,1.0,0,100,255)
 			end
 
 			if distance_trailer < 50.0 and (not IsEntityAttachedToEntity(truck,trailer) or GetVehiclePedIsIn(ped,false) ~= truck) then
-				timer = 5
+				timer = 2
 				local tx,ty,tz = table.unpack(trailer_coods)
 				Utils.Markers.drawMarker(0,tx,ty,tz+3.6,1.0,0,100,255)
 			end
@@ -497,6 +531,90 @@ function createVehicleMarkersThread()
 		end
 	end)
 end
+
+function createVehicleFastCargoTimerThread(cargo_timer)
+	Citizen.CreateThreadNow(function()
+		while cargo_timer > 0 do
+			Wait(1000)
+			cargo_timer = cargo_timer - 1
+		end
+	end)
+	Citizen.CreateThreadNow(function()
+		while IsEntityAVehicle(trailer) do
+			local timer = 1000
+			if not is_store_truck_text_shown then
+				timer = 2
+				Utils.Markers.drawText2D(Utils.translate('fast_cargo_timer'):format(cargo_timer), 8,0.5,0.95,0.50,255,255,255,180)
+				if cargo_timer <= 0 then
+					exports['lc_utils']:notify("error", Utils.translate("failed_urgent_time"):format(Config.jobs.special_cargo.urgent.reward_penalty_percent))
+					return
+				end
+			end
+			Wait(timer)
+		end
+	end)
+end
+
+local activeInspectThreads = {}
+
+RegisterNetEvent('truck_logistics:client:createInspectVehicleThread')
+AddEventHandler('truck_logistics:client:createInspectVehicleThread', function(contract_data, net_trailer)
+    if activeInspectThreads[net_trailer] then return end
+    activeInspectThreads[net_trailer] = true
+
+	local ped = PlayerPedId()
+	local is_inspecting = false
+
+	local attempt = 1
+	while not NetworkDoesNetworkIdExist(net_trailer) or not NetworkDoesEntityExistWithNetworkId(net_trailer) do
+		Wait(1000)
+		attempt = attempt + 1
+		if attempt > 15 then
+			break
+		end
+	end
+
+	while NetworkDoesNetworkIdExist(net_trailer) and NetworkDoesEntityExistWithNetworkId(net_trailer) do
+		local vehicle = NetToEnt(net_trailer)
+		local timer = 1000
+		local player_coords = GetEntityCoords(ped)
+		local trailer_length = 7.5
+		local interaction_distance = 3.0
+
+		-- Get trailer matrix
+		local forward, _, _, trailer_coords = GetEntityMatrix(vehicle)
+
+		-- Compute point behind the trailer
+		local interaction_point = trailer_coords - (forward * trailer_length)
+
+		-- Distance from player to that point
+		local distance = #(player_coords - interaction_point)
+
+		local success, groundZ = GetGroundZExcludingObjectsFor_3dCoord(interaction_point.x, interaction_point.y, interaction_point.z, false)
+		if success then
+			interaction_point = vector3(interaction_point.x, interaction_point.y, groundZ + 0.7)
+		end
+
+		if distance <= interaction_distance and GetEntitySpeed(vehicle) < 0.5  and not is_inspecting then
+			Utils.Markers.drawMarker(27,interaction_point.x, interaction_point.y, interaction_point.z,2.0,0,100,255,150)
+			Utils.Markers.showHelpNotification(Utils.translate("cargo_inspect_interaction"), true)
+			timer = 2
+		end
+
+		if IsControlJustPressed(0, 38) and not is_inspecting and distance <= interaction_distance and IsVehicleStopped(vehicle) then
+			is_inspecting = true
+
+			Utils.Callback.TriggerServerCallback('truck_logistics:hasPoliceJob', function(has_police_job)
+				executeCargoInspection(has_police_job, contract_data)
+				is_inspecting = false
+			end)
+		end
+
+		Wait(timer)
+	end
+
+    activeInspectThreads[net_trailer] = nil
+end)
 
 function resetLoading()
 	Citizen.Wait(50000)
@@ -513,6 +631,70 @@ Citizen.CreateThread(function()
 	end
 end)
 
+function registerTargetForTrailerModels()
+	local trailer_list = {}
+	local seen = {} -- Set to track unique trailers
+
+	for _, value in ipairs(Config.jobs.available_loads) do
+		if not seen[value.trailer] then
+			table.insert(trailer_list, value.trailer)
+			seen[value.trailer] = true
+		end
+	end
+
+	local params = {
+		labelText = Utils.translate('cargo_inspect_interaction_target'),
+		icon = "fas fa-truck-ramp-box",
+		iconColor = "#2986cc",
+		zone_id = "trucker_trailers",
+	}
+	Utils.Target.createTargetForModels(trailer_list,params,inspectTrailerCargoCallback)
+end
+
+function inspectTrailerCargoCallback(zone_id, callbackData, entity)
+	Utils.Callback.TriggerServerCallback('truck_logistics:hasPoliceJob', function(has_police_job)
+		Utils.Callback.TriggerServerCallback('truck_logistics:getTrailerContent', function(contract_data)
+			executeCargoInspection(has_police_job, contract_data)
+		end,NetworkGetNetworkIdFromEntity(entity))
+	end)
+end
+
+function executeCargoInspection(has_police_job, contract_data)
+	local ped = PlayerPedId()
+	if has_police_job then
+		local dict = "amb@prop_human_bum_bin@idle_a"
+		local anim = "idle_a"
+
+		-- Load and play animation
+		Utils.Animations.loadAnimDict(dict)
+		TaskPlayAnim(ped, dict, anim, 8.0, -8.0, -1, 1, 0, false, false, false)
+
+		-- Freeze movement
+		FreezeEntityPosition(ped, true)
+
+		-- Wait to simulate inspection
+        exports['lc_utils']:progressBar(Config.jobs.inspect_cargo_time * 1000, Utils.translate("cargo_inspect_loading"))
+        Wait(Config.jobs.inspect_cargo_time * 1000)
+
+		-- Stop animation & unfreeze
+		Utils.Animations.stopPlayerAnim(false)
+		FreezeEntityPosition(ped, false)
+
+		-- Show result
+		if contract_data then
+			if contract_data.illegal == 1 then
+				exports['lc_utils']:notify("info", Utils.translate("cargo_inspect_illegal_message"):format(contract_data.contract_name))
+			else
+				exports['lc_utils']:notify("info", Utils.translate("cargo_inspect_message"):format(contract_data.contract_name))
+			end
+		else
+			exports['lc_utils']:notify("info", Utils.translate("cargo_inspect_message"):format(Utils.translate("cargo_inspect_empty")))
+		end
+	else
+		exports['lc_utils']:notify("error", Utils.translate("cargo_inspect_must_be_police"))
+	end
+end
+
 RegisterNetEvent('truck_logistics:Notify')
 AddEventHandler('truck_logistics:Notify', function(type,message)
 	exports['lc_utils']:notify(type,message)
@@ -528,5 +710,16 @@ Citizen.CreateThread(function()
 		createMarkersThread()
 	else
 		createTargetsThread()
+		registerTargetForTrailerModels()
 	end
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+	if GetCurrentResourceName() ~= resourceName then return end
+	if truck then
+		Utils.Vehicles.deleteVehicle(truck)
+    end
+    if trailer then
+        Utils.Vehicles.deleteVehicle(trailer)
+    end
 end)

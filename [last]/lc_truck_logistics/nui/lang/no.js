@@ -50,6 +50,7 @@ Lang["no"] = {
 	contract_page_cargo_fragile: "Skjør Last",
 	contract_page_cargo_valuable: "Verdifull Last",
 	contract_page_cargo_urgent: "Hastelast",
+    contract_page_cargo_illegal: "Ulovlig last",
 	contract_page_button_start_job: "Start Oppdrag",
 	contract_page_button_start_job_party: "Start oppdrag i gruppe",
 	contract_page_button_cancel_job: "Avbryt Oppdrag",
@@ -204,6 +205,26 @@ Lang["no"] = {
 			<BR> Level 6:
 			<li> 30% bonus for tidskritisk last </li>
 		</ul>`,
+    skills_page_illegal_title: "Ulovlig last",
+    skills_page_illegal_desc: `
+        <p>Smugling er en høyrisiko- og høybelønningsvirksomhet. Kun de modigste og mest listige sjåførene tør å ta på seg disse lyssky oppdragene.</p>
+        <ul>
+            Nivå 1:
+            <li> Låser opp jobber med ulovlig last</li>
+            <li> 2% bonus på belønning for ulovlige leveranser</li>
+            <li> 10% erfaringsbonus for ulovlige leveranser</li>
+            <BR> Nivå 2:
+            <li> 4% bonus på belønning for ulovlige leveranser</li>
+            <BR> Nivå 3:
+            <li> 6% bonus på belønning for ulovlige leveranser</li>
+            <BR> Nivå 4:
+            <li> 8% bonus på belønning for ulovlige leveranser</li>
+            <BR> Nivå 5:
+            <li> 10% bonus på belønning for ulovlige leveranser</li>
+            <BR> Nivå 6:
+            <li> 12% bonus på belønning for ulovlige leveranser</li>
+        </ul>
+    `,
 
 	party_page_title: "Gruppe",
 	party_page_desc: "Lag eller delta i en gruppe for å levere gods med venner.",

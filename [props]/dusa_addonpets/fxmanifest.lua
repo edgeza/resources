@@ -1,0 +1,15 @@
+fx_version 'cerulean'
+game 'gta5'
+
+author 'dusadev.tebex.io'
+description 'Dusa Pet Addons'
+
+files {
+    'peds.meta'
+}
+
+client_script 'client.lua'
+
+data_file 'PED_METADATA_FILE' 'peds.meta'
+data_file 'DLC_ITYP_REQUEST' 'stream/props/leash/leash_model.ytyp'
+

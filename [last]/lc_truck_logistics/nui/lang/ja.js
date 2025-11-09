@@ -50,6 +50,7 @@ Lang["ja"] = {
 	contract_page_cargo_fragile: "割れ物",
 	contract_page_cargo_valuable: "貴重品",
 	contract_page_cargo_urgent: "緊急",
+    contract_page_cargo_illegal: "違法な貨物",
 	contract_page_button_start_job: "受注",
 	contract_page_button_start_job_party: "グループで受注",
 	contract_page_button_cancel_job: "キャンセル",
@@ -204,6 +205,26 @@ Lang["ja"] = {
 			<BR> Level 6:
 			<li> 緊急貨物を運んだ場合に30%の追加報酬 </li>
 		</ul>`,
+    skills_page_illegal_title: "違法な貨物",
+    skills_page_illegal_desc: `
+        <p>密輸は高リスク・高リターンのビジネスです。最も大胆で狡猾なドライバーだけがこの闇の仕事に挑戦します。</p>
+        <ul>
+            レベル1:
+            <li> 違法貨物の仕事をアンロック</li>
+            <li> 違法配達の報酬に2%ボーナス</li>
+            <li> 違法配達の経験値に10%ボーナス</li>
+            <BR> レベル2:
+            <li> 違法配達の報酬に4%ボーナス</li>
+            <BR> レベル3:
+            <li> 違法配達の報酬に6%ボーナス</li>
+            <BR> レベル4:
+            <li> 違法配達の報酬に8%ボーナス</li>
+            <BR> レベル5:
+            <li> 違法配達の報酬に10%ボーナス</li>
+            <BR> レベル6:
+            <li> 違法配達の報酬に12%ボーナス</li>
+        </ul>
+    `,
 
 	party_page_title: "パーティー",
 	party_page_desc: "パーティーを作成したり参加したりして仲間と一緒に配達しよう",

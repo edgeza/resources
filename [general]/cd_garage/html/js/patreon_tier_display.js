@@ -193,30 +193,15 @@
   }
 
   function setBadge(labelElement, tier) {
-    if (!labelElement) {
-      return;
-    }
-
-    let badge = labelElement.querySelector(BADGE_SELECTOR);
-    if (!tier) {
+    // Tier badges disabled - car labels already show tier information
+    // Remove any existing badges
+    if (labelElement) {
+      const badge = labelElement.querySelector(BADGE_SELECTOR);
       if (badge) {
         badge.remove();
       }
-      return;
     }
-
-    ensureStyles();
-
-    if (!badge) {
-      badge = document.createElement('span');
-      badge.className = BADGE_CLASS;
-      badge.setAttribute('role', 'presentation');
-      labelElement.appendChild(badge);
-    }
-
-    badge.dataset.tier = String(tier);
-    badge.textContent = tierLabels[tier] || `Tier ${tier}`;
-    badge.title = `${badge.textContent} Patreon Vehicle`;
+    return;
   }
 
   function updateItem(item) {

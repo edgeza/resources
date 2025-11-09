@@ -178,27 +178,56 @@ function LoadRectMinimap()
     -- SetMinimapComponentPosition("minimap", "L", "B", 0.0 + minimapOffset, -0.197, 0.1638, 0.213) -- -0.197 oyuncunun ikonu
     -- SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.0173 + minimapOffset , -0.068, 0.308, 0.369) -- -0.068 yukarı aşağı konumlandır
 
-    if statusType == 10 then 
+    local mapX, mapY, mapWidth, mapHeight
+    local maskX, maskY, maskWidth, maskHeight
+
+    if statusType == 10 then
+        mapWidth = 0.1638
+        mapHeight = 0.203
+        maskWidth = 0.128
+        maskHeight = resolutionX > 1920 and resolutionX <= 2560 and 0.20 or 0.30
+
         if resolutionX > 1920 and resolutionX <= 2560 then
-            SetMinimapComponentPosition("minimap", "L", "B", -0.02 + minimapOffset, -0.107, 0.1638, 0.203)
-            SetMinimapComponentPosition("minimap_mask", "L", "B", 0.0 + minimapOffset, 0.0, 0.128, 0.20)
-            SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.0173 + minimapOffset , -0.025, 0.231, 0.27) -- uzatır konumlandırır
+            mapX = -0.02 + minimapOffset
+            mapY = -0.107
+            maskX = 0.0 + minimapOffset
+            maskY = 0.0
         else
-            SetMinimapComponentPosition("minimap", "L", "B", 0.0 + minimapOffset, -0.137, 0.1638, 0.203)
-            SetMinimapComponentPosition("minimap_mask", "L", "B", 0.0 + minimapOffset, 0.0, 0.128, 0.30)
-            SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.0173 + minimapOffset , -0.039, 0.308, 0.36) -- uzatır konumlandırır
+            mapX = 0.0 + minimapOffset
+            mapY = -0.137
+            maskX = 0.0 + minimapOffset
+            maskY = 0.0
         end
     else
+        mapWidth = 0.1638
+        mapHeight = resolutionX > 1920 and resolutionX <= 2560 and 0.153 or 0.213
+        maskWidth = 0.128
+        maskHeight = 0.20
+
         if resolutionX > 1920 and resolutionX <= 2560 then
-            SetMinimapComponentPosition("minimap", "L", "B", -0.02 + minimapOffset, -0.057, 0.1638, 0.153)
-            SetMinimapComponentPosition("minimap_mask", "L", "B", 0.0 + minimapOffset, 0.0, 0.128, 0.20)
-            SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.0173 + minimapOffset , -0.002, 0.231, 0.27) -- uzatır konumlandırır
+            mapX = -0.02 + minimapOffset
+            mapY = -0.057
+            maskX = 0.0 + minimapOffset
+            maskY = 0.0
         else
-            SetMinimapComponentPosition("minimap", "L", "B", 0.0 + minimapOffset, -0.117, 0.1638, 0.213)
-            SetMinimapComponentPosition("minimap_mask", "L", "B", 0.0 + minimapOffset, 0.0, 0.128, 0.20)
-            SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.0173 + minimapOffset , -0.005, 0.308, 0.36)
+            mapX = 0.0 + minimapOffset
+            mapY = -0.117
+            maskX = 0.0 + minimapOffset
+            maskY = 0.0
         end
     end
+
+    SetMinimapComponentPosition("minimap", "L", "B", mapX, mapY, mapWidth, mapHeight)
+    SetMinimapComponentPosition("minimap_mask", "L", "B", maskX, maskY, maskWidth, maskHeight)
+    SetMinimapComponentPosition(
+        "minimap_blur",
+        "L",
+        "B",
+        mapX,
+        mapY,
+        mapWidth,
+        mapHeight
+    )
     SetBlipAlpha(GetNorthRadarBlip(), 0)
     SetRadarBigmapEnabled(true, false)
     SetMinimapClipType(0)

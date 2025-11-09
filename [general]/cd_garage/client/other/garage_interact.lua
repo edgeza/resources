@@ -239,7 +239,9 @@ if Config.GarageInteractMethod == 'cd_drawtextui' or Config.GarageInteractMethod
                 local coords = GetEntityCoords(ped)
                 local job = GetJob().name
                 local inZone = false
-                if Config.JobVehicles.Locations[job] ~= nil and on_duty then
+                -- Allow patreon jobs regardless of duty (they have defaultDuty = true)
+                local canAccess = on_duty or (job == 'patreon1' or job == 'patreon2' or job == 'patreon3')
+                if Config.JobVehicles.Locations[job] ~= nil and canAccess then
                     for cd = 1, #Config.JobVehicles.Locations[job] do
                         local self = Config.JobVehicles.Locations[job][cd]
                         local dist = #(coords-vector3(self.coords.x, self.coords.y, self.coords.z))

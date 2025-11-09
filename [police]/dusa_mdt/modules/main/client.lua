@@ -21,7 +21,8 @@ function mdt:open()
         -- Deduplicate user list to prevent duplicate entries
         local seen = {}
         local uniqueUserList = {}
-        for _, user in ipairs(utils.userList) do
+        local userList = utils.userList or {}
+        for _, user in ipairs(userList) do
             if not seen[user.citizenid] then
                 seen[user.citizenid] = true
                 table.insert(uniqueUserList, user)
@@ -30,8 +31,9 @@ function mdt:open()
 
         utils.userList = uniqueUserList
 
+        local wantedList = utils.wanted or {}
         for _, user in pairs(utils.userList) do
-            for _, wanted in pairs(utils.wanted) do
+            for _, wanted in pairs(wantedList) do
                 if user.citizenid == wanted.citizenid then
                     user.wanted = wanted.wanted
                     user.caught = wanted.caught

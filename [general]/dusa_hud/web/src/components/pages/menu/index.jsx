@@ -189,7 +189,7 @@ const Menu = ({ ref }) => {
         onStop={(e, data) => handleStop(e, data, "menu")}
         disabled={!settings.general.freeformEditMode}
       >
-        <div className="flex flex-col absolute bottom-[85px] left-4">
+        <div className="flex flex-col absolute bottom-6 left-6 pointer-events-auto">
           {settings.general.showLocation && (
             <div className="w-[369px] opacity-80 custom:w-[600px] px-2 flex items-center justify-between custom:h-20 h-[58px] bg-gradient-to-r from-neutral-950/80 via-neutral-900/80 to-neutral-950/80 rounded rounded-b-none">
               <LogoAndLocation />
@@ -201,7 +201,7 @@ const Menu = ({ ref }) => {
             style={{ maxHeight, transition: "max-height 200ms ease-in-out" }}
           >
             {activeTab === settings.language.map && (
-              <div className="w-[369px] custom:w-[600px] custom:h-96 h-[234.95px]" />
+              <div className="w-[369px] custom:w-[600px] custom:h-96 h-[234.95px] pointer-events-none" />
             )}
             {activeTab === settings.language.vehicle && <VehicleMenu />}
             {activeTab === settings.language.media && <MediaMenu ref={ref} />}

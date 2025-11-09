@@ -160,6 +160,10 @@ Config.Categories = { -- Get the type from the database and make sure to add it 
 		vehicles = true,
 		luxury = true,
 	},
+	["lux"] = { -- lux shop categories (maps to car categories)
+		vehicles = true,
+		luxury = true,
+	},
 	["boat"] = { -- boat categories
 		boats = true,
 	},

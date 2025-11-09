@@ -282,7 +282,7 @@ Config.PropertyGarages = {
 -- └──────────────────────────────────────────────────────────────────┘
 
 Config.FakePlates = {
-    ENABLE = true, --Do you want to use the built in fake plate system?
+    ENABLE = false, --Do you want to use the built in fake plate system?
     item_name = 'fakeplate', --The name of the usable item to add a fake plate.
 
     RemovePlate = {

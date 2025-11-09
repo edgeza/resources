@@ -8804,6 +8804,7 @@ ItemList = {
         ['useable'] = false,
         ['shouldClose'] = true,
         ['combinable'] = nil,
+        ['job'] = { 'patreon1', 'patreon2' },
         ['description'] = 'Halloween themed AR-15'
     },
     ['weapon_toym16']                 = {
@@ -8817,6 +8818,7 @@ ItemList = {
         ['useable'] = false,
         ['shouldClose'] = true,
         ['combinable'] = nil,
+        ['job'] = { 'patreon1' },
         ['description'] = 'Toy M16 assault rifle'
     },
     ['weapon_saiga9']                 = {

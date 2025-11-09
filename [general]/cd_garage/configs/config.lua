@@ -584,10 +584,9 @@ Config.JobVehicles = {
         --garage_type: What type of vehicle this is ('car' / 'boat', 'air').
         --model: The spawn name of this vehicle. (this is not supposed to be a string, these symbols get the hash key of this vehicle).
         ['patreon'] = {
-            [1] = {job = 'patreon', spawn_max = false, plate = 'patreon', job_grade = 0, garage_type = 'car', model = `elegyrh6`},
-            [2] = {job = 'patreon', spawn_max = false, plate = 'patreon', job_grade = 1, garage_type = 'car', model = `formula2`},
-            [3] = {job = 'patreon', spawn_max = false, plate = 'patreon', job_grade = 2, garage_type = 'car', model = `openwheel1`},
-            [4] = {job = 'patreon', spawn_max = false, plate = 'patreon', job_grade = 3, garage_type = 'car', model = `openwheel3`},
+            [1] = {job = 'patreon1', spawn_max = false, plate = 'patreon', job_grade = 0, garage_type = 'car', model = `elegyrh6`},
+            [1] = {job = 'patreon2', spawn_max = false, plate = 'patreon', job_grade = 0, garage_type = 'car', model = `elegyrh6`},
+            [2] = {job = 'patreon2', spawn_max = false, plate = 'patreon', job_grade = 0, garage_type = 'car', model = `formula2`},   
         },
         ['events'] = {
             [1] = {job = 'formula1', spawn_max = true, plate = 'formula1', job_grade = 0, garage_type = 'car', model = `formula`},

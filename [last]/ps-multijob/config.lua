@@ -31,6 +31,10 @@ Config.WhitelistJobs = {
 	["drivingteacher"] = true,
 	["dynasty"] = true,
 	["towing"] = true,
+	["patreon1"] = false,
+	["patreon2"] = false,
+	["patreon3"] = false,
+	["patreon4"] = false,
 }
 
 Config.Descriptions = {

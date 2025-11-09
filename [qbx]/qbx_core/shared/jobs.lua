@@ -513,39 +513,56 @@ return {
             },
         },
     },
-    ['doj'] = {
-        label = 'DOJ',
-        type = 'doj',
+    ['highnotes'] = {
+        label = 'High Notes',
         defaultDuty = true,
         offDutyPay = false,
         grades = {
             [0] = {
-                name = 'SIU',
-                payment = 3500
+                name = 'Cashier',
+                payment = 1500
             },
             [1] = {
-                name = 'Civil Lawyer',
-                payment = 4000
+                name = 'Budtender',
+                payment = 2000
             },
             [2] = {
-                name = 'Criminal Lawyer',
-                payment = 4000
+                name = 'Shift Manager',
+                payment = 2500
             },
             [3] = {
-                name = 'Prosecutor',
-                payment = 5000
+                name = 'Manager',
+                payment = 3500
             },
             [4] = {
-                name = 'Lead Prosecutor',
-                payment = 5500
+                name = 'Owner',
+                isboss = true,
+                bankAuth = true,
+                payment = 4000
             },
-            [5] = {
-                name = 'Chief Justice',
-                payment = 6000
+        },
+     },    
+     ['patreon1'] = {
+        label = 'Patreon',
+        type = 'patreon',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'Patreon T1',
+                payment = 3500
             },
-            [6] = {
-                name = 'Attorney General',
-                payment = 6500
+        },
+    },
+    ['patreon2'] = {
+        label = 'Patreon',
+        type = 'patreon',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'Patreon T1',
+                payment = 3500
             },
         },
     },

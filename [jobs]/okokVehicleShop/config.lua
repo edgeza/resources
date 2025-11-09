@@ -3,10 +3,10 @@ Config, Locales = {}, {}
 -- =========================
 -- CORE/TOGGLES
 -- =========================
-Config.Debug = false -- true = will print some debug messages
+Config.Debug = true -- true = will print some debug messages
 Config.Locale = 'en' -- en
 Config.AddVehiclesFromVehiclesFile = false -- true = will add vehicles from qbcore/shared/vehicles.lua
-Config.QBPermissionsUpdate = false -- set it to true if you have the latest Permissions update
+Config.QBPermissionsUpdate = true -- set it to true if you have the latest Permissions update
 Config.UseRoutingBuckets = true -- true = use routing buckets | false = don't use routing buckets
 Config.UseNewStaffCheckMethod = false -- only works if Config.QBPermissionsUpdate is set to true
 Config.PayForOrder = true -- true = pay for the vehicle when you order it | false = don't pay and only receive the profit when selling

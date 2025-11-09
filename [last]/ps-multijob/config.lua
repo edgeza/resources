@@ -51,6 +51,8 @@ Config.Descriptions = {
 	["skybar"] = "Sell some yummy drinks",
 	["patreon1"] = "Patreon Tier 1 - Access to exclusive vehicles",
 	["patreon2"] = "Patreon Tier 2 - Access to exclusive vehicles",
+	["patreon3"] = "Patreon Tier 3 - Access to exclusive vehicles",
+
 }
 
 -- Change the icons to any free font awesome icon, also add other jobs your server might have to the list
@@ -80,4 +82,5 @@ Config.FontAwesomeIcons = {
 	["skybar"] = "fa-solid fa-wine-glass",
 	["patreon1"] = "fa-solid fa-star",
 	["patreon2"] = "fa-solid fa-star",
+	["patreon3"] = "fa-solid fa-star",
 }

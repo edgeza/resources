@@ -550,7 +550,7 @@ return {
         grades = {
             [0] = {
                 name = 'Patreon T1',
-                payment = 3500
+                payment = 0
             },
         },
     },
@@ -562,7 +562,19 @@ return {
         grades = {
             [0] = {
                 name = 'Patreon T2',
-                payment = 3500
+                payment = 0
+            },
+        },
+    },
+    ['patreon3'] = {
+        label = 'Patreon',
+        type = 'patreon',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'Patreon T3',
+                payment = 0
             },
         },
     },

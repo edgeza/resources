@@ -9,11 +9,11 @@ Config.PatreonTiers = {
     -- Job to Tier mapping
     -- When a player has job 'patreon1', they get tier 1 vehicles
     -- When a player has job 'patreon2', they get tier 2 vehicles
+    -- When a player has job 'patreon3', they get tier 3 vehicles
     job_to_tier = {
         ['patreon1'] = 1,
         ['patreon2'] = 2,
-        -- Add more mappings here if needed
-        -- ['patreon3'] = 3,
+        ['patreon3'] = 3,
     },
     
     -- Vehicle tiers configuration

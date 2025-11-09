@@ -17,6 +17,87 @@ local function GetPatreonTierFromJob(jobName)
     return 0
 end
 
+-- Get the tier requirement for a vehicle model
+local function GetVehicleTierRequirement(vehicleModel)
+    if not Config.PatreonTiers or not Config.PatreonTiers.ENABLE or not Config.PatreonTiers.tiers then
+        return nil -- Not a patreon vehicle
+    end
+    
+    local spawncode = tostring(vehicleModel):upper()
+    local minTier = nil
+    
+    for tier, tierData in pairs(Config.PatreonTiers.tiers) do
+        -- Check cars
+        if tierData.cars then
+            for i = 1, #tierData.cars do
+                if tostring(tierData.cars[i]):upper() == spawncode then
+                    minTier = (minTier and math.min(minTier, tier)) or tier
+                end
+            end
+        end
+        
+        -- Check boats
+        if tierData.boats then
+            for i = 1, #tierData.boats do
+                if tostring(tierData.boats[i]):upper() == spawncode then
+                    minTier = (minTier and math.min(minTier, tier)) or tier
+                end
+            end
+        end
+        
+        -- Check air vehicles
+        if tierData.air then
+            for i = 1, #tierData.air do
+                if tostring(tierData.air[i]):upper() == spawncode then
+                    minTier = (minTier and math.min(minTier, tier)) or tier
+                end
+            end
+        end
+    end
+    
+    return minTier
+end
+
+-- Check if a player can see a vehicle based on their patreon tier
+-- patreon1 (tier 1) can see tier 1 vehicles
+-- patreon2 (tier 2) can see tier 1 and 2 vehicles
+-- patreon3 (tier 3) can see tier 1, 2, and 3 vehicles
+local function CanPlayerSeeVehicle(source, vehicleModel)
+    if not Config.PatreonTiers or not Config.PatreonTiers.ENABLE then
+        return true -- If patreon system is disabled, show all vehicles
+    end
+    
+    local vehicleTier = GetVehicleTierRequirement(vehicleModel)
+    
+    -- If vehicle is not a patreon vehicle, always show it
+    if not vehicleTier then
+        return true
+    end
+    
+    -- Get player's patreon tier
+    local jobName = GetJob(source)
+    if not jobName then
+        return false
+    end
+    
+    local playerTier = GetPatreonTierFromJob(jobName)
+    
+    -- If player doesn't have a patreon job, hide patreon vehicles
+    if playerTier == 0 then
+        return false
+    end
+    
+    -- Player can see vehicles from their tier and all lower tiers
+    -- tier 1 sees tier 1
+    -- tier 2 sees tier 1 and 2
+    -- tier 3 sees tier 1, 2, and 3
+    return vehicleTier <= playerTier
+end
+
+-- Export function for use in other files
+exports('CanPlayerSeeVehicle', CanPlayerSeeVehicle)
+exports('GetVehicleTierRequirement', GetVehicleTierRequirement)
+
 local function GetVehicleTypeFromModel(model)
     -- Simple detection - you may need to enhance this
     local modelStr = tostring(model):lower()

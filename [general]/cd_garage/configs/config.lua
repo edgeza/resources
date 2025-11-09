@@ -485,6 +485,9 @@ Config.JobVehicles = {
         ['patreon2'] = {
             [1] = {coords = vector3(239.74, -813.57, 30.21), spawn_coords = vector4(226.23, -808.74, 30.56, 123.65), distance = 5, garage_type = 'car', method = 'personalowned'},
         },
+        ['patreon3'] = {
+            [1] = {coords = vector3(239.74, -813.57, 30.21), spawn_coords = vector4(226.23, -808.74, 30.56, 123.65), distance = 5, garage_type = 'car', method = 'personalowned'},
+        },
         ['events'] = { --If you choose to add more tables here for more jobs, they must be the jobs name, not the label.
             [1] = {coords = vector3(4375.24, 7913.04, 90.12), spawn_coords = vector4(4421.56, 7860.93, 89.03, 329.85), distance = 10, garage_type = 'car', method = 'regular'},
         }, 
@@ -586,11 +589,6 @@ Config.JobVehicles = {
         --job_grade: The minimum a players job grade must be to have access to this vehicle.
         --garage_type: What type of vehicle this is ('car' / 'boat', 'air').
         --model: The spawn name of this vehicle. (this is not supposed to be a string, these symbols get the hash key of this vehicle).
-        ['patreon'] = {
-            [1] = {job = 'patreon1', spawn_max = false, plate = 'patreon', job_grade = 0, garage_type = 'car', model = `elegyrh6`},
-            [2] = {job = 'patreon2', spawn_max = false, plate = 'patreon', job_grade = 0, garage_type = 'car', model = `elegyrh6`},
-            [3] = {job = 'patreon2', spawn_max = false, plate = 'patreon', job_grade = 0, garage_type = 'car', model = `formula2`},   
-        },
         ['events'] = {
             [1] = {job = 'formula1', spawn_max = true, plate = 'formula1', job_grade = 0, garage_type = 'car', model = `formula`},
             [2] = {job = 'formula1', spawn_max = true, plate = 'formula1', job_grade = 0, garage_type = 'car', model = `formula2`},

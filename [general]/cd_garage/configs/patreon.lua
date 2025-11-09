@@ -9,11 +9,11 @@ Config.PatreonTiers = {
     -- Job to Tier mapping
     -- When a player has job 'patreon1', they get tier 1 vehicles
     -- When a player has job 'patreon2', they get tier 2 vehicles
-    -- When a player has job 'patreon3', they get tier 3 vehicles
     job_to_tier = {
         ['patreon1'] = 1,
-        ['patreon2'] = 2,
+        ['patreon2'] = 2,        
         ['patreon3'] = 3,
+        -- Add more mappings here if needed
     },
     
     -- Vehicle tiers configuration
@@ -34,6 +34,14 @@ Config.PatreonTiers = {
         },
         [2] = { 
             cars = { 
+                -- Tier 1 cars (inherited)
+                'sc_dominatorwb', 'vacca2', 'clubta', 'furiawb', 'sentinel_rts', 
+                'h4rxwindsorcus', 'gstzr3503', 'schwarzer2', 'gp1wb', 'r300w', 
+                'cypherct', 'contenderc', 
+                'coquettewb', 'Hoonie', 'jestgpr', 'komodafr', 'zentornoc', 
+                'mk2vigerozx', 'z190wb', 'cometrr', 'boorbc', 
+                'sultanrsv8', 'saseverowb', 'gstarg2',
+                -- Tier 2 cars
                 'turismorr', 'playboy', 'domttc', 'italigts', 'jesterwb', 
                 'vigerozxwbc', 'hrgt6r', 'yosemite6str', 
                 'fcomneisgt25', 'sddriftvet', 'remuswb', 'elytron', 'hotkniferod', 
@@ -45,6 +53,20 @@ Config.PatreonTiers = {
         },
         [3] = { 
             cars = { 
+                -- Tier 1 cars (inherited)
+                'sc_dominatorwb', 'vacca2', 'clubta', 'furiawb', 'sentinel_rts', 
+                'h4rxwindsorcus', 'gstzr3503', 'schwarzer2', 'gp1wb', 'r300w', 
+                'cypherct', 'contenderc', 
+                'coquettewb', 'Hoonie', 'jestgpr', 'komodafr', 'zentornoc', 
+                'mk2vigerozx', 'z190wb', 'cometrr', 'boorbc', 
+                'sultanrsv8', 'saseverowb', 'gstarg2',
+                -- Tier 2 cars (inherited)
+                'turismorr', 'playboy', 'domttc', 'italigts', 'jesterwb', 
+                'vigerozxwbc', 'hrgt6r', 'yosemite6str', 
+                'fcomneisgt25', 'sddriftvet', 'remuswb', 'elytron', 'hotkniferod', 
+                'vacca3', 'gstghell1', 'jester4wb', 'rt3000wb', 'sdmonsterslayer', 
+                'audace', 'gstjc2', 'turismo2lm', 'zentorno2', 'ziongtc', 'vertice',
+                -- Tier 3 cars
                 'vd_tenfrally', 'vanz23m2wb', 'uniobepdb', 'thraxs', 'sunrise1', 
                 'bansheeas', 'jester3c', 'gstnio2', 'sentineldm', 'schlagenstr', 
                 'italigtoc', 'sagauntletstreet', 'scdtm', 'draftgpr', 'rh82', 

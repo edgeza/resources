@@ -12,7 +12,7 @@ Config = {
     EnableVehicleTrailsEverywhere = true, -- [true/false] - Enables vehicle trails everywhere.
     EnablePedFootstepsEverywhere = true,  -- [true/false] - Enables ped footsteps everywhere.
     WaterFreezes = 3.0,                   -- [float] - The strength of the frozen water effect. 0.0 = no frozen water, 3.0 = completely frozen water.
-    SnowIntensity = 1.0,                  -- [float] - The intensity of the snow effect. 0.0 = no snow, 1.0 = heavy snow.
+    SnowIntensity = 0.5,                  -- [float] - The intensity of the snow effect. 0.0 = no snow, 1.0 = heavy snow.
 
     AcePermsInsteadOfFramework = false,   -- [true/false] - Enables ACE permissions instead of framework permissions.
 

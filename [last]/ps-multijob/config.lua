@@ -7,42 +7,30 @@ Config.MaxJobs = 3
 Config.IgnoredJobs = {
 	["unemployed"] = true,
 	["ambulance"] = true,
+    ["police"] = true,
 	["bcso"] = true,
-	["police"] = true,
 }
 Config.DenyDuty = {
 }
 
 Config.WhitelistJobs = {
 	["police"] = true,
-	["ambulance"] = true,
-	["palmcoast"] = true,
-	["bennies"] = true,
-	["6str"] = true,
-	["olrpmechanic"] = true,
+	["bcso"] = true,
+	--["ambulance"] = true,
+	["mechanic"] = true,
 	["judge"] = true,
 	["lawyer"] = true,
-	["doj"] = true,
-	["koi"] = true,
-	["catcafe"] = true,
-	["highnotes"] = true,
 	["beanmachine"] = true,
 	["aldente"] = true,
 	["drivingteacher"] = true,
 	["dynasty"] = true,
-	["towing"] = true,
-	["patreon1"] = false,
-	["patreon2"] = false,
-	["patreon3"] = false,
-	["patreon4"] = false,
 }
 
 Config.Descriptions = {
-	["unemployed"] = "Looking for work",
 	["police"] = "Shoot some criminals or maybe be a good cop and arrest them",
 	["bcso"] = "Shoot some criminals or maybe be a good cop and arrest them",
 	--["ambulance"] = "Fix the bullet holes",
-	["mechanic1"] = "Fix the bullet holes",
+	["mechanic"] = "Fix the bullet holes",
 	["tow"] = "Pickup the tow truck and steal some vehicles",
 	["taxi"] = "Pickup people around the city and drive them to their destination",
 	["bus"] = "Pickup multiple people around the city and drive them to their destination",
@@ -61,16 +49,17 @@ Config.Descriptions = {
 	["drivingteacher"] = "Teaching some driving skills",
 	["skydive"] = "Free Fallin'",
 	["skybar"] = "Sell some yummy drinks",
+	["patreon1"] = "Patreon Tier 1 - Access to exclusive vehicles",
+	["patreon2"] = "Patreon Tier 2 - Access to exclusive vehicles",
 }
 
 -- Change the icons to any free font awesome icon, also add other jobs your server might have to the list
 -- List: https://fontawesome.com/search?o=r&s=solid
 Config.FontAwesomeIcons = {
-	["unemployed"] = "fa-solid fa-user",
 	["police"] = "fa-solid fa-handcuffs",
 	["bcso"] = "fa-solid fa-handcuffs",
 	--["ambulance"] = "fa-solid fa-user-doctor",
-	["mechanic1"] = "fa-solid fa-wrench",
+	["mechanic"] = "fa-solid fa-wrench",
 	["tow"] = "fa-solid fa-truck-tow",
 	["taxi"] = "fa-solid fa-taxi",
 	["bus"] = "fa-solid fa-bus",
@@ -89,4 +78,6 @@ Config.FontAwesomeIcons = {
 	["drivingteacher"] = "fa-solid fa-parachute-box",
 	["skydive"] = "fa-solid fa-parachute-box",
 	["skybar"] = "fa-solid fa-wine-glass",
+	["patreon1"] = "fa-solid fa-star",
+	["patreon2"] = "fa-solid fa-star",
 }

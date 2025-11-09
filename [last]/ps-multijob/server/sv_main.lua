@@ -5,30 +5,19 @@ local function GetJobs(citizenid)
     MySQL.Async.fetchAll("SELECT jobdata FROM multijobs WHERE citizenid = @citizenid",{
         ["@citizenid"] = citizenid
     }, function(jobs)
-        if jobs[1] and jobs[1].jobdata ~= "[]" and jobs[1].jobdata ~= nil and jobs[1].jobdata ~= "{}" then
+        if jobs[1] and jobs ~= "[]" then
             jobs = json.decode(jobs[1].jobdata)
         else
             local Player = QBCore.Functions.GetOfflinePlayerByCitizenId(citizenid)
-            if Player then
-                local temp = {}
-                if not Config.IgnoredJobs[Player.PlayerData.job.name] then
-                    temp[Player.PlayerData.job.name] = Player.PlayerData.job.grade.level
-                    MySQL.insert('INSERT INTO multijobs (citizenid, jobdata) VALUES (:citizenid, :jobdata) ON DUPLICATE KEY UPDATE jobdata = :jobdata', {
-                        citizenid = citizenid,
-                        jobdata = json.encode(temp),
-                    })
-                else
-                    -- Add unemployed as a fallback job if current job is ignored
-                    temp["unemployed"] = 0
-                    MySQL.insert('INSERT INTO multijobs (citizenid, jobdata) VALUES (:citizenid, :jobdata) ON DUPLICATE KEY UPDATE jobdata = :jobdata', {
-                        citizenid = citizenid,
-                        jobdata = json.encode(temp),
-                    })
-                end
-                jobs = temp
-            else
-                jobs = {}
+            local temp = {}
+            if not Config.IgnoredJobs[Player.PlayerData.job.name] then
+                temp[Player.PlayerData.job.name] = Player.PlayerData.job.grade.level
+                MySQL.insert('INSERT INTO multijobs (citizenid, jobdata) VALUES (:citizenid, :jobdata) ON DUPLICATE KEY UPDATE jobdata = :jobdata', {
+                    citizenid = citizenid,
+                    jobdata = json.encode(temp),
+                })
             end
+            jobs = temp
         end
         p:resolve(jobs)
     end)
@@ -59,8 +48,7 @@ local function UpdatePlayerJob(Player, job, grade)
         local sharedJobData = QBCore.Shared.Jobs[job]
         if sharedJobData == nil then return end
 
-        -- QBX compatibility: try both string and number grade keys
-        local sharedGradeData = sharedJobData.grades[tostring(grade)] or sharedJobData.grades[grade]
+        local sharedGradeData = sharedJobData.grades[grade]
         if sharedGradeData == nil then return end
 
         local isBoss = false
@@ -209,16 +197,18 @@ QBCore.Functions.CreateCallback("ps-multijob:getJobs", function(source, cb)
             if QBCore.Shared.Jobs[job] == nil then
                 print("The job '" .. job .. "' has been removed and is not present in your QBCore jobs. Remove it from the multijob SQL or add it back to your qbcore jobs.lua.")
             else
-                -- Check if the grade exists in the job configuration (QBX uses numbers, QBCore uses strings)
-                local gradeData = QBCore.Shared.Jobs[job].grades[tostring(grade)] or QBCore.Shared.Jobs[job].grades[grade]
+                -- Check if the grade exists
+                local jobConfig = QBCore.Shared.Jobs[job]
+                local gradeKey = tostring(grade)
+                local gradeData = jobConfig.grades[gradeKey]
                 if gradeData == nil then
-                    print("The grade '" .. grade .. "' for job '" .. job .. "' no longer exists in QBX job configuration. Skipping this job entry.")
-                    -- Remove the invalid job entry from the database
-                    jobs[job] = nil
-                    MySQL.update.await("update multijobs set jobdata = :jobdata where citizenid = :citizenid", {
-                        citizenid = Player.PlayerData.citizenid,
-                        jobdata = json.encode(jobs),
-                    })
+                    local numericGrade = tonumber(grade)
+                    if numericGrade ~= nil then
+                        gradeData = jobConfig.grades[numericGrade]
+                    end
+                end
+                if gradeData == nil then
+                    print("The grade '" .. tostring(grade) .. "' for job '" .. job .. "' no longer exists in QBX job configuration. Skipping this job entry.")
                 else
                     local online = active[job] or 0
                     getjobs = {
@@ -245,7 +235,6 @@ QBCore.Functions.CreateCallback("ps-multijob:getJobs", function(source, cb)
         whitelist = whitelistedjobs,
         civilian = civjobs,
     }
-    
     cb(multijobs)
 end)
 

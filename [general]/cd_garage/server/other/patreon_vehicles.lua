@@ -416,15 +416,43 @@ if Config.Framework == 'esx' then
     end)
     
 elseif Config.Framework == 'qbcore' then
+    -- Hook into player loaded - use multiple events for reliability
     AddEventHandler('QBCore:Server:OnPlayerLoaded', function(Player)
-        Wait(2000) -- Wait for player data to fully load
-        local job = Player.PlayerData.job
-        if job and job.name then
-            local tier = GetPatreonTierFromJob(job.name)
-            if tier > 0 then
-                GrantPatreonVehicles(Player.PlayerData.source, tier)
+        CreateThread(function()
+            Wait(3000) -- Wait for player data to fully load
+            local source = Player.PlayerData.source
+            local Player = QBCore.Functions.GetPlayer(source)
+            if Player then
+                local job = Player.PlayerData.job
+                if job and job.name then
+                    local tier = GetPatreonTierFromJob(job.name)
+                    if tier > 0 then
+                        if Config.PatreonTiers.DEBUG then
+                            print(string.format('[cd_garage] Player %d loaded with patreon job %s (tier %d), granting vehicles...', source, job.name, tier))
+                        end
+                        GrantPatreonVehicles(source, tier)
+                    end
+                end
             end
-        end
+        end)
+    end)
+    
+    -- Also hook into QBCore player loaded event (alternative)
+    RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+        local source = source
+        CreateThread(function()
+            Wait(3000)
+            local Player = QBCore.Functions.GetPlayer(source)
+            if Player then
+                local job = Player.PlayerData.job
+                if job and job.name then
+                    local tier = GetPatreonTierFromJob(job.name)
+                    if tier > 0 then
+                        GrantPatreonVehicles(source, tier)
+                    end
+                end
+            end
+        end)
     end)
     
     RegisterNetEvent('QBCore:Server:OnJobUpdate', function(source, job)
@@ -477,6 +505,40 @@ elseif Config.Framework == 'qbcore' then
         end
     end)
 end
+
+-- Fallback: Check and grant vehicles when opening patreon garage
+RegisterNetEvent('cd_garage:CheckPatreonVehicles', function()
+    local source = source
+    local jobName = GetJob(source)
+    if not jobName then
+        return
+    end
+    
+    local tier = GetPatreonTierFromJob(jobName)
+    if tier > 0 then
+        -- Check if player has any patreon vehicles
+        local identifier = GetIdentifier(source)
+        if identifier then
+            local Result = DatabaseQuery('SELECT COUNT(*) as count FROM '..FW.vehicle_table..' WHERE '..FW.vehicle_identifier..'=@identifier AND job_personalowned=@jobName', {
+                ['@identifier'] = identifier,
+                ['@jobName'] = jobName
+            })
+            
+            local vehicleCount = 0
+            if Result and Result[1] then
+                vehicleCount = tonumber(Result[1].count) or 0
+            end
+            
+            -- If no vehicles found, grant them
+            if vehicleCount == 0 then
+                if Config.PatreonTiers.DEBUG then
+                    print(string.format('[cd_garage] Player %d opened patreon garage but has no vehicles. Granting tier %d vehicles...', source, tier))
+                end
+                GrantPatreonVehicles(source, tier)
+            end
+        end
+    end
+end)
 
 -- Admin command to manually grant vehicles
 RegisterCommand('grantpatreonvehicles', function(source, args)

@@ -561,7 +561,7 @@ return {
         offDutyPay = false,
         grades = {
             [0] = {
-                name = 'Patreon T1',
+                name = 'Patreon T2',
                 payment = 3500
             },
         },

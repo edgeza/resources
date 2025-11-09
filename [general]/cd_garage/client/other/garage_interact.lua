@@ -257,6 +257,11 @@ if Config.GarageInteractMethod == 'cd_drawtextui' or Config.GarageInteractMethod
                                 if IsControlJustReleased(0, Config.Keys.QuickChoose_Key) then
                                     if not InVehicle() then
                                         TriggerEvent('cd_garage:Cooldown', 3000)
+                                        -- Check and grant patreon vehicles if needed
+                                        if job == 'patreon1' or job == 'patreon2' or job == 'patreon3' then
+                                            TriggerServerEvent('cd_garage:CheckPatreonVehicles')
+                                        end
+                                        
                                         if Config.JobVehicles.ENABLE and self.method == 'societyowned' then
                                             TriggerEvent('cd_garage:JobVehicleSpawn', 'owned', job, self.garage_type, true, self.spawn_coords)
                                         elseif Config.JobVehicles.ENABLE and self.method == 'personalowned' then
@@ -489,6 +494,11 @@ else
                                     local job = GetJob().name
                                     local hasJob = CheckJob(job)
                                     if hasJob then
+                                        -- Check and grant patreon vehicles if needed
+                                        if job == 'patreon1' or job == 'patreon2' or job == 'patreon3' then
+                                            TriggerServerEvent('cd_garage:CheckPatreonVehicles')
+                                        end
+                                        
                                         if dd.method == 'societyowned' then
                                             TriggerEvent('cd_garage:JobVehicleSpawn', 'owned', job, dd.garage_type, true, dd.spawn_coords)
                                         elseif dd.method == 'personalowned' then
@@ -659,6 +669,11 @@ else
                                 local job = GetJob().name
                                 local hasJob = CheckJob(job)
                                 if hasJob then
+                                    -- Check and grant patreon vehicles if needed
+                                    if job == 'patreon1' or job == 'patreon2' or job == 'patreon3' then
+                                        TriggerServerEvent('cd_garage:CheckPatreonVehicles')
+                                    end
+                                    
                                     if dd.method == 'societyowned' then
                                         TriggerEvent('cd_garage:JobVehicleSpawn', 'owned', job, dd.garage_type, true, dd.spawn_coords)
                                     elseif dd.method == 'personalowned' then

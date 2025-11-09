@@ -9,46 +9,34 @@ if Config.Framework == 'qbcore' then
             for k, v in pairs(Result) do
                 local VehicleData = QBCore.Shared.Vehicles[v.vehicle]
                 if VehicleData then
-                    -- Check if player can see this vehicle based on patreon tier
-                    local canSeeVehicle = true
-                    if Config.PatreonTiers and Config.PatreonTiers.ENABLE then
-                        local CanPlayerSeeVehicle = exports['cd_garage']:CanPlayerSeeVehicle
-                        if CanPlayerSeeVehicle then
-                            canSeeVehicle = CanPlayerSeeVehicle(source, v.vehicle)
+                    if v.impound == 1 then
+                        v.state = json.decode(v.impound_data).impound_label
+                    else
+                        if v.in_garage then
+                            v.state = 'Garaged'
+                        else
+                            v.state = 'Out'
                         end
                     end
                     
-                    -- Only add vehicle if player can see it
-                    if canSeeVehicle then
-                        if v.impound == 1 then
-                            v.state = json.decode(v.impound_data).impound_label
-                        else
-                            if v.in_garage then
-                                v.state = 'Garaged'
-                            else
-                                v.state = 'Out'
-                            end
-                        end
-                        
-                        local fullname 
-                        if VehicleData["brand"] ~= nil then
-                            fullname = VehicleData["brand"] .. " " .. VehicleData["name"]
-                        else
-                            fullname = VehicleData["name"]
-                        end
-                        local props = json.decode(v.mods)
-                        Vehicles[#Vehicles+1] = {
-                            fullname = fullname,
-                            brand = VehicleData["brand"],
-                            model = VehicleData["name"],
-                            plate = v.plate,
-                            garage = v.garage_id,
-                            state = v.state,
-                            fuel = props.fuelLevel,
-                            engine = props.engineHealth,
-                            body = props.bodyHealth
-                        }
+                    local fullname 
+                    if VehicleData["brand"] ~= nil then
+                        fullname = VehicleData["brand"] .. " " .. VehicleData["name"]
+                    else
+                        fullname = VehicleData["name"]
                     end
+                    local props = json.decode(v.mods)
+                    Vehicles[#Vehicles+1] = {
+                        fullname = fullname,
+                        brand = VehicleData["brand"],
+                        model = VehicleData["name"],
+                        plate = v.plate,
+                        garage = v.garage_id,
+                        state = v.state,
+                        fuel = props.fuelLevel,
+                        engine = props.engineHealth,
+                        body = props.bodyHealth
+                    }
                 else
                     print('^1[error_code-1975]')
                     print('Codesign Vehicle Missing: '..v.vehicle)

@@ -1,6 +1,28 @@
+local Config = lib.load('config.weather')
 local serverWeather = GlobalState.weather
 local hadSnow = false
 local playerState = LocalPlayer.state
+
+-- Snow weather types that should have visual snow particles
+local snowFilter = {
+    ['SNOW'] = true,
+    ['SNOWLIGHT'] = true,
+    ['BLIZZARD'] = true,
+    ['XMAS'] = true,
+}
+
+-- Helper function to check if weather should have snow
+local function shouldHaveSnow(weather)
+    if not weather then return false end
+    -- If snow is disabled in config, never show snow
+    if not Config.enableSnow then return false end
+    -- Check hasSnow property first, then fallback to weather type
+    if weather.hasSnow ~= nil then
+        return weather.hasSnow
+    end
+    -- Fallback: check if weather type is a snow type
+    return snowFilter[weather.weather] == true
+end
 
 local function resetWeatherParticles()
     if hadSnow then
@@ -57,11 +79,11 @@ local function setWeather(forceSwap)
         SetWind(serverWeather.windSpeed / 2)
     end
 
-    if serverWeather.hasSnow then
+    if shouldHaveSnow(serverWeather) then
         setWeatherParticles()
     end
 
-    if not serverWeather.hasSnow and hadSnow then
+    if not shouldHaveSnow(serverWeather) and hadSnow then
         resetWeatherParticles()
     end
 end

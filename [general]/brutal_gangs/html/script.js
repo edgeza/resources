@@ -62,7 +62,15 @@ window.addEventListener('message', function(event) {
         CayoPericoMap = data.cayo_perico
         MyPerms = data.mypermissions
         PlayerJob = data.myjob
-        GangTable = data.gangtable
+        GangTable = data.gangtable || {}
+        GangTable.datas = GangTable.datas || {}
+        GangTable.datas.ranks = Array.isArray(GangTable.datas.ranks) ? GangTable.datas.ranks : []
+        if (GangTable.datas.ranks.length === 0) {
+            GangTable.datas.ranks = [{
+                name: 'member',
+                label: 'Member'
+            }]
+        }
         Levels = data.levels
         MapTable = data.maptable
         Currency = data.currencyforms
@@ -872,8 +880,13 @@ function CreateTopBar() {
 }
 
 function ChangePlayerPer(id, btn_id, rank_num, player_id, value) {
-    if (btn_id == 'inv_rank_btn') {
-        ChoosedRank = GangTable.datas.ranks[rank_num].name
+    const element = document.getElementById(id)
+    if (!element) {
+        return
+    }
+    const rankData = GangTable.datas.ranks[rank_num]
+    if (btn_id == 'inv_rank_btn' && rankData) {
+        ChoosedRank = rankData.name
     }
     if (value) {
         if (!MyPerms.edit_ranks){
@@ -883,14 +896,14 @@ function ChangePlayerPer(id, btn_id, rank_num, player_id, value) {
         $.post('https://' + GetParentResourceName() + '/UseButton', JSON.stringify({
             action: "setmemberrank",
             id: player_id,
-            rankname: GangTable.datas.ranks[rank_num].name
+            rankname: rankData ? rankData.name : ChoosedRank
         }))
     }
 
     if (btn_id == 'pic_btn') {
         ChoosedPic = rank_num
     }
-    document.getElementById(btn_id).innerHTML = document.getElementById(id).innerHTML
+    document.getElementById(btn_id).innerHTML = element.innerHTML
 }
 
 function SendStartGraffiti(){
@@ -916,10 +929,14 @@ function ReplacePicSend() {
 
 function CreateSubMenus() {
     $("#ranks_container_del ul").html("")
-    for (let i = 0; i < GangTable.datas.ranks.length; i++) {
-        $("#ranks_container_del ul").append(`<li><button class="dropdown-item" id="rank_el_del${i}" onclick="ChangePlayerPer(id, 'del_rank_btn')">${GangTable.datas.ranks[i].label}</button></li>`)
+    if (GangTable.datas.ranks.length > 0) {
+        for (let i = 0; i < GangTable.datas.ranks.length; i++) {
+            $("#ranks_container_del ul").append(`<li><button class="dropdown-item" id="rank_el_del${i}" onclick="ChangePlayerPer(id, 'del_rank_btn')">${GangTable.datas.ranks[i].label}</button></li>`)
+        }
+        ChangePlayerPer('rank_el_del0', 'del_rank_btn')
+    } else {
+        document.getElementById('del_rank_btn').innerHTML = t('no_ranks') || 'No Ranks'
     }
-    ChangePlayerPer('rank_el_del0', 'del_rank_btn')
 
     $("#picture_replacer ul").html("")
     for (let i = 0; i < GraffitiIcons.length; i++) {

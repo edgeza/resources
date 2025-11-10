@@ -104,8 +104,33 @@ if Config.InsideGarage.ENABLE then
         local ped = PlayerPedId()
         shell_coords = GetEntityCoords(ped)-vector3(0,0,Config.InsideGarage.shell_z_axis)
         local model = GetHashKey(shell_data.type)
+
+        if not IsModelInCdimage(model) then
+            print(('[cd_garage] Shell model %s is missing. Ensure the shell resource is started.'):format(shell_data.type))
+            InsideAction(L('entity_doesnot_exist'))
+            return
+        end
+
+        RequestModel(model)
+        local timeout, modelLoaded = 0, HasModelLoaded(model)
+        while not modelLoaded and timeout < 2000 do
+            Wait(0)
+            timeout = timeout + 1
+            modelLoaded = HasModelLoaded(model)
+        end
+
+        if not modelLoaded then
+            print(('[cd_garage] Failed to load shell model %s.'):format(shell_data.type))
+            InsideAction(L('loading_failed'))
+            return
+        end
+
         shell = CreateObjectNoOffset(model, shell_coords.x, shell_coords.y, shell_coords.z, false, false, false)
-        while not DoesEntityExist(shell) do Wait(0) print('shell does not exist') end
+        if not DoesEntityExist(shell) then
+            print(('[cd_garage] Shell entity for %s failed to create.'):format(shell_data.type))
+            InsideAction(L('entity_doesnot_exist'))
+            return
+        end
         FreezeEntityPosition(shell, true)
         SetEntityAsMissionEntity(shell, true, true)
         SetModelAsNoLongerNeeded(model)

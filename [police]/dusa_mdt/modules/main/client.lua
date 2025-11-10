@@ -140,12 +140,8 @@ RegisterNUICallback('close', function(_, cb)
     cb('ok')
 end)
 
-RegisterNUICallback('setDuty', function (data)
-    if isPolice() then
-        bridge.setDuty(data)
-    else
-        bridge.notify(locale('notofficer'), 'error')
-    end
+RegisterNUICallback('setDuty', function (_)
+    -- Duty selector disabled; PS Multijob handles duty state externally.
 end)
 
 local function CellFrontCamActivate(activate)

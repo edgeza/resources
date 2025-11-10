@@ -68,7 +68,7 @@ Config.KeyBinds = {
 
     -- for this one use only text for keys
     zoneHudInfo = "Z", --  [Z] Key bind to show zone hud
-    gangMenu = "f10",
+    gangMenu = "F10",
 }
 
 Config.ZoneOptions = {

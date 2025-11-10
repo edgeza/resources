@@ -68,12 +68,12 @@ Config.PedTypes = {      -- If you want to add new NPC model, you can add from h
 ----------------------------------------------------------------
 ----                       KEY FOB                          ----
 ----------------------------------------------------------------
-Config.EnableKeyFob = true            -- Enable disable key fob
+Config.EnableKeyFob = false            -- Enable disable key fob
 Config.FobKeybind = 'K'                -- Keybind key
 Config.FobDescription = 'Open Key Fob' -- Keybind desc
 
 Config.ToggleLockKey = 'L'             -- Toggle lock default keybind
-Config.EngineKey = 'M'                -- On / Off engine default keybind - set false to disable engine keybind (e.g Config.EngineKey = false)
+Config.EngineKey = 'G'                -- On / Off engine default keybind - set false to disable engine keybind (e.g Config.EngineKey = false)
                                     -- On / Off engine default keybind - set false to disable engine keybind (e.g Config.EngineKey = false)
 
 -- For a list of FiveM vehicle classes, refer to:

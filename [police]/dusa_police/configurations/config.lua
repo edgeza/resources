@@ -945,8 +945,8 @@ Config = {
                     ped = 's_m_y_cop_01',
                     coords = vec4(831.74, -1304.12, 19.85, 1.7),
                     label = 'Evidence Stash',
-                    slots = 500000,
-                    weight = 1000000000000000,
+                    slots = 500,
+                    weight = 10000000,
                 }
             },
         }

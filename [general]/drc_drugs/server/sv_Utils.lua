@@ -58,6 +58,82 @@ elseif Config.Framework == "standalone" then
     -- ADD YOU FRAMEWORK
 end
 
+local SharedItemsCache = nil
+
+local function FetchSharedItems()
+    if SharedItemsCache ~= nil then
+        return SharedItemsCache
+    end
+
+    if Config.Framework == "qbcore" and QBCore then
+        if QBCore.Shared and QBCore.Shared.Items then
+            SharedItemsCache = QBCore.Shared.Items
+            return SharedItemsCache
+        end
+
+        if QBCore.SharedItems then
+            SharedItemsCache = QBCore.SharedItems
+            return SharedItemsCache
+        end
+
+        if QBCore.Functions and QBCore.Functions.GetItems then
+            SharedItemsCache = QBCore.Functions.GetItems()
+            if SharedItemsCache then
+                return SharedItemsCache
+            end
+        end
+
+        local ok, items = pcall(function()
+            return exports['qb-core']:GetItems()
+        end)
+        if ok and items then
+            SharedItemsCache = items
+            if QBCore.Shared then
+                QBCore.Shared.Items = QBCore.Shared.Items or items
+            end
+            return SharedItemsCache
+        end
+    end
+
+    if Config.Inventory == "quasar" then
+        local ok, items = pcall(function()
+            return exports['qs-inventory']:GetItemList()
+        end)
+        if ok and items then
+            SharedItemsCache = items
+            return SharedItemsCache
+        end
+    end
+
+    return nil
+end
+
+local function GetSharedItemData(itemName)
+    if not itemName then return nil end
+
+    local items = FetchSharedItems()
+    if type(items) == "table" then
+        if items[itemName] then
+            return items[itemName]
+        end
+
+        for _, data in pairs(items) do
+            if type(data) == "table" and (data.name == itemName or data.item == itemName) then
+                return data
+            end
+        end
+    end
+
+    if Config.Framework == "qbcore" and QBCore and QBCore.Shared and QBCore.Shared.Items and QBCore.Shared.Items[itemName] then
+        return QBCore.Shared.Items[itemName]
+    end
+
+    return {
+        name = itemName,
+        label = itemName,
+    }
+end
+
 function BanPlayer(source, message)
     if Config.AnticheatBan then
         --Example of usage for SQZ ANTICHEAT (Higly recommended Anticheat!)
@@ -180,7 +256,8 @@ function AddItem(name, count, source)
     elseif Config.Framework == "qbcore" then
         local xPlayer = QBCore.Functions.GetPlayer(source)
         xPlayer.Functions.AddItem(name, count, nil, nil)
-        TriggerClientEvent("inventory:client:ItemBox", source, QBCore.Shared.Items[name], "add", count)
+        local itemData = GetSharedItemData(name)
+        TriggerClientEvent("inventory:client:ItemBox", source, itemData, "add", count)
 
     elseif Config.Framework == "standalone" then
         -- ADD YOUR FRAMEWORK
@@ -194,7 +271,8 @@ function RemoveItem(name, count, source)
     elseif Config.Framework == "qbcore" then
         local xPlayer = QBCore.Functions.GetPlayer(source)
         xPlayer.Functions.RemoveItem(name, count, nil, nil)
-        TriggerClientEvent("inventory:client:ItemBox", source, QBCore.Shared.Items[name], "remove", count)
+        local itemData = GetSharedItemData(name)
+        TriggerClientEvent("inventory:client:ItemBox", source, itemData, "remove", count)
     elseif Config.Framework == "standalone" then
         -- ADD YOUR FRAMEWORK
     end

@@ -12,7 +12,7 @@ if Config.Framework == 'qbcore' then
         if Config.PatreonTiers and Config.PatreonTiers.ENABLE then
             IsVehicleAllowedByTier = function(...)
                 return exports['cd_garage']:IsVehicleAllowedByTier(...)
-            end
+            end;
             IsVehicleInAnyTier = function(...)
                 return exports['cd_garage']:IsVehicleInAnyTier(...)
             end

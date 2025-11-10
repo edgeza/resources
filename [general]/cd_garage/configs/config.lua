@@ -362,7 +362,7 @@ Config.Mileage = {
 Config.PersistentVehicles = { --Requires OneSync to use.
     ENABLE = true, --Do you want to use the built-in persistent vehicle feature?
     SaveAfterRestart = {
-        ENABLE = true, --Do you want vehicles to be saved and restored after a server restart?
+        ENABLE = false, --Do you want vehicles to be saved and restored after a server restart?
         save_regular_job_vehicles = true, --Do you want regular job vehicles spawned from cd_garage to be saved and restored after a server restart?
         save_owned_job_vehicles = true --Do you want personal or society owned job vehicles to be saved and restored after a server restart?
     }

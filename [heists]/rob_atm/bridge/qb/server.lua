@@ -39,7 +39,7 @@ end
 
 function bridge.addMoney(src)
     local Player = QBCore.Functions.GetPlayer(src)
-    local amount = math.random(15000, 35000) 
+    local amount = math.random(100, 500)
     Player.Functions.AddMoney("cash", amount)
 end
 

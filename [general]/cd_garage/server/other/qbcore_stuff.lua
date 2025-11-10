@@ -10,8 +10,13 @@ if Config.Framework == 'qbcore' then
         local playerTier
         local IsVehicleAllowedByTier, IsVehicleInAnyTier
         if Config.PatreonTiers and Config.PatreonTiers.ENABLE then
-            IsVehicleAllowedByTier = exports['cd_garage']:IsVehicleAllowedByTier
-            IsVehicleInAnyTier = exports['cd_garage']:IsVehicleInAnyTier
+            local cdGarageExports = exports['cd_garage']
+            IsVehicleAllowedByTier = function(...)
+                return cdGarageExports['IsVehicleAllowedByTier'](...)
+            end
+            IsVehicleInAnyTier = function(...)
+                return cdGarageExports['IsVehicleInAnyTier'](...)
+            end
         end
         
         do

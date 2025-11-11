@@ -200,6 +200,41 @@ ItemList = {
     ['koi_waterbottle'] = {['name'] = 'koi_waterbottle', ['label'] = 'Koi WaterBottle', ['weight'] = 10, ['type'] = 'item', ['image'] = 'koi_waterbottle.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
     ['koi_emptycup'] = {['name'] = 'koi_emptycup', ['label'] = 'Koi Empty Cup', ['weight'] = 10, ['type'] = 'item', ['image'] = 'koi_emptycup.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
     
+    ---Radio
+    ["radio"] = {
+        ["name"] = "radio",
+        ["label"] = "Radio",
+        ["weight"] = 100,
+        ["type"] = "item",
+        ["image"] = "radio.png",
+        ["unique"] = true,
+        ["useable"] = true,
+        ["shouldClose"] = true,
+        ["description"] = "A communication system for person"
+},
+["jammer"] = {
+        ["name"] = "jammer",
+        ["label"] = "Radio Jammer",
+        ["weight"] = 10000,
+        ["type"] = "item",
+        ["image"] = "jammer.png",
+        ["unique"] = true,
+        ["useable"] = true,
+        ["shouldClose"] = true,
+        ["description"] = "A device to block radio signals around"
+},
+["radiocell"] = {
+        ["name"] = "radiocell",
+        ["label"] = "AAA Cells",
+        ["weight"] = 500,
+        ["type"] = "item",
+        ["image"] = "radiocell.png",
+        ["useable"] = true,
+        ["shouldClose"] = true,
+        ["description"] = "Batteries to powerup radio device"
+}
+
+
     ['weapon_unarmed']                  = {
         ['name'] = 'weapon_unarmed',
         ['label'] = 'Fists',

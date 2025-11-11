@@ -79,7 +79,7 @@ Config.ProgressBarTime = {
     ["ElectricBox"] = 0.1,
 }
 
-Config.RegisterOption = "lockpick" -- "lockpick" | "hit" | "both" in which way you want the register to be robbed
+Config.RegisterOption = "both" -- "lockpick" | "hit" | "both" in which way you want the register to be robbed
 Config.ItemRequired = {        -- choosed for each step of the robbery
     ["Register"] = { item = "advancedlockpick", breakChance = 50 },
     ["SmallSafe"] = { item = "trojan_usb", breakChance = 50 },

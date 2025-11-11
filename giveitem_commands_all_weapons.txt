@@ -1,0 +1,181 @@
+-- Full list of giveitem commands for all non-melee weapons (ID 3)
+-- Separated by Police and Criminal based on CNEW-Job-Lock-Weapons config
+-- Format: /giveitem 3 [weapon_name] 1
+
+-- ============================================
+-- POLICE WEAPONS (Locked to Police/Sheriff jobs)
+-- ============================================
+-- These weapons are blacklisted for civilians and only available to police/bcso jobs
+
+-- POLICE PISTOLS (class 1)
+/giveitem 3 weapon_stungun 1 --normal
+/giveitem 3 weapon_illglock17 1 --normal
+/giveitem 3 weapon_glock18c 1 --normal
+/giveitem 3 weapon_glock22 1 --normal
+/giveitem 3 weapon_glock17 1 --normal
+/giveitem 3 weapon_browning 1 --normal
+/giveitem 3 weapon_glock20 1 --normal
+
+/giveitem 3 weapon_m1911 1 --patreon
+/giveitem 3 weapon_midasglock 1 --patreon
+/giveitem 3 weapon_glock21 1 --patreon
+/giveitem 3 weapon_glock19gen4 1 --patreon
+/giveitem 3 weapon_fn57 1 --patreon
+
+-- POLICE PISTOLS (class 2)
+/giveitem 3 weapon_pistol50 1 --normal
+
+-- POLICE SUBMACHINE GUNS (class 3)
+/giveitem 3 weapon_smg 1 --normal
+/giveitem 3 weapon_combatpdw 1 --patreon
+/giveitem 3 weapon_pmxfm 1 --patreon
+
+-- POLICE ASSAULT RIFLES (class 4)
+
+/giveitem 3 weapon_bar15 1 --normal
+/giveitem 3 weapon_dmk18 1 --normal
+/giveitem 3 weapon_lbtarp 1 --normal
+/giveitem 3 weapon_ram7 1 --normal
+/giveitem 3 weapon_m4 1 --normal
+
+/giveitem 3 weapon_carbinerifle 1 --patreon
+/giveitem 3 weapon_specialcarbine 1 --patreon
+/giveitem 3 weapon_m6ic 1 --patreon
+/giveitem 3 weapon_scarsc 1 --patreon
+/giveitem 3 weapon_scarh 1 --patreon
+
+
+-- POLICE SHOTGUNS
+/giveitem 3 weapon_beanbag 1 --normal
+
+-- POLICE THROWABLES
+/giveitem 3 weapon_bzgas 1 --normal
+
+-- ============================================
+-- CRIMINAL WEAPONS (Available to all players)
+-- ============================================
+-- These weapons are NOT blacklisted and can be used by civilians
+
+-- CRIMINAL PISTOLS
+/giveitem 3 weapon_pistol 1
+/giveitem 3 weapon_pistol_mk2 1
+/giveitem 3 weapon_combatpistol 1
+/giveitem 3 weapon_appistol 1
+/giveitem 3 weapon_snspistol 1
+/giveitem 3 weapon_snspistol_mk2 1
+/giveitem 3 weapon_heavypistol 1
+/giveitem 3 weapon_vintagepistol 1
+/giveitem 3 weapon_flaregun 1
+/giveitem 3 weapon_marksmanpistol 1
+/giveitem 3 weapon_revolver 1
+/giveitem 3 weapon_revolver_mk2 1
+/giveitem 3 weapon_doubleaction 1
+/giveitem 3 weapon_raypistol 1
+/giveitem 3 weapon_ceramicpistol 1
+/giveitem 3 weapon_navyrevolver 1
+/giveitem 3 weapon_gadgetpistol 1
+/giveitem 3 weapon_stungun_mp 1
+/giveitem 3 weapon_blueglocks 1
+/giveitem 3 weapon_glock41 1
+/giveitem 3 weapon_glockbeams 1
+/giveitem 3 weapon_p30l 1
+/giveitem 3 weapon_mgglock 1
+/giveitem 3 weapon_p210 1
+/giveitem 3 weapon_sr40 1
+/giveitem 3 weapon_t1911 1
+/giveitem 3 weapon_tglock19 1
+/giveitem 3 weapon_de 1
+/giveitem 3 weapon_dp9 1
+/giveitem 3 weapon_fnx45 1
+/giveitem 3 weapon_m9a3 1
+/giveitem 3 weapon_m45a1 1
+/giveitem 3 weapon_manurhin 1
+/giveitem 3 weapon_python 1
+/giveitem 3 weapon_ragingbull 1
+/giveitem 3 weapon_bdhg 1
+/giveitem 3 weapon_candy_apple_glock 1
+/giveitem 3 weapon_catacombs_glock 1
+/giveitem 3 weapon_freedom_glock 1
+/giveitem 3 weapon_hornet_glock 1
+/giveitem 3 weapon_safari_glock 1
+/giveitem 3 weapon_families_glock_18c 1
+/giveitem 3 weapon_pi_revolver 1
+/giveitem 3 weapon_patchday_pistol 1
+
+-- CRIMINAL SUBMACHINE GUNS
+/giveitem 3 weapon_microsmg 1
+/giveitem 3 weapon_smg_mk2 1
+/giveitem 3 weapon_assaultsmg 1
+/giveitem 3 weapon_machinepistol 1
+/giveitem 3 weapon_minismg 1
+/giveitem 3 weapon_raycarbine 1
+/giveitem 3 weapon_krissvector 1
+/giveitem 3 weapon_tec9s 1
+/giveitem 3 weapon_draco 1
+/giveitem 3 weapon_mp9 1
+/giveitem 3 weapon_mac10 1
+
+-- CRIMINAL SHOTGUNS
+/giveitem 3 weapon_pumpshotgun 1
+/giveitem 3 weapon_pumpshotgun_mk2 1
+/giveitem 3 weapon_sawnoffshotgun 1
+/giveitem 3 weapon_assaultshotgun 1
+/giveitem 3 weapon_bullpupshotgun 1
+/giveitem 3 weapon_musket 1
+/giveitem 3 weapon_heavyshotgun 1
+/giveitem 3 weapon_dbshotgun 1
+/giveitem 3 weapon_autoshotgun 1
+/giveitem 3 weapon_combatshotgun 1
+/giveitem 3 weapon_m500 1
+/giveitem 3 weapon_r590 1
+/giveitem 3 weapon_aa12 1
+/giveitem 3 weapon_komrad12 1
+/giveitem 3 weapon_mossberg500 1
+/giveitem 3 weapon_remington870 1
+/giveitem 3 weapon_saiga12g 1
+/giveitem 3 weapon_spas12 1
+/giveitem 3 weapon_saiga9 1
+
+-- CRIMINAL ASSAULT RIFLES
+/giveitem 3 weapon_assaultrifle 1
+/giveitem 3 weapon_assaultrifle_mk2 1
+/giveitem 3 weapon_carbinerifle_mk2 1
+/giveitem 3 weapon_advancedrifle 1
+/giveitem 3 weapon_specialcarbine_mk2 1
+/giveitem 3 weapon_bullpuprifle 1
+/giveitem 3 weapon_bullpuprifle_mk2 1
+/giveitem 3 weapon_compactrifle 1
+/giveitem 3 weapon_militaryrifle 1
+/giveitem 3 weapon_heavyrifle 1
+/giveitem 3 weapon_tacticalrifle 1
+/giveitem 3 weapon_blackarp 1
+/giveitem 3 weapon_bscar 1
+/giveitem 3 weapon_thompson 1
+/giveitem 3 weapon_redarp 1
+/giveitem 3 weapon_redm4a1 1
+/giveitem 3 weapon_tarp 1
+/giveitem 3 weapon_woarp 1
+/giveitem 3 weapon_ak47 1
+/giveitem 3 weapon_ak47m2 1
+/giveitem 3 weapon_ar15 1
+/giveitem 3 weapon_ar16 1
+/giveitem 3 weapon_fnfal 1
+/giveitem 3 weapon_tar21 1
+/giveitem 3 weapon_pdm4a1 1
+/giveitem 3 weapon_ar15hw 1
+/giveitem 3 weapon_toym16 1
+/giveitem 3 weapon_patchday8ng 1
+/giveitem 3 weapon_m4a1dragon 1
+/giveitem 3 weapon_blue_carbine_rifle 1
+/giveitem 3 weapon_ultra_blackout_rifle 1
+/giveitem 3 weapon_lime_black_ar 1
+/giveitem 3 weapon_no_silver_rifle 1
+/giveitem 3 weapon_white_black_ar 1
+/giveitem 3 weapon_white_orange_rifle 1
+/giveitem 3 weapon_bombinglr300 1
+/giveitem 3 weapon_hypebeast 1
+/giveitem 3 weapon_paint_splatter 1
+/giveitem 3 weapon_groza 1
+/giveitem 3 weapon_aks74 1
+/giveitem 3 weapon_ak74 1
+/giveitem 3 weapon_mk47fm 1

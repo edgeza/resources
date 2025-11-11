@@ -9,6 +9,13 @@ local rainFilter = {
     ['THUNDER'] = true,
 }
 
+local snowFilter = {
+    ['SNOW'] = true,
+    ['SNOWLIGHT'] = true,
+    ['BLIZZARD'] = true,
+    ['XMAS'] = true,
+}
+
 local math_random = math.random
 
 -- Sequence Functions --
@@ -81,10 +88,17 @@ local function isWeatherEventAllowed(chance, hasRain, minutesSinceRain, timeBefo
 end
 
 local function getWeatherEvent(weather)
-    return {
+    local event = {
         weather = weather,
         time = cycleTimer
     }
+    
+    -- Automatically set hasSnow for snow weather types (only if snow is enabled)
+    if Config.enableSnow and snowFilter[weather] then
+        event.hasSnow = true
+    end
+    
+    return event
 end
 
 local function getDecemberSnow()
@@ -94,6 +108,7 @@ local function getDecemberSnow()
             time = 86400,
             windSpeed = 0.0,
             windDirection = 0.0,
+            hasSnow = Config.enableSnow, -- Enable visual snow for XMAS weather only if snow is enabled
         }
     }
 end

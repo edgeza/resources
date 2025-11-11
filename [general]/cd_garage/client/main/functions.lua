@@ -52,6 +52,64 @@ function SpawnVehicle(data, jobspawn, jobspawn_owned, tp_invehicle, persistent)
         return
     end
 
+    -- Patreon tier gating (client guard only, server already enforces in vehicle list)
+    if not jobspawn and Config.PatreonTiers and Config.PatreonTiers.ENABLE then
+        local vehicleModelName = (data and data.vehicle and data.vehicle.model) or model
+        if vehicleModelName then
+            local spawncode = tostring(vehicleModelName):upper()
+            -- Determine if spawncode is gated by any tier
+            local appearsInAnyTier = false
+            local minTier = nil
+            for t, tierData in pairs(Config.PatreonTiers.tiers or {}) do
+                -- Check cars
+                local carList = (tierData and tierData.cars) or {}
+                for i = 1, #carList do
+                    if tostring(carList[i]):upper() == spawncode then
+                        appearsInAnyTier = true
+                        minTier = (minTier and math.min(minTier, t)) or t
+                    end
+                end
+                -- Check boats
+                local boatList = (tierData and tierData.boats) or {}
+                for i = 1, #boatList do
+                    if tostring(boatList[i]):upper() == spawncode then
+                        appearsInAnyTier = true
+                        minTier = (minTier and math.min(minTier, t)) or t
+                    end
+                end
+                -- Check air vehicles
+                local airList = (tierData and tierData.air) or {}
+                for i = 1, #airList do
+                    if tostring(airList[i]):upper() == spawncode then
+                        appearsInAnyTier = true
+                        minTier = (minTier and math.min(minTier, t)) or t
+                    end
+                end
+            end
+            if appearsInAnyTier then
+                local playerTier = 0
+                if Config.Framework == 'qbcore' then
+                    local p = QBCore.Functions.GetPlayerData()
+                    local md = p and p.metadata or {}
+                    local key = Config.PatreonTiers.metadata_key or 'patreon_tier'
+                    local t = md[key]
+                    if type(t) == 'number' then playerTier = t elseif type(t) == 'string' then playerTier = tonumber(t) or 0 end
+                end
+                local allowed
+                if Config.PatreonTiers.inherit ~= false then
+                    allowed = (tonumber(playerTier or 0) or 0) >= (minTier or 1)
+                else
+                    allowed = (tonumber(playerTier or 0) or 0) == (minTier or 1)
+                end
+                if not allowed then
+                    CloseAllNUI()
+                    Notif(3, 'patreon_garage_denied')
+                    return
+                end
+            end
+        end
+    end
+
     LoadModel(model)
     if not HasModelLoaded(model) then
         CloseAllNUI()

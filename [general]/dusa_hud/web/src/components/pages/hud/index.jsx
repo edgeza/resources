@@ -220,7 +220,7 @@ const Hud = () => {
               onStop={(e, data) => handleStop(e, data, "server")}
               disabled={!settings.general.freeformEditMode}
             >
-              <div className="absolute right-4 top-4">
+              <div className="absolute right-6 top-20 pointer-events-auto">
                 <QuickInfo />
               </div>
             </Draggable>
@@ -234,7 +234,7 @@ const Hud = () => {
               onStop={(e, data) => handleStop(e, data, "speedo")}
               disabled={!settings.general.freeformEditMode}
             >
-              <div className="absolute right-4 bottom-4">
+              <div className="absolute right-6 bottom-6 pointer-events-auto">
                 {SpeedoMeterComponent && (
                   <SpeedoMeterComponent
                     speed={speed}

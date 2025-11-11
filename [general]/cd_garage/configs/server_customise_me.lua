@@ -22,10 +22,12 @@ function GetIdentifier(source)
     if not source then return end
     if Config.Framework == 'esx' then 
         local xPlayer = ESX.GetPlayerFromId(source)
+        if not xPlayer then return nil end
         return xPlayer.identifier
 
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
+        if not xPlayer then return nil end
         return xPlayer.PlayerData.citizenid
 
     elseif Config.Framework == 'other' then
@@ -38,10 +40,12 @@ function GetJob(source)
     if not source then return end
     if Config.Framework == 'esx' then 
         local xPlayer = ESX.GetPlayerFromId(source)
+        if not xPlayer then return nil end
         return xPlayer.job.name
 
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
+        if not xPlayer or not xPlayer.PlayerData then return nil end
         return xPlayer.PlayerData.job.name
 
     elseif Config.Framework == 'other' then
@@ -53,6 +57,7 @@ end
 function CheckMoney(source, amount, payment_type) --payment_type = What this payment is for. [ 'garage_space' / 'return_vehicle' / 'civ_unimpound' / 'transfer_garage' ] 
     if Config.Framework == 'esx' then 
         local xPlayer = ESX.GetPlayerFromId(source)
+        if not xPlayer then return false end
         if xPlayer.getAccount('bank').money >= amount then
             xPlayer.removeAccountMoney('bank', amount)
             return true
@@ -62,7 +67,8 @@ function CheckMoney(source, amount, payment_type) --payment_type = What this pay
 
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
-        if xPlayer.PlayerData.money['bank'] >= amount then
+        if not xPlayer or not xPlayer.PlayerData or not xPlayer.PlayerData.money then return false end
+        if xPlayer.PlayerData.money['bank'] and xPlayer.PlayerData.money['bank'] >= amount then
             xPlayer.Functions.RemoveMoney('bank', amount, payment_type)
             return true
         else
@@ -77,10 +83,12 @@ end
 function RemoveMoney(source, amount, payment_type) --payment_type = What this payment is for. [ 'garage_tax' ] 
     if Config.Framework == 'esx' then 
         local xPlayer = ESX.GetPlayerFromId(source)
+        if not xPlayer then return end
         xPlayer.removeAccountMoney('bank', amount)
 
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
+        if not xPlayer then return end
         xPlayer.Functions.RemoveMoney('bank', amount, 'Garage Payment')
 
     elseif Config.Framework == 'other' then
@@ -92,6 +100,7 @@ function CheckPerms(source, action)
     if Config.StaffPerms[action].perms == nil then return false end
     if Config.Framework == 'esx' then 
         local xPlayer = ESX.GetPlayerFromId(source)
+        if not xPlayer then return false end
         local perms = xPlayer.getGroup()
         for c, d in pairs(Config.StaffPerms[action].perms[Config.Framework]) do
             if perms == d then
@@ -127,11 +136,12 @@ function GetCharacterName(source)
     local char_name = L('unknown')
     if Config.Framework == 'esx' then
         local xPlayer = ESX.GetPlayerFromId(source)
+        if not xPlayer then return CharacterNames[source] or L('unknown') end
         char_name = xPlayer.getName(source)
 
     elseif Config.Framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(source)
-        if xPlayer then
+        if xPlayer and xPlayer.PlayerData and xPlayer.PlayerData.charinfo then
             if xPlayer.PlayerData.charinfo.firstname and xPlayer.PlayerData.charinfo.lastname then
                 char_name = xPlayer.PlayerData.charinfo.firstname..' '..xPlayer.PlayerData.charinfo.lastname
             end
@@ -150,9 +160,11 @@ function GetSourceFromIdentifier(identifier)
         local AllPlayers = ESX.GetPlayers()
         for cd = 1, #AllPlayers do
             local xPlayer = ESX.GetPlayerFromId(AllPlayers[cd])
-            local xPlayer_identifier = GetIdentifier(xPlayer.source)
-             if xPlayer_identifier and xPlayer_identifier == identifier then
-                return xPlayer.source
+            if xPlayer then
+                local xPlayer_identifier = GetIdentifier(xPlayer.source)
+                if xPlayer_identifier and xPlayer_identifier == identifier then
+                    return xPlayer.source
+                end
             end
         end
     
@@ -160,9 +172,11 @@ function GetSourceFromIdentifier(identifier)
         local AllPlayers = QBCore.Functions.GetPlayers()
         for cd = 1, #AllPlayers do
             local xPlayer = QBCore.Functions.GetPlayer(AllPlayers[cd])
-            local xPlayer_identifier = GetIdentifier(xPlayer.PlayerData.source)
-            if xPlayer_identifier and xPlayer_identifier == identifier then
-                return xPlayer.PlayerData.source
+            if xPlayer and xPlayer.PlayerData and xPlayer.PlayerData.source then
+                local xPlayer_identifier = GetIdentifier(xPlayer.PlayerData.source)
+                if xPlayer_identifier and xPlayer_identifier == identifier then
+                    return xPlayer.PlayerData.source
+                end
             end
         end
     

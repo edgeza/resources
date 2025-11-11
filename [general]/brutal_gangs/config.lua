@@ -558,7 +558,7 @@ Config = {
     Raid = {
         Price = {money = 50000, rep = 2000},
         MaximumTime = 30, -- in minutes
-        MinimumOnlineMembers = 6, -- minimum members online to start
+        MinimumOnlineMembers = 0, -- minimum members online to start
         CooldownAfterDeath = 45, -- in minutes
         WinReward = {use = true, money = 1000, rep = 100}, -- The reward given to the attacking gang if they win the raid.
         LossReward = {use = true, money =  300, rep = 50}, -- The reward given to the defending gang if they lose the defense.

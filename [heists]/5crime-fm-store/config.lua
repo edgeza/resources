@@ -34,12 +34,12 @@ Config.Icons = {
 
 Config.Framework = "qb" -- "qb" | "esx" | "other"
 
-Config.Inventory = "qb" -- choose the inventory to use
+Config.Inventory = "qs" -- choose the inventory to use
 -- "ox" for ox_inventory
 -- "qb" for qb-core | qb-inventory, ps-inventory, qs-inventory
 -- "esx" for esx framework | esx, qs-inventory
 
-Config.Dispatch = "cd"
+Config.Dispatch = "custom"
 -- "ps" for ps-dispatch
 -- "cd" for cd_dispatch
 -- "qs" for qs-dispatch
@@ -81,7 +81,7 @@ Config.ProgressBarTime = {
 
 Config.RegisterOption = "both" -- "lockpick" | "hit" | "both" in which way you want the register to be robbed
 Config.ItemRequired = {        -- choosed for each step of the robbery
-    ["Register"] = { item = "advancedlockpick", breakChance = 50 },
+    ["Register"] = { item = "lockpick", breakChance = 50 },
     ["SmallSafe"] = { item = "trojan_usb", breakChance = 50 },
     ["Computer"] = { item = "trojan_usb", breakChance = 50 },
     ["Safe"] = { ["Cracking"] = { item = nil, breakChance = 50 }, ["Drill"] = { item = "drill", breakChance = 50 }, ["Bomb"] = { item = "thermite", breakChance = 50 } },

@@ -8,7 +8,7 @@ Config = {
     Target = Target.OX,                   -- [NONE - none (pressing E), OX - ox_target, QB - qb-target, Q - qtarget]
     Database = Database.OX,      -- [OX - ox_mysql, MYSQL_ASYNC - mysql-async, GHMATTI - ghmattimysql]
 
-    XmasWeather = true,                   -- [true/false] - Enables Xmas weather.
+    XmasWeather = false,                   -- [true/false] - Enables Xmas weather.
     EnableVehicleTrailsEverywhere = true, -- [true/false] - Enables vehicle trails everywhere.
     EnablePedFootstepsEverywhere = true,  -- [true/false] - Enables ped footsteps everywhere.
     WaterFreezes = 3.0,                   -- [float] - The strength of the frozen water effect. 0.0 = no frozen water, 3.0 = completely frozen water.

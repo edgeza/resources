@@ -7,6 +7,7 @@ return {
     timeBetweenRain = 180, -- How many minutes between rain events
     rainAfterRestart = 60, -- How many minutes AFTER a server restart before rain will start to show?
 
+    enableSnow = false, -- Enable visual snow particles and effects (set to false to disable snow)
     decemberSnow = true, -- if turned on means that only snow will happen in december
 
     useStaticWeather = true,

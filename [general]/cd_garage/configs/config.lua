@@ -80,8 +80,8 @@ Config.Keys = {
 }
 
 Config.UniqueGarages = true --Do you want to only be able to get your car from the garage you last put it in?
-Config.SaveAdvancedVehicleDamage = true --Do you want to save poped tyres, broken doors and broken windows and re-apply them all when spawning a vehicle?
-Config.UseExploitProtection = true --Do you want to enable the cheat engine protection to check the vehicle hashes when a vehicle is stored?
+Config.SaveAdvancedVehicleDamage = false --Do you want to save poped tyres, broken doors and broken windows and re-apply them all when spawning a vehicle?
+Config.UseExploitProtection = false --Do you want to enable the cheat engine protection to check the vehicle hashes when a vehicle is stored?
 Config.ResetGarageState = true --Do you want vehicles to be returned to the garage when the script starts/restarts? Auto disabled if using persistent vehicles.
 Config.SpawnGaragePeds = false -- Do you want peds to spawn in the area where a garage is located?
 
@@ -282,7 +282,7 @@ Config.PropertyGarages = {
 -- └──────────────────────────────────────────────────────────────────┘
 
 Config.FakePlates = {
-    ENABLE = false, --Do you want to use the built in fake plate system?
+    ENABLE = true, --Do you want to use the built in fake plate system?
     item_name = 'fakeplate', --The name of the usable item to add a fake plate.
 
     RemovePlate = {
@@ -360,9 +360,9 @@ Config.Mileage = {
 -- └──────────────────────────────────────────────────────────────────┘
 
 Config.PersistentVehicles = { --Requires OneSync to use.
-    ENABLE = false, --Do you want to use the built-in persistent vehicle feature?
+    ENABLE = true, --Do you want to use the built-in persistent vehicle feature?
     SaveAfterRestart = {
-        ENABLE = true, --Do you want vehicles to be saved and restored after a server restart?
+        ENABLE = false, --Do you want vehicles to be saved and restored after a server restart?
         save_regular_job_vehicles = true, --Do you want regular job vehicles spawned from cd_garage to be saved and restored after a server restart?
         save_owned_job_vehicles = true --Do you want personal or society owned job vehicles to be saved and restored after a server restart?
     }
@@ -479,15 +479,7 @@ Config.JobVehicles = {
             --'regular' = This will use the vehicles from the Config.JobVehicles.RegularMethod table below. These are spawned in vehicles and are not owned by anyone.
             --'personalowned' = This will use your personal job vehicles that you have purchased from the cardealer and only you can only access from your job spawn location. Vehicles in your owned_vehicles database table which have job_personalowned set to a players "job name" (not "job label") will be classed as personal owned job vehicles.
             --'societyowned' = This will use society owned vehicles. This will search for your job instead of your steam/license identifier in the owned_vehicles database table and allow you to use all of the vehicles your job owns.
-        ['patreon1'] = {
-            [1] = {coords = vector3(239.74, -813.57, 30.21), spawn_coords = vector4(226.23, -808.74, 30.56, 123.65), distance = 5, garage_type = 'car', method = 'personalowned'},
-        },
-        ['patreon2'] = {
-            [1] = {coords = vector3(239.74, -813.57, 30.21), spawn_coords = vector4(226.23, -808.74, 30.56, 123.65), distance = 5, garage_type = 'car', method = 'personalowned'},
-        },
-        ['patreon3'] = {
-            [1] = {coords = vector3(239.74, -813.57, 30.21), spawn_coords = vector4(226.23, -808.74, 30.56, 123.65), distance = 5, garage_type = 'car', method = 'personalowned'},
-        },
+
         ['events'] = { --If you choose to add more tables here for more jobs, they must be the jobs name, not the label.
             [1] = {coords = vector3(4375.24, 7913.04, 90.12), spawn_coords = vector4(4421.56, 7860.93, 89.03, 329.85), distance = 10, garage_type = 'car', method = 'regular'},
         }, 
@@ -495,12 +487,6 @@ Config.JobVehicles = {
             --MISSION ROW PD
             [1] = {coords = vec3(844.12, -1334.6, 26.1), spawn_coords = vec4(853.58, -1332.39, 26.12, 60.87), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row PD (cars)
             [2] = {coords = vec3(837.83, -1408.09, 26.13), spawn_coords = vec4(837.83, -1408.09, 26.13, 309.39), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
-            [3] = {coords = vec3(862.16, -1374.08, 26.13), spawn_coords = vec4(862.16, -1374.08, 26.13, 40.2), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row SWAT
-            [4] = {coords = vec3(860.31, -1380.29, 26.14), spawn_coords = vec4(860.31, -1380.29, 26.14, 39.68), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row AGU
-            [5] = {coords = vec3(857.48, -1385.3, 26.15), spawn_coords = vec4(857.48, -1385.3, 26.15, 38.14), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row AGU
-            [6] = {coords = vec3(857.46, -1385.67, 26.15), spawn_coords = vec4(857.46, -1385.67, 26.15, 35.63), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row Detective
-            [7] = {coords = vec3(854.65, -1390.74, 26.14), spawn_coords = vec4(854.65, -1390.74, 26.14, 32.67), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row Traffic
-            [8] = {coords = vec3(851.99, -1395.94, 26.13), spawn_coords = vec4(851.99, -1395.94, 26.13, 42.96), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row Aviation
             --SANDY PD
             [3] = {coords = vector3(1868.33, 3686.05, 33.78), spawn_coords = vector4(1872.68, 3687.19, 33.65, 211.34), distance = 10, garage_type = 'car', method = 'regular'}, --Sandy PD (cars)
             [4] = {coords = vector3(1853.9, 3707.06, 33.97), spawn_coords = vector4(1853.1, 3706.57, 33.97, 209.84), distance = 5, garage_type = 'air', method = 'regular'}, --Sandy PD (helipad)
@@ -589,6 +575,7 @@ Config.JobVehicles = {
         --job_grade: The minimum a players job grade must be to have access to this vehicle.
         --garage_type: What type of vehicle this is ('car' / 'boat', 'air').
         --model: The spawn name of this vehicle. (this is not supposed to be a string, these symbols get the hash key of this vehicle).
+
         ['events'] = {
             [1] = {job = 'formula1', spawn_max = true, plate = 'formula1', job_grade = 0, garage_type = 'car', model = `formula`},
             [2] = {job = 'formula1', spawn_max = true, plate = 'formula1', job_grade = 0, garage_type = 'car', model = `formula2`},

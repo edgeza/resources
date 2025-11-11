@@ -104,12 +104,7 @@ function BossMenuFunction(job)
     if Config['Core']:upper() == 'ESX' then
         TriggerEvent('esx_society:openBossMenu', job, function(data) end, { wash = false })
     elseif Config['Core']:upper() == 'QBCORE' then
-        -- QBX uses qbx-management instead of qb-bossmenu
-        if GetResourceState('qbx-management') == 'started' then
-            TriggerEvent('qbx-management:client:OpenMenu')
-        else
-            TriggerEvent('qb-bossmenu:client:OpenMenu')
-        end
+        TriggerEvent('qb-bossmenu:client:OpenMenu')
     end
 end    
 

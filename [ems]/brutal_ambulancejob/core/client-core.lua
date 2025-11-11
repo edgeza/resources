@@ -1,4 +1,4 @@
-Core = qb
+Core = nil
 
 if Config['Core']:upper() == 'ESX' then
     local _esx_ = 'new' -- 'new' / 'old'

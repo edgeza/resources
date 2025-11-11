@@ -27,6 +27,7 @@ server_scripts {
     'game/server/object/*.lua',
     'configurations/serverconfig.lua',
     'game/opensource/server.lua',
+    'game/opensource/callsign.lua',
     'game/opensource/items.lua',
     'game/opensource/server_events.lua',
 }

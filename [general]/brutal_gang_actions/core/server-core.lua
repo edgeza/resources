@@ -65,6 +65,11 @@ if Config['Core']:upper() == 'ESX' then
     function GetItemCount(source, item)
         local xPlayer = GETPFI(source)
 
+        if xPlayer.getInventoryItem(item) == nil then
+            print("^1PROBLEM!^7 The ^3" ..item.. "^7 item is not created.")
+            return 0
+        end
+
         if _esx_ == 'new' then
             return xPlayer.getInventoryItem(item).count
         else

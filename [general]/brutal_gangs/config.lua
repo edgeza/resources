@@ -14,7 +14,7 @@ Config = {
     Inventory = 'quasar_inventory', -- 'ox_inventory' / 'qb_inventory' / 'quasar_inventory' / 'chezza_inventory' / 'codem_inventory' / 'core_inventory' / 'origen_inventory' / 'ps-inventory' / 'tgiann-inventory' // Custom can be add in the cl_utils.lua!!!
     -- Wardrobe = 'default', -- 'default' / 'ak47_clothing' / 'codem_apperance' / 'fivem_appearance' / 'illenium_appearance' / 'qb_clothing' / 'raid_clothes' / 'rcore_clothes' / 'rcore_clothing' / 'sleek_clothestore' / 'tgiann_clothing' // Custom can be add in the cl_utils.lua!!!
     TextUI = 'ox_lib', -- false / 'brutal_textui' / 'ox_lib' / 'okokTextUI' / 'ESXTextUI' / 'QBDrawText' // Custom can be add in the cl_utils.lua!!!
-    Target = 'oxtarget', -- 'oxtarget' / 'qb-target' // if the TextUI is set to false target will step its place. | The Target cannot be false.
+    Target = 'oxtargett', -- 'oxtarget' / 'qb-target' // if the TextUI is set to false target will step its place. | The Target cannot be false.
     BrutalNotify = true, -- Buy here: (4€+VAT) https://store.brutalscripts.com | Or set up your own notify >> cl_utils.lua
     -- BrutalKeys = true, -- Buy here: (15€+VAT) https://store.brutalscripts.com | Or set up your own if you're using a different vehicle key >> cl_utils.lua
     SteamName = false, -- true = Steam name | false = character name
@@ -558,7 +558,7 @@ Config = {
     Raid = {
         Price = {money = 50000, rep = 2000},
         MaximumTime = 30, -- in minutes
-        MinimumOnlineMembers = 0, -- minimum members online to start
+        MinimumOnlineMembers = 6, -- minimum members online to start
         CooldownAfterDeath = 45, -- in minutes
         WinReward = {use = true, money = 1000, rep = 100}, -- The reward given to the attacking gang if they win the raid.
         LossReward = {use = true, money =  300, rep = 50}, -- The reward given to the defending gang if they lose the defense.

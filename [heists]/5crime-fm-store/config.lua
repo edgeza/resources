@@ -81,7 +81,7 @@ Config.ProgressBarTime = {
 
 Config.RegisterOption = "both" -- "lockpick" | "hit" | "both" in which way you want the register to be robbed
 Config.ItemRequired = {        -- choosed for each step of the robbery
-    ["Register"] = { item = "advancedlockpick", breakChance = 50 },
+    ["Register"] = { item = "lockpick", breakChance = 50 },
     ["SmallSafe"] = { item = "trojan_usb", breakChance = 50 },
     ["Computer"] = { item = "trojan_usb", breakChance = 50 },
     ["Safe"] = { ["Cracking"] = { item = nil, breakChance = 50 }, ["Drill"] = { item = "drill", breakChance = 50 }, ["Bomb"] = { item = "thermite", breakChance = 50 } },

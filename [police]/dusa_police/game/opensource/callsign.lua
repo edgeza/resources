@@ -6,15 +6,22 @@ lib.addCommand('callsign', {
     help = 'Give yourself a callsign',
     params = {{
         name = 'callsign',
-        type = 'number',
-        help = 'Callsign number'
+        type = 'string',
+        help = 'Callsign text'
     }},
-}, function(source, args)
+}, function(source, args, raw)
     local callsign = args.callsign
-    if not callsign then
-        Framework.Notify(source, 'Usage: /callsign <number>', 'error')
+
+    if not callsign and raw then
+        callsign = raw:match('^%S+%s+(.+)$')
+    end
+
+    if not callsign or callsign == '' then
+        Framework.Notify(source, 'Usage: /callsign <text>', 'error')
         return
     end
+
+    callsign = callsign:gsub('^%s+', ''):gsub('%s+$', '')
 
     local player = qbxCore:GetPlayer(source)
     if not player then return end

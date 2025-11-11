@@ -62,25 +62,16 @@ end
 
 function GetJobName(source)
     local player = GetPlayerFromId(source)
-    if not player then
-        return nil
-    end
     return player.PlayerData.job.name
 end
 
 function GetJobGrade(source)
     local player = GetPlayerFromId(source)
-    if not player then
-        return nil
-    end
     return player.PlayerData.job.grade.level
 end
 
 function GetAccountMoney(source, account)
     local player = GetPlayerFromId(source)
-    if not player then
-        return 0
-    end
     if account == 'money' then account = 'cash' end
     if account == 'black_money' then account = 'crypto' end
     return player.PlayerData.money[account]
@@ -88,9 +79,6 @@ end
 
 function AddAccountMoney(source, account, amount)
     local player = GetPlayerFromId(source)
-    if not player then
-        return
-    end
     if account == 'money' then account = 'cash' end
     player.Functions.AddMoney(account, amount)
 end
@@ -105,9 +93,6 @@ end
 
 function RemoveAccountMoney(source, account, amount)
     local player = GetPlayerFromId(source)
-    if not player then
-        return
-    end
     if account == 'money' then account = 'cash' end
     Debug('account', account, amount)
     player.Functions.RemoveMoney(account, amount)
@@ -153,9 +138,6 @@ end
 ---@param doNotUpdateCash boolean -- Because of stupid race condition, inventory doesn't initialize the cash item when adding the item. So we need to update it manually.
 function UpdateFrameworkInventory(source, items, doNotUpdateCash)
     local player = GetPlayerFromId(source)
-    if not player then
-        return
-    end
     player.Functions.SetPlayerData('items', items)
     if not doNotUpdateCash then
         UpdateCashItem(source)
@@ -164,9 +146,6 @@ end
 
 RegisterServerCallback(Config.InventoryPrefix .. ':server:checkDead', function(_, cb, id)
     local Player = QBCore.Functions.GetPlayer(id)
-    if not Player then
-        return cb(false)
-    end
     cb(Player.PlayerData.metadata['isdead'])
 end)
 
@@ -202,9 +181,6 @@ end
 RegisterNetEvent('inventory:consumables:addHunger', function(amount)
     local src = source
     local player = GetPlayerFromId(src)
-    if not player then
-        return
-    end
     player.Functions.SetMetaData('hunger', amount)
     TriggerClientEvent('hud:client:UpdateNeeds', src, amount, player.PlayerData.metadata.thirst, amount)
 end)
@@ -212,9 +188,6 @@ end)
 RegisterNetEvent('inventory:consumables:addThirst', function(amount)
     local src = source
     local player = GetPlayerFromId(src)
-    if not player then
-        return
-    end
     player.Functions.SetMetaData('thirst', amount)
     TriggerClientEvent('hud:client:UpdateNeeds', src, player.PlayerData.metadata.hunger, amount)
 end)

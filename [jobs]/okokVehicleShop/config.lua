@@ -37,7 +37,7 @@ Config.TransitionTime = 4000 -- how much time it takes to go from one camera to 
 Config.ShakeAmplitude = 0.2 -- camera shake
 Config.UseKMh = true -- true = use KM/h | false = use miles/h
 Config.MaxVehiclesSpeed = 320 -- Max speed a vehicle can go at (it is only used for UI purposes, it does NOT change the speed of a vehicle)
-Config.TestDriveTime = 40 -- In seconds ---- OLD VALUE CHANGING WHILE BEEING USED: 40
+Config.TestDriveTime = 30 -- In seconds ---- OLD VALUE CHANGING WHILE BEEING USED: 40
 Config.StopTestDriveCmd = "cancel" -- command to stop the test drive
 
 -- Vehicle Listing Settings
@@ -53,7 +53,7 @@ Config.Key = 38 -- [E] Key to open the interaction, check here the keys ID: http
 
 -- Currency/Business
 Config.Currency = '$' -- Currency symbol
-Config.CurrencySide = 'right' -- left | right
+Config.CurrencySide = 'left' -- left | right
 Config.MaxEmployeesPerDealership = 5 -- Maximum number of employees per dealership
 Config.HireRange = 3 -- Range to hire an employee
 Config.WeeklyGoalResetHours = 168 -- How many hours to reset the weekly goal (168 = 1 week)
@@ -149,7 +149,7 @@ Config.FinanceVehiclesSettings = {
 	["payment_check_interval"] = 12, -- real hours
 	["payments"] = 12, -- how many payments will be made
 	["max_failed_payments"] = 3, -- maximum number of failed payments before the vehicle is repossessed
-	["max_financed_vehicles"] = 2, -- maximum number of financed vehicles per player
+	["max_financed_vehicles"] = 0, -- maximum number of financed vehicles per player
 }
 
 -- =========================
@@ -216,8 +216,8 @@ Config.Stands = {
 		isVip = false, -- if set to true IT WON'T BE OWNED BY ANYONE and will use vip coins instead of currency, check sv_utils.lua to change the vip coins functions
 
 		vehicleCameraSettings = {
-			location = vec3(291.22, -1161.23, 29.13),
-			camera = vec4(284.04, -1160.87, 29.11, 267.94),
+			location = vec3(290.26, -1160.76, 29.13),
+			camera = vec4(285.1, -1157.5, 28.91, 237.96),
 		},
 
 		vehicleSettings = {
@@ -261,8 +261,8 @@ Config.Stands = {
 		isVip = false, -- if set to true IT WON'T BE OWNED BY ANYONE and will use vip coins instead of currency, check sv_utils.lua to change the vip coins functions
 
 		vehicleCameraSettings = {
-			location = vector3(-177.17, -1173.17, 22.95),
-			camera = vector4(-185.06, -1163.74, 22.94, 50.0),
+			location = vec3(-184.88, -1174.7, 23.13),
+			camera = vec4(-189.32, -1170.52, 22.94, 224.8), 
 		},
 
 		vehicleSettings = {

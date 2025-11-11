@@ -188,6 +188,9 @@ Config.Messages = {
     lootTruck = "Press [E] to loot the destroyed truck",
     looting = "Looting truck...",
     lootCompleted = "Looting completed!",
+    crewCompleted = "Your crew has completed the truck heist.",
+    crewLooted = "Your crew has secured the loot from the truck.",
+    heistFailedCrew = "The truck escaped before you could finish the heist.",
 }
 
 -- Dispatch Settings (Police Alert Integration)

@@ -199,8 +199,7 @@ ItemList = {
     ['koi_icecubes'] = {['name'] = 'koi_icecubes', ['label'] = 'Koi IceCubes', ['weight'] = 10, ['type'] = 'item', ['image'] = 'koi_icecubes.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
     ['koi_waterbottle'] = {['name'] = 'koi_waterbottle', ['label'] = 'Koi WaterBottle', ['weight'] = 10, ['type'] = 'item', ['image'] = 'koi_waterbottle.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
     ['koi_emptycup'] = {['name'] = 'koi_emptycup', ['label'] = 'Koi Empty Cup', ['weight'] = 10, ['type'] = 'item', ['image'] = 'koi_emptycup.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
-
-
+    
     ['weapon_unarmed']                  = {
         ['name'] = 'weapon_unarmed',
         ['label'] = 'Fists',

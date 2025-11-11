@@ -68,11 +68,68 @@ function Draw3DText(coords, text)
 end
 
 function AllGuardsDead()
+    local hasTrackedGuards = false
+
     for i, guard in pairs(guards) do
-        if guard and DoesEntityExist(guard) and not IsEntityDead(guard) then
-            return false
+        if guard and DoesEntityExist(guard) then
+            hasTrackedGuards = true
+            if not IsEntityDead(guard) then
+                return false
+            end
         end
     end
+
+    if hasTrackedGuards then
+        return true
+    end
+
+    if truckEntity and DoesEntityExist(truckEntity) then
+        local truckCoords = GetEntityCoords(truckEntity)
+        local guardModels = {}
+        if Config.Guards and Config.Guards.model then
+            table.insert(guardModels, GetHashKey(Config.Guards.model))
+        end
+        if Config.Escort and Config.Escort.guards and Config.Escort.guards.model then
+            table.insert(guardModels, GetHashKey(Config.Escort.guards.model))
+        end
+
+        if #guardModels > 0 then
+            local guardCheckRadius = 60.0
+            if Config.Guards and Config.Guards.checkRadius then
+                guardCheckRadius = Config.Guards.checkRadius
+            end
+
+            local peds = {}
+            if type(GetGamePool) == "function" then
+                peds = GetGamePool('CPed')
+            else
+                local handle, ped = FindFirstPed()
+                if handle ~= -1 then
+                    local success = true
+                    repeat
+                        table.insert(peds, ped)
+                        success, ped = FindNextPed(handle)
+                    until not success
+                    EndFindPed(handle)
+                end
+            end
+
+            for _, ped in ipairs(peds) do
+                if DoesEntityExist(ped) and not IsEntityDead(ped) then
+                    local pedModel = GetEntityModel(ped)
+                    for _, guardModel in ipairs(guardModels) do
+                        if pedModel == guardModel then
+                            local pedCoords = GetEntityCoords(ped)
+                            if #(pedCoords - truckCoords) <= guardCheckRadius then
+                                return false
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
     return true
 end
 
@@ -363,6 +420,7 @@ function SpawnCITTruck(coords, heading)
         if truckNetId and truckNetId ~= 0 and NetworkDoesNetworkIdExist(truckNetId) then
             SetNetworkIdExistsOnAllMachines(truckNetId, true)
             SetNetworkIdCanMigrate(truckNetId, true)
+            TriggerServerEvent('olrp_truckheist:server:setTruckNetId', truckNetId)
         end
     end
     
@@ -1536,6 +1594,66 @@ RegisterNetEvent('olrp_truckheist:client:startHeist', function(heistData, should
     end
 end)
 
+RegisterNetEvent('olrp_truckheist:client:setTruckEntity', function(truckNetId)
+    if truckEntity and DoesEntityExist(truckEntity) then
+        local existingNetId = NetworkGetNetworkIdFromEntity(truckEntity)
+        if existingNetId == truckNetId then
+            return
+        end
+    end
+
+    CreateThread(function()
+        local attempts = 0
+        while attempts < 150 do
+            if NetworkDoesNetworkIdExist(truckNetId) then
+                local vehicle = NetworkGetEntityFromNetworkId(truckNetId)
+                if DoesEntityExist(vehicle) then
+                    truckEntity = vehicle
+                    SetEntityAsMissionEntity(truckEntity, true, true)
+
+                    if truckBlip and DoesBlipExist(truckBlip) then
+                        RemoveBlip(truckBlip)
+                    end
+
+                    truckBlip = AddBlipForEntity(truckEntity)
+                    Wait(100)
+
+                    if truckBlip and DoesBlipExist(truckBlip) then
+                        SetBlipSprite(truckBlip, Config.Blips.truck.sprite)
+                        SetBlipDisplay(truckBlip, 4)
+                        SetBlipScale(truckBlip, Config.Blips.truck.scale)
+                        SetBlipColour(truckBlip, Config.Blips.truck.color)
+                        SetBlipAsShortRange(truckBlip, false)
+                        SetBlipHiddenOnLegend(truckBlip, false)
+                        SetBlipFlashes(truckBlip, true)
+                        BeginTextCommandSetBlipName("STRING")
+                        AddTextComponentString(Config.Blips.truck.name)
+                        EndTextCommandSetBlipName(truckBlip)
+                    end
+
+                    CreateThread(function()
+                        local ensureAttempts = 0
+                        while ensureAttempts < 10 do
+                            if truckBlip and DoesBlipExist(truckBlip) then
+                                SetBlipDisplay(truckBlip, 4)
+                                SetBlipAsShortRange(truckBlip, false)
+                                SetBlipFlashes(truckBlip, true)
+                            end
+                            ensureAttempts = ensureAttempts + 1
+                            Wait(200)
+                        end
+                    end)
+
+                    break
+                end
+            end
+
+            attempts = attempts + 1
+            Wait(100)
+        end
+    end)
+end)
+
 
 RegisterNetEvent('olrp_truckheist:client:receiveTracker', function()
     if not currentHeist then return end
@@ -1635,6 +1753,13 @@ RegisterNetEvent('olrp_truckheist:client:failHeist', function(reason)
         ShowNotification(Config.Messages.truckEscaped, "error", 8000)
     else
         ShowNotification(Config.Messages.heistFailed, "error", 8000)
+    end
+    CleanupHeist()
+end)
+
+RegisterNetEvent('olrp_truckheist:client:endHeist', function(notifyType, message)
+    if message and message ~= "" then
+        ShowNotification(message, notifyType or "info", 8000)
     end
     CleanupHeist()
 end)

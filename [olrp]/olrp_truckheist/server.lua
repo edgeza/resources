@@ -220,6 +220,32 @@ function CleanupHeist(heistId)
     end
 end
 
+local function FindHeistByParticipant(source)
+    source = tonumber(source)
+    if not source then return nil, nil end
+
+    for heistId, heistData in pairs(activeHeists) do
+        if heistData.participants then
+            for _, participantId in ipairs(heistData.participants) do
+                if participantId == source then
+                    return heistId, heistData
+                end
+            end
+        end
+    end
+
+    return nil, nil
+end
+
+local function NotifyCrew(heistData, excludeSource, notifyEvent, ...)
+    if not heistData or not heistData.participants then return end
+    for _, participantId in ipairs(heistData.participants) do
+        if not excludeSource or participantId ~= excludeSource then
+            TriggerClientEvent(notifyEvent, participantId, ...)
+        end
+    end
+end
+
 -- Discord Webhook Function
 function SendDiscordLog(title, description, color, fields)
     if not Config.Discord.enabled or Config.Discord.webhook == "" then return end
@@ -407,6 +433,13 @@ RegisterNetEvent('olrp_truckheist:server:startHeist', function()
     -- Start heist - ONLY the heist starter gets the truck and blip
     TriggerClientEvent('olrp_truckheist:client:startHeist', source, heistData, true) -- true = spawn truck
     
+    -- Share heist state with the rest of the crew
+    for _, participantId in ipairs(partyMembers) do
+        if participantId ~= source then
+            TriggerClientEvent('olrp_truckheist:client:startHeist', participantId, heistData, false)
+        end
+    end
+    
     -- Give tracker to all party members after a delay
     SetTimeout(5000, function()
         if activeHeists[heistId] then
@@ -420,8 +453,13 @@ RegisterNetEvent('olrp_truckheist:server:startHeist', function()
     -- Auto cleanup after duration (only if HeistDuration is enabled)
     if Config.HeistDuration and type(Config.HeistDuration) == "number" and Config.HeistDuration > 0 then
         SetTimeout(Config.HeistDuration * 60 * 1000, function()
-            if activeHeists[heistId] then
+            local heistData = activeHeists[heistId]
+            if heistData then
                 TriggerClientEvent('olrp_truckheist:client:failHeist', source, "truckEscaped")
+
+                local crewMessage = Config.Messages and Config.Messages.heistFailedCrew or "The truck escaped before you could finish the heist."
+                NotifyCrew(heistData, source, 'olrp_truckheist:client:endHeist', "error", crewMessage)
+
                 CleanupHeist(heistId)
             end
         end)
@@ -431,30 +469,25 @@ end)
 RegisterNetEvent('olrp_truckheist:server:receiveTracker', function()
     local source = source
     
-    -- Find active heist for this player
-    for heistId, heistData in pairs(activeHeists) do
-        if heistData.playerId == source then
-            heistData.trackerReceived = true
-            TriggerClientEvent('olrp_truckheist:client:receiveTracker', source)
-            break
-        end
+    local heistId, heistData = FindHeistByParticipant(source)
+    if heistData then
+        heistData.trackerReceived = true
+        TriggerClientEvent('olrp_truckheist:client:receiveTracker', source)
     end
 end)
 
 RegisterNetEvent('olrp_truckheist:server:completeDelivery', function()
     local source = source
     
-    -- Find active heist for this player
-    for heistId, heistData in pairs(activeHeists) do
-        if heistData.playerId == source then
-            -- Give reward
-            local reward = GiveReward(source)
-            
-            -- Complete heist
-            TriggerClientEvent('olrp_truckheist:client:completeHeist', source, reward)
-            CleanupHeist(heistId)
-            break
-        end
+    local heistId, heistData = FindHeistByParticipant(source)
+    if heistData then
+        local reward = GiveReward(source)
+        TriggerClientEvent('olrp_truckheist:client:completeHeist', source, reward)
+
+        local crewMessage = Config.Messages and Config.Messages.crewCompleted or "The truck heist has been completed by your crew."
+        NotifyCrew(heistData, source, 'olrp_truckheist:client:endHeist', "success", crewMessage)
+
+        CleanupHeist(heistId)
     end
 end)
 
@@ -462,36 +495,37 @@ RegisterNetEvent('olrp_truckheist:server:truckEscaped', function()
     local source = source
     local Player = GetPlayer(source)
     
-    -- Find active heist for this player
-    for heistId, heistData in pairs(activeHeists) do
-        if heistData.playerId == source then
-            if Player then
-                local playerName = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
-                local playerCitizenId = Player.PlayerData.citizenid
-                
-                -- Calculate heist duration
-                local duration = math.floor((GetGameTimer() - heistData.startTime) / 1000)
-                local minutes = math.floor(duration / 60)
-                local seconds = duration % 60
-                
-                -- Send Discord log for failed heist
-                SendDiscordLog(
-                    "CIT Heist Failed - Truck Escaped",
-                    "The armored truck escaped before being destroyed",
-                    15158332, -- Red color
-                    {
-                        {name = "Player", value = playerName .. " (" .. playerCitizenId .. ")", inline = true},
-                        {name = "Server ID", value = source, inline = true},
-                        {name = "Duration", value = minutes .. "m " .. seconds .. "s", inline = true},
-                        {name = "Reason", value = "Truck escaped", inline = true}
-                    }
-                )
-            end
+    local heistId, heistData = FindHeistByParticipant(source)
+    if heistData then
+        if Player then
+            local playerName = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
+            local playerCitizenId = Player.PlayerData.citizenid
             
-            TriggerClientEvent('olrp_truckheist:client:failHeist', source, "truckEscaped")
-            CleanupHeist(heistId)
-            break
+            -- Calculate heist duration
+            local duration = math.floor((GetGameTimer() - heistData.startTime) / 1000)
+            local minutes = math.floor(duration / 60)
+            local seconds = duration % 60
+            
+            -- Send Discord log for failed heist
+            SendDiscordLog(
+                "CIT Heist Failed - Truck Escaped",
+                "The armored truck escaped before being destroyed",
+                15158332, -- Red color
+                {
+                    {name = "Player", value = playerName .. " (" .. playerCitizenId .. ")", inline = true},
+                    {name = "Server ID", value = source, inline = true},
+                    {name = "Duration", value = minutes .. "m " .. seconds .. "s", inline = true},
+                    {name = "Reason", value = "Truck escaped", inline = true}
+                }
+            )
         end
+        
+        TriggerClientEvent('olrp_truckheist:client:failHeist', source, "truckEscaped")
+
+        local crewMessage = Config.Messages and Config.Messages.heistFailedCrew or "The truck has escaped. The heist has failed."
+        NotifyCrew(heistData, source, 'olrp_truckheist:client:endHeist', "error", crewMessage)
+
+        CleanupHeist(heistId)
     end
 end)
 
@@ -501,6 +535,21 @@ end)
 
 RegisterNetEvent('olrp_truckheist:server:broadcastTruck', function(truckNetId)
     BroadcastTruckNetwork(truckNetId)
+end)
+
+RegisterNetEvent('olrp_truckheist:server:setTruckNetId', function(truckNetId)
+    local source = source
+    local heistId, heistData = FindHeistByParticipant(source)
+
+    if heistData then
+        heistData.truckNetId = truckNetId
+        if heistData.participants then
+            for _, participantId in ipairs(heistData.participants) do
+                TriggerClientEvent('olrp_truckheist:client:setTruckEntity', participantId, truckNetId)
+            end
+        end
+        BroadcastTruckNetwork(truckNetId)
+    end
 end)
 
 
@@ -524,40 +573,41 @@ RegisterNetEvent('olrp_truckheist:server:lootTruck', function()
     local Player = GetPlayer(source)
     if not Player then return end
     
-    -- Find active heist for this player
-    for heistId, heistData in pairs(activeHeists) do
-        if heistData.playerId == source then
-            -- Get player info
-            local playerName = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
-            local playerCitizenId = Player.PlayerData.citizenid
-            
-            -- Calculate heist duration
-            local duration = math.floor((GetGameTimer() - heistData.startTime) / 1000) -- duration in seconds
-            local minutes = math.floor(duration / 60)
-            local seconds = duration % 60
-            
-            -- Give reward
-            local reward = GiveReward(source)
-            
-            -- Send Discord log for heist completion
-            SendDiscordLog(
-                "CIT Heist Completed Successfully",
-                "Player successfully completed the armored truck robbery",
-                3066993, -- Green color
-                {
-                    {name = "Player", value = playerName .. " (" .. playerCitizenId .. ")", inline = true},
-                    {name = "Server ID", value = source, inline = true},
-                    {name = "Reward Received", value = "$" .. reward, inline = true},
-                    {name = "Duration", value = minutes .. "m " .. seconds .. "s", inline = true},
-                    {name = "Participants", value = #heistData.participants, inline = true}
-                }
-            )
-            
-            -- Complete heist
-            TriggerClientEvent('olrp_truckheist:client:completeHeist', source, reward)
-            CleanupHeist(heistId)
-            break
-        end
+    local heistId, heistData = FindHeistByParticipant(source)
+    if heistData then
+        -- Get player info
+        local playerName = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname
+        local playerCitizenId = Player.PlayerData.citizenid
+        
+        -- Calculate heist duration
+        local duration = math.floor((GetGameTimer() - heistData.startTime) / 1000) -- duration in seconds
+        local minutes = math.floor(duration / 60)
+        local seconds = duration % 60
+        
+        -- Give reward
+        local reward = GiveReward(source)
+        
+        -- Send Discord log for heist completion
+        SendDiscordLog(
+            "CIT Heist Completed Successfully",
+            "Player successfully completed the armored truck robbery",
+            3066993, -- Green color
+            {
+                {name = "Player", value = playerName .. " (" .. playerCitizenId .. ")", inline = true},
+                {name = "Server ID", value = source, inline = true},
+                {name = "Reward Received", value = "$" .. reward, inline = true},
+                {name = "Duration", value = minutes .. "m " .. seconds .. "s", inline = true},
+                {name = "Participants", value = #heistData.participants, inline = true}
+            }
+        )
+        
+        -- Complete heist
+        TriggerClientEvent('olrp_truckheist:client:completeHeist', source, reward)
+
+        local crewMessage = Config.Messages and Config.Messages.crewLooted or "Your crew has completed the truck heist."
+        NotifyCrew(heistData, source, 'olrp_truckheist:client:endHeist', "success", crewMessage)
+
+        CleanupHeist(heistId)
     end
 end)
 

@@ -112,39 +112,6 @@ ItemList = {
     ['plush_07a'] = {['name'] = 'plush_07a', ['label'] = 'Plush Toy 07', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_07a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
     ['plush_08a'] = {['name'] = 'plush_08a', ['label'] = 'Plush Toy 08', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_08a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
 
-    --Radio Items
-    ["radio"] = {
-        ["name"] = "radio",
-        ["label"] = "Radio",
-        ["weight"] = 100,
-        ["type"] = "item",
-        ["image"] = "radio.png",
-        ["unique"] = true,
-        ["useable"] = true,
-        ["shouldClose"] = true,
-        ["description"] = "A communication system for person"
-},
-    ["jammer"] = {
-        ["name"] = "jammer",
-        ["label"] = "Radio Jammer",
-        ["weight"] = 10000,
-        ["type"] = "item",
-        ["image"] = "jammer.png",
-        ["unique"] = true,
-        ["useable"] = true,
-        ["shouldClose"] = true,
-        ["description"] = "A device to block radio signals around"
-},
-    ["radiocell"] = {
-        ["name"] = "radiocell",
-        ["label"] = "AAA Cells",
-        ["weight"] = 500,
-        ["type"] = "item",
-        ["image"] = "radiocell.png",
-        ["useable"] = true,
-        ["shouldClose"] = true,
-        ["description"] = "Batteries to powerup radio device"
-}
     --Storm Chaser Items
 
     ['storm_tablet'] = {

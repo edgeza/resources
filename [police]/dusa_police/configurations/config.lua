@@ -170,7 +170,7 @@ Config = {
 
 
     -- Radio
-    EnableRadio = true,
+    EnableRadio = false,
     RadioItem = 'radio',
     RadioCommand = 'radio',
     FrequencyStep = 0.01,

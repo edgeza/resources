@@ -3,8 +3,8 @@ games { 'gta5' }
 lua54 'yes'
 
 author 'Keres & Dév'
-description 'Brutal Gang Menu - store.brutalscripts.com'
-version '1.1.8'
+description 'Brutal Executions - store.brutalscripts.com'
+version '1.0.7'
 
 data_file "DLC_ITYP_REQUEST" "stream/brt_rope.ytyp"
 
@@ -12,18 +12,18 @@ client_scripts {
 	'config.lua',
 	'core/client-core.lua',
 	'cl_utils.lua',
-	'client/*.lua'
+	'client/*.lua',
 }
 
 server_scripts { 
 	'@mysql-async/lib/MySQL.lua', 
 	'config.lua',
 	'core/server-core.lua',
+	'sv_utils.lua',
 	'server/*.lua',
 }
 
-export 'CurrentPlayerAction'
-export 'OpenActionsMenu'
+export 'OpenExecutionsMenu'
 
 shared_script {
 	'@ox_lib/init.lua'
@@ -45,6 +45,7 @@ dependencies {
 escrow_ignore {
 	'config.lua',
 	'cl_utils.lua',
+	'sv_utils.lua',
 	'core/client-core.lua',
 	'core/server-core.lua',
 }

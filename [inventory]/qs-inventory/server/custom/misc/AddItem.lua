@@ -65,6 +65,36 @@ function AddItem(source, item, amount, slot, info, data, created, lastinventory,
     end
 
     if (slot and inventory[slot]) and (inventory[slot].name:lower() == item:lower()) and (itemInfo['type'] == 'item' and not itemInfo['unique']) then
+        -- Handle freshness averaging for decayable items (any item with decay property)
+        if itemInfo['decay'] and itemInfo['decay'] > 0 then
+            local existingInfo = inventory[slot].info or {}
+            local newInfo = info or {}
+            local existingAmount = inventory[slot].amount
+            local newAmount = amount
+            
+            -- Get existing freshness (default 100 if not set)
+            local existingFreshness = existingInfo.freshness or 100
+            local newFreshness = newInfo.freshness or 100
+            
+            -- Calculate weighted average freshness
+            local totalAmount = existingAmount + newAmount
+            local avgFreshness = ((existingFreshness * existingAmount) + (newFreshness * newAmount)) / totalAmount
+            
+            -- Update the info with averaged freshness and preserve created time
+            inventory[slot].info = inventory[slot].info or {}
+            inventory[slot].info.freshness = math.floor(avgFreshness * 100) / 100 -- Round to 2 decimals
+            if newInfo.created then
+                -- Keep the older created time (the one that's been decaying longer)
+                if not existingInfo.created or (newInfo.created < existingInfo.created) then
+                    inventory[slot].info.created = newInfo.created
+                else
+                    inventory[slot].info.created = existingInfo.created
+                end
+            elseif not inventory[slot].info.created then
+                inventory[slot].info.created = os.time()
+            end
+        end
+        
         inventory[slot].amount = inventory[slot].amount + amount
         TriggerEvent('esx:onAddInventoryItem', source, item, amount)
         TriggerClientEvent('esx:addInventoryItem', source, item, amount)
@@ -94,6 +124,15 @@ function AddItem(source, item, amount, slot, info, data, created, lastinventory,
         UpdateInventoryState(source)
         return true
     elseif not itemInfo['unique'] and slot or slot and inventory[slot] == nil then
+        -- Initialize freshness for decayable items (any item with decay property)
+        if itemInfo['decay'] and itemInfo['decay'] > 0 then
+            if type(info) ~= 'table' then
+                info = {}
+            end
+            info.freshness = info.freshness or 100
+            info.created = info.created or os.time()
+        end
+        
         inventory[slot] = ItemInfo({
             name = itemInfo['name'],
             amount = amount,

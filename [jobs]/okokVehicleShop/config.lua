@@ -3,7 +3,7 @@ Config, Locales = {}, {}
 -- =========================
 -- CORE/TOGGLES
 -- =========================
-Config.Debug = true -- true = will print some debug messages
+Config.Debug = false -- true = will print some debug messages
 Config.Locale = 'en' -- en
 Config.AddVehiclesFromVehiclesFile = false -- true = will add vehicles from qbcore/shared/vehicles.lua
 Config.QBPermissionsUpdate = true -- set it to true if you have the latest Permissions update
@@ -18,7 +18,7 @@ Config.ShowOwnerBlip = false -- Activate/Deactivate owner blips
 Config.ShowBuyVehicleShopBlip = false -- Activate/Deactivate buy shop blip
 Config.ShowHasOwnerShopBlip = true -- Activate/Deactivate blip of shops with "hasOwner = false"
 Config.TestDrive = true -- Activate/Deactivate test drive
-Config.DevMode = false -- Allows you to restart the script (IMPORTANT: only set this to true if you are configuring the script)
+Config.DevMode = true -- Allows you to restart the script (IMPORTANT: only set this to true if you are configuring the script)
 Config.EventPrefix = "okokVehicleshop" -- this will change the prefix of the events name so if Config.EventPrefix = "example" the events will be "example:event"
 Config.QBCorePrefix = "QBCore"
 Config.qbPrefix = "qb"
@@ -37,7 +37,7 @@ Config.TransitionTime = 4000 -- how much time it takes to go from one camera to 
 Config.ShakeAmplitude = 0.2 -- camera shake
 Config.UseKMh = true -- true = use KM/h | false = use miles/h
 Config.MaxVehiclesSpeed = 320 -- Max speed a vehicle can go at (it is only used for UI purposes, it does NOT change the speed of a vehicle)
-Config.TestDriveTime = 30 -- In seconds ---- OLD VALUE CHANGING WHILE BEEING USED: 40
+Config.TestDriveTime = 40 -- In seconds ---- OLD VALUE CHANGING WHILE BEEING USED: 40
 Config.StopTestDriveCmd = "cancel" -- command to stop the test drive
 
 -- Vehicle Listing Settings
@@ -53,7 +53,7 @@ Config.Key = 38 -- [E] Key to open the interaction, check here the keys ID: http
 
 -- Currency/Business
 Config.Currency = '$' -- Currency symbol
-Config.CurrencySide = 'left' -- left | right
+Config.CurrencySide = 'right' -- left | right
 Config.MaxEmployeesPerDealership = 5 -- Maximum number of employees per dealership
 Config.HireRange = 3 -- Range to hire an employee
 Config.WeeklyGoalResetHours = 168 -- How many hours to reset the weekly goal (168 = 1 week)
@@ -67,9 +67,9 @@ Config.OwnerBuyVehiclePercentage = 10 -- How much of a discount the owner has to
 Config.SellBusinessReceivePercentage = 50 -- How much % a player will receive for selling his business (in percentage, 50 = 50%)
 
 -- Plate Settings
-Config.PlateLetters = 4 -- How many letters the plate has
-Config.PlateNumbers = 4 -- How many numbers the plate has
-Config.PlateUseSpace = false -- If the plate uses spaces between letters and numbers
+Config.PlateLetters = 2 -- How many letters the plate has
+Config.PlateNumbers = 2 -- How many numbers the plate has
+Config.PlateUseSpace = true -- If the plate uses spaces between letters and numbers
 Config.EnableCustomPlates = true -- If true = players can use custom plates for their vehicles
 Config.CustomPlatePrice = 1000 -- The price for a custom plate
 Config.EnablePlatePrefix = true -- If true = the plate will have a prefix
@@ -149,7 +149,7 @@ Config.FinanceVehiclesSettings = {
 	["payment_check_interval"] = 12, -- real hours
 	["payments"] = 12, -- how many payments will be made
 	["max_failed_payments"] = 3, -- maximum number of failed payments before the vehicle is repossessed
-	["max_financed_vehicles"] = 0, -- maximum number of financed vehicles per player
+	["max_financed_vehicles"] = 5, -- maximum number of financed vehicles per player
 }
 
 -- =========================
@@ -157,10 +157,6 @@ Config.FinanceVehiclesSettings = {
 -- =========================
 Config.Categories = { -- Get the type from the database and make sure to add it here according to the type of vehicle for the test drive to be able to identify the vehicle type
 	["car"] = { -- car categories
-		vehicles = true,
-		luxury = true,
-	},
-	["lux"] = { -- lux shop categories (maps to car categories)
 		vehicles = true,
 		luxury = true,
 	},
@@ -212,12 +208,12 @@ Config.Stands = {
 		licenseType = "drive_a", -- if you want to use a license system you'll need to set it up on sv_utils.lua
 		currency = "bank", -- used to buy/sell the business and buy vehicle
 		hasOwner = false, -- true = this vehicle shop can have a owner and will need maintenance to have stock | false = no owner and with vehicles all the time, price = max_price set on the database
-		blipCoords = vec3(290.65, -1161.58, 29.13), -- blip position for the vehicle shop
+		blipCoords = vec3(288.18, -1171.55, 29.94), -- blip position for the vehicle shop
 		isVip = false, -- if set to true IT WON'T BE OWNED BY ANYONE and will use vip coins instead of currency, check sv_utils.lua to change the vip coins functions
 
 		vehicleCameraSettings = {
-			location = vec3(290.26, -1160.76, 29.13),
-			camera = vec4(285.1, -1157.5, 28.91, 237.96),
+			location = vec3(291.77, -1161.12, 29.13),
+			camera = vec4(286.57, -1158.65, 28.91, 239.47),
 		},
 
 		vehicleSettings = {
@@ -261,8 +257,8 @@ Config.Stands = {
 		isVip = false, -- if set to true IT WON'T BE OWNED BY ANYONE and will use vip coins instead of currency, check sv_utils.lua to change the vip coins functions
 
 		vehicleCameraSettings = {
-			location = vec3(-184.88, -1174.7, 23.13),
-			camera = vec4(-189.32, -1170.52, 22.94, 224.8), 
+			location = vec3(-185.11, -1174.75, 23.13),
+			camera = vec4(-187.99, -1169.89, 22.94, 208.23),
 		},
 
 		vehicleSettings = {
@@ -276,7 +272,7 @@ Config.Stands = {
 			paid = true, -- true = the player will pay for the test drive | false = the player will not pay for the test drive
 			price = 100, -- Price of the test drive
 			time = 45, -- Time of the test drive in seconds
-			plate = "TEST", -- Plate of the test drive vehicle [max 8 characters]
+			plate = "ONE LIFE", -- Plate of the test drive vehicle [max 8 characters]
 			carLocation = vector4(-157.49, -1172.91, 24.62, 0.0), -- Location of the car test drive
 			boatLocation = vector4(-796.85, -1502.27, -0.09, 113.55), -- Location of the boat test drive
 			airLocation = vector4(-1332.52, -2205.1, 13.34, 151.03), -- Location of the air test drive

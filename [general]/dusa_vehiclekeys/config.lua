@@ -14,8 +14,10 @@ Config.LockNPCParkedCars = true                              -- Lock parked NPC 
 Config.RemoveLockpickNormal = 0.0                            -- Chance to remove lockpick on fail
 Config.RemoveLockpickAdvanced = 0.0                          -- Chance to remove advanced lockpick on fail
 Config.LockPickDoorEvent = function()
-    local result = exports['dusa_lockpick']:startLockpick(5) -- 5 means try chance for lockpick minigame
-    LockpickFinishCallback(result)
+    -- Use qbx_lockpick instead of dusa_lockpick
+    TriggerEvent('qb-lockpick:client:openLockpick', function(success)
+        LockpickFinishCallback(success)
+    end)
 end
 
 Config.PoliceJobs = { 'police' }
@@ -85,7 +87,7 @@ Config.Classes = { -- Classes that will show luxury key fob UI
 ----------------------------------------------------------------
 ----                       HOTWIRE                          ----
 ----------------------------------------------------------------
-Config.EnableHotwire = true       -- Enable/disable hotwiring system | true = normal hotwiring | false = everyone has keys to all vehicles
+Config.EnableHotwire = false       -- Enable/disable hotwiring system | true = normal hotwiring | false = everyone has keys to all vehicles
 Config.HotwireChance = 50         -- Hotwiring chance (For hotwire minigame)
 Config.TimeBetweenHotwires = 5000 -- Place a delay between hotwire attempts
 Config.minHotwireTime = 1000      -- Define time in ms for min-max hotwire progressbar length

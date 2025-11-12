@@ -142,8 +142,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 10000,
+                    max = 20000
                 }
             },
             GetItem = true, -- Get Items
@@ -159,8 +159,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 15000,
+                    max = 25000
                 }
             },
             GetItem = true, -- Get Items
@@ -176,8 +176,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 10000,
+                    max = 15000
                 }
             },
             GetItem = true, -- Get Items
@@ -194,8 +194,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 30000,
+                    max = 35000
                 }
             },
             GetItem = true, -- Get Items
@@ -211,8 +211,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -229,8 +229,8 @@ Config.Reward = {
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
 
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -247,8 +247,8 @@ Config.Reward = {
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
 
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -265,8 +265,8 @@ Config.Reward = {
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
 
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -284,8 +284,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 10000,
+                    max = 25000
                 }
             },
             GetItem = true, -- Get Items
@@ -301,8 +301,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -319,8 +319,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -336,8 +336,8 @@ Config.Reward = {
                 MoneyItem = "markedbills", --  -- The item u want to take as money (make sure to set the Moneytype to "item")
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -354,8 +354,8 @@ Config.Reward = {
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
 
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -372,8 +372,8 @@ Config.Reward = {
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
 
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items
@@ -390,8 +390,8 @@ Config.Reward = {
                 ItemInfo = false,          -- Item info for the cash item, this is used if you have markedbills that has random amount of money in info
 
                 MoneyReward = {            -- Set the min and the max cash or bank reward
-                    min = 200,
-                    max = 400
+                    min = 2000,
+                    max = 4000
                 }
             },
             GetItem = true, -- Get Items

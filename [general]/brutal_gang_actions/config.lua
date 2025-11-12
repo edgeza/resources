@@ -11,7 +11,7 @@ More informations about the script:   https://docs.brutalscripts.com
 
 Config = {
     Core = 'QBCORE',  -- 'ESX' / 'QBCORE' | Other core setting on the 'core' folder.
-    Target = 'qb-target', -- 'oxtarget' / 'qb-target' 
+    Target = 'oxtarget', -- 'oxtarget' / 'qb-target' 
     Inventory = 'quasar_inventory', -- 'ox_inventory' / 'qb_inventory' / 'quasar_inventory' / 'chezza_inventory' / 'codem_inventory' / 'core_inventory' / 'origen_inventory' / 'ps-inventory' // Custom can be add in the cl_utils.lua!!!
     ProgressBar = 'pogressBar', -- 'progressBars' / 'pogressBar' / 'mythic_progbar' // Custom can be add in the cl_utils.lua!!!
     BrutalNotify = true, -- Buy here: (4€+VAT) https://store.brutalscripts.com | Or set up your own notify >> cl_utils.lua

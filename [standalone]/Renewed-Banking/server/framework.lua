@@ -181,9 +181,15 @@ end
 function IsJobAuth(job, grade)
     local numGrade = tonumber(grade)
     if Framework == 'qb' or Framework == 'qbx' then
-        return Jobs[job].grades[grade] and Jobs[job].grades[grade].bankAuth or Jobs[job].grades[numGrade] and Jobs[job].grades[numGrade].bankAuth
+        local jobData = Jobs and Jobs[job]
+        if not jobData or not jobData.grades then return false end
+        local gradeData = jobData.grades[grade] or jobData.grades[numGrade]
+        return gradeData and gradeData.bankAuth or false
     elseif Framework == 'esx' then
-        return Jobs[job].grades[grade] and Jobs[job].grades[grade].name == 'boss' or Jobs[job].grades[numGrade] and Jobs[job].grades[numGrade].name == 'boss'
+        local jobData = Jobs and Jobs[job]
+        if not jobData or not jobData.grades then return false end
+        local gradeData = jobData.grades[grade] or jobData.grades[numGrade]
+        return gradeData and gradeData.name == 'boss' or false
     end
 end
 

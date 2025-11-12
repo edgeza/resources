@@ -27,7 +27,7 @@ Config.Framework = 2 --[ 1 = ESX / 2 = QBCore / 3 = Other ] Choose your framewor
 Config.Inventory = 3
 
 -- Choose your dispatch script
--- 1 = Codesign Dispatch (ps-dispatch)
+-- 1 = Codesign Dispatch (cd-dispatch)
 -- 2 = ProjectSloth Dispatch (ps-dispatch)
 -- 3 = Core Dispatch (core_dispatch)
 -- 4 = Quasar Dispatch (qs-dispatch)
@@ -123,7 +123,7 @@ Config.DrugOptions = {
     saleRandomQuantity = false, -- Enables the randomization of the amount of drugs that the player will sell
     saleAlwaysReport = true, -- If enabled, police will get a dispatch for accepted, rejected and reported.
 
-    minimumCops = 2, -- The minimum number of police officers on duty required for the drug selling feature
+    minimumCops = 0, -- The minimum number of police officers on duty required for the drug selling feature
 
     categoryLowIcon = 'fas fa-cannabis', -- The icon for low category drugs when targeting a ped (https://fontawesome.com/)
     categoryMidIcon = 'fas fa-syringe', -- The icon for medium category drugs when targeting a ped (https://fontawesome.com/)

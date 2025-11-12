@@ -19,6 +19,29 @@ local stashProgressActive = false
 local stashProgressStartTime = 0
 local stashProgressDuration = 30000 -- 30 seconds in milliseconds (fallback value)
 local stashAlreadyAccessed = false
+local stashHackActive = false
+local voltLabResourceName = Config.MilitaryStash and Config.MilitaryStash.hack and Config.MilitaryStash.hack.resource or "ultra-voltlab"
+
+local function clamp(value, minValue, maxValue)
+    return math.min(math.max(value, minValue), maxValue)
+end
+
+local function isFunction(value)
+    return type(value) == "function"
+end
+
+local function isVoltLabAvailable(resourceName)
+    if not resourceName or resourceName == "" then
+        return false
+    end
+    if not isFunction(GetResourceState) then
+        return true
+    end
+    local state = GetResourceState(resourceName)
+    return state == "started" or state == "starting"
+end
+
+local voltLabAvailable = isVoltLabAvailable(voltLabResourceName)
 
 
 -- Initialize
@@ -91,6 +114,18 @@ CreateThread(function()
     end)
 end)
 
+AddEventHandler('onResourceStart', function(resourceName)
+    if resourceName == voltLabResourceName then
+        voltLabAvailable = true
+    end
+end)
+
+AddEventHandler('onResourceStop', function(resourceName)
+    if resourceName == voltLabResourceName then
+        voltLabAvailable = false
+    end
+end)
+
 -- Player data updates
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
@@ -160,6 +195,7 @@ RegisterNetEvent('militaryheist:client:restartHeist', function()
     exports['olrp_militaryheist']:UpdateUnitCounts()
     -- Reset stash access for new heist cycle
     stashAlreadyAccessed = false
+    stashHackActive = false
     stashProgressActive = false
     TriggerServerEvent('militaryheist:server:initialSpawn')
 end)
@@ -288,10 +324,24 @@ CreateThread(function()
                             OpenMilitaryStash()
                         end
                     else
-                        QBCore.Functions.DrawText3D(stashCoords.x, stashCoords.y, stashCoords.z + 1.0, "[E] Access Military Storage")
-                        
-                        if IsControlJustPressed(0, 38) then -- E key
-                            StartStashProgress()
+                        local hackConfig = Config.MilitaryStash.hack
+
+                        if hackConfig and hackConfig.enabled then
+                            if stashHackActive then
+                                QBCore.Functions.DrawText3D(stashCoords.x, stashCoords.y, stashCoords.z + 1.0, "VoltLab hack in progress...")
+                            elseif not voltLabAvailable then
+                                QBCore.Functions.DrawText3D(stashCoords.x, stashCoords.y, stashCoords.z + 1.0, "VoltLab system offline - contact staff")
+                            else
+                                QBCore.Functions.DrawText3D(stashCoords.x, stashCoords.y, stashCoords.z + 1.0, "[E] Initiate VoltLab Hack")
+                                if IsControlJustPressed(0, 38) then -- E key
+                                    StartStashProgress()
+                                end
+                            end
+                        else
+                            QBCore.Functions.DrawText3D(stashCoords.x, stashCoords.y, stashCoords.z + 1.0, "[E] Access Military Storage")
+                            if IsControlJustPressed(0, 38) then -- E key
+                                StartStashProgress()
+                            end
                         end
                     end
                 elseif aliveUnits > 0 then
@@ -307,8 +357,14 @@ CreateThread(function()
 end)
 
 -- Start stash progress
+local function BeginStashProgress()
+    stashProgressActive = true
+    stashProgressStartTime = GetGameTimer()
+    QBCore.Functions.Notify("Starting to access military storage vault...", 'info', 5000)
+end
+
 function StartStashProgress()
-    if stashProgressActive or stashAlreadyAccessed then
+    if stashProgressActive or stashAlreadyAccessed or stashHackActive then
         return
     end
     
@@ -319,10 +375,47 @@ function StartStashProgress()
         return
     end
     
-    stashProgressActive = true
-    stashProgressStartTime = GetGameTimer()
-    
-    QBCore.Functions.Notify("Starting to access military storage vault...", 'info', 5000)
+    local hackConfig = Config.MilitaryStash.hack
+    if hackConfig and hackConfig.enabled then
+        local configuredResource = hackConfig.resource or voltLabResourceName
+        if configuredResource ~= voltLabResourceName then
+            voltLabResourceName = configuredResource
+        end
+
+        voltLabAvailable = isVoltLabAvailable(voltLabResourceName)
+        if not voltLabAvailable then
+            QBCore.Functions.Notify("VoltLab system is not available. Contact staff to enable the hacking module.", 'error', 6000)
+            return
+        end
+
+        stashHackActive = true
+        local hackTime = clamp(math.floor(hackConfig.time or 45), 10, 60)
+
+        QBCore.Functions.Notify("Initiating VoltLab security bypass...", 'info', 5000)
+        
+        TriggerEvent('ultra-voltlab', hackTime, function(result, reason)
+            stashHackActive = false
+            
+            if result == 1 then
+                QBCore.Functions.Notify("VoltLab hack successful! Accessing storage...", 'success', 4000)
+                BeginStashProgress()
+                return
+            end
+            
+            local message = "VoltLab hack failed!"
+            if result == 2 then
+                message = "VoltLab hack failed: timed out!"
+            elseif result == -1 then
+                message = "VoltLab hack error: " .. (reason or "Unknown issue")
+            elseif reason and reason ~= "" then
+                message = "VoltLab hack failed: " .. reason
+            end
+            QBCore.Functions.Notify(message, 'error', 5000)
+        end)
+        return
+    end
+
+    BeginStashProgress()
 end
 
 -- Open military stash

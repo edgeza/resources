@@ -105,9 +105,9 @@ Config.PoliceCanSeeSixthSlot         = true                    -- [EDIT] Police 
 Config.PoliceJobs                    = { 'police', 'sheriff' } -- [EDIT] Jobs treated as police.
 Config.BlockedSlot                   = true                    -- [EDIT] Lock 6th slot to prevent stealing.
 Config.GiveItemHideName              = false                   -- [EDIT] Hide item names on give; show only ID.
-Config.OpenProgressBar               = false                   -- [EDIT] Show progress bar on open (dup-prevention).
+Config.OpenProgressBar               = true                   -- [EDIT] Show progress bar on open (dup-prevention).
 Config.EnableSounds                  = true                    -- [EDIT] Toggle default inventory sounds.
-Config.EnableThrow                   = true                    -- [EDIT] Allow throwing items.
+Config.EnableThrow                   = false                    -- [EDIT] Allow throwing items.
 Config.UseJonskaItemThrow            = false                   -- [EDIT] Use custom throw (see custom/misc/jonska.lua).
 Config.EnableTrade                   = true                    -- [EDIT] Safe MMORPG-style trade.
 Config.EnableChangeLabel             = true                    -- [EDIT] One-click rename items.
@@ -142,6 +142,11 @@ Config.LabelChangePrice              = false -- [EDIT] Price or false for free.
 Config.BlockedLabelChangeItems       = {     -- [EDIT] Items that cannot be renamed.
     money = true,
     phone = true,
+    drug_ecstasy = true,
+    drug_lean = true,
+    drug_lsd = true,
+    drug_meth = true,
+    cocaine = true,
 }
 
 --──────────────────────────────────────────────────────────────────────────────
@@ -341,7 +346,7 @@ Config.Genders                       = {
 --──────────────────────────────────────────────────────────────────────────────
 Config.OpenInventoryAnim             = true                                      -- [EDIT] Play animation when opening inventory
 Config.OpenInventoryScene            = false                                     -- [EDIT] Toggle scene animation
-Config.Logo                          = 'https://i.ibb.co/CJfj6KV/Mini-copia.png' -- [EDIT] Logo (URL or local path)
+Config.Logo                          = 'https://media.discordapp.net/attachments/1413813009016684616/1425597683170803874/logo.png?ex=6914550d&is=6913038d&hm=7ec03c78b977ff881963a6170bca14186532c0a51f55499ae1fdee7440f1d597&=&format=webp&quality=lossless.png' -- [EDIT] Logo (URL or local path)
 Config.IdleCamera                    = false                                     -- [EDIT] Enable idle camera while inventory open
 
 --──────────────────────────────────────────────────────────────────────────────

@@ -139,12 +139,27 @@ AddEventHandler('brutal_gangs:client:utils:CreateVehicle', function(Vehicle)
     SetVehicleFuelLevel(Vehicle, 100.0)
     DecorSetFloat(Vehicle, "_FUEL_LEVEL", GetVehicleFuelLevel(Vehicle))
 
+    -- Get vehicle plate
+    local plate = nil
+    if Config['Core']:upper() == 'QBCORE' then
+        plate = QBCore.Functions.GetPlate(Vehicle)
+    else
+        plate = GetVehicleNumberPlateText(Vehicle)
+    end
+
+    -- Brutal Keys support
     if Config.BrutalKeys and GetResourceState("brutal_keys") == "started" then 
         exports.brutal_keys:addVehicleKey(plate, plate) 
     end
 
-    if Config['Core']:upper() == 'QBCORE' then
-        TriggerEvent("vehiclekeys:client:SetOwner", QBCore.Functions.GetPlate(Vehicle))
+    -- Dusa Vehicle Keys support
+    if GetResourceState("dusa_vehiclekeys") == "started" then
+        if plate then
+            TriggerEvent("vehiclekeys:client:SetOwner", plate)
+        end
+    elseif Config['Core']:upper() == 'QBCORE' then
+        -- Fallback to QBCore vehiclekeys if dusa_vehiclekeys is not running
+        TriggerEvent("vehiclekeys:client:SetOwner", plate)
     end
 end)
 

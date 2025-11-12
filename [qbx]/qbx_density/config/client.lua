@@ -6,6 +6,6 @@ return {
     parked = 0.1, -- Density of parked vehicles
     vehicle = 0.1, -- Density of vehicles
     randomvehicles = 0.1, -- Density of random vehicles
-    peds = 0.1, -- Density of random peds (civilians, etc.)
-    scenario = 0.1, -- Density of scenario peds (bikers, gangsters, etc.)
+    peds = 0.5, -- Density of random peds (civilians, etc.) - Increased for more NPCs walking around
+    scenario = 0.5, -- Density of scenario peds (walking NPCs on sidewalks, walkways, etc.) - Increased for more NPCs
 }

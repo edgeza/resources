@@ -124,7 +124,10 @@ if Config['Core']:upper() == 'ESX' then
 
     function GetPlayerJob(source)
         local xPlayer = GETPFI(source)
-        return xPlayer.job.name
+        if not xPlayer then
+            return 'none'
+        end
+        return xPlayer.job and xPlayer.job.name or 'none'
     end
 
     function CreateCoreJob(name, label, grades)
@@ -228,7 +231,16 @@ elseif Config['Core']:upper() == 'QBCORE' then
 
     function GetPlayerJob(source)
         local xPlayer = GETPFI(source)
-        return xPlayer.PlayerData.gang.name
+        if not xPlayer then
+            return 'none'
+        end
+
+        local gang = xPlayer.PlayerData and xPlayer.PlayerData.gang
+        if gang and gang.name then
+            return gang.name
+        end
+
+        return 'none'
     end
 
     function CreateCoreJob(name, label, grades)

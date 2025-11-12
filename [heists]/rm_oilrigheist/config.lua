@@ -8,7 +8,7 @@ Config['OilRigHeist'] = {
         eventName = 'esx:getSharedObject', -- If your framework using trigger event for shared object, you can set in here.
         targetScript = 'ox_target' -- Target script name (qtarget or qb-target or ox_target)
     },
-    ["dispatch"] = "default", -- cd_dispatch | qs-dispatch | ps-dispatch | rcore_dispatch | default
+    ["dispatch"] = "cd_dispatch", -- cd_dispatch | qs-dispatch | ps-dispatch | rcore_dispatch | default
     ['requiredPoliceCount'] = 0, -- required police count for start heist
     ['dispatchJobs'] = {'police', 'sheriff'},
     ['requiredItems'] = { -- Add this items to database or shared. Don't change the order, you can change the item names.

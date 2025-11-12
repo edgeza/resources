@@ -98,24 +98,24 @@ Config.ExcludedJobs = {
 
 -- Patrol Settings
 Config.PatrolSettings = {
-    walkSpeed = 1.0,
-    runSpeed = 2.5,
-    waitTime = {min = 3000, max = 8000}, -- Wait time between patrol points (ms)
-    detectionRange = 50.0, -- How far they can detect players
-    shootingRange = 30.0,  -- How far they can shoot
-    alertRange = 100.0     -- How far they alert other units
+    walkSpeed = 1.2,
+    runSpeed = 3.0,
+    waitTime = {min = 1500, max = 4000}, -- Wait time between patrol points (ms)
+    detectionRange = 70.0, -- How far they can detect players
+    shootingRange = 45.0,  -- How far they can shoot
+    alertRange = 130.0     -- How far they alert other units
 }
 
 -- Spawn Settings
 Config.SpawnSettings = {
-    maxUnits = 35, -- Maximum military units spawned (matches all spawn points)
-    respawnTime = 3600000, -- 1 hour in milliseconds (3600000ms = 1 hour)
+    maxUnits = 50, -- Maximum military units spawned (matches all spawn points)
+    respawnTime = 900000, -- 15 minutes in milliseconds (more frequent reinforcement)
     spawnDistance = 500.0, -- Distance from base to spawn units
     despawnTime = 10000, -- 10 seconds in milliseconds for dead units
-    cullingDistance = 120.0, -- NPCs beyond this distance are frozen (performance optimization) - Reduced for better performance
-    nearbyDistance = 60.0, -- NPCs within this distance update more frequently - Reduced for better performance
+    cullingDistance = 150.0, -- NPCs beyond this distance are frozen (performance optimization)
+    nearbyDistance = 75.0, -- NPCs within this distance update more frequently
     usePredefinedSpawns = true, -- Use predefined spawn points instead of random spawning
-    autoRespawn = false -- Disable automatic respawning of units
+    autoRespawn = true -- Enable automatic respawning of units
 }
 
 -- Predefined Military Unit Spawn Points
@@ -190,7 +190,7 @@ Config.HeistRestart = {
 Config.MilitaryStash = {
     enabled = true,
     location = vector3(1662.79, -3.48, 173.77), -- Military storage vault location
-    requiredUnitsKilled = 35, -- Must kill all units to access
+    requiredUnitsKilled = 50, -- Must kill all units to access
     stashId = "military_base_stash",
     stashLabel = "Military Base Storage",
     stashSlots = 50,
@@ -229,5 +229,10 @@ Config.MilitaryStash = {
     },
     accessCooldown = 0, -- No cooldown
     notificationMessage = "All military units eliminated! Storage vault is now accessible.",
-    accessDeniedMessage = "You must eliminate all military units before accessing the storage vault."
+    accessDeniedMessage = "You must eliminate all military units before accessing the storage vault.",
+    hack = {
+        enabled = true,
+        resource = "ultra-voltlab",
+        time = 45 -- Seconds available to complete the VoltLab hack (10-60)
+    }
 }

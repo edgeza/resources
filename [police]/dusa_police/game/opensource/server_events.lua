@@ -95,8 +95,8 @@ if Config.EnableWheelLock then
     RegisterServerEvent('police:server:attachWheelLock', function(netId)
         local src = source
         local vehicle = NetworkGetEntityFromNetworkId(netId)
-        
-        if not DoesEntityExist(vehicle) or not IsEntityAVehicle(vehicle) then return end
+
+        if vehicle == 0 or not DoesEntityExist(vehicle) or GetEntityType(vehicle) ~= 2 then return end
         
         local Player = Framework.GetPlayer(src)
         if not Player or not Functions.IsLEO(Player.Job.Name) then return end
@@ -110,8 +110,8 @@ if Config.EnableWheelLock then
     RegisterServerEvent('police:server:removeWheelLock', function(netId)
         local src = source
         local vehicle = NetworkGetEntityFromNetworkId(netId)
-        
-        if not DoesEntityExist(vehicle) or not IsEntityAVehicle(vehicle) then return end
+
+        if vehicle == 0 or not DoesEntityExist(vehicle) or GetEntityType(vehicle) ~= 2 then return end
         
         local Player = Framework.GetPlayer(src)
         if not Player or not Functions.IsLEO(Player.Job.Name) then return end

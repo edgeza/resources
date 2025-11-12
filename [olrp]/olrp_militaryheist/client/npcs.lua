@@ -255,6 +255,10 @@ function SpawnMilitaryUnit(unitConfig, spawnPoint)
         SetPedCombatAttributes(ped, 3, false)  -- Prevent friendly fire
         SetPedCombatAttributes(ped, 58, true)  -- Disable hurt by friendly fire
         SetPedCombatRange(ped, 2)
+        SetPedCombatAbility(ped, 2)            -- Professional combat ability
+        SetPedCombatMovement(ped, 2)           -- Will flank and move aggressively
+        SetPedHearingRange(ped, Config.PatrolSettings.detectionRange + 30.0)
+        SetPedSeeingRange(ped, Config.PatrolSettings.detectionRange + 30.0)
         
         -- Multiple layers of friendly fire prevention
         SetCanAttackFriendly(ped, false, false)
@@ -356,7 +360,7 @@ function StartUnitBehavior(unitData)
                     SetBlockingOfNonTemporaryEvents(ped, true)
                     SetPedCombatAttributes(ped, 17, true)
                 end
-                Wait(1000) -- Increased wait time for non-targeting units
+                Wait(500) -- Shorter wait to re-evaluate targeting
             else
                 -- Player can be targeted - re-enable combat
                 SetBlockingOfNonTemporaryEvents(ped, false)
@@ -401,16 +405,16 @@ function StartUnitBehavior(unitData)
                 
                 -- PERFORMANCE: Aggressive variable wait time based on distance
                 if distanceToPlayer <= Config.SpawnSettings.nearbyDistance then
-                    Wait(750) -- Increased from 500ms
+                    Wait(300) -- Faster reactivity when close
                 elseif distanceToPlayer <= Config.PatrolSettings.detectionRange then
-                    Wait(1500) -- Increased from 1000ms
+                    Wait(900) -- Quicker reaction inside detection range
                 else
-                    Wait(3000) -- Increased from 2000ms
+                    Wait(1800) -- Quicker updates for distant units
                 end
             end
         else
             -- NPC is too far - run much slower update
-            Wait(8000) -- Increased from 5000ms
+            Wait(5000) -- Check distant NPCs a bit more often
         end
     end
 end
@@ -458,7 +462,7 @@ function EngagePlayer(unitData, playerPed, playerCoords, distance)
             -- Clear any previous tasks to ensure fresh targeting
             ClearPedTasks(ped)
             Wait(50)
-            TaskShootAtEntity(ped, playerPed, 3000, GetHashKey("FIRING_PATTERN_FULL_AUTO"))
+            TaskShootAtEntity(ped, playerPed, 5000, GetHashKey("FIRING_PATTERN_FULL_AUTO"))
             
             -- Notify player if not already notified
             if not unitData.currentTarget then
@@ -472,7 +476,7 @@ function EngagePlayer(unitData, playerPed, playerCoords, distance)
         -- Move towards player while keeping weapon ready
         -- PERFORMANCE: Only set task if target changed or not moving to player
         if unitData.currentTarget ~= playerPed then
-            TaskGoToEntity(ped, playerPed, -1, 3.0, 3.0, 1073741824, 0)
+            TaskGoToEntity(ped, playerPed, -1, 3.0, 4.0, 1073741824, 0)
             unitData.currentTarget = playerPed
             unitData.lastTaskUpdate = GetGameTimer()
         end

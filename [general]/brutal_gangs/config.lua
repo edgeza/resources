@@ -72,7 +72,7 @@ Config = {
         [0] = {
             maxMembersCount = 15,
 
-            vehicles = {amount = 80, price = nil},
+            vehicles = {amount = 120, price = nil},
             stash = {size = 1400, price = nil},
             ranks = {amount = 3, price = nil},
             raid = {available = false, price = nil},
@@ -82,7 +82,7 @@ Config = {
             price = {money = 50000, rep = 3750},
             maxMembersCount = 15,
 
-            vehicles = {amount = 85, price = {money = 15000, rep = 525}},
+            vehicles = {amount = 130, price = {money = 15000, rep = 525}},
             stash = {size = 2300, price = {money = 5000, rep = 175}},
             safe = {available = true, size = 1400, price = {money = 25000, rep = 875}},
             ranks = {amount = 6, price = {money = 0, rep = 650}},
@@ -93,7 +93,7 @@ Config = {
             price = {money = 150000, rep = 11250},
             maxMembersCount = 15,
 
-            vehicles = {amount = 90, price = {money = 15000, rep = 525}},
+            vehicles = {amount = 140, price = {money = 15000, rep = 525}},
             stash = {size = 4000, price = {money = 5000, rep = 175}},
             safe = {available = true, size = 2300, price = {money = 3000, rep = 105}},
             ranks = {amount = 9, price = {money = 0, rep = 650}},
@@ -104,7 +104,7 @@ Config = {
             price = {money = 250000, rep = 18750},
             maxMembersCount = 15,
 
-            vehicles = {amount = 100, price = {money = 15000, rep = 525}},
+            vehicles = {amount = 150, price = {money = 15000, rep = 525}},
             stash = {size = 10000, price = {money = 5000, rep = 175}},
             safe = {available = true, size = 3200, price = {money = 3000, rep = 105}},
             ranks = {amount = 12, price = {money = 0, rep = 650}},

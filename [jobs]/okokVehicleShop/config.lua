@@ -18,7 +18,7 @@ Config.ShowOwnerBlip = false -- Activate/Deactivate owner blips
 Config.ShowBuyVehicleShopBlip = false -- Activate/Deactivate buy shop blip
 Config.ShowHasOwnerShopBlip = true -- Activate/Deactivate blip of shops with "hasOwner = false"
 Config.TestDrive = true -- Activate/Deactivate test drive
-Config.DevMode = true -- Allows you to restart the script (IMPORTANT: only set this to true if you are configuring the script)
+Config.DevMode = false -- Allows you to restart the script (IMPORTANT: only set this to true if you are configuring the script)
 Config.EventPrefix = "okokVehicleshop" -- this will change the prefix of the events name so if Config.EventPrefix = "example" the events will be "example:event"
 Config.QBCorePrefix = "QBCore"
 Config.qbPrefix = "qb"
@@ -103,9 +103,9 @@ Config.CancelCustomOrderFee = 5 -- When a player cancels a custom order he will 
 -- Vehicle Sales/Trade-ins
 Config.EnableSellVehicle = true -- If true = players can sell their vehicles to the vehicle shop
 Config.SellVehiclePercentage = 35 -- When a player sells a vehicle to the vehicle shop he will get a percentage of the vehicle price, 50 = 50%
-Config.EnableTradeIns = true -- If true = players can trade-in their vehicles for a discount on a new vehicle
+Config.EnableTradeIns = false -- If true = players can trade-in their vehicles for a discount on a new vehicle
 Config.TradeInPercentage = 50 -- This is the percentage of the vehicle price that will be given as a discount for the trade-in
-Config.TradeInStored = true -- If true = player can only trade-in vehicles that are stored
+Config.TradeInStored = false -- If true = player can only trade-in vehicles that are stored
 Config.SocietyTradeInRanksLevel = {3, 4}
 
 -- Blips & Markers

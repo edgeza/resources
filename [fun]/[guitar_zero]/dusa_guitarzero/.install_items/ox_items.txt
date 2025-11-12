@@ -1,0 +1,8 @@
+-- dusa guitarzero
+['guitarstand'] = {
+    label = 'GuitarZero Stand',
+    weight = 1,
+    stack = true,
+    close = true,
+    description = nil
+},

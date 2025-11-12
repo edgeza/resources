@@ -1466,6 +1466,17 @@ Config.market_categories = {
 				['amount_to_delivery'] = 2,
 				['img'] = 'screwdriverset.png',
 			},
+			['wetsuit'] = {
+				['name'] = "Wetsuit",
+				['price_to_customer'] = 350,
+				['price_to_customer_min'] = 175,
+				['price_to_customer_max'] = 700,
+				['price_to_export'] = 315,
+				['price_to_owner'] = 300,
+				['amount_to_owner'] = 2,
+				['amount_to_delivery'] = 2,
+				['img'] = 'wetsuit.png',
+			},
 			-- ['empty_weed_bag'] = {
 			-- 	['name'] = "Empty Weed Bag",
 			-- 	['price_to_customer'] = 10,

@@ -4,7 +4,7 @@ game 'gta5'
 
 lua54 'yes'
 
-version '3.6.92'
+version '3.6.91'
 
 name 'qs-inventory'
 author 'Quasar Store'

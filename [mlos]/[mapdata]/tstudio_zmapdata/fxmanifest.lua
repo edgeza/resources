@@ -8,13 +8,17 @@ version '1.0'
 
 this_is_a_map 'yes'
 
-dependencies { 
+dependencies {
     '/server:4960',     -- ⚠️PLEASE READ⚠️; Requires at least SERVER build 4960.
     '/gameBuild:2545',  -- ⚠️PLEASE READ⚠️; Requires at least GAME build 2545.
 }
 
-shared_script {
+data_file 'TIMECYCLEMOD_FILE' 'tstudio_timecycles.xml'
+
+shared_scripts {
     'config.lua',
+    'utils/utils.lua',
+    'utils/misc.lua',
 }
 
 client_scripts {
@@ -22,16 +26,22 @@ client_scripts {
     'client/entitysets_loader.lua',
     'client/ipl_blocker.lua',
     'client/privacy_glass.lua',
+    'client/dry_volume.lua',
 }
 
 server_scripts {
-    'server/misc.lua',
     'server/patch_loader.lua',
+    'server/resource_monitor.lua',
+}
+
+files {
+    'tstudio_timecycles.xml',
 }
 
 escrow_ignore {
     'stream/*/*.*',
-    'locales/*.lua', 
+    'locales/*.lua',
     'config.lua',
 }
+
 dependency '/assetpacks'

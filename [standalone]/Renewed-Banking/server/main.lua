@@ -3,60 +3,93 @@ local cachedPlayers = {}
 
 CreateThread(function()
     Wait(500)
-    if not LoadResourceFile("Renewed-Banking", 'web/public/build/bundle.js') or GetCurrentResourceName() ~= "Renewed-Banking" then
+
+    if not LoadResourceFile("Renewed-Banking", "web/public/build/bundle.js") or GetCurrentResourceName() ~= "Renewed-Banking" then
         error(locale("ui_not_built"))
-        return StopResource("Renewed-Banking")
+        StopResource("Renewed-Banking")
+        return
     end
-    local accounts = MySQL.query.await('SELECT * FROM bank_accounts_new', {})
-    if accounts then
-        for _,v in pairs (accounts) do
-            local job = v.id
-            v.auth = json.decode(v.auth)
-            cachedAccounts[job] = { --  cachedAccounts[#cachedAccounts+1]
-                id = job,
+
+    local function resolveLabel(identifier)
+        local ok, label = pcall(GetSocietyLabel, identifier)
+        if ok and label and label ~= "" then
+            return label
+        end
+        return identifier
+    end
+
+    local accounts = MySQL.query.await("SELECT * FROM bank_accounts_new")
+    if accounts and #accounts > 0 then
+        for _, accountData in ipairs(accounts) do
+            local accountId = accountData.id
+            local decodedAuth = json.decode(accountData.auth or "[]") or {}
+            local decodedTransactions = json.decode(accountData.transactions or "[]") or {}
+
+            cachedAccounts[accountId] = {
+                id = accountId,
                 type = locale("org"),
-                name = GetSocietyLabel(job),
-                frozen = v.isFrozen == 1,
-                amount = v.amount,
-                transactions = json.decode(v.transactions),
+                name = resolveLabel(accountId),
+                frozen = accountData.isFrozen == 1,
+                amount = accountData.amount or 0,
+                transactions = decodedTransactions,
                 auth = {},
-                creator = v.creator
+                creator = accountData.creator
             }
-            if #v.auth >= 1 then
-                for k=1, #v.auth do
-                    cachedAccounts[job].auth[v.auth[k]] = true
+
+            if #decodedAuth >= 1 then
+                for _, identifier in ipairs(decodedAuth) do
+                    cachedAccounts[accountId].auth[identifier] = true
                 end
             end
         end
     end
+
     local jobs, gangs = GetFrameworkGroups()
-    local query = {}
-    local function addCachedAccount(group)
-        cachedAccounts[group] = {
-            id = group,
-            type = locale('org'),
-            name = GetSocietyLabel(group),
+    local pendingQueries = {}
+
+    local function addCachedAccount(groupName)
+        local label = resolveLabel(groupName)
+        cachedAccounts[groupName] = {
+            id = groupName,
+            type = locale("org"),
+            name = label,
             frozen = 0,
             amount = 0,
             transactions = {},
             auth = {},
             creator = nil
         }
-        query[#query + 1] = {"INSERT INTO bank_accounts_new (id, amount, transactions, auth, isFrozen, creator) VALUES (?, ?, ?, ?, ?, NULL) ",
-        { group, cachedAccounts[group].amount, json.encode(cachedAccounts[group].transactions), json.encode({}), cachedAccounts[group].frozen }}
+
+        pendingQueries[#pendingQueries + 1] = {
+            "INSERT INTO bank_accounts_new (id, amount, transactions, auth, isFrozen, creator) VALUES (?, ?, ?, ?, ?, NULL) ON DUPLICATE KEY UPDATE amount = amount",
+            {
+                groupName,
+                cachedAccounts[groupName].amount,
+                json.encode(cachedAccounts[groupName].transactions),
+                json.encode({}),
+                cachedAccounts[groupName].frozen
+            }
+        }
     end
-    for job in pairs(jobs) do
-        if not cachedAccounts[job] then
-            addCachedAccount(job)
+
+    if jobs then
+        for jobName in pairs(jobs) do
+            if not cachedAccounts[jobName] then
+                addCachedAccount(jobName)
+            end
         end
     end
-    for gang in pairs(gangs) do
-        if not cachedAccounts[gang] then
-            addCachedAccount(gang)
+
+    if gangs then
+        for gangName in pairs(gangs) do
+            if not cachedAccounts[gangName] then
+                addCachedAccount(gangName)
+            end
         end
     end
-    if #query >= 1 then
-        MySQL.transaction.await(query)
+
+    if #pendingQueries >= 1 then
+        MySQL.transaction.await(pendingQueries)
     end
 end)
 
@@ -188,7 +221,9 @@ local function handleTransaction(account, title, amount, message, issuer, receiv
         print(locale("invalid_account", account))
     end
     return transaction
-end exports("handleTransaction", handleTransaction)
+end
+
+exports("handleTransaction", handleTransaction)
 
 function GetAccountMoney(account)
     if not cachedAccounts[account] then
@@ -208,7 +243,7 @@ function AddAccountMoney(account, amount)
         locale("invalid_account", account)
         return false
     end
-    cachedAccounts[account].amount += amount
+    cachedAccounts[account].amount = cachedAccounts[account].amount + amount
     updateBalance(account)
     return true
 end
@@ -263,7 +298,7 @@ function RemoveAccountMoney(account, amount)
         return false
     end
 
-    cachedAccounts[account].amount -= amount
+    cachedAccounts[account].amount = cachedAccounts[account].amount - amount
     updateBalance(account)
     return true
 end
@@ -554,7 +589,9 @@ end
 
 RegisterNetEvent('Renewed-Banking:server:changeAccountName', function(account, newName)
     updateAccountName(account, newName, source)
-end) exports("changeAccountName", updateAccountName)-- Should only use this on very secure backends to avoid anyone using this as this is a server side ONLY export --
+end)
+
+exports("changeAccountName", updateAccountName)-- Should only use this on very secure backends to avoid anyone using this as this is a server side ONLY export --
 
 --- Retrieves a cached job account if it exists.
 ---@param jobName string The name of the job whose account is being retrieved.

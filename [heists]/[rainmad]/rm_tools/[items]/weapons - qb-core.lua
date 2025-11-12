@@ -1,0 +1,2 @@
+[`weapon_weld`] = { name = 'weapon_weld', label = 'Portable Weld', weapontype = 'Miscellaneous', ammotype = nil, damagereason = 'Died' },
+[`weapon_drill`] = { name = 'weapon_drill', label = 'Portable Drill', weapontype = 'Miscellaneous', ammotype = nil, damagereason = 'Died' },

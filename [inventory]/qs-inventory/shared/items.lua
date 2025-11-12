@@ -115,41 +115,53 @@ ItemList = {
     --Storm Chaser Items
 
     ['storm_tablet'] = {
-       ['name'] = 'storm_tablet',
-       ['label'] = 'Storm Tablet',
-       ['weight'] = 1000,
-       ['type'] = 'item',
-       ['image'] = 'storm_tablet.png',
-       ['unique'] = true,
-       ['useable'] = true,
-       ['shouldClose'] = true,
-       ['combinable'] = nil,
-       ['description'] = 'Portable doppler display for storm chasing crews.'
-   },
-   ['storm_probe'] = {
-       ['name'] = 'storm_probe',
-       ['label'] = 'Storm Probe',
-       ['weight'] = 4500,
-       ['type'] = 'item',
-       ['image'] = 'storm_probe.png',
-       ['unique'] = false,
-       ['useable'] = true,
-       ['shouldClose'] = true,
-       ['combinable'] = nil,
-       ['description'] = 'Deployable probe that captures storm data.'
-   },
-   ['storm_data'] = {
-       ['name'] = 'storm_data',
-       ['label'] = 'Storm Data Drive',
-       ['weight'] = 150,
-       ['type'] = 'item',
-       ['image'] = 'storm_drive.png',
-       ['unique'] = false,
-       ['useable'] = false,
-       ['shouldClose'] = true,
-       ['combinable'] = nil,
-       ['description'] = 'Collected atmospheric telemetry ready for sale.'
-   },
+        ['name'] = 'storm_tablet',
+        ['label'] = 'Storm Tablet',
+        ['weight'] = 1000,
+        ['type'] = 'item',
+        ['image'] = 'storm_tablet.png',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Portable doppler display for storm chasing crews.'
+    },
+    ['storm_probe'] = {
+        ['name'] = 'storm_probe',
+        ['label'] = 'Storm Probe',
+        ['weight'] = 4500,
+        ['type'] = 'item',
+        ['image'] = 'storm_probe.png',
+        ['unique'] = false,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Deployable probe that captures storm data.'
+    },
+    ['storm_data'] = {
+        ['name'] = 'storm_data',
+        ['label'] = 'Storm Data Drive',
+        ['weight'] = 150,
+        ['type'] = 'item',
+        ['image'] = 'storm_drive.png',
+        ['unique'] = false,
+        ['useable'] = false,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'Collected atmospheric telemetry ready for sale.'
+    },
+    ["wetsuit"] = {
+        ["name"] = "wetsuit",
+        ["label"] = "Wetsuit",
+        ["weight"] = 200,
+        ["type"] = "item",
+        ["image"] = "wetsuit.png",
+        ["unique"] = false,
+        ["useable"] = true,
+        ["shouldClose"] = false,
+        ["combinable"] = nil,
+        ["description"] = "0x0x"
+    },
 
     --KOI
     ['koi_grilled_salmon'] = {['name'] = 'koi_grilled_salmon', ['label'] = 'Koi Grilled Salmon', ['weight'] = 10, ['type'] = 'item', ['image'] = 'koi_grilled_salmon.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
@@ -2673,6 +2685,30 @@ ItemList = {
         ['useable'] = true,
         ['description'] = 'Weapon Metal Detector'
     },
+    ['weapon_weld'] = {
+        ['name'] = 'weapon_weld',
+        ['label'] = 'Portable Weld',
+        ['weight'] = 250,
+        ['type'] = 'weapon',
+        ['image'] = 'WEAPON_WELD.png',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = 'A tool for melting or burning'
+    },
+    ['weapon_drill'] = {
+        ['name'] = 'weapon_drill',
+        ['label'] = 'Portable Drill',
+        ['weight'] = 750,
+        ['type'] = 'weapon',
+        ['image'] = 'WEAPON_DRILL.png',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = false,
+        ['combinable'] = nil,
+        ['description'] = 'A portable drill for breaking through surfaces'
+    },
 
     -- PISTOL ATTACHMENTS
     ['pistol_defaultclip']              = {
@@ -4171,7 +4207,7 @@ ItemList = {
         ['delete'] = false,
         ['object'] = 'prop_vodka_bottle',
         ['rare'] = 'common', -- epic, legendary, common
-        ['description'] = 'For all the thirsty out there. This item will decay over time.',
+        ['description'] = 'For all the thirsty out there',
         ['client'] = {
             status = {
                 thirst = 50000,

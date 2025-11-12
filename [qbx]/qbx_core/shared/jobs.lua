@@ -541,7 +541,52 @@ return {
                 payment = 4000
             },
         },
-     },    
+     },
+     ['swat'] = {
+        label = 'SWAT',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'SWAT',
+                payment = 3500
+            },
+        },
+    },
+    ['agu'] = {
+        label = 'AGU',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'AGU',
+                payment = 3500
+            },
+        },
+    },
+    ['aviation'] = {
+        label = 'Aviation',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'Aviation',
+                payment = 3500
+            },
+        },
+    },
+    ['detective'] = {
+        label = 'Narcotics / Detectives',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'Detective',
+                payment = 3500
+            },
+        },
+    },
+
      ['patreon1'] = {
         label = 'Patreon',
         type = 'patreon',

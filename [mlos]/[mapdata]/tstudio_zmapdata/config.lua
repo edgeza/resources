@@ -33,7 +33,9 @@ Config = {
             coords = vector3(-247.246368, -919.344238, 40.5292854),
             ipl = "johanni_jurassic_jackpot_milo",
             entitySets = {
-                {name = "casino_table_yes", enable = true}, -- Enable the casino_table_yes entity set
+                {name = "casino_table_yes_w_car_podium", enable = true}, -- Enable the casino_table_yes_w_car_podium entity set
+                {name = "casino_table_no_w_car_podium", enable = false}, -- Enable the casino_table_no_w_car_podium entity set
+                {name = "casino_table_yes", enable = false}, -- Enable the casino_table_yes entity set
                 {name = "casino_table_no", enable = false} -- Disable the casino_table_no entity set
             }
         }, {
@@ -86,8 +88,220 @@ Config = {
             entitySets = {
                 {name = "fleeca_vaultprops", enable = true}, -- Enable the casino slots entity set
             }
-        }
-        -- Add more interior configs here
+        },
+        -- #########################################
+        -- Pearls Resort Entity Set Configuration
+        -- #########################################
+        {
+            name = "Villa Small Interior 01",
+            coords = vector3(-1919.861694, -1461.563599, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_01_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 02",
+            coords = vector3(-1938.779663, -1500.747437, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_02_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 03",
+            coords = vector3(-1964.696533, -1518.412964, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_03_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 04",
+            coords = vector3(-1994.894653, -1474.635742, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_04_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 05",
+            coords = vector3(-1969.661743, -1458.650879, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_05_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 06",
+            coords = vector3(-2050.360840, -1427.984985, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_06_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 07",
+            coords = vector3(-2038.969727, -1400.422729, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_07_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 08",
+            coords = vector3(-2098.611572, -1406.019897, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_08_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 09",
+            coords = vector3(-2085.950684, -1377.324097, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_09_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 10",
+            coords = vector3(-2050.601318, -1351.971924, 2.169187),
+            ipl = "tstudio_jhn_resort_int_villa_s_10_milo_",
+            entitySets = {
+                {name = "villa_s_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Large Interior 01",
+            coords = vector3(-2062.492920, -1498.251099, 2.171660),
+            ipl = "tstudio_jhn_resort_int_villa_l_01_milo_",
+            entitySets = {
+                {name = "villa_l_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Large Interior 02",
+            coords = vector3(-2013.281982, -1518.893188, 2.171660),
+            ipl = "tstudio_jhn_resort_int_villa_l_02_milo_",
+            entitySets = {
+                {name = "villa_l_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Villa Large Interior 03",
+            coords = vector3(-2090.989990, -1453.017822, 2.171660),
+            ipl = "tstudio_jhn_resort_int_villa_l_03_milo_",
+            entitySets = {
+                {name = "villa_l_props_yes", enable = true}, -- Enable this entity set
+                {name = "villa_s_props_no", enable = false} -- Disable this entity set
+            }
+        },
+        {
+            name = "Pearls Restaurant",
+            coords = vector3(-1934.319580, -1334.520142, 2.050076),
+            ipl = "tstudio_jhn_resort_int_pearls_milo_",
+            entitySets = {
+                {name = "casino_table_slots_wheel_yes", enable = true}, -- Enable this entity set
+                {name = "enable_3d_logos", enable = true}, -- Enable this entity set
+            }
+        },
+
+        -- #########################################
+        -- Cayo Perico Lagoon Entity Set Configuration
+        -- #########################################
+        {
+            name = "Villa Small Interior 01",
+            coords = vector3(4719.517090, -4835.916016, 2.169187),
+            ipl = "tstudio_jhn_cayo_party_int_villa_s_01_milo_",
+            entitySets = {
+                {name = "decorations_villa_s_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 02",
+            coords = vector3(4762.354980, -4821.987793, 2.169187),
+            ipl = "tstudio_jhn_cayo_party_int_villa_s_02_milo_",
+            entitySets = {
+                {name = "decorations_villa_s_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 03",
+            coords = vector3(4728.758301, -4863.995117, 2.169187),
+            ipl = "tstudio_jhn_cayo_party_int_villa_s_03_milo_",
+            entitySets = {
+                {name = "decorations_villa_s_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 04",
+            coords = vector3(4771.432129, -4849.894531, 2.169187),
+            ipl = "tstudio_jhn_cayo_party_int_villa_s_04_milo_",
+            entitySets = {
+                {name = "decorations_villa_s_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 05",
+            coords = vector3(4738.696289, -4897.474609, 2.169187),
+            ipl = "tstudio_jhn_cayo_party_int_villa_s_05_milo_",
+            entitySets = {
+                {name = "decorations_villa_s_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Small Interior 06",
+            coords = vector3(4783.766113, -4882.660156, 2.169187),
+            ipl = "tstudio_jhn_cayo_party_int_villa_s_06_milo_",
+            entitySets = {
+                {name = "decorations_villa_s_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Large Interior 01",
+            coords = vector3(4664.574707, -5023.058594, 2.171660),
+            ipl = "tstudio_jhn_cayo_party_int_villa_l_01_milo_",
+            entitySets = {
+                {name = "decorations_villa_l_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Large Interior 02",
+            coords = vector3(4697.878906, -5032.681152, 2.171660),
+            ipl = "tstudio_jhn_cayo_party_int_villa_l_02_milo_",
+            entitySets = {
+                {name = "decorations_villa_l_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Large Interior 03",
+            coords = vector3(4665.482910, -4961.603516, 2.171660),
+            ipl = "tstudio_jhn_cayo_party_int_villa_l_03_milo_",
+            entitySets = {
+                {name = "decorations_villa_l_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
+        {
+            name = "Villa Large Interior 04",
+            coords = vector3(4689.266113, -4930.037598, 2.171660),
+            ipl = "tstudio_jhn_cayo_party_int_villa_l_04_milo_",
+            entitySets = {
+                {name = "decorations_villa_l_yes", enable = true}, -- Enable/Disable this entity set
+            }
+        },
     },
 
     PrivacySwitch = {
@@ -104,6 +318,9 @@ Config = {
 
     -- CompatibilityPatches define fixes for specific combinations of maps
     CompatibilityPatches = {
+        -- ===========================================
+        -- TStudio Maps Compatibility Patches
+        -- ===========================================
         {
             name = "Fix for Opium Nights & LSI Square",
             requiredMaps = {"tstudio_opium_nights", "tstudio_lsi_square"},
@@ -174,6 +391,14 @@ Config = {
             requiredMaps = {"tstudio_missionrow_park", "tstudio_impound"},
             fixResource = "tstudio_zpatch_mrpark_impound" -- Resource to apply the fix
         }, {
+            name = "Fix for Missionrowpark, Legionsquare, Tropical Heights & Mission Row PD ",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "tstudio_tropical_heights", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_th_ls_mrpd" -- Resource to apply the fix
+        }, {
+            name = "Fix for Missionrowpark, Legionsquare, Tropical Heights, Kebab King & Mission Row PD ",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "tstudio_tropical_heights", "tstudio_kebabking", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_th_kebab_ls_mrpd" -- Resource to apply the fix
+        }, {
             name = "Fix for Legion Garage & Kebab",
             requiredMaps = {"tstudio_legionsquare_garage", "tstudio_kebabking"},
             fixResource = "tstudio_zpatch_garage_kebab" -- Resource to apply the fix
@@ -194,7 +419,7 @@ Config = {
             fixResource = "tstudio_zpatch_pillbox_kebab" -- Resource to apply the fix
         }, {
             name = "Fix for Pillbox & Kebab",
-            requiredMaps = {"tstudio_pillbox_md", "tstudio_kebabking"}, 
+            requiredMaps = {"tstudio_pillbox_md", "tstudio_kebabking"},
             fixResource = "tstudio_zpatch_pillbox_kebab" -- Resource to apply the fix
         },
         {
@@ -211,6 +436,218 @@ Config = {
             name = "Fix for Paleto Bewo & Paleto Cardealer & Taxi",
             requiredMaps = {"tstudio_paleto_bewo", "tstudio_paleto_cardealer", "tstudio_taxi"},
             fixResource = "tstudio_zpatch_bw_cardealer_taxi",
+        },
+        {
+            name = "Fix for Ammunation & Gabz PDM",
+            requiredMaps = {"tstudio_ammunation", "cfx-gabz-pdm"},
+            fixResource = "tstudio_zpatch_ammunation_gabz_pdm",
+        },
+
+        {
+            name = "Fix for Legion Square & MRPD",
+            requiredMaps = {"tstudio_legionsquare", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_ls_mrpd",
+        },
+        {
+            name = "Fix for Mission Row Park & MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_mrpd",
+        },
+        {
+            name = "Fix for Mission Row Park, Kebab, Legion Square & MRPD",
+            requiredMaps = {"tstudio_legionsquare", "tstudio_kebabking", "tstudio_missionrow_park", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_kebab_ls_mrpd",
+        },
+        {
+            name = "Fix for Mission Row Park, Kebab, Tropical Heights & MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_kebabking", "tstudio_tropical_heights", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_kebab_th_mrpd",
+        },
+        {
+            name = "Fix for Mission Row Park, Legion Square & MRPD",
+            requiredMaps = {"tstudio_legionsquare", "tstudio_missionrow_park", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_mrpd",
+        },
+        {
+            name = "Fix for Mission Row Park, Tropical Heights, Kebab, Legion Square & MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_tropical_heights", "tstudio_kebabking", "tstudio_legionsquare", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_th_kebab_ls_mrpd",
+        },
+        {
+            name = "Fix for Mission Row Park, Tropical Height, Legion Square & MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_tropical_heights", "tstudio_legionsquare", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_th_ls_mrpd",
+        },
+        {
+            name = "Fix for Mission Row Park, Tropical Height & MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_tropical_heights", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_th_mrpd",
+        },
+        {
+            name = "Fix for Tropical Height & MRPD",
+            requiredMaps = {"tstudio_tropical_heights", "tstudio_mrpd"},
+            fixResource = "tstudio_zpatch_th_mrpd",
+        },
+
+        -- ===========================================
+        -- Fiv3Devs Maps Compatibility Patches
+        -- ===========================================
+        {
+            name = "Fix for Mission Row Park, Legion Square & Fiv3Devs Pillbox",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "fiv3devs_pillbox"},
+            fixResource = "tstudio_zpatch_mrpark_ls_fiv3dev_pillbox"
+        },
+        {
+            name = "Fix for Kebab & Fiv3Devs Pillbox",
+            requiredMaps = {"tstudio_kebabking", "fiv3devs_pillbox"},
+            fixResource = "tstudio_zpatch_kebab_fiv3devs_pillbox"
+        },
+        {
+            name = "Fix for Water XML of Pearls Resort & Fiv3Devs Pacific Bluffs",
+            requiredMaps = {"tstudio_pearls_resort", "fiv3devs_pacificbluffs"},
+            fixResource = "tstudio_zpatch_pearls_fiv3dev_bluffs_water"
+        },
+
+        -- ===========================================
+        -- Kiiya Maps Compatibility Patches
+        -- ===========================================
+
+        { -- This patch is for the Mission Row Park, Legion Square, Tropical Heights & Kiiya MRPD
+            name = "Fix for Mission Row Park, Legion Square, Tropical Heights & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "tstudio_tropical_heights", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_th_kiiya_mrpd"
+        },
+        { -- This patch is for the Mission Row Park & Kiiya MRPD
+            name = "Fix for Mission Row Park & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_kiiya_mrpd"
+        },
+        { -- This patch is for the Mission Row Park, Tropical Heights & Kiiya MRPD
+            name = "Fix for Mission Row Park, Tropical Heights & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_tropical_heights", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_th_kiiya_mrpd"
+        },
+        { -- This patch is for the Kebabking & Kiiya MRPD
+            name = "Fix for Kebabking & Kiiya MRPD",
+            requiredMaps = {"tstudio_kebabking", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_kebab_kiiya_mrpd"
+        },
+        { -- This patch is for the Legion Square, Kebabking & Kiiya MRPD
+            name = "Fix for Legion Square, Kebabking & Kiiya MRPD",
+            requiredMaps = {"tstudio_legionsquare", "tstudio_kebabking", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_ls_kebab_kiiya_mrpd"
+        },
+        { -- This patch is for the Legion Square, Tropical Heights, Kebabking & Kiiya MRPD
+            name = "Fix for Legion Square, Tropical Heights & Kebabking & Kiiya MRPD",
+            requiredMaps = {"tstudio_legionsquare", "tstudio_tropical_heights", "tstudio_kebabking", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_ls_th_kebab_kiiya_mrpd"
+        },
+        { -- This patch is for the Kebabking, Tropical Heights & Kiiya MRPD
+            name = "Fix for Kebabking, Tropical Heights & Kiiya MRPD",
+            requiredMaps = {"tstudio_kebabking", "tstudio_tropical_heights", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_kebab_th_kiiya_mrpd"
+        },
+        { -- This patch is for the Legion Square & Kiiya MRPD
+            name = "Fix for Legion Square & Kiiya MRPD",
+            requiredMaps = {"tstudio_legionsquare", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_ls_kiiya_mrpd"
+        },
+        { -- This patch is for the Legion Square, Tropical Heights & Kiiya MRPD
+            name = "Fix for Legion Square, Tropical Heights & Kiiya MRPD",
+            requiredMaps = {"tstudio_legionsquare", "tstudio_tropical_heights", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_ls_th_kiiya_mrpd"
+        },
+        { -- This patch is for the Tropical Heights & Kiiya MRPD
+            name = "Fix for Tropical Heights & Kiiya MRPD",
+            requiredMaps = {"tstudio_tropical_heights", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_th_kiiya_mrpd"
+        },
+        { -- This patch is for the Mission Row Park, Legionsquare, Kebabking & Kiiya MRPD
+            name = "Fix for Mission Row Park, Legionsquare, Kebabking & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "tstudio_kebabking", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_kebab_kiiya_mrpd"
+        },
+        { -- This patch is for the Mission Row Park, Legionsquare, Tropical Heights, Kebabking & Kiiya MRPD
+            name = "Fix for Mission Row Park, Legionsquare, Tropical Heights, Kebabking & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "tstudio_kebabking", "tstudio_tropical_heights", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_kebab_th_kiiya_mrpd"
+        },
+        { -- This patch is for the Mission Row Park, Kebabking & Kiiya MRPD
+            name = "Fix for Mission Row Park, Kebabking & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_kebabking", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_kebab_kiiya_mrpd"
+        },
+        { -- This patch is for the Mission Row Park, Kebabking, Tropical Heights & Kiiya MRPD
+            name = "Fix for Mission Row Park, Kebabking, Tropical Heights & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_kebabking", "tstudio_tropical_heights", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_kebab_th_kiiya_mrpd"
+        },
+        { -- This patch is for the Mission Row Park, Legionsquare & Kiiya MRPD
+            name = "Fix for Mission Row Park, Legionsquare & Kiiya MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "kiiya_mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_kiiya_mrpd"
+        },
+
+        -- ===========================================
+        -- FM Maps Compatibility Patches
+        -- ===========================================
+        {
+            name = "Fix for Legion Square & FM MRPD",
+            requiredMaps = {"tstudio_legionsquare", "cfx-fm-mrpd"},
+            fixResource = "tstudio_zpatch_ls_fm_mrpd"
+        },
+        {
+            name = "Fix for Mission Row Park & FM MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "cfx-fm-mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_fm_mrpd"
+        },
+        {
+            name = "Fix for Mission Row Park, Legion Square & FM MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "cfx-fm-mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_fm_mrpd"
+        },
+        {
+            name = "Fix for Mission Row Park, Legion Square, Tropical Heights & FM MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "tstudio_tropical_heights", "cfx-fm-mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_th_fm_mrpd"
+        },
+        {
+            name = "Fix for Mission Row Park, Tropical Heights & FM MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_tropical_heights", "cfx-fm-mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_th_fm_mrpd"
+        },
+        {
+            name = "Fix for Tropical Heights & FM MRPD",
+            requiredMaps = {"tstudio_tropical_heights", "cfx-fm-mrpd"},
+            fixResource = "tstudio_zpatch_th_fm_mrpd"
+        },
+        {
+            name = "Fix for Mission Row Park, Legion Square, Tropical Heights & Kebab & FM MRPD",
+            requiredMaps = {"tstudio_missionrow_park", "tstudio_legionsquare", "tstudio_tropical_heights", "tstudio_kebabking", "cfx-fm-mrpd"},
+            fixResource = "tstudio_zpatch_mrpark_ls_th_kebab_fm_mrpd"
+        },
+
+        -- ===========================================
+        -- RTX Compatibility Patches
+        -- ===========================================
+        {
+            name = "Fix for Pearls Resort & RTX Themepark DLC",
+            requiredMaps = {"tstudio_pearls_resort", "rtx_themepark_dlc_objects"},
+            fixResource = "tstudio_zpatch_pearls_rtx_themepark_dlc"
+        },
+        {
+            name = "Fix for Pearls Resort & RTX Themepark",
+            requiredMaps = {"tstudio_pearls_resort", "rtx_themepark_objects"},
+            fixResource = "tstudio_zpatch_pearls_rtx_themepark"
+        },
+
+        -- ===========================================
+        -- Ambitioneers Compatibility Patches
+        -- ===========================================
+        {
+            name = "Fix for Water XML of Pearls Resort & Ambitioneers Roxwood",
+            requiredMaps = {"tstudio_pearls_resort", "amb-roxwood-map"},
+            fixResource = "tstudio_zpatch_pearls_ambitioneers_roxwood_water"
         },
     },
 
@@ -355,95 +792,78 @@ Config = {
     -- resourceDependency: (Optional) Only disable this interior if the specified resource is started
     --                     This prevents breaking default interiors when custom resources aren't loaded
     Interiors = {
-        -- Tattoo Shops
-        {
-            coords = vector3(-3171.2937, 1076.24451, 19.8303947),
-            interiorName = 'v_tattoo',
-            enabled = true,
-            resourceDependency = 'tstudio_tattoo_studio' -- Only disable if this resource is started
-        }, {
-            coords = vector3(322.967865, 181.942917, 102.587761),
-            interiorName = 'v_tattoo',
-            enabled = true,
-            resourceDependency = 'tstudio_tattoo_studio'
-        }, {
-            coords = vector3(1323.765, -1653.43164, 51.27684),
-            interiorName = 'v_tattoo',
-            enabled = true,
-            resourceDependency = 'tstudio_tattoo_studio'
-        }, {
-            coords = vector3(-1153.18408, -1427.0127, 3.955685),
-            interiorName = 'v_tattoo',
-            enabled = true,
-            resourceDependency = 'tstudio_tattoo_studio'
-        }, 
-        
-        -- Ammu-Nation Locations
-        {
-            coords = vector3(821.144043, -2154.8916, 28.61892),
-            interiorName = 'v_gun',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation' -- Only disable if this resource is started
-        }, -- Cypress
-        {
-            coords = vector3(843.2987, -1028.10669, 27.1947746),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- LaMesa
-        {
-            coords = vector3(10.9070005, -1105.65833, 28.7969322),
-            interiorName = 'v_gun',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- Legion
-        {
-            coords = vector3(247.371582, -47.245163, 68.9409943),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- Hawick
-        {
-            coords = vector3(-1310.87659, -392.009644, 35.6957169),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- MorningWood
-        {
-            coords = vector3(-663.1717, -940.758057, 20.8291473),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- Little Seoul
-        {
-            coords = vector3(-3167.29614, 1084.70984, 19.8386574),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- Chumash
-        {
-            coords = vector3(2568.834, 299.788116, 107.734818),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- East Highway
-        {
-            coords = vector3(1696.95251, 3755.445, 33.7052574),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- Sandy Shores
-        {
-            coords = vector3(-327.1706, 6079.257, 30.4546967),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        }, -- Paleto Bay
-        {
-            coords = vector3(-1114.84509, 2693.80957, 17.55406),
-            interiorName = 'v_gun2',
-            enabled = true,
-            resourceDependency = 'tstudio_ammunation'
-        } -- Route 68
+        ["tstudio_tattoo_studio"] = {
+            [1] = { enabled = true, name = "v_tattoo", coords = vec3(-3171.2937, 1076.24451, 19.8303947) },
+            [2] = { enabled = true, name = "v_tattoo", coords = vec3(322.967865, 181.942917, 102.587761) },
+            [3] = { enabled = true, name = "v_tattoo", coords = vec3(1323.765, -1653.43164, 51.27684) },
+            [4] = { enabled = true, name = "v_tattoo", coords = vec3(-1153.18408, -1427.0127, 3.955685) },
+        },
+        ["tstudio_ammunation"] = {
+            [1] = { enabled = true, name = "v_gun", coords = vec3(821.144043, -2154.8916, 28.61892) },      -- Cypress
+            [2] = { enabled = true, name = "v_gun2", coords = vec3(843.2987, -1028.10669, 27.1947746) },    -- LaMesa
+            [3] = { enabled = true, name = "v_gun", coords = vec3(10.9070005, -1105.65833, 28.7969322) },   -- Legion
+            [4] = { enabled = true, name = "v_gun2", coords = vec3(247.371582, -47.245163, 68.9409943) },   -- Hawick
+            [5] = { enabled = true, name = "v_gun2", coords = vec3(-1310.87659, -392.009644, 35.6957169) }, -- MorningWood
+            [6] = { enabled = true, name = "v_gun2", coords = vec3(-663.1717, -940.758057, 20.8291473) },   -- Little Seoul
+            [7] = { enabled = true, name = "v_gun2", coords = vec3(-3167.29614, 1084.70984, 19.8386574) },  -- Chumash
+            [8] = { enabled = true, name = "v_gun2", coords = vec3(2568.834, 299.788116, 107.734818) },     -- East Highway
+            [9] = { enabled = true, name = "v_gun2", coords = vec3(1696.95251, 3755.445, 33.7052574) },     -- Sandy Shores
+            [10] = { enabled = true, name = "v_gun2", coords = vec3(-327.1706, 6079.257, 30.4546967) },     -- Paleto Bay
+            [11] = { enabled = true, name = "v_gun2", coords = vec3(-1114.84509, 2693.80957, 17.55406) }    -- Route 68
+        },
+        ["tstudio_fleeca"] = {
+            [1] = { enabled = true, name = "v_genbank", coords = vec3(-355.435852, -48.5326, 48.1063843) },    -- Vinewood
+            [2] = { enabled = true, name = "v_genbank", coords = vec3(309.74646, -277.644165, 53.2345963) },   -- Vinewood (Lower Level)
+            [3] = { enabled = true, name = "v_genbank", coords = vec3(145.416824, -1039.277, 28.4378834) },    -- Legion Square
+            [4] = { enabled = true, name = "v_genbank", coords = vec3(-1216.7616, -333.000763, 36.85084) },    -- Movie Studio
+            [5] = { enabled = true, name = "hei_generic_bank_dlc", coords = vec3(-2962.59131, 478.238037, 14.7668953) },  -- West Highway
+            [6] = { enabled = true, name = "v_genbank", coords = vec3(1179.74475, 2706.985, 37.15784) }        -- Sandy Shores
+        },
+        ["tstudio_pillbox_md"] = {
+            [1] = { enabled = true, name = "rc12b_default", ipl = "rc12b_default", coords = vec3(307.1680, -590.807, 43.280) },    -- Pillbox Hill
+        },
+        ["tstudio_mrpd"] = {
+            [1] = { enabled = true, name = "hei_heist_police_dlc", ipl = "hei_heist_police_dlc", coords = vec3(442.429565, -985.067, 29.8852863) },    -- preparation for MRPD
+            [2] = { enabled = true, name = "v_policehub", ipl = "v_policehub", coords = vec3(442.429565, -985.0669, 29.8852863) },    -- preparation for MRPD        },
+        },
+    },
+
+    -- Dry Volume configurations
+    -- Dry volumes prevent water from rendering in specific areas
+    -- Each project can have multiple dry volumes defined by min/max coordinates
+    DryVolumes = {
+        ["tstudio_missionrow_park"] = {
+            {
+                name = "Mission Row Park IPL Patch Fix 1",
+                minX = 337.012115,
+                minY = -1013.49805,
+                minZ = -100.221939,
+                maxX = 353.21637,
+                maxY = -992.301636,
+                maxZ = -97.20087
+            },
+            {
+                name = "Mission Row Park IPL Patch Fix 2",
+                minX = 281.538,
+                minY = -1002.9624,
+                minZ = -100.007484,
+                maxX = 313.910767,
+                maxY = -984.104553,
+                maxZ = -90.30185
+            }
+        },
+        -- Example for multiple dry volumes in one project:
+        -- ["project_name"] = {
+        --     {
+        --         name = "Area 1",
+        --         minX = x1, minY = y1, minZ = z1,
+        --         maxX = x2, maxY = y2, maxZ = z2
+        --     },
+        --     {
+        --         name = "Area 2",
+        --         minX = x1, minY = y1, minZ = z1,
+        --         maxX = x2, maxY = y2, maxZ = z2
+        --     }
+        -- }
     }
 }

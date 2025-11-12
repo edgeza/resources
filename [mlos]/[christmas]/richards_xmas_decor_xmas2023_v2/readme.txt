@@ -1,0 +1,1 @@
+To use the no-decoration version in the main areas such as Mission Row, Sandy Shores Sheriff Station, Sandy Shores Medical Center, Pillbox, GABZ Benny, Paleto Police Station, N Team Legion Square, City Hall, and Premium Delux Motorsport, you can simply copy the files from the [optional] folder and replace them in the stream folder.

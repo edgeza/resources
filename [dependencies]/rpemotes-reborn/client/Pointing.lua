@@ -15,6 +15,8 @@ local function CanPlayerPoint()
         and not IsPedInjured(playerPed)
         and not IsPedInMeleeCombat(playerPed)
         and not IsPedRagdoll(playerPed)
+        and not IsPedSwimming(playerPed)
+        and not IsPedSwimmingUnderWater(playerPed)
 end
 
 local function PointingStopped()
@@ -44,6 +46,12 @@ local function PointingThread()
 
         while Pointing do
             Wait(0)
+
+            -- Stop pointing if player goes underwater or swimming
+            if IsPedSwimming(playerPed) or IsPedSwimmingUnderWater(playerPed) then
+                Pointing = false
+                break
+            end
 
             if not CanPlayerPoint() then
                 Pointing = false
@@ -88,6 +96,13 @@ local function StartPointing()
         return
     end
 
+    local playerPed = PlayerPedId()
+    
+    -- Prevent pointing if player is swimming or underwater
+    if IsPedSwimming(playerPed) or IsPedSwimmingUnderWater(playerPed) then
+        return
+    end
+
     if not CanPlayerPoint() then
         return
     end
@@ -95,8 +110,8 @@ local function StartPointing()
     Pointing = not Pointing
 
     if Pointing and LoadAnim("anim@mp_point") then
-        SetPedConfigFlag(PlayerPedId(), 36, true)
-        TaskMoveNetworkByName(PlayerPedId(), 'task_mp_pointing', 0.5, false, 'anim@mp_point', 24)
+        SetPedConfigFlag(playerPed, 36, true)
+        TaskMoveNetworkByName(playerPed, 'task_mp_pointing', 0.5, false, 'anim@mp_point', 24)
         DestroyAllProps()
         PointingThread()
     end

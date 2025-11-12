@@ -484,9 +484,10 @@ Config.JobVehicles = {
             [1] = {coords = vector3(4375.24, 7913.04, 90.12), spawn_coords = vector4(4421.56, 7860.93, 89.03, 329.85), distance = 10, garage_type = 'car', method = 'regular'},
         }, 
         ['police'] = { --If you choose to add more tables here for more jobs, they must be the jobs name, not the label.
-            --MISSION ROW PD
+        --MISSION ROW PD
             [1] = {coords = vec3(844.12, -1334.6, 26.1), spawn_coords = vec4(853.58, -1332.39, 26.12, 60.87), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row PD (cars)
             [2] = {coords = vec3(837.83, -1408.09, 26.13), spawn_coords = vec4(837.83, -1408.09, 26.13, 309.39), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
+            
             --SANDY PD
             [3] = {coords = vector3(1868.33, 3686.05, 33.78), spawn_coords = vector4(1872.68, 3687.19, 33.65, 211.34), distance = 10, garage_type = 'car', method = 'regular'}, --Sandy PD (cars)
             [4] = {coords = vector3(1853.9, 3707.06, 33.97), spawn_coords = vector4(1853.1, 3706.57, 33.97, 209.84), distance = 5, garage_type = 'air', method = 'regular'}, --Sandy PD (helipad)
@@ -565,6 +566,26 @@ Config.JobVehicles = {
             -- Koi Restaurant
             [1] = {coords = vec3(-1014.77, -1470.86, 5.01), spawn_coords = vec4(-1014.66, -1470.9, 5.01, 41.71), distance = 5, garage_type = 'car', method = 'regular'},
         },
+        ['swat'] = {
+            -- SWAT
+            [1] = {coords = vec3(864.23, -1376.32, 26.13), spawn_coords = vec4(863.48, -1375.53, 26.13, 43.38), distance = 5, garage_type = 'car', method = 'regular'}, --Mission SWAT
+        },
+        ['agu'] = {
+            -- AGU
+            [1] = {coords = vec3(861.61, -1381.64, 26.14), spawn_coords = vec4(860.67, -1380.41, 26.14, 36.95), distance = 5, garage_type = 'car', method = 'regular'}, --Mission AGU
+        },
+        ['traffic'] = {
+            -- TRAFFIC
+            [1] = {coords = vec3(858.5, -1386.93, 26.15), spawn_coords = vec4(857.68, -1385.79, 26.15, 35.6), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Traffic
+        },
+        ['aviation'] = {
+            -- Aviation
+            [1] = {coords = vec3(855.93, -1392.62, 26.14), spawn_coords = vec4(855.14, -1391.48, 26.14, 34.38), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Aviation
+        },
+        ['detective'] = {
+            -- Detective
+            [1] = {coords = vec3(853.52, -1397.87, 26.13), spawn_coords = vec4(852.39, -1396.48, 26.13, 38.83), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Detective
+        },
     },
 
     --This will only be used if any of the 'method'(s) in the table above are set to use 'regular' job vehicles.
@@ -586,36 +607,28 @@ Config.JobVehicles = {
         ['police'] = {
             -- Ground Fleet
             [1] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 0, garage_type = 'car', model = `polbike`},
-            [2] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 0, garage_type = 'car', model = `dlpanto`},
-            [3] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 0, garage_type = 'car', model = `dlcade3`},       
+            [2] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 0, garage_type = 'car', model = `dlpanto`},       
             [4] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 0, garage_type = 'car', model = `dlmanch`},
             [5] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 0, garage_type = 'car', model = `Prisonvan3rb`},           
             [6] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `dloutlaw`},
-            [7] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `policegcrb`},
-            [8] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `dlshin`},
-            [9] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `dlcomni`},
-            [10] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `dlgranger2`},           
-            [11] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `dlrhine`},
-            [12] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `dlstalker2`},
-            [13] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 2, garage_type = 'car', model = `dlbuffalo4`},
-            [14] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 2, garage_type = 'car', model = `dlkomoda`},
-            [15] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 2, garage_type = 'car', model = `dlballer8`},
-            [16] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 3, garage_type = 'car', model = `dljugular`},
+            [7] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 2, garage_type = 'car', model = `policegcrb`},
+            [8] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'car', model = `dlshin`},           
+            [11] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 3, garage_type = 'car', model = `dlrhine`},
+            [12] = {job = 'police', spawn_max = true, plate = 'K9 UNIT', job_grade = 6, garage_type = 'car', model = `dlstalker2`},
+            [14] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 4, garage_type = 'car', model = `dlkomoda`},
+            [16] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 5, garage_type = 'car', model = `dljugular`},
             [17] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 3, garage_type = 'car', model = `dlcara`},
-            [18] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 3, garage_type = 'car', model = `dlballer7`},
-            [19] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 3, garage_type = 'car', model = `dlcinq`},
-            [20] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 3, garage_type = 'car', model = `dlvstr`},
-            [21] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 6, garage_type = 'car', model = `dltenf2`},
-            [22] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 7, garage_type = 'car', model = `dlturismo3`},
-            [23] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 8, garage_type = 'car', model = `polsentinel`},
-            [24] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 8, garage_type = 'car', model = `dlcomet6`},
-            [25] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 8, garage_type = 'car', model = `dlcont`}, 
+            [20] = {job = 'police', spawn_max = true, plate = 'K9 UNIT', job_grade = 6, garage_type = 'car', model = `dlvstr`},
+            [21] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 7, garage_type = 'car', model = `dltenf2`},
+            [22] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 8, garage_type = 'car', model = `dlturismo3`},
+            [24] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 7, garage_type = 'car', model = `dlcomet6`},
+            [25] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 7, garage_type = 'car', model = `dlcont`}, 
             [26] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `candimodstrailer`},
-            [27] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `dlvigero2`},
-            [28] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `polcoach`},
+            [27] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 8, garage_type = 'car', model = `dlvigero2`},
+            [28] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 7, garage_type = 'car', model = `polcoach`},
             [29] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 12, garage_type = 'car', model = `segway`},
-            
-
+            [30] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 9, garage_type = 'car', model = `vanillaschlagen`},
+            [31] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 12, garage_type = 'car', model = `vd_pamira`},
 
             -- Air Fleet
             [30] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 2,  garage_type = 'air', model = `pd_heli`},
@@ -627,18 +640,35 @@ Config.JobVehicles = {
             [33] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'boat', model = `polboat2`},
             [34] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 1, garage_type = 'boat', model = `jetskirb`},
             
-            --SWAT Ground Fleet
-            [35] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `BearcatRBstairs`},
-            [36] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `swatcarrier`},
-            [37] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `gurkharb`},
-            [38] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `rookrb`},
-            [39] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'car', model = `mraprb`},
-            
             --SWAT Air Fleet
             [40] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'air', model = `909_ch53`},
             [41] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 12, garage_type = 'air', model = `mh6`},
             [42] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'air', model = `riothuey`},
+
+            --SWAT
+            [1] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `BearcatRBstairs`},
+            [2] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `swatcarrier`},
+            [3] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `gurkharb`},
+            [4] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `rookrb`},
+            [5] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `mraprb`},
+
+            --AGU
+            [1] = {job = 'agu', spawn_max = true, plate = 'AGU', job_grade = 0, garage_type = 'car', model = `dlballer7`},
+            [2] = {job = 'agu', spawn_max = true, plate = 'AGU', job_grade = 0, garage_type = 'car', model = `polsentinel`},
+
+             --Detectives
+            [1] = {job = 'police', spawn_max = true, plate = 'XY', job_grade = 1, garage_type = 'car', model = `dlgranger2`},
+            [2] = {job = 'police', spawn_max = true, plate = 'XY', job_grade = 2, garage_type = 'car', model = `dlbuffalo4`},
+            [3] = {job = 'police', spawn_max = true, plate = 'XY', job_grade = 3, garage_type = 'car', model = `dlcinq`},
+
+             --Aviation 
+            [1] = {job = 'aviation', spawn_max = true, plate = 'AVIATION', job_grade = 0, garage_type = 'car', model = `dlcade3`},
+        
+             --TRAFFIC
+            [1] = {job = 'police', spawn_max = true, plate = 'TRAFFIC', job_grade = 0, garage_type = 'car', model = `dlcomni`},
+            [15] = {job = 'police', spawn_max = true, plate = 'TRAFFIC', job_grade = 0, garage_type = 'car', model = `dlballer8`},
         },
+        
         ['ambulance'] = {
             -- Ground Fleet
             [1] = {job = 'ambulance', spawn_max = true, plate = 'EMS', job_grade = 1, garage_type = 'car', model = `AMBUIMP`},

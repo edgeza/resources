@@ -1,0 +1,13 @@
+-- GUITARZERO
+['guitarstand'] = {
+    ['name'] = 'guitarstand',                       
+    ['label'] = 'GuitarZero Stand',              
+    ['weight'] = 0,            
+    ['type'] = 'item',         
+    ['image'] = 'guitarstand.png',             
+    ['unique'] = false,         
+    ['useable'] = true,     
+    ['shouldClose'] = false,    
+    ['combinable'] = nil,   
+    ['description'] = 'Massive Stand for Guitar Zero'
+},

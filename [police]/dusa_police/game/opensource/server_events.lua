@@ -85,7 +85,8 @@ AddEventHandler('police:server:sendToJail', function(id, duration, reason)
     elseif GetResourceState('esx-qalle-jail'):find('start') then
         TriggerClientEvent('esx-qalle-jail:jailPlayer', targetId, duration)
     elseif GetResourceState('rcore_prison'):find('start') then
-        exports['rcore_prison']:Jail(targetId, duration, reason, src)
+        -- rcore_prison Jail export: (playerId, jailTime, reason)
+        exports['rcore_prison']:Jail(targetId, duration, reason or '')
     elseif GetResourceState('xt-prison'):find('start') then
         lib.callback.await('xt-prison:client:enterJail', targetId, duration)
     end

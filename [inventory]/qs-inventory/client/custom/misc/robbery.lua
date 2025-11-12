@@ -15,6 +15,31 @@ local function LoadAnimDict(dict)
     end
 end
 
+local function canRobTarget(playerId, targetPed)
+    if not targetPed or targetPed == 0 then
+        return false, false
+    end
+
+    local targetDead = GetEntityHealth(targetPed) <= 0
+    if not targetDead and Config.StealDeadPlayer then
+        targetDead = checkEntityDead(playerId, targetPed)
+    end
+
+    if targetDead then
+        return true, true
+    end
+
+    if IsEntityPlayingAnim(targetPed, lib, anim, 3) then
+        return true, false
+    end
+
+    if Config.StealWithoutHandsUp then
+        return true, false
+    end
+
+    return false, false
+end
+
 RegisterKeyMapping('handsup', Lang('INVENTORY_KEYMAPPING_HANDSUP_LABEL'), 'keyboard', Config.KeyBinds.handsup)
 
 RegisterCommand('handsup', function()
@@ -77,10 +102,12 @@ RegisterNetEvent(Config.InventoryPrefix .. ':client:search', function()
     if player ~= -1 and distance < 2.5 then
         local playerId = GetPlayerServerId(player)
         local searchPlayerPed = GetPlayerPed(player)
-        if IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or Config.StealDeadPlayer and checkEntityDead(playerId, searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 then
+        local canRob, targetDead = canRobTarget(playerId, searchPlayerPed)
+        if canRob then
             TriggerServerEvent(Config.InventoryPrefix .. ':server:OpenInventory', 'otherplayer', playerId)
             checkPlayerIsNear(player)
             inRobbery = true
+            deadPlayer = targetDead
         else
             SendTextMessage(Lang('INVENTORY_NOTIFICATION_NO_HANDSUP'), 'error')
         end
@@ -98,7 +125,15 @@ AddEventHandler(Config.InventoryPrefix .. ':client:playerRobbery', function()
         TriggerEvent(Config.InventoryPrefix .. ':client:forceCloseInventory')
         Wait(500)
 
-        if checkEntityDead(playerId, searchPlayerPed) then
+        local canRob, targetDead = canRobTarget(playerId, searchPlayerPed)
+        if not canRob then
+            SendTextMessage(Lang('INVENTORY_NOTIFICATION_NO_HANDSUP'), 'error')
+            return
+        end
+
+        deadPlayer = targetDead
+
+        if targetDead then
             RequestAnimDict('amb@world_human_gardener_plant@male@base')
             while not HasAnimDictLoaded('amb@world_human_gardener_plant@male@base') do
                 Wait(100)
@@ -120,7 +155,7 @@ AddEventHandler(Config.InventoryPrefix .. ':client:playerRobbery', function()
             return
         end
 
-        if DoesEntityExist(searchPlayerPed) and IsEntityPlayingAnim(searchPlayerPed, lib, anim, 3) and not checkEntityDead(playerId, searchPlayerPed) then
+        if DoesEntityExist(searchPlayerPed) then
             LoadAnimDict('combat@aim_variations@arrest')
             TaskPlayAnim(PlayerPedId(), 'combat@aim_variations@arrest', 'cop_med_arrest_01', 8.0, -8, -1, 1, 0, 0, 0, 0)
             ProgressBar('steal_player', Lang('INVENTORY_PROGRESS_STEAL'), 5500, false, true, {
@@ -156,10 +191,15 @@ function checkPlayerRobbery(other)
             local targetPos = GetEntityCoords(pedTarget)
             local distance = GetDistanceBetweenCoords(pos.x, pos.y, pos.z, targetPos.x, targetPos.y, targetPos.z, true)
             if distance < 3.0 then
-                inInventory = true
-                deadPlayer = true
-                StealingPed = pedTarget
-                TriggerEvent(Config.InventoryPrefix .. ':client:RobPlayer', target)
+                local canRob, targetDead = canRobTarget(target, pedTarget)
+                if canRob then
+                    inInventory = true
+                    deadPlayer = targetDead
+                    StealingPed = pedTarget
+                    TriggerEvent(Config.InventoryPrefix .. ':client:RobPlayer', target)
+                else
+                    SendTextMessage(Lang('INVENTORY_NOTIFICATION_NO_HANDSUP'), 'error')
+                end
             end
         end
     else
@@ -168,17 +208,14 @@ function checkPlayerRobbery(other)
             local playerId = GetPlayerServerId(closestPlayer)
             local searchPlayerPed = GetPlayerPed(closestPlayer)
             if searchPlayerPed and searchPlayerPed ~= 0 then
-                if Config.StealDeadPlayer and checkEntityDead(playerId, searchPlayerPed) then
+                local canRob, targetDead = canRobTarget(playerId, searchPlayerPed)
+                if canRob then
                     inInventory = true
-                    deadPlayer = true
+                    deadPlayer = targetDead
                     StealingPed = searchPlayerPed
                     TriggerEvent(Config.InventoryPrefix .. ':client:RobPlayer', playerId)
-                end
-                if IsEntityPlayingAnim(searchPlayerPed, lib, anim, 3) then
-                    inInventory = true
-                    deadPlayer = false
-                    StealingPed = searchPlayerPed
-                    TriggerEvent(Config.InventoryPrefix .. ':client:RobPlayer', playerId)
+                else
+                    SendTextMessage(Lang('INVENTORY_NOTIFICATION_NO_HANDSUP'), 'error')
                 end
             end
         end

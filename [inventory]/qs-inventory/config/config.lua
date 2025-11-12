@@ -114,6 +114,7 @@ Config.EnableChangeLabel             = true                    -- [EDIT] One-cli
 
 Config.Handsup                       = true                    -- [EDIT] Enable hands-up & robbery options.
 Config.StealDeadPlayer               = true                    -- [EDIT] Allow looting dead players.
+Config.StealWithoutHandsUp           = false                   -- [EDIT] Allow robbing conscious targets without hands-up.
 Config.StealWithoutWeapons           = false                   -- [EDIT] Can only rob if target is hands-up w/o weapon.
 Config.PlaceableItems                = true                    -- [EDIT] Enable placeable items.
 

@@ -2,6 +2,8 @@ if GetResourceState("qb-core") ~= 'started' then return end
 
 QBCore = exports['qb-core']:GetCoreObject()
 CaseList = CFG.CaseList 
+local itemLabelWarnedOnce = false
+local weaponLabelWarnedOnce = false
 
 for key, _ in pairs(CaseList) do
     local item = key
@@ -72,9 +74,9 @@ function GetItemLabel(item)
     -- Safety check for QBCore and Shared.Items
     if not QBCore or not QBCore.Shared or not QBCore.Shared.Items then
         -- Only warn once per session to avoid spam
-        if not GetItemLabel.warnedOnce then
+        if not itemLabelWarnedOnce then
             print(string.format('^3[Loot Cases] Warning: QBCore.Shared.Items is nil. Using item name as fallback for: %s', item))
-            GetItemLabel.warnedOnce = true
+            itemLabelWarnedOnce = true
         end
         return item -- Return item name as fallback
     end
@@ -107,9 +109,9 @@ function GetWeaponLabel(weapon)
     -- Safety check for QBCore and Shared tables
     if not QBCore or not QBCore.Shared then
         -- Only warn once per session to avoid spam
-        if not GetWeaponLabel.warnedOnce then
+        if not weaponLabelWarnedOnce then
             print(string.format('^3[Loot Cases] Warning: QBCore.Shared is nil. Using weapon name as fallback for: %s', weapon))
-            GetWeaponLabel.warnedOnce = true
+            weaponLabelWarnedOnce = true
         end
         return weapon -- Return weapon name as fallback
     end

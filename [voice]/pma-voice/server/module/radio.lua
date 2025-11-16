@@ -34,15 +34,25 @@ local function radioNameGetter_orig(source)
 end
 local radioNameGetter = radioNameGetter_orig
 
---- adds a check to the channel, function is expected to return a boolean of true or false
----@param cb function the function to execute the check on
+--- overrides the radio name getter function
+---@param channel number unused parameter (kept for backwards compatibility)
+---@param cb function the function to execute to get the player name
 function overrideRadioNameGetter(channel, cb)
+	-- Handle case where only callback is provided (channel is nil)
+	if cb == nil and channel ~= nil then
+		cb = channel
+		channel = nil
+	end
+	
 	local cbType = type(cb)
-	if cbType == 'table' and not cb.__cfx_functionReference then
+	if cbType == 'nil' then
+		error("'cb' expected 'function' got 'nil'")
+	end
+	if cbType ~= 'function' and (cbType ~= 'table' or not cb.__cfx_functionReference) then
 		error(("'cb' expected 'function' got '%s'"):format(cbType))
 	end
 	radioNameGetter = cb
-	logger.info("%s added a check to channel %s", GetInvokingResource(), channel)
+	logger.info("%s overrode radio name getter", GetInvokingResource())
 end
 
 exports('overrideRadioNameGetter', overrideRadioNameGetter)
@@ -63,7 +73,9 @@ function addPlayerToRadio(source, radioChannel)
 	-- check if the channel exists, if it does set the varaible to it
 	-- if not create it (basically if not radiodata make radiodata)
 	radioData[radioChannel] = radioData[radioChannel] or {}
-	local plyName = radioNameGetter(source)
+	-- Safety check: ensure radioNameGetter is never nil
+	local getName = radioNameGetter or radioNameGetter_orig
+	local plyName = getName(source)
 	for player, _ in pairs(radioData[radioChannel]) do
 		TriggerClientEvent('pma-voice:addPlayerToRadio', player, source, plyName)
 	end

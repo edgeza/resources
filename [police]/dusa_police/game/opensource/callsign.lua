@@ -10,10 +10,16 @@ lib.addCommand('callsign', {
         help = 'Callsign text'
     }},
 }, function(source, args, raw)
-    local callsign = args.callsign
+    local callsign = nil
 
-    if not callsign and raw then
+    -- Always try to parse from raw first to get the full callsign with spaces
+    if raw then
         callsign = raw:match('^%S+%s+(.+)$')
+    end
+
+    -- Fallback to args.callsign if raw parsing failed or raw is not available
+    if not callsign or callsign == '' then
+        callsign = args.callsign
     end
 
     if not callsign or callsign == '' then

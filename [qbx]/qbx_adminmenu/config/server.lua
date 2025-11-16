@@ -8,6 +8,7 @@ return {
         saveVehicle = 'admin',
         setModel = 'admin',
         dev = 'admin',
+        maxMods = 'admin',
     },
 
     eventPerms = {

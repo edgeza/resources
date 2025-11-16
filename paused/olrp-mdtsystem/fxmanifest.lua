@@ -1,37 +1,29 @@
 fx_version 'cerulean'
 game 'gta5'
 
-name 'olrp-mdt'
-description 'Advanced Mobile Data Terminal System for QBCore/QBox/ESX'
-author 'OLRP Development'
-version '2.0.0'
-
-shared_scripts {
-    'config/shared.lua'
-}
-
-client_scripts {
-    'client/main.lua'
-}
-
-server_scripts {
-    '@oxmysql/lib/MySQL.lua',
-    'server/main.lua'
-}
+author 'Raihil Singh'
+description 'LSPD Mobile Data Terminal System'
+version '1.0.0'
 
 ui_page 'html/index.html'
 
+client_scripts {
+    'client/client.lua'
+}
+
+server_scripts {
+    'server/server.lua'
+}
+
 files {
     'html/index.html',
-    'html/css/*.css',
-    'html/js/*.js',
-    'html/img/*',
-    'html/assets/*',
-    'html/fonts/*'
+    'html/style.css',
+    'html/script.js',
+    'html/LSPD.jpg',
+    'html/map.png',
+    'html/citizen.png',
+    'html/Police.webp',
+    'html/*.png',
+    'html/*.jpg',
+    'html/*.webp'
 }
-
-dependencies {
-    'oxmysql'
-}
-
-lua54 'yes'

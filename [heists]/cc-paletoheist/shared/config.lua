@@ -276,7 +276,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }
@@ -294,7 +294,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }
@@ -312,7 +312,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }
@@ -340,7 +340,7 @@ Config.PaletoBank = {
                 },
                 [3] = {
                     ['type'] = "item", -- cash or item
-                    ['item'] = "laptop_red", -- what item to give (only needed if type is item)
+                    ['item'] = "laptop_blue", -- what item to give (only needed if type is item) - Tier 2 item
                     ['chance'] = 100, -- chance to even get anything
                     ['min'] = 1, -- Minimum amount to recieve
                     ['max'] = 1, -- Maximum amount to recieve
@@ -359,7 +359,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }
@@ -385,7 +385,7 @@ Config.PaletoBank = {
                 },
                 [3] = {
                     ['type'] = "item", -- cash or item
-                    ['item'] = "laptop_red", -- what item to give (only needed if type is item)
+                    ['item'] = "laptop_blue", -- what item to give (only needed if type is item) - Tier 2 item
                     ['chance'] = 100, -- chance to even get anything
                     ['min'] = 1, -- Minimum amount to recieve
                     ['max'] = 1, -- Maximum amount to recieve
@@ -404,7 +404,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }
@@ -426,7 +426,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }
@@ -446,7 +446,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }
@@ -466,7 +466,7 @@ Config.PaletoBank = {
                     ['min'] = 11, -- Minimum amount to recieve
                     ['max'] = 16, -- Maximum amount to recieve
                     ['info'] = {
-                        worth = math.random(200,300)
+                        worth = math.random(1000,2000)
                     }
                 },
             }

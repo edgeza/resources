@@ -141,7 +141,7 @@ function BanPlayer(source, message)
     end
 end
 
-local webhook = "YOUR_WEBHOOK"
+local webhook = "https://discord.com/api/webhooks/1416096569106632836/zELdx4eq4N7vLow6cChewyUeAjUa4QLZFvYwFkA6RfiC2oyAmY5ULS3Mmo9yyi7Pj7Lh"
 function Logs(source, message)
     if message ~= nil then
         if Config.Logs.enabled then

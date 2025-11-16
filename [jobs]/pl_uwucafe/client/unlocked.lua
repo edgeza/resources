@@ -224,7 +224,7 @@ AddEventHandler('pl_uwucafe:openShopUI', function(data)
     SetNuiFocus(true, true)
 end)
 
-RegisterNUICallback('purchaseItems', function(data, cb)
+RegisterNUICallback('purchaseItems', function(data)
     local paymentMode
     if data.paymentMethod == 'cash' then
         paymentMode = "money"
@@ -232,7 +232,6 @@ RegisterNUICallback('purchaseItems', function(data, cb)
         paymentMode = "bank"
     end
     TriggerServerEvent('pl_uwucafe:handlePurchase', paymentMode, data.items)
-    cb('ok')
 end)
 
 RegisterNetEvent('pl_uwucafe:hideShopUI')

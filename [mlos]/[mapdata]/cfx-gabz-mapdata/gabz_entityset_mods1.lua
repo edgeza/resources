@@ -240,7 +240,7 @@ local interiors = {
             { name = 'room14_vaultstairs', enable = true },
             { name = 'room15_vaultbasement', enable = true },
             { name = 'room16_vault', enable = true },
-            { name = 'room16_vault_trolleys', enable = false }, -- gold and cash trolleys
+            { name = 'room16_vault_trolleys', enable = true }, -- gold and cash trolleys
         }
     },
     {

@@ -2,10 +2,20 @@ local Installed_Sound = require "data.installed_sound"
 local Locations = require "data.location"
 local Sound = require "data.sound"
 
-local function canInstall(source, ped)
-    local player = Core.Player[source]
+local function getPlayerObject(source)
+    if Core and Core.GetOrCreatePlayer then
+        return Core.GetOrCreatePlayer(source)
+    end
 
-    if player:isAdmin(source) then
+    if Core and Core.Player then
+        return Core.Player[source]
+    end
+end
+
+local function canInstall(player, ped)
+    if not player then return false end
+
+    if player.isAdmin and player:isAdmin() then
         return true
     else
         local myCoords = GetEntityCoords(ped)
@@ -25,10 +35,10 @@ end
 
 RegisterNetEvent('an-engine:server:install', function (data)
     local source = source --[[@as string]]
-    local player = Core.Player[source]
+    local player = getPlayerObject(source)
 
     if not player then
-        lib.print.error('The player data has not been loaded, use the command /loadplayer to load the player data.')
+        lib.print.error(('Failed to load player data for %s.'):format(source))
         return
     end
 
@@ -39,7 +49,7 @@ RegisterNetEvent('an-engine:server:install', function (data)
         return
     end
 
-    if not canInstall(source, ped) then
+    if not canInstall(player, ped) then
         return
     end
 
@@ -98,8 +108,8 @@ RegisterNetEvent('an-engine:server:install', function (data)
 end)
 
 RegisterNetEvent('an-engineswap:server:saveZoneData', function(data, type)
-    local player = Core.Player[source --[[@as string]]]
-    if not player:isAdmin(source) then return end
+    local player = getPlayerObject(source)
+    if not player or not player:isAdmin() then return end
 
     if type == "add" then
         Locations[data.uuid] = data
@@ -116,8 +126,8 @@ RegisterNetEvent('an-engineswap:server:saveZoneData', function(data, type)
 end)
 
 RegisterNetEvent('an-engineswap:server:changeSoundData', function(newData, category, index)
-    local player = Core.Player[source --[[@as string]]]
-    if not player:isAdmin(source) then return end
+    local player = getPlayerObject(source)
+    if not player or not player:isAdmin() then return end
 
     if Sound[category] and Sound[category][index] then
         Sound[category][index] = newData
@@ -129,8 +139,8 @@ RegisterNetEvent('an-engineswap:server:changeSoundData', function(newData, categ
 end)
 
 RegisterNetEvent('an-engineswap:server:newSound', function(data)
-    local player = Core.Player[source --[[@as string]]]
-    if not player:isAdmin(source) then return end
+    local player = getPlayerObject(source)
+    if not player or not player:isAdmin() then return end
 
     Sound[data.type][data.name] = {
         price = data.price,

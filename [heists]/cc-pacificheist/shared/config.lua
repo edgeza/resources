@@ -331,11 +331,11 @@ Config.TableLoot = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
-                chance = 50, -- Chance to even recieve this, if it should aways give, set to 100
-                min = 1, -- Minimun amount to recieve
-                max = 1 -- Maximum amount to recieve
+                chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
+                min = 8, -- Minimun amount to recieve
+                max = 12 -- Maximum amount to recieve
             }
         }
     },
@@ -352,11 +352,11 @@ Config.TableLoot = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
-                chance = 50, -- Chance to even recieve this, if it should aways give, set to 100
-                min = 1, -- Minimun amount to recieve
-                max = 1 -- Maximum amount to recieve
+                chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
+                min = 8, -- Minimun amount to recieve
+                max = 12 -- Maximum amount to recieve
             }
         }
     },
@@ -373,11 +373,11 @@ Config.TableLoot = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
-                chance = 50, -- Chance to even recieve this, if it should aways give, set to 100
-                min = 1, -- Minimun amount to recieve
-                max = 1 -- Maximum amount to recieve
+                chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
+                min = 8, -- Minimun amount to recieve
+                max = 12 -- Maximum amount to recieve
             }
         }
     },
@@ -394,11 +394,11 @@ Config.TableLoot = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
-                chance = 50, -- Chance to even recieve this, if it should aways give, set to 100
-                min = 1, -- Minimun amount to recieve
-                max = 1 -- Maximum amount to recieve
+                chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
+                min = 8, -- Minimun amount to recieve
+                max = 12 -- Maximum amount to recieve
             }
         }
     },
@@ -415,11 +415,11 @@ Config.TableLoot = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
-                chance = 50, -- Chance to even recieve this, if it should aways give, set to 100
-                min = 1, -- Minimun amount to recieve
-                max = 1 -- Maximum amount to recieve
+                chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
+                min = 8, -- Minimun amount to recieve
+                max = 12 -- Maximum amount to recieve
             }
         }
     }      
@@ -440,7 +440,7 @@ Config.Safes = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
                 chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
                 min = 23, -- Minimun amount to recieve
@@ -462,7 +462,7 @@ Config.Safes = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
                 chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
                 min = 23, -- Minimun amount to recieve
@@ -484,7 +484,7 @@ Config.Safes = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
                 chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
                 min = 23, -- Minimun amount to recieve
@@ -506,7 +506,7 @@ Config.Safes = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
                 chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
                 min = 23, -- Minimun amount to recieve
@@ -528,7 +528,7 @@ Config.Safes = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
                 chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
                 min = 23, -- Minimun amount to recieve
@@ -550,7 +550,7 @@ Config.Safes = {
                 type = "item", -- Can be money or item
                 item = "markedbills", -- Item to give (only needed if type is item)
                 info = {
-                    worth = 250
+                    worth = math.random(2000, 2500)
                 },
                 chance = 100, -- Chance to even recieve this, if it should aways give, set to 100
                 min = 23, -- Minimun amount to recieve

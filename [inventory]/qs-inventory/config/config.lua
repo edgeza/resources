@@ -100,14 +100,14 @@ Config.UseTarget                     = false -- [EDIT]
 -- General Inventory Settings                                                   [EDIT]
 -- [INFO] Core behavior for interactions, UI and safety features.
 --──────────────────────────────────────────────────────────────────────────────
-Config.ThrowKeybind                  = 'E'                     -- [EDIT] Key to throw items; false to disable.
+Config.ThrowKeybind                  = ''                     -- [EDIT] Key to throw items; false to disable.
 Config.PoliceCanSeeSixthSlot         = true                    -- [EDIT] Police can see protected 6th slot.
 Config.PoliceJobs                    = { 'police', 'sheriff' } -- [EDIT] Jobs treated as police.
 Config.BlockedSlot                   = true                    -- [EDIT] Lock 6th slot to prevent stealing.
 Config.GiveItemHideName              = false                   -- [EDIT] Hide item names on give; show only ID.
 Config.OpenProgressBar               = false                   -- [EDIT] Show progress bar on open (dup-prevention).
 Config.EnableSounds                  = true                    -- [EDIT] Toggle default inventory sounds.
-Config.EnableThrow                   = true                    -- [EDIT] Allow throwing items.
+Config.EnableThrow                   = false                    -- [EDIT] Allow throwing items.
 Config.UseJonskaItemThrow            = false                   -- [EDIT] Use custom throw (see custom/misc/jonska.lua).
 Config.EnableTrade                   = true                    -- [EDIT] Safe MMORPG-style trade.
 Config.EnableChangeLabel             = true                    -- [EDIT] One-click rename items.

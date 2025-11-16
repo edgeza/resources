@@ -4,7 +4,7 @@
 
 
 ServerConfig = {
-    LogService = 'fivemerr', -- fivemerr, discord, fivemanage
+    LogService = 'discord', -- fivemerr, discord, fivemanage
     LogApi = 'https://api.fivemerr.com/logs', -- not required if using fivemerr
     DropExploiter = true,
 

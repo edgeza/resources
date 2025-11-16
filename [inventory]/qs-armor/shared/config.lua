@@ -21,7 +21,7 @@ Config.Language = 'en'
 ]]
 
 Config.Progressbar = { -- Timer durations for progress bars (in milliseconds).
-    UseArmor = 4000,      -- Duration for applying regular armor.
+    UseArmor = 5000,      -- Duration for applying regular armor.
     UseHeavyArmor = 5000, -- Duration for applying heavy armor.
     ResetArmor = 2500     -- Duration for removing the armor.
 }

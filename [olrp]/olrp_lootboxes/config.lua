@@ -39,15 +39,22 @@ CFG.CaseList = {
         color = "#808080",
         image = "images/common_case.png",
         items = {
-            {name = "Bandage", item = "bandage", amount = 5, rarity = "Common", image = "bandage.png"},
-            {name = "Water Bottle", item = "water_bottle", amount = 3, rarity = "Common", image = "water_bottle.png"},
-            {name = "Sandwich", item = "sandwich", amount = 2, rarity = "Common", image = "sandwich.png"},
-            {name = "$500", item = "money", amount = 500, rarity = "Uncommon", image = "cash.png"},
-            {name = "Lockpick", item = "lockpick", amount = 2, rarity = "Uncommon", image = "lockpick.png"},
-            {name = "$1,000", item = "money", amount = 1000, rarity = "Rare", image = "cash.png"},
-            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 1, rarity = "Rare", image = "advancedlockpick.png"},
-            {name = "$2,500", item = "money", amount = 2500, rarity = "Epic", image = "cash.png"},
-            {name = "$5,000", item = "money", amount = 5000, rarity = "Legendary", image = "cash.png"},
+            -- Common (60% chance)
+            {name = "Bandage", item = "bandage", amount = 10, rarity = "Common", image = "bandage.png"},
+            {name = "Water Bottle", item = "water_bottle", amount = 5, rarity = "Common", image = "water_bottle.png"},
+            {name = "Lockpick", item = "lockpick", amount = 3, rarity = "Common", image = "lockpick.png"},
+            {name = "Pistol Ammo", item = "pistol_ammo", amount = 25, rarity = "Common", image = "pistol_ammo.png"},
+            -- Uncommon (25% chance)
+            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 2, rarity = "Uncommon", image = "advancedlockpick.png"},
+            {name = "Phone", item = "phone", amount = 1, rarity = "Uncommon", image = "phone.png"},
+            {name = "Pistol Ammo", item = "pistol_ammo", amount = 50, rarity = "Uncommon", image = "pistol_ammo.png"},
+            -- Rare (10% chance)
+            {name = "Basic Drill", item = "basicdrill", amount = 1, rarity = "Rare", image = "basicdrill.png"},
+            {name = "Basic Decrypter", item = "basicdecrypter", amount = 1, rarity = "Rare", image = "basicdecrypter.png"},
+            -- Epic (4% chance)
+            {name = "Pistol", item = "weapon_pistol", amount = 1, rarity = "Epic", image = "weapon_pistol.png"},
+            -- Legendary (1% chance)
+            {name = "Combat Pistol", item = "weapon_combatpistol", amount = 1, rarity = "Legendary", image = "weapon_combatpistol.png"},
         }
     },
     ["uncommon_case"] = {
@@ -56,16 +63,22 @@ CFG.CaseList = {
         color = "#00ff00",
         image = "images/uncommon_case.png",
         items = {
-            {name = "Bandage", item = "bandage", amount = 10, rarity = "Common", image = "bandage.png"},
-            {name = "Water Bottle", item = "water_bottle", amount = 5, rarity = "Common", image = "water_bottle.png"},
-            {name = "$1,000", item = "money", amount = 1000, rarity = "Uncommon", image = "cash.png"},
-            {name = "Lockpick", item = "lockpick", amount = 5, rarity = "Uncommon", image = "lockpick.png"},
-            {name = "Phone", item = "phone", amount = 1, rarity = "Uncommon", image = "phone.png"},
-            {name = "$2,500", item = "money", amount = 2500, rarity = "Rare", image = "cash.png"},
-            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 2, rarity = "Rare", image = "advancedlockpick.png"},
-            {name = "$5,000", item = "money", amount = 5000, rarity = "Epic", image = "cash.png"},
-            {name = "Pistol", item = "weapon_pistol", amount = 1, rarity = "Epic", image = "weapon_pistol.png"},
-            {name = "$10,000", item = "money", amount = 10000, rarity = "Legendary", image = "cash.png"},
+            -- Common (60% chance)
+            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 5, rarity = "Common", image = "advancedlockpick.png"},
+            {name = "Pistol Ammo", item = "pistol_ammo", amount = 50, rarity = "Common", image = "pistol_ammo.png"},
+            {name = "SMG Ammo", item = "smg_ammo", amount = 30, rarity = "Common", image = "smg_ammo.png"},
+            -- Uncommon (25% chance)
+            {name = "Basic Drill", item = "basicdrill", amount = 2, rarity = "Uncommon", image = "basicdrill.png"},
+            {name = "Basic Decrypter", item = "basicdecrypter", amount = 2, rarity = "Uncommon", image = "basicdecrypter.png"},
+            {name = "Phone", item = "phone", amount = 2, rarity = "Uncommon", image = "phone.png"},
+            -- Rare (10% chance)
+            {name = "Pistol", item = "weapon_pistol", amount = 1, rarity = "Rare", image = "weapon_pistol.png"},
+            {name = "Heavy Pistol", item = "weapon_heavypistol", amount = 1, rarity = "Rare", image = "weapon_heavypistol.png"},
+            -- Epic (4% chance)
+            {name = "Micro SMG", item = "weapon_microsmg", amount = 1, rarity = "Epic", image = "weapon_microsmg.png"},
+            {name = "Laptop Green", item = "laptop_green", amount = 1, rarity = "Epic", image = "laptop_green.png"},
+            -- Legendary (1% chance)
+            {name = "Combat Pistol", item = "weapon_combatpistol", amount = 1, rarity = "Legendary", image = "weapon_combatpistol.png"},
         }
     },
     ["rare_case"] = {
@@ -74,16 +87,23 @@ CFG.CaseList = {
         color = "#0080ff",
         image = "images/diamond_case.png",
         items = {
-            {name = "$2,500", item = "money", amount = 2500, rarity = "Common", image = "cash.png"},
-            {name = "Lockpick", item = "lockpick", amount = 10, rarity = "Common", image = "lockpick.png"},
-            {name = "$5,000", item = "money", amount = 5000, rarity = "Uncommon", image = "cash.png"},
-            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 5, rarity = "Uncommon", image = "advancedlockpick.png"},
-            {name = "Phone", item = "phone", amount = 2, rarity = "Uncommon", image = "phone.png"},
-            {name = "$10,000", item = "money", amount = 10000, rarity = "Rare", image = "cash.png"},
-            {name = "Pistol", item = "weapon_pistol", amount = 1, rarity = "Rare", image = "weapon_pistol.png"},
-            {name = "Micro SMG", item = "weapon_microsmg", amount = 1, rarity = "Epic", image = "weapon_microsmg.png"},
-            {name = "$25,000", item = "money", amount = 25000, rarity = "Epic", image = "cash.png"},
-            {name = "$50,000", item = "money", amount = 50000, rarity = "Legendary", image = "cash.png"},
+            -- Common (60% chance)
+            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 10, rarity = "Common", image = "advancedlockpick.png"},
+            {name = "Pistol Ammo", item = "pistol_ammo", amount = 75, rarity = "Common", image = "pistol_ammo.png"},
+            {name = "SMG Ammo", item = "smg_ammo", amount = 50, rarity = "Common", image = "smg_ammo.png"},
+            -- Uncommon (25% chance)
+            {name = "Advanced Drill", item = "advanceddrill", amount = 1, rarity = "Uncommon", image = "advanceddrill.png"},
+            {name = "Advanced Decrypter", item = "advanceddecrypter", amount = 1, rarity = "Uncommon", image = "advanceddecrypter.png"},
+            {name = "Heavy Armor", item = "heavyarmor", amount = 2, rarity = "Uncommon", image = "heavyarmor.png"},
+            -- Rare (10% chance)
+            {name = "Micro SMG", item = "weapon_microsmg", amount = 1, rarity = "Rare", image = "weapon_microsmg.png"},
+            {name = "SMG", item = "weapon_smg", amount = 1, rarity = "Rare", image = "weapon_smg.png"},
+            {name = "Laptop Green", item = "laptop_green", amount = 1, rarity = "Rare", image = "laptop_green.png"},
+            -- Epic (4% chance)
+            {name = "Assault SMG", item = "weapon_assaultsmg", amount = 1, rarity = "Epic", image = "weapon_assaultsmg.png"},
+            {name = "Pump Shotgun", item = "weapon_pumpshotgun", amount = 1, rarity = "Epic", image = "weapon_pumpshotgun.png"},
+            -- Legendary (1% chance)
+            {name = "Laptop Blue", item = "laptop_blue", amount = 1, rarity = "Legendary", image = "laptop_blue.png"},
         }
     },
     ["epic_case"] = {
@@ -92,16 +112,23 @@ CFG.CaseList = {
         color = "#8000ff",
         image = "images/epic_case.png",
         items = {
-            {name = "$5,000", item = "money", amount = 5000, rarity = "Common", image = "cash.png"},
-            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 10, rarity = "Common", image = "advancedlockpick.png"},
-            {name = "$10,000", item = "money", amount = 10000, rarity = "Uncommon", image = "cash.png"},
-            {name = "Pistol", item = "weapon_pistol", amount = 1, rarity = "Uncommon", image = "weapon_pistol.png"},
-            {name = "Phone", item = "phone", amount = 3, rarity = "Uncommon", image = "phone.png"},
-            {name = "$25,000", item = "money", amount = 25000, rarity = "Rare", image = "cash.png"},
-            {name = "Micro SMG", item = "weapon_microsmg", amount = 1, rarity = "Rare", image = "weapon_microsmg.png"},
+            -- Common (60% chance)
+            {name = "SMG Ammo", item = "smg_ammo", amount = 75, rarity = "Common", image = "smg_ammo.png"},
+            {name = "Rifle Ammo", item = "rifle_ammo", amount = 50, rarity = "Common", image = "rifle_ammo.png"},
+            {name = "Heavy Armor", item = "heavyarmor", amount = 5, rarity = "Common", image = "heavyarmor.png"},
+            -- Uncommon (25% chance)
+            {name = "Advanced Drill", item = "advanceddrill", amount = 2, rarity = "Uncommon", image = "advanceddrill.png"},
+            {name = "Advanced Decrypter", item = "advanceddecrypter", amount = 2, rarity = "Uncommon", image = "advanceddecrypter.png"},
+            {name = "Jammer", item = "jammer", amount = 1, rarity = "Uncommon", image = "jammer.png"},
+            -- Rare (10% chance)
+            {name = "Assault SMG", item = "weapon_assaultsmg", amount = 1, rarity = "Rare", image = "weapon_assaultsmg.png"},
+            {name = "Pump Shotgun Mk2", item = "weapon_pumpshotgun_mk2", amount = 1, rarity = "Rare", image = "weapon_pumpshotgun_mk2.png"},
+            {name = "Laptop Blue", item = "laptop_blue", amount = 1, rarity = "Rare", image = "laptop_blue.png"},
+            -- Epic (4% chance)
             {name = "Assault Rifle", item = "weapon_assaultrifle", amount = 1, rarity = "Epic", image = "weapon_assaultrifle.png"},
-            {name = "$100,000", item = "money", amount = 100000, rarity = "Epic", image = "cash.png"},
-            {name = "$250,000", item = "money", amount = 250000, rarity = "Legendary", image = "cash.png"},
+            {name = "AK-47", item = "weapon_ak47", amount = 1, rarity = "Epic", image = "weapon_ak47.png"},
+            -- Legendary (1% chance)
+            {name = "Hardened Drill", item = "hardeneddrill", amount = 1, rarity = "Legendary", image = "hardeneddrill.png"},
         }
     },
     ["legendary_case"] = {
@@ -110,16 +137,24 @@ CFG.CaseList = {
         color = "#ff8000",
         image = "images/legendary_case.png",
         items = {
-            {name = "$10,000", item = "money", amount = 10000, rarity = "Common", image = "cash.png"},
-            {name = "Pistol", item = "weapon_pistol", amount = 2, rarity = "Common", image = "weapon_pistol.png"},
-            {name = "$25,000", item = "money", amount = 25000, rarity = "Uncommon", image = "cash.png"},
-            {name = "Micro SMG", item = "weapon_microsmg", amount = 1, rarity = "Uncommon", image = "weapon_microsmg.png"},
-            {name = "Phone", item = "phone", amount = 5, rarity = "Uncommon", image = "phone.png"},
-            {name = "$50,000", item = "money", amount = 50000, rarity = "Rare", image = "cash.png"},
+            -- Common (60% chance)
+            {name = "Rifle Ammo", item = "rifle_ammo", amount = 100, rarity = "Common", image = "rifle_ammo.png"},
+            {name = "Heavy Armor", item = "heavyarmor", amount = 10, rarity = "Common", image = "heavyarmor.png"},
+            {name = "Jammer", item = "jammer", amount = 2, rarity = "Common", image = "jammer.png"},
+            -- Uncommon (25% chance)
+            {name = "Hardened Drill", item = "hardeneddrill", amount = 1, rarity = "Uncommon", image = "hardeneddrill.png"},
+            {name = "Hardened Decrypter", item = "hardeneddecrypter", amount = 1, rarity = "Uncommon", image = "hardeneddecrypter.png"},
+            {name = "Disruptor", item = "disruptor", amount = 1, rarity = "Uncommon", image = "disruptor.png"},
+            -- Rare (10% chance)
             {name = "Assault Rifle", item = "weapon_assaultrifle", amount = 1, rarity = "Rare", image = "weapon_assaultrifle.png"},
-            {name = "$100,000", item = "money", amount = 100000, rarity = "Epic", image = "cash.png"},
-            {name = "Combat MG", item = "weapon_combatmg", amount = 1, rarity = "Epic", image = "weapon_combatmg.png"},
-            {name = "$1,000,000", item = "money", amount = 1000000, rarity = "Legendary", image = "cash.png"},
+            {name = "AK-47", item = "weapon_ak47", amount = 1, rarity = "Rare", image = "weapon_ak47.png"},
+            {name = "Bullpup Rifle", item = "weapon_bullpuprifle", amount = 1, rarity = "Rare", image = "weapon_bullpuprifle.png"},
+            -- Epic (4% chance)
+            {name = "Assault Rifle Mk2", item = "weapon_assaultrifle_mk2", amount = 1, rarity = "Epic", image = "weapon_assaultrifle_mk2.png"},
+            {name = "Military Rifle", item = "weapon_militaryrifle", amount = 1, rarity = "Epic", image = "weapon_militaryrifle.png"},
+            {name = "Laptop Red", item = "laptop_red", amount = 1, rarity = "Epic", image = "laptop_red.png"},
+            -- Legendary (1% chance)
+            {name = "Heavy Rifle", item = "weapon_heavyrifle", amount = 1, rarity = "Legendary", image = "weapon_heavyrifle.png"},
         }
     },
     ["diamond_case"] = {
@@ -128,17 +163,24 @@ CFG.CaseList = {
         color = "#00ffff",
         image = "images/diamond_case.png",
         items = {
-            {name = "$25,000", item = "money", amount = 25000, rarity = "Common", image = "cash.png"},
-            {name = "Advanced Lockpick", item = "advancedlockpick", amount = 15, rarity = "Common", image = "advancedlockpick.png"},
-            {name = "$50,000", item = "money", amount = 50000, rarity = "Uncommon", image = "cash.png"},
-            {name = "Pistol", item = "weapon_pistol", amount = 2, rarity = "Uncommon", image = "weapon_pistol.png"},
-            {name = "Phone", item = "phone", amount = 5, rarity = "Uncommon", image = "phone.png"},
-            {name = "$100,000", item = "money", amount = 100000, rarity = "Rare", image = "cash.png"},
-            {name = "Micro SMG", item = "weapon_microsmg", amount = 2, rarity = "Rare", image = "weapon_microsmg.png"},
-            {name = "$250,000", item = "money", amount = 250000, rarity = "Epic", image = "cash.png"},
-            {name = "Assault Rifle", item = "weapon_assaultrifle", amount = 1, rarity = "Epic", image = "weapon_assaultrifle.png"},
-            {name = "$1,000,000", item = "money", amount = 1000000, rarity = "Legendary", image = "cash.png"},
-            {name = "Combat MG", item = "weapon_combatmg", amount = 1, rarity = "Legendary", image = "weapon_combatmg.png"},
+            -- Common (60% chance)
+            {name = "Rifle Ammo", item = "rifle_ammo", amount = 150, rarity = "Common", image = "rifle_ammo.png"},
+            {name = "Heavy Armor", item = "heavyarmor", amount = 15, rarity = "Common", image = "heavyarmor.png"},
+            {name = "Jammer", item = "jammer", amount = 3, rarity = "Common", image = "jammer.png"},
+            -- Uncommon (25% chance)
+            {name = "Hardened Drill", item = "hardeneddrill", amount = 2, rarity = "Uncommon", image = "hardeneddrill.png"},
+            {name = "Hardened Decrypter", item = "hardeneddecrypter", amount = 2, rarity = "Uncommon", image = "hardeneddecrypter.png"},
+            {name = "Disruptor", item = "disruptor", amount = 2, rarity = "Uncommon", image = "disruptor.png"},
+            -- Rare (10% chance)
+            {name = "Assault Rifle Mk2", item = "weapon_assaultrifle_mk2", amount = 1, rarity = "Rare", image = "weapon_assaultrifle_mk2.png"},
+            {name = "Bullpup Rifle Mk2", item = "weapon_bullpuprifle_mk2", amount = 1, rarity = "Rare", image = "weapon_bullpuprifle_mk2.png"},
+            {name = "Laptop Red", item = "laptop_red", amount = 1, rarity = "Rare", image = "laptop_red.png"},
+            -- Epic (4% chance)
+            {name = "Military Rifle", item = "weapon_militaryrifle", amount = 1, rarity = "Epic", image = "weapon_militaryrifle.png"},
+            {name = "Heavy Rifle", item = "weapon_heavyrifle", amount = 1, rarity = "Epic", image = "weapon_heavyrifle.png"},
+            {name = "Tactical Rifle", item = "weapon_tacticalrifle", amount = 1, rarity = "Epic", image = "weapon_tacticalrifle.png"},
+            -- Legendary (1% chance)
+            {name = "AR-15", item = "weapon_ar15", amount = 1, rarity = "Legendary", image = "weapon_ar15.png"},
         }
     },
     ["knife_case"] = {

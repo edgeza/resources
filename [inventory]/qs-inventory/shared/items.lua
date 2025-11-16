@@ -38,7 +38,8 @@
 
 ItemList = {
 
-   ['cc_sugar'] = {['name'] = 'cc_sugar', ['label'] = 'Sugar', ['weight'] = 10, ['type'] = 'item', ['image'] = 'cc_sugar.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
+    --Add in qb-core/shared/items.lua
+    ['cc_sugar'] = {['name'] = 'cc_sugar', ['label'] = 'Sugar', ['weight'] = 10, ['type'] = 'item', ['image'] = 'cc_sugar.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
     ['cc_espresso'] = {['name'] = 'cc_espresso', ['label'] = 'Espresso', ['weight'] = 10, ['type'] = 'item', ['image'] = 'cc_espresso.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
     ['cc_cappuccino'] = {['name'] = 'cc_cappuccino', ['label'] = 'Cappuccino', ['weight'] = 10, ['type'] = 'item', ['image'] = 'cc_cappuccino.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
     ['cc_milk'] = {['name'] = 'cc_milk', ['label'] = 'Milk', ['weight'] = 10, ['type'] = 'item', ['image'] = 'cc_milk.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = ''},
@@ -111,6 +112,48 @@ ItemList = {
     ['plush_06a'] = {['name'] = 'plush_06a', ['label'] = 'Plush Toy 06', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_06a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
     ['plush_07a'] = {['name'] = 'plush_07a', ['label'] = 'Plush Toy 07', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_07a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
     ['plush_08a'] = {['name'] = 'plush_08a', ['label'] = 'Plush Toy 08', ['weight'] = 100, ['type'] = 'item', ['image'] = 'plush_08a.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true},
+
+
+    --Gym
+    ['gym_membership'] 	= {['name'] = 'gym_membership', ['label'] = 'Gym Membership', ['weight'] = 1, ['type'] = 'item', ['image'] = 'leather.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Leather'},
+   
+    --Book
+
+    ['book'] = {
+        ['name'] = 'book',
+        ['label'] = 'Book',
+        ['weight'] = 100,
+        ['type'] = 'item',
+        ['image'] = 'book.png',
+        ['unique'] = true,
+        ['useable'] = true,
+        ['shouldClose'] = true,
+        ['combinable'] = nil,
+        ['description'] = 'An empty book that can store images as pages.'
+    },
+
+    -- MM_RADIO
+    ["jammer"] = {
+        ["name"] = "jammer",
+        ["label"] = "Radio Jammer",
+        ["weight"] = 10000,
+        ["type"] = "item",
+        ["image"] = "jammer.png",
+        ["unique"] = true,
+        ["useable"] = true,
+        ["shouldClose"] = true,
+        ["description"] = "A device to block radio signals around"
+    },
+    ["radiocell"] = {
+            ["name"] = "radiocell",
+            ["label"] = "AAA Cells",
+            ["weight"] = 500,
+            ["type"] = "item",
+            ["image"] = "radiocell.png",
+            ["useable"] = true,
+            ["shouldClose"] = true,
+            ["description"] = "Batteries to powerup radio device"
+    },
 
     --Storm Chaser Items
 
@@ -5021,7 +5064,7 @@ ItemList = {
         ['weight'] = 2500,
         ['type'] = 'item',
         ['image'] = 'repairkit.png',
-        ['job'] = { 'mechanic', 'mechanic1', 'mechanic2', 'mechanic3' },
+        ['job'] = { 'bennies', '6str', 'palmcoast', 'olrpmechanic' },
         ['unique'] = false,
         ['useable'] = true,
         ['shouldClose'] = true,
@@ -5034,7 +5077,7 @@ ItemList = {
         ['weight'] = 4000,
         ['type'] = 'item',
         ['image'] = 'advancedkit.png',
-        ['job'] = { 'mechanic', 'mechanic1', 'mechanic2', 'mechanic3' },
+        ['job'] = { 'bennies', '6str', 'palmcoast', 'olrpmechanic' },
         ['unique'] = false,
         ['useable'] = true,
         ['shouldClose'] = true,
@@ -6723,7 +6766,7 @@ ItemList = {
     nitrous_install_kit             = { name = 'nitrous_install_kit', label = 'Nitrous Install Kit', weight = 1000, type = 'item', image = 'nitrous_install_kit.png', unique = false, useable = false, shouldClose = true, combinable = nil, description = nil },
     -- Repair & Cleaning Items
     cleaning_kit                    = { name = 'cleaning_kit', label = 'Cleaning Kit', weight = 1000, type = 'item', image = 'cleaning_kit.png', unique = false, useable = true, shouldClose = true, combinable = true, description = nil },
-    repair_kit                      = { name = 'repair_kit', label = 'Vehicle Repair Kit', weight = 1000, type = 'item', job = { 'mechanic', 'mechanic1', 'mechanic2', 'mechanic3' }, image = 'repair_kit.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = nil },
+    repair_kit                      = { name = 'repair_kit', label = 'Vehicle Repair Kit', weight = 1000, type = 'item', job = { 'bennies', '6str', 'palmcoast', 'olrpmechanic' }, image = 'repair_kit.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = nil },
     duct_tape                       = { name = 'duct_tape', label = 'Duct Tape', weight = 100, type = 'item', image = 'duct_tape.png', unique = false, useable = true, shouldClose = true, combinable = true, description = nil },
     -- Performance
     performance_part                = { name = 'performance_part', label = 'Performance Part', weight = 1000, type = 'item', image = 'performance_part.png', unique = false, useable = false, shouldClose = false, combinable = true, description = nil },
@@ -7977,536 +8020,6 @@ ItemList = {
         ['shouldClose'] = true,
         ['combinable'] = nil,
         ['description'] = 'Your description here'
-    },
-
-    -- GG Hunting Weapons
-
-    ['weapon_huntingrifle']      = {
-        ['name'] = 'weapon_huntingrifle',
-        ['label'] = 'Hunting Rifle',
-        ['weight'] = 1000,
-        ['type'] = 'weapon',
-        ['ammotype'] = 'AMMO_SNIPER',
-        ['image'] = 'weapon_huntingrifle.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['rare'] = 'common', -- epic, legendary, common
-        ['description'] =
-        'A high-velocity rifle designed for precise, long-range shots at game. Ideal for hunters seeking to take down large prey from a distance.'
-    },
-    ['weapon_crossbow']          = {
-        ['name'] = 'weapon_crossbow',
-        ['label'] = 'Hunting Crossbow',
-        ['weight'] = 1000,
-        ['type'] = 'weapon',
-        ['ammotype'] = 'AMMO_SNIPER',
-        ['image'] = 'weapon_crossbow.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['rare'] = 'common', -- epic, legendary, common
-        ['description'] =
-        'A precision weapon favored by skilled hunters. Fires arrows with remarkable accuracy, ideal for hunters who value skill and control over brute force.'
-    },
-
-    -- GG hunting Ammo
-    ['gg_hunting_arrowammo']     = {
-        ['name'] = 'gg_hunting_arrowammo',
-        ['label'] = 'Arrow Ammo',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_arrowammo.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] =
-        'Specially crafted arrows designed for use with the hunting crossbow. Built for precision and power, ideal for taking down animals quietly.'
-    },
-
-    ['gg_hunting_rifleammo']     = {
-        ['name'] = 'gg_hunting_rifleammo',
-        ['label'] = 'Hunting Rifle Ammo',
-        ['weight'] = 200,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_rifleammo.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] =
-        'High-powered ammunition for the hunting rifle. Designed for long-range accuracy and the ability to pierce through tough animal hides.'
-    },
-
-    -- GG Hunting Items
-    ['gg_hunting_animaltracker'] = {
-        ['name'] = 'gg_hunting_animaltracker',
-        ['label'] = 'Advanced Animal Tracker',
-        ['weight'] = 100,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_animaltracker.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] =
-        'A sophisticated device used to track animal movements across the terrain, aiding hunters in locating their prey.'
-    },
-
-    ['gg_hunting_animaltrap']    = {
-        ['name'] = 'gg_hunting_animaltrap',
-        ['label'] = 'Heavy-Duty Animal Trap',
-        ['weight'] = 100,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_animaltrap.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A durable trap designed to capture animals alive for easier transportation or use as bait.'
-    },
-
-    ['gg_hunting_campfire']      = {
-        ['name'] = 'gg_hunting_campfire',
-        ['label'] = 'Portable Campfire',
-        ['weight'] = 100,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_campfire.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] =
-        'A compact campfire setup for warming up, cooking, and providing light during long hunting expeditions.'
-    },
-
-    ['gg_hunting_meat']          = {
-        ['name'] = 'gg_hunting_meat',
-        ['label'] = 'Fresh Animal Meat',
-        ['weight'] = 5,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_meat.png',
-        ['unique'] = false,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'Freshly harvested meat from a hunt, ideal for cooking or trade.'
-    },
-
-    ['gg_hunting_cookedmeat']    = {
-        ['name'] = 'gg_hunting_cookedmeat',
-        ['label'] = 'Cooked Game Meat',
-        ['weight'] = 5,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_cookedmeat.png',
-        ['unique'] = false,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'Deliciously cooked meat, perfect for a meal during your hunting adventure.'
-    },
-
-    ['gg_hunting_knife_01']      = {
-        ['name'] = 'gg_hunting_knife_01',
-        ['label'] = 'Basic Hunting Knife',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_knife_01.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A reliable, entry-level hunting knife ideal for basic butchering tasks.'
-    },
-
-    ['gg_hunting_knife_02']      = {
-        ['name'] = 'gg_hunting_knife_02',
-        ['label'] = 'Intermediate Hunting Knife',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_knife_02.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A well-crafted hunting knife offering improved precision for more efficient butchering.'
-    },
-
-    ['gg_hunting_knife_03']      = {
-        ['name'] = 'gg_hunting_knife_03',
-        ['label'] = 'Premium Hunting Knife',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_hunting_knife_03.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] =
-        'A top-tier hunting knife, designed for expert hunters, providing unmatched sharpness and durability for butchering.'
-    },
-
-    ['gg_deer_hide_01']          = {
-        ['name'] = 'gg_deer_hide_01',
-        ['label'] = 'Rough Deer Hide',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_deer_hide_01.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A basic, coarse deer hide with minimal value.'
-    },
-
-    ['gg_deer_hide_02']          = {
-        ['name'] = 'gg_deer_hide_02',
-        ['label'] = 'Sturdy Deer Hide',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_deer_hide_02.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A good-quality deer hide, suitable for crafting or trade.'
-    },
-
-    ['gg_deer_hide_03']          = {
-        ['name'] = 'gg_deer_hide_03',
-        ['label'] = 'Pristine Deer Hide',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_deer_hide_03.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A high-quality, flawless deer hide highly valued by traders.'
-    },
-
-    ['gg_boar_tusk_01']          = {
-        ['name'] = 'gg_boar_tusk_01',
-        ['label'] = 'Rough Boar Tusk',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_boar_tusk_01.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A basic, crude boar tusk with minimal value.'
-    },
-
-    ['gg_boar_tusk_02']          = {
-        ['name'] = 'gg_boar_tusk_02',
-        ['label'] = 'Sturdy Boar Tusk',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_boar_tusk_02.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A sturdy boar tusk with a moderate value, suitable for crafting or trade.'
-    },
-
-    ['gg_boar_tusk_03']          = {
-        ['name'] = 'gg_boar_tusk_03',
-        ['label'] = 'Pristine Boar Tusk',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_boar_tusk_03.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A high-quality boar tusk, highly valued by craftsmen and traders.'
-    },
-
-    ['gg_rabbit_pelt_01']        = {
-        ['name'] = 'gg_rabbit_pelt_01',
-        ['label'] = 'Rough Rabbit Pelt',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_rabbit_pelt_01.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A basic rabbit pelt with minimal value.'
-    },
-    ['gg_rabbit_pelt_02']        = {
-        ['name'] = 'gg_rabbit_pelt_02',
-        ['label'] = 'Sturdy Rabbit Pelt',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_rabbit_pelt_02.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A decent-quality rabbit pelt, suitable for crafting or trade.'
-    },
-    ['gg_rabbit_pelt_03']        = {
-        ['name'] = 'gg_rabbit_pelt_03',
-        ['label'] = 'Pristine Rabbit Pelt',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_rabbit_pelt_03.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A high-quality rabbit pelt, highly valued by traders and craftsmen.'
-    },
-    ['gg_cougar_claw_01']        = {
-        ['name'] = 'gg_cougar_claw_01',
-        ['label'] = 'Rough Cougar Claw',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_cougar_claw_01.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A basic cougar claw with minimal value.'
-    },
-    ['gg_cougar_claw_02']        = {
-        ['name'] = 'gg_cougar_claw_02',
-        ['label'] = 'Sturdy Cougar Claw',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_cougar_claw_02.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A sturdy cougar claw, suitable for crafting or trade.'
-    },
-    ['gg_cougar_claw_03']        = {
-        ['name'] = 'gg_cougar_claw_03',
-        ['label'] = 'Pristine Cougar Claw',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_cougar_claw_03.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A high-quality cougar claw, highly valued by traders and craftsmen.'
-    },
-    ['gg_coyote_fangs_01']       = {
-        ['name'] = 'gg_coyote_fangs_01',
-        ['label'] = 'Rough Coyote Fang',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_coyote_fangs_01.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A basic coyote fang with minimal value.'
-    },
-    ['gg_coyote_fangs_02']       = {
-        ['name'] = 'gg_coyote_fangs_02',
-        ['label'] = 'Sturdy Coyote Fang',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_coyote_fangs_02.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A sturdy coyote fang, suitable for crafting or trade.'
-    },
-    ['gg_coyote_fangs_03']       = {
-        ['name'] = 'gg_coyote_fangs_03',
-        ['label'] = 'Pristine Coyote Fang',
-        ['weight'] = 20,
-        ['type'] = 'item',
-        ['image'] = 'gg_coyote_fangs_03.png',
-        ['unique'] = true,
-        ['useable'] = false,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A high-quality coyote fang, highly valued by traders and craftsmen.'
-    },
-
-    ['gg_salt_block_01']         = {
-        ['name'] = 'gg_salt_block_01',
-        ['label'] = 'Basic Salt Block',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_salt_block_01.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A simple salt block used to attract animals.'
-    },
-    ['gg_salt_block_02']         = {
-        ['name'] = 'gg_salt_block_02',
-        ['label'] = 'Enhanced Salt Block',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_salt_block_02.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A refined salt block that draws in more animals.'
-    },
-    ['gg_salt_block_03']         = {
-        ['name'] = 'gg_salt_block_03',
-        ['label'] = 'Premium Salt Block',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_salt_block_03.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A high-quality salt block, highly effective at attracting animals.'
-    },
-    ['gg_pug_bait_01']           = {
-        ['name'] = 'gg_pug_bait_01',
-        ['label'] = 'Basic Pug Bait',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_pug_bait_01.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'common',
-        ['description'] = 'A simple and crude bait for attracting pugs.'
-    },
-    ['gg_pug_bait_02']           = {
-        ['name'] = 'gg_pug_bait_02',
-        ['label'] = 'Advanced Pug Bait',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_pug_bait_02.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'epic',
-        ['description'] = 'A more effective bait to lure in pugs, with a stronger scent.'
-    },
-    ['gg_pug_bait_03']           = {
-        ['name'] = 'gg_pug_bait_03',
-        ['label'] = 'Specialized Pug Bait',
-        ['weight'] = 10,
-        ['type'] = 'item',
-        ['image'] = 'gg_pug_bait_03.png',
-        ['unique'] = false,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A premium bait crafted to attract the rarest of pugs.'
-    },
-    ['gg_captured_rabbit']       = {
-        ['name'] = 'gg_captured_rabbit',
-        ['label'] = 'Captured Rabbit',
-        ['weight'] = 50,
-        ['type'] = 'item',
-        ['image'] = 'gg_captured_rabbit.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A captured rabbit, perfect for luring carnivores as high-quality bait.'
-    },
-    ['gg_captured_hen']          = {
-        ['name'] = 'gg_captured_hen',
-        ['label'] = 'Captured Hen',
-        ['weight'] = 50,
-        ['type'] = 'item',
-        ['image'] = 'gg_captured_hen.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A captured hen, a tempting bait for larger predators seeking prey.'
-    },
-    ['gg_captured_chickenhawk']  = {
-        ['name'] = 'gg_captured_chickenhawk',
-        ['label'] = 'Captured Chickenhawk',
-        ['weight'] = 50,
-        ['type'] = 'item',
-        ['image'] = 'gg_captured_chickenhawk.png',
-        ['unique'] = true,
-        ['useable'] = true,
-        ['shouldClose'] = true,
-        ['combinable'] = nil,
-        ['object'] = nil,
-        ['rare'] = 'legendary',
-        ['description'] = 'A captured chickenhawk, a rare and enticing bait that attracts powerful predators.'
     },
 
     ['wheelchair']               = {

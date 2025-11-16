@@ -9,7 +9,8 @@ lib.addCommand('carsound', {
     help = 'engineswap',
     restricted = 'group.admin'
 }, function(source, args, raw)
-    local player = Core.Player[source --[[@as string]]]
+    local player = Core.GetOrCreatePlayer and Core.GetOrCreatePlayer(source) or (Core.Player and Core.Player[source])
+    if not player then return end
     local job = player:getJob()
     TriggerClientEvent("an-engineswap:server:openengine", source,job)
 end)

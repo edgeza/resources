@@ -39,7 +39,9 @@ end)()
 
 --<!>-- GUIDE --<!>--
 Core.Functions.CreateUseableItem('miningguide', function(source, item)
-    TriggerClientEvent('boii-mining:cl:OpenGuide', source)
+    local src = source
+    if not src or src == 0 then return end
+    TriggerClientEvent('boii-mining:cl:OpenGuide', src)
 end)
 --<!>-- GUIDE --<!>--
 

@@ -1,0 +1,27 @@
+{
+    "anonymous": "Anonimowy",
+    "requestid": {
+        "closest_player_id": "ID Gracza [^1%s^0]"
+    },
+    "ui": {
+        "invalidCommand": "Nieprawidłowa komenda! Wprowadź prawidłową komendę.",
+        "adminMessage": "Wiadomość administratora.",
+        "emote": "Emote",
+        "adminChat": "Czat Administratora",
+        "privateMessage": "Wiadomość Prywatna",
+        "roleplayAction": "Akcja Roleplay",
+        "settings": {
+            "settings": "Ustawienia",
+            "restore": "Przywróć Ustawienia",
+            "restoreDefaults": "Ustawienia Przywrócone",
+            "chatPosition": "Zmień Pozycję Czatu",
+            "chatSize": "Zmień Rozmiar Czatu",
+            "showOnMessage": "Pokaż przy Otrzymaniu Wiadomości",
+            "saveSettings": "Ustawienia Zapisane.",
+            "savedSettings": "Zapisz Ustawienia",
+            "yes": "Tak",
+            "no": "Nie",
+            "theme": "Wybierz Motyw"
+        }
+    }
+} 

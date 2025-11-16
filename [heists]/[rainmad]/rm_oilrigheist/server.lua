@@ -183,7 +183,11 @@ AddEventHandler('oilrig:server:rewardItem', function(data)
 
                 if chance <= v['chance'] then
                     rewardItem = {name = v['itemName'], count = v['itemCount']()}
-                    player.addInventoryItem(rewardItem.name, rewardItem.count)
+                    local itemInfo = nil
+                    if v['itemInfo'] then
+                        itemInfo = v['itemInfo']()
+                    end
+                    player.addInventoryItem(rewardItem.name, rewardItem.count, itemInfo)
                     discordLog(player.getName() ..  ' - ' .. player.getIdentifier(), ' Gain ' .. rewardItem.name .. ' x' .. rewardItem.count .. ' on Oil Rig Heist Crate!')
                 end
             end
@@ -201,7 +205,11 @@ AddEventHandler('oilrig:server:rewardItem', function(data)
 
                 if chance <= v['chance'] then
                     rewardItem = {name = v['itemName'], count = v['itemCount']()}
-                    player.Functions.AddItem(rewardItem.name, rewardItem.count)
+                    local itemInfo = nil
+                    if v['itemInfo'] then
+                        itemInfo = v['itemInfo']()
+                    end
+                    player.Functions.AddItem(rewardItem.name, rewardItem.count, false, itemInfo)
                     discordLog(player.PlayerData.name ..  ' - ' .. player.PlayerData.license, ' Gain ' .. rewardItem.name .. ' x' .. rewardItem.count .. ' on Oil Rig Heist Crate!')
                 end
             end

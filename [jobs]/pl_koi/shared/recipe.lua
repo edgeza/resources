@@ -22,8 +22,8 @@ ItemDefinitions.original = {
                     reward = 1, --item reward on completing
                     duration = 10000,
                     required = {  -- required items for crafting
-					{item = 'koi_salt', label="Salt", quantity = 1},
-                    {item = 'koi_dill_butter', label="Dill Butter", quantity = 1},
+					{item = 'koi_salt', label="Salt", quantity = 10},
+                    {item = 'koi_dill_butter', label="Dill Butter", quantity = 10},
 				    },
                 },
                 koi_lobster_tail = {
@@ -32,8 +32,8 @@ ItemDefinitions.original = {
                     reward = 1, --item reward on completing
                     duration = 10000,
                     required = {  -- required items for crafting
-					{item = 'koi_salt', label="Salt", quantity = 1},
-                    {item = 'koi_clarified_butter', label="Clarified Butter", quantity = 1},
+					{item = 'koi_salt', label="Salt", quantity = 10},
+                    {item = 'koi_clarified_butter', label="Clarified Butter", quantity = 10},
 				    },
                 },
                 koi_shrimp_scampi = {
@@ -42,8 +42,8 @@ ItemDefinitions.original = {
                     reward = 1, --item reward on completing
                     duration = 10000,
                     required = {  -- required items for crafting
-					{item = 'koi_salt', label="Salt", quantity = 1},
-                    {item = 'koi_white_wine', label="White Wine", quantity = 1},
+					{item = 'koi_salt', label="Salt", quantity = 10},
+                    {item = 'koi_white_wine', label="White Wine", quantity = 10},
 				    },
                 },
                 koi_seared_scallops = {
@@ -52,8 +52,8 @@ ItemDefinitions.original = {
                     reward = 1, --item reward on completing
                     duration = 10000,
                     required = {  -- required items for crafting
-					{item = 'koi_salt', label="Salt", quantity = 1},
-                    {item = 'koi_truffle_oil', label="Truffle Oil", quantity = 1},
+					{item = 'koi_salt', label="Salt", quantity = 10},
+                    {item = 'koi_truffle_oil', label="Truffle Oil", quantity = 10},
 				    },
                 },
                 koi_crab_cakes = {
@@ -62,8 +62,8 @@ ItemDefinitions.original = {
                     reward = 1, --item reward on completing
                     duration = 10000,
                     required = {  -- required items for crafting
-					{item = 'koi_salt', label="Salt", quantity = 1},
-                    {item = 'koi_old_bay_seasoning', label="Old Bay Seasoning", quantity = 1},
+					{item = 'koi_salt', label="Salt", quantity = 10},
+                    {item = 'koi_old_bay_seasoning', label="Old Bay Seasoning", quantity = 10},
 				    },
                 },
 
@@ -78,13 +78,13 @@ ItemDefinitions.original = {
                 koi_mojito = {
                     label = "Koi Mojito",
                     price = 50,
-                    reward = 1,
+                    reward = 10,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_fresh_mint_leaves', label = "Fresh Mint Leaves", quantity = 1 },
-                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 1 },
-                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_fresh_mint_leaves', label = "Fresh Mint Leaves", quantity = 10 },
+                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 10 },
+                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 10 },
                     },
                 },
                 koi_pina_colada = {
@@ -93,10 +93,10 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_coconut_cream', label = "Coconut Cream", quantity = 1 },
-                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 1 },
-                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_coconut_cream', label = "Coconut Cream", quantity = 10 },
+                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 10 },
+                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 10 },
                     },
                 },
                 koi_margarita = {
@@ -105,10 +105,10 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_triple_sec', label = "Triple Sec", quantity = 1 },
-                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 1 },
-                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_triple_sec', label = "Triple Sec", quantity = 10 },
+                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 10 },
+                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 10 },
                     },
                 },
                 koi_espresso_martini = {
@@ -117,10 +117,10 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_coffee_liquor_kahlua', label = "Coffee Liquor", quantity = 1 },
-                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 1 },
-                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_coffee_liquor_kahlua', label = "Coffee Liquor", quantity = 10 },
+                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 10 },
+                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 10 },
                     },
                 },
                 koi_arnold_palmer = {
@@ -129,10 +129,10 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_fresh_lemonade', label = "Fresh Lemonade", quantity = 1 },
-                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 1 },
-                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_fresh_lemonade', label = "Fresh Lemonade", quantity = 10 },
+                        { item = 'koi_emptycup', label = "Koi Empty Cup", quantity = 10 },
+                        { item = 'koi_icecubes', label = "Koi Ice Cubes", quantity = 10 },
                     },
                 },
             }
@@ -148,8 +148,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_herb_butter', label = "Herb Butter", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_herb_butter', label = "Herb Butter", quantity = 10 },
                     },
                 },
                 koi_filet_mignon = {
@@ -158,8 +158,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_bearnaise_sauce', label = "Béarnaise Sauce", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_bearnaise_sauce', label = "Béarnaise Sauce", quantity = 10 },
                     },
                 },
                 koi_t_bone_steak = {
@@ -168,8 +168,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_steakhouse_dry_rub', label = "Steakhouse Dry Rub", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_steakhouse_dry_rub', label = "Steakhouse Dry Rub", quantity = 10 },
                     },
                 },
                 koi_tomahawk_steak = {
@@ -178,8 +178,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_smoked_sea_salt', label = "Smoked Sea Salt", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_smoked_sea_salt', label = "Smoked Sea Salt", quantity = 10 },
                     },
                 },
                 koi_new_york_strip = {
@@ -188,8 +188,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_red_wine_reduction', label = "Red Wine Reduction", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_red_wine_reduction', label = "Red Wine Reduction", quantity = 10 },
                     },
                 },
             },
@@ -205,8 +205,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_mascarpone_cheese', label = "Mascarpone Cheese", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_mascarpone_cheese', label = "Mascarpone Cheese", quantity = 10 },
                     },
                 },
                 koi_cheesecake = {
@@ -215,8 +215,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_graham_cracker_crust', label = "Graham Cracker Crust", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_graham_cracker_crust', label = "Graham Cracker Crust", quantity = 10 },
                     },
                 },
                 koi_chocolate_lava_cake = {
@@ -225,8 +225,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_molten_ganache_filling', label = "Molten Ganache Filling", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_molten_ganache_filling', label = "Molten Ganache Filling", quantity = 10 },
                     },
                 },
                 koi_creme_brulee = {
@@ -235,8 +235,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_caramelized_sugar_topping', label = "Caramelized Sugar Topping", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_caramelized_sugar_topping', label = "Caramelized Sugar Topping", quantity = 10 },
                     },
                 },
                 koi_key_lime_pie = {
@@ -245,8 +245,8 @@ ItemDefinitions.original = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_key_lime_juice', label = "Key Lime Juice", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_key_lime_juice', label = "Key Lime Juice", quantity = 10 },
                     },
                 },
             },
@@ -267,8 +267,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
                 djs_togo_kungpaochicken = {
@@ -277,8 +277,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
                     },
                 },
                 djs_togo_mushroomchicken = {
@@ -287,8 +287,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
                 djs_togo_sweetfirechicken = {
@@ -297,8 +297,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
                 djs_togo_teriyakichicken = {
@@ -307,8 +307,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
                     },
                 },
                 djs_togocontainer_chicken = {
@@ -317,7 +317,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
             },
@@ -333,8 +333,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
                     },
                 },
                 djs_togo_blackpepperangussteak = {
@@ -343,7 +343,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
                     },
                 },
                 djs_togo_broccolibeef = {
@@ -352,8 +352,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 1 },
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_black_pepper', label = "Black Pepper", quantity = 10 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
             },
@@ -369,8 +369,8 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
                     },
                 },
                 djs_togo_chveggieeggroll = {
@@ -379,7 +379,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
                 djs_togo_eggroll = {
@@ -388,7 +388,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
                 djs_togo_supergreens = {
@@ -397,7 +397,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
             },
@@ -413,7 +413,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_sugar', label = "Sugar", quantity = 1 },
+                        { item = 'koi_sugar', label = "Sugar", quantity = 10 },
                     },
                 },
                 djs_togocontainer_noodles = {
@@ -422,7 +422,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
                 djs_togocontainer_whiterice = {
@@ -431,7 +431,7 @@ ItemDefinitions.dj = {
                     reward = 1,
                     duration = 10000,
                     required = {
-                        { item = 'koi_salt', label = "Salt", quantity = 1 },
+                        { item = 'koi_salt', label = "Salt", quantity = 10 },
                     },
                 },
             },

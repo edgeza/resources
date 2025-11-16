@@ -1,0 +1,27 @@
+{
+    "anonymous": "Anonim",
+    "requestid": {
+        "closest_player_id": "Oyuncu ID [^1%s^0]"
+    },
+    "ui": {
+        "invalidCommand": "Geçersiz komut! Lütfen geçerli bir komut girin.",
+        "adminMessage": "Admin mesajı.",
+        "emote": "Emote",
+        "adminChat": "Admin Sohbeti",
+        "privateMessage": "Özel Mesaj",
+        "roleplayAction": "Roleplay Aksiyonu",
+        "settings": {
+            "settings": "Ayarlar",
+            "restore": "Ayarları Sıfırla",
+            "restoreDefaults": "Ayarlar Sıfırlandı",
+            "chatPosition": "Sohbet Konumunu Değiştir",
+            "chatSize": "Sohbet Boyutunu Değiştir",
+            "showOnMessage": "Mesaj Alındığında Göster",
+            "saveSettings": "Ayarlar Kaydedildi.",
+            "savedSettings": "Ayarları Kaydet",
+            "yes": "Evet",
+            "no": "Hayır",
+            "theme": "Tema Seç"
+        }
+    }
+} 

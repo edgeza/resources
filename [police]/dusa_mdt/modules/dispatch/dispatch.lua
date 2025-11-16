@@ -13,7 +13,7 @@ function dispatch:add(alert)
     local id = generateId()
     local data = {
         id = alert.id or id,
-        gameId = "#"..alert.id or id,
+        gameId = "#"..(alert.id or id),
         code = alert.code or alert.message or "10-XX",
         iconList = alertProperties,
         location = alert.coords,

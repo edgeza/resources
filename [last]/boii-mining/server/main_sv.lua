@@ -34,18 +34,22 @@ local MetaDataName = Config.XP.MetaDataName
 --<!>-- ADD/REMOVE ITEM EVENTS START --<!>--
 -- Remove item event
 RegisterServerEvent('boii-mining:sv:RemoveItem', function(itemremove, amount)
-    local source = source
-    local pData = Core.Functions.GetPlayer(source)
+    local src = source
+    if not src or src == 0 then return end
+    local pData = Core.Functions.GetPlayer(src)
+    if not pData then return end
     if pData.Functions.RemoveItem(itemremove, tonumber(amount)) then
-        TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[itemremove], 'remove', amount)
+        TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[itemremove], 'remove', amount)
     end
 end)
 -- Add item event
 RegisterServerEvent('boii-mining:sv:AddItem', function(itemadd, amount)
-    local source = source
-    local pData = Core.Functions.GetPlayer(source)
+    local src = source
+    if not src or src == 0 then return end
+    local pData = Core.Functions.GetPlayer(src)
+    if not pData then return end
     if pData.Functions.AddItem(itemadd, tonumber(amount)) then
-        TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[itemadd], 'add', amount)
+        TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[itemadd], 'add', amount)
     end
 end)
 --<!>-- ADD/REMOVE ITEM EVENTS END --<!>--
@@ -53,10 +57,12 @@ end)
 --<!>-- TAKE GUIDE --<!>--
 RegisterServerEvent('boii-mining:sv:TakeGuide', function()
     local src = source
+    if not src or src == 0 then return end
     local pData = Core.Functions.GetPlayer(src)
+    if not pData then return end
     if pData.Functions.GetItemByName('miningguide') ~= nil then TriggerClientEvent('boii-mining:notify', src, Language.Mining.Quarry.Ped['hasguide'], 'error') return end
     pData.Functions.AddItem('miningguide', 1)
-    TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items['miningguide'], 'add', 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items['miningguide'], 'add', 1)
     TriggerClientEvent('boii-mining:notify', src, Language.Mining.Quarry.Ped['guide'], 'success')
 end)
 --<!>-- TAKE GUIDE --<!>--

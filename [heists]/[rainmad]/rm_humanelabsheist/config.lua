@@ -6,11 +6,13 @@ Config['HumaneLabs'] = {
     ['dispatchJobs'] = {'police', 'sheriff'},
     ['nextRob'] = 3600, -- seconds for next heist,
     ['rewards'] = {
-        ['money'] = 15000,
+        ['money'] = 1, -- Set to 1 to enable money reward (server will randomize 400k-500k)
         ['blackMoney'] = 0,
         ['items'] = { -- you can disable this, just make ['items'] = nil
-            { name = 'gold', count = function() return math.random(1, 5) end},
-            { name = 'diamond', count = function() return math.random(1, 5) end}
+            { name = 'hardeneddecrypter', count = function() return 1 end},
+            { name = 'hardeneddrill', count = function() return 1 end},
+            { name = 'laptop_red', count = function() return 1 end},
+            { name = 'disruptor', count = function() return 1 end},
         }
     },
     ['minigameDifficulty'] = {
@@ -68,7 +70,13 @@ Config['HumaneLabs'] = {
     ['wetsuit'] = {
         itemName = 'wetsuit',
         divingTime = 600,
-    }
+    },
+    ['requiredItems'] = { -- Tier 2 items required for this Tier 3 heist
+        'advanceddecrypter',
+        'advanceddrill',
+        'laptop_blue',
+        'wetsuit',
+    },
 }
 
 policeAlert = function(coords)

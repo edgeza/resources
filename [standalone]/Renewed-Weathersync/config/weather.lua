@@ -1,7 +1,7 @@
 return {
 
     useScheduledWeather = true, -- Do you want txAdmin to schedule custom rain and thunder near restart?
-    serverDuration = 14, -- How many hours will the server run before restarting?, if a server restarts every 8 hours put this to 9 etc.
+    serverDuration = 7, -- How many hours will the server run before restarting?, if a server restarts every 8 hours put this to 9 etc.
     weatherCycletimer = 30, -- How many minutes between weather changes
 
     timeBetweenRain = 180, -- How many minutes between rain events
@@ -12,20 +12,20 @@ return {
 
     useStaticWeather = true,
     staticWeather = {
-        ['BLIZZARD'] = 0.0, --0% chance
-        ['CLEAR'] = 0.1, -- 10% chance
-        ['CLEARING'] = 0.1, -- 10% chance
-        ['CLOUDS'] = 0.1, -- 10% chance
-        ['EXTRASUNNY'] = 0.4, -- 40% chance
-        ['FOGGY'] = 0.1,
-        ['NEUTRAL'] = 0.0,
-        ['OVERCAST'] = 0.1,
-        ['RAIN'] = 0.1,
-        ['SMOG'] = 0.1,
-        ['SNOW'] = 0.0,
-        ['SNOWLIGHT'] = 0.0,
-        ['THUNDER'] = 0.1,
-        ['XMAS'] = 0.0
+        ['BLIZZARD'] = 0.05,     -- 5% chance - occasional strong snowstorm
+        ['CLEAR'] = 0.05,        -- 5% chance - some clear days
+        ['CLEARING'] = 0.05,     -- 5% chance - post-storm clearing
+        ['CLOUDS'] = 0.10,       -- 15% chance - more common in winter
+        ['EXTRASUNNY'] = 0.15,   -- 15% chance - fewer fully sunny days
+        ['FOGGY'] = 0.1,         -- 10% chance - winter fog
+        ['NEUTRAL'] = 0.0,       -- 0% - skip this one for realism
+        ['OVERCAST'] = 0.15,     -- 15% chance - frequent gray skies
+        ['RAIN'] = 0.05,         -- 5% chance - light winter rain
+        ['SMOG'] = 0.05,         -- 5% chance - some haze still possible
+        ['SNOW'] = 0.1,          -- 10% chance - proper snowfall
+        ['SNOWLIGHT'] = 0.1,     -- 10% chance - light flurries
+        ['THUNDER'] = 0.0,       -- 0% - rare in cold season
+        ['XMAS'] = 0.2            -- 10% - festive snowy weather around Christmas
     },
 
     useWeatherSequences = true,
@@ -325,8 +325,3 @@ return {
         },
     }
 }
-
-
-
-
-

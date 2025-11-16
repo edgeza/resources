@@ -1,14 +1,75 @@
 local allowedModels = {}
+local supportedModelsIndexed = false
+
+local function IndexSupportedGasPumpModels()
+    if supportedModelsIndexed then
+        return
+    end
+
+    if type(Config) ~= "table" or type(Config.SupportedGasPumpModel) ~= "table" then
+        return
+    end
+
+    local indexed = {}
+
+    for _, pumpConfig in pairs(Config.SupportedGasPumpModel) do
+        if type(pumpConfig) == "table" and pumpConfig.modelHash then
+            indexed[pumpConfig.modelHash] = pumpConfig
+        end
+    end
+
+    Config.SupportedGasPumpModel = indexed
+    supportedModelsIndexed = true
+end
+
+local function GetPumpConfig(modelHash)
+    if not modelHash then
+        return nil
+    end
+
+    if not supportedModelsIndexed then
+        IndexSupportedGasPumpModels()
+    end
+
+    if type(Config) ~= "table" or type(Config.SupportedGasPumpModel) ~= "table" then
+        return nil
+    end
+
+    return Config.SupportedGasPumpModel[modelHash]
+end
+
+local function GetPumpConfigFromEntity(obj)
+    if not obj then
+        return nil, nil
+    end
+
+    local modelHash = GetEntityModel(obj)
+
+    if not modelHash then
+        return nil, nil
+    end
+
+    return GetPumpConfig(modelHash), modelHash
+end
 
 CreateThread(function()
-    for k, v in pairs(Config.SupportedGasPumpModel) do
-        allowedModels[v.modelHash] = true
-        Config.resolution[v.modelHash] = v.inGameUIData
+    while type(Config) ~= "table" or type(Config.SupportedGasPumpModel) ~= "table" do
+        Wait(0)
+    end
+
+    IndexSupportedGasPumpModels()
+
+    for _, pumpConfig in pairs(Config.SupportedGasPumpModel) do
+        allowedModels[pumpConfig.modelHash] = true
+
+        if pumpConfig.inGameUIData then
+            Config.resolution[pumpConfig.modelHash] = pumpConfig.inGameUIData
+        end
     end
 end)
 
 function IsModelAllowedDispenser(model)
-    return Config.SupportedGasPumpModel[model] ~= nil
+    return GetPumpConfig(model) ~= nil
 end
 
 function GetAllWorkingDispenserModels()
@@ -16,38 +77,44 @@ function GetAllWorkingDispenserModels()
 end
 
 function GetDispenserGunModel(model)
-    return Config.SupportedGasPumpModel[model].nozzleHand
+    local pumpConfig = GetPumpConfig(model)
+
+    if not pumpConfig then
+        return nil
+    end
+
+    return pumpConfig.nozzleHand
 end
 
 function CreateFuelRopeForPump(obj, side)
-    local model = GetEntityModel(obj)
-    if not obj or not side or not model then
+    if not obj or not side then
         return
     end
 
-    local dData = Config.SupportedGasPumpModel[model].dispenserGunObjectsPosition[side]
-    if not dData then
+    local pumpConfig = GetPumpConfigFromEntity(obj)
+
+    if not pumpConfig then
         return
     end
 
-    local offsetRope = dData.offsetRope
+    local dispenserData = pumpConfig.dispenserGunObjectsPosition and pumpConfig.dispenserGunObjectsPosition[side]
+
+    if not dispenserData then
+        return
+    end
+
+    local offsetRope = dispenserData.offsetRope
     local ropePos = GetOffsetFromEntityInWorldCoords(obj, offsetRope)
 
-    local ropeObject = CreateLocalObject(Config.SupportedGasPumpModel[model].nozzleWithTube, ropePos)
+    local ropeObject = CreateLocalObject(pumpConfig.nozzleWithTube, ropePos)
 
     SetEntityCollision(ropeObject, false, true)
-    SetEntityHeading(ropeObject, GetEntityHeading(obj) - dData.heading)
+    SetEntityHeading(ropeObject, GetEntityHeading(obj) - dispenserData.heading)
     return ropeObject
 end
 
 function CreateFuelHolderForPump(obj, side)
-    local model = GetEntityModel(obj)
-    if not obj or not side or not model then
-        return
-    end
-
-    if not Config.SupportedGasPumpModel[model] then
-        print("Model: ", model, type(model), "doesnt exists!")
+    if not obj or not side then
         return
     end
 
@@ -56,98 +123,114 @@ function CreateFuelHolderForPump(obj, side)
         return
     end
 
-    local dData = Config.SupportedGasPumpModel[model].dispenserGunObjectsPosition[side]
-    if not dData then
+    local pumpConfig, model = GetPumpConfigFromEntity(obj)
+
+    if not pumpConfig then
+        print("Model: ", model, type(model), "doesnt exists!")
         return
     end
 
-    local offsetHolder = dData.offsetHolder
+    local dispenserData = pumpConfig.dispenserGunObjectsPosition and pumpConfig.dispenserGunObjectsPosition[side]
+    if not dispenserData then
+        return
+    end
+
+    local offsetHolder = dispenserData.offsetHolder
     local holderPos = GetOffsetFromEntityInWorldCoords(obj, offsetHolder)
 
-    local holderObject = CreateLocalObject(Config.SupportedGasPumpModel[model].nozzleHolster, holderPos)
+    local holderObject = CreateLocalObject(pumpConfig.nozzleHolster, holderPos)
 
     SetEntityCollision(holderObject, false, true)
-    SetEntityHeading(holderObject, GetEntityHeading(obj) - dData.heading)
+    SetEntityHeading(holderObject, GetEntityHeading(obj) - dispenserData.heading)
 
     return holderObject
 end
 
 function GetOffsetCoordsForRopeFuelDispenser(obj)
+    local pumpConfig = GetPumpConfigFromEntity(obj)
+    if not pumpConfig then
+        return
+    end
+
     local pedPos = GetEntityCoords(PlayerPedId())
-    local modelHash = GetEntityModel(obj)
 
-    local offsetOne, offsetTwo = Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForSides[1], Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForSides[2]
+    local offsetOne = pumpConfig.positionOffsetCheckForSides and pumpConfig.positionOffsetCheckForSides[1]
+    local offsetTwo = pumpConfig.positionOffsetCheckForSides and pumpConfig.positionOffsetCheckForSides[2]
 
-    local distance1 = #(GetOffsetFromEntityInWorldCoords(obj, offsetOne) - pedPos)
-    local distance2 = #(GetOffsetFromEntityInWorldCoords(obj, offsetTwo) - pedPos)
+    local distance1 = offsetOne and #(GetOffsetFromEntityInWorldCoords(obj, offsetOne) - pedPos) or math.huge
+    local distance2 = offsetTwo and #(GetOffsetFromEntityInWorldCoords(obj, offsetTwo) - pedPos) or math.huge
 
     if distance1 <= distance2 then
-        return Config.SupportedGasPumpModel[modelHash].ropeOffsetPosition[1]
+        return pumpConfig.ropeOffsetPosition and pumpConfig.ropeOffsetPosition[1]
     elseif distance2 < distance1 then
-        return Config.SupportedGasPumpModel[modelHash].ropeOffsetPosition[2]
+        return pumpConfig.ropeOffsetPosition and pumpConfig.ropeOffsetPosition[2]
     end
 end
 
 function GetOffsetsForUIFlipForDispenserPump(obj)
-    local modelHash = GetEntityModel(obj)
+    local pumpConfig = GetPumpConfigFromEntity(obj)
 
-    if not Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForCameraSide then
+    if not pumpConfig or not pumpConfig.positionOffsetCheckForCameraSide then
         return vector3(-1.25, -1.0, 0.0), vector3(-1.25, 1.0, 0.0)
     end
 
-    return (Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForCameraSide[1] or vector3(-1.25, -1.0, 0.0)), (Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForCameraSide[2] or vector3(-1.25, 1.0, 0.0))
+    return (pumpConfig.positionOffsetCheckForCameraSide[1] or vector3(-1.25, -1.0, 0.0)), (pumpConfig.positionOffsetCheckForCameraSide[2] or vector3(-1.25, 1.0, 0.0))
 end
 
 function GetWalkOffsetForPump(obj, side)
+    local pumpConfig = GetPumpConfigFromEntity(obj)
+
+    if not pumpConfig then
+        return
+    end
+
     local pedPos = GetEntityCoords(PlayerPedId())
-    local modelHash = GetEntityModel(obj)
 
-    local offsetOne, offsetTwo = Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForSides[1], Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForSides[2]
+    local offsetOne = pumpConfig.positionOffsetCheckForSides and pumpConfig.positionOffsetCheckForSides[1]
+    local offsetTwo = pumpConfig.positionOffsetCheckForSides and pumpConfig.positionOffsetCheckForSides[2]
 
-    local distance1 = #(GetOffsetFromEntityInWorldCoords(obj, offsetOne) - pedPos)
-    local distance2 = #(GetOffsetFromEntityInWorldCoords(obj, offsetTwo) - pedPos)
+    local distance1 = offsetOne and #(GetOffsetFromEntityInWorldCoords(obj, offsetOne) - pedPos) or 999999
+    local distance2 = offsetTwo and #(GetOffsetFromEntityInWorldCoords(obj, offsetTwo) - pedPos) or 999999
 
-    if not offsetOne then
-        distance1 = 999999
+    local walkingOffsets = pumpConfig.playerWalkingOffsetPosition
+
+    if not walkingOffsets then
+        return
     end
-    if not offsetTwo then
-        distance2 = 999999
-    end
 
-    if side then
-        return GetOffsetFromEntityInWorldCoords(obj, Config.SupportedGasPumpModel[modelHash].playerWalkingOffsetPosition[side]), side
+    if side and walkingOffsets[side] then
+        return GetOffsetFromEntityInWorldCoords(obj, walkingOffsets[side]), side
     end
 
     if distance1 <= distance2 then
-        return GetOffsetFromEntityInWorldCoords(obj, Config.SupportedGasPumpModel[modelHash].playerWalkingOffsetPosition[1]), 1
+        return walkingOffsets[1] and GetOffsetFromEntityInWorldCoords(obj, walkingOffsets[1]), 1
     elseif distance2 < distance1 then
-        return GetOffsetFromEntityInWorldCoords(obj, Config.SupportedGasPumpModel[modelHash].playerWalkingOffsetPosition[2]), 2
+        return walkingOffsets[2] and GetOffsetFromEntityInWorldCoords(obj, walkingOffsets[2]), 2
     end
 end
 
 function GetHeadingOffetForPump(obj, side)
+    local pumpConfig = GetPumpConfigFromEntity(obj)
+
+    if not pumpConfig then
+        return
+    end
+
     local pedPos = GetEntityCoords(PlayerPedId())
-    local modelHash = GetEntityModel(obj)
 
-    local offsetOne, offsetTwo = Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForSides[1], Config.SupportedGasPumpModel[modelHash].positionOffsetCheckForSides[2]
+    local offsetOne = pumpConfig.positionOffsetCheckForSides and pumpConfig.positionOffsetCheckForSides[1]
+    local offsetTwo = pumpConfig.positionOffsetCheckForSides and pumpConfig.positionOffsetCheckForSides[2]
 
-    local distance1 = #(GetOffsetFromEntityInWorldCoords(obj, offsetOne) - pedPos)
-    local distance2 = #(GetOffsetFromEntityInWorldCoords(obj, offsetTwo) - pedPos)
+    local distance1 = offsetOne and #(GetOffsetFromEntityInWorldCoords(obj, offsetOne) - pedPos) or 999999
+    local distance2 = offsetTwo and #(GetOffsetFromEntityInWorldCoords(obj, offsetTwo) - pedPos) or 999999
 
-    if not offsetOne then
-        distance1 = 999999
-    end
-    if not offsetTwo then
-        distance2 = 999999
-    end
-
-    if side then
-        return Config.SupportedGasPumpModel[modelHash].playerHeadingTowardGasPump[side]
+    if side and pumpConfig.playerHeadingTowardGasPump then
+        return pumpConfig.playerHeadingTowardGasPump[side]
     end
 
     if distance1 <= distance2 then
-        return Config.SupportedGasPumpModel[modelHash].playerHeadingTowardGasPump[1]
+        return pumpConfig.playerHeadingTowardGasPump and pumpConfig.playerHeadingTowardGasPump[1]
     elseif distance2 < distance1 then
-        return Config.SupportedGasPumpModel[modelHash].playerHeadingTowardGasPump[2]
+        return pumpConfig.playerHeadingTowardGasPump and pumpConfig.playerHeadingTowardGasPump[2]
     end
 end

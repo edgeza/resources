@@ -3,7 +3,11 @@ Config = {
     PoliceJobs = {
         'police',
         'bcso',
-        'sheriff'
+        'sheriff',
+        'swat',
+        'aviation',
+        'traffic',
+        'detective'
     },
 
     UseItem = true, -- Generally use item or commands / false to use commands
@@ -61,7 +65,7 @@ Config = {
                 event = "police:client:PlaceGps",
             },
             {
-                name = 'impoundvehicle',
+                name = 'impound',
                 label = "Impound Vehicle",
                 icon = "fa-solid fa-truck-pickup",
                 event = "police:client:ImpoundVehicle",
@@ -462,16 +466,16 @@ Config = {
                         grade = 0,
                         stock = 500,
                     },
-                    ['heavyarmor'] = {
+                    ['armor'] = {
                         type = 'equipments',
-                        name = 'Heavy Armor',
+                        name = 'PD Armor',
                         price = 1,
                         grade = 0,
                         stock = 500,
                     },
-                    ['medikit'] = {
+                    ['big_heal'] = {
                         type = 'equipments',
-                        name = 'MedKit',
+                        name = 'Big Heal',
                         price = 1,
                         grade = 0,
                         stock = 500,
@@ -519,58 +523,38 @@ Config = {
                         type = 'equipments',
                         name = 'Stormram',
                         price = 1,
-                        grade = 0,
+                        grade = 4,
                         stock = 500,
                     },
                     ['wheel_lock'] = {
                         type = 'equipments',
                         name = 'Wheel Locker',
                         price = 1,
-                        grade = 0,
+                        grade = 4,
                         stock = 500,
                     },
                     ['wrench'] = {
                         type = 'equipments',
                         name = 'Wrench',
                         price = 1,
-                        grade = 0,
+                        grade = 4,
                         stock = 500,
                     },
                     ['vehicle_gps'] = {
                         type = 'equipments',
                         name = 'Vehicle GPS',
                         price = 1,
-                        grade = 0,
+                        grade = 9,
                         stock = 500,
                     },
                     ['remove_gps'] = {
                         type = 'equipments',
                         name = 'GPS Detacher',
                         price = 1,
-                        grade = 0,
+                        grade = 9,
                         stock = 500,
                     },
-                    ['moneybag'] = {
-                        type = 'other',
-                        name = 'Money Bag',
-                        price = 1,
-                        grade = 0,
-                        stock = 500,
-                    },
-                    ['bandage'] = {
-                        type = 'other',
-                        name = 'Bandage',
-                        price = 1,
-                        grade = 0,
-                        stock = 500,
-                    },
-                    ['firstaid'] = {
-                        type = 'other',
-                        name = 'Medkit',
-                        price = 1,
-                        grade = 0,
-                        stock = 500,
-                    },
+                    
                     -- GGC Custom Weapons -- Lethals
                 
                     -- GGC Custom Weapons -- Hand Guns
@@ -585,7 +569,7 @@ Config = {
                         type = 'weapon',
                         name = 'Glock-18C',
                         price = 10,
-                        grade = 0,
+                        grade = 3,
                         stock = 500,
                     },
                     ['weapon_glock22'] = {
@@ -599,21 +583,21 @@ Config = {
                         type = 'weapon',
                         name = 'Desert Eagle',
                         price = 10,
-                        grade = 0,
+                        grade = 3,
                         stock = 500,
                     },
                     ['weapon_fnx45'] = {
                         type = 'weapon',
                         name = 'FN FNX-45',
                         price = 10,
-                        grade = 0,
+                        grade = 3,
                         stock = 500,
                     },
                     ['weapon_m1911'] = {
                         type = 'weapon',
                         name = 'M1911',
                         price = 10,
-                        grade = 0,
+                        grade = 3,
                         stock = 500,
                     },
                     ['weapon_glock20'] = {
@@ -634,7 +618,7 @@ Config = {
                         type = 'weapon',
                         name = 'Browning',
                         price = 10,
-                        grade = 0,
+                        grade = 3,
                         stock = 500,
                     },
                     -- GGC Custom Weapons -- SMGs
@@ -642,7 +626,7 @@ Config = {
                         type = 'weapon',
                         name = 'Beretta PMX',
                         price = 10,
-                        grade = 0,
+                        grade = 4,
                         stock = 500,
                     },
                     -- GGC Custom Weapons -- Rifles
@@ -650,28 +634,28 @@ Config = {
                         type = 'weapon',
                         name = 'LWRC M6IC',
                         price = 10,
-                        grade = 0,
+                        grade = 5,
                         stock = 500,
                     },
                     ['weapon_scarsc'] = {
                         type = 'weapon',
                         name = 'Scar SC',
                         price = 10,
-                        grade = 0,
+                        grade = 4,
                         stock = 500,
                     },
                     ['weapon_m4'] = {
                         type = 'weapon',
                         name = 'M4A1 Carbine',
                         price = 10,
-                        grade = 0,
+                        grade = 4,
                         stock = 500,
                     },
                     ['weapon_groza'] = {
                         type = 'weapon',
                         name = 'OTs-14 Groza',
                         price = 10,
-                        grade = 0,
+                        grade = 6,
                         stock = 500,
                     },
                 }
@@ -940,14 +924,6 @@ Config = {
                     slots = 50,
                     weight = 100000,
                 },
-                evidence = {
-                    interaction = 'npc', -- target : npc : textui
-                    ped = 's_m_y_cop_01',
-                    coords = vec4(831.74, -1304.12, 19.85, 1.7),
-                    label = 'Evidence Stash',
-                    slots = 500,
-                    weight = 10000000,
-                }
             },
         }
     },
@@ -1091,7 +1067,7 @@ Config = {
 
     -- Tackling
     Tackle = { -- 0.01 ms resmon usage
-        Enabled = true,
+        Enabled = false,
         Distance = 3.0,
         Keys = { "LEFTSHIFT", "E" },
         Timeout = 10, -- seconds, to prevent spamming

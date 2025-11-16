@@ -30,14 +30,12 @@ crm_config.crm_pages = { -- Note: If you disable a page, make sure to disable th
 crm_config.crm_jobs = {
     {crm_id = 1, crm_jobs = {'police'}, crm_title = 'Law Enforcement', crm_icon = 'fa-handcuffs'},
     {crm_id = 2, crm_jobs = {'ambulance'}, crm_title = 'Emergency Medical Services', crm_icon = 'fa-star-of-life'},
-    {crm_id = 3, crm_jobs = {'mechanic'}, crm_title = 'East Customs', crm_icon = 'fa-wrench'},
-    {crm_id = 4, crm_jobs = {'mechanic1'}, crm_title = 'Bennys Workshop', crm_icon = 'fa-wrench'},
+    {crm_id = 3, crm_jobs = {'palmcoast'}, crm_title = 'Palm Coast', crm_icon = 'fa-wrench'},
+    {crm_id = 4, crm_jobs = {'bennies'}, crm_title = 'Bennys Racetrack', crm_icon = 'fa-wrench'},
     {crm_id = 5, crm_jobs = {'aod'}, crm_title = 'Angels of Death', crm_icon = 'fa-wrench'},
     {crm_id = 6, crm_jobs = {'beanmachine'}, crm_title = 'Bean Machine', crm_icon = 'fa-mug-hot'},
     {crm_id = 7, crm_jobs = {'catcafe'}, crm_title = 'Cat Cafe', crm_icon = 'fa-paw'},
-    {crm_id = 8, crm_jobs = {'burgershot'}, crm_title = 'Burgershot', crm_icon = 'fa-burger'},
-    {crm_id = 9, crm_jobs = {'billiards'}, crm_title = 'Billiards', crm_icon = 'fa-wine-bottle'},
-    {crm_id = 10, crm_jobs = {'upnatom'}, crm_title = 'Up n Atom', crm_icon = 'fa-martini-glass-empty'},
+    {crm_id = 8, crm_jobs = {'koi'}, crm_title = 'Koi Restaurant', crm_icon = 'fa-bacon'},
 }
 
 crm_config.crm_heists = {

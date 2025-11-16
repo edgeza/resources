@@ -22,11 +22,11 @@ Config.cancel_command = "cancelhelp"  -- Type this command to stop AI ambulance 
 -- false: The player will be dropped at the hospital, and a notification will be shown.
 Config.revive = true  -- AI will revive players if true, otherwise just drop them at the hospital
 
-Config.reviveOnPlace = false -- AI will revive without the trip to hospital
+Config.reviveOnPlace = true -- AI will revive without the trip to hospital
 
 -- Defines the billing amount for the medical services provided by the AI medic.
 -- This value determines how much the player is charged for the medic's assistance.
-Config.Bill = 0  -- Amount to be billed for the medic service (default = 0)
+Config.Bill = 2000  -- Amount to be billed for the medic service (default = 0)
 
 -- Specifies the vehicle model used for AI ambulances. >> (Make Sure Its not Blacklisted by any script or anti-cheat)
 -- This value refers to the vehicle that AI medics will use to respond to emergencies.

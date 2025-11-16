@@ -176,7 +176,39 @@ Config.TargetConfig = {
 Config.Stores = {
     {
         type = "clothing",
+        coords = vec4(-745.19, -2082.77, 9.02, 55.36),
+        size = vector3(4, 4, 4),
+        rotation = 45,
+        usePoly = false, -- false => uses the size + rotation to create the zone | true => uses points to create the zone
+        showBlip = true, -- overrides the blip visibilty configured above for the group
+        --targetModel = "s_m_m_doctor_01", -- overrides the target ped configured for the group
+        --targetScenario = "" -- overrides the target scenario configure for the group
+        points = {
+            vec3(-745.97, -2084.91, 9.02),
+            vec3(-747.2, -2084.03, 9.02),
+            vec3(-745.33, -2081.52, 9.02),
+            vec3(-743.83, -2081.76, 9.02)
+        }
+    },
+    {
+        type = "clothing", -- Bennies clothing
         coords = vector4(1693.2, 4828.11, 42.07, 188.66),
+        size = vector3(4, 4, 4),
+        rotation = 45,
+        usePoly = false, -- false => uses the size + rotation to create the zone | true => uses points to create the zone
+        showBlip = true, -- overrides the blip visibilty configured above for the group
+        --targetModel = "s_m_m_doctor_01", -- overrides the target ped configured for the group
+        --targetScenario = "" -- overrides the target scenario configure for the group
+        points = {
+            vector3(1686.9018554688, 4829.8330078125, 42.07),
+            vector3(1698.8566894531, 4831.4604492188, 42.07),
+            vector3(1700.2448730469, 4817.7734375, 42.07),
+            vector3(1688.3682861328, 4816.2954101562, 42.07)
+        }
+    },
+    {
+        type = "clothing", -- Palmcustoms clothing
+        coords = vec4(-2035.14, -510.37, 12.21, 237.7),
         size = vector3(4, 4, 4),
         rotation = 45,
         usePoly = false, -- false => uses the size + rotation to create the zone | true => uses points to create the zone

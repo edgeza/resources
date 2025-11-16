@@ -11,25 +11,73 @@ Config.EnableApplicationSystem = true  -- Set to false to disable job applicatio
 
 -- Management access locations
 Config.Locations = {
-    ["police"] = {
-        label = "Police Department",
+    ["swat"] = {
+        label = "swat Department",
         logoImage = "logo.png",
         locations = {
             {
-                coords = vector3(837.28, -1307.94, 28.24), -- Main Police Station
+                coords = vec3(810.58, -1302.28, 19.85), -- Main Police Station
                 width = 1.0,
                 length = 1.0,
                 heading = 144,
                 minZ = 27.0,
                 maxZ = 29.0,
-            },
+            }
+        }
+    },
+    ["detective"] = {
+        label = "DETECTIVE Department",
+        logoImage = "logo.png",
+        locations = {
             {
-                coords = vector3(1853.82, 3689.82, 34.27), -- Sandy Shores Sheriff
+                coords = vec3(834.44, -1302.57, 19.85), -- Main Police Station
                 width = 1.0,
                 length = 1.0,
-                heading = 0,
-                minZ = 34.0,
-                maxZ = 35.0,
+                heading = 144,
+                minZ = 27.0,
+                maxZ = 29.0,
+            }
+        }
+    },
+    ["agu"] = {
+        label = "AGU Department",
+        logoImage = "logo.png",
+        locations = {
+            {
+                coords = vec3(813.26, -1303.37, 19.85), -- Main Police Station
+                width = 1.0,
+                length = 1.0,
+                heading = 144,
+                minZ = 27.0,
+                maxZ = 29.0,
+            }
+        }
+    },
+    ["aviation"] = {
+        label = "aviation Department",
+        logoImage = "logo.png",
+        locations = {
+            {
+                coords = vec3(810.96, -1298.43, 19.84), -- Main Police Station
+                width = 1.0,
+                length = 1.0,
+                heading = 144,
+                minZ = 27.0,
+                maxZ = 29.0,
+            }
+        }
+    },
+    ["aviation"] = {
+        label = "aviation Department",
+        logoImage = "logo.png",
+        locations = {
+            {
+                coords = vec3(810.96, -1298.43, 19.84), -- Main Police Station
+                width = 1.0,
+                length = 1.0,
+                heading = 144,
+                minZ = 27.0,
+                maxZ = 29.0,
             }
         }
     },
@@ -144,7 +192,7 @@ Config.Locations = {
         logoImage = "logo.png",
         locations = {
             {
-                coords = vector3(409.0, -1623.0, 29.29), -- Towing Yard (example location)
+                coords = vec3(476.78, -1319.9, 29.21), -- Towing Yard (example location)
                 width = 1.0,
                 length = 1.0,
                 heading = 0,

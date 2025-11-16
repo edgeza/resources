@@ -128,22 +128,27 @@ return {
             },
             [4] = {
                 name = 'Sergeant',
+                isboss = true,
                 payment = 3500
             },
             [5] = {
                 name = 'Lieutenant',
+                isboss = true,
                 payment = 3500
             },
             [6] = {
                 name = 'K9 Unit',
+                isboss = true,
                 payment = 4000
             },
             [7] = {
                 name = 'Captain',
+                isboss = true,
                 payment = 4500
             },
             [8] = {
                 name = 'Commander',
+                isboss = true,
                 payment = 5000
             },
             [9] = {
@@ -164,6 +169,7 @@ return {
             [12] = {
                 name = 'Police Commissioner',
                 isboss = true,
+                bankAuth = true,
                 payment = 8000
             },
         },
@@ -219,6 +225,7 @@ return {
             [10] = {
                 name = 'Chief',
                 isboss = true,
+                bankAuth = true,
                 payment = 8000
             },
         },
@@ -548,8 +555,14 @@ return {
         offDutyPay = false,
         grades = {
             [0] = {
-                name = 'SWAT',
+                name = 'SWAT Member',
                 payment = 3500
+            },
+            [1] = {
+                name = 'SWAT Lead',
+                isboss = true,
+                bankAuth = true,
+                payment = 4000
             },
         },
     },
@@ -559,7 +572,13 @@ return {
         offDutyPay = false,
         grades = {
             [0] = {
-                name = 'AGU',
+                name = 'AGU Member',
+                payment = 3500
+            },
+            [1] = {
+                name = 'AGU Lead',
+                isboss = true,
+                bankAuth = true,
                 payment = 3500
             },
         },
@@ -570,7 +589,13 @@ return {
         offDutyPay = false,
         grades = {
             [0] = {
-                name = 'Aviation',
+                name = 'Aviation Member',
+                payment = 3500
+            },
+            [1] = {
+                name = 'Aviation Lead',
+                isboss = true,
+                bankAuth = true,
                 payment = 3500
             },
         },
@@ -581,7 +606,30 @@ return {
         offDutyPay = false,
         grades = {
             [0] = {
-                name = 'Detective',
+                name = 'Detective Member',
+                payment = 3500
+            },
+            [1] = {
+                name = 'Detective Lead',
+                isboss = true,
+                bankAuth = true,
+                payment = 3500
+            },
+        },
+    },
+    ['traffic'] = {
+        label = 'Traffic',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            [0] = {
+                name = 'Traffic Member',
+                payment = 3500
+            },
+            [1] = {
+                name = 'Traffic Lead',
+                isboss = true,
+                bankAuth = true,
                 payment = 3500
             },
         },

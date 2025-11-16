@@ -92,8 +92,9 @@ AddEventHandler('humanelabsheist:server:heistRewards', function()
     if player then
         if start then
             if Config['HumaneLabs']['rewards']['money'] > 0 then
-                player.Functions.AddMoney('cash', Config['HumaneLabs']['rewards']['money'])
-                discordLog(player.PlayerData.name ..  ' - ' .. player.PlayerData.license, ' gain $' .. Config['HumaneLabs']['rewards']['money'])
+                local moneyReward = math.random(400000, 500000) -- Random between 400k-500k
+                player.Functions.AddMoney('cash', moneyReward)
+                discordLog(player.PlayerData.name ..  ' - ' .. player.PlayerData.license, ' gain $' .. moneyReward)
             end
 
             if Config['HumaneLabs']['rewards']['blackMoney'] > 0 then

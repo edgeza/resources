@@ -24,9 +24,18 @@ end)
 
 local function pay(player)
     local job = player.PlayerData.job
-    local payment = GetJob(job.name).grades[job.grade.level].payment or job.payment
+    if not job or not job.name then return end
+
+    local jobInfo = GetJob(job.name)
+    if not jobInfo then return end
+
+    local gradeLevel = job.grade and job.grade.level
+    local gradeInfo = gradeLevel and jobInfo.grades and jobInfo.grades[gradeLevel]
+    local payment = gradeInfo and gradeInfo.payment or job.payment
+    if not payment then return end
+    payment = tonumber(payment) or 0
     if payment <= 0 then return end
-    if not GetJob(job.name).offDutyPay and not job.onduty then return end
+    if not jobInfo.offDutyPay and not job.onduty then return end
     if not config.money.paycheckSociety then
         config.sendPaycheck(player, payment)
         return

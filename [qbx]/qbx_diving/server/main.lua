@@ -9,6 +9,86 @@ local currentAreaIndex = math.random(1, #sharedConfig.coralLocations)
 ---@type table<integer, true> Set of coralIndex
 local pickedUpCoralIndexes = {}
 
+local function resolveInventoryType()
+    if GetResourceState('qs-inventory') == 'started' then
+        return 'qs'
+    elseif GetResourceState('ox_inventory') == 'started' then
+        return 'ox'
+    end
+    return 'qb'
+end
+
+local inventoryType = resolveInventoryType()
+
+local function getPlayer(src)
+    return exports.qbx_core:GetPlayer(src)
+end
+
+local function getItemCount(src, player, item)
+    if inventoryType == 'ox' then
+        return exports.ox_inventory:GetItemCount(src, item) or 0
+    end
+
+    player = player or getPlayer(src)
+    if not player or not player.Functions then return 0 end
+
+    local itemData
+
+    if player.Functions.GetItemByName then
+        itemData = player.Functions.GetItemByName(item)
+    end
+
+    if (not itemData or not itemData.amount) and player.Functions.GetItemsByName then
+        itemData = player.Functions.GetItemsByName(item)
+    end
+
+    if not itemData then
+        return 0
+    end
+
+    if type(itemData.amount) == 'number' then
+        return itemData.amount
+    end
+
+    if type(itemData) == 'table' then
+        local total = 0
+        for _, entry in pairs(itemData) do
+            if entry and entry.amount then
+                total += entry.amount
+            end
+        end
+        return total
+    end
+
+    return 0
+end
+
+local function removeItem(src, player, item, amount)
+    if amount <= 0 then return false end
+
+    if inventoryType == 'ox' then
+        return exports.ox_inventory:RemoveItem(src, item, amount)
+    end
+
+    player = player or getPlayer(src)
+    if not player or not player.Functions or not player.Functions.RemoveItem then return false end
+
+    return player.Functions.RemoveItem(item, amount)
+end
+
+local function addItem(src, player, item, amount)
+    if amount <= 0 then return false end
+
+    if inventoryType == 'ox' then
+        return exports.ox_inventory:AddItem(src, item, amount)
+    end
+
+    player = player or getPlayer(src)
+    if not player or not player.Functions or not player.Functions.AddItem then return false end
+
+    return player.Functions.AddItem(item, amount)
+end
+
 local function getItemPrice(amount, price)
     for i = 1, #config.priceModifiers do
         local modifier = config.priceModifiers[i]
@@ -30,10 +110,10 @@ RegisterNetEvent('qbx_diving:server:sellCoral', function()
 
     for i = 1, #config.coralTypes do
         local coral = config.coralTypes[i]
-        local count = exports.ox_inventory:GetItemCount(src, coral.item)
+        local count = getItemCount(src, player, coral.item)
 
         if count and count > 0 then
-            if exports.ox_inventory:RemoveItem(src, coral.item, count) then
+            if removeItem(src, player, coral.item, count) then
                 local price = count * coral.price
                 local reward = getItemPrice(count, price)
                 payout += math.ceil(reward)
@@ -71,10 +151,12 @@ end
 RegisterNetEvent('qbx_diving:server:takeCoral', function(coralIndex)
     if pickedUpCoralIndexes[coralIndex] then return end
     local src = source
+    local player = getPlayer(src)
+    if not player then return end
     local coralType = config.coralTypes[math.random(1, #config.coralTypes)]
     local amount = math.random(1, coralType.maxAmount)
 
-    exports.ox_inventory:AddItem(src, coralType.item, amount)
+    if not addItem(src, player, coralType.item, amount) then return end
     pickedUpCoralIndexes[coralIndex] = true
     TriggerClientEvent('qbx_diving:client:coralTaken', -1, coralIndex)
     TriggerEvent('qbx_diving:server:coralTaken', sharedConfig.coralLocations[currentAreaIndex].corals[coralIndex].coords)

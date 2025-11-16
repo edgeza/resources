@@ -60,7 +60,7 @@ Config.Interact = {
 ---@field AccessOnMarker boolean: Do you want to use access to the exam selection menu as E in marker?
 Config.AccessOnMarker = true
 Config.UseTarget = true
-Config.TargetResource = 'qb-target'
+Config.TargetResource = 'ox_target'
 Config.Target = function()
     exports[Config.TargetResource]:AddBoxZone('flightschoolv2', {
         coords = vec(Config.Zones["menu"].coords.x, Config.Zones["menu"].coords.y, Config.Zones["menu"].coords.z+0.35),

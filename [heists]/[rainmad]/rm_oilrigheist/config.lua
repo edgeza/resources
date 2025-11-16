@@ -27,11 +27,45 @@ Config['OilRigHeist'] = {
     },
     ['requiredPlayersForHeist'] = 1, -- Required players for start heist.
     ['crateSettings'] = {
-        ['crateCount'] = 3, -- Crate with items count for every heist. (Max 10)
+        ['crateCount'] = 6, -- Crate with items count for every heist. (Max 10)
         ['crateItems'] = { -- Items for every crate.
+            -- Money and Materials (Less Common - Weapons are priority)
+            {itemName = 'markedbills', itemCount = function() return math.random(3, 5) end, chance = 60, itemInfo = function() return {worth = math.random(2000, 2500)} end}, -- Money reward (reduced chance, weapons are main reward)
             {itemName = 'scrap',   itemCount = function() return math.random(1, 5) end, chance = 90},
             {itemName = 'scrap2',  itemCount = function() return math.random(1, 5) end, chance = 80},
             {itemName = 'scrap3',  itemCount = function() return math.random(1, 5) end, chance = 70},
+            
+            -- Crafting Materials (Always)
+            {itemName = 'steel', itemCount = function() return math.random(50, 100) end, chance = 100},
+            {itemName = 'aluminum', itemCount = function() return math.random(30, 60) end, chance = 100},
+            {itemName = 'reinforced_steel', itemCount = function() return math.random(5, 15) end, chance = 100},
+            
+            -- Ammunition (Common)
+            {itemName = 'pistol_ammo', itemCount = function() return math.random(45, 75) end, chance = 75},
+            {itemName = 'smg_ammo', itemCount = function() return math.random(35, 65) end, chance = 65},
+            {itemName = 'rifle_ammo', itemCount = function() return math.random(25, 55) end, chance = 55},
+            
+            -- Armor (Uncommon)
+            {itemName = 'heavyarmor', itemCount = function() return math.random(2, 4) end, chance = 60},
+            
+            -- Tools (Rare)
+            {itemName = 'hardeneddecrypter', itemCount = function() return 1 end, chance = 40},
+            {itemName = 'hardeneddrill', itemCount = function() return 1 end, chance = 35},
+            {itemName = 'disruptor', itemCount = function() return 1 end, chance = 30},
+            
+            -- Jammers (Guaranteed 1, 25% chance for second)
+            {itemName = 'jammer', itemCount = function() return 1 end, chance = 100}, -- Guaranteed 1 jammer
+            {itemName = 'jammer', itemCount = function() return 1 end, chance = 25}, -- 25% chance for second jammer
+            
+            -- Class 4 Weapons (Assault Rifles) - Very Rare (15% chance)
+            {itemName = 'weapon_assaultrifle', itemCount = function() return 1 end, chance = 15},
+            {itemName = 'weapon_ak47', itemCount = function() return 1 end, chance = 15},
+            {itemName = 'weapon_bullpuprifle', itemCount = function() return 1 end, chance = 15},
+            
+            -- Class 4 Weapons (Rare Variants) - Ultra Rare (5% chance)
+            {itemName = 'weapon_assaultrifle_mk2', itemCount = function() return 1 end, chance = 5},
+            {itemName = 'weapon_militaryrifle', itemCount = function() return 1 end, chance = 5},
+            {itemName = 'weapon_heavyrifle', itemCount = function() return 1 end, chance = 5},
         },
         ['lootTime'] = 5, -- Seconds
     }

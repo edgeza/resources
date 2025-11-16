@@ -23,7 +23,3 @@ function GetPlayerGender()
     end
     return "male"
 end
-
-RegisterNetEvent('esx:playerLoaded', function()
-    spawnCats()
-end)

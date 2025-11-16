@@ -7,8 +7,8 @@ return {
 		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
 	},
 	[2] = { -- Bennies Race track
-		coords = vector3(-747.58, -2043.42, 8.29),
-		radius = 10.000000,
+		coords = vec3(-763.14, -2059.69, 8.89),
+		radius = 5.000000,
 		groups = nil,
 		debug = false,
 		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
@@ -20,15 +20,22 @@ return {
 		debug = false,
 		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
 	},
-	[5] = {  -- Onelife Mechanics
+	[4] = {  -- Onelife Mechanics
 		coords = vector3(1160.22, -768.54, 56.83),
 		radius = 10.000000,
 		groups = nil,
 		debug = false,
 		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
 	},
-	[6] = {  -- Onelife Mechanics 2
+	[5] = {  -- Onelife Mechanics 2
 		coords = vector3(1130.75, -768.82, 57.11),
+		radius = 10.000000,
+		groups = nil,
+		debug = false,
+		drawtext = { inveh = "Press E to engineswap", outveh = "You need to be in a vehicle!" }
+	},
+	[6] = {  -- Palmcoast
+		coords = vec3(-2001.74, -502.76, 11.54),
 		radius = 10.000000,
 		groups = nil,
 		debug = false,

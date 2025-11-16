@@ -1,4 +1,52 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local function GetCoreObject()
+    -- Try qbx_core first (QBX) - try multiple export names
+    local qbxStates = {'qbx_core', 'qbx-core', 'qbx'}
+    for _, resName in ipairs(qbxStates) do
+        if GetResourceState(resName) == 'started' or GetResourceState(resName) == 'starting' then
+            -- Try getSharedObject
+            local success, core = pcall(function()
+                return exports[resName]:getSharedObject()
+            end)
+            if success and core then 
+                print('[PS-OBJECTSPAWNER] Using ' .. resName .. ':getSharedObject')
+                return core 
+            end
+            
+            -- Try GetCoreObject
+            success, core = pcall(function()
+                return exports[resName]:GetCoreObject()
+            end)
+            if success and core then 
+                print('[PS-OBJECTSPAWNER] Using ' .. resName .. ':GetCoreObject')
+                return core 
+            end
+            
+            -- Try getCoreObject
+            success, core = pcall(function()
+                return exports[resName]:getCoreObject()
+            end)
+            if success and core then 
+                print('[PS-OBJECTSPAWNER] Using ' .. resName .. ':getCoreObject')
+                return core 
+            end
+        end
+    end
+    
+    -- Fallback to qb-core (QBCore)
+    if GetResourceState('qb-core') == 'started' or GetResourceState('qb-core') == 'starting' then
+        local success, core = pcall(function()
+            return exports['qb-core']:GetCoreObject()
+        end)
+        if success and core then 
+            print('[PS-OBJECTSPAWNER] Using qb-core:GetCoreObject')
+            return core 
+        end
+    end
+    
+    error('[PS-OBJECTSPAWNER] Failed to get core object. Please check your server console for the correct resource name and export.')
+end
+
+local QBCore = GetCoreObject()
 local ObjectList = {} -- Object, Model, Coords, IsRendered, SpawnRange
 
 local PlacingObject, LoadedObjects = false, false
@@ -12,9 +60,117 @@ local ObjectTypes = {
 }
 
 local ObjectParams = {
-    ["container"] = {event = "ps-objectspawner:client:containers", icon = "fas fa-question", label = "Container", SpawnRange = 200},
-    ["none"] = {SpawnRange = 200},
+    ["container"] = {event = "ps-objectspawner:client:containers", icon = "fas fa-question", label = "Container", SpawnRange = 200, TargetDistance = 2.0},
+    ["none"] = {SpawnRange = 200, TargetDistance = 2.0},
 }
+
+local permission = nil
+local targetSystem = nil
+local targetWarningShown = false
+
+local function getTargetSystem()
+    if targetSystem ~= nil and targetSystem ~= false then
+        return targetSystem
+    end
+
+    if GetResourceState('ox_target') == 'started' then
+        targetSystem = 'ox_target'
+    elseif GetResourceState('ox_target') == 'starting' then
+        targetSystem = 'ox_target'
+    elseif GetResourceState('qbx-target') == 'started' then
+        targetSystem = 'qbx-target'
+    elseif GetResourceState('qbx-target') == 'starting' then
+        targetSystem = 'qbx-target'
+    elseif GetResourceState('qb-target') == 'started' then
+        targetSystem = 'qb-target'
+    elseif GetResourceState('qb-target') == 'starting' then
+        targetSystem = 'qb-target'
+    else
+        targetSystem = false
+        if not targetWarningShown then
+            print('[PS-OBJECTSPAWNER] No supported target resource detected (qb-target or ox_target). Target interactions will be disabled.')
+            targetWarningShown = true
+        end
+    end
+
+    return targetSystem
+end
+
+local function addTargetToEntity(entity, options)
+    if not entity or not options or not options.event then return end
+
+    local target = getTargetSystem()
+    if not target then return end
+
+    local distance = tonumber(options.distance) or tonumber(options.TargetDistance) or tonumber(options.SpawnRange) or 2.0
+    local targetName = options.name or ('object_spawner_' .. (options.id or entity))
+
+    if target == 'ox_target' then
+        pcall(function()
+            exports.ox_target:addLocalEntity(entity, {
+                {
+                    name = targetName,
+                    event = options.event,
+                    icon = options.icon,
+                    label = options.label,
+                    id = options.id,
+                    distance = distance
+                }
+            })
+        end)
+    elseif target == 'qb-target' then
+        pcall(function()
+            exports['qb-target']:AddTargetEntity(entity, {
+                options = {
+                    {
+                        name = targetName,
+                        event = options.event,
+                        icon = options.icon,
+                        label = options.label,
+                        id = options.id
+                    }
+                },
+                distance = distance
+            })
+        end)
+    elseif target == 'qbx-target' then
+        pcall(function()
+            exports['qbx-target']:AddTargetEntity(entity, {
+                options = {
+                    {
+                        name = targetName,
+                        event = options.event,
+                        icon = options.icon,
+                        label = options.label,
+                        id = options.id
+                    }
+                },
+                distance = distance
+            })
+        end)
+    end
+end
+
+local function removeTargetFromEntity(entity)
+    if not entity then return end
+
+    local target = targetSystem or getTargetSystem()
+    if not target then return end
+
+    if target == 'ox_target' then
+        pcall(function()
+            exports.ox_target:removeLocalEntity(entity)
+        end)
+    elseif target == 'qb-target' then
+        pcall(function()
+            exports['qb-target']:RemoveTargetEntity(entity)
+        end)
+    elseif target == 'qbx-target' then
+        pcall(function()
+            exports['qbx-target']:RemoveTargetEntity(entity)
+        end)
+    end
+end
 
 --Functions
 local function openMenu()
@@ -65,6 +221,7 @@ AddEventHandler('onResourceStop', function(resourceName)
         for k, v in pairs(ObjectList) do
             if v["IsRendered"] then
                 RemoveRoadNodeSpeedZone(v["speedzone"])
+                removeTargetFromEntity(v["object"])
                 DeleteObject(v["object"])
             end
         end
@@ -73,7 +230,7 @@ end)
 
 RegisterNetEvent('ps-objectspawner:client:registerobjectcommand', function(perms)
     permission = perms
-    if permission == 'god' then
+    if permission == 'admin' then
         openMenu()
     end
 end)
@@ -183,10 +340,21 @@ end
 
 local function PlaceSpawnedObject(heading)
     local ObjectType = 'prop' --will be replaced with inputted prop type later, which will determine options/events
-    local Options = { SpawnRange = tonumber(CurrentSpawnRange) }
-    if ObjectParams[CurrentObjectType] ~= nil then
-        Options = { event = ObjectParams[CurrentObjectType].event, icon = ObjectParams[CurrentObjectType].icon, label = ObjectParams[CurrentObjectType].label, SpawnRange = ObjectParams[CurrentObjectType].SpawnRange} --will be replaced with config of options later
+    local typeParams = ObjectParams[CurrentObjectType] or {}
+    local renderDistance = tonumber(CurrentSpawnRange) or typeParams.SpawnRange or 200
+    local targetDistance = tonumber(typeParams.TargetDistance) or 2.0
+    local Options = {
+        SpawnRange = renderDistance,
+        TargetDistance = targetDistance,
+        distance = targetDistance
+    }
+
+    if typeParams.event then
+        Options.event = typeParams.event
+        Options.icon = typeParams.icon
+        Options.label = typeParams.label
     end
+
     local finalCoords = vector4(CurrentCoords.x, CurrentCoords.y, CurrentCoords.z, heading)
     TriggerServerEvent("ps-objectspawner:server:CreateNewObject", CurrentModel, finalCoords, CurrentObjectType, Options, CurrentObjectName)
     DeleteObject(CurrentObject)
@@ -204,7 +372,14 @@ local function CreateSpawnedObject(data)
     local object = data.object
     CurrentObjectType = data.type
     CurrentObjectName = data.name or "Random Object"
-    CurrentSpawnRange = ObjectParams[objectType] and ObjectParams[objectType] ~= nil or data.distance or 15
+    local inputDistance = tonumber(data.distance)
+    if inputDistance then
+        CurrentSpawnRange = inputDistance
+    elseif ObjectParams[CurrentObjectType] and ObjectParams[CurrentObjectType].SpawnRange then
+        CurrentSpawnRange = ObjectParams[CurrentObjectType].SpawnRange
+    else
+        CurrentSpawnRange = 15
+    end
     
     RequestSpawnObject(object)
     CurrentModel = object
@@ -274,6 +449,21 @@ CreateThread(function()
 	while true do
 		for k, v in pairs(ObjectList) do
             local data = v["options"]
+            if not data then
+                data = {}
+                ObjectList[k]["options"] = data
+            end
+            if not data["SpawnRange"] then
+                local typeParams = ObjectParams[v.type] or {}
+                data["SpawnRange"] = typeParams.SpawnRange or 200
+            end
+            data["SpawnRange"] = tonumber(data["SpawnRange"]) or 200
+            if data.TargetDistance then
+                data.TargetDistance = tonumber(data.TargetDistance)
+            end
+            if data.distance then
+                data.distance = tonumber(data.distance)
+            end
             local objectCoords = v["coords"]
 			local playerCoords = GetEntityCoords(PlayerPedId())
 			local dist = #(playerCoords - vector3(objectCoords["x"], objectCoords["y"], objectCoords["z"]))
@@ -295,19 +485,16 @@ CreateThread(function()
                     Wait(50)
                     SetEntityAlpha(v["object"], i, false)
                 end
-                if ObjectParams[v.type] ~= nil and ObjectParams[v.type].event ~= nil then
-                    exports['qb-target']:AddTargetEntity(object, {
-                        --debugPoly=true,
-                        options = {
-                            {
-                                name = "object_spawner_"..object, 
-                                event = ObjectParams[v.type].event,
-                                icon = ObjectParams[v.type].icon,
-                                label = ObjectParams[v.type].label,
-                                id = v.id
-                            },
-                        },
-                        distance = ObjectParams[data.SpawnRange]
+                if data and data.event then
+                    addTargetToEntity(object, {
+                        name = data.name or ("object_spawner_" .. v.id),
+                        event = data.event,
+                        icon = data.icon,
+                        label = data.label,
+                        id = v.id,
+                        TargetDistance = data.TargetDistance or (ObjectParams[v.type] and ObjectParams[v.type].TargetDistance),
+                        SpawnRange = data.SpawnRange,
+                        distance = data.distance
                     })
                 end
 			end
@@ -318,6 +505,7 @@ CreateThread(function()
                         Wait(50)
                         SetEntityAlpha(v["object"], i, false)
                     end
+                    removeTargetFromEntity(v["object"])
                     DeleteObject(v["object"])
 
                     RemoveRoadNodeSpeedZone(v["speedzone"])
@@ -331,8 +519,13 @@ CreateThread(function()
 end)
 
 RegisterNetEvent("ps-objectspawner:client:AddObject", function(object)
+    local typeParams = ObjectParams[object.type] or {}
+    object.options = object.options or {}
+    object.options.TargetDistance = object.options.TargetDistance or typeParams.TargetDistance or 2.0
+    object.options.distance = object.options.distance or object.options.TargetDistance
+    object.options.SpawnRange = object.options.SpawnRange or typeParams.SpawnRange or 200
     ObjectList[object.id] = object
-    if permission == 'god' then
+    if permission == 'admin' then
         SendNUIMessage({ 
             action = "created",
             newSpawnedObject = object,
@@ -341,30 +534,32 @@ RegisterNetEvent("ps-objectspawner:client:AddObject", function(object)
 end)
 
 RegisterNUICallback('tpTo', function(data, cb)
-    if permission == 'god' then
+    if permission == 'admin' then
         SetEntityCoords(PlayerPedId(), data.coords.x+1, data.coords.y+1, data.coords.z)
     end
     cb('ok')
 end)
 
 RegisterNUICallback('delete', function(data, cb)
-    if permission == 'god' then
+    if permission == 'admin' then
         TriggerServerEvent("ps-objectspawner:server:DeleteObject", data.id)
     end
     cb('ok')
 end)
 
 RegisterNetEvent('ps-objectspawner:client:receiveObjectDelete', function(id)
-    if permission == 'god' then
-        if ObjectList[id]["IsRendered"] then
-            if DoesEntityExist(ObjectList[id]["object"]) then 
+    if permission == 'admin' then
+        local objectData = ObjectList[id]
+        if objectData and objectData["IsRendered"] then
+            if DoesEntityExist(objectData["object"]) then 
                 for i = 255, 0, -51 do
                     Wait(50)
-                    SetEntityAlpha(ObjectList[id]["object"], i, false)
+                    SetEntityAlpha(objectData["object"], i, false)
                 end
-                DeleteObject(ObjectList[id]["object"])
+                removeTargetFromEntity(objectData["object"])
+                DeleteObject(objectData["object"])
 
-                RemoveRoadNodeSpeedZone(ObjectList[id]["speedzone"])
+                RemoveRoadNodeSpeedZone(objectData["speedzone"])
             end
         end
         ObjectList[id] = nil

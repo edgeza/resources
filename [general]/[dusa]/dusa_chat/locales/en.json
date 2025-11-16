@@ -1,0 +1,27 @@
+{
+    "anonymous": "Anonymous",
+    "requestid": {
+        "closest_player_id": "Player ID [^1%s^0]"
+    },
+    "ui": {
+        "invalidCommand": "Invalid command! Please enter a valid command.",
+        "adminMessage": "Admin message.",
+        "emote": "Emote",
+        "adminChat": "Admin Chat",
+        "privateMessage": "Private Message",
+        "roleplayAction": "Roleplay Action",
+        "settings": {
+            "settings": "Settings",
+            "restore": "Restore Settings",
+            "restoreDefaults": "Settings Restored",
+            "chatPosition": "Change Chat Position",
+            "chatSize": "Change Chat Size",
+            "showOnMessage": "Show on Message Received",
+            "saveSettings": "Settings Saved.",
+            "savedSettings": "Save Settings",
+            "yes": "Yes",
+            "no": "No",
+            "theme": "Select Theme"
+        }
+    }
+}

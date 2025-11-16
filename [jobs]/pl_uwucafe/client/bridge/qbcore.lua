@@ -23,7 +23,3 @@ function GetPlayerGender()
     end
     return "male"
 end
-
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    spawnCats()
-end)

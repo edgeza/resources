@@ -186,7 +186,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -213,7 +213,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -240,7 +240,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -267,7 +267,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -294,7 +294,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -313,7 +313,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(200,300)
+                            worth = math.random(1000,2000)
                         }
                     },
                     [2] = {
@@ -351,7 +351,7 @@ Config.Banks = {
                         ['min'] = 8, -- Minimum amount to recieve
                         ['max'] = 13, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(200,300)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -516,7 +516,7 @@ Config.Banks = {
                         ['min'] = 18, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -543,7 +543,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 9, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -570,7 +570,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -597,7 +597,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -624,7 +624,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -643,7 +643,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                     [2] = {
@@ -688,7 +688,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -853,7 +853,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -880,7 +880,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -907,7 +907,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -934,7 +934,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -961,7 +961,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -980,7 +980,7 @@ Config.Banks = {
                         ['min'] = 8, -- Minimum amount to recieve
                         ['max'] = 13, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(200,300)
+                            worth = math.random(1000,2000)
                         }
                     },
                     [2] = {
@@ -1025,7 +1025,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1190,7 +1190,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1217,7 +1217,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1244,7 +1244,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1271,7 +1271,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1298,7 +1298,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1317,7 +1317,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                     [2] = {
@@ -1362,7 +1362,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1527,7 +1527,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1554,7 +1554,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1581,7 +1581,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1608,7 +1608,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1635,7 +1635,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1654,7 +1654,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                     [2] = {
@@ -1699,7 +1699,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1864,7 +1864,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1891,7 +1891,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1918,7 +1918,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(200,300)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1945,7 +1945,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(200,300)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1972,7 +1972,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }
@@ -1991,7 +1991,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 9, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(200,300)
+                            worth = math.random(1000,2000)
                         }
                     },
                     [2] = {
@@ -2036,7 +2036,7 @@ Config.Banks = {
                         ['min'] = 1, -- Minimum amount to recieve
                         ['max'] = 8, -- Maximum amount to recieve
                         ['info'] = {
-                            worth = math.random(100,200)
+                            worth = math.random(1000,2000)
                         }
                     },
                 }

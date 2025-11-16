@@ -348,7 +348,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -530,7 +530,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -734,7 +734,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -917,7 +917,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -1100,7 +1100,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -1260,7 +1260,7 @@ Config.ShopList = {
     
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
     
         -- do not change
         open = true,
@@ -1413,7 +1413,7 @@ Config.ShopList = {
     
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
     
         -- do not change
         open = true,
@@ -1567,7 +1567,7 @@ Config.ShopList = {
     
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
     
         -- do not change
         open = true,
@@ -1722,7 +1722,7 @@ Config.ShopList = {
     
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
     
         -- do not change
         open = true,
@@ -1901,7 +1901,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -2084,7 +2084,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -2246,7 +2246,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -2429,7 +2429,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -2578,7 +2578,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -2733,7 +2733,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -2888,7 +2888,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -3043,7 +3043,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -3203,7 +3203,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -3382,7 +3382,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -3545,7 +3545,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -3708,7 +3708,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -3877,7 +3877,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -4054,7 +4054,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -4237,7 +4237,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -4434,7 +4434,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -4638,7 +4638,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -4800,7 +4800,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -4983,7 +4983,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,
@@ -5145,7 +5145,7 @@ Config.ShopList = {
 
         -- do not change
         -- you will have to change this value in game not in config this is just placeholder for default value
-        price = 520000,
+        price = 1000000,
 
         -- do not change
         open = true,

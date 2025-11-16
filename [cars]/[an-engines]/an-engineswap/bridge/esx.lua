@@ -35,6 +35,7 @@ if lib.context == 'server' then
     ---@diagnostic disable-next-line: duplicate-set-field
     function player:constructor(source)
         self.player = ESX.GetPlayerFromId(source)
+        self.source = source
     end
 
     ---@diagnostic disable-next-line: duplicate-set-field
@@ -93,20 +94,44 @@ if lib.context == 'server' then
         return self.player.name
     end
 
+    local function ensurePlayerLoaded(source)
+        local src = tonumber(source)
+        if not src then return end
+
+        local existing = Core.Player[src]
+        if existing and existing.player then
+            return existing
+        end
+
+        local newPlayer = player:new(src)
+        if not newPlayer.player then
+            return nil
+        end
+
+        Core.Player[src] = newPlayer
+        SetTimeout(0, function()
+            TriggerClientEvent('an-engineswap:client:updatePlayerJob', src, newPlayer:getJob())
+        end)
+
+        return newPlayer
+    end
+
+    Core.GetOrCreatePlayer = ensurePlayerLoaded
+
     RegisterNetEvent('esx:playerLoaded', function(_, xPlayer, isNew)
         local statebag = Player(xPlayer.source).state
         if not statebag.isLoggedIn then statebag:set("isLoggedIn", true, true) end
-        Core.Player[xPlayer.source] = player:new(xPlayer.source)
+        ensurePlayerLoaded(xPlayer.source)
+    end)
+
+    AddEventHandler('playerDropped', function()
+        Core.Player[source] = nil
     end)
 
     lib.addCommand('loadplayer', {
         help = 'Load player',
         restricted = 'group.admin'
     }, function(source, args, raw)
-        if not Core.Player[source] then
-            Core.Player[source] = player:new(source)
-            Wait(200)
-            TriggerClientEvent('an-engineswap:client:updatePlayerJob', source, Core.Player[source]:getJob())
-        end
+        ensurePlayerLoaded(source)
     end)
 end

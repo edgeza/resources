@@ -1,641 +1,544 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLRP MDT System</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/themes.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="ambulance.css" id="ambulance-stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>LSPD - Mobile Data Terminal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen hidden">
-        <div class="loading-header">
-            <div class="loading-logo">
+    <div class="ipad-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-left">
+                <span id="current-time">14:30</span>
+            </div>
+            <div class="status-center">
                 <i class="fas fa-shield-alt"></i>
-                <span>OLRP MDT</span>
+                <span>LSPD MDT</span>
             </div>
-            <div class="loading-status">
-                <div class="loading-dot"></div>
-                <span>Initializing</span>
+            <div class="status-right">
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-three-quarters"></i>
             </div>
         </div>
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <h2>Loading MDT System</h2>
-            <p>Please wait while we initialize your terminal...</p>
-        </div>
-    </div>
 
-    <!-- Main Container -->
-    <div id="mdt-container" class="mdt-container" style="display: none !important; visibility: hidden !important; opacity: 0 !important;">
-        <!-- Header -->
-        <header class="mdt-header">
-            <div class="header-left">
-                <div class="logo" id="main-logo">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>OLRP MDT</span>
-                </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
                 <div class="user-info">
-                    <div class="user-avatar">
+                    <div class="avatar">
+                        <img src="Police.webp" alt="Officer" id="officerAvatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="user-details">
-                        <span class="user-name" id="user-name">Loading...</span>
-                        <span class="user-badge" id="user-badge">Officer</span>
+                        <div class="name">Tobani Bongani</div>
+                        <div class="badge">Badge: D-1</div>
                     </div>
                 </div>
-            </div>
-            <div class="header-center">
-                <div class="search-container">
-                    <input type="text" id="global-search" placeholder="Search citizens, vehicles, incidents...">
-                    <button class="search-btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="header-actions">
-                    <button class="action-btn" id="notifications-btn" title="Notifications">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-badge" id="notification-count">0</span>
-                    </button>
-                    <button class="action-btn" id="settings-btn" title="Settings">
+
+                <nav class="app-nav">
+                    <div class="nav-item active" data-tab="dashboard">
+                        <i class="fas fa-grid"></i>
+                        <span>Dashboard</span>
+                    </div>
+                    <div class="nav-item" data-tab="profiles">
+                        <i class="fas fa-id-card"></i>
+                        <span>Profiles</span>
+                    </div>
+                    <div class="nav-item" data-tab="reports">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </div>
+                    <div class="nav-item" data-tab="bolos">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>BOLOs</span>
+                    </div>
+                    <div class="nav-item" data-tab="vehicles">
+                        <i class="fas fa-car"></i>
+                        <span>DMV</span>
+                    </div>
+                    <div class="nav-item" data-tab="weapons">
+                        <i class="fas fa-gun"></i>
+                        <span>Weapons</span>
+                    </div>
+                    <div class="nav-item" data-tab="dispatch">
+                        <i class="fas fa-broadcast-tower"></i>
+                        <span>Dispatch</span>
+                    </div>
+                    <div class="nav-item" data-tab="map">
+                        <i class="fas fa-map"></i>
+                        <span>Map</span>
+                    </div>
+                    <div class="nav-item" data-tab="bodycam">
+                        <i class="fas fa-camera"></i>
+                        <span>Bodycam</span>
+                    </div>
+                    <div class="nav-item" data-tab="cameras">
+                        <i class="fas fa-video"></i>
+                        <span>Cameras</span>
+                    </div>
+                    <div class="nav-item" data-tab="logs">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Staff Logs</span>
+                    </div>
+                    <div class="nav-item" data-tab="settings">
                         <i class="fas fa-cog"></i>
-                    </button>
-                    <button class="action-btn" id="close-mdt-btn" title="Close MDT">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="status-indicator">
-                    <div class="status-dot online"></div>
-                    <span>Online</span>
-                </div>
-            </div>
-        </header>
+                        <span>Settings</span>
+                    </div>
+                </nav>
 
-        <!-- Body Container -->
-        <div class="mdt-body">
-            <!-- Sidebar -->
-            <aside class="mdt-sidebar">
-            <!-- Sidebar Header with Emblem -->
-            <div class="sidebar-header">
-                <div class="sidebar-emblem" id="sidebar-emblem">
-                    <img src="img/LSPD-removebg-preview.png" class="emblem-icon" alt="Department Logo">
-                    <div class="emblem-text" id="department-name">DEPARTMENT</div>
+                <div class="system-status">
+                    <div class="status-item">
+                        <i class="fas fa-circle" style="color: var(--ipad-green);"></i>
+                        <span>Secure Connection</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-server"></i>
+                        <span>LSPD Network</span>
+                    </div>
                 </div>
             </div>
-            
-            <nav class="sidebar-nav" id="sidebar-nav">
-                <!-- Police Navigation -->
-                <div class="nav-section police-nav">
-                    <h3>Main</h3>
-                    <ul class="nav-list">
-                        <li class="nav-item active" data-page="dashboard">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </li>
-                        <li class="nav-item" data-page="citizens">
-                            <i class="fas fa-users"></i>
-                            <span>Citizens</span>
-                        </li>
-                        <li class="nav-item" data-page="vehicles">
-                            <i class="fas fa-car"></i>
-                            <span>Vehicles</span>
-                        </li>
-                        <li class="nav-item" data-page="warrants">
-                            <i class="fas fa-gavel"></i>
-                            <span>Warrant</span>
-                        </li>
-                        <li class="nav-item" data-page="court">
-                            <i class="fas fa-balance-scale"></i>
-                            <span>Court</span>
-                        </li>
-                        <li class="nav-item" data-page="criminal">
-                            <i class="fas fa-book"></i>
-                            <span>Criminal Code</span>
-                        </li>
-                        <li class="nav-item" data-page="weapons">
-                            <i class="fas fa-gun"></i>
-                            <span>Weapons</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-section police-nav">
-                    <h3>Documentation</h3>
-                    <ul class="nav-list">
-                        <li class="nav-item" data-page="incidents">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Incidents</span>
-                        </li>
-                        <li class="nav-item" data-page="reports">
-                            <i class="fas fa-file-medical"></i>
-                            <span>Reports</span>
-                        </li>
-                        <li class="nav-item" data-page="fto">
-                            <i class="fas fa-user-graduate"></i>
-                            <span>FTO Reports</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-section police-nav">
-                    <h3>Department</h3>
-                    <ul class="nav-list">
-                        <li class="nav-item" data-page="roster">
-                            <i class="fas fa-list-ul"></i>
-                            <span>Roster</span>
-                        </li>
-                        <li class="nav-item" data-page="sop">
-                            <i class="fas fa-clipboard-check"></i>
-                            <span>SOP</span>
-                        </li>
-                        <li class="nav-item" data-page="management">
-                            <i class="fas fa-user-shield"></i>
-                            <span>Officers Management</span>
-                        </li>
-                        <li class="nav-item" data-page="income">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span>Income</span>
-                        </li>
-                        <li class="nav-item" data-page="logs">
-                            <i class="fas fa-clipboard-list"></i>
-                            <span>Logs</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Ambulance Navigation -->
-                <div class="nav-section ambulance-nav" style="display: none;">
-                    <h3>Medical</h3>
-                    <ul class="nav-list">
-                        <li class="nav-item active" data-page="dashboard">
-                            <i class="fas fa-ambulance"></i>
-                            <span>Dashboard</span>
-                        </li>
-                        <li class="nav-item" data-page="patients">
-                            <i class="fas fa-user-injured"></i>
-                            <span>Patients</span>
-                        </li>
-                        <li class="nav-item" data-page="medical-records">
-                            <i class="fas fa-file-medical"></i>
-                            <span>Medical Records</span>
-                        </li>
-                        <li class="nav-item" data-page="emergency-calls">
-                            <i class="fas fa-phone"></i>
-                            <span>Emergency Calls</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-section ambulance-nav" style="display: none;">
-                    <h3>Response</h3>
-                    <ul class="nav-list">
-                        <li class="nav-item" data-page="active-calls">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span>Active Calls</span>
-                        </li>
-                        <li class="nav-item" data-page="response-times">
-                            <i class="fas fa-stopwatch"></i>
-                            <span>Response Times</span>
-                        </li>
-                        <li class="nav-item" data-page="field-reports">
-                            <i class="fas fa-clipboard"></i>
-                            <span>Field Reports</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-section ambulance-nav" style="display: none;">
-                    <h3>Resources</h3>
-                    <ul class="nav-list">
-                        <li class="nav-item" data-page="medical-supplies">
-                            <i class="fas fa-briefcase-medical"></i>
-                            <span>Medical Supplies</span>
-                        </li>
-                        <li class="nav-item" data-page="medical-staff">
-                            <i class="fas fa-user-md"></i>
-                            <span>Medical Staff</span>
-                        </li>
-                        <li class="nav-item" data-page="units">
-                            <i class="fas fa-ambulance"></i>
-                            <span>EMS Units</span>
-                        </li>
-                        <li class="nav-item" data-page="protocols">
-                            <i class="fas fa-book-medical"></i>
-                            <span>Protocols</span>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            
-            <!-- Sidebar Footer -->
-            <div class="sidebar-footer">
-                <div class="footer-status">
-                    <i class="fas fa-camera"></i>
-                    <button class="status-btn available">Available</button>
-                </div>
-            </div>
-        </aside>
 
-        <!-- Main Content -->
-        <main class="mdt-main">
-            <!-- Police Dashboard Page -->
-            <div id="dashboard-page" class="page active police-dashboard">
-                <!-- Background Watermark -->
-                <img src="img/LSPD-dark.png" class="dashboard-watermark" id="dashboard-watermark" alt="LSPD Logo">
-                
-                <div class="page-header">
-                    <h1>Dashboard</h1>
-                    <button class="add-button" id="add-bulletin-btn">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-                <div class="dashboard-widgets">
-                    <!-- Bulletin Board Widget -->
-                    <div class="widget bulletin-widget">
-                        <div class="widget-header">
-                            <h3>Bulletin Board</h3>
-                            <button class="add-icon">
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Dashboard Tab -->
+                <div class="tab-content active" id="dashboard-tab">
+                    <div class="content-header">
+                        <h1>Dashboard</h1>
+                        <div class="header-actions">
+                            <button class="ios-btn" onclick="dispatchCall()">
                                 <i class="fas fa-plus"></i>
+                                New Call
                             </button>
                         </div>
-                        <div class="widget-content" id="bulletin-content">
-                            <div class="bulletin-item">
-                                <div class="bulletin-info">
-                                    <h4>Officers Attention</h4>
-                                    <p>Assemble at 5:00 PM</p>
-                                    <span class="bulletin-meta">10/4/2023, 4:00 PM</span>
-                                </div>
-                                <div class="bulletin-check">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
                             </div>
-                            <div class="bulletin-item">
-                                <div class="bulletin-info">
-                                    <h4>Test Announcement</h4>
-                                    <p>Testing purpose</p>
-                                    <span class="bulletin-meta">12/5/2023, 1:00 AM</span>
-                                </div>
-                                <div class="bulletin-check">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="activeUnitsCount">12</div>
+                                <div class="stat-label">Active Units</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="reportsCount">8</div>
+                                <div class="stat-label">Today's Reports</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="bolosCount">3</div>
+                                <div class="stat-label">Active BOLOs</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="incidentsCount">5</div>
+                                <div class="stat-label">Active Incidents</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Recent Reports Widget -->
-                    <div class="widget reports-widget">
-                        <div class="widget-header">
-                            <h3>Recent Reports</h3>
-                        </div>
-                        <div class="widget-content" id="reports-content">
-                            <div class="report-item">
-                                <div class="report-info">
-                                    <h4>Location: q</h4>
-                                    <p>Date Time: 8/16/2023, 1:23 PM</p>
-                                </div>
-                                <span class="report-badge">14</span>
-                            </div>
-                            <div class="report-item">
-                                <div class="report-info">
-                                    <h4>test</h4>
-                                    <p>Location: w - Date Time: 8/16/2023, 1:23 PM</p>
-                                </div>
-                                <span class="report-badge">15</span>
-                            </div>
-                            <div class="report-item">
-                                <div class="report-info">
-                                    <h4>Adam Nawalka</h4>
-                                    <p>Location: Adam Nawalka - Date Time: 8/16/2023, 1:23 PM</p>
-                                </div>
-                                <span class="report-badge">17</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Active Warrants Widget -->
-                    <div class="widget warrants-widget">
-                        <div class="widget-header">
-                            <h3>Active Warrants</h3>
-                        </div>
-                        <div class="widget-content" id="warrants-content">
-                            <div class="warrant-item">
-                                <div class="warrant-info">
-                                    <h4>Tony Hello</h4>
-                                    <p>Issue Date: 2023-01-16</p>
-                                    <p>Expiry Date: 2023-02-01</p>
-                                    <span class="warrant-status">Status: active</span>
-                                </div>
-                                <span class="warrant-badge">WARRANT</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Units Widget -->
-                    <div class="widget units-widget">
-                        <div class="widget-header">
-                            <h3>Units</h3>
-                        </div>
-                        <div class="widget-content">
-                            <table class="units-table" id="units-table">
-                                <thead>
-                                    <tr>
-                                        <th>Callsign</th>
-                                        <th>Name</th>
-                                        <th>Rank</th>
-                                        <th>Department</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>82w</td>
-                                        <td>TonyTT Sharma</td>
-                                        <td>Officer</td>
-                                        <td>CPD</td>
-                                        <td><button class="status-btn available">Available</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- BOLOs Widget -->
-                    <div class="widget bolos-widget">
-                        <div class="widget-header">
-                            <h3>BOLOs</h3>
-                        </div>
-                        <div class="widget-content" id="bolos-content">
-                            <div class="bolo-item">
-                                <div class="bolo-info">
-                                    <h4>TonyTT Sharma</h4>
-                                    <p>Wanted: Yes</p>
-                                    <span class="bolo-status">Status: Bolo</span>
-                                </div>
-                                <span class="bolo-badge">BOLO</span>
-                            </div>
+                    <div class="section">
+                        <h2>Active Units</h2>
+                        <div class="units-grid" id="unitsGrid">
+                            <!-- Units will be loaded here -->
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- EMS Dashboard Page -->
-            <div id="ems-dashboard-page" class="page ambulance-dashboard" style="display: none;">
-                <!-- Background Watermark -->
-                <img src="img/ems.png" class="dashboard-watermark" id="ems-dashboard-watermark" alt="EMS Logo">
-                
-                <div class="page-header">
-                    <h1>Medical Dashboard</h1>
-                    <button class="add-button" id="add-ems-bulletin-btn">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-                <div class="dashboard-widgets">
-                    <!-- Active Emergency Calls Widget -->
-                    <div class="widget emergency-calls-widget">
-                        <div class="widget-header">
-                            <h3>Active Emergency Calls</h3>
-                        </div>
-                        <div class="widget-content" id="emergency-calls-content">
-                            <div class="emergency-call-item">
-                                <div class="call-info">
-                                    <h4><i class="fas fa-exclamation-triangle" style="color: #CC0000;"></i> Critical Patient</h4>
-                                    <p>Location: Legion Square</p>
-                                    <span class="call-meta">2 minutes ago - Priority: HIGH</span>
-                                </div>
-                                <span class="emergency-call">CRITICAL</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Recent Patients Widget -->
-                    <div class="widget patients-widget">
-                        <div class="widget-header">
-                            <h3>Recent Patients</h3>
-                        </div>
-                        <div class="widget-content" id="patients-content">
-                            <div class="patient-item">
-                                <div class="patient-info">
-                                    <h4>John Doe</h4>
-                                    <p>Injury: Chest Pain - Treated: 15 minutes ago</p>
-                                </div>
-                                <span class="treatment-status">TREATED</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Medical Staff Widget -->
-                    <div class="widget medical-staff-widget">
-                        <div class="widget-header">
-                            <h3>Medical Staff</h3>
-                        </div>
-                        <div class="widget-content">
-                            <table class="units-table" id="medical-staff-table">
-                                <thead>
-                                    <tr>
-                                        <th>Callsign</th>
-                                        <th>Name</th>
-                                        <th>Rank</th>
-                                        <th>Department</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>EMS-1</td>
-                                        <td>Dr. Jane Smith</td>
-                                        <td>Paramedic</td>
-                                        <td>Medical</td>
-                                        <td><button class="status-btn available">Available</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Citizens Page -->
-            <div id="citizens-page" class="page">
-                <div class="page-header">
-                    <h1>Citizen Database</h1>
-                    <div class="page-actions">
-                        <div class="search-box">
-                            <input type="text" id="citizen-search" placeholder="Search by name, ID, or license...">
-                            <button class="search-btn">
+                <!-- Profiles Tab -->
+                <div class="tab-content" id="profiles-tab">
+                    <div class="content-header">
+                        <h1>Citizen Database</h1>
+                        <div class="search-container">
+                            <div class="search-box">
                                 <i class="fas fa-search"></i>
+                                <input type="text" id="profileSearch" placeholder="Search by name, ID, or phone..." onkeypress="if(event.key === 'Enter') searchProfiles()">
+                            </div>
+                            <button class="ios-btn" onclick="searchProfiles()">
+                                Search
                             </button>
                         </div>
-                        <button class="btn btn-primary" id="add-citizen-btn">
-                            <i class="fas fa-plus"></i>
-                            Add Citizen
-                        </button>
+                    </div>
+                    <div class="search-results" id="profilesResults">
+                        <div class="empty-state">
+                            <i class="fas fa-search"></i>
+                            <h3>Search Citizen Database</h3>
+                            <p>Enter a name, ID, or phone number to search</p>
+                        </div>
                     </div>
                 </div>
-                <div class="page-content">
-                    <div class="data-table-container">
-                        <table class="data-table" id="citizens-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>DOB</th>
-                                    <th>License</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="citizens-tbody">
-                                <!-- Data will be populated by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Vehicles Page -->
-            <div id="vehicles-page" class="page">
-                <div class="page-header">
-                    <h1>Vehicle Database</h1>
-                    <div class="page-actions">
-                        <div class="search-box">
-                            <input type="text" id="vehicle-search" placeholder="Search by plate, VIN, or owner...">
-                            <button class="search-btn">
+                <!-- Reports Tab -->
+                <div class="tab-content" id="reports-tab">
+                    <div class="content-header">
+                        <h1>Incident Reports</h1>
+                        <div class="header-actions">
+                            <button class="ios-btn primary" onclick="showReportForm()">
+                                <i class="fas fa-plus"></i>
+                                New Report
+                            </button>
+                            <button class="ios-btn" onclick="loadReports()">
+                                <i class="fas fa-sync"></i>
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Report Form -->
+                    <div class="form-container" id="reportForm" style="display: none;">
+                        <h2>New Incident Report</h2>
+                        <form id="incidentForm">
+                            <div class="form-group">
+                                <label>Incident Title</label>
+                                <input type="text" id="reportTitle" class="ios-input" placeholder="Enter incident title">
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" id="reportLocation" class="ios-input" placeholder="Enter location">
+                            </div>
+                            <div class="form-group">
+                                <label>Summary</label>
+                                <textarea id="reportSummary" class="ios-input" rows="3" placeholder="Enter incident summary"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Suspects</label>
+                                    <input type="text" id="reportSuspects" class="ios-input" placeholder="Enter suspect names">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fine Amount ($)</label>
+                                    <input type="number" id="reportFine" class="ios-input" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="ios-btn" onclick="hideReportForm()">Cancel</button>
+                                <button type="submit" class="ios-btn primary">Submit Report</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Reports List -->
+                    <div class="reports-list" id="reportsList">
+                        <!-- Reports will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- BOLOs Tab -->
+                <div class="tab-content" id="bolos-tab">
+                    <div class="content-header">
+                        <h1>Be On Lookout</h1>
+                        <div class="header-actions">
+                            <button class="ios-btn primary" onclick="showBoloForm()">
+                                <i class="fas fa-plus"></i>
+                                New BOLO
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bolos-grid" id="bolosGrid">
+                        <!-- BOLOs will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Vehicles Tab -->
+                <div class="tab-content" id="vehicles-tab">
+                    <div class="content-header">
+                        <h1>DMV Database</h1>
+                        <div class="search-container">
+                            <div class="search-box">
                                 <i class="fas fa-search"></i>
+                                <input type="text" id="plateSearch" placeholder="Enter license plate...">
+                            </div>
+                            <button class="ios-btn" onclick="searchVehicle()">
+                                Search
                             </button>
                         </div>
-                        <button class="btn btn-primary" id="add-vehicle-btn">
-                            <i class="fas fa-plus"></i>
-                            Add Vehicle
-                        </button>
                     </div>
-                </div>
-                <div class="page-content">
-                    <div class="data-table-container">
-                        <table class="data-table" id="vehicles-table">
-                            <thead>
-                                <tr>
-                                    <th>Plate</th>
-                                    <th>Model</th>
-                                    <th>Owner</th>
-                                    <th>Status</th>
-                                    <th>Insurance</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="vehicles-tbody">
-                                <!-- Data will be populated by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Incidents Page -->
-            <div id="incidents-page" class="page">
-                <div class="page-header">
-                    <h1>Incident Reports</h1>
-                    <div class="page-actions">
-                        <div class="filter-dropdown">
-                            <select id="incident-filter">
-                                <option value="all">All Incidents</option>
-                                <option value="open">Open</option>
-                                <option value="closed">Closed</option>
-                                <option value="pending">Pending</option>
-                            </select>
+                    <div class="vehicle-results" id="vehicleResults">
+                        <div class="empty-state">
+                            <i class="fas fa-car"></i>
+                            <h3>Vehicle Search</h3>
+                            <p>Enter a license plate to search the DMV database</p>
                         </div>
-                        <button class="btn btn-primary" id="new-incident-report-btn">
-                            <i class="fas fa-plus"></i>
-                            New Report
-                        </button>
                     </div>
                 </div>
-                <div class="page-content">
-                    <div class="data-table-container">
-                        <table class="data-table" id="incidents-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Type</th>
-                                    <th>Location</th>
-                                    <th>Officer</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="incidents-tbody">
-                                <!-- Data will be populated by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Map Page -->
-            <div id="map-page" class="page">
-                <div class="page-header">
-                    <h1>Interactive Map</h1>
-                    <div class="page-actions">
-                        <button class="btn btn-primary" id="reset-map-btn">
-                            <i class="fas fa-undo"></i>
-                            Reset View
-                        </button>
+                <!-- Weapons Tab -->
+                <div class="tab-content" id="weapons-tab">
+                    <div class="content-header">
+                        <h1>Weapons Registry</h1>
+                        <div class="search-container">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="weaponSearch" placeholder="Search by serial number or owner...">
+                            </div>
+                            <button class="ios-btn" onclick="searchWeapons()">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                    <div class="weapons-results" id="weaponsResults">
+                        <div class="empty-state">
+                            <i class="fas fa-gun"></i>
+                            <h3>Weapons Search</h3>
+                            <p>Search registered weapons by serial number or owner</p>
+                        </div>
                     </div>
                 </div>
-                <div class="page-content">
+
+                <!-- Dispatch Tab -->
+                <div class="tab-content" id="dispatch-tab">
+                    <div class="content-header">
+                        <h1>Dispatch Center</h1>
+                        <div class="header-actions">
+                            <button class="ios-btn primary" onclick="createNewCall()">
+                                <i class="fas fa-plus"></i>
+                                New Call
+                            </button>
+                            <button class="ios-btn" onclick="loadActiveCalls()">
+                                <i class="fas fa-sync"></i>
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dispatch-container">
+                        <div class="calls-list">
+                            <h3>Active Calls</h3>
+                            <div class="calls-grid" id="activeCalls">
+                                <!-- Active calls will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <div class="dispatch-controls">
+                            <h3>Dispatch Controls</h3>
+                            <div class="control-panel">
+                                <div class="control-group">
+                                    <label>Available Units</label>
+                                    <select id="availableUnits" class="ios-input">
+                                        <option>Loading units...</option>
+                                    </select>
+                                </div>
+                                <div class="control-group">
+                                    <label>Assign to Call</label>
+                                    <select id="activeCallList" class="ios-input">
+                                        <option>No active calls</option>
+                                    </select>
+                                </div>
+                                <button class="ios-btn primary" onclick="assignUnit()">
+                                    <i class="fas fa-user-check"></i>
+                                    Assign Unit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Tab -->
+                <div class="tab-content" id="map-tab">
+                    <div class="content-header">
+                        <h1>GTA V Map</h1>
+                        <div class="header-actions">
+                            <div class="map-tools">
+                                <button class="ios-btn" onclick="addZone('circle')">
+                                    <i class="fas fa-circle"></i>
+                                    Circle
+                                </button>
+                                <button class="ios-btn" onclick="addZone('square')">
+                                    <i class="fas fa-square"></i>
+                                    Square
+                                </button>
+                                <button class="ios-btn" onclick="addZone('polygon')">
+                                    <i class="fas fa-draw-polygon"></i>
+                                    Polygon
+                                </button>
+                                <button class="ios-btn" onclick="clearZones()">
+                                    <i class="fas fa-trash"></i>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="map-container">
-                        <div class="map-controls">
-                            <div class="map-legend">
-                                <h4>Controls</h4>
-                                <ul>
-                                    <li><i class="fas fa-search-plus"></i> Scroll to zoom in/out</li>
-                                    <li><i class="fas fa-undo"></i> Click Reset to return to default view</li>
-                                </ul>
+                        <div class="map-wrapper">
+                            <div class="gta-map" id="gtaMap">
+                                <canvas id="mapCanvas"></canvas>
+                                <img id="mapImage" src="map.png" alt="GTA V Map" style="display: none;" onerror="this.onerror=null; this.src='map.jpg'; this.onerror=function(){this.src='https://i.imgur.com/7W0jXJv.png';}">
+                                <div class="map-overlay" id="mapOverlay">
+                                    <!-- Zones will be drawn here -->
+                                </div>
                             </div>
                         </div>
-                        <div id="map-viewer" class="map-3d-viewer"></div>
-                        <div class="map-loading" id="map-loading">
-                            <div class="spinner"></div>
-                            <p>Loading map...</p>
+                        <div class="map-legend">
+                            <h4>Active Zones</h4>
+                            <div class="zones-list" id="zonesList">
+                                <!-- Zones list will be here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bodycam Tab -->
+                <div class="tab-content" id="bodycam-tab">
+                    <div class="content-header">
+                        <h1>Body Camera System</h1>
+                        <div class="header-actions">
+                            <button class="ios-btn primary" onclick="startBodycam()">
+                                <i class="fas fa-record-vinyl"></i>
+                                Start Recording
+                            </button>
+                            <button class="ios-btn" onclick="loadBodycamFeeds()">
+                                <i class="fas fa-sync"></i>
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bodycam-container">
+                        <div class="active-feeds">
+                            <h3>Live Bodycam Feeds</h3>
+                            <div class="feeds-grid" id="bodycamFeeds">
+                                <!-- Bodycam feeds will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <div class="recordings-list">
+                            <h3>Recent Recordings</h3>
+                            <div class="recordings" id="bodycamRecordings">
+                                <!-- Recordings list will be here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cameras Tab -->
+                <div class="tab-content" id="cameras-tab">
+                    <div class="content-header">
+                        <h1>Surveillance Cameras</h1>
+                        <button class="ios-btn" onclick="loadCameras()">
+                            <i class="fas fa-sync"></i>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="cameras-grid" id="camerasGrid">
+                        <!-- Camera feeds will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Logs Tab -->
+                <div class="tab-content" id="logs-tab">
+                    <div class="content-header">
+                        <h1>Staff Duty Logs</h1>
+                        <button class="ios-btn" onclick="loadStaffLogs()">
+                            <i class="fas fa-sync"></i>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="logs-list" id="logsList">
+                        <!-- Staff logs will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-content" id="settings-tab">
+                    <div class="content-header">
+                        <h1>Settings</h1>
+                    </div>
+                    <div class="settings-container">
+                        <!-- Badge Settings -->
+                        <div class="settings-section">
+                            <h3>Badge Information</h3>
+                            <div class="control-group">
+                                <label for="badgeNumber">Badge Number</label>
+                                <input type="text" id="badgeNumber" class="ios-input" placeholder="e.g., 1A-4" maxlength="20">
+                                <small>Your badge number will be displayed in the sidebar</small>
+                            </div>
+                        </div>
+
+                        <!-- Theme Settings -->
+                        <div class="settings-section">
+                            <h3>Theme</h3>
+                            <div class="control-group">
+                                <label for="themeSelect">MDT Theme</label>
+                                <select id="themeSelect" class="ios-input">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                    <option value="auto">Auto (System)</option>
+                                </select>
+                                <small>Choose your preferred color theme</small>
+                            </div>
+                        </div>
+
+                        <!-- Color Customization -->
+                        <div class="settings-section">
+                            <h3>Color Customization</h3>
+                            <div class="color-picker-group">
+                                <div class="color-picker-item">
+                                    <label for="primaryColor">Primary Color</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="primaryColor" class="color-picker" value="#007aff">
+                                        <input type="text" id="primaryColorText" class="ios-input color-text" value="#007aff" maxlength="7">
+                                    </div>
+                                </div>
+                                <div class="color-picker-item">
+                                    <label for="accentColor">Accent Color</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="accentColor" class="color-picker" value="#007aff">
+                                        <input type="text" id="accentColorText" class="ios-input color-text" value="#007aff" maxlength="7">
+                                    </div>
+                                </div>
+                                <div class="color-picker-item">
+                                    <label for="backgroundColor">Background Color</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="backgroundColor" class="color-picker" value="#f5f5f7">
+                                        <input type="text" id="backgroundColorText" class="ios-input color-text" value="#f5f5f7" maxlength="7">
+                                    </div>
+                                </div>
+                                <div class="color-picker-item">
+                                    <label for="cardColor">Card Color</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="cardColor" class="color-picker" value="#ffffff">
+                                        <input type="text" id="cardColorText" class="ios-input color-text" value="#ffffff" maxlength="7">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="settings-actions">
+                            <button class="ios-btn primary" onclick="saveSettings()">
+                                <i class="fas fa-save"></i>
+                                Save Settings
+                            </button>
+                            <button class="ios-btn" onclick="resetSettings()">
+                                <i class="fas fa-undo"></i>
+                                Reset to Default
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Other pages will be added dynamically -->
-        </main>
         </div>
     </div>
 
-    <!-- Modals -->
-    <div id="modal-overlay" class="modal-overlay hidden">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h2 id="modal-title">Modal Title</h2>
-                <button class="modal-close" id="modal-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-content" id="modal-content">
-                <!-- Modal content will be populated dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Notifications -->
-    <div id="notifications-container" class="notifications-container"></div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="js/main.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/components.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

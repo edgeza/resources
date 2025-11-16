@@ -94,12 +94,16 @@ function AddItem(source, item, amount, slot, info, data, created, lastinventory,
         UpdateInventoryState(source)
         return true
     elseif not itemInfo['unique'] and slot or slot and inventory[slot] == nil then
-        inventory[slot] = ItemInfo({
+        local itemObject = ItemInfo({
             name = itemInfo['name'],
             amount = amount,
             slot = slot,
             info = info
         })
+        if type(itemObject) ~= 'table' then
+            return Error(('ItemInfo returned an invalid value (%s) while adding %s to slot %s for player %s'):format(type(itemObject), itemInfo['name'], tostring(slot), tostring(source)))
+        end
+        inventory[slot] = itemObject
         TriggerEvent('esx:onAddInventoryItem', source, item, amount)
         TriggerClientEvent('esx:addInventoryItem', source, item, amount)
 
@@ -120,8 +124,12 @@ function AddItem(source, item, amount, slot, info, data, created, lastinventory,
             Debug("Add Item new slot ::: Item added to player's inventory:", source, 'Item:', inventory[slot].name, 'Amount:', inventory[slot].amount, 'disableauto', disableAutoShowBox)
             if not disableAutoShowBox then
                 local itemData = ItemList[inventory[slot].name]
-                itemData.count = amount
-                TriggerClientEvent('qs-inventory:client:ItemBox', source, itemData, 'add')
+                if itemData then
+                    itemData.count = amount
+                    TriggerClientEvent('qs-inventory:client:ItemBox', source, itemData, 'add')
+                else
+                    Debug('AddItem missing item data for ItemBox:', inventory[slot].name)
+                end
             end
         end
         UpdateFrameworkInventory(source, inventory, true)
@@ -137,12 +145,16 @@ function AddItem(source, item, amount, slot, info, data, created, lastinventory,
 
                     TriggerEvent('qb-inventory:server:itemAdded', source, item, amount, 1)
                     TriggerClientEvent('qb-inventory:client:itemAdded', source, item, amount, 1)
-                    inventory[i] = ItemInfo({
+                    local itemObject = ItemInfo({
                         name = itemInfo['name'],
                         amount = 1,
                         slot = i,
                         info = info
                     })
+                    if type(itemObject) ~= 'table' then
+                        return Error(('ItemInfo returned an invalid value (%s) while adding %s to slot %s for player %s'):format(type(itemObject), itemInfo['name'], tostring(i), tostring(source)))
+                    end
+                    inventory[i] = itemObject
                     if inventory[slot] and inventory[slot].name == 'money' and Config.Framework == 'esx' then
                         local player = GetPlayerFromId(source)
                         local money = GetItemTotalAmount(source, 'money')
@@ -154,12 +166,16 @@ function AddItem(source, item, amount, slot, info, data, created, lastinventory,
                         player.setAccountMoney('black_money', money, 'dropped')
                     end
 
-                    if not ContainsItem(itemsToCheck, inventory[i].name) then
+                    if inventory[i] and not ContainsItem(itemsToCheck, inventory[i].name) then
                         Debug("add item create new slot ::: added to player's inventory:", source, 'Item:', inventory[i].name, 'Amount:', inventory[i].amount, 'disable', disableAutoShowBox)
                         if not disableAutoShowBox then
                             local itemData = ItemList[inventory[i].name]
-                            itemData.count = 1
-                            TriggerClientEvent('qs-inventory:client:ItemBox', source, itemData, 'add')
+                            if itemData then
+                                itemData.count = 1
+                                TriggerClientEvent('qs-inventory:client:ItemBox', source, itemData, 'add')
+                            else
+                                Debug('AddItem missing item data for ItemBox:', inventory[i].name)
+                            end
                         end
                     end
 

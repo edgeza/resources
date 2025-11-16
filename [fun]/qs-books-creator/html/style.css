@@ -1,0 +1,297 @@
+@font-face {
+    font-family: "CabinetGrotesk-Medium";
+    src: url("font/CabinetGrotesk-Medium.woff2") format("woff2"),
+        url("font/CabinetGrotesk-Medium.woff") format("woff"),
+        url("font/CabinetGrotesk-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+}
+@font-face {
+    font-family: "CabinetGrotesk-Black";
+    src: url("font/CabinetGrotesk-Black.woff2") format("woff2"),
+        url("font/CabinetGrotesk-Black.woff") format("woff"),
+        url("font/CabinetGrotesk-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-display: swap;
+    font-style: normal;
+}
+@font-face {
+    font-family: "CabinetGrotesk-Bold";
+    src: url("font/CabinetGrotesk-Bold.woff2") format("woff2"),
+        url("font/CabinetGrotesk-Bold.woff") format("woff"),
+        url("font/CabinetGrotesk-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+}
+* {
+    box-sizing: border-box;
+    font-family: "CabinetGrotesk-Bold";
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-font-smoothing: antialiased;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+body {
+    font-family: ui-serif, "Cormorant Garamond", Georgia, serif;
+}
+.hidden {
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+:root {
+    --book-shift: 0%;
+    --tiltX: 0deg;
+    --tiltY: 0deg;
+}
+#app {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    user-select: none;
+}
+.book-wrap {
+    position: relative; /* ancla para el hint absoluto */
+    width: auto;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+    perspective: 1600px;
+    transform-style: preserve-3d;
+    transition: transform 420ms ease;
+}
+.book-wrap.rotate {
+    transform: rotateY(18deg);
+}
+.book {
+    height: min(70vh, 1350px);
+    aspect-ratio: 4 / 3;
+    width: auto;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 420ms ease;
+    transform: translateX(var(--book-shift)) rotateX(var(--tiltX))
+        rotateY(var(--tiltY));
+}
+.book.single-first {
+    --book-shift: -25%;
+}
+.book.single-first-nudge {
+    animation: bookNudge 600ms ease-out forwards;
+}
+@keyframes bookNudge {
+    from {
+        transform: translateX(-25%) rotateX(var(--tiltX)) rotateY(var(--tiltY));
+    }
+    to {
+        transform: translateX(-18%) rotateX(var(--tiltX)) rotateY(var(--tiltY));
+    }
+}
+.book.opening {
+    animation: bookFloat3D 4s ease-in-out infinite;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+    transform-origin: center center;
+}
+@keyframes bookFloat3D {
+    0% {
+        transform: translateX(var(--book-shift)) rotateX(-3deg) rotateY(6deg)
+            rotateZ(-0.6deg) translateZ(0);
+    }
+    25% {
+        transform: translateX(var(--book-shift)) rotateX(1.5deg) rotateY(-3deg)
+            rotateZ(0.6deg) translateZ(15px);
+    }
+    50% {
+        transform: translateX(var(--book-shift)) rotateX(2deg) rotateY(6deg)
+            rotateZ(-0.8deg) translateZ(25px);
+    }
+    75% {
+        transform: translateX(var(--book-shift)) rotateX(-1deg) rotateY(-5deg)
+            rotateZ(0.5deg) translateZ(12px);
+    }
+    100% {
+        transform: translateX(var(--book-shift)) rotateX(-3deg) rotateY(6deg)
+            rotateZ(-0.6deg) translateZ(0);
+    }
+}
+.page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    transform-origin: 0 50%;
+    transition: transform 0.8s ease, z-index 0.2s;
+    border-right: 10px solid transparent;
+    cursor: pointer;
+    line-height: 0;
+}
+.page .side-1,
+.page .side-2 {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    padding: 0;
+    backface-visibility: hidden;
+    background: repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.03) 0 2px,
+            rgba(0, 0, 0, 0.02) 2px 4px
+        ),
+        linear-gradient(180deg, #f1ede6, #eae5db);
+    background-size: 100% 100%;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+        inset 50px 0 50px rgba(0, 0, 0, 0.15);
+}
+.page .side-2 {
+    transform: rotateY(180deg);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+        inset -50px 0 50px rgba(0, 0, 0, 0.18);
+}
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+.page,
+.page * {
+    transform-style: preserve-3d;
+}
+.page img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: none;
+    pointer-events: none;
+}
+.page .content {
+    height: 100%;
+    overflow: auto;
+    color: #2a2935;
+}
+.page .content h1,
+.page .content h2 {
+    color: #2a2935;
+    margin: 0 0 12px;
+}
+.page .content p {
+    margin: 10px 0;
+    color: #3a3a3a;
+}
+
+.open-hint {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 16px);
+    transform: translateX(-50%);
+    margin: 0;
+
+    /* --- una sola línea --- */
+    white-space: nowrap; /* no permitir salto de línea */
+    text-wrap: nowrap; /* refuerzo moderno */
+    line-height: 1; /* evita que parezca dos líneas */
+    hyphens: none; /* sin guiones automáticos */
+    -webkit-hyphens: none;
+    word-break: normal; /* no rompas palabras */
+
+    /* --- si no entra, cortar con … --- */
+    max-width: min(90vw, 1200px); /* límite responsivo */
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-align: center;
+    font-size: 28px;
+    font-family: "CabinetGrotesk-Black";
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    user-select: none;
+    pointer-events: none;
+}
+
+@keyframes hintPulse {
+    from {
+        opacity: 0.5;
+        transform: translate(-50%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -4px);
+    }
+}
+
+.page::after {
+    content: none;
+}
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+}
+@media (hover: none), (pointer: coarse) {
+    .book-wrap.rotate {
+        transform: none;
+    }
+}
+
+/* Lomo sutil entre páginas en spread */
+.book::before,
+.book::after {
+    content: "";
+    position: absolute;
+    top: 2%;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    display: none;
+    z-index: 9999;
+}
+.book::before {
+    width: 22px;
+    border-radius: 12px;
+    background: radial-gradient(
+        closest-side,
+        rgba(0, 0, 0, 0.18),
+        rgba(0, 0, 0, 0.08) 55%,
+        rgba(0, 0, 0, 0) 80%
+    );
+    opacity: 0.65;
+    filter: blur(0.5px);
+}
+.book::after {
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.35),
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.35)
+    );
+    opacity: 0.25;
+}
+.book.has-spread::before,
+.book.has-spread::after {
+    display: block;
+}
+.book.single-first::before,
+.book.single-first::after {
+    display: none !important;
+}
+
+.book.single-final {
+    --book-shift: 0%;
+}

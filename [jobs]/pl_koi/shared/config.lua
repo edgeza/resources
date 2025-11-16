@@ -112,8 +112,8 @@ Config.MaxStock = 99999999
 Config.IceMachine = {
     ice_itemname = 'koi_icecubes',
     water_itemname = 'koi_waterbottle',
-    WaitTime = 250,
-    MaxIce = 25
+    WaitTime = 1,
+    MaxIce = 50
 }
 
 Config.MaxBillAmount = 100000
@@ -230,25 +230,25 @@ Config.Emotes = {
 Config.DeliveryFood = {
     {
         items = {
-            { name = "koi_grilled_salmon", label = "Koi Grilled Salmon", quantity = 1 },
-            { name = "koi_mojito", label = "Koi Mojito", quantity = 1 },
-            { name = "koi_tomahawk_steak", label = "Koi Tomahawk Steak", quantity = 1 }, 
+            { name = "koi_grilled_salmon", label = "Koi Grilled Salmon", quantity = 10 },
+            { name = "koi_mojito", label = "Koi Mojito", quantity = 10 },
+            { name = "koi_tomahawk_steak", label = "Koi Tomahawk Steak", quantity = 10 }, 
         },
         total = 100
     },
     {
         items = {
-            { name = "koi_shrimp_scampi", label = "Koi Shrimp Scampi", quantity = 1 },
-            { name = "koi_pina_colada", label = "Koi Pina Colada", quantity = 1 },
-            { name = "koi_ribeye_steak", label = "Koi Ribeye Steak", quantity = 1 },
+            { name = "koi_shrimp_scampi", label = "Koi Shrimp Scampi", quantity = 10 },
+            { name = "koi_pina_colada", label = "Koi Pina Colada", quantity = 10 },
+            { name = "koi_ribeye_steak", label = "Koi Ribeye Steak", quantity = 10 },
         },
         total = 90
     },
     {
         items = {
-            { name = "koi_seared_scallops", label = "Koi Seared Scallops", quantity = 1 },
-            { name = "koi_margarita", label = "Koi Margarita", quantity = 1 },
-            { name = "koi_filet_mignon", label = "Koi Filet Mignon", quantity = 1 },
+            { name = "koi_seared_scallops", label = "Koi Seared Scallops", quantity = 10 },
+            { name = "koi_margarita", label = "Koi Margarita", quantity = 10 },
+            { name = "koi_filet_mignon", label = "Koi Filet Mignon", quantity = 10 },
         },
         total = 110
     } 

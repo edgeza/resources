@@ -78,7 +78,7 @@ return {
                 {type = "item", item = "bobcatcard", min = 1, max = 2, label = "bobcatcard"},
                 {type = "weapon", item = "weapon_compactrifle", min = 1, max = 2, label = "SMG"},
                 {type = "weapon", item = "weapon_assaultrifle_mk2", min = 1, max = 2, label = "Assault Rifle Mk2"},
-                {type = "weapon", item = "weapon_carbinerifle_mk2", min = 1, max = 1, label = "Carbine Rifle Mk2"},
+                {type = "weapon", item = "weapon_bullpuprifle_mk2", min = 1, max = 1, label = "Bullpup Rifle Mk2"},
                 {type = "weapon", item = "weapon_ak47m2", min = 1, max = 1, label = "AK-47 M2"},
             }
         },
@@ -99,7 +99,7 @@ return {
                 {type = "weapon", item = "weapon_krissvector", min = 1, max = 2, label = "SMG"},
                 {type = "weapon", item = "weapon_redarp", min = 1, max = 2, label = "Lockpick"},
                 {type = "weapon", item = "weapon_assaultrifle", min = 1, max = 2, label = "Assault Rifle"},
-                {type = "weapon", item = "weapon_carbinerifle_mk2", min = 1, max = 2, label = "Carbine Rifle Mk2"},
+                {type = "weapon", item = "weapon_bullpuprifle_mk2", min = 1, max = 2, label = "Bullpup Rifle Mk2"},
                 {type = "weapon", item = "weapon_ak47m2", min = 1, max = 2, label = "AK-47 M2"},
             }
         }

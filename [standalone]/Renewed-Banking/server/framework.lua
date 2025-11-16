@@ -197,7 +197,10 @@ function IsGangAuth(Player, gang)
     if Framework == 'qb' or Framework == 'qbx' then
         local grade = tostring(Player.PlayerData.gang.grade.level)
         local gradeNum = tonumber(grade)
-        return Gangs[gang].grades[grade] and Gangs[gang].grades[grade].bankAuth or Gangs[gang].grades[gradeNum] and Gangs[gang].grades[gradeNum].bankAuth
+        local gangData = Gangs and Gangs[gang]
+        if not gangData or not gangData.grades then return false end
+        local gradeData = gangData.grades[grade] or gangData.grades[gradeNum]
+        return gradeData and gradeData.bankAuth or false
     elseif Framework == 'esx' then
         return false
     end

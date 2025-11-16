@@ -45,8 +45,10 @@ end
 
 RegisterServerEvent('boii-mining:sv:Smelt', function(reward, amount)
     local src = source
+    if not src or src == 0 then return end
     local pData = Core.Functions.GetPlayer(src)
-    local MiningXP = pData.PlayerData.metadata[MetaDataName]
+    if not pData or not pData.PlayerData then return end
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     local recipe = findSmeltRecipeByReward(reward)
     if not recipe then return end
     -- Validate and remove inputs server-side (supports single or two-item recipes)
@@ -89,7 +91,7 @@ RegisterServerEvent('boii-mining:sv:Smelt', function(reward, amount)
             end
         else
             pData.Functions.AddItem(reward, amount)
-            TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[reward], 'add', amount)
+            TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[reward], 'add', amount)
             if Config.XP.Use then
                 pData.Functions.SetMetaData(MetaDataName, (MiningXP + math.random(10, 15))) -- Edit xp reward here
                 TriggerClientEvent('boii-mining:notify', src, Language.Mining.Smelting['successxp'], 'success')
@@ -99,7 +101,7 @@ RegisterServerEvent('boii-mining:sv:Smelt', function(reward, amount)
         end
     else
         pData.Functions.AddItem(reward, amount)
-        TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[reward], 'add', amount)
+        TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[reward], 'add', amount)
         if Config.XP.Use then
             pData.Functions.SetMetaData(MetaDataName, (MiningXP + math.random(10, 15))) -- Edit xp reward here
             TriggerClientEvent('boii-mining:notify', src, Language.Mining.Smelting['successxp'], 'success')

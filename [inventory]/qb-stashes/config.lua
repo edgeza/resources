@@ -1,6 +1,6 @@
 Config = {}
 
-Config.PoliceOpen = true -- Can Police open all stashes
+Config.PoliceOpen = false -- Can Police open all stashes
 
 Config.Stashes = {
     -- ["geminimansion"] = {
@@ -23,7 +23,7 @@ Config.Stashes = {
         jobrequired = true,
         gangrequired = false,
         gang = "",
-        job = "mechanic",
+        job = "palmcoast",
         -- cid = {"MAH44286"},  
         stashSize = 10000000,
         stashSlots = 60, 
@@ -35,7 +35,7 @@ Config.Stashes = {
         jobrequired = true,
         gangrequired = false,
         gang = "",
-        job = "mechanic",
+        job = "palmcoast",
         -- cid = {"MAH44286"},  
         stashSize = 10000000,
         stashSlots = 60, 
@@ -369,6 +369,18 @@ Config.Stashes = {
         },
         stashSize = 3000000,
         stashSlots = 200, 
+    },
+    ["evidence_stash"] = {
+        stashName = "Evidence",
+        coords = vec4(831.74, -1304.12, 19.85, 1.7),
+        requirecid = false,
+        jobrequired = true,
+        gangrequired = false,
+        gang = "",
+        job = "police",
+        grade = "", 
+        stashSize = 100000000,
+        stashSlots = 500, 
     },
     ["catcafe_extra"] = {
         stashName = "CatCafe Extra",

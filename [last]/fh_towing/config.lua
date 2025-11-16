@@ -9,7 +9,7 @@ Config.ClassBlacklist =  {10, 11, 14, 15, 16, 20, 21}       -- Vehicle classes t
 Config.ControlDistance = 1.5                                -- From how far away the tow truck should be controlable
 Config.FlatbedAnimDict = 'amb@prop_human_atm@male@idle_a'   -- Animation directory for using the flatbed controls 
 Config.FlatbedAnimClip = 'idle_b'                           -- Animation clip for using the flatbed controls
-Config.MaxDistance = 2.0            -- How far away the vehicle to be towed can be from the flatbed's unload position.
+Config.MaxDistance = 3.0            -- How far away the vehicle to be towed can be from the flatbed's unload position.
 Config.MotorOn = false              -- If the engine of the flatbed truck must be running to use it
 Config.CheckSpace = 0.10            -- How much space must be behind the tow truck to unload. Set it to false to not check for space (will delete the colliding entities). 
 Config.AdjustmentSteps = 0.05       -- How fast or precisely you want to align the vehicle on the flatbed
@@ -59,6 +59,26 @@ Config.WrongColor = '#eb584d'       -- Here you can edit the color for the wrong
 Config.TruckList = {
     {   
         model = 'flatbed',                          -- The model of the towtruck or trailer
+        trailer = false,                            -- If true overrides Config.MotorOn because trailers dont have engines
+        extraBlacklist = {},                        -- If there should be any Vehicle classes that cant be loaded whit this flatbed/trailer
+        controlPos = vec3(-1.6141937,-1.978680,-0.079155),  -- The offset of the vehicle from where the flatbed should be controlled
+        attachPos = vec3(0.132239, -2.432629, 1.424534),        -- The inital position of the vehicle on the flatbed
+        unloadPos = vec3(-0.267122, -6.514886, -0.104604), -- The position where the car will be placed after unloading it
+        initialTilt = 0.0,                          -- The initial tilt when the vehicle ist first brought up on the flatbed
+        bone = 'chassis_dummy',                         -- The vehicle bone from where the offset will be calculated
+    },
+    {   
+        model = 'caracaran',                          -- The model of the towtruck or trailer
+        trailer = false,                            -- If true overrides Config.MotorOn because trailers dont have engines
+        extraBlacklist = {},                        -- If there should be any Vehicle classes that cant be loaded whit this flatbed/trailer
+        controlPos = vec3(-1.6141937,-1.978680,-0.079155),  -- The offset of the vehicle from where the flatbed should be controlled
+        attachPos = vec3(0.132239, -2.432629, 1.424534),        -- The inital position of the vehicle on the flatbed
+        unloadPos = vec3(-0.267122, -6.514886, -0.104604), -- The position where the car will be placed after unloading it
+        initialTilt = 0.0,                          -- The initial tilt when the vehicle ist first brought up on the flatbed
+        bone = 'chassis_dummy',                         -- The vehicle bone from where the offset will be calculated
+    },
+    {   
+        model = 'everonb',                          -- The model of the towtruck or trailer
         trailer = false,                            -- If true overrides Config.MotorOn because trailers dont have engines
         extraBlacklist = {},                        -- If there should be any Vehicle classes that cant be loaded whit this flatbed/trailer
         controlPos = vec3(-1.6141937,-1.978680,-0.079155),  -- The offset of the vehicle from where the flatbed should be controlled

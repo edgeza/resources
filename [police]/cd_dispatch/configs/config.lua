@@ -43,7 +43,7 @@ Config.FrameworkTriggers = {
 
 
 Config.UsingOneSync = true --Do you use OneSync legacy or infinity?
-Config.UseFrameworkDutySystem = false --Do you want to use your frameworks (esx/qbcore) built-in duty system?
+Config.UseFrameworkDutySystem = true --Do you want to use your frameworks (esx/qbcore) built-in duty system?
 Config.Debug = false --To enable debug prints.
 Config.EnableTestCommand = false --The test command is 'dispatchtest'.
 

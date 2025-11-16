@@ -31,7 +31,7 @@ Config.Locale = 'en' -- 'en', 'fr', 'de', 'es', 'it', 'pt', 'tr' -- Language
 Config.Debug = {
     PolyZone = false, --Shows Red Boxes for Target
     DrawSprite = true, --Show White Circles above the target locations
-    Prints = true, --Prints debug messages in console
+    Prints = false, --Prints debug messages in console
 }
 --gabz: https://fivem.gabzv.com/
 
@@ -112,8 +112,8 @@ Config.MaxStock = 99999999
 Config.IceMachine = {
     ice_itemname = 'cc_icecubes',
     water_itemname = 'cc_waterbottle',
-    WaitTime = 250,
-    MaxIce = 25
+    WaitTime = 1,
+    MaxIce = 50
 }
 
 Config.MaxBillAmount = 100000

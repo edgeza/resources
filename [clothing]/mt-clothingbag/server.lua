@@ -12,5 +12,7 @@ RegisterNetEvent('mt-clothingbag:server:removeBag', function()
     local Player = QBCore.Functions.GetPlayer(src)
     
     Player.Functions.RemoveItem('clothing_bag', 1)
-    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['clothing_bag'], "remove")
+    if QBCore.Shared and QBCore.Shared.Items and QBCore.Shared.Items['clothing_bag'] then
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['clothing_bag'], "remove")
+    end
 end)

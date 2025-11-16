@@ -8,11 +8,11 @@ this_is_a_map 'yes'
 
 replace_level_meta 'gta5'
 
-data_file 'AUDIO_GAMEDATA' 'audio/[medical-center]/fm_hsp_doors_sounds_game.dat'
+data_file 'AUDIO_GAMEDATA' 'audio/[doors]/fm_doors_sounds_game.dat'
 
 files { 
     'gta5.meta',
     'doortuning.ymt',
-    'audio/[medical-center]/fm_hsp_doors_sounds_game.dat151.rel',
+    'audio/[doors]/fm_doors_sounds_game.dat151.rel',
 }
 dependency '/assetpacks'

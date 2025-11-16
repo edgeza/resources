@@ -36,11 +36,13 @@ if lib.context == 'server' then
     ---@diagnostic disable-next-line: duplicate-set-field
     function player:constructor(source)
         self.player = QBCore.Functions.GetPlayer(source) --[[@as table]]
+        self.source = source
     end
 
     ---@diagnostic disable-next-line: duplicate-set-field
-    function player:isAdmin(source)
-        return IsPlayerAceAllowed(source --[[@as string]], 'admin')
+    function player:isAdmin()
+        if not self.source then return false end
+        return IsPlayerAceAllowed(self.source, 'admin')
     end
     
     ---@diagnostic disable-next-line: duplicate-set-field
@@ -90,18 +92,46 @@ if lib.context == 'server' then
         return ('%s %s'):format(charinfo.firstname, charinfo.lastname)
     end
 
+    local function ensurePlayerLoaded(source)
+        local src = tonumber(source)
+        if not src then return end
+
+        local existing = Core.Player[src]
+        if existing and existing.player then
+            return existing
+        end
+
+        local newPlayer = player:new(src)
+        if not newPlayer.player then
+            return nil
+        end
+
+        Core.Player[src] = newPlayer
+        SetTimeout(0, function()
+            TriggerClientEvent('an-engineswap:client:updatePlayerJob', src, newPlayer:getJob())
+        end)
+
+        return newPlayer
+    end
+
+    Core.GetOrCreatePlayer = ensurePlayerLoaded
+
     RegisterNetEvent('QBCore:Server:OnPlayerLoaded', function()
-        Core.Player[source --[[@as string]]] = player:new(source)
+        ensurePlayerLoaded(source)
+    end)
+
+    RegisterNetEvent('QBCore:Server:OnPlayerUnload', function()
+        Core.Player[source] = nil
+    end)
+
+    AddEventHandler('playerDropped', function()
+        Core.Player[source] = nil
     end)
 
     lib.addCommand('loadplayer', {
         help = 'Load player',
         restricted = 'group.admin'
     }, function(source, args, raw)
-        if not Core.Player[source] then
-            Core.Player[source] = player:new(source)
-            Wait(200)
-            TriggerClientEvent('an-engineswap:client:updatePlayerJob', source, Core.Player[source]:getJob())
-        end
+        ensurePlayerLoaded(source)
     end)
 end

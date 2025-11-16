@@ -486,7 +486,7 @@ Config.JobVehicles = {
         ['police'] = { --If you choose to add more tables here for more jobs, they must be the jobs name, not the label.
         --MISSION ROW PD
             [1] = {coords = vec3(844.12, -1334.6, 26.1), spawn_coords = vec4(853.58, -1332.39, 26.12, 60.87), distance = 5, garage_type = 'car', method = 'regular'}, --Mission Row PD (cars)
-            [2] = {coords = vec3(837.83, -1408.09, 26.13), spawn_coords = vec4(837.83, -1408.09, 26.13, 309.39), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
+            [2] = {coords = vec3(824.6, -1386.75, 38.18), spawn_coords = vec4(824.58, -1386.81, 38.18, 86.77), distance = 5, garage_type = 'air', method = 'regular'}, --Mission Row PD (helipad)
             
             --SANDY PD
             [3] = {coords = vector3(1868.33, 3686.05, 33.78), spawn_coords = vector4(1872.68, 3687.19, 33.65, 211.34), distance = 10, garage_type = 'car', method = 'regular'}, --Sandy PD (cars)
@@ -504,6 +504,7 @@ Config.JobVehicles = {
             [13] = {coords = vector3(-285.38, 6626.74, 7.12), spawn_coords = vector4(-300.52, 6625.1, -0.65, 43.15), distance = 20, garage_type = 'boat', method = 'regular'}, --Sandy Lake (boats)
             [14] = {coords = vector3(467.48, -3389.73, 6.07), spawn_coords = vector4(456.72, -3385.81, 0.12, 189.92), distance = 20, garage_type = 'boat', method = 'regular'}, --Sandy Lake (boats)
             [15] = {coords = vector3(-444.17, -2421.32, 6.04), spawn_coords = vector4(-424.33, -2394.89, 0.51, 329.24), distance = 20, garage_type = 'boat', method = 'regular'}, --Sandy Lake (boats)
+
             --Davis PD
             [16] = {coords = vector3(350.34, -1606.96, 29.28), spawn_coords = vector4(351.89, -1605.09, 29.28, 321.04), distance = 5, garage_type = 'car', method = 'regular'}, --Davis PD (cars)
             [17] = {coords = vector3(384.36, -1619.16, 38.03), spawn_coords = vector4(386.32, -1620.79, 38.03, 51.42), distance = 5, garage_type = 'air', method = 'regular'}, --Davis PD (helipad)
@@ -519,7 +520,7 @@ Config.JobVehicles = {
 
         },
         ['towing'] = {
-            [1] = {coords = vector3(482.51, -1338.29, 29.29), spawn_coords = vector4(490.01, -1341.55, 29.23, 359.5), distance = 5, garage_type = 'car', method = 'regular'},
+            [1] = {coords = vector3(482.51, -1338.29, 29.29), spawn_coords = vector4(490.01, -1341.55, 29.23, 359.5), distance = 5, garage_type = 'car', method = 'regular'},       
         },
         ['ambulance'] = {
             [1] = {coords = vector3(329.53, -574.45, 28.72),    spawn_coords = vector4(327.41, -573.86, 28.72, 330.00),     distance = 5,   garage_type = 'car',    method = 'regular'},
@@ -645,28 +646,7 @@ Config.JobVehicles = {
             [41] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 12, garage_type = 'air', model = `mh6`},
             [42] = {job = 'police', spawn_max = true, plate = 'PD', job_grade = 10, garage_type = 'air', model = `riothuey`},
 
-            --SWAT
-            [1] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `BearcatRBstairs`},
-            [2] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `swatcarrier`},
-            [3] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `gurkharb`},
-            [4] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `rookrb`},
-            [5] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `mraprb`},
-
-            --AGU
-            [1] = {job = 'agu', spawn_max = true, plate = 'AGU', job_grade = 0, garage_type = 'car', model = `dlballer7`},
-            [2] = {job = 'agu', spawn_max = true, plate = 'AGU', job_grade = 0, garage_type = 'car', model = `polsentinel`},
-
-             --Detectives
-            [1] = {job = 'police', spawn_max = true, plate = 'XY', job_grade = 1, garage_type = 'car', model = `dlgranger2`},
-            [2] = {job = 'police', spawn_max = true, plate = 'XY', job_grade = 2, garage_type = 'car', model = `dlbuffalo4`},
-            [3] = {job = 'police', spawn_max = true, plate = 'XY', job_grade = 3, garage_type = 'car', model = `dlcinq`},
-
-             --Aviation 
-            [1] = {job = 'aviation', spawn_max = true, plate = 'AVIATION', job_grade = 0, garage_type = 'car', model = `dlcade3`},
-        
-             --TRAFFIC
-            [1] = {job = 'police', spawn_max = true, plate = 'TRAFFIC', job_grade = 0, garage_type = 'car', model = `dlcomni`},
-            [15] = {job = 'police', spawn_max = true, plate = 'TRAFFIC', job_grade = 0, garage_type = 'car', model = `dlballer8`},
+            
         },
         
         ['ambulance'] = {
@@ -690,6 +670,8 @@ Config.JobVehicles = {
         ['towing'] = {
             [1] = {job = 'towing', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `caracaran`},
             [2] = {job = 'towing', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `everonb`},
+            [3] = {job = 'flatbed', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `everonb`},
+
         },
         ['bennies'] = {
             [1] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `Shifter_kart`},
@@ -723,6 +705,29 @@ Config.JobVehicles = {
         ['catcafe'] = {
             [1] = {job = 'catcafe', spawn_max = false, plate = 'CATCAFE', job_grade = 1, garage_type = 'car', model = `vancat`},
         },
+        ['swat'] = {
+            [1] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `BearcatRBstairs`},
+            [2] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `swatcarrier`},
+            [3] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `gurkharb`},
+            [4] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `rookrb`},
+            [5] = {job = 'swat', spawn_max = true, plate = 'SWAT', job_grade = 0, garage_type = 'car', model = `mraprb`},
+        },
+        ['agu'] = {
+            [1] = {job = 'agu', spawn_max = true, plate = 'AGU', job_grade = 0, garage_type = 'car', model = `dlballer7`},
+            [2] = {job = 'agu', spawn_max = true, plate = 'AGU', job_grade = 0, garage_type = 'car', model = `polsentinel`},
+        },
+        ['detective'] = {
+            [1] = {job = 'detective', spawn_max = true, plate = 'XY', job_grade = 1, garage_type = 'car', model = `dlgranger2`},
+            [2] = {job = 'detective', spawn_max = true, plate = 'XY', job_grade = 2, garage_type = 'car', model = `dlbuffalo4`},
+            [3] = {job = 'detective', spawn_max = true, plate = 'XY', job_grade = 3, garage_type = 'car', model = `dlcinq`},
+        },
+        ['avation'] = {
+            [1] = {job = 'aviation', spawn_max = true, plate = 'AVIATION', job_grade = 0, garage_type = 'car', model = `dlcade3`},
+        },
+        ['traffic'] = {
+            [1] = {job = 'police', spawn_max = true, plate = 'TRAFFIC', job_grade = 0, garage_type = 'car', model = `dlcomni`},
+            [2] = {job = 'police', spawn_max = true, plate = 'TRAFFIC', job_grade = 0, garage_type = 'car', model = `dlballer8`},
+        },    
     }
 }
 
@@ -922,12 +927,12 @@ Config.Locations = {
         Garage_ID = 'Formula 1',
         Type = 'car',
         Dist = 10,
-        x_1 = 4405, y_1 = 7864.03, z_1 = 89.2,
+        x_1 = 4405.0, y_1 = 7864.03, z_1 = 89.2,
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
         x_2 = 4487.82, y_2 = 7845.72, z_2 = 88.13, h_2 = 6.49,
-        EnableBlip = true,
+        EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
     },
@@ -1448,19 +1453,6 @@ Config.Locations = {
         ShellType = '10cargarage_shell',
     },
     {
-        Garage_ID = 'Aztecas',
-        Type = 'car',
-        Dist = 6,
-        x_1 = 1001.02, y_1 = -2509.91, z_1 = 28.3,
-        EventName1 = 'cd_garage:QuickChoose',
-        EventName2 = 'cd_garage:EnterGarage',
-        Name = UIText,
-        x_2 = 1001.02, y_2 = -2509.91, z_2 = 28.3, h_2 = 33.73,
-        EnableBlip = true,
-        JobRestricted = nil,
-        ShellType = '10cargarage_shell',
-    },
-    {
         Garage_ID = 'Paleto Farm',
         Type = 'car',
         Dist = 2,
@@ -1476,15 +1468,26 @@ Config.Locations = {
     {
         Garage_ID = 'Disciples',
         Type = 'car',
-        Dist = 2,
-        x_1 = -104.63, y_1 = 821.49, z_1 = 235.73,
+        Dist = 2, 
+        x_1 = -1695.46, y_1 = 5207.85, z_1 = 4.78,  
         EventName1 = 'cd_garage:QuickChoose',
         EventName2 = 'cd_garage:EnterGarage',
         Name = UIText,
-        x_2 = -104.63, y_2 = 821.49, z_2 = 235.73, h_2 = 10.27,
+        x_2 = -1695.46, y_2 = 5207.85, z_2 = 4.78, h_2 = 206.26, 
         EnableBlip = false,
         JobRestricted = nil,
         ShellType = '10cargarage_shell',
+    },
+    {   
+        Garage_ID = 'Disciples Air',
+        Type = 'air',
+        Dist = 3,
+        x_1 = -1679.63, y_1 = 5159.85, z_1 = 6.0,
+        EventName1 = 'cd_garage:QuickChoose',
+        Name = '<b>'..L('hangar')..'</b></p>'..L('open_garage_4'),
+        x_2 = -1679.63, y_2 = 5159.85, z_2 = 6.0, h_2 = 341.16,
+        EnableBlip = false,
+        JobRestricted = nil,
     },
     {
         Garage_ID = 'UWU Cafe',
@@ -1567,6 +1570,17 @@ Config.Locations = {
         x_2 = -811.54, y_2 = -1509.42, z_2 = -0.47, h_2 = 130.14,
         EnableBlip = true,
         JobRestricted = nil,
+    },
+    {   --BEACH CLUB BOAT
+    Garage_ID = 'A', --The very first boat garage's `garage_id` must be the same as the default value of the garage_id in the database as when a vehicle is purchased it gets sent to this garage.
+    Type = 'boat',
+    Dist = 10,
+    x_1 = -1501.02, y_1 = -1435.67, z_1 = 0.46, 
+    EventName1 = 'cd_garage:QuickChoose',
+    Name = '<b>'..L('harbor')..'</b></p>'..L('open_garage_3'),
+    x_2 = -1525.96, y_2 = -1443.0, z_2 = -0.82, h_2 = 120.73,
+    EnableBlip = true,
+    JobRestricted = nil,
     },
 
     {   --THIS IS AN AIR GARAGE, YOU CAN REMOVE OR ADD NEW AIR GARAGES IF YOU WISH.

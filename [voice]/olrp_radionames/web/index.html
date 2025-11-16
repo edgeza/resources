@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>olrp-radionames</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --radio-color-r: 255;
+            --radio-color-g: 50;
+            --radio-color-b: 50;
+            --radio-scale: 1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow: hidden;
+            background: transparent !important;
+            font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Main Container with 3D Perspective - Draggable and Resizable */
+        .radio-list-container {
+            position: absolute;
+            top: 50%;
+            right: 2%;
+            transform: translateY(-50%) scale(var(--radio-scale));
+            transform-origin: top right;
+            perspective: 3000px;
+            perspective-origin: center center;
+            z-index: 1000;
+            display: none;
+            cursor: move;
+            user-select: none;
+        }
+
+        .radio-list-container.dragging {
+            cursor: grabbing;
+        }
+
+        /* Resize Handle */
+        .resize-handle {
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.8);
+            border: 3px solid rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 1);
+            border-radius: 6px;
+            cursor: nwse-resize;
+            z-index: 1001;
+            display: none;
+            box-shadow: 0 0 15px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.8);
+        }
+        
+        .resize-handle::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 12px 12px;
+            border-color: transparent transparent rgba(255, 255, 255, 0.9) transparent;
+        }
+
+        .radio-list-container.editing .resize-handle {
+            display: block;
+        }
+
+        .radio-list-container.editing {
+            cursor: default;
+            pointer-events: auto !important;
+        }
+        
+        .radio-list-container.editing .radio-list-card {
+            pointer-events: auto !important;
+            cursor: move;
+        }
+        
+        .radio-list-container.editing .resize-handle {
+            pointer-events: auto !important;
+            cursor: nwse-resize;
+        }
+
+        /* 3D Card Container */
+        .radio-list-card {
+            transform-style: preserve-3d;
+            position: relative;
+            animation: cardEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.5));
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateX(150px) translateZ(-500px) rotateY(45deg) scale(0.7);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) translateZ(0) rotateY(0deg) scale(1);
+            }
+        }
+
+        /* 3D Header with Extruded Text */
+        .radio-list-header {
+            position: relative;
+            padding: 16px 24px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, 
+                rgba(20, 20, 30, 0.95) 0%,
+                rgba(30, 25, 45, 0.95) 50%,
+                rgba(20, 20, 30, 0.95) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 2px solid rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5);
+            border-radius: 16px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.3) inset,
+                0 0 40px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4);
+            transform: translateZ(30px) rotateX(-5deg);
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        .radio-list-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.15),
+                transparent);
+            animation: shimmer 8s infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .radio-list-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.08) 0%,
+                transparent 70%);
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.5; }
+        }
+
+        /* 3D Extruded Text Effect */
+        .header-text {
+            position: relative;
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            text-shadow: 
+                0 0 8px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.6),
+                0 0 15px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4),
+                0 2px 0 rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.3),
+                0 4px 0 rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.2);
+            transform: translateZ(20px);
+            z-index: 1;
+        }
+
+        /* Channel Frequency Badge */
+        .channel-badge {
+            display: inline-block;
+            margin-left: 12px;
+            padding: 4px 10px;
+            background: linear-gradient(135deg, 
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4),
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4));
+            border: 1px solid rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.6);
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            transform: translateZ(15px);
+            box-shadow: 
+                0 0 15px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5),
+                inset 0 0 10px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.3);
+        }
+
+        /* Player List Container */
+        .player-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transform-style: preserve-3d;
+        }
+
+        /* 3D Player Item */
+        .radio-list-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, 
+                rgba(15, 15, 25, 0.9) 0%,
+                rgba(25, 20, 35, 0.9) 50%,
+                rgba(15, 15, 25, 0.9) 100%);
+            backdrop-filter: blur(15px) saturate(180%);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateZ(0) rotateX(0deg);
+            transform-style: preserve-3d;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        }
+
+        .radio-list-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent);
+            transition: left 0.5s;
+        }
+
+        .radio-list-item:hover {
+            transform: translateX(-8px) translateZ(20px) rotateY(-3deg) rotateX(2deg);
+            border-color: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.7);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4),
+                0 0 0 1px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4) inset;
+        }
+
+        .radio-list-item:hover::before {
+            left: 100%;
+        }
+
+        /* Player Name with 3D Effect */
+        .player-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 12px;
+            font-weight: 600;
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.5),
+                0 0 8px rgba(255, 255, 255, 0.1);
+            transform: translateZ(10px);
+            position: relative;
+        }
+
+        /* Server ID Badge */
+        .server-id {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 24px;
+            padding: 0 8px;
+            background: linear-gradient(135deg, 
+                rgba(150, 50, 50, 0.4),
+                rgba(200, 50, 50, 0.4));
+            border: 1px solid rgba(255, 100, 100, 0.5);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 220, 220, 1);
+            transform: translateZ(15px);
+            box-shadow: 
+                0 0 10px rgba(200, 50, 50, 0.4),
+                inset 0 0 8px rgba(255, 100, 100, 0.3);
+            margin-right: 8px;
+        }
+
+        /* Talking State - Visual Indicator Only (No Expansion) */
+        .radio-list-item.talking {
+            background: linear-gradient(135deg, 
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.3) 0%,
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.35) 50%,
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.3) 100%);
+            border-color: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.9);
+            color: #ffffff;
+            transform: translateZ(0);
+            box-shadow: 
+                0 4px 20px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5),
+                0 0 30px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4),
+                0 0 0 2px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.6) inset;
+            animation: talkingGlow 1.2s ease-in-out infinite;
+        }
+
+        @keyframes talkingGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 4px 20px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5),
+                    0 0 30px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4),
+                    0 0 0 2px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.6) inset;
+            }
+            50% {
+                box-shadow: 
+                    0 4px 20px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.7),
+                    0 0 40px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.6),
+                    0 0 0 2px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.8) inset;
+            }
+        }
+
+        .radio-list-item.talking .player-name {
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 1),
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.6),
+                0 0 40px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.9),
+                0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: nameGlow 1.2s ease-in-out infinite;
+        }
+
+        @keyframes nameGlow {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px rgba(255, 255, 255, 1),
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 30px rgba(255, 255, 255, 0.6),
+                    0 0 40px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.9),
+                    0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            50% {
+                text-shadow: 
+                    0 0 15px rgba(255, 255, 255, 1),
+                    0 0 25px rgba(255, 255, 255, 0.9),
+                    0 0 35px rgba(255, 255, 255, 0.7),
+                    0 0 50px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 1),
+                    0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        /* Talking Indicator */
+        .talking-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 8px;
+            padding: 4px 8px;
+            background: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4);
+            border: 1px solid rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.7);
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateZ(20px);
+            animation: indicatorPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes indicatorPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .talking-indicator::before {
+            content: '●';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: rgb(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b));
+            border-radius: 50%;
+            box-shadow: 
+                0 0 10px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 1),
+                0 0 20px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.8);
+            animation: dotPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        /* Self Indicator */
+        .self-indicator {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 8px;
+            padding: 4px 10px;
+            background: linear-gradient(135deg, 
+                rgba(255, 150, 150, 0.4),
+                rgba(255, 200, 200, 0.4));
+            border: 1px solid rgba(255, 100, 100, 0.7);
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255, 240, 240, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateZ(15px);
+            box-shadow: 
+                0 0 15px rgba(255, 100, 100, 0.5),
+                inset 0 0 8px rgba(255, 150, 150, 0.3);
+        }
+
+        /* Background Glow Effect */
+        .radio-list-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(ellipse at center, 
+                rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.2) 0%,
+                transparent 70%);
+            border-radius: 20px;
+            z-index: -1;
+            filter: blur(30px);
+            animation: backgroundGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes backgroundGlow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Settings UI */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .settings-overlay.active {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        .settings-panel {
+            pointer-events: auto;
+            background: linear-gradient(135deg, 
+                rgba(20, 20, 30, 0.98) 0%,
+                rgba(30, 25, 45, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            min-width: 400px;
+            max-width: 500px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.3);
+        }
+
+        .settings-header {
+            font-family: 'Orbitron', monospace;
+            font-size: 24px;
+            font-weight: 900;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 0 10px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.8),
+                0 0 20px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.6);
+        }
+
+        .settings-group {
+            margin-bottom: 25px;
+        }
+
+        .settings-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .color-picker {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            background: rgb(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b));
+            box-shadow: 
+                0 0 20px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5),
+                inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="color"] {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        .size-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .size-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgb(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b));
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.8);
+        }
+
+        .size-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgb(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b));
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.8);
+        }
+
+        .size-value {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .settings-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .settings-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.6);
+            border-radius: 8px;
+            background: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.2);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .settings-btn:hover {
+            background: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.4);
+            box-shadow: 0 0 20px rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5);
+        }
+
+        .settings-btn.primary {
+            background: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.5);
+        }
+
+        .edit-mode-hint {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(var(--radio-color-r), var(--radio-color-g), var(--radio-color-b), 0.9);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .radio-list-container.editing .edit-mode-hint {
+            display: block;
+        }
+    </style>
+    <script type="text/javascript">
+        (function() {
+            // Settings Management
+            let settings = {
+                color: { r: 255, g: 50, b: 50 },
+                scale: 1,
+                position: { top: '50%', right: '2%', transform: 'translateY(-50%)' }
+            };
+
+            // Load settings from localStorage
+            function loadSettings() {
+                const saved = localStorage.getItem('olrp_radionames_settings');
+                if (saved) {
+                    try {
+                        settings = JSON.parse(saved);
+                        applySettings();
+                    } catch (e) {
+                        console.error('Failed to load settings:', e);
+                    }
+                }
+            }
+
+            // Save settings to localStorage
+            function saveSettings() {
+                localStorage.setItem('olrp_radionames_settings', JSON.stringify(settings));
+            }
+
+            // Apply settings to UI
+            function applySettings() {
+                const root = document.documentElement;
+                root.style.setProperty('--radio-color-r', settings.color.r);
+                root.style.setProperty('--radio-color-g', settings.color.g);
+                root.style.setProperty('--radio-color-b', settings.color.b);
+                root.style.setProperty('--radio-scale', settings.scale);
+                
+                const container = document.getElementById('radio-list');
+                if (container && settings.position) {
+                    container.style.top = settings.position.top;
+                    container.style.right = settings.position.right;
+                    container.style.left = settings.position.left;
+                    container.style.bottom = settings.position.bottom;
+                    container.style.transform = settings.position.transform || 'translateY(-50%) scale(var(--radio-scale))';
+                }
+            }
+
+            // Get parent resource name helper
+            const nativeGetParentResourceName = typeof window.GetParentResourceName === 'function'
+                ? window.GetParentResourceName.bind(window)
+                : null;
+
+            function GetParentResourceName() {
+                if (nativeGetParentResourceName) {
+                    try {
+                        return nativeGetParentResourceName();
+                    } catch (e) {}
+                }
+
+                try {
+                    const hostname = window.location.hostname;
+                    if (hostname) {
+                        if (hostname.startsWith('cfx-nui-')) {
+                            return hostname.replace('cfx-nui-', '');
+                        }
+                        if (hostname !== 'nui-game') {
+                            return hostname.split('.')[0];
+                        }
+                    }
+                } catch (e) {}
+
+                return 'olrp_radionames';
+            }
+            
+            function closeSettingsUI() {
+                const overlay = document.getElementById('settings-overlay');
+                const container = document.getElementById('radio-list');
+                
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+                if (container) {
+                    container.classList.remove('editing');
+                    container.style.zIndex = '';
+                    container.style.opacity = '';
+                }
+                
+                const resourceName = GetParentResourceName();
+                fetch(`https://${resourceName}/close`, {
+                    method: 'POST',
+                    body: '{}'
+                }).catch(() => {});
+            }
+            
+            window.closeSettingsUI = closeSettingsUI;
+            
+            // Initialize settings on load
+            window.addEventListener('DOMContentLoaded', function() {
+                loadSettings();
+                applySettings();
+            });
+            
+            // Also apply on immediate load (in case DOMContentLoaded already fired)
+            loadSettings();
+            setTimeout(applySettings, 100);
+
+            // Drag functionality
+            let isDragging = false;
+            let isResizing = false;
+            let dragStartX = 0;
+            let dragStartY = 0;
+            let resizeStartX = 0;
+            let resizeStartY = 0;
+            let initialScale = 1;
+
+            // Start drag
+            function startDrag(e) {
+                const container = document.getElementById('radio-list');
+                if (!container || !container.classList.contains('editing')) return false;
+                
+                // Don't start drag if clicking on resize handle or settings
+                if (e.target.closest('.resize-handle') || e.target.closest('.settings-overlay') || e.target.closest('.settings-panel')) return false;
+                
+                isDragging = true;
+                container.classList.add('dragging');
+                
+                const rect = container.getBoundingClientRect();
+                dragStartX = e.clientX - rect.left;
+                dragStartY = e.clientY - rect.top;
+                
+                return true;
+            }
+
+            // On drag
+            function onDrag(e) {
+                if (!isDragging) return;
+                
+                const container = document.getElementById('radio-list');
+                if (!container) {
+                    isDragging = false;
+                    return;
+                }
+                
+                const x = e.clientX - dragStartX;
+                const y = e.clientY - dragStartY;
+                
+                // Keep within viewport bounds
+                const maxX = window.innerWidth - 50;
+                const maxY = window.innerHeight - 50;
+                const boundedX = Math.max(0, Math.min(x, maxX));
+                const boundedY = Math.max(0, Math.min(y, maxY));
+                
+                container.style.left = boundedX + 'px';
+                container.style.top = boundedY + 'px';
+                container.style.right = 'auto';
+                container.style.bottom = 'auto';
+                container.style.transform = 'scale(var(--radio-scale))';
+                
+                e.preventDefault();
+            }
+
+            // Stop drag
+            function stopDrag() {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                const container = document.getElementById('radio-list');
+                if (container) {
+                    container.classList.remove('dragging');
+                    
+                    // Save position
+                    settings.position = {
+                        top: container.style.top,
+                        left: container.style.left,
+                        right: 'auto',
+                        bottom: 'auto',
+                        transform: container.style.transform
+                    };
+                    saveSettings();
+                }
+            }
+
+            // Start resize
+            function startResize(e) {
+                const container = document.getElementById('radio-list');
+                if (!container || !container.classList.contains('editing')) return false;
+                
+                isResizing = true;
+                resizeStartX = e.clientX;
+                resizeStartY = e.clientY;
+                initialScale = parseFloat(settings.scale) || 1;
+                
+                return true;
+            }
+
+            // On resize
+            function onResize(e) {
+                if (!isResizing) return;
+                
+                const deltaX = e.clientX - resizeStartX;
+                const deltaY = e.clientY - resizeStartY;
+                
+                // Calculate scale change based on diagonal movement
+                const diagonalDelta = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const scaleDelta = diagonalDelta / 400; // Sensitivity
+                // Drag down-right = larger, drag up-left = smaller
+                const direction = (deltaX > 0 && deltaY > 0) ? 1 : ((deltaX < 0 && deltaY < 0) ? -1 : 0);
+                const newScale = Math.max(0.5, Math.min(2.0, initialScale + (direction * scaleDelta)));
+                
+                settings.scale = newScale;
+                applySettings();
+                
+                // Update slider if visible
+                const sizeSlider = document.getElementById('size-slider');
+                const sizeValue = document.getElementById('size-value');
+                if (sizeSlider) sizeSlider.value = newScale;
+                if (sizeValue) sizeValue.textContent = Math.round(newScale * 100) + '%';
+                
+                e.preventDefault();
+            }
+
+            // Stop resize
+            function stopResize() {
+                if (!isResizing) return;
+                isResizing = false;
+                saveSettings();
+            }
+
+            // Event listeners - use both capture and bubble phases
+            function handleMouseDown(e) {
+                const container = document.getElementById('radio-list');
+                if (!container) return;
+                
+                const resizeHandle = document.querySelector('.resize-handle');
+                
+                // Check for resize handle first
+                if (resizeHandle && (e.target === resizeHandle || e.target.closest('.resize-handle'))) {
+                    if (startResize(e)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    return;
+                }
+                
+                // Check for drag
+                if (container.classList.contains('editing')) {
+                    const card = container.querySelector('.radio-list-card');
+                    // Don't drag if clicking on settings overlay
+                    if (!e.target.closest('.settings-overlay') && card && (e.target.closest('.radio-list-card') || e.target === container)) {
+                        if (startDrag(e)) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    }
+                }
+            }
+            
+            function handleMouseMove(e) {
+                if (isDragging) {
+                    onDrag(e);
+                    e.preventDefault();
+                }
+                if (isResizing) {
+                    onResize(e);
+                    e.preventDefault();
+                }
+            }
+            
+            function handleMouseUp(e) {
+                if (isDragging || isResizing) {
+                    stopDrag();
+                    stopResize();
+                    e.preventDefault();
+                }
+            }
+
+            // Add event listeners with capture phase
+            document.addEventListener('mousedown', handleMouseDown, true);
+            document.addEventListener('mousemove', handleMouseMove, true);
+            document.addEventListener('mouseup', handleMouseUp, true);
+            
+            // Also add to window for better capture
+            window.addEventListener('mousemove', handleMouseMove, true);
+            window.addEventListener('mouseup', handleMouseUp, true);
+            
+            // Handle mouse leave
+            document.addEventListener('mouseleave', function() {
+                stopDrag();
+                stopResize();
+            });
+            
+            // Handle window blur (when clicking outside)
+            window.addEventListener('blur', function() {
+                stopDrag();
+                stopResize();
+            });
+
+            // Settings UI
+            let currentChannel = null;
+            let currentChannelName = null;
+            let playerServerIds = {};
+
+            window.addEventListener("message", function(event) {
+                var item = event.data;
+
+                // Open settings
+                if (item.openSettings) {
+                    const overlay = document.getElementById('settings-overlay');
+                    const container = document.getElementById('radio-list');
+                    if (overlay) {
+                        overlay.classList.add('active');
+                        
+                        // Make radio list visible behind overlay
+                        if (container) {
+                            container.style.zIndex = '10001';
+                            container.style.opacity = '0.95';
+                        }
+                        
+                        // Set current values
+                        const colorInput = document.getElementById('color-picker-input');
+                        const sizeSlider = document.getElementById('size-slider');
+                        const sizeValue = document.getElementById('size-value');
+                        
+                        if (colorInput) {
+                            const rgb = settings.color || { r: 255, g: 50, b: 50 };
+                            colorInput.value = `#${[rgb.r, rgb.g, rgb.b].map(x => {
+                                const hex = x.toString(16);
+                                return hex.length === 1 ? '0' + hex : hex;
+                            }).join('')}`;
+                        }
+                        
+                        if (sizeSlider) {
+                            sizeSlider.value = settings.scale || 1;
+                        }
+                        
+                        if (sizeValue) {
+                            sizeValue.textContent = Math.round((settings.scale || 1) * 100) + '%';
+                        }
+                    }
+                }
+
+                if (item.closeSettings) {
+                    const overlay = document.getElementById('settings-overlay');
+                    const container = document.getElementById('radio-list');
+                    if (overlay) overlay.classList.remove('active');
+                    if (container) {
+                        container.classList.remove('editing');
+                        container.style.zIndex = '';
+                        container.style.opacity = '';
+                    }
+                }
+
+                // Toggle edit mode
+                if (item.toggleEditMode !== undefined) {
+                    const container = document.getElementById('radio-list');
+                    if (container) {
+                        if (item.toggleEditMode) {
+                            container.classList.add('editing');
+                        } else {
+                            container.classList.remove('editing');
+                        }
+                    }
+                }
+
+                // Handle radio list updates
+                if (item.radioId != null) {
+                    let radioListElem = document.getElementById("radio-list");
+                    let card = document.getElementById("radio-list-card");
+                    let playerList = null;
+
+                    // Create card if it doesn't exist
+                    if (!card) {
+                        card = document.createElement("div");
+                        card.id = "radio-list-card";
+                        card.className = "radio-list-card";
+                        radioListElem.appendChild(card);
+                    }
+
+                    // Get or create player list
+                    playerList = card.querySelector(".player-list");
+                    if (!playerList) {
+                        playerList = document.createElement("div");
+                        playerList.className = "player-list";
+                        card.appendChild(playerList);
+                    }
+
+                    // Update header if channel changed
+                    if (item.channel && item.channel !== currentChannelName) {
+                        currentChannelName = item.channel;
+                        let header = card.querySelector(".radio-list-header");
+                        
+                        if (!header) {
+                            header = document.createElement("div");
+                            header.className = "radio-list-header";
+                            card.insertBefore(header, playerList);
+                        }
+
+                        let headerText = header.querySelector(".header-text");
+                        if (!headerText) {
+                            headerText = document.createElement("span");
+                            headerText.className = "header-text";
+                            header.appendChild(headerText);
+                        }
+
+                        let channelName = item.channel || "Radio";
+                        if (typeof channelName === 'number') {
+                            channelName = "Channel " + channelName;
+                        }
+
+                        headerText.innerHTML = channelName;
+                    }
+
+                    // Add player to list
+                    if (item.radioName != null) {
+                        let listItem = document.getElementById("radio-list-item-" + item.radioId);
+                        
+                        if (!listItem) {
+                            listItem = document.createElement("div");
+                            listItem.id = "radio-list-item-" + item.radioId;
+                            listItem.className = "radio-list-item";
+                            
+                            // Parse player name - server ID might be included in name
+                            let playerName = item.radioName;
+                            let serverId = item.radioId.toString();
+                            
+                            // Check if server ID is in the name (format: "ID) Name" or "Name (ID")
+                            let nameMatch = playerName.match(/^(\d+)\)\s*(.+)$/); // Left format: "42) John Doe"
+                            if (nameMatch) {
+                                serverId = nameMatch[1];
+                                playerName = nameMatch[2].trim();
+                            } else {
+                                nameMatch = playerName.match(/^(.+)\s*\((\d+)$/); // Right format: "John Doe (42"
+                                if (nameMatch) {
+                                    playerName = nameMatch[1].trim();
+                                    serverId = nameMatch[2];
+                                }
+                            }
+                            
+                            playerServerIds[item.radioId] = serverId;
+                            
+                            // Create player name span
+                            let nameSpan = document.createElement("span");
+                            nameSpan.className = "player-name";
+                            nameSpan.textContent = playerName;
+                            listItem.appendChild(nameSpan);
+                            
+                            // Create server ID badge
+                            let serverIdBadge = document.createElement("span");
+                            serverIdBadge.className = "server-id";
+                            serverIdBadge.textContent = serverId;
+                            listItem.appendChild(serverIdBadge);
+                            
+                            // Add self indicator if it's the current player
+                            if (item.self === true) {
+                                let selfIndicator = document.createElement("span");
+                                selfIndicator.className = "self-indicator";
+                                selfIndicator.textContent = "You";
+                                listItem.appendChild(selfIndicator);
+                            }
+                            
+                            playerList.appendChild(listItem);
+                        }
+                    } 
+                    // Update talking state
+                    else if (item.radioTalking != null) {
+                        let listItem = document.getElementById("radio-list-item-" + item.radioId);
+                        
+                        if (listItem) {
+                            if (item.radioTalking) {
+                                listItem.classList.add("talking");
+                                
+                                // Add talking indicator if it doesn't exist
+                                if (!listItem.querySelector(".talking-indicator")) {
+                                    let talkingIndicator = document.createElement("span");
+                                    talkingIndicator.className = "talking-indicator";
+                                    talkingIndicator.textContent = "Talking";
+                                    listItem.appendChild(talkingIndicator);
+                                }
+                            } else {
+                                listItem.classList.remove("talking");
+                                
+                                // Remove talking indicator
+                                let talkingIndicator = listItem.querySelector(".talking-indicator");
+                                if (talkingIndicator) {
+                                    talkingIndicator.remove();
+                                }
+                            }
+                        }
+                    } 
+                    // Remove player from list
+                    else {
+                        let listItem = document.getElementById("radio-list-item-" + item.radioId);
+                        if (listItem && listItem.parentNode) {
+                            listItem.parentNode.removeChild(listItem);
+                            delete playerServerIds[item.radioId];
+                        }
+                    }
+                }
+
+                // Clear radio list
+                if (item.clearRadioList) {
+                    let radioListElem = document.getElementById("radio-list");
+                    let card = document.getElementById("radio-list-card");
+                    
+                    if (card) {
+                        while (card.firstChild) {
+                            card.removeChild(card.firstChild);
+                        }
+                        radioListElem.removeChild(card);
+                    }
+                    
+                    currentChannel = null;
+                    currentChannelName = null;
+                    playerServerIds = {};
+                }
+                
+                // Change visibility
+                if (item.changeVisibility) {
+                    let radioListElem = document.getElementById("radio-list");
+                    if (item.visible == true) {
+                        radioListElem.style.display = "block";
+                    } else if (item.visible == false) {
+                        radioListElem.style.display = "none";
+                    }
+                }
+            });
+
+            // Settings UI handlers
+            document.addEventListener('DOMContentLoaded', function() {
+                // Color picker
+                const colorInput = document.getElementById('color-picker-input');
+                if (colorInput) {
+                    colorInput.addEventListener('input', function(e) {
+                        const hex = e.target.value;
+                        const r = parseInt(hex.substr(1, 2), 16);
+                        const g = parseInt(hex.substr(3, 2), 16);
+                        const b = parseInt(hex.substr(5, 2), 16);
+                        
+                        settings.color = { r, g, b };
+                        applySettings();
+                    });
+                }
+
+                // Size slider
+                const sizeSlider = document.getElementById('size-slider');
+                const sizeValue = document.getElementById('size-value');
+                if (sizeSlider) {
+                    sizeSlider.addEventListener('input', function(e) {
+                        settings.scale = parseFloat(e.target.value);
+                        applySettings();
+                        if (sizeValue) {
+                            sizeValue.textContent = Math.round(settings.scale * 100) + '%';
+                        }
+                    });
+                }
+
+                // Edit position button
+                const editBtn = document.getElementById('edit-position');
+                if (editBtn) {
+                    editBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const container = document.getElementById('radio-list');
+                        if (container) {
+                            const isEditing = container.classList.contains('editing');
+                            if (isEditing) {
+                                container.classList.remove('editing');
+                                editBtn.textContent = 'Edit Position';
+                                // Disable keep input when exiting edit mode
+                                fetch(`https://${GetParentResourceName()}/toggleEditMode`, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ enabled: false })
+                                }).catch(() => {});
+                            } else {
+                                container.classList.add('editing');
+                                editBtn.textContent = 'Done Editing';
+                                // Enable keep input when entering edit mode so player can drag/resize
+                                fetch(`https://${GetParentResourceName()}/toggleEditMode`, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ enabled: true })
+                                }).catch(() => {});
+                            }
+                        }
+                    });
+                }
+
+                // Save button
+                const saveBtn = document.getElementById('save-settings');
+                if (saveBtn) {
+                    saveBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        saveSettings();
+                        const resourceName = GetParentResourceName();
+                        fetch(`https://${resourceName}/settingsSaved`, { method: 'POST', body: '{}' }).catch(() => {});
+                        closeSettingsUI();
+                    });
+                }
+
+                // Close button
+                const closeBtn = document.getElementById('close-settings');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closeSettingsUI();
+                    });
+                }
+
+                // Close on overlay click (but not on panel)
+                const overlay = document.getElementById('settings-overlay');
+                if (overlay) {
+                    overlay.addEventListener('click', function(e) {
+                        if (e.target === overlay) {
+                            closeSettingsUI();
+                        }
+                    });
+                }
+                
+                window.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        const overlay = document.getElementById('settings-overlay');
+                        if (overlay && overlay.classList.contains('active')) {
+                            closeSettingsUI();
+                        }
+                    }
+                });
+                
+                // Prevent panel clicks from closing
+                const settingsPanel = document.querySelector('.settings-panel');
+                if (settingsPanel) {
+                    settingsPanel.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
+                }
+            });
+        })();
+    </script>
+</head>
+<body>
+    <div class="radio-list-container" id="radio-list">
+        <div class="edit-mode-hint">Drag to move • Resize handle in bottom-right</div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <!-- Settings UI -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-panel">
+            <div class="settings-header">Radio Names Settings</div>
+            
+            <div class="settings-group">
+                <label class="settings-label">Color Theme</label>
+                <div class="color-picker-container">
+                    <div class="color-picker">
+                        <input type="color" id="color-picker-input" value="#ff3232">
+                    </div>
+                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 12px;">
+                        Choose the accent color for borders, glows, and highlights
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <label class="settings-label">Size: <span id="size-value">100%</span></label>
+                <input type="range" class="size-slider" id="size-slider" min="0.5" max="2" step="0.1" value="1">
+            </div>
+
+            <div class="settings-group" style="color: rgba(255, 255, 255, 0.7); font-size: 12px; margin-top: 20px;">
+                <strong>Position & Size:</strong><br>
+                Click "Edit Position" to drag the radio list anywhere on screen and resize it using the handle in the bottom-right corner.
+            </div>
+
+            <div class="settings-buttons">
+                <button class="settings-btn" id="edit-position">Edit Position</button>
+                <button class="settings-btn primary" id="save-settings">Save</button>
+                <button class="settings-btn" id="close-settings">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

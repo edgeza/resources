@@ -90,8 +90,10 @@ end)
 --<!>-- PURCHASE PERMIT --<!>--
 RegisterServerEvent('boii-mining:sv:PurchasePermit', function(args)
     local src = source
+    if not src or src == 0 then return end
     local pData = Core.Functions.GetPlayer(src)
-    local MiningXP = pData.PlayerData.metadata[MetaDataName]
+    if not pData or not pData.PlayerData then return end
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     local moneytype = Config.Stores.Money.Type
     local qbmoney = pData.PlayerData.money[moneytype]
     if Config.XP.Use then
@@ -115,8 +117,8 @@ RegisterServerEvent('boii-mining:sv:PurchasePermit', function(args)
             if pData.Functions.GetItemByName(Config.Stores.Money.Item).amount >= args.price then
                 pData.Functions.RemoveItem(Config.Stores.Money.Item, args.price)
                 pData.Functions.AddItem(args.item, 1)
-                TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[Config.Stores.Money.Item], 'remove', args.price)
-                TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[args.item], 'add', 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[Config.Stores.Money.Item], 'remove', args.price)
+                TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[args.item], 'add', 1)
             else
                 TriggerClientEvent('boii-mining:notify', src, Language.Mining.Stores['enoughmoney'], 'error')
             end
@@ -128,7 +130,7 @@ RegisterServerEvent('boii-mining:sv:PurchasePermit', function(args)
             if pData.Functions.GetItemByName(args.item) ~= nil then TriggerClientEvent('boii-mining:notify', src, Language.Mining.Stores['alreadyhaspermit'], 'error') return end
             pData.Functions.RemoveMoney(moneytype, args.price, 'mining-store')
             pData.Functions.AddItem(args.item, 1)
-            TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[args.item], 'add', 1)
+            TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[args.item], 'add', 1)
         else
             TriggerClientEvent('boii-mining:notify', src, Language.Mining.Stores['enoughmoney'], 'error')
         end
@@ -140,8 +142,10 @@ end)
 --<!>-- PURCHASE EQUIPMENT --<!>--
 RegisterServerEvent('boii-mining:sv:PurchaseEquipment', function(args)
     local src = source
+    if not src or src == 0 then return end
     local pData = Core.Functions.GetPlayer(src)
-    local MiningXP = pData.PlayerData.metadata[MetaDataName]
+    if not pData or not pData.PlayerData then return end
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     local moneytype = Config.Stores.Money.Type
     local qbmoney = pData.PlayerData.money[moneytype]
     if Config.XP.Use then
@@ -164,8 +168,8 @@ RegisterServerEvent('boii-mining:sv:PurchaseEquipment', function(args)
             if pData.Functions.GetItemByName(Config.Stores.Money.Item).amount >= args.price then
                 pData.Functions.RemoveItem(Config.Stores.Money.Item, args.price)
                 pData.Functions.AddItem(args.item, 1)
-                TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[Config.Stores.Money.Item], 'remove', args.price)
-                TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[args.item], 'add', 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[Config.Stores.Money.Item], 'remove', args.price)
+                TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[args.item], 'add', 1)
             else
                 TriggerClientEvent('boii-mining:notify', src, Language.Mining.Stores['enoughmoney'], 'error')
             end
@@ -176,7 +180,7 @@ RegisterServerEvent('boii-mining:sv:PurchaseEquipment', function(args)
         if qbmoney >= args.price then
             pData.Functions.RemoveMoney(moneytype, args.price, 'mining-store')
             pData.Functions.AddItem(args.item, 1)
-            TriggerClientEvent('inventory:client:ItemBox', source, Core.Shared.Items[args.item], 'add', 1)
+            TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[args.item], 'add', 1)
         else
             TriggerClientEvent('boii-mining:notify', src, Language.Mining.Stores['enoughmoney'], 'error')
         end

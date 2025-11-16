@@ -81,6 +81,21 @@ lib.addCommand('admincar', {
     exports.qbx_core:Notify(source, 'This vehicle is now yours.', 'success')
 end)
 
+lib.addCommand('maxmods', {
+    help = 'Maximize current vehicle performance',
+    restricted = config.maxMods,
+}, function(source)
+    local ped = GetPlayerPed(source)
+    if not ped or ped == 0 then return end
+
+    local vehicle = GetVehiclePedIsIn(ped, false)
+    if vehicle == 0 then
+        return exports.qbx_core:Notify(source, 'You have to be in a vehicle, to use this', 'error')
+    end
+
+    TriggerClientEvent('qbx_admin:client:maxMods', source, NetworkGetNetworkIdFromEntity(vehicle))
+end)
+
 lib.addCommand('setmodel', {
     help = 'Sets your model to the given model',
     restricted = config.setModel,

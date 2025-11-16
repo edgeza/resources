@@ -3,7 +3,7 @@ games { 'gta5' }
 
 author 'PulseScripts - pulsescripts.com'
 description 'Uwu Cat Cafe'
-version '2.0.8'
+version '2.0.9'
 
 lua54 'yes'
 
@@ -75,7 +75,6 @@ escrow_ignore {
     'server/IceMachine.lua',
     'server/unlocked.lua',
     'server/Log.lua',
-
     "locales/**.json",
 }
 dependency '/assetpacks'

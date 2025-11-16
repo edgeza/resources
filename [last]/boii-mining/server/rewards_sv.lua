@@ -103,7 +103,9 @@ end)
 --<!>-- PAN PAYDIRT --<!>--
 RegisterServerEvent('boii-mining:sv:PanPaydirt', function()
     local src = source
+    if not src or src == 0 then return end
     local pData = Core.Functions.GetPlayer(src)
+    if not pData or not pData.PlayerData then return end
     local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
     local regularreward = Config.Paydirt.Panning.Return.Regular[math.random(1, #Config.Paydirt.Panning.Return.Regular)]
     local regularreward2 = Config.Paydirt.Panning.Return.Regular[math.random(1, #Config.Paydirt.Panning.Return.Regular)]

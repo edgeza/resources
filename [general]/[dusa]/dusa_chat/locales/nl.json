@@ -1,0 +1,27 @@
+{
+    "anonymous": "Anoniem",
+    "requestid": {
+        "closest_player_id": "Speler ID [^1%s^0]"
+    },
+    "ui": {
+        "invalidCommand": "Ongeldig commando! Voer een geldig commando in.",
+        "adminMessage": "Admin bericht.",
+        "emote": "Emote",
+        "adminChat": "Admin Chat",
+        "privateMessage": "Privébericht",
+        "roleplayAction": "Roleplay Actie",
+        "settings": {
+            "settings": "Instellingen",
+            "restore": "Instellingen Herstellen",
+            "restoreDefaults": "Instellingen Hersteld",
+            "chatPosition": "Chat Positie Wijzigen",
+            "chatSize": "Chat Grootte Wijzigen",
+            "showOnMessage": "Toon bij Ontvangen Bericht",
+            "saveSettings": "Instellingen Opgeslagen.",
+            "savedSettings": "Instellingen Opslaan",
+            "yes": "Ja",
+            "no": "Nee",
+            "theme": "Selecteer Thema"
+        }
+    }
+} 

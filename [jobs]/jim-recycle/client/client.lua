@@ -2,6 +2,7 @@ PlayerJob, onDuty, Peds, Targets, searchProps, Props, randPackage = {}, false, {
 local TrollyProp = nil
 local scrapProps = {}
 local emotecancelled = false
+local isCarryingItems = false
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
 	Core.Functions.GetPlayerData(function(PlayerData) PlayerJob = PlayerData.job if PlayerData.job.name == Config.JobRole then onDuty = PlayerJob.onduty end end)
@@ -215,6 +216,7 @@ function EndJob()
 		end
 		scrapProps = {}
 	end
+	isCarryingItems = false
 end
 
 function ClearProps()
@@ -232,6 +234,7 @@ function ClearProps()
 		end
 		scrapProps = {}
 	end
+	isCarryingItems = false
 end
 
 --Pick one of the crates for the player to choose, generate outline + target
@@ -309,6 +312,10 @@ AddEventHandler("emote:canceled", function()
 end)
 
 RegisterNetEvent("jim-recycle:PickupPackage:Start", function(data) local Ped = PlayerPedId()
+	if isCarryingItems then
+		triggerNotify(nil, Loc[Config.Lan].error["already_carrying"] or "You are already carrying items. Drop them off first!", "error")
+		return
+	end
 	emotecancelled = false
 	TaskStartScenarioInPlace(Ped, "CODE_HUMAN_MEDIC_KNEEL", 0, true)
 	if progressBar({label = Loc[Config.Lan].progressbar["search"], time = 5000, cancel = false, icon = "fas fa-magnifying-glass"}) then
@@ -337,21 +344,15 @@ RegisterNetEvent("jim-recycle:PickupPackage:Hold", function(data) local Ped = Pl
 		scrapProps = {}
 	end
 	
-	-- Create multiple stacked props (3-5 props stacked vertically)
-	local stackCount = math.random(3, 5)
-	local baseZOffset = 0.0
-	local stackSpacing = 0.15 -- Spacing between stacked items
+	-- Create single prop to put in hands
+	local v = Config.scrapPool[math.random(1, #Config.scrapPool)]
+	local prop = makeProp({prop = v.model, coords = vec4(PedCoords.x, PedCoords.y, PedCoords.z, 0.0)}, 1, 1)
 	
-	for i = 1, stackCount do
-		local v = Config.scrapPool[math.random(1, #Config.scrapPool)]
-		local prop = makeProp({prop = v.model, coords = vec4(PedCoords.x, PedCoords.y, PedCoords.z, 0.0)}, 1, 1)
-		
-		-- Calculate stacked position - each prop stacks on top of the previous one
-		local stackedZPos = v.zPos + (baseZOffset + (i - 1) * stackSpacing)
-		
-		AttachEntityToEntity(prop, Ped, GetPedBoneIndex(Ped, 18905), v.xPos, v.yPos, stackedZPos, v.xRot, v.yRot, v.zRot, 20.0, true, true, false, true, 1, true)
-		scrapProps[#scrapProps + 1] = prop
-	end
+	AttachEntityToEntity(prop, Ped, GetPedBoneIndex(Ped, 18905), v.xPos, v.yPos, v.zPos, v.xRot, v.yRot, v.zRot, 20.0, true, true, false, true, 1, true)
+	scrapProps[#scrapProps + 1] = prop
+
+	-- Mark that player is now carrying items
+	isCarryingItems = true
 
 	--Create target for drop off location
 	SetEntityDrawOutline(TrollyProp, true)
@@ -401,6 +402,8 @@ RegisterNetEvent("jim-recycle:PickupPackage:Finish", function(data) local Ped = 
 	ClearPedTasks(Ped)
 	FreezeEntityPosition(Ped, false)
 	toggleItem(true, "recyclablematerial", math.random(Config.RecycleAmounts["Recycle"].Min, Config.RecycleAmounts["Recycle"].Max))
+	-- Reset carrying flag so player can pick up another package
+	isCarryingItems = false
 	PickRandomPackage(data.Trolly)
 end)
 

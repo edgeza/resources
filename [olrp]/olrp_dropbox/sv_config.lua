@@ -87,7 +87,7 @@ return {
         return true, rewards, selectedCategory.name
     end,
     Debug = true,
-    MinPlayers = 1, -- Minimum players required for dropbox to spawn
+    MinPlayers = 20, -- Minimum players required for dropbox to spawn
     FirstDropMin = 30, -- First drop appears 30-60 minutes after restart
     FirstDropMax = 60,
     SubsequentDropMin = 90, -- Subsequent drops appear every 90-150 minutes

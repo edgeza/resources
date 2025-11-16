@@ -61,7 +61,6 @@ escrow_ignore {
   "client/cl-locations.lua",
   "client/cl-shops-stashes.lua",
   "client/cl-handling.lua",
-  "client/cl-menu-sync-patch.lua",
   "server/sv-usable-items.lua",
   "server/sv-webhooks.lua",
   "server/sv-shops-stashes.lua",

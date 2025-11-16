@@ -670,8 +670,8 @@ Config.JobVehicles = {
         ['towing'] = {
             [1] = {job = 'towing', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `caracaran`},
             [2] = {job = 'towing', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `everonb`},
-            [3] = {job = 'flatbed', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `everonb`},
-
+            [3] = {job = 'towing', spawn_max = true, plate = 'TOW', job_grade = 0, garage_type = 'car', model = `flatbed`},
+            
         },
         ['bennies'] = {
             [1] = {job = 'bennies', spawn_max = false, plate = 'BENNYS', job_grade = 1, garage_type = 'car', model = `Shifter_kart`},

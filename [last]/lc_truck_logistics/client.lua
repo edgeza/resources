@@ -395,7 +395,7 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
 					trailer = nil
 					trailer_blip = nil
 					route_blip = nil
-					if not Config.jobs.truck_rental.must_return_truck or contract_data.contract_type ~= 0 then
+					if not Config.jobs.must_bring_truck_back or contract_data.contract_type ~= 0 then
 						TriggerServerEvent("truck_logistics:finishContract",GetVehicleEngineHealth(truck),GetVehicleBodyHealth(truck),trailer_body)
 					end
 					is_finished = true
@@ -448,7 +448,7 @@ AddEventHandler('truck_logistics:startContract', function(key,contract_data,loca
                         is_store_truck_text_shown = true
 						Utils.Markers.drawText2D(Utils.translate('press_e_to_store_truck'), 8,0.5,0.95,0.50,255,255,255,180)
 						if IsControlJustPressed(0,38) then
-							if Config.jobs.truck_rental.must_return_truck and is_finished then
+							if Config.jobs.must_bring_truck_back and is_finished then
 								TriggerServerEvent("truck_logistics:finishContract",GetVehicleEngineHealth(truck),GetVehicleBodyHealth(truck),trailer_body)
 							end
 							Utils.Vehicles.deleteVehicle(truck)

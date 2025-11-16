@@ -52,10 +52,10 @@ Lang.cooldown = "You must wait before using this command again"
 --  \______/   \__|    \______/ \__|  \__|\________| \______/
 
 Stores = {
-    ["East Customs"] = {
-        image = "nui://bit-notifications/html/assets/east_customs.png",
-        name = "East Customs",
-        job = "mechanic",
+    ["Palm Coast "] = {
+        image = "nui://bit-notifications/html/assets/Palm_Logo.png",
+        name = "Palm Coast",
+        job = "palmcoast",
         minGrade = 0
     },
     ["Department of Justice"] = {
@@ -64,10 +64,10 @@ Stores = {
         job = "doj",
         minGrade = 0
     },
-    ["Benny"] = {
+    ["Benny's"] = {
         image = "nui://bit-notifications/html/assets/bennys.jpg",
         name = "Benny's",
-        job = "mechanic1",
+        job = "bennies",
         minGrade = 0
     },
     ["Bean Machine"] = {
@@ -133,13 +133,13 @@ Stores = {
     ["OneLife Mechanic"] = {
         image = "nui://bit-notifications/html/assets/onelife_mechanics.png",
         name = "OneLife Mechanic",
-        job = "mechanic3",
+        job = "olrpmechanic",
         minGrade = 0
     },
     ["6STR Tuner Shop"] = {
         image = "nui://bit-notifications/html/assets/tunershop.png",
         name = "6STR Tuner Shop",
-        job = "mechanic2",
+        job = "6str",
         minGrade = 0
     },
    ["OneLife Towing"] = {

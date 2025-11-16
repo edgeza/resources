@@ -46,9 +46,59 @@ function RemoveSocietyMoney(source, Player, amount)
 end
 
 function HasLicense(source, Player, licenseType)
-    -- Add your compatibility to check if the player has a license
-    -- return true if you want to open the shop
-    return true
+	-- When no license is required for the stand, allow access
+	if not licenseType or licenseType == '' then return true end
+
+	-- QS-Licenses support (try common APIs safely)
+	if GetResourceState('qs-licenses') == 'started' or GetResourceState('qs-license') == 'started' then
+		local providers = { 'qs-licenses', 'qs-license' }
+		for _, prov in ipairs(providers) do
+			if GetResourceState(prov) == 'started' then
+				-- Try HasLicense(source, licenseType)
+				local ok, has = pcall(function()
+					return exports[prov]:HasLicense(source, licenseType)
+				end)
+				if ok then return has and true or false end
+
+				-- Try CheckLicense(source, licenseType)
+				ok, has = pcall(function()
+					return exports[prov]:CheckLicense(source, licenseType)
+				end)
+				if ok then return has and true or false end
+
+				-- Try GetLicense(source, licenseType) that returns table/bool
+				ok, has = pcall(function()
+					return exports[prov]:GetLicense(source, licenseType)
+				end)
+				if ok then
+					if type(has) == 'boolean' then return has end
+					if type(has) == 'table' then return true end
+				end
+			end
+		end
+	end
+
+	-- Buty-license support (maps practical_* to Buty keys when applicable)
+	if GetResourceState('Buty-license') == 'started' then
+		local identifier = Player?.PlayerData.citizenid
+		if not identifier then return false end
+
+		local butyType = licenseType
+		if licenseType == 'practical_plane' then
+			butyType = 'plane'
+		elseif licenseType == 'practical_helicopter' then
+			butyType = 'helicopter'
+		end
+
+		local ok = exports['Buty-license']:HasLicense(identifier, 'driving', butyType)
+		return ok and true or false
+	end
+
+	-- Default QB-Core metadata licences (works with vms_flightschoolv2 defaults)
+	local licences = Player?.PlayerData.metadata and Player.PlayerData.metadata['licences'] or {}
+	if type(licences) ~= 'table' then return false end
+
+	return licences[licenseType] == true
 end
 
 -- Events

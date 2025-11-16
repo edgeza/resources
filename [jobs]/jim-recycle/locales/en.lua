@@ -9,6 +9,7 @@ Loc["en"] = {
         ["no_bottles"] = "No bottles or cans to trade",
         ["searched"] = "Already Searched.",
         ["nothing"] = "You couldn't find anything.",
+        ["already_carrying"] = "You are already carrying items. Drop them off first!",
     },
     success = {
         ["on_duty"] = "You went on duty",

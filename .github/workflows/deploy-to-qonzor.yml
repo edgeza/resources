@@ -1,25 +1,27 @@
-name: Deploy to Qonzor via SFTP
+name: Deploy to Qonzor via SFTP — Incremental
 
 on:
   push:
     branches:
-      - main  # Change if you deploy from a different branch
+      - main   # or other branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Upload via SFTP
-        uses: Dylan700/sftp-upload-action@latest
+      - name: Upload changed files via SFTP
+        uses: wangyucode/sftp-upload-action@v2.0.4
         with:
-          server: ${{ secrets.QONZOR_SFTP_HOST }}
+          host: ${{ secrets.QONZOR_SFTP_HOST }}
           username: ${{ secrets.QONZOR_SFTP_USER }}
           password: ${{ secrets.QONZOR_SFTP_PASS }}
           port: ${{ secrets.QONZOR_SFTP_PORT }}
-          uploads: |
-            ./ => ${{ secrets.QONZOR_REMOTE_DIR }}
-          delete: 'true'
+          localDir: "./"                               # root of your repo
+          remoteDir: "/208.115.201.10_30120/txData/Qbox_F4C5D7.base/resources/"
+          forceUpload: false   # only upload newer files
+          removeExtraFilesOnServer: false  # do not delete files on server
+          exclude: ".git/,**/node_modules/**"   # optional, skip large unneeded dirs

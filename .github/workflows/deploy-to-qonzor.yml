@@ -1,0 +1,25 @@
+name: Deploy to Qonzor via SFTP
+
+on:
+  push:
+    branches:
+      - main  # Change if you deploy from a different branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload via SFTP
+        uses: Dylan700/sftp-upload-action@latest
+        with:
+          server: ${{ secrets.QONZOR_SFTP_HOST }}
+          username: ${{ secrets.QONZOR_SFTP_USER }}
+          password: ${{ secrets.QONZOR_SFTP_PASS }}
+          port: ${{ secrets.QONZOR_SFTP_PORT }}
+          uploads: |
+            ./ => ${{ secrets.QONZOR_REMOTE_DIR }}
+          delete: 'true'

@@ -136,14 +136,19 @@ local function robKeyLoop(seat)
 
                 -- If trying to enter a player vehicle
                 if entering ~= 0 and entering ~= lastPickedVehicle and not HasKeys(plate) and not isTakingKeys and Config.EnableHotwire then
-                    if next(AllKeys) then
-                        if AllKeys[plate] then
-                            if AllKeys[plate].locked then
-                                SetVehicleDoorsLocked(entering, 2)
-                            else
-                                SetVehicleDoorsLocked(entering, 1)
-                                TaskEnterVehicle(ped, entering)
-                            end
+                    local searchPlate = trimAndLowerPlate(plate)
+                    -- Check if vehicle exists in AllKeys (player-owned)
+                    if next(AllKeys) and AllKeys[searchPlate] then
+                        -- Player-owned vehicle: always lock and prevent entry if player doesn't have keys
+                        SetVehicleDoorsLocked(entering, 2)
+                        ClearPedTasks(ped)
+                    else
+                        -- Check server-side if vehicle is player-owned (for vehicles not yet in AllKeys)
+                        local playerOwned = lib.callback.await('dusa_vehiclekeys:server:checkPlayerOwned', false, plate)
+                        if playerOwned then
+                            -- Player-owned vehicle: lock it and prevent entry
+                            SetVehicleDoorsLocked(entering, 2)
+                            ClearPedTasks(ped)
                         end
                     end
                 end
@@ -153,17 +158,38 @@ local function robKeyLoop(seat)
                     sleep = 1000
                     local vehicle = GetVehiclePedIsIn(ped)
                     local plate = GetVehicleNumberPlateText(vehicle)
-                    if GetPedInVehicleSeat(vehicle, -1) == cache.ped and not HasKeys(plate) and not isBlacklistedVehicle(vehicle) and not AreKeysJobShared(vehicle) then
+                    local isDriver = GetPedInVehicleSeat(vehicle, -1) == cache.ped
+                    
+                    if isDriver and not HasKeys(plate) and not isBlacklistedVehicle(vehicle) and not AreKeysJobShared(vehicle) then
                         sleep = 0
+                        
+                        local searchPlate = trimAndLowerPlate(plate)
+                        -- Check if vehicle is player-owned
+                        local playerOwned = false
+                        if next(AllKeys) and AllKeys[searchPlate] then
+                            playerOwned = true
+                        else
+                            -- Only check server if not in local cache
+                            playerOwned = lib.callback.await('dusa_vehiclekeys:server:checkPlayerOwned', false, plate)
+                        end
+                        
+                        if playerOwned then
+                            -- Eject player from driver seat if they don't have keys to player-owned vehicle
+                            TaskLeaveVehicle(ped, vehicle, 0)
+                            Wait(100)
+                            SetVehicleDoorsLocked(vehicle, 2)
+                            Framework.Notify(Config.Language['notify']['ydhk'], 'error')
+                        else
+                            -- Allow hotwiring for non-player-owned vehicles
+                            local vehiclePos = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, 1.0, 0.5)
+                            lib.showTextUI(Config.Language['info']['skeys'])
 
-                        local vehiclePos = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, 1.0, 0.5)
-                        lib.showTextUI(Config.Language['info']['skeys'])
-
-                        SetVehicleEngineOn(vehicle, false, false, true)
-                        if IsControlJustPressed(0, 74) then
-                            -- Hotwire(vehicle, plate)
-                            lib.hideTextUI()
-                            OpenHotwire(vehicle, plate)
+                            SetVehicleEngineOn(vehicle, false, false, true)
+                            if IsControlJustPressed(0, 74) then
+                                -- Hotwire(vehicle, plate)
+                                lib.hideTextUI()
+                                OpenHotwire(vehicle, plate)
+                            end
                         end
                     else
                         -- Hide UI if player has keys or is not in driver seat
@@ -338,27 +364,39 @@ end)
 
 RegisterNetEvent('dusa_vehiclekeys:client:GiveKeys', function(id)
     local targetVehicle = GetVehicle()
-    if targetVehicle then
-        local targetPlate = trimAndLowerPlate(GetVehicleNumberPlateText(targetVehicle))
-        if HasKeys(targetPlate) then
-            if id and type(id) == "number" then -- Give keys to specific ID
-                GiveKeys(id, targetPlate)
-            else
-                if IsPedSittingInVehicle(cache.ped, targetVehicle) then -- Give keys to everyone in vehicle
-                    local otherOccupants = GetOtherPlayersInVehicle(targetVehicle)
-                    for p = 1, #otherOccupants do
-                        TriggerServerEvent('dusa_vehiclekeys:server:GiveVehicleKeys',
-                            GetPlayerServerId(NetworkGetPlayerIndexFromPed(otherOccupants[p])), targetPlate)
-                    end
-                else -- Give keys to closest player
-                    local coords = GetEntityCoords(cache.ped)
-                    local closestPlayer = lib.getClosestPlayer(coords, 3.5)
+    if not targetVehicle or targetVehicle == 0 then
+        Framework.Notify(Config.Language['notify']['vehclose'], 'error')
+        return
+    end
+    
+    local targetPlate = trimAndLowerPlate(GetVehicleNumberPlateText(targetVehicle))
+    if not targetPlate or targetPlate == '' then
+        Framework.Notify(Config.Language['notify']['vehclose'], 'error')
+        return
+    end
+    
+    if HasKeys(targetPlate) then
+        if id and type(id) == "number" then -- Give keys to specific ID
+            GiveKeys(id, targetPlate)
+        else
+            if IsPedSittingInVehicle(cache.ped, targetVehicle) then -- Give keys to everyone in vehicle
+                local otherOccupants = GetOtherPlayersInVehicle(targetVehicle)
+                for p = 1, #otherOccupants do
+                    TriggerServerEvent('dusa_vehiclekeys:server:GiveVehicleKeys',
+                        GetPlayerServerId(NetworkGetPlayerIndexFromPed(otherOccupants[p])), targetPlate)
+                end
+            else -- Give keys to closest player
+                local coords = GetEntityCoords(cache.ped)
+                local closestPlayer = lib.getClosestPlayer(coords, 3.5)
+                if closestPlayer then
                     GiveKeys(GetPlayerServerId(closestPlayer), targetPlate)
+                else
+                    Framework.Notify(Config.Language['notify']['nonear'], 'error')
                 end
             end
-        else
-            Framework.Notify(Config.Language['notify']['ydhk'], 'error')
         end
+    else
+        Framework.Notify(Config.Language['notify']['ydhk'], 'error')
     end
 end)
 
@@ -1239,29 +1277,7 @@ RegisterNetEvent('vehiclekeys:client:SetOwner', function(plate)
     end
 end)
 
-RegisterNetEvent('dusa_vehiclekeys:client:GiveKeys', function()
-    local targetVehicle = GetVehicle()
-    if targetVehicle then
-        local targetPlate = trimAndLowerPlate(GetVehicleNumberPlateText(targetVehicle))
-        if HasKeys(targetPlate) then
-            if IsPedSittingInVehicle(cache.ped, targetVehicle) then -- Give keys to everyone in vehicle
-                local otherOccupants = GetOtherPlayersInVehicle(targetVehicle)
-                for p = 1, #otherOccupants do
-                    TriggerServerEvent('dusa_vehiclekeys:server:GiveVehicleKeys',
-                        GetPlayerServerId(NetworkGetPlayerIndexFromPed(otherOccupants[p])), targetPlate)
-                end
-            else -- Give keys to closest player
-                local coords = GetEntityCoords(cache.ped)
-                local closestPlayer = lib.getClosestPlayer(coords, 3.5)
-                if closestPlayer then
-                    GiveKeys(GetPlayerServerId(closestPlayer), targetPlate)
-                end
-            end
-        else
-            Framework.Notify(Config.Language['notify']['ydhk'], 'error')
-        end
-    end
-end)
+-- This event handler is a duplicate and has been merged with the one above
 
 RegisterNetEvent('dusa_vehiclekeys:client:RemoveKeys', function(plate)
     if plate then

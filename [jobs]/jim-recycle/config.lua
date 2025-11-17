@@ -1,51 +1,83 @@
+
 Config = {
-	Debug = false, -- Toggle Debug Mode
 	Lan = "en",
+	System = {
+		Debug = false, 			-- enable debug mode
 
-	img = "qs-inventory/html/images/", -- Set this to your inventory
+		Menu = "ox",			-- "qb", "ox", "gta"
+		ProgressBar = "ox",	-- "qb", "ox", "gta"
+		Notify = "ox",			-- "qb", "ox", "gta"
+		drawText = "ox",		-- "qb", "ox", "gta"
 
-	Inv = "qb", -- set to "ox" if using OX Inventory, "qb" for QBCore/QB/QS Inventory (they all use QBCore.Shared.Items)
-	Menu = "ox", -- "ox" for ox_lib menus (works with QBox), "qb" for qb-menu (QBCore only)
-	ProgressBar = "qb",
-	Notify = "qb",
+		skillCheck = "ox",		-- "qb", "ox", "gta"
 
-	Overrides = {
-		ScrapyardSeraching = true,
-		DumpsterDiving = true,
-		RecycleCenter = true,
+		DontUseTarget = false,
+
+		useSkillCheck = true,
 	},
+	Main = {
+		useLineHighlight = true,		-- Renders outlines for recycle targets, set this to false if you have users crashing due to QuantV
+		useblipTarget = true,			-- Shows small blips for recycle targets, set this to false to disable these
+	},
+	Crafting = {
+		showItemBox = true,
+	},
+}
 
-	ScrapyardSearching = {
-		Enable = true,
-		searched = { }, -- No Touch
-		skillcheck = "ox_lib", --"qb-lock", "ps-ui", "qb-skillbar", "ox_lib", nil
-		models = { -- The mighty list of dumpters/trash cans
-			`prop_wreckedcart`, `prop_snow_rub_trukwreck_2`, `prop_wrecked_buzzard`, `prop_rub_buswreck_01`, `prop_rub_buswreck_03`, `prop_rub_buswreck_06`, `prop_rub_carwreck_10`,
-			`prop_rub_carwreck_11`, `prop_rub_carwreck_12`, `prop_rub_carwreck_13`, `prop_rub_carwreck_14`, `prop_rub_carwreck_15`, `prop_rub_carwreck_16`, `prop_rub_carwreck_17`,
-			`prop_rub_carwreck_2`, `prop_rub_carwreck_3`, `prop_rub_carwreck_5`, `prop_rub_carwreck_7`, `prop_rub_carwreck_8`, `prop_rub_carwreck_9`, `prop_rub_railwreck_1`, `prop_rub_railwreck_2`,
-			`prop_rub_railwreck_3`, `prop_rub_trukwreck_1`, `prop_rub_trukwreck_2`, `prop_rub_wreckage_3`, `prop_rub_wreckage_4`, `prop_rub_wreckage_5`, `prop_rub_wreckage_6`, `prop_rub_wreckage_7`,
-			`prop_rub_wreckage_8`, `prop_rub_wreckage_9`, `ch1_01_sea_wreck_3`, `cs2_30_sea_ch2_30_wreck005`, `cs2_30_sea_ch2_30_wreck7`, `cs4_05_buswreck`,
-		},
-		searchTime = 3000,
+Config.ScrapyardSearching = {
+	Enable = true,
+	searched = { }, -- No Touch
+	models = { -- The mighty list of dumpters/trash cans
+		`prop_wreckedcart`, `prop_snow_rub_trukwreck_2`, `prop_wrecked_buzzard`, `prop_rub_buswreck_01`, `prop_rub_buswreck_03`, `prop_rub_buswreck_06`, `prop_rub_carwreck_10`,
+		`prop_rub_carwreck_11`, `prop_rub_carwreck_12`, `prop_rub_carwreck_13`, `prop_rub_carwreck_14`, `prop_rub_carwreck_15`, `prop_rub_carwreck_16`, `prop_rub_carwreck_17`,
+		`prop_rub_carwreck_2`, `prop_rub_carwreck_3`, `prop_rub_carwreck_5`, `prop_rub_carwreck_7`, `prop_rub_carwreck_8`, `prop_rub_carwreck_9`, `prop_rub_railwreck_1`, `prop_rub_railwreck_2`,
+		`prop_rub_railwreck_3`, `prop_rub_trukwreck_1`, `prop_rub_trukwreck_2`, `prop_rub_wreckage_3`, `prop_rub_wreckage_4`, `prop_rub_wreckage_5`, `prop_rub_wreckage_6`, `prop_rub_wreckage_7`,
+		`prop_rub_wreckage_8`, `prop_rub_wreckage_9`, `ch1_01_sea_wreck_3`, `cs2_30_sea_ch2_30_wreck005`, `cs2_30_sea_ch2_30_wreck7`, `cs4_05_buswreck`,
 	},
-	DumpsterDiving = {
-		Enable = true,
-		searched = { }, -- No Touch
-		skillcheck = "ox_lib", --"qb-lock", "ps-ui", "qb-skillbar", "ox_lib", nil
-		models = { -- The mighty list of dumpters/trash cans
-			`prop_dumpster_01a`, `prop_dumpster_02a`, `prop_dumpster_02b`, `prop_dumpster_3a`, `prop_dumpster_4a`, `prop_dumpster_4b`,
-			`prop_bin_05a`, `prop_bin_06a`, `prop_bin_07a`, `prop_bin_07b`, `prop_bin_07c`, `prop_bin_07d`, `prop_bin_08a`, `prop_bin_08open`,
-			`prop_bin_09a`, `prop_bin_10a`, `prop_bin_10b`, `prop_bin_11a`, `prop_bin_12a`, `prop_bin_13a`, `prop_bin_14a`, `prop_bin_14b`,
-			`prop_bin_beach_01d`, `prop_bin_delpiero`, `prop_bin_delpiero_b`, `prop_recyclebin_01a`, `prop_recyclebin_02_c`, `prop_recyclebin_02_d`,
-			`prop_recyclebin_02a`, `prop_recyclebin_02b`, `prop_recyclebin_03_a`, `prop_recyclebin_04_a`, `prop_recyclebin_04_b`, `prop_recyclebin_05_a`,
-			`zprop_bin_01a_old`, `hei_heist_kit_bin_01`, `ch_prop_casino_bin_01a`, `vw_prop_vw_casino_bin_01a`, `mp_b_kit_bin_01`,
-		},
-		searchTime = 3000,
+	searchTime = 5000,
+
+	ScrapItems = {
+		{item = "iron", 		rarity = 80, min = 3, max = 9},
+		{item = "aluminum", 	rarity = 65, min = 3, max = 9},
+		{item = "rubber", 		rarity = 70, min = 3, max = 7},
+		{item = "glass",		rarity = 6, min = 1, max = 2},
+		{item = "copper", 		rarity = 75, min = 2, max = 6},
+		{item = "steel", 		rarity = 45, min = 3, max = 6},
+		{item = "plastic", 		rarity = 75, min = 2, max = 9},
+		{item = "metalscrap", 	rarity = 45, min = 2, max = 7},
 	},
-	EnableOpeningHours = false, -- Enable opening hours? If disabled you can always open the pawnshop.
-	OpenHour = 9, -- From what hour should the pawnshop be open?
-	CloseHour = 21, -- From what hour should the pawnshop be closed?
-	PayAtDoor = 200, -- Set to nil stop turn this off, set to a number to enable
+}
+
+Config.DumpsterDiving = {
+	Enable = true,
+	searched = { }, -- No Touch
+	models = { -- The mighty list of dumpters/trash cans
+		`prop_dumpster_01a`, `prop_dumpster_02a`, `prop_dumpster_02b`, `prop_dumpster_3a`, `prop_dumpster_4a`, `prop_dumpster_4b`,
+		`prop_bin_05a`, `prop_bin_06a`, `prop_bin_07a`, `prop_bin_07b`, `prop_bin_07c`, `prop_bin_07d`, `prop_bin_08a`, `prop_bin_08open`,
+		`prop_bin_09a`, `prop_bin_10a`, `prop_bin_10b`, `prop_bin_11a`, `prop_bin_12a`, `prop_bin_13a`, `prop_bin_14a`, `prop_bin_14b`,
+		`prop_bin_beach_01d`, `prop_bin_delpiero`, `prop_bin_delpiero_b`, `prop_recyclebin_01a`, `prop_recyclebin_02_c`, `prop_recyclebin_02_d`,
+		`prop_recyclebin_02a`, `prop_recyclebin_02b`, `prop_recyclebin_03_a`, `prop_recyclebin_04_a`, --[[ `prop_recyclebin_04_b`, ]] `prop_recyclebin_05_a`,
+		`zprop_bin_01a_old`, `hei_heist_kit_bin_01`, `ch_prop_casino_bin_01a`, `vw_prop_vw_casino_bin_01a`, `mp_b_kit_bin_01`,
+	},
+	searchTime = 3000,
+
+	DumpItems = {
+		{ item = 'can', 	rarity = 4 },
+		{ item = 'bottle', 	rarity = 4 },
+		{ item = 'plastic', rarity = 3 },
+		{ item = 'glass', 	rarity = 2 },
+		{ item = 'steel', 	rarity = 1 },
+	},
+}
+
+Config.RecyclingCenter = {
+	EnableOpeningHours = false, -- if enabled, players can only access at a certain time of day
+	OpenHour = 9, -- From what hour should the pawnshop be open? ( 9 = 9 am )
+	CloseHour = 21, -- From what hour should the pawnshop be closed? ( 21 = 9pm )
+
+	PayAtDoor = 100, -- Set to nil to disable charge for entering warehouse
+
+	TradeForRandomItems = false,	-- Set to true to make players recieve randomly picked materials when trading recyclablematerials
 
 	propTable = { -- Table of crates that will spawn
 		"ex_Prop_Crate_Bull_SC_02",
@@ -105,59 +137,83 @@ Config = {
 		{ model = "prop_ld_suitcase_01", xPos = -0.04, yPos = 0.06, zPos = 0.31, xRot = -2.0, yRot = 21.0, zRot = 155.0 },
 		{ model = "v_ind_cs_toolbox2", xPos = 0.04, yPos = 0.12, zPos = 0.29, xRot = 56.0, yRot = 287.0, zRot = 169.0 },
 	},
+}
+
+Config.Other = {
 	Prices = {
-		['copper'] = 10,
-		['plastic'] = 5,
-		['metalscrap'] = 5,
-		['steel'] = 8,
-		['glass'] = 6,
-		['iron'] = 9,
-		['rubber'] = 6,
-		['aluminum'] = 12,
-		['bottle'] = 5,
-		['can'] = 5,
+		Header = Loc[Config.Lan].menu["sell_mats"],
+		Items = {
+			copper = 10,
+			plastic = 10,
+			metalscrap = 10,
+			steel = 10,
+			glass = 10,
+			iron = 10,
+			rubber = 10,
+			aluminum = 10,
+			bottle = 5,
+			can = 5,
+		},
 	},
 	BottleBankTable = {
-		"bottle",
-		"can",
+		Header = Loc[Config.Lan].menu["sell_bottles"],
+		Items = {
+			bottle = 1,
+			can = 1,
+		},
 	},
-	TradeTable = {
-		"copper",
-		"plastic",
-		"metalscrap",
-		"steel",
-		"glass",
-		"iron",
-		"rubber",
-		"aluminum",
-		"bottle",
-		"can",
+	-- Trading menu
+	TradeTable = {	-- The items you can trade reycle boxes for
+	"steel",
+	"copper",
+	"iron",
+	"glass",
+	"bottle",
+	"can",
 	},
-	DumpItems = {
-		"bottle",
-		"can",
-		"sandwich",
-	},
-	ScrapItems = {
-		"steel",
-		"copper",
-		"iron",
-		"glass",
-		"bottle",
-		"can",
-	},
-	RecycleAmounts = {
+	RecycleAmounts = {		-- How much you can get per run to recycle box in
 		["Recycle"] = {
 			Min = 25,
 			Max = 35,
 		},
-		["Trade"] = {
-			{ amount = 1, itemGive = 1, Min = 1, Max = 1, },
-			{ amount = 10, itemGive = 5, Min = 4, Max = 8, },
-			{ amount = 100, itemGive = 8, Min = 35, Max = 45, },
-			{ amount = 200, itemGive = 10, Min = 65, Max = 85, },
-		},
+        ["Trade"] = {		-- How much per item you will recieve
+		{ amount = 1, itemGive = 1, Min = 1, Max = 1, },
+		{ amount = 10, itemGive = 5, Min = 4, Max = 8, },
+		{ amount = 100, itemGive = 8, Min = 35, Max = 45, },
+		{ amount = 200, itemGive = 10, Min = 65, Max = 85, },
+        },
 	}
 }
 
-Loc = {}
+-- Function for locales
+-- Don't touch unless you know what you're doing
+-- This needs to be here because it loads before everything else
+function locale(section, string)
+    if not Config.Lan or Config.Lan == "" then
+        print("^1Error^7: ^3Config^7.^3Lan ^1not set^7, ^2falling back to Config.Lan = 'en'")
+        Config = Config or {}
+        Config.Lan = "en"
+    end
+
+    local localTable = Loc[Config.Lan]
+    -- If Loc[..] doesn't exist, warn user
+    if not localTable then
+		print("Locale Table '"..Config.Lan.."' Not Found")
+        return "Locale Table '"..Config.Lan.."' Not Found"
+    end
+
+    -- If Loc[..].section doesn't exist, warn user
+    if not localTable[section] then
+		print("^1Error^7: Locale Section: ['"..section.."'] Invalid")
+        return "Locale Section: ['"..section.."'] Invalid"
+    end
+
+    -- If Loc[..].section.string doesn't exist, warn user
+    if not localTable[section][string] then
+		print("^1Error^7: Locale String: ['"..section.."']['"..string.."'] Invalid")
+        return "Locale String: ['"..string.."'] Invalid"
+    end
+
+    -- If no issues, return the string
+    return localTable[section][string]
+end

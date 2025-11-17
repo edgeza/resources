@@ -5337,15 +5337,6 @@ return {
         hash = `alphaz1`,
         shop = 'airplane',
     },
-    besra = {
-        name = 'Besra',
-        brand = 'Buckingham',
-        model = 'besra',
-        price = 3500000,
-        category = 'military',
-        hash = `besra`,
-        shop = 'airplane',
-    },
     cuban800 = {
         name = 'Cuban 800',
         brand = 'Buckingham',
@@ -6028,15 +6019,6 @@ return {
         price = 0,
         category = 'sports',
         hash = `vd_tenfrally`,
-        shop = 'patreon',
-    },
-    vanz23m2wb = {
-        name = 'Vanz 23M2 Widebody - Tier 3',
-        brand = 'OTHER',
-        model = 'vanz23m2wb',
-        price = 0,
-        category = 'sports',
-        hash = `vanz23m2wb`,
         shop = 'patreon',
     },
     thraxs = {

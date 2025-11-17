@@ -232,8 +232,8 @@ config.RemoveStress = {
         end
     },
     ["vape"] = {
-        min = 5,
-        max = 10,
+        min = 15,
+        max = 20,
         enable = true,
         func = function()
             -- Common vape event patterns

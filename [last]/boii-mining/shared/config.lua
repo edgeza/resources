@@ -17,7 +17,7 @@ Config.CoreSettings = {
 
 -- MLO Settings
 Config.MLO = {
-    k4mb1_cave = true, -- Toggle use of k4mb1 mining cave mlo
+    k4mb1_cave = false, -- Toggle use of k4mb1 mining cave mlo
 }
 
 -- XP settings
@@ -46,7 +46,7 @@ Config.XP = {
 Config.Blips = {
     {title = 'Quarry', colour = 5, id = 365, coords = vector3(2952.93, 2789.36, 41.48), scale = 0.7, useblip = true},
     {title = 'Mineshaft', colour = 5, id = 365, coords = vector3(-599.64, 2092.27, 131.4), scale = 0.7, useblip = true},
-    {title = 'Foundry', colour = 47, id = 648, coords = vector3(2920.56, 2653.48, 43.18), scale = 0.7, useblip = true},
+    {title = 'Foundry', colour = 47, id = 648, coords = vector3(2920.56, 2653.48, 43.18), scale = 0.7, useblip = false},
     {title = 'Foundry', colour = 47, id = 648, coords = vector3(1109.53, -2008.29, 31.05), scale = 0.7, useblip = true},
     {title = 'Builders Warehouse', colour = 5, id = 473, coords = vector3(1192.2, -1261.27, 35.18), scale = 0.6, useblip = true},
     {title = 'Jeweller', colour = 5, id = 617, coords = vector3(-458.67, -67.38, 41.29), scale = 0.6, useblip = true}
@@ -412,7 +412,6 @@ Config.Smelting = {
     Locations = {
         Foundry = {{name = 'foundry_smelt', coords = vector3(1110.55, -2008.68, 31.75), radius = 1.2, debugPoly = false, useZ = true, distance = 1.5}},
         --<!>-- ONLY USED IF CONFIG.MLO.K4MB1_CAVE = TRUE --<!>--
-        KambiCave = {{name = 'k4mb1_smelt', coords = vector3(2920.86, 2653.47, 43.18), radius = 0.8, debugPoly = false, useZ = true, distance = 1.5}}, 
     },
     Time = 1, -- Time in seconds to load furnace
     CanFail = false, -- Toggle whether smelting can fail

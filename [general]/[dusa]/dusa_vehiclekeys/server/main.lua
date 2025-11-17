@@ -46,7 +46,22 @@ RegisterNetEvent('dusa_vehiclekeys:server:AcquireVehicleKeys', function(plate)
 end)
 
 RegisterNetEvent('dusa_vehiclekeys:server:setVehLockState', function(vehNetId, state)
-    SetVehicleDoorsLocked(NetworkGetEntityFromNetworkId(vehNetId), state)
+    local source = source
+    local vehicle = NetworkGetEntityFromNetworkId(vehNetId)
+    if not DoesEntityExist(vehicle) then return end
+    
+    -- Get vehicle plate and check if player has keys
+    local plate = GetVehicleNumberPlateText(vehicle)
+    if plate and plate ~= '' then
+        local searchPlate = trimAndLowerPlate(plate)
+        -- Only allow lock state change if player has keys or vehicle is not player-owned
+        local playerOwned = VehicleList[searchPlate] ~= nil
+        if playerOwned and not HasKeys(source, searchPlate) then
+            return -- Reject unauthorized lock state changes
+        end
+    end
+    
+    SetVehicleDoorsLocked(vehicle, state)
 end)
 
 local storeState = nil
@@ -183,6 +198,11 @@ RegisterServerEvent('dusa_vehiclekeys:sv:syncPlate', function(plate, status)
     local source = source
     if plate then
         local searchPlate = trimAndLowerPlate(plate)
+        
+        -- Check if player has keys to this vehicle before allowing lock state change
+        if not HasKeys(source, searchPlate) then
+            return -- Silently reject unauthorized lock state changes
+        end
 
         if not AllVehicles[searchPlate] then AllVehicles[searchPlate] = {} end
         AllVehicles[searchPlate]['locked'] = status

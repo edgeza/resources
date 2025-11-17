@@ -89,9 +89,9 @@ return {
     Debug = true,
     MinPlayers = 20, -- Minimum players required for dropbox to spawn
     FirstDropMin = 30, -- First drop appears 30-60 minutes after restart
-    FirstDropMax = 60,
-    SubsequentDropMin = 90, -- Subsequent drops appear every 90-150 minutes
-    SubsequentDropMax = 150,
+    FirstDropMax = 40,
+    SubsequentDropMin = 60, -- Subsequent drops appear every 90-150 minutes
+    SubsequentDropMax = 80,
     Locations = {
         {coords = vec3(-3425.65991, 961.249023, 7.55314398), rot = vec3(-90,-49.9999809,0)},
         {coords = vec3(-3419.24609, 977.58374, 11.2044258), rot = vec3(0, 60.0000038, 90.0000381)},

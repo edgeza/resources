@@ -325,7 +325,8 @@ end)
 --<!>-- LIGHTS --<!>--
 
 --<!>-- SMELTING --<!>--
-for k, v in pairs(Config.Smelting.Locations.Foundry) do
+if Config.Smelting and Config.Smelting.Locations and Config.Smelting.Locations.Foundry then
+    for k, v in pairs(Config.Smelting.Locations.Foundry) do
     if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addSphereZone then
         local success, result = pcall(function()
             return exports[TargetName]:addSphereZone({
@@ -350,9 +351,10 @@ for k, v in pairs(Config.Smelting.Locations.Foundry) do
             print('^1[boii-mining] Error adding smelting zone: ' .. tostring(result))
         end
     end
+    end
 end
 
-if Config.MLO.k4mb1_cave then
+if Config.MLO.k4mb1_cave and Config.Smelting and Config.Smelting.Locations and Config.Smelting.Locations.KambiCave then
     for k, v in pairs(Config.Smelting.Locations.KambiCave) do
         if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addSphereZone then
             local success, result = pcall(function()
@@ -731,14 +733,18 @@ AddEventHandler('onResourceStop', function(res)
     -- remove paydirt
     for _, h in ipairs(SpawnedPaydirt) do
         if DoesEntityExist(h) then
-            exports[TargetName]:RemoveTargetEntity(h)
+            if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                exports[TargetName]:removeLocalEntity(h)
+            end
             DeleteEntity(h)
         end
     end
     -- remove blast rocks
     for _, h in ipairs(SpawnedBlastRocks) do
         if DoesEntityExist(h) then
-            exports[TargetName]:RemoveTargetEntity(h)
+            if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                exports[TargetName]:removeLocalEntity(h)
+            end
             DeleteEntity(h)
         end
     end
@@ -747,7 +753,9 @@ AddEventHandler('onResourceStop', function(res)
     for _, lst in ipairs(lists) do
         for k, h in pairs(lst) do
             if h and DoesEntityExist(h) then
-                exports[TargetName]:RemoveTargetEntity(h)
+                if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                    exports[TargetName]:removeLocalEntity(h)
+                end
                 DeleteEntity(h)
                 lst[k] = nil
             end
@@ -792,14 +800,48 @@ RegisterNetEvent('boii-mining:cl:ProceedPlaceDynamite', function(data)
         GetHashKey('ng_proc_rock_2a'), GetHashKey('ng_proc_rock_2b'), GetHashKey('ng_proc_rock_2c'),
         GetHashKey('ng_proc_rock_3a')
     }
-    for _, h in ipairs(smallRockHashes) do RequestModel(h) end
     local fallbackRockHashes = { GetHashKey('prop_rock_4_c'), GetHashKey('prop_rock_4_d') }
+    -- Request all models
+    for _, h in ipairs(smallRockHashes) do RequestModel(h) end
     for _, h in ipairs(fallbackRockHashes) do RequestModel(h) end
+    -- Wait for models to load
+    CreateThread(function()
+        local tries = 0
+        local allLoaded = false
+        while not allLoaded and tries < 50 do
+            allLoaded = true
+            for _, h in ipairs(smallRockHashes) do
+                if not HasModelLoaded(h) then
+                    allLoaded = false
+                    break
+                end
+            end
+            if not allLoaded then
+                for _, h in ipairs(fallbackRockHashes) do
+                    if not HasModelLoaded(h) then
+                        allLoaded = false
+                        break
+                    end
+                end
+            end
+            if not allLoaded then
+                tries = tries + 1
+                Wait(100)
+            end
+        end
+    end)
     SetTimeout(delay * 1000, function()
         AddExplosion(pos.x, pos.y, pos.z, 2, 2.0, true, false, 1.0)
         local rockModels = {}
         for _, h in ipairs(smallRockHashes) do if HasModelLoaded(h) then rockModels[#rockModels+1] = h end end
-        if #rockModels == 0 then rockModels = fallbackRockHashes end
+        if #rockModels == 0 then 
+            rockModels = {}
+            for _, h in ipairs(fallbackRockHashes) do if HasModelLoaded(h) then rockModels[#rockModels+1] = h end end
+        end
+        if #rockModels == 0 then
+            -- Ultimate fallback: use any available rock model
+            rockModels = { GetHashKey('prop_rock_4_c') }
+        end
         local function isRockModel(mdl)
             for _, h in ipairs(rockModels) do if mdl == h then return true end end
             return false
@@ -821,20 +863,31 @@ RegisterNetEvent('boii-mining:cl:ProceedPlaceDynamite', function(data)
             SpawnedBlastRocks[#SpawnedBlastRocks+1] = rock
             CreateThread(function()
                 Wait(1200)
+                if not DoesEntityExist(rock) then return end
                 PlaceObjectOnGroundProperly(rock)
                 FreezeEntityPosition(rock, true)
-                exports[TargetName]:AddTargetEntity(rock, {
-                    options = {
+                if GetResourceState(TargetName) == 'started' and exports[TargetName] and exports[TargetName].addLocalEntity then
+                    -- Capture area and rockModels in closure
+                    local capturedArea = area
+                    local capturedRockModels = {}
+                    for _, h in ipairs(rockModels) do capturedRockModels[#capturedRockModels+1] = h end
+                    local function capturedIsRockModel(mdl)
+                        for _, h in ipairs(capturedRockModels) do if mdl == h then return true end end
+                        return false
+                    end
+                    exports[TargetName]:addLocalEntity(rock, {
                         {
                             icon = 'fa-solid fa-person-digging',
                             label = 'Drill Rock',
-                            action = function(entity)
+                            onSelect = function(entity)
                                 if LocalPlayer.state.mining_busy then return end
                                 -- remove this rock's target immediately to avoid re-trigger spam
                                 if entity and DoesEntityExist(entity) then
-                                    exports[TargetName]:RemoveTargetEntity(entity)
+                                    if exports[TargetName] and exports[TargetName].removeLocalEntity then
+                                        exports[TargetName]:removeLocalEntity(entity)
+                                    end
                                 end
-                                TriggerEvent('boii-mining:cl:StartDrillRock', { area = area }, entity)
+                                TriggerEvent('boii-mining:cl:StartDrillRock', { area = capturedArea }, entity)
                             end,
                             canInteract = function(entity)
                                 if not entity or entity == 0 then return false end
@@ -844,12 +897,12 @@ RegisterNetEvent('boii-mining:cl:ProceedPlaceDynamite', function(data)
                                 success = pcall(function() mdl = GetEntityModel(entity) end)
                                 if not success then return false end
                                 if LocalPlayer.state.mining_busy then return false end
-                                return isRockModel(mdl) and not IsPedInAnyVehicle(PlayerPedId())
-                            end
+                                return capturedIsRockModel(mdl) and not IsPedInAnyVehicle(PlayerPedId())
+                            end,
+                            distance = 1.8
                         }
-                    },
-                    distance = 1.8
-                })
+                    })
+                end
             end)
         end
     end)
@@ -886,7 +939,9 @@ RegisterNetEvent('boii-mining:cl:StartDrillRock', function(args, entity)
     end
     -- ensure this rock cannot be re-triggered during drilling
     if rock ~= 0 and DoesEntityExist(rock) then
-        pcall(function() exports[TargetName]:RemoveTargetEntity(rock) end)
+        if exports[TargetName] and exports[TargetName].removeLocalEntity then
+            exports[TargetName]:removeLocalEntity(rock)
+        end
     end
     local ped = PlayerPedId()
     local t = (area == 'Mine' and Config.Mine.Drilling.Time or Config.Quarry.Drilling.Time) * 1000
@@ -915,7 +970,9 @@ RegisterNetEvent('boii-mining:cl:StartDrillRock', function(args, entity)
         TriggerServerEvent('boii-mining:sv:QuarryDrilling')
     end
     if rock ~= 0 and DoesEntityExist(rock) then
-        exports[TargetName]:RemoveTargetEntity(rock)
+        if exports[TargetName] and exports[TargetName].removeLocalEntity then
+            exports[TargetName]:removeLocalEntity(rock)
+        end
         DeleteObject(rock)
     end
     setMiningBusy(false)
@@ -1291,3 +1348,20 @@ if Config.XP and Config.XP.Use and Config.XP.Command then
     end)
 end
 --<!>-- MINING XP COMMAND --<!>--
+
+--<!>-- GUIDE HANDLER --<!>--
+RegisterNetEvent('boii-mining:cl:OpenGuide', function()
+    SetNuiFocus(true, true)
+    SendNUIMessage({
+        open = true
+    })
+end)
+
+RegisterNUICallback('CloseGuide', function(data, cb)
+    SetNuiFocus(false, false)
+    SendNUIMessage({
+        open = false
+    })
+    cb('ok')
+end)
+--<!>-- GUIDE HANDLER --<!>--

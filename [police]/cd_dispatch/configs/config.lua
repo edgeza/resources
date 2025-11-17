@@ -418,7 +418,7 @@ Config.PoliceAlerts = {
     --[[SPEEDTRAP CONFIG]]--
     SpeedTrap = {
         ENABLE = true, ----Do you want speeding vehicles to alert police?
-        check_owner_for_fine = true, --Do you want players to only be fined in vehicles they own? (if enabled, players in stolen cars will not be fined).
+        check_owner_for_fine = false, --Do you want players to only be fined in vehicles they own? (if enabled, players in stolen cars will not be fined).
 
         Blip = {
             ENABLE = true, --Do you want speed traps to display on a players minimap?

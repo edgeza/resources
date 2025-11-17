@@ -365,3 +365,74 @@ RegisterServerEvent('boii-mining:sv:CaveDrilling', function()
     end
 end)
 --<!>-- KAMBI CAVE DRILLING --<!>--
+
+--<!>-- TRIGGER QUARRY BLAST (from X markers) --<!>--
+RegisterServerEvent('boii-mining:sv:TriggerQuarryBlast', function(index)
+    local src = source
+    local pData = Core.Functions.GetPlayer(src)
+    if not pData then return end
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
+    -- Check if this is a quarry cave blast (only if cave MLO is enabled)
+    -- The client passes index, but we need to determine if it's cave or regular quarry
+    -- For now, assume regular quarry unless we can determine otherwise from the index
+    local isCave = false
+    if Config.MLO and Config.MLO.k4mb1_cave and Config.Quarry and Config.Quarry.Caving and Config.Quarry.Caving.Locations then
+        -- If index is within cave locations range, it's a cave blast
+        local totalQuarry = Config.Quarry.Mining and Config.Quarry.Mining.Locations and #Config.Quarry.Mining.Locations or 0
+        if index and index > totalQuarry then
+            isCave = true
+        end
+    end
+    local requiredXP = isCave and 2441 or 1250
+    if Config.XP.Use and MiningXP < requiredXP then
+        TriggerClientEvent('boii-mining:notify', src, isCave and 'Your mining level is too low to place dynamite in caves.' or 'Your mining level is too low to place dynamite at the quarry.', 'error')
+        return
+    end
+    local permitName = isCave and (Config.Stores and Config.Stores.Permits and Config.Stores.Permits.Caving and Config.Stores.Permits.Caving.name)
+        or (Config.Stores and Config.Stores.Permits and Config.Stores.Permits.Mining and Config.Stores.Permits.Mining.name)
+    if permitName and not pData.Functions.GetItemByName(permitName) then
+        TriggerClientEvent('boii-mining:notify', src, isCave and 'You need a Caving Permit to place dynamite in caves.' or 'You need a Mining Permit to place dynamite at the quarry.', 'error')
+        return
+    end
+    local requiredItemName = (Config.Quarry and Config.Quarry.Dynamite and Config.Quarry.Dynamite.Required and Config.Quarry.Dynamite.Required.name) or 'dynamite'
+    local itm = pData.Functions.GetItemByName(requiredItemName)
+    if not itm or (itm.amount or 0) <= 0 then
+        TriggerClientEvent('boii-mining:notify', src, 'You do not have any dynamite.', 'error')
+        return
+    end
+    pData.Functions.RemoveItem(requiredItemName, 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[requiredItemName], 'remove', 1)
+    local delay = (Config.Quarry and Config.Quarry.Dynamite and Config.Quarry.Dynamite.Delay) or 5
+    local area = isCave and 'QuarryCave' or 'Quarry'
+    TriggerClientEvent('boii-mining:cl:ProceedPlaceDynamite', src, { area = area, delay = delay })
+end)
+--<!>-- TRIGGER QUARRY BLAST --<!>--
+
+--<!>-- TRIGGER MINE BLAST (from X markers) --<!>--
+RegisterServerEvent('boii-mining:sv:TriggerMineBlast', function(index)
+    local src = source
+    local pData = Core.Functions.GetPlayer(src)
+    if not pData then return end
+    local MiningXP = pData.PlayerData.metadata[MetaDataName] or 0
+    local requiredXP = (Config.XP and Config.XP.Thresholds and Config.XP.Thresholds.Cave) or 2441
+    if Config.XP.Use and MiningXP < requiredXP then
+        TriggerClientEvent('boii-mining:notify', src, 'Your mining level is too low to place dynamite in caves.', 'error')
+        return
+    end
+    local permitName = Config.Stores and Config.Stores.Permits and Config.Stores.Permits.Caving and Config.Stores.Permits.Caving.name
+    if permitName and not pData.Functions.GetItemByName(permitName) then
+        TriggerClientEvent('boii-mining:notify', src, 'You need a Caving Permit to place dynamite in caves.', 'error')
+        return
+    end
+    local requiredItemName = (Config.Mine and Config.Mine.Dynamite and Config.Mine.Dynamite.Required and Config.Mine.Dynamite.Required.name) or 'dynamite'
+    local itm = pData.Functions.GetItemByName(requiredItemName)
+    if not itm or (itm.amount or 0) <= 0 then
+        TriggerClientEvent('boii-mining:notify', src, 'You do not have any dynamite.', 'error')
+        return
+    end
+    pData.Functions.RemoveItem(requiredItemName, 1)
+    TriggerClientEvent('inventory:client:ItemBox', src, Core.Shared.Items[requiredItemName], 'remove', 1)
+    local delay = (Config.Mine and Config.Mine.Dynamite and Config.Mine.Dynamite.Delay) or 5
+    TriggerClientEvent('boii-mining:cl:ProceedPlaceDynamite', src, { area = 'Mine', delay = delay })
+end)
+--<!>-- TRIGGER MINE BLAST --<!>--

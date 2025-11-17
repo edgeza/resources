@@ -19,7 +19,7 @@ Config.SmokeDelay = 1.5 -- Delay between smoke puffs in seconds
 Config.DisableCombatButtons = true -- Disable combat buttons when using the vape
 Config.Stress = {
     Enable = true, -- Enable stress effect for all vapes
-    Amount = -10, -- Amount of stress to add/remove per puff (negative to reduce stress)
+    Amount = -40, -- Amount of stress to add/remove per puff (negative to reduce stress)
     CustomActions = { -- Custom actions to execute after each puff
         { Type = "Trigger", Event = "esx_status:add", Args = { "stress", -10000 } }, -- Example: Add to stress system
         { Type = "Print", Message = "Stress reduced after puff!" }, -- Example: Print to console

@@ -125,7 +125,13 @@ function openQuestion() {
 
 	$(".theory-image").empty()
 	if (questions[selectedCategory][randomQuestion].questionPhoto) {
-		$(".theory-image").html(`<img src="questions_images/${selectedCategory + `-` + questions[selectedCategory][randomQuestion].questionPhoto}">`)
+		var photoPath = questions[selectedCategory][randomQuestion].questionPhoto;
+		// Don't add category prefix for nophoto.png
+		if (photoPath === 'nophoto.png') {
+			$(".theory-image").html(`<img src="questions_images/nophoto.png">`)
+		} else {
+			$(".theory-image").html(`<img src="questions_images/${selectedCategory + `-` + photoPath}">`)
+		}
 	} else {
 		$(".theory-image").html(`<img src="questions_images/nophoto.png">`)
 	}

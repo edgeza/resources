@@ -123,21 +123,6 @@ Config = {
 
                 -- You can add more...
             },
-
-            BossMenu = {
-                grades = {3,4}, -- Grades allowed to access boss menu
-                coords = {
-                    -- Pillbox Hospital Coords
-                    vector3(341.0698, -589.9628, 43.2841),
-
-                    -- QBCore Hospital Coords
-                    -- vector3(310.4246, -599.5806, 43.2918),
-
-                
-                    -- You can add more...
-                },
-            },
-
             Garages = {
                 -- DISABLED: Using cd_garage instead
                 -- You can add more...

@@ -6,7 +6,7 @@ Config.Webhook = true -- true enabled false disabled
 Config.Discord = true
 Config.Notification = true -- true enabled false disabled for notification
 Config.MysqlTableName = 'codem_craft' -- MySQL Table Name
-Config.InteractionHandler = 'qb-target' -- qb-target, ox_target or drawtext
+Config.InteractionHandler = 'ox_target' -- qb-target, ox_target or drawtext
 
 Config.Categories = {
     {

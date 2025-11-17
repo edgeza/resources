@@ -87,73 +87,6 @@ Config = {
                 -- You can add more...
             }
         },
-        
-        ['City GYM'] = {
-            ItemRequired = {Use = false, Item = 'gym_membership', Time = 15, RemoveItem = true},
-            Distances = {Marker = 10, Text = 1.0},
-            GYMCoords = { x = -1263.9678, y = -360.9280, z = 36.9944},
-            Marker = { Distance = 15, Sprite = 30, Rotation = true, UpAndDown = false, Brightness = 100, r = 260, g = 40, b = 40, sizes = {x = 0.25, y = 0.3, z = 0.3}},  -- More sprites: https://docs.fivem.net/docs/game-references/markers/
-            Blip = { Use = true, colour = 1, size = 1.1, sprite = 311 },
-            Exersices = {
-                [1]  = { type = 'weightlifting', x = -1269.4681, y = -362.2640, z = 36.9837, heading = 114.9331},
-                [2]  = { type = 'weightlifting', x = -1267.5681, y = -365.8660, z = 36.9837, heading = 111.7152},
-                [3]  = { type = 'pullup', x = -1256.8202, y = -358.4193, z = 36.9595, heading = 115.7973},
-                [4]  = { type = 'pullup', x = -1258.6047, y = -355.1523, z = 36.9596, heading = 157.1221},
-                [5]  = { type = 'yoga', x = -1270.4337, y = -359.4362, z = 36.9596, heading = 265.9220},
-                [6]  = { type = 'pushups', x = -1262.6473, y = -359.7602, z = 36.9948, heading = 118.7721},
-                [7]  = { type = 'pushups', x = -1261.6625, y = -361.5224, z = 36.9948, heading = 114.4993},
-                [8]  = { type = 'situps', x = -1266.0231, y = -356.7149, z = 36.9596, heading = 208.9295},
-                [9]  = { type = 'situps', x = -1263.2084, y = -355.0845, z = 36.9596, heading = 205.2904},
-                [10] = { type = 'running', x = -1263.5249, y = -369.5938, z = 37.1113, heading = 213.0987},
-                [11] = { type = 'running', x = -1260.6754, y = -368.0751, z = 37.1124, heading = 213.4567},
-                [12] = { type = 'running', x = -1257.7607, y = -366.3998, z = 37.1116, heading = 208.1506},
-                -- You can add more...
-            }
-        },
-
-        ['Prison GYM'] = {
-            ItemRequired = {Use = false, Item = 'gym_membership', Time = 15, RemoveItem = true},
-            Distances = {Marker = 10, Text = 1.0},
-            GYMCoords = { x = 1747.8870, y = 2544.0845, z = 43.5854},
-            Marker = { Distance = 15, Sprite = 30, Rotation = true, UpAndDown = false, Brightness = 100, r = 260, g = 40, b = 40, sizes = {x = 0.25, y = 0.3, z = 0.3}},  -- More sprites: https://docs.fivem.net/docs/game-references/markers/
-            Blip = { Use = false, colour = 1, size = 1.1, sprite = 311 },
-            Exersices = {
-                [1]  = { type = 'weightlifting', x = 1746.9486, y = 2543.9863, z = 43.5855, heading = 100.8497},
-                [2]  = { type = 'weightlifting', x = 1748.1990, y = 2541.6675, z = 43.5855, heading = 111.0449},
-                [3]  = { type = 'pushups', x = 1739.7616, y = 2541.2312, z = 43.5855, heading = 206.0246},
-                [4]  = { type = 'pushups', x = 1742.0660, y = 2537.2927, z = 43.5855, heading = 32.1690},
-                [5]  = { type = 'situps', x = 1751.0808, y = 2536.8789, z = 43.5855, heading = 24.3098},
-                [6]  = { type = 'situps', x = 1752.6005, y = 2537.6794, z = 43.5855, heading = 24.3307},
-                -- You can add more...
-            }
-        },
-        
-        ['Families GYM'] = {
-            ItemRequired = {Use = false, Item = '', Time = 30, RemoveItem = false},
-            Distances = {Marker = 10, Text = 1.0},
-            GYMCoords = { x = -2602.45, y = 1888.4, z = 163.75},
-            Marker = { Distance = 15, Sprite = 30, Rotation = true, UpAndDown = false, Brightness = 100, r = 51, g = 204, b = 51, sizes = {x = 0.25, y = 0.3, z = 0.3}},  -- More sprites: https://docs.fivem.net/docs/game-references/markers/
-            Blip = { Use = false, colour = 33, size = 0.7, sprite = 311 },
-            Exersices = {
-                [1]  = { type = 'yoga', x = -2605.13, y = 1888.54, z = 163.75, heading = 273.64},
-                [2]  = { type = 'running', x = -2601.57, y = 1893.61, z = 163.75,heading =  5.1},
-                [3]  = { type = 'pullup', x = -2603.01, y = 1890.39, z = 163.75, heading = 3.47},
-                [4]  = { type = 'pushups', x = -2605.02, y = 1892.34, z = 163.75, heading = 137.56},
-                [5]  = { type = 'situps', x = -2602.44, y = 1885.46, z = 163.75,heading =  90.44},
-                [6]  = { type = 'weightlifting', x = -2604.31, y = 1883.46, z = 163.75, heading = 147.33},
-            }
-        },
-        ['Ballas GYM'] = {
-            ItemRequired = {Use = false, Item = '', Time = 30, RemoveItem = false},
-            Distances = {Marker = 10, Text = 1.0},
-            GYMCoords = { x = -104.76, y = -1809.6, z = 31.21},
-            Marker = { Distance = 15, Sprite = 30, Rotation = true, UpAndDown = false, Brightness = 100, r = 211, g = 42, b = 245, sizes = {x = 0.25, y = 0.3, z = 0.3}},  -- More sprites: https://docs.fivem.net/docs/game-references/markers/
-            Blip = { Use = false, colour = 33, size = 0.7, sprite = 311 },
-            Exersices = {
-                [1]  = { type = 'running', x = -104.01, y = -1812.57, z = 31.21,heading =  180.00},
-                [2]  = { type = 'situps', x = -102.26, y = -1810.21, z = 31.26, heading = 150.67},
-            }
-        },
         ['Patreon GYM'] = {
             ItemRequired = {Use = false, Item = '', Time = 30, RemoveItem = false},
             Distances = {Marker = 10, Text = 1.0},
@@ -184,6 +117,7 @@ Config = {
                 [8]  = { type = 'weightlifting', x = 874.99, y = -1321.63, z = 26.92, heading = 268.11},  
                 [9]  = { type = 'pullup', x = 870.95, y = -1321.44, z = 26.83, heading = 180.93},
                 [10]  = { type = 'pullup', x = 868.27, y = -1321.58, z = 26.77, heading = 180.58},
+                [11]  = { type = 'situps', x = 875.4, y = -1319.44, z = 26.99, heading =  87.12},
             }
         },
     },

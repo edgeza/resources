@@ -51,16 +51,16 @@ function GiveItemToPlayer(source, item, amount)
 			-- DLC Backpacks
 		elseif itemData['name'] == 'backpack' then
 			info.ID = 'backpack_' .. math.random(111111, 999999)
-			info.weight = 10000
-			info.slots = 10
+			info.weight = 100000
+			info.slots = 30
 		elseif itemData['name'] == 'backpack2' then
 			info.ID = 'backpack_' .. math.random(111111, 999999)
-			info.weight = 10000
-			info.slots = 10
+			info.weight = 100000
+			info.slots = 40
 		elseif itemData['name'] == 'paramedicbag' then
 			info.ID = 'paramedic_' .. math.random(111111, 999999)
-			info.weight = 10000
-			info.slots = 10
+			info.weight = 100000
+			info.slots = 20
 		elseif itemData['name'] == 'briefcase' then
 			info.ID = 'briefcase_' .. math.random(111111, 999999)
 			info.weight = 10000

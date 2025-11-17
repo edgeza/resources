@@ -28,6 +28,7 @@ var questions = {
             "correctAnswer": 'B',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'What are the requirements for wearing a helmet?',
             "a": 'Helmets are not required while driving on city streets.',
             "b": 'All motorcycle riders and passengers are required to wear helmets at all times.',
@@ -35,6 +36,7 @@ var questions = {
             "correctAnswer": 'B',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Grabbing the front brake or jamming down on the rear brake',
             "a": 'Is the best way to stop in an emergency.',
             "b": 'Is the best way to slow down when the streets are wet.',
@@ -42,6 +44,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Passengers on motorcycles should',
             "a": 'Should sit as far forward as possible without crowding you.',
             "b": 'Put their feet on the ground when the motorcycle is stopped.',
@@ -49,6 +52,7 @@ var questions = {
             "correctAnswer": 'A',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'When riding with a group of motorcyclists, a staggered formation',
             "a": 'Should be used when riding on curves.',
             "b": 'Is recommended at all times.',
@@ -56,6 +60,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'You should operate the engine cut-off switch and pull in the clutch when',
             "a": 'The throttle is stuck and you cant free it.',
             "b": 'You start to lose control in a curve.',
@@ -64,6 +69,7 @@ var questions = {
         },
 
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Before changing lanes on a multilane road, you should check',
             "a": 'the lane next to you and the far lane.',
             "b": 'only the far lane.',
@@ -72,6 +78,7 @@ var questions = {
             "correctAnswer": 'A',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'When riding in a group, the best formation is the ___ formation.',
             "a": 'single-file.',
             "b": 'side-by-side.',
@@ -80,6 +87,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'When making a slow, tight turn, the rider should',
             "a": 'lean in the opposite direction of the motorcycle.',
             "b": 'lean toward the front of the motorcycle.',
@@ -88,6 +96,7 @@ var questions = {
             "correctAnswer": 'D',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'If oncoming traffic is present and you are passing a line of parked cars, which lane position should you choose?',
             "a": 'Center',
             "b": 'Right',
@@ -96,6 +105,7 @@ var questions = {
             "correctAnswer": 'A',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Most of your motorcycles stopping power is provided by',
             "a": 'the rear brake.',
             "b": 'the front and rear brakes equally.',
@@ -104,6 +114,7 @@ var questions = {
             "correctAnswer": 'D',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'If your motorcycle starts to wobble, your best course of action is to',
             "a": 'apply the brakes quickly.',
             "b": 'close the throttle gradually.',
@@ -112,6 +123,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Surfaces that provide little traction for a motorcycle include',
             "a": 'lanes that are not often used.',
             "b": 'gravel roads.',
@@ -120,6 +132,7 @@ var questions = {
             "correctAnswer": 'B',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Increase your safety at night by',
             "a": 'using the lights of the car ahead to help you see.',
             "b": 'increasing your following distance.',
@@ -128,6 +141,7 @@ var questions = {
             "correctAnswer": 'D',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'When following a vehicle, you should maintain a ___-second following distance.',
             "a": 'two',
             "b": 'three',
@@ -136,6 +150,7 @@ var questions = {
             "correctAnswer": 'A',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'In a lane of traffic, how many lane positions are there for a motorcycle?',
             "a": '1',
             "b": '2',
@@ -226,6 +241,7 @@ var questions = {
             "correctAnswer": 'A',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Can you pass another vehicle when approaching a curve or a hill?',
             "a": 'Yes, but you may only pass on the right.',
             "b": 'No, never.',
@@ -233,6 +249,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Which of the following places is a U-turn allowed?',
             "a": 'On the railroad crossing',
             "b": 'Across a double yellow line',
@@ -240,6 +257,7 @@ var questions = {
             "correctAnswer": 'B',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'You should cut your speed in half when the road is ___.',
             "a": 'wet',
             "b": 'icy',
@@ -247,6 +265,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'When driving in fog, rain, or snow, use ___.',
             "a": 'low beams',
             "b": 'fog lights only',
@@ -254,6 +273,7 @@ var questions = {
             "correctAnswer": 'A',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'A broken yellow centerline means that:',
             "a": 'Passing is not permitted.',
             "b": 'Passing on the left is permitted when the way ahead is clear.',
@@ -261,6 +281,7 @@ var questions = {
             "correctAnswer": 'B',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Alcohol is',
             "a": 'A stimulant.',
             "b": 'An antihistamine.',
@@ -268,6 +289,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Before you change lanes, you should check your mirrors and',
             "a": 'Glance over your shoulder',
             "b": 'Never look over your right shoulder',
@@ -278,6 +300,7 @@ var questions = {
     ],
     ['C']: [
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Which of the following should you NOT do if you experience a tire failure?',
             "a": 'Be aware that a tire has failed.',
             "b": 'Apply the brakes hard and immediately.',
@@ -286,6 +309,7 @@ var questions = {
             "correctAnswer": 'B',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Flags or lights are required on projecting loads that extend',
             "a": '56 inches or more beyond the rear body.',
             "b": '3 or more feet beyond the rear body.',
@@ -294,6 +318,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'Which of these equals the total stopping distance?',
             "a": 'Reaction distance + breaking distance',
             "b": 'Reaction distance + breaking distance + signal distance',
@@ -302,6 +327,7 @@ var questions = {
             "correctAnswer": 'C',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'To help you stay alert and safe while driving, you should',
             "a": 'drink coffee if you get drowsy.',
             "b": 'avoid medications whose warning labels mention drowsiness.',
@@ -310,6 +336,7 @@ var questions = {
             "correctAnswer": 'B',
         },
         {
+            "questionPhoto": 'nophoto.png',
             "question": 'An A: B: C type fire extinguisher is designed to work on which types of fires?',
             "a": 'Wood, paper and cloth',
             "b": 'Gasoline',

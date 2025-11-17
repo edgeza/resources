@@ -7723,7 +7723,7 @@ ItemList = {
     ['emptysack']             = { ['name'] = 'emptysack', ['label'] = 'Sack', ['weight'] = 100, ['type'] = 'item', ['image'] = 'emptysack.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'A empty sack for storing things!' },
     ['gold_pan']              = { ['name'] = 'gold_pan', ['label'] = 'Gold Pan', ['weight'] = 1500, ['type'] = 'item', ['image'] = 'gold_pan.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A pan for washing dirt or gravel. Will you find gold?' },
     ['jackhammer']            = { ['name'] = 'jackhammer', ['label'] = 'Jackhammer', ['weight'] = 1500, ['type'] = 'item', ['image'] = 'jackhammer.png', ['unique'] = true, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A high quality jack hammer for breaking rocks.' },
-    ['dynamite']              = { ['name'] = 'dynamite', ['label'] = 'Dynamite', ['weight'] = 500, ['type'] = 'item', ['image'] = 'dynamite.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A stick of dynamite.' },
+    ['dynamite']              = { ['name'] = 'dynamite', ['label'] = 'Dynamite', ['weight'] = 500, ['type'] = 'item', ['image'] = 'dynamite.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'A stick of dynamite.' },
 
     -- Paydirt
     ['paydirt']               = { ['name'] = 'paydirt', ['label'] = 'Paydirt', ['weight'] = 2500, ['type'] = 'item', ['image'] = 'paydirt.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = false, ['combinable'] = nil, ['description'] = 'A sack of paydirt!' },

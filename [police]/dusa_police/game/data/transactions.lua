@@ -7,4 +7,13 @@ return {
             amount = '+$1000000',
             type = 'deposit',
         },
+    
+        [2] = {
+            id = 2,
+            name = 'Deposit',
+            details = 'İşlem Detayı',
+            date = '11/17/2025, 5:13:14 PM',
+            amount = '+$16100000',
+            type = 'deposit',
+        },
     }

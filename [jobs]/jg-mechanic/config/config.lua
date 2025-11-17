@@ -391,6 +391,11 @@ Config.MechanicLocations = {
           { name = "mechanic_tablet",       label = "Mechanic Tablet",       price = 100 },
         },
       },
+      { --Heli Repair
+        coords = vec3(-1987.09, -504.5, 12.05),
+        size = 3.0,
+        showBlip = false,
+      },
       {
         name = "Parts Bin 3",
         coords = vec3(-2063.84, -471.7, 12.22),
@@ -491,7 +496,7 @@ Config.MechanicLocations = {
 
       --Heli Repairs
       {
-        coords = vector3(-940.9, -2010.79, 9.51),
+        coords = vec3(-720.01, -2065.44, 8.87),
         size = 3.0,
         showBlip = false,
       },

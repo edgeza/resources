@@ -298,7 +298,7 @@ Config.Stands = {
 		licenseType = "drive_b", -- if you want to use a license system you'll need to set it up on sv_utils.lua
 		currency = "bank", -- used to buy/sell the business and buy vehicle
 		hasOwner = false, -- true = this vehicle shop can have a owner and will need maintenance to have stock | false = no owner and with vehicles all the time, price = max_price set on the database
-		blipCoords = vector3(-1258.76, -368.13, 36.91), -- blip position for the vehicle shop
+		blipCoords = vec3(1730.99, 3311.8, 41.22), -- blip position for the vehicle shop
 		isVip = false, -- if set to true IT WON'T BE OWNED BY ANYONE and will use vip coins instead of currency, check sv_utils.lua to change the vip coins functions
 
 		vehicleCameraSettings = {

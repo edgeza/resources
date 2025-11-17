@@ -191,6 +191,22 @@ Config.Stores = {
         }
     },
     {
+        type = "clothing", --PD Clothing
+        coords = vec4(833.79, -1292.21, 19.85, 303.58),
+        size = vector3(4, 4, 4),
+        rotation = 45,
+        usePoly = false, -- false => uses the size + rotation to create the zone | true => uses points to create the zone
+        showBlip = true, -- overrides the blip visibilty configured above for the group
+        --targetModel = "s_m_m_doctor_01", -- overrides the target ped configured for the group
+        --targetScenario = "" -- overrides the target scenario configure for the group
+        points = {
+            vec3(832.67, -1293.31, 19.85),
+            vec3(832.6, -1293.4, 19.85),
+            vec3(832.55, -1293.34, 19.85),
+            vec3(832.62, -1293.28, 19.85)
+        }
+    },
+    {
         type = "clothing", -- Bennies clothing
         coords = vector4(1693.2, 4828.11, 42.07, 188.66),
         size = vector3(4, 4, 4),
